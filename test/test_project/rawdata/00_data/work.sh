@@ -1,0 +1,3 @@
+echo -e 'Begin at : \c' && date
+/data_center_01/pipeline/16S_ITS_pipeline_v3.0/bin/00_Merge.py  /data_center_01/pipeline/16S_ITS_pipeline_v3.0/test/test_project/rawdata/16S_pre1.fq /data_center_01/pipeline/16S_ITS_pipeline_v3.0/test/test_project/rawdata/16S_pre2.fq /data_center_01/pipeline/16S_ITS_pipeline_v3.0/test/test_project/rawdata/16S_pre3.fq /data_center_01/pipeline/16S_ITS_pipeline_v3.0/test/test_project/rawdata/16S_pre4.fq  /data_center_01/pipeline/16S_ITS_pipeline_v3.0/test/test_project/rawdata/00_data -r 100000 -n /data_center_01/pipeline/16S_ITS_pipeline_v3.0/test/test_project/rawdata/names.list && echo -e 'This-Work-is-Completed! : \c' && date
+echo -e 'All target finished at : \c' && date

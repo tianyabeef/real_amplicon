@@ -1,5 +1,6 @@
 import sys
 sys.path.insert(1,'../src')
+from ConfigDict import ConfigDict
 import ConfigParser
 import time
 import re
@@ -9,8 +10,8 @@ def readConfig():
         return str
     ConfigParser.RawConfigParser.optionxform = lambda self,str:str
     config = ConfigParser.SafeConfigParser()
-    config.readfp(open('analy.cfg'))
-    print config.get('analysis2','time.out')
+    config.readfp(open('../cfg/default.cfg'))
+    print re.split('\s+',config.get('work_config','test_list').strip())
     return config
 
 def writeConfig():
@@ -26,10 +27,10 @@ def writeConfig():
         config.add_section("analysis2")
         config.set("analysis2", "id", task["id"])
         config.set("analysis2", "target", task["dst_filename"]) 
-        config.set("analysis2", "pac kage", task["package"]) 
-        config.set("analysis2", "time.out", task["timeout"]) 
+        config.set("analysis2", "package", task["package"]) 
+        config.set("analysis2", "timeout", task["timeout"]) 
         config.set("analysis2", "started", time.asctime()) 
-        fp = open("analy.cfg", "w") 
+        fp = open("analy.conf", "w") 
         config.write(fp)
     except ConfigParser.DuplicateSectionError,ex:
         print ex
@@ -38,6 +39,5 @@ def writeConfig():
 
 
 if __name__ == '__main__':
-
-    writeConfig()
     readConfig()
+

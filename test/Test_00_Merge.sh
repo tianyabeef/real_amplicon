@@ -1,1 +1,1 @@
-../bin/00_Merge.py -i test.fq,test2.fq -n names.list
+../bin/00_Merge.py test.fq test2.fq ./ -r 10000 -n names.list
