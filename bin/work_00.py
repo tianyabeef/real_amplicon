@@ -11,14 +11,6 @@ def work_00_merge(cfg_in):
             in_file_list += work.config.get('00','raw_data_dir') + '/' + in_file + ' '
     work.config.set('00','fq_for_merge',in_file_list)
 
-    # set the output interface config
-    out_dir = work.config.get('00','out_dir')
-    work.config.add('out_files','merged_file',out_dir + '/16S_together.fna')
-    work.config.add('out_files','merged_stat',out_dir + '/16S_together.stat')
-    work.config.add('out_files','work_shell',out_dir + '/work.sh')
-    work.config.add('out_files','cfg_file',out_dir + '/work.cfg')
-    work.config.set('all','fna_file',work.config.get('out_files','merged_file'))
-
     # set the commands
     script = work.config.get('scripts','00_merge')
     infile_list = work.config.get('00','fq_for_merge')
@@ -27,10 +19,15 @@ def work_00_merge(cfg_in):
     name_table = work.config.get('00','name_table')
     work.commands.append('%s %s %s -r %s -n %s'%(script,infile_list,out_dir,require,name_table))
 
-    # write
-    work.config.remove_option('00','work_dir')
-    work.write_config(work.config.get('out_files','cfg_file'))
-    work.write_shell(work.config.get('out_files','work_shell'))
+    # write cfg and shell
+    work.write_config(out_dir + '/work.cfg')
+    work.write_shell(out_dir + '/work.sh')
 
-    return work.config
+    work.set_out_config()
+    # set the output interface config
+    data_type = work.config.get('all','data_type')
+    work.cfg_out.set('00','data_stat for 01',out_dir + '/%s_together.stat'%data_type)
+    work.cfg_out.set('all','fna_file',out_dir + '/%s_together.fna'%data_type)
+
+    return work.cfg_out
 

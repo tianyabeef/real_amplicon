@@ -32,15 +32,20 @@ class Sample(object):
         return int( n * (1.2 + r) )
 
 class Subject(object):
-    def __init__(self,infile_list,out_dir,required_data,name_table_file=None):
+    def __init__(self,infile_list,upload_dir,out_fasta_file,out_stat_file,required_data,out_length_file,max_length,min_length,length_step,name_table_file=None):
         self.infile_list = infile_list
         self.required_data = required_data
-        self.out_fasta_file = '%s/16S_together.fna'%out_dir
-        self.stat_file = '%s/16S_together.stat'%out_dir
-        self.out_dir = out_dir
+        self.out_fasta_file = out_fasta_file
+        self.out_length_file = out_length_file
+        self.max_length = max_length
+        self.min_length = min_length
+        self.length_step = length_step
+        self.stat_file = out_stat_file
+        self.upload_dir = upload_dir
         self.name_table_file = name_table_file
         self.sample_set = {}
         self.name_table = {}
+        self.length = {}
 
     def read_name_table(self):
         try:
@@ -56,10 +61,13 @@ class Subject(object):
 
     def init_sample(self,sample_name):
         if self.name_table:
-            sample_name = self.name_table[sample_name]
+            try:
+                sample_name = self.name_table[sample_name]
+            except KeyError,ex:
+                return None
         if sample_name not in self.sample_set:
             sample_obj = Sample(sample_name,self.required_data)
-            sample_obj.init_handle('%s/upload'%self.out_dir)
+            sample_obj.init_handle(self.upload_dir)
             self.sample_set[sample_name] = sample_obj
         sample_obj = self.sample_set[sample_name]
         return sample_obj
@@ -73,15 +81,21 @@ class Subject(object):
     def merge_with_infile(self,infile):
         for record in SeqIO.parse(open(infile),'fastq'):
             description = record.description
-            sample = re.search('(\S+)_\d+',description).group(1)
+            sample = re.search('(\S+)_\d+$',description).group(1)
             sample = self.init_sample(sample)
+            if sample is None:
+                continue
             if sample.stats['tags'] >= sample.needed_data:
                 continue
+            length = len(record)
             sample.stats['tags'] += 1
-            sample.stats['bases'] += len(record)
+            sample.stats['bases'] += length
             q20,q30 = record.Q20_Q30()
             sample.stats['Q20'] += q20
             sample.stats['Q30'] += q30
+            if length not in self.length:
+                self.length[length] = 0
+            self.length[length] += 1
             self.output(record,sample)
 
     def merge(self):
@@ -98,4 +112,21 @@ class Subject(object):
         for sample in self.sample_set.itervalues():
             out_stat.write('%s\t%s\t%s\t%s\t%s\n'%(sample.name,sample.stats['tags'],sample.stats['bases'],sample.stats['Q20'],sample.stats['Q30']))
         out_stat.close()
+
+    def write_length(self):
+        out_length = open(self.out_length_file,'w')
+        out_length.write('length\tnum\n')
+        r = range(self.min_length,self.max_length+self.length_step,self.length_step)
+        for index in range(len(r)-1):
+            b = r[index]
+            e = r[index+1]
+            length = 0
+            for l in range(b,e):
+                try:
+                    length += self.length[l]
+                except KeyError,ex:
+                    continue
+            length_range = '%s-%s'%(b,e)
+            out_length.write('%s\t%s\n'%(length_range,length))
+        out_length.close()
 

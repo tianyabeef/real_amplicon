@@ -9,15 +9,15 @@ sys.path.insert(1,this_script_path + '/../src')
 from Bio import SeqIO
 
 def read_params(args):
-    parser = argparse.ArgumentParser(description='get singleton reads')
-    parser.add_argument('-i','--infile',dest='infile',metavar='str',type=str,
-            help="set your input fasta file ")
-    parser.add_argument('-o','--outfile',dest='outfile',metavar='str',type=str,
+    parser = argparse.ArgumentParser(description='rename otu fasta with prefix | v1.0 at 2015/09/16 by liangzb')
+    parser.add_argument('-i','--infile',dest='infile',metavar='FILE',type=str,required=True,
+            help="set your input fasta file")
+    parser.add_argument('-o','--outfile',dest='outfile',metavar='FILE',type=str,required=True,
             help="set your output file ")
-    parser.add_argument('--with_size',dest='if_with_size',metavar='bool',type=bool,default=False
-            help="if you set this True, a size will be added to the seq id")
-    parser.add_argument('--prefix',dest='prefix',metavar='str',type=str,default='denovo'
-            help="set the prefix of the id , default is [denovo]")
+    parser.add_argument('--with_size',dest='if_with_size',metavar='BOOL',type=bool,default=False,
+            help="if you set this True, a size will be added to the seq id, [ default is False ]")
+    parser.add_argument('--prefix',dest='prefix',metavar='STR',type=str,default='denovo',
+            help="set the prefix of the id , [ default is denovo ]")
 
     args = parser.parse_args()
     params = vars(args)
