@@ -1,3 +1,0 @@
-total_reads	103
-single_reads	97
-single_ratio	94.17%
