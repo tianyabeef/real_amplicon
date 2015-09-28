@@ -1,5 +1,3 @@
-source /data_center_01/pipeline/16S_ITS_pipeline_v3.0/bin/environment.sh
-
 echo -e 'Begin at : \c' && date
 /data_center_01/pipeline/16S_ITS_pipeline_v3.0/script/01_get_singleton_read.py --infile /data_center_01/pipeline/16S_ITS_pipeline_v3.0/test/00_data/16S_together.fna --outdir /data_center_01/pipeline/16S_ITS_pipeline_v3.0/test/01_pick_otu/single && echo -e 'This-Work-is-Completed! : \c' && date
 /home/snowflake/local/bin/usearch7.0.1090_i86linux32 -sortbysize /data_center_01/pipeline/16S_ITS_pipeline_v3.0/test/01_pick_otu/single/derep.fa -output /data_center_01/pipeline/16S_ITS_pipeline_v3.0/test/01_pick_otu/sorted.fa -minsize 2 && echo -e 'This-Work-is-Completed! : \c' && date

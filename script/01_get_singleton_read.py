@@ -13,7 +13,7 @@ def read_params(args):
     parser.add_argument('-i','--infile',dest='infile',metavar='FILE',type=str,required=True,
             help="set the input file")
     parser.add_argument('-o','--outdir',dest='outdir',metavar='OUTDIR',type=str,default='./single',
-            help="set the output dir")
+            help="set the output dir, [ default is PWD/single ]")
     parser.add_argument('-f','--out_fa',dest='outfa',metavar='FILE',type=str,default=None,
             help="set the output fasta file, [ default is OUTDIR/derep.fa ]")
     parser.add_argument('-s','--out_stat',dest='outstat',metavar='FILE',type=str,default=None,

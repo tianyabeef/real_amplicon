@@ -1,0 +1,11 @@
+total_reads	221989
+single_reads	192921
+single_ratio	86.91%
+
+sample_name	total_reads	single_reads	single_ratio
+K15N	38692	33795	87.34%
+W11H	37042	31892	86.10%
+W6H	36329	31872	87.73%
+K16N	34202	29710	86.87%
+W9H	37894	32428	85.58%
+K17N	37830	33224	87.82%

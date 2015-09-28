@@ -101,7 +101,8 @@ class Subject(object):
         fp.write('OTU std: %2.2f\n'%np.std(otu_num))
         fp.write('\n')
         fp.write('sample_name\ttags\tmapped_tags\tmapped_ratio\tsingleton_tags\tsingleton_ratio\tQ20_ratio\tQ30_ratio\tOTUs\n')
-        for sample_name,sample in self.sample_set.iteritems():
+        for sample_name in sorted(list(self.sample_set.iterkeys())):
+            sample = self.sample_set[sample_name]
             tags = sample.stats['tags']
             mapped_ratio = sample.stats['mapped_tags'] / tags * 100
             Q20_ratio = sample.stats['q20'] / sample.stats['bases'] * 100

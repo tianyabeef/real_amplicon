@@ -30,6 +30,7 @@ class Sample(object):
 class NonAbundanceRecord(object):
     def __init__(self):
         self.count = 0
+        self.sample = None
         
 class Subject(object):
     def __init__(self,infile,out_fa,out_stat):
@@ -37,36 +38,7 @@ class Subject(object):
         self.out_fa = out_fa
         self.out_stat = out_stat
         self.sample_set = {}
-        # 
-        #self.container = []
         self.container = {}
-
-    '''O(n^2) , too slow
-    def find_record(self):
-        consumer = self.containerClassfy()
-        consumer.next() 
-        fp = open(self.infile)
-        for record in SeqIO.parse(fp,'fasta'):
-            record.count = 1
-            sample_name = re.search('(.+)_\d+$',record.id).group(1)
-            if sample_name in self.sample_set:
-                record.sample = self.sample_set[sample_name]
-            else:
-                record.sample = Sample(sample_name)
-                self.sample_set[sample_name] = record.sample
-            record.sample.total_reads += 1
-            consumer.send(record)
-        fp.close()
-   
-    def containerClassfy(self):
-        while True:
-            record = (yield )
-            for index,ct_seq in enumerate(self.container):
-                find_result = ct_seq.find_longer(record)
-                if find_result:
-                    self.container[index] = find_result
-                    break
-            else:
                 
     def write_stat(self):
         fp = open(self.out_stat,'w')
@@ -85,30 +57,28 @@ class Subject(object):
         for sample in self.sample_set.itervalues():
             ratio = sample.single_reads / sample.total_reads * 100
             fp.write('%s\t%s\t%s\t%2.2f%%\n'%(sample.name,sample.total_reads,sample.single_reads,ratio))
-        fp.close()               self.container.append(record)
-    '''
+        fp.close()              
+
     def write_fa(self):
         fp = open(self.out_fa,'w')
-        for seq in self.container:
+        for seq in self.container.itervalues():
             seq.id = '%s;size=%s;'%(seq.id,seq.count)
             seq.description = ''
             fp.write(seq.format('fasta'))
         fp.close()
 
-
     def find_record(self):
         fp = open(self.infile)
         for record in SeqIO.parse(fp,'fasta'):
-            record.count += 1
             sample_name = re.search('(.+)_\d+$',record.id).group(1)
-            if sample_name in self.sample_set:
-                record.sample = self.sample_set[sample_name]
-            else:
-                record.sample = Sample(sample_name)
-                self.sample_set[sample_name] = record.sample
-            record.sample.total_reads += 1
-            if record.seq not in self.container:
-                self.container[record.seq] = NonAbundanceRecord()
-            self.container[record.seq].count += 1
+            if sample_name not in self.sample_set:
+                sample = Sample(sample_name)
+                self.sample_set[sample_name] = sample
+            self.sample_set[sample_name].total_reads += 1
+            if str(record.seq) not in self.container:
+                record.count = 0
+                self.container[str(record.seq)] = record
+                self.container[str(record.seq)].sample = self.sample_set[sample_name]
+            self.container[str(record.seq)].count += 1
+        fp.close()
  
-    

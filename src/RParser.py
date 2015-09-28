@@ -5,8 +5,7 @@ class MyTemplate(Template):
     delimiter = '@#'
 
 class RParser(object):
-    def __init__(self,work_dir):
-        self.work_dir = work_dir
+    def __init__(self):
         self.template = None
         self.R_script = None
         self.file = None

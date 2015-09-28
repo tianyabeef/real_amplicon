@@ -1,7 +1,7 @@
 from settings import *
 
 def work_01_pick_otu(cfg_in):
-    work = SubWork('01',cfg_in)
+    work = SubWork('01',cfg_in) 
 
     usearch = work.config.get('software','usearch')
     fna_file = work.config.get('all','fna_file')
@@ -41,24 +41,22 @@ def work_01_pick_otu(cfg_in):
     work.commands.append('%s -i %s -t %s -o %s'%(work.config.get('scripts','01_otutab2fa'),fna_file,otus_tab,seqs_fa))
     
     # summary
-    data_stat = cfg_in.get('00','data_stat for 01')
+    data_stat = work.config.get('00','data_stat for 01')
     out_stat_file = out_dir + '/pick_otu_summary.xls'
     work.commands.append('%s -r %s -s %s --uc %s -o %s'%(work.config.get('scripts','01_stat'),data_stat,singleton_stat,map_uc,out_stat_file)) 
     #work.commands.append('%s -r %s -s %s --otutab %s -o %s'%(work.config.get('scripts','01_stat'),data_stat,singleton_stat,otus_tab,out_stat_file))
 
 
-    work.set_out_config()
     #set the output interface config
-    work.cfg_out.set('01','otus_all',otus_tab)
-    work.cfg_out.set('01','seqs_all',seqs_fa)
-
-    # write
     work.config.set('01','otus_all',otus_tab)
     work.config.set('01','seqs_all',seqs_fa)
+    work.config.set('01','stat_file',out_stat_file)
+
+    # write
     work.write_config(out_dir + '/work.cfg')
     work.write_shell(out_dir + '/work.sh')
 
-    return work.cfg_out
+    return work.config,out_dir + '/work.sh'
 
 def work_01_alpha_rare(cfg_in):
     work = SubWork('01',cfg_in)
@@ -67,7 +65,7 @@ def work_01_alpha_rare(cfg_in):
         sys.stderr.write('\nplease run pick otu first!\n')
 
     # get qiime 
-    work.config.set_section('qiime',cfg_in.items('qiime'))
+    work.config.set_section('qiime',work.config.items('qiime'))
 
     out_dir = work.config.get('01','out_dir') + '/alpha_rare'
 
@@ -82,7 +80,8 @@ def work_01_alpha_rare(cfg_in):
     # assign taxonomy
     classifier_file = out_dir + '/rdp_classifier.txt'
     hier_file = out_dir + '/rdp_hier.txt'
-    work.commands.append('%s -j %s -i %s -d %s -o %s -c %s -h %s'%(work.config.get('scripts','01_rdp_classfier'),
+    tax_assign = out_dir + '/tax_assignment.txt'
+    work.commands.append('%s -j %s -i %s -d %s -o %s -c %s --hier_outfile %s'%(work.config.get('scripts','01_rdp_classfier'),
                                                                    work.config.get('software','rdp_classifier'),
                                                                    rep_set,
                                                                    work.config.get('all','data_type'),
@@ -90,21 +89,49 @@ def work_01_alpha_rare(cfg_in):
                                                                    work.config.get('01','classify_confident_cutoff'),
                                                                    hier_file))
 
+    work.commands.append('%s -i %s -c %s -o %s'%(work.config.get('scripts','01_transform_rdp_qiime'),
+                                                 classifier_file,
+                                                 work.config.get('01','classify_confident_cutoff'),
+                                                 tax_assign)) 
 
     # make otu table
-#    otu_table = out_dir + ''
+    otu_biom = out_dir + '/otu_table.biom'
+    work.commands.append('%s -i %s -t %s -o %s'%(work.config.get('qiime','make_otu_table'),
+                                                 work.config.get('01','otus_all'),
+                                                 tax_assign,
+                                                 otu_biom))
 
+    # multiple_rarefactions
+    rarefaction_dir = out_dir + '/rarefaction'
+    work.commands.append('%s -r %s -i %s -o %s -m %s -s %s -t %s'%(work.config.get('scripts','01_multiple_rarefactions'),
+                                                                   work.config.get('qiime','multiple_rarefactions'),
+                                                                   otu_biom,
+                                                                   rarefaction_dir,
+                                                                   work.config.get('01','rarefaction_min'),
+                                                                   work.config.get('01','rarefaction_step'),
+                                                                   work.config.get('01','stat_file')))
+    # alpha diversity
+    alpha_diversity_dir = out_dir + '/alpha_div'
+    work.commands.append('%s -i %s -o %s --metrics %s'%(work.config.get('qiime','alpha_diversity'),
+                                                        rarefaction_dir,
+                                                        alpha_diversity_dir,
+                                                        work.config.get('01','alpha_metrics')))
 
-    work.set_out_config()
-    work.write_config(out_dir + '/work.sh')
-    return work.cfg_out
-
-
-
-
-
-
-
-
+    # alpha collate
+    alpha_collate_dir = out_dir + '/alpha_div_collated'
+    work.commands.append('%s -i %s -o %s'%(work.config.get('qiime','collate_alpha'),
+                                           alpha_diversity_dir,
+                                           alpha_collate_dir))
+    
+    # alpha rare plot
+    work.commands.append('%s -g %s -d %s -o %s -a %s'%(work.config.get('scripts','01_alpha_rare'),
+                                                       work.config.get('all','total_group_file'),
+                                                       alpha_collate_dir,
+                                                       alpha_collate_dir,
+                                                       work.config.get('01','alpha_metrics')))
+    
+    work.write_shell(out_dir + '/work.sh')
+    work.write_config(out_dir + '/work.cfg')
+    return work.config,out_dir + '/work.sh'
 
 

@@ -3,17 +3,6 @@ import os
 import re
 import ConfigParser as cp
 
-ENVIRONMENT = '''\
-PYTHONPATH=''
-R_HOME=/data_center_01/home/NEOLINE/liangzebin/soft/R/R-3.1.3
-R_LIBS=$R_HOME/lib64/R/library
-LD_LIBRARY_PATH=$R_HOME/lib:$LD_LIBRARY_PATH
-PY_BIN=/data_center_01/home/liangzb/.pyenv/versions/2.7.10/bin
-RDP_JAR_PATH=/home/snowflake/softwares/qiime/rdp_classifier_2.2/rdp_classifier-2.2.jar
-LEfSe_PATH=/data_center_01/home/NEOLINE/liangzebin/soft/LEfSe/nsegata-lefse-094f447691f0
-PATH=$PY_BIN:$R_HOME/bin:$LEfSe_PATH:$PATH
-
-'''
 
 class MyConfigParser(cp.SafeConfigParser):
 
@@ -89,8 +78,9 @@ class Work(object):
         fp.close()
 
     def write_shell(self,shell_file):
+        if not os.path.exists(os.path.dirname(shell_file)):
+            os.system('mkdir -p %s'%os.path.dirname(shell_file))
         shell = open(shell_file,'w')
-        shell.write('source /data_center_01/pipeline/16S_ITS_pipeline_v3.0/bin/environment.sh\n\n')
         shell.write("echo -e 'Begin at : \c' && date\n")
         for cmd in self.commands:
             shell.write(cmd + " && echo -e 'This-Work-is-Completed! : \c' && date\n")
@@ -105,24 +95,5 @@ class SubWork(Work):
             cfg_in = cfg
         super(SubWork,self).__init__()
         self.work_id = work_id
-        self.cfg_in = cfg_in
-        self.config.set_section('all',cfg_in.items('all'))
-        self.config.set_section('software',cfg_in.items('software'))
-        self.set_script()
-        cfg_in.set(work_id,'work_dir',self.config.get('all','work_dir'))
-        self.config.set_section(work_id,cfg_in.items(work_id))
-
-    def set_script(self):
-        for name,value in self.cfg_in.items('scripts'):
-            if re.search('^%s'%self.work_id,name):
-                self.config.set('scripts',name,value)
-
-    def set_out_config(self):
-        cfg_out = MyConfigParser()
-        for section in self.config.sections():
-            cfg_out.set_section(section,self.config.items(section))
-        for section in self.cfg_in.sections():
-            cfg_out.add_section(section,self.cfg_in.items(section,raw=True))
-        self.cfg_out = cfg_out
-
-
+        cfg_in.set(work_id,'work_dir',cfg_in.get('all','work_dir'))
+        self.config = cfg_in

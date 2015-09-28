@@ -17,17 +17,15 @@ def work_00_merge(cfg_in):
     out_dir = work.config.get('00','out_dir')
     require = work.config.get('00','require')
     name_table = work.config.get('00','name_table')
-    work.commands.append('%s %s %s -r %s -n %s'%(script,infile_list,out_dir,require,name_table))
+    data_type = work.config.get('all','data_type')
+    work.commands.append('%s %s %s -r %s -n %s -d %s'%(script,infile_list,out_dir,require,name_table,data_type))
+
+    work.config.set('00','data_stat for 01',out_dir + '/%s_together.stat'%data_type)
+    work.config.set('all','fna_file',out_dir + '/%s_together.fna'%data_type)
 
     # write cfg and shell
     work.write_config(out_dir + '/work.cfg')
     work.write_shell(out_dir + '/work.sh')
-
-    work.set_out_config()
-    # set the output interface config
-    data_type = work.config.get('all','data_type')
-    work.cfg_out.set('00','data_stat for 01',out_dir + '/%s_together.stat'%data_type)
-    work.cfg_out.set('all','fna_file',out_dir + '/%s_together.fna'%data_type)
-
-    return work.cfg_out
+       
+    return work.config,out_dir + '/work.sh'
 

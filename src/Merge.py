@@ -32,7 +32,11 @@ class Sample(object):
         return int( n * (1.2 + r) )
 
 class Subject(object):
-    def __init__(self,infile_list,upload_dir,out_fasta_file,out_stat_file,required_data,out_length_file,max_length,min_length,length_step,name_table_file=None):
+    def __init__(self,infile_list,upload_dir,
+                 out_fasta_file,out_stat_file,
+                 required_data,out_length_file,
+                 max_length,min_length,length_step,
+                 name_table_file=None):
         self.infile_list = infile_list
         self.required_data = required_data
         self.out_fasta_file = out_fasta_file
@@ -73,7 +77,9 @@ class Subject(object):
         return sample_obj
 
     def output(self,record,sample):
-        out_record = SeqRecord(seq=record.seq,id='%s_%s'%(sample.name,sample.stats['tags']),description='')
+        out_record = SeqRecord(seq=record.seq,
+                               id='%s_%s'%(sample.name,sample.stats['tags']),
+                               description='')
         self.out_fasta.write(out_record.format('fasta'))
         record.description = ''
         sample.out.write(record.format('fastq'))
@@ -110,7 +116,11 @@ class Subject(object):
         out_stat = open(self.stat_file,'w')
         out_stat.write('Sample_name\tTags\tBases\tQ20\tQ30\n')
         for sample in self.sample_set.itervalues():
-            out_stat.write('%s\t%s\t%s\t%s\t%s\n'%(sample.name,sample.stats['tags'],sample.stats['bases'],sample.stats['Q20'],sample.stats['Q30']))
+            out_stat.write('%s\t%s\t%s\t%s\t%s\n'%(sample.name,
+                                                   sample.stats['tags'],
+                                                   sample.stats['bases'],
+                                                   sample.stats['Q20'],
+                                                   sample.stats['Q30']))
         out_stat.close()
 
     def write_length(self):
