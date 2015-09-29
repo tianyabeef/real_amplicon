@@ -1,5 +1,0 @@
-X = read.table('/data_center_01/pipeline/16S_ITS_pipeline_v3.0/test/00_data/16S_together.length',header=TRUE,row.names=1)
-pdf('/data_center_01/pipeline/16S_ITS_pipeline_v3.0/test/00_data/length_distrubution.pdf')
-barplot(t(X),col='#4285F4',xlab='Sequence length',ylab='Sequence number',main='Sequence length distribution',xaxt='n')
-text(labels=row.names(X),x=(1:nrow(X))*1.2,y=rep(0,nrow(X)),srt=60,xpd=TRUE,adj=1.1)
-dev.off()
