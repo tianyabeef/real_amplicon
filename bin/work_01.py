@@ -1,71 +1,75 @@
 from settings import *
 
-def work_01_pick_otu(cfg_in):
-    work = SubWork('01',cfg_in) 
+def pick_otu(cfg_in,vars=None):
+    work = Work(DEFAULT_CONFIG_DIR + '/pick_otu.cfg')
+    work.set_params(cfg_in,vars)
+    work.load_default_config()
 
-    usearch = work.config.get('software','usearch')
-    fna_file = work.config.get('all','fna_file')
+    config = work.config
+    usearch = config.get('softwares','usearch')
+    params = config.get_section('params')
+    scripts = config.get_section('scripts')
+    outfiles = config.get_section('outfiles')
+
+    # intermediate result
+    out_dir = outfiles['out_dir']
+    sorted_fa = out_dir + '/sorted.fa'
+    cluster_otus = out_dir + '/cluster_otus.fa'
+    otus_fa = out_dir + '/otus.fa'
+    map_uc = out_dir + '/map.uc'
 
     # get singleton reads
-    out_dir = work.config.get('01','out_dir') + '/single'
-    derep_fa = out_dir + '/derep.fa'
-    singleton_stat = out_dir + '/stat.txt'
-    work.commands.append('%s --infile %s --outdir %s'%(work.config.get('scripts','01_get_singleton_read'),fna_file,out_dir))
-
+    work.commands.append('%s --infile %s --outdir %s'%(scripts['01_get_singleton_read'],
+                                                       params['fna_file'],
+                                                       outfiles['single_dir']))
     # sort by size
-    out_dir = work.config.get('01','out_dir')
-    minsize = work.config.get('01','minsize')
-    sorted_fa = out_dir + '/sorted.fa'
-    work.commands.append('%s -sortbysize %s -output %s -minsize %s'%(usearch,derep_fa,sorted_fa,minsize))
-
+    work.commands.append('%s -sortbysize %s -output %s -minsize %s'%(usearch,
+                                                                      outfiles['single_dir'] + '/derep.fa',
+                                                                      sorted_fa,
+                                                                      params['minsize']))
     # cluster otus
-    cluster_otus = out_dir + '/cluster_otus.fa'
-    work.commands.append('%s -cluster_otus %s -otus %s'%(usearch,sorted_fa,cluster_otus))
-
+    work.commands.append('%s -cluster_otus %s -otus %s'%(usearch,
+                                                         sorted_fa,
+                                                         cluster_otus))
     # rename
-    otus_fa = out_dir + '/otus.fa'
-    work.commands.append('%s --infile %s --outfile %s'%(work.config.get('scripts','01_rename_otu_fasta'),cluster_otus,otus_fa))
-
+    work.commands.append('%s --infile %s --outfile %s'%(scripts['01_rename_otu_fasta'],
+                                                        cluster_otus,
+                                                        otus_fa))
     # remap
-    strand = work.config.get('01','strand')
-    id = work.config.get('01','identity')
-    map_uc = out_dir + '/map.uc'
-    work.commands.append('%s -usearch_global %s -db %s -strand %s -id %s -uc %s'%(usearch,fna_file,otus_fa,strand,id,map_uc))
-
+    work.commands.append('%s -usearch_global %s -db %s -strand %s -id %s -uc %s'%(usearch,
+                                                                                  params['fna_file'],
+                                                                                  otus_fa,
+                                                                                  params['strand'],
+                                                                                  params['identity'],
+                                                                                  map_uc))
     # uc to otu_sample table 
-    otus_tab = out_dir + '/otus_all.txt'
-    work.commands.append('%s -i %s -o %s'%(work.config.get('scripts','01_uc2otutab'),map_uc,otus_tab))
-
+    work.commands.append('%s -i %s -o %s'%(scripts['01_uc2otutab'],
+                                           map_uc,
+                                           outfiles['otus_all']))
     # otus_sample table to fa
     seqs_fa = out_dir + '/seqs_all.fa'
-    work.commands.append('%s -i %s -t %s -o %s'%(work.config.get('scripts','01_otutab2fa'),fna_file,otus_tab,seqs_fa))
-    
+    work.commands.append('%s -i %s -t %s -o %s'%(scripts['01_otutab2fa'],
+                                                 params['fna_file'],
+                                                 outfiles['otus_all'],
+                                                 outfiles['seqs_all']))
     # summary
-    data_stat = work.config.get('00','data_stat for 01')
-    out_stat_file = out_dir + '/pick_otu_summary.xls'
-    work.commands.append('%s -r %s -s %s --uc %s -o %s'%(work.config.get('scripts','01_stat'),data_stat,singleton_stat,map_uc,out_stat_file)) 
-    #work.commands.append('%s -r %s -s %s --otutab %s -o %s'%(work.config.get('scripts','01_stat'),data_stat,singleton_stat,otus_tab,out_stat_file))
+    work.commands.append('%s -r %s -s %s --single_list %s --uc %s -o %s'%(scripts['01_stat'],
+                                                                          params['fna_stat'],
+                                                                          outfiles['single_dir'] + '/stat.txt',
+                                                                          outfiles['single_dir'] + '/single.list',
+                                                                          map_uc,
+                                                                          outfiles['out_stat_file'])) 
 
+    work.write_config(outfiles['config'])
+    work.write_shell(outfiles['shell'])
 
-    #set the output interface config
-    work.config.set('01','otus_all',otus_tab)
-    work.config.set('01','seqs_all',seqs_fa)
-    work.config.set('01','stat_file',out_stat_file)
-
-    # write
-    work.write_config(out_dir + '/work.cfg')
-    work.write_shell(out_dir + '/work.sh')
-
-    return work.config,out_dir + '/work.sh'
+    return  outfiles 
 
 def work_01_alpha_rare(cfg_in):
     work = SubWork('01',cfg_in)
 
     if  not work.config.has_option('01','otus_all') or not work.config.has_option('01','seqs_all'):
         sys.stderr.write('\nplease run pick otu first!\n')
-
-    # get qiime 
-    work.config.set_section('qiime',work.config.items('qiime'))
 
     out_dir = work.config.get('01','out_dir') + '/alpha_rare'
 

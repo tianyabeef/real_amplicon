@@ -33,10 +33,11 @@ class NonAbundanceRecord(object):
         self.sample = None
         
 class Subject(object):
-    def __init__(self,infile,out_fa,out_stat):
+    def __init__(self,infile,out_fa,out_stat,single_list):
         self.infile = infile
         self.out_fa = out_fa
         self.out_stat = out_stat
+        self.single_list = single_list
         self.sample_set = {}
         self.container = {}
                 
@@ -61,11 +62,15 @@ class Subject(object):
 
     def write_fa(self):
         fp = open(self.out_fa,'w')
+        sl_fp = open(self.single_list,'w')
         for seq in self.container.itervalues():
+            if seq.count == 1:
+                sl_fp.write(seq.id+'\n')
             seq.id = '%s;size=%s;'%(seq.id,seq.count)
             seq.description = ''
             fp.write(seq.format('fasta'))
         fp.close()
+        sl_fp.close()
 
     def find_record(self):
         fp = open(self.infile)

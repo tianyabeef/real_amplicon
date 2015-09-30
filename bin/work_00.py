@@ -1,31 +1,25 @@
 from settings import *
 
-def work_00_merge(cfg_in):
-    work = SubWork('00',cfg_in)
-    ## make fq_for_merge option be relative path avaliable
-    in_file_list = ' '
-    for in_file in re.split('\s+',work.config.get('00','fq_for_merge').strip()):
-        if re.search('\/',in_file.strip()):
-            in_file_list += in_file + ' '
-        else :
-            in_file_list += work.config.get('00','raw_data_dir') + '/' + in_file + ' '
-    work.config.set('00','fq_for_merge',in_file_list)
+def data_merge(cfg_in,vars=None):
+    work = Work(DEFAULT_CONFIG_DIR + '/data_merge.cfg')
+    work.set_params(cfg_in,vars)
+    work.load_default_config()
 
-    # set the commands
-    script = work.config.get('scripts','00_merge')
-    infile_list = work.config.get('00','fq_for_merge')
-    out_dir = work.config.get('00','out_dir')
-    require = work.config.get('00','require')
-    name_table = work.config.get('00','name_table')
-    data_type = work.config.get('all','data_type')
-    work.commands.append('%s %s %s -r %s -n %s -d %s'%(script,infile_list,out_dir,require,name_table,data_type))
+    config = work.config
+    params = config.get_section('params')
+    output = config.get_section('outfiles')
+    scripts = config.get_section('scripts')
+    work.commands.append('%s %s %s -f %s -s %s -r %s -n %s -d %s'%(scripts['00_Merge'],
+                                                                   params['fq_for_merge'],
+                                                                   output['out_dir'],
+                                                                   output['fna_together'],
+                                                                   output['fna_stat'],
+                                                                   params['require'],
+                                                                   params['name_list'],
+                                                                   params['data_type']))
 
-    work.config.set('00','data_stat for 01',out_dir + '/%s_together.stat'%data_type)
-    work.config.set('all','fna_file',out_dir + '/%s_together.fna'%data_type)
+    work.write_config(output['out_dir'] + '/work.cfg')
+    work.write_shell(output['out_dir'] + '/work.sh')
 
-    # write cfg and shell
-    work.write_config(out_dir + '/work.cfg')
-    work.write_shell(out_dir + '/work.sh')
-       
-    return work.config,out_dir + '/work.sh'
+    return output
 

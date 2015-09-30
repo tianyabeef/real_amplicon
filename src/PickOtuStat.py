@@ -13,6 +13,7 @@ class Sample(object):
         self.stats['q20'] = 0
         self.stats['q30'] = 0
         self.stats['mapped_tags'] = 0
+        self.stats['singleton_mapped_tags'] = 0
         self.stats['singleton_tags'] = 0
         self.stats['singleton_ratio'] = 0
 
@@ -33,6 +34,13 @@ class Subject(object):
             sample.stats['bases'] = int(bases)
             sample.stats['q20'] = int(q20)
             sample.stats['q30'] = int(q30)
+        fp.close()
+
+    def read_single_list(self,file):
+        fp=open(file)
+        self.single_reads = set()
+        for line in fp:
+            self.single_reads.add(line.strip())
         fp.close()
 
     def read_single_stat(self,file):
@@ -67,6 +75,8 @@ class Subject(object):
             sample = self.sample_set[sample_name]
             sample.stats['mapped_tags'] += 1
             sample.otus.add(otu_name)
+            if reads in self.single_reads:
+                sample.stats['singleton_mapped_tags'] += 1
         fp.close()
 
     def get_mapped_tags_from_otutab(self,file):
@@ -82,6 +92,8 @@ class Subject(object):
                 sample = self.sample_set[sample_name]
                 sample.stats['mapped_tags'] += 1
                 sample.otus.add(otu_name)
+                if tab in self.single_reads:
+                    sample.stats['singleton_mapped_tags'] += 1
         fp.close()
 
     def write(self,file):
@@ -100,16 +112,19 @@ class Subject(object):
         fp.write('OTU average: %2.2f\n'%np.mean(otu_num))
         fp.write('OTU std: %2.2f\n'%np.std(otu_num))
         fp.write('\n')
-        fp.write('sample_name\ttags\tmapped_tags\tmapped_ratio\tsingleton_tags\tsingleton_ratio\tQ20_ratio\tQ30_ratio\tOTUs\n')
+        fp.write('sample_name\ttags\tmapped_tags\tmapped_ratio\tsingleton_tags\tsingleton_ratio\tchimera_tags\tchimera_ratio\tQ20_ratio\tQ30_ratio\tOTUs\n')
         for sample_name in sorted(list(self.sample_set.iterkeys())):
             sample = self.sample_set[sample_name]
             tags = sample.stats['tags']
             mapped_ratio = sample.stats['mapped_tags'] / tags * 100
             Q20_ratio = sample.stats['q20'] / sample.stats['bases'] * 100
             Q30_ratio = sample.stats['q30'] / sample.stats['bases'] * 100
-            fp.write('%s\t%s\t%s\t%2.2f%%\t%s\t%s\t%2.2f%%\t%2.2f%%\t%s\n'%(sample_name,tags,sample.stats['mapped_tags'],mapped_ratio,
-                                                                                     sample.stats['singleton_tags'],sample.stats['singleton_ratio'],
-                                                                                     Q20_ratio,Q30_ratio,len(sample.otus)))
+            chimeras = tags - sample.stats['mapped_tags'] - sample.stats['singleton_tags'] + sample.stats['singleton_mapped_tags']
+            chimeras_ratio = chimeras / tags
+            fp.write('%s\t%s\t%s\t%2.2f%%\t%s\t%s\t%s\t%2.2f%%\t%2.2f%%\t%2.2f%%\t%s\n'%(sample_name,tags,sample.stats['mapped_tags'],mapped_ratio,
+                                                                                         sample.stats['singleton_tags'],sample.stats['singleton_ratio'],
+                                                                                         chimeras,chimeras_ratio,
+                                                                                         Q20_ratio,Q30_ratio,len(sample.otus)))
         fp.close()
      
 

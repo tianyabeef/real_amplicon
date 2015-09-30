@@ -18,6 +18,8 @@ def read_params(args):
             help="set the output fasta file, [ default is OUTDIR/derep.fa ]")
     parser.add_argument('-s','--out_stat',dest='outstat',metavar='FILE',type=str,default=None,
             help="set the output stat file, [ default is OUTDIR/stat.txt ]")
+    parser.add_argument('--single_list',dest='single_list',metavar='FILE',type=str,default=None,
+            help="set the single read list file, [ default is OUTDIR/single.list ]")
 
     args = parser.parse_args()
     params = vars(args)
@@ -25,14 +27,15 @@ def read_params(args):
         params['outfa'] = params['outdir'] + '/derep.fa'
     if params['outstat'] is None:
         params['outstat'] = params['outdir'] + '/stat.txt'
+    if params['single_list'] is None:
+        params['single_list'] = params['outdir'] + '/single.list'
     return params
 
 if __name__ == '__main__':
     params = read_params(sys.argv)
     if not os.path.isdir(params['outdir']):
         os.mkdir(params['outdir']) 
-    #read_hash = sorted(get_read_hash(params['infile']).iteritems(),key=lambda (k,v):len(k) )
-    subject = gs.Subject(params['infile'],params['outfa'],params['outstat'])
+    subject = gs.Subject(params['infile'],params['outfa'],params['outstat'],params['single_list'])
     subject.find_record()
     subject.write_fa()
     subject.write_stat()

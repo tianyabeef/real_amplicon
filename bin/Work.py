@@ -33,6 +33,12 @@ class MyConfigParser(cp.SafeConfigParser):
         else:
             self.add_section(section)
 
+    def get_section(self,section):
+        var = {}
+        for item in self.items(section):
+            var[item[0]] = item[1]
+        return var
+
     def add(self,section,name=None,value=None):
         if name:
             if self.has_option(section,name) and self.get(section,name) is not None:
@@ -52,22 +58,84 @@ class MyConfigParser(cp.SafeConfigParser):
         else:
             self.add_sectioin(section)
 
+    def rename(self,old,new):
+        try:
+            self.set_section(new,self.items(old))
+        except cp.NoSectionError,ex:
+            return False
+        self.remove_section(old)
+
     def write(self,fp):
         try:
             cp.SafeConfigParser.write(self,fp)
         except cp.InterpolationMissingOptionError,ex:
             cp.RawConfigParser.write(self,fp)
 
+
 class Work(object):
-    def __init__(self):
+
+    def __init__(self,default_config):
         self.config = MyConfigParser()
         self.commands = []
-
-    def read_config(self,config_file):
-        config = MyConfigParser()
-        config.readfp(open(config_file))
-        self.config = config
+        self.default_config = self.__read_config(default_config)
+    
+    @staticmethod
+    def __read_config(config):
+        if config.__class__ == str:
+            cfg = MyConfigParser()
+            cfg.readfp(open(config))
+            config = cfg
         return config
+
+    def set_params(self,config,vars=None):
+        params_list = self.default_config.options('params')
+        config = self.__read_config(config)
+        self.load_default_section('params')
+        if config is None:
+            return None
+        try:
+            param_dict = config.get_section('params')
+        except cp.NoSectionError,ex:
+            return None
+        for option in params_list:
+            try:
+                self.config.set('params',option,param_dict[option])
+            except KeyError,ex:
+                if self.config.get('params',str(ex).strip("'")) is None:
+                    raise KeyError,ex
+        if vars is not None:
+            for option,value in vars.iteritems():
+                self.config.set('params',option,value)
+
+    def set_config(self,config):
+        config = self.__read_config(config)
+        if config is None:
+            return None
+        for section in config.sections():
+            self.config.set_section(section,items=config.items(section,raw=True))
+
+    def load_default_section(self,section):
+        _vars = None
+        while 1:
+            try:
+                self.config.add_section(section,items=self.default_config.items(section,vars=_vars))
+            except cp.InterpolationMissingOptionError,ex:
+                if _vars is None:
+                    _vars = {}
+                _vars[ex.reference] = self.config.get('params',ex.reference)
+            else:
+                break
+        if _vars is None:
+            return
+        for option in _vars.iterkeys():
+            self.config.remove_option(section,option)
+
+    def load_default_config(self):
+        config = self.default_config
+        if config is None or not config.sections():
+            return None
+        for section in config.sections():
+            self.load_default_section(section)
 
     def write_config(self,out_file):
         out_dir = os.path.dirname(out_file)
@@ -81,11 +149,38 @@ class Work(object):
         if not os.path.exists(os.path.dirname(shell_file)):
             os.system('mkdir -p %s'%os.path.dirname(shell_file))
         shell = open(shell_file,'w')
-        shell.write("echo -e 'Begin at : \c' && date\n")
+#        shell.write("echo -e 'Begin at : \c' && date\n")
         for cmd in self.commands:
-            shell.write(cmd + " && echo -e 'This-Work-is-Completed! : \c' && date\n")
-        shell.write("echo -e 'All target finished at : \c' && date\n")
+            shell.write(cmd+'\n')
+#            shell.write(cmd + " && echo -e 'This-Work-is-Completed! : \c' && date\n")
+#        shell.write("echo -e 'All target finished at : \c' && date\n")
         shell.close()
+
+
+class Pipeline(Work):
+
+    def __init__(self,config):
+        super(Pipeline,self).__init__(config)
+        self.set_config(config)
+        try:
+            self.job_id = self.config.get('params','job_id')
+        except cp.NoOptionError,ex:
+            self.job_id = 'S'
+
+    def add_job(self,job_name,shell,prep=None,vf='5G',queue='all.q'):
+        job_name = '%s_%s'%(self.job_id,job_name)
+        __o_file = '%s.o'%shell
+        __e_file = '%s.e'%shell
+        if os.path.isfile(__o_file):
+            os.remove(__o_file)
+        if os.path.isfile(__e_file):
+            os.remove(__e_file)
+        cmd = '%s=`qsub -cwd -l vf=%s -q %s -N %s -e %s.e -o %s.o -terse'%(job_name,vf,queue,job_name,
+                                                                           __e_file,__o_file)
+        if prep is not None:
+            cmd += ' -hold_jid %s'%prep
+        cmd += ' %s`'%shell
+        self.commands.append(cmd)
 
 class SubWork(Work):
     def __init__(self,work_id,cfg_in):
@@ -97,3 +192,6 @@ class SubWork(Work):
         self.work_id = work_id
         cfg_in.set(work_id,'work_dir',cfg_in.get('all','work_dir'))
         self.config = cfg_in
+
+
+
