@@ -79,6 +79,13 @@ class Work(object):
         self.commands = []
         self.default_config = self.__read_config(default_config)
     
+    def __del__(self):
+        try:
+            self.write_config(self.config.get('outfiles','config'))
+            self.write_shell(self.config.get('outfiles','shell'))
+        except cp.NoSectionError,ex:
+            pass
+
     @staticmethod
     def __read_config(config):
         if config.__class__ == str:
@@ -157,6 +164,7 @@ class Work(object):
         shell.close()
 
 
+
 class Pipeline(Work):
 
     def __init__(self,config):
@@ -166,6 +174,22 @@ class Pipeline(Work):
             self.job_id = self.config.get('params','job_id')
         except cp.NoOptionError,ex:
             self.job_id = 'S'
+
+    @staticmethod
+    def make_shell(work_shell,work_list):
+        from settings import FUNCTIONAL_SCRIPT_DIR
+        work_shell = open(work_shell,'w')
+        for (work,config) in work_list:
+            script = '%s/%s.py'%(FUNCTIONAL_SCRIPT_DIR,work)
+            work_shell.write('python %s %s\n'%(script,config))
+        work_shell.close()
+
+    @staticmethod
+    def merge_shell(total_shell,shell_list):
+        total_shell = open(total_shell,'w')
+        for shell in shell_list:
+            total_shell.write('sh %s\n'%shell)
+        total_shell.close()
 
     def add_job(self,job_name,shell,prep=None,vf='5G',queue='all.q'):
         job_name = '%s_%s'%(self.job_id,job_name)
@@ -181,6 +205,10 @@ class Pipeline(Work):
             cmd += ' -hold_jid %s'%prep
         cmd += ' %s`'%shell
         self.commands.append(cmd)
+
+    def __del__(self):
+        self.write_shell(self.config.get('params','pipeline_shell'))
+
 
 class SubWork(Work):
     def __init__(self,work_id,cfg_in):

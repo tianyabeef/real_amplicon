@@ -18,8 +18,8 @@ def data_merge(cfg_in,vars=None):
                                                                    params['name_list'],
                                                                    params['data_type']))
 
-    work.write_config(output['out_dir'] + '/work.cfg')
-    work.write_shell(output['out_dir'] + '/work.sh')
-
     return output
 
+if __name__ == '__main__':
+    config = sys.argv[1]
+    data_merge(config)

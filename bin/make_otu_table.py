@@ -16,8 +16,6 @@ def make_otu_table(cfg_in,vars=None):
     out_dir = outfiles['out_dir']
     rep_set = out_dir + '/rep_set.fna'
     classifier_file = out_dir + '/rdp_classifier.txt'
-    tax_assign = out_dir + '/tax_assignment.txt'
-    otu_biom = out_dir + '/otu_table.biom'
 
     # pick rep set
     work.commands.append('%s -i %s -f %s -o %s -m %s'%(qiime['pick_rep_set'],
@@ -36,14 +34,16 @@ def make_otu_table(cfg_in,vars=None):
     work.commands.append('%s -i %s -c %s -o %s'%(scripts['transform_rdp_qiime'],
                                                  classifier_file,
                                                  params['classify_confident_cutoff'],
-                                                 tax_assign))
+                                                 outfiles['tax_assign']))
     # make otu table
     work.commands.append('%s -i %s -t %s -o %s'%(qiime['make_otu_table'],
                                                  params['otu_mapping_file'],
-                                                 tax_assign,
-                                                 otu_biom))
+                                                 outfiles['tax_assign'],
+                                                 outfiles['otu_biom']))
     
-    work.write_shell(outfiles['shell'])
-    work.write_config(outfiles['config'])
 
     return outfiles
+
+if __name__ == '__main__':
+    config = sys.argv[1]
+    make_otu_table(config)
