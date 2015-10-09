@@ -35,6 +35,7 @@ def work_01(pipeline,infiles=None):
                          [pick_otu_outfiles['shell'],
                           otu_table_outfiles['shell'],
                           alpha_rare_outfiles['shell']])
+    pipeline.add_job('pick_otu',pick_otu_outfiles['out_dir'] + '/work.sh',prep='data_merge')
     return pick_otu_outfiles
 
 def work_02(pipeline,infiles=None):
@@ -48,6 +49,10 @@ def work_02(pipeline,infiles=None):
           'reference_seqs':downsize_outfiles['seqs_fa']}
     otu_table_outfiles = make_otu_table(pipeline.config,vars=vars)
 
+    vars={'work_dir':downsize_outfiles['out_dir'],
+          'otu_biom':otu_table_outfiles['otu_biom'],
+          'tax_ass':otu_table_outfiles['tax_assign']}
+    taxanomy_total_outfiles = taxanomy_total(pipeline.config,vars=vars)
 
 
 if __name__ == '__main__':
@@ -59,5 +64,6 @@ if __name__ == '__main__':
 
     outfiles_00 = work_00(pipeline)
     outfiles_01 = work_01(pipeline,infiles=outfiles_00) 
+    outfiles_02 = work_02(pipeline,infiles=outfiles_01)
 
     

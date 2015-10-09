@@ -192,14 +192,14 @@ class Pipeline(Work):
         total_shell.close()
 
     def add_job(self,job_name,shell,prep=None,vf='5G',queue='all.q'):
-        job_name = '%s_%s'%(self.job_id,job_name)
+        qsub_name = '%s_%s'%(self.job_id,job_name)
         __o_file = '%s.o'%shell
         __e_file = '%s.e'%shell
         if os.path.isfile(__o_file):
             os.remove(__o_file)
         if os.path.isfile(__e_file):
             os.remove(__e_file)
-        cmd = '%s=`qsub -cwd -l vf=%s -q %s -N %s -e %s.e -o %s.o -terse'%(job_name,vf,queue,job_name,
+        cmd = '%s=`qsub -cwd -l vf=%s -q %s -N %s -e %s -o %s -terse'%(job_name,vf,queue,qsub_name,
                                                                            __e_file,__o_file)
         if prep is not None:
             cmd += ' -hold_jid %s'%prep

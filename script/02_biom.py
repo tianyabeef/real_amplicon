@@ -7,8 +7,8 @@ import argparse
 
 def read_params(args):
     parser = argparse.ArgumentParser(description='a wrapper for biom | v1.0 at 2015/09/28 by liangzb')
-    parser.add_argument('-s','--biom_soft',dest='biom',metavar='BIOM',type=str,required=True,
-            help="set the biom software with absolute path")
+    parser.add_argument('-s','--biom_soft',dest='biom',metavar='BIOM',type=str,default='biom',
+            help="set the biom software with absolute path, default find in env")
     parser.add_argument('-i','--biom_file',dest='biomfile',metavar='FILE',type=str,required=True,
             help="set the input biom file")
     parser.add_argument('-o','--out_file',dest='outfile',metavar='FILE',type=str,required=True,
