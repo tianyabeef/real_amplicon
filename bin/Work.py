@@ -202,7 +202,7 @@ class Pipeline(Work):
         cmd = '%s=`qsub -cwd -l vf=%s -q %s -N %s -e %s -o %s -terse'%(job_name,vf,queue,qsub_name,
                                                                            __e_file,__o_file)
         if prep is not None:
-            cmd += ' -hold_jid %s'%prep
+            cmd += ' -hold_jid $%s'%prep
         cmd += ' %s`'%shell
         self.commands.append(cmd)
 

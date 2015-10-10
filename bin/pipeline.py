@@ -54,6 +54,16 @@ def work_02(pipeline,infiles=None):
           'tax_ass':otu_table_outfiles['tax_assign']}
     taxanomy_total_outfiles = taxanomy_total(pipeline.config,vars=vars)
 
+    pipeline.make_shell(downsize_outfiles['out_dir'] + '/make.sh',
+                        [('downsize',downsize_outfiles['config']),
+                         ('make_otu_table',otu_table_outfiles['config']),
+                         ('taxanomy_total',taxanomy_total_outfiles['config'])])
+    pipeline.merge_shell(downsize_outfiles['out_dir'] + '/work.sh',
+                         [downsize_outfiles['shell'],
+                          otu_table_outfiles['shell'],
+                          taxanomy_total_outfiles['shell']])
+    pipeline.add_job('OTU_all',downsize_outfiles['out_dir'] + '/work.sh',prep='pick_otu')
+    return downsize_outfiles
 
 if __name__ == '__main__':
 

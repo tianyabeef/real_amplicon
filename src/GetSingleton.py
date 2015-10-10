@@ -75,9 +75,13 @@ class Subject(object):
     def find_record(self):
         fp = open(self.infile)
         for record in SeqIO.parse(fp,'fasta'):
-            sample_name = re.search('(.+)_\d+$',record.id).group(1)
+            try:
+                sample_name = re.search('(.+)_\d+$',record.id).group(1)
+            except AttributeError,ex:
+                sys.stderr.write('Notice: please check the sample name (without space)\n')
+                raise AttributeError,ex
             if sample_name not in self.sample_set:
-                sample = Sample(sample_name)
+                sample = Sample(r'%s'%sample_name)
                 self.sample_set[sample_name] = sample
             self.sample_set[sample_name].total_reads += 1
             if str(record.seq) not in self.container:

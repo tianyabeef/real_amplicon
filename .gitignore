@@ -1,3 +1,7 @@
 test/
 test/*
 test/*/*
+test_name/
+test_name/*
+qiime/
+biopython/

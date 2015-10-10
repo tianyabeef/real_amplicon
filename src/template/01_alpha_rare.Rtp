@@ -1,5 +1,5 @@
 library(WGCNA)
-table = read.table('@#{otu_table}', sep = "\t",head = T)
+table = read.table('@#{otu_table}', sep = "\t",head = T, check.names=F)
 group=read.table('@#{group_file}', sep = "\t",head = F,row.names=1)
 pdf('@#{pdf_file}')
 par(mar=c(5.1,5.1,3.1,2.1))

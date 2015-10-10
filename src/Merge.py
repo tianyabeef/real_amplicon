@@ -58,7 +58,8 @@ class Subject(object):
             sys.stderr.write('There is no file to open!')
             return False
         for line in name_table:
-            tabs = re.split('\s+',line.strip())
+#            tabs = re.split('\s+',line.strip())
+            tabs = line.strip().split('\t')
             self.name_table[tabs[0]] = tabs[1]
         name_table.close()
         return True
