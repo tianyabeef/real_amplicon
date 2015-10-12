@@ -1,16 +1,16 @@
 library(gplots)
 library(RColorBrewer)
-data=read.table("@#{heatmap_profile}",header=TRUE,row.names=1,sep="\\t")
+data=read.table("@#{heatmap_profile}",header=TRUE,row.names=1,sep="\t")
 row.sums <- apply(data, 1, sum)
 data_sort <-sort(row.sums)
 data_sort_rev <-rev(data_sort)
 if("@#{top}"=="all"){
 }else{
         final_data <- data_sort_rev[1:@#{top}]
-        data <-data[attributes(final_data)\$names,]
+        data <-data[attributes(final_data)$names,]
 }
 
-group=read.table("@#{group}",sep="\\t",header=F,row.names=1)
+group=read.table("@#{group}",sep="\t",header=F,row.names=1)
 name=read.table("@#{show_rowname}",header=F)
 rows=rep(" ",nrow(data))
 for(i in 1:nrow(data)){
@@ -37,9 +37,9 @@ heatmap.2(as.matrix(data),
           key.xlab="relative abundance",  # no xlab
           key.par=list(mar=c(5, 5, 5, 10)),
           key.xtickfun=function() {
-            breaks <- parent.frame()\$breaks
+            breaks <- parent.frame()$breaks
             return(list(
-              at=parent.frame()\$scale01(c(breaks[1],
+              at=parent.frame()$scale01(c(breaks[1],
                                           breaks[length(breaks)])),
               labels=c(as.character(breaks[1]),
                        as.character(round(as.numeric(breaks[length(breaks)]),4)))
