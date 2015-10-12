@@ -40,7 +40,7 @@ def find_minimum(file,group):
     if group is not None:
         with open(group) as group:
             for line in group:
-                sample.add(line.split('\t')[0])
+                sample_set.add(line.split('\t')[0])
 
     with open(file) as fp:
         line = fp.next()

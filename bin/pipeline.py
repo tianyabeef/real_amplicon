@@ -66,7 +66,7 @@ def work_02(pipeline,infiles=None):
                           otu_table_outfiles['shell'],
                           taxanomy_total_outfiles['shell']])
     pipeline.add_job('OTU_all',work_dir + '/work.sh',prep='pick_otu')
-    return downsize_outfiles
+    return otu_table_outfiles
 
 def parse_group(group_file):
     sample_set = set()
@@ -87,7 +87,7 @@ def parse_group(group_file):
     return vars
 
 def work_03(pipeline,in_vars=None):
-    work_dir = '%s/03_otu_groups/%s'%(pipeline.config.get('params','work_dir'),in_vars['analysis_name'])
+    work_dir = '%s/03_OTU_groups/%s'%(pipeline.config.get('params','work_dir'),in_vars['analysis_name'])
     vars={'work_dir':work_dir,
           'otu_table_in':in_vars['otu_table_in'],
           'stat_file_in':in_vars['stat_file_in'],
@@ -95,6 +95,28 @@ def work_03(pipeline,in_vars=None):
           'group':in_vars['group_file']}
     downsize_outfiles = downsize(pipeline.config,vars=vars)
 
+    vars={'work_dir':work_dir,
+          'otu_mapping_file':downsize_outfiles['otu_table'],
+          'reference_seqs':downsize_outfiles['seqs_fa']}
+    otu_table_outfiles = make_otu_table(pipeline.config,vars=vars)
+    
+    vars={'work_dir':work_dir,
+          'group':in_vars['group_file'],
+          'otu_biom':otu_table_outfiles['otu_biom'],
+          'uniform_profile':otu_table_outfiles['uniform_profile'],
+          'tax_ass':otu_table_outfiles['tax_assign']} 
+    taxanomy_group_outfiles = taxanomy_group(pipeline.config,vars=vars)
+
+    pipeline.make_shell(work_dir + '/make.sh',
+                        [('downsize',downsize_outfiles['config']),
+                         ('make_otu_table',otu_table_outfiles['config']),
+                         ('taxanomy_total',taxanomy_group_outfiles['config'])])
+    pipeline.merge_shell(work_dir + '/work.sh',
+                         [downsize_outfiles['shell'],
+                          otu_table_outfiles['shell'],
+                          taxanomy_group_outfiles['shell']])
+    pipeline.add_job('OTU_group',work_dir + '/work.sh',prep='pick_otu')
+    return otu_table_outfiles
 
 if __name__ == '__main__':
 

@@ -13,7 +13,7 @@ def read_params(args):
                         help="set the otu table file")
     parser.add_argument('-t','--tax_assignment',dest='tax_ass',metavar='FILE',type=str,required=True,
                         help="set the tax assignment file")
-    parser.add_argument('-c','--percent_cutoff',dest='cutoff',metavar='FLOAT',type=FLOAT,defualt=1,
+    parser.add_argument('-c','--percent_cutoff',dest='cutoff',metavar='FLOAT',type=float,default=1,
                         help="set the percent cutoff in [0.8, 0.9, 1], [default is 1]")
     parser.add_argument('-o','--out_dir',dest='out_dir',metavar='DIR',type=str,required=True,
                         help="set the output dir")
@@ -27,8 +27,8 @@ if __name__ == '__main__':
         os.mkdir(params['out_dir'])
     for_plot = params['out_dir'] + '/for_plot.txt'
     core_otu = params['out_dir'] + '/core_otu.txt'
-    pdf = params['out_dir'] + '/core_otu.pdf'
-    png = params['out_dir'] + '/core_otu.png'
+    pdf_file = params['out_dir'] + '/core_otu.pdf'
+    png_file = params['out_dir'] + '/core_otu.png'
     
     subject = Subject(params['otu_table'],params['tax_ass'],
                       for_plot,core_otu,params['cutoff'])

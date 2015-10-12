@@ -12,10 +12,20 @@ def taxanomy_group(cfg_in,vars=None):
     outfiles = config.get_section('outfiles')
     software = config.get_section('softwares')
 
+    # summarize taxa
+    work.commands.append('%s -i %s -o %s'%(qiime['summarize_taxa'],
+                                           params['otu_biom'],
+                                           outfiles['summarize_dir']))
 
+    # core otu
+    work.commands.append('%s -i %s -t %s -c %s -o %s'%(scripts['core_otu'],
+                                                       params['uniform_profile'],
+                                                       params['tax_ass'],
+                                                       params['core_percent_cutoff'],
+                                                       outfiles['core_otu_outdir']))
     
 
-    return outfile
+    return outfiles
 
 if __name__ == '__main__':
     config = sys.argv[1]

@@ -10,7 +10,7 @@ class OTU(object):
 
 class Subject(object):
     tax_level = ['kingdom','phylum','class','order','family','genus','specie']
-    tax_level_dic = {'k':'kingdom','p':'phylum','c':'class'
+    tax_level_dic = {'k':'kingdom','p':'phylum','c':'class',
                      'o':'order','f':'family','g':'genus','s':'specie'}
         
     def __init__(self,otu_table,tax_ass,for_plot,core_txt,cutoff):
@@ -33,7 +33,7 @@ class Subject(object):
                 otu,tax,conf = line.strip().split('\t')
                 tax = tax.split(';')[-1]
                 tax_short,tax_name = re.search('(\w)__(.+)',tax).groups()
-                tax_level = tax_level_dic[tax_short]
+                tax_level = self.tax_level_dic[tax_short]
                 self.otus[otu] = OTU(otu,tax_level,tax_name)
         
     def read_otu_table(self):
@@ -55,7 +55,7 @@ class Subject(object):
         segs = ['>0.5','>0.6','>0.7','>0.8','>0.9','==1']
         for s in segs:
             self.segments[s] = 0
-        for otu in self.otus
+        for otu in self.otus.itervalues():
             p = otu.percent
             for s in segs:
                 if eval('%s%s'%(p,s)):
@@ -67,8 +67,8 @@ class Subject(object):
                     break
 
     def write_core_otu(self):
-        with open(self.core_otu,'w') as core_otu:
+        with open(self.core_txt,'w') as core_otu:
             core_otu.write('OTU ID\tTaxonomy\tname\n')
-            for otu in self.otus.iterkeys():
+            for otu in self.otus.itervalues():
                 if otu.percent >= self.cutoff:
                     core_otu.write('%s\t%s\t%s'%(otu.name,otu.tax_level,otu.tax_name))
