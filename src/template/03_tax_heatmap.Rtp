@@ -1,0 +1,48 @@
+library(gplots)
+library(RColorBrewer)
+data=read.table("@#{heatmap_profile}",header=TRUE,row.names=1,sep="\\t")
+row.sums <- apply(data, 1, sum)
+data_sort <-sort(row.sums)
+data_sort_rev <-rev(data_sort)
+if("@#{top}"=="all"){
+}else{
+        final_data <- data_sort_rev[1:@#{top}]
+        data <-data[attributes(final_data)\$names,]
+}
+
+group=read.table("@#{group}",sep="\\t",header=F,row.names=1)
+name=read.table("@#{show_rowname}",header=F)
+rows=rep(" ",nrow(data))
+for(i in 1:nrow(data)){
+        if(name[1,i]==1){
+                rows[i]=rownames(data)[i]
+        }
+}
+group=group[colnames(data),1]
+group=as.data.frame(group)
+rownames(group)=colnames(data)
+pdf("@#{heatmap.pdf}",12,16)
+par(mar=c(2.1,1.1,2.1,5.1))
+
+col2 = colorRampPalette(c("blue","white"))(50)
+col3 = colorRampPalette(c("white", "orangered"), bias=100)(2000)
+col=c(col2,col3)
+heatmap.2(as.matrix(data),
+          col=col,labRow=rows,na.rm=T,distfun=function(x) dist(x),
+          hclustfun=function(x) hclust(x,method='complete'),cexRow=1.8,
+          offsetRow=0.1,cexCol=1.8,symkey=FALSE,density.info="none",
+          trace="none",keysize=1.5,margins=c(5,13),lmat = rbind(c(0,3),c(2,1),c(0,4)),lwid = c(1.5,3),lhei = c(1,4,0.6),
+          colsep=c(1:ncol(data)),rowsep=c(1:nrow(data)),sepcolor="black",sepwidth=c(0.01, 0.01),
+          key.title=NA, # no title
+          key.xlab="relative abundance",  # no xlab
+          key.par=list(mar=c(5, 5, 5, 10)),
+          key.xtickfun=function() {
+            breaks <- parent.frame()\$breaks
+            return(list(
+              at=parent.frame()\$scale01(c(breaks[1],
+                                          breaks[length(breaks)])),
+              labels=c(as.character(breaks[1]),
+                       as.character(round(as.numeric(breaks[length(breaks)]),4)))
+            ))
+          })
+dev.off()
