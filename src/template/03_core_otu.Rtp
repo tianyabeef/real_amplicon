@@ -1,0 +1,6 @@
+data=read.table("@#{for_plot}",row.names=1)
+data=t(as.matrix(data))
+pdf("@#{pdf_file}")
+par(mar=c(4.1,5.1,4.1,2.1))
+barplot(data,ylab="Number of OTUs",xlab="Fraction of samples",col='blue',cex.names=1.5,cex.axis=1.5,cex.lab=2)
+dev.off()

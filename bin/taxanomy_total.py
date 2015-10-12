@@ -17,20 +17,9 @@ def taxanomy_total(cfg_in,vars=None):
                                            params['otu_biom'],
                                            outfiles['summarize_dir']))
 
-    # biom convert
-    work.commands.append('%s -s %s -i %s -o %s'%(scripts['biom'],
-                                                 software['biom'],
-                                                 params['otu_biom'],
-                                                 outfiles['otu_txt']))
-
-    # get uniform
-    work.commands.append('%s -i %s -o %s'%(scripts['get_uniform'],
-                                           outfiles['otu_txt'],
-                                           outfiles['uniform_profile']))
-
     # specaccum
     work.commands.append('%s -i %s -o %s'%(scripts['specaccum'],
-                                           outfiles['uniform_profile'],
+                                           params['uniform_profile'],
                                            outfiles['specaccum_dir']))
 
     # rank_abundance
@@ -42,7 +31,7 @@ def taxanomy_total(cfg_in,vars=None):
     # tax_star
     work.commands.append('%s -t %s -i %s -o %s'%(scripts['tax_star'],
                                                  params['tax_ass'],
-                                                 outfiles['uniform_profile'],
+                                                 params['uniform_profile'],
                                                  outfiles['tax_star_dir']))
 
     # bar_plot
@@ -52,4 +41,6 @@ def taxanomy_total(cfg_in,vars=None):
 
     return outfiles 
 
-
+if __name__ == '__main__':
+    config = sys.argv[1]
+    taxanomy_total(config)

@@ -40,6 +40,16 @@ def make_otu_table(cfg_in,vars=None):
                                                  params['otu_mapping_file'],
                                                  outfiles['tax_assign'],
                                                  outfiles['otu_biom']))
+    # biom convert
+    work.commands.append('%s -s %s -i %s -o %s'%(scripts['biom'],
+                                                 software['biom'],
+                                                 outfiles['otu_biom'],
+                                                 outfiles['otu_txt']))
+
+    # get uniform
+    work.commands.append('%s -i %s -o %s'%(scripts['get_uniform'],
+                                           outfiles['otu_txt'],
+                                           outfiles['uniform_profile']))
     
 
     return outfiles
