@@ -71,7 +71,6 @@ class MyConfigParser(cp.SafeConfigParser):
         except cp.InterpolationMissingOptionError,ex:
             cp.RawConfigParser.write(self,fp)
 
-
 class Work(object):
 
     def __init__(self,default_config):

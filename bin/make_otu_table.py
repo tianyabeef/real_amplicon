@@ -35,6 +35,11 @@ def make_otu_table(cfg_in,vars=None):
                                                  classifier_file,
                                                  params['classify_confident_cutoff'],
                                                  outfiles['tax_assign']))
+    # assign statistic
+    work.commands.append('%s -i %s -t %s -o %s'%(scripts['otu_ass_stat'],
+                                                params['otu_mapping_file'],
+                                                outfiles['tax_assign'],
+                                                outfiles['tax_assign_stat']))
     # make otu table
     work.commands.append('%s -i %s -t %s -o %s'%(qiime['make_otu_table'],
                                                  params['otu_mapping_file'],
@@ -45,7 +50,6 @@ def make_otu_table(cfg_in,vars=None):
                                                  software['biom'],
                                                  outfiles['otu_biom'],
                                                  outfiles['otu_txt']))
-
     # get uniform
     work.commands.append('%s -i %s -o %s'%(scripts['get_uniform'],
                                            outfiles['otu_txt'],

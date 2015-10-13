@@ -1,5 +1,4 @@
 from settings import *
-import argparse
 from functional_modules import *
 
 PWD = os.getcwd()
@@ -82,12 +81,12 @@ def work_03(pipeline,infiles=None):
           'otu_mapping_file':downsize_outfiles['otu_table'],
           'reference_seqs':downsize_outfiles['seqs_fa']}
     otu_table_outfiles = make_otu_table(pipeline.config,vars=vars)
-    
+
     vars={'work_dir':work_dir,
           'group':infiles['group_file'],
           'otu_biom':otu_table_outfiles['otu_biom'],
           'uniform_profile':otu_table_outfiles['uniform_profile'],
-          'tax_ass':otu_table_outfiles['tax_assign']} 
+          'tax_ass':otu_table_outfiles['tax_assign']}
     taxanomy_group_outfiles = taxanomy_group(pipeline.config,vars=vars)
 
     pipeline.make_shell(work_dir + '/make.sh',
@@ -110,7 +109,7 @@ if __name__ == '__main__':
     group_files = re.split('\s+',user_config.get('params','group_files'))
 
     outfiles_00 = work_00(pipeline)
-    outfiles_01 = work_01(pipeline,infiles=outfiles_00) 
+    outfiles_01 = work_01(pipeline,infiles=outfiles_00)
     outfiles_02 = work_02(pipeline,infiles=outfiles_01)
     for group_file in group_files:
         infiles = copy.deepcopy(outfiles_01)

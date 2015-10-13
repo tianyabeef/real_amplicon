@@ -3,7 +3,6 @@ from settings import *
 def parse_group(group_file):
     sample_set = set()
     group_set = {}
-    vars = {}
     with open(group_file) as group:
         for line in group:
             sample_name,group_name = line.strip().split('\t')
@@ -47,10 +46,12 @@ def taxanomy_group(cfg_in,vars=None):
                                                            outfiles['core_otu_outdir']))
 
     # otu venn
-#    if group_num >= 2 and group_num <= 5:
-#        work.commands.append('%s -i %s')
+    if group_num >= 2 and group_num <= 5:
+        work.commands.append('%s -i %s -g %s -o %s'%(scripts['otu_venn'],
+                                                     params['uniform_profile'],
+                                                     params['group'],
+                                                     outfiles['otu_venn_outdir']))
         
-
     return outfiles
 
 if __name__ == '__main__':

@@ -13,8 +13,8 @@ def read_params(args):
             help="set the minimum to downsize, [default is None]")
     parser.add_argument('-s','--in_statfile',dest='statfile',metavar='INT',type=str,default=None,
             help="find the minimum from statfile which produced by 01_stat, can be overrited by MINIMUM")
-    parser.add_argument('-i','--otu_table',dest='otu_table',metavar='STR',type=str,required=True,
-            help="set the otu_table")
+    parser.add_argument('-i','--otu_mapfile',dest='otu_map',metavar='STR',type=str,required=True,
+            help="set the otu_mapfile")
     parser.add_argument('-o','--outfile',dest='outfile',metavar='OUTFILE',type=str,required=True,
             help="set the output file")
     parser.add_argument('--out_statfile',dest='outstatfile',metavar='FILE',type=str,default=None,
@@ -61,6 +61,6 @@ if __name__ == '__main__':
     params = read_params(sys.argv)
     if not os.path.isdir(os.path.dirname(params['outfile'])):
         os.mkdir(os.path.dirname(params['outfile']))
-    s = Subject(params['otu_table'],params['outfile'],params['outstatfile'],params['minimum'],params['keep'],params['random'])
+    s = Subject(params['otu_map'],params['outfile'],params['outstatfile'],params['minimum'],params['keep'],params['random'])
     s.work()
 

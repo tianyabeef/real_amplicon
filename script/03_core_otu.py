@@ -10,13 +10,13 @@ from CoreOTU import Subject
 def read_params(args):
     parser = argparse.ArgumentParser(description='''core otu analysis | v1.0 at 2015/10/12 by liangzb ''')
     parser.add_argument('-i','--otu_profile',dest='otu_table',metavar='FILE',type=str,required=True,
-                        help="set the otu table file")
+            help="set the otu table file")
     parser.add_argument('-t','--tax_assignment',dest='tax_ass',metavar='FILE',type=str,required=True,
-                        help="set the tax assignment file")
+            help="set the tax assignment file")
     parser.add_argument('-c','--percent_cutoff',dest='cutoff',metavar='FLOAT',type=float,default=1,
-                        help="set the percent cutoff in [0.8, 0.9, 1], [default is 1]")
+            help="set the percent cutoff in [0.8, 0.9, 1], [default is 1]")
     parser.add_argument('-o','--out_dir',dest='out_dir',metavar='DIR',type=str,required=True,
-                        help="set the output dir")
+            help="set the output dir")
     args = parser.parse_args()
     params = vars(args)
     return params
@@ -29,7 +29,7 @@ if __name__ == '__main__':
     core_otu = params['out_dir'] + '/core_otu.txt'
     pdf_file = params['out_dir'] + '/core_otu.pdf'
     png_file = params['out_dir'] + '/core_otu.png'
-    
+
     subject = Subject(params['otu_table'],params['tax_ass'],
                       for_plot,core_otu,params['cutoff'])
     subject.work()
@@ -42,4 +42,4 @@ if __name__ == '__main__':
     r_job.write(params['out_dir'] + '/core_otu.R')
     r_job.run()
     os.system('convert %s %s'%(pdf_file,png_file))
- 
+

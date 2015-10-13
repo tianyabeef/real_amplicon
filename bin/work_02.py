@@ -27,7 +27,7 @@ def work_02_otu_table(cfg_in):
                                                        downsize_fa,
                                                        rep_set,
                                                        work.config.get('02','pick_rep_set_method')))
-    
+
     # assign taxonomy
     classifier_file = out_dir + '/rdp_classifier.txt'
     hier_file = out_dir + '/rdp_hier.txt'

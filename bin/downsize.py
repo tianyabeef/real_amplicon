@@ -10,13 +10,16 @@ def downsize(cfg_in,vars=None):
     scripts = config.get_section('scripts')
     outfiles = config.get_section('outfiles')
 
-    work.commands.append('%s -s %s -i %s -o %s --out_statfile %s -k %s -g %s'%(scripts['downsize'],
-                                                                               params['stat_file_in'],
-                                                                               params['otu_table_in'],
-                                                                               outfiles['otu_table'],
-                                                                               outfiles['downsize_stat'],
-                                                                               params['keep_small_size'],
-                                                                               params['group']))
+    params['group'] = params['group'] or None
+    command = ('%s -s %s -i %s -o %s --out_statfile %s -k %s '%(scripts['downsize'],
+                                                                params['stat_file_in'],
+                                                                params['otu_table_in'],
+                                                                outfiles['otu_table'],
+                                                                outfiles['downsize_stat'],
+                                                                params['keep_small_size']))
+    if params['group']:
+        command += '-g %s'%params['group']
+    work.commands.append(command)
 
     work.commands.append('%s -i %s -t %s -o %s'%(scripts['otutab2fa'],
                                                  params['seqs_all'],
