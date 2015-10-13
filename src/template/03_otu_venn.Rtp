@@ -1,0 +1,57 @@
+library(VennDiagram)
+library(grid)
+X = read.table("@#{for_plot}",sep='\t',row.names=1,header=F,check.names=F)
+g = c()
+for(i in 1:nrow(X)){
+	a = X[i,]
+	a = as.vector(a)
+	a = strsplit(a,' ')
+	g = c(g,a)
+}
+gnum = nrow(X)
+if(gnum==2){
+	venn.plot <- venn.diagram(
+		x = list('@#{group_name1}'=g[1][[1]],'@#{group_name2}'=g[2][[1]]),
+		filename = "@#{tiff_file}",
+		col = "black",
+		fill = c("dodgerblue", "goldenrod1"),
+		cat.col = c("dodgerblue", "goldenrod1"),
+		cat.cex = 1.5,
+		cat.fontface = "bold",
+		margin = 0.14
+	)
+}else if(gnum==3){
+	venn.plot <- venn.diagram(
+		x = list('@#{group_name1}'=g[1][[1]],'@#{group_name2}'=g[2][[1]],'@#{group_name3}'=g[3][[1]]),
+		filename = "@#{tiff_file}",
+		col = "black",
+		fill = c("dodgerblue", "goldenrod1","darkorange1"),
+		cat.col = c("dodgerblue", "goldenrod1","darkorange1"),
+		cat.cex = 1.5,
+		cat.fontface = "bold",
+		margin = 0.14
+	)	
+}else if(gnum==4){
+	venn.plot <- venn.diagram(
+		x = list('@#{group_name1}'=g[1][[1]],'@#{group_name2}'=g[2][[1]],'@#{group_name3}'=g[3][[1]],'@#{group_name4}'=g[4][[1]]),
+		filename = "@#{tiff_file}",
+		col = "black",
+		fill = c("dodgerblue", "goldenrod1","darkorange1","seagreen3"),
+		cat.col = c("dodgerblue", "goldenrod1","darkorange1","seagreen3"),
+		cat.cex = 1.5,
+		cat.fontface = "bold",
+		margin = 0.14
+	)	
+}else if(gnum==5){
+	venn.plot <- venn.diagram(
+		x = list('@#{group_name1}'=g[1][[1]],'@#{group_name2}'=g[2][[1]],'@#{group_name3}'=g[3][[1]],'@#{group_name4}'=g[4][[1]],'@#{group_name5}'=g[5][[1]]),
+		filename = "@#{tiff_file}",
+		col = "black",
+		fill = c("dodgerblue", "goldenrod1", "darkorange1", "seagreen3", "orchid3"),
+		cat.col = c("dodgerblue", "goldenrod1","darkorange1","seagreen3", "orchid3"),
+		cex = c(1.5, 1.5, 1.5, 1.5, 1.5, 1, 0.8, 1, 0.8, 1, 0.8, 1, 0.8,1, 0.8, 1, 0.55, 1, 0.55, 1, 0.55, 1, 0.55, 1, 0.55, 1, 1, 1, 1, 1, 1.5),
+		cat.cex = 1.5,
+		cat.fontface = "bold",
+		margin = 0.14
+	)	
+}

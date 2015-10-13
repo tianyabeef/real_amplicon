@@ -1,6 +1,6 @@
 library(WGCNA)
 table = read.table('@#{otu_table}', sep = "\t",head = T, check.names=F)
-group=read.table('@#{group_file}', sep = "\t",head = F,row.names=1)
+group=read.table('@#{group_file}', sep = "\t",head = F,row.names=1, check.names=F)
 pdf('@#{pdf_file}')
 par(mar=c(5.1,5.1,3.1,2.1))
 
@@ -39,7 +39,7 @@ for(i in 1:ncol(table))
 		error=function(e) e
 	)
 	if(class(estimation)[1] == 'simpleError'){
-		next	
+		next
 	}
     if(min > deviance(estimation)){
 		min = deviance(estimation)

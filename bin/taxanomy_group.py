@@ -26,7 +26,6 @@ def taxanomy_group(cfg_in,vars=None):
     scripts = config.get_section('scripts')
     qiime = config.get_section('qiime')
     outfiles = config.get_section('outfiles')
-    software = config.get_section('softwares')
     sample_num_in_groups,\
     min_sample_num_in_groups,\
     sample_num_total,\
@@ -51,7 +50,18 @@ def taxanomy_group(cfg_in,vars=None):
                                                      params['uniform_profile'],
                                                      params['group'],
                                                      outfiles['otu_venn_outdir']))
-        
+    # tax_pca
+    if sample_num_total > 5:
+        work.commands.append('%s -i %s -g %s -o %s'%(scripts['otu_pca'],
+                                                     params['uniform_profile'],
+                                                     params['group'],
+                                                     outfiles['otu_pca_outdir']))
+    if sample_num_total > 4:
+        work.commands.append('%s -i %s -g %s -o %s'%(scripts['tax_heatmap'],
+                                                     outfiles['summarize_dir'] + '/otu_table_L6.txt',
+                                                     params['group'],
+                                                     outfiles['tax_heatmap_outdir']))
+
     return outfiles
 
 if __name__ == '__main__':
