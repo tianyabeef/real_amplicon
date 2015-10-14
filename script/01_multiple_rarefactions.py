@@ -42,7 +42,7 @@ def get_maximum(file):
     line = fp.next()
     while(line):
         line = fp.next().strip()
-    head = fp.next()
+    fp.next()
     maximum = max([int(line.strip().split('\t')[2]) for line in fp])
     fp.close()
     return maximum
@@ -55,7 +55,7 @@ if __name__ == '__main__':
 
     __range = []
     if range(params['max'] > 10000):
-        __range += range(params['min'],10000,int(params['step'] / 10)) + range(10000,params['max'],params['step']) 
+        __range += range(params['min'],10000,int(params['step'] / 10)) + range(10000,params['max'],params['step'])
     else:
         __range = range(params['min'],params['max'],params['step'])
 

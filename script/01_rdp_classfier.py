@@ -2,7 +2,6 @@
 from __future__ import division
 import sys
 import os
-import re
 import argparse
 
 def read_params(args):

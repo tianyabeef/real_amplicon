@@ -25,6 +25,9 @@ def read_otu_ass(otu_ass_file):
     ass_num['No. of OTUs'] = 0
     tax_level_dict = {'k':'Kingdom','p':'Phylum','c':'Class','o':'Order',
                       'f':'Family','g':'Genus','s':'Species'}
+    assigned_list = ['Kingdom','Phylum','Class','Order','Family','Genus','Species']
+    for name in assigned_list:
+        ass_num['Assigned to %s'%name] = 0
     with open(otu_ass_file) as otu_ass:
         for line in otu_ass:
             tabs = line.strip().split('\t')
@@ -43,10 +46,14 @@ def read_otu_mapfile(result,otu_mapfile):
     with open(otu_mapfile) as otu_map:
         for line in otu_map:
             tabs = line.strip().split('\t')
-            otu_name = tabs.pop(0)
+            tabs.pop(0)
             otu_sample = set()
             for tab in tabs:
-                sample_name = re.search('(.+)_\d+$',tab).group(1)
+                try:
+                    sample_name = re.search('(.+)_\d+$',tab).group(1)
+                except AttributeError:
+                    print tab
+                    raise
                 if sample_name in otu_sample:
                     continue
                 otu_sample.add(sample_name)

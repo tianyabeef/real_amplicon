@@ -25,10 +25,13 @@ def get_file_for_star_plot(tax_ass,profile,outfile):
     tax = {}
     for line in open(tax_ass):
         tabs = line.strip().split('\t')
-        acc_tax = tabs[1].split(';')[-1]
-        if not acc_tax.startswith('g__'):
+        taxes = tabs[1].split(';')
+        for name in taxes:
+            if name.startswith('g__'):
+                tax[tabs[0]] = name
+                break
+        else:
             continue
-        tax[tabs[0]] = acc_tax
     profile_sum = {}
     with open(profile) as f:
         head = f.next()
@@ -59,7 +62,7 @@ def get_file_for_star_plot(tax_ass,profile,outfile):
             out_str += '\t%s'%profile
         out_fp.write(out_str.strip() + '\n')
     out_fp.close()
-       
+
 if __name__ == '__main__':
     params = read_params(sys.argv)
     if not os.path.isdir(params['out_dir']):

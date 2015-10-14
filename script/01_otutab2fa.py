@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 from __future__ import division
 import sys
-import re
 import os
 import argparse
 from Bio import SeqIO
@@ -23,7 +22,7 @@ def get_reads_set(otutab):
     reads_set = set()
     for line in open(otutab):
         tabs = line.strip().split('\t')
-        otu_name = tabs.pop(0)
+        tabs.pop(0)
         for read_id in tabs:
             reads_set.add(read_id)
     return reads_set

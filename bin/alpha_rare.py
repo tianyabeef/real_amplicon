@@ -10,7 +10,7 @@ def alpha_rare(cfg_in,vars=None):
     outfiles = config.get_section('outfiles')
     qiime = config.get_section('qiime')
     scripts = config.get_section('scripts')
-    
+
     out_dir = outfiles['out_dir']
 
     # multiple_rarefactions
@@ -34,14 +34,14 @@ def alpha_rare(cfg_in,vars=None):
     work.commands.append('%s -i %s -o %s'%(qiime['collate_alpha'],
                                            alpha_diversity_dir,
                                            alpha_collate_dir))
-    
+
     # alpha rare plot
     work.commands.append('%s -g %s -d %s -o %s -a %s'%(scripts['alpha_rare'],
                                                        params['alpha_group_file'],
                                                        alpha_collate_dir,
                                                        alpha_collate_dir,
                                                        params['alpha_metrics']))
-    
+
     return outfiles
 
 if __name__ == '__main__':

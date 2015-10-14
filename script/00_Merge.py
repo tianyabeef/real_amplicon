@@ -34,7 +34,7 @@ def read_params(args):
     parser.add_argument('-n',dest='name_table',metavar='FILE',type=str,default=None,
             help="set the name convert table, [ default is None ]")
 
-    args = parser.parse_args() 
+    args = parser.parse_args()
     params = vars(args)
     if params['upload_dir'] is None:
         params['upload_dir'] = params['outdir'] + '/upload'

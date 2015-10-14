@@ -31,10 +31,13 @@ def work(infile,outfile,showed_rows):
         out.write(head.strip('#'))
         for line in in_fp:
             tabs = line.strip().split('\t')
-            tax = tabs[0].split(';')[-1]
-            if not tax.startswith('g__'):
+            taxes = tabs[0].split(';')
+            for tax in taxes:
+                if tax.startswith('g__'):
+                    tabs[0] = tax[3:]
+                    break
+            else:
                 continue
-            tabs[0] = tax[3:]
             out.write('\t'.join(tabs) + '\n')
             n = 0
             for tab in tabs[1:]:
@@ -68,6 +71,4 @@ if __name__ == '__main__':
     r_job.write(params['out_dir'] + '/heatmap.R')
     r_job.run()
     os.system('convert %s %s'%(pdf_file,png_file))
-
-
 

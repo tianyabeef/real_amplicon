@@ -67,8 +67,7 @@ def work_02(pipeline,infiles=None):
     pipeline.add_job('OTU_all',work_dir + '/work.sh',prep='pick_otu')
     return otu_table_outfiles
 
-def work_03(pipeline,infiles=None):
-    analysis_name = re.search('.+\/(.+)\..+',infiles['group_file']).group(1)
+def work_03(pipeline,analysis_name,infiles=None):
     work_dir = '%s/03_OTU_groups/%s'%(pipeline.config.get('params','work_dir'),analysis_name)
     vars={'work_dir':work_dir,
           'otu_table_in':infiles['otus_all'],
@@ -100,20 +99,28 @@ def work_03(pipeline,infiles=None):
     pipeline.add_job('OTU_group',work_dir + '/work.sh',prep='pick_otu')
     return otu_table_outfiles
 
+def work_tree(pipeline,analysis_name,infiles=None):
+    work_dir = '%s/04_diversity_analysis/%s'%(pipeline.config.get('params','work_dir'),analysis_name)
+    vars={'work_dir':work_dir,
+          'rep_set':infiles['rep_set']}
+    outfiles = make_tree(pipeline.config, vars=vars)
+    return outfiles['tree_file']
+
 if __name__ == '__main__':
 
     work_cfg = PWD + '/work.cfg'
 
     pipeline = Pipeline(work_cfg)
     user_config = pipeline.config
+    data_type = user_config.get('params','data_type')
     group_files = re.split('\s+',user_config.get('params','group_files'))
 
     outfiles_00 = work_00(pipeline)
     outfiles_01 = work_01(pipeline,infiles=outfiles_00)
     outfiles_02 = work_02(pipeline,infiles=outfiles_01)
     for group_file in group_files:
+        analysis_name = re.search('.+\/(.+)\..+',group_file).group(1)
         infiles = copy.deepcopy(outfiles_01)
         infiles['group_file'] = group_file
-        outfiles_03 = work_03(pipeline,infiles)
-
-
+        outfiles_03 = work_03(pipeline,analysis_name,infiles)
+        tree_file = work_tree(pipeline,analysis_name,outfiles_03)

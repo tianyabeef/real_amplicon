@@ -22,9 +22,10 @@ class Sample(object):
 
 
 class Subject(object):
-    
-    def __init__(self,profile,outfile):
+
+    def __init__(self,level,profile,outfile):
         self.sample = []
+        self.level = level
         self.profile = profile
         self.outfile = outfile
         self.tax_total_profile = {}
@@ -38,10 +39,13 @@ class Subject(object):
             if line.startswith('#'):
                 self.get_samples(line)
             tax = line.strip().split('\t')[0]
-            tax = tax.split(';')[-1]
-            if not re.search('^\w__',tax):
+            taxes = tax.split(';')
+            for name in reversed(taxes):
+                if re.search('^%s__'%self.level[0],name):
+                    tax = name[3:]
+                    break
+            else:
                 continue
-            tax = tax[3:]
             self.get_profile(tax,line)
         fp.close()
 

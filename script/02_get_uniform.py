@@ -2,7 +2,6 @@
 from __future__ import division
 import sys
 import os
-import re
 import argparse
 
 def read_params(args):
@@ -50,7 +49,7 @@ def write(outfile,infile,sum):
         fp_out.write(out_str.strip() + '\n')
     fp_in.close()
     fp_out.close()
-           
+
 if __name__ == '__main__':
     params = read_params(sys.argv)
     if not os.path.isdir(os.path.dirname(params['outfile'])):

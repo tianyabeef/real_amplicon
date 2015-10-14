@@ -56,6 +56,7 @@ def taxanomy_group(cfg_in,vars=None):
                                                      params['uniform_profile'],
                                                      params['group'],
                                                      outfiles['otu_pca_outdir']))
+    # heatmap
     if sample_num_total > 4:
         work.commands.append('%s -i %s -g %s -o %s'%(scripts['tax_heatmap'],
                                                      outfiles['summarize_dir'] + '/otu_table_L6.txt',

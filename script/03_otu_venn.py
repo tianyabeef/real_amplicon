@@ -34,7 +34,6 @@ def read(otu_table_file,sample_in_group,vars):
     group_names = set(sample_in_group.itervalues())
     for ind,group in enumerate(list(group_names)):
         vars['group_name%s'%(ind+1,)] = group
-        print ind + 1,group
         otu_in_group[group] = set()
     with open(otu_table_file) as otu_table:
         head = otu_table.next()

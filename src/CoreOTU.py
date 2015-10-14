@@ -12,7 +12,7 @@ class Subject(object):
     tax_level = ['kingdom','phylum','class','order','family','genus','specie']
     tax_level_dic = {'k':'kingdom','p':'phylum','c':'class',
                      'o':'order','f':'family','g':'genus','s':'specie'}
-        
+
     def __init__(self,otu_table,tax_ass,for_plot,core_txt,cutoff):
         self.otu_table = otu_table
         self.tax_ass = tax_ass
@@ -35,7 +35,7 @@ class Subject(object):
                 tax_short,tax_name = re.search('(\w)__(.+)',tax).groups()
                 tax_level = self.tax_level_dic[tax_short]
                 self.otus[otu] = OTU(otu,tax_level,tax_name)
-        
+
     def read_otu_table(self):
         with open(self.otu_table) as table:
             head = table.next()
@@ -49,7 +49,7 @@ class Subject(object):
                     if float(tab) > 0:
                         n += 1
                 otu.percent = n / len(tabs)
-   
+
     def write_for_plot(self):
         self.segments = {}
         segs = ['>0.5','>0.6','>0.7','>0.8','>0.9','==1']

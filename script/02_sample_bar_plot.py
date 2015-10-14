@@ -2,7 +2,6 @@
 from __future__ import division
 import sys
 import os
-import re
 import argparse
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1,this_script_path + '/../src')
@@ -31,14 +30,14 @@ def work(level,params):
         os.mkdir(work_dir)
     profile = '%s/otu_table_L%d.txt'%(params['wf_tax_dir'],level)
     outfile = '%s/for_plot.txt'%work_dir
-    subject = Subject(profile,outfile)
+    subject = Subject(TAX_LEVEL[level],profile,outfile)
     subject.run()
 
 if __name__ == '__main__':
     params = read_params(sys.argv)
     if not os.path.isdir(params['out_dir']):
         os.mkdir(params['out_dir'])
-    
+
     outfile_list = []
     for level in params['level_list']:
         outfile_list.append(work(level,params))
@@ -58,6 +57,3 @@ if __name__ == '__main__':
         r_job.write(Rscript)
         r_job.run()
         os.system('convert %s %s'%(pdf_file,png_file))
-
-
-   
