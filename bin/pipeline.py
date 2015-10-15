@@ -151,21 +151,20 @@ def work_03(pipeline, analysis_name, infiles=None):
 
 
 def work_tree(pipeline, analysis_name, infiles=None):
-    work_dir = '%s/04_diversity_analysis/%s' % (
+    work_dir = '%s/04_diversity_analysis/%s/tree' % (
         pipeline.config.get('params', 'work_dir'), analysis_name)
     vars = {'work_dir': work_dir, 'rep_set': infiles['rep_set']}
     outfiles = make_tree(pipeline.config, vars=vars)
     pipeline.make_shell(work_dir + '/make.sh',
                         [('make_tree', outfiles['config'])])
-    pipeline.merge_shell(work_dir + '/work.sh', [outfiles['shell']])
     pipeline.add_job('make_tree_' + analysis_name,
-                     work_dir + '/work.sh',
+                     outfiles['shell'],
                      prep='OTU_group_' + analysis_name)
     return outfiles['tree_file']
 
 
 def work_alpha_diversity(pipeline, analysis_name, tree_file, infiles=None):
-    work_dir = '%s/04_diversity_analysis/%s' % (pipeline.config.get(
+    work_dir = '%s/04_diversity_analysis/%s/alpha' % (pipeline.config.get(
         'params', 'work_dir'), analysis_name)
 
     vars = {
@@ -192,10 +191,11 @@ def work_alpha_diversity(pipeline, analysis_name, tree_file, infiles=None):
     pipeline.merge_shell(work_dir + '/work.sh',
                          [alpha_rare_outfiles['shell'],
                           alpha_diversity_outfiles['shell']])
+    pipeline.add_job('alpha_div_' + analysis_name,work_dir + '/work.sh',prep="make_tree_"+analysis_name)
     return alpha_diversity_outfiles
 
 def work_beta_diversity(pipeline, analysis_name, tree_file, infiles=None):
-    work_dir = '%s/04_diversity_analysis/%s'%(pipeline.config.get('params','work_dir'),analysis_name)
+    work_dir = '%s/04_diversity_analysis/%s/beta'%(pipeline.config.get('params','work_dir'),analysis_name)
 
     vars = {'work_dir':work_dir,
             'group':infiles['group_file']}
