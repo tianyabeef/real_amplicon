@@ -1,6 +1,4 @@
-import sys
 import os
-import re
 import ConfigParser as cp
 
 
@@ -11,7 +9,7 @@ class MyConfigParser(cp.SafeConfigParser):
 
     def optionxform(self,str):
         return str
-    
+
     def add_section(self,section,items=None):
         if items:
             if not self.has_section(section):
@@ -77,7 +75,7 @@ class Work(object):
         self.config = MyConfigParser()
         self.commands = []
         self.default_config = self.__read_config(default_config)
-    
+
     def __del__(self):
         try:
             self.write_config(self.config.get('outfiles','config'))

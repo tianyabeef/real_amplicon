@@ -6,3 +6,5 @@ from downsize import downsize
 from taxanomy_total import taxanomy_total
 from taxanomy_group import taxanomy_group
 from make_tree import make_tree
+from alpha_diversity import alpha_diversity
+from beta_diversity import beta_diversity
