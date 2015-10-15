@@ -1,36 +1,23 @@
-source('/data_center_01/pipeline/16S_ITS_pipeline_v3.0/src/template/labels2colors.R')
 cols_brewer = c('#00447E','#F34800','#FFDD00','#930026','#64A10E','#A5CFED','#464E04','#BDD100','#4E0C66','#931025','#FEDE10','#00447E','#D00000','#64A10E','#F34800','#2B8BC3','#FDA100','#A6D4F2','#CDD7E2','#9295C1')
 
-X=read.table("@#{w_file}",header=TRUE,row.names=1,check.names=F)
-group=read.table("@#{group_file}",header=F,row.names=1,check.names=F)
-X=X[,rownames(group)]
-colnames(X)=rownames(group)
-colors=labels2colors(group,colorSeq=cols_brewer)
-g=unique(group)
-gcols=unique(colors)
-xlist=c()
-for(i in 1:nrow(g)){
-    rname=which(group[,1]==g[i,1])
-    g0=rownames(group)[rname]
-    g0=g0[!is.na(g0)]
-    Xg1=X[,g0][X[,g0]!="n/a"]
-    Xg=list(as.numeric(Xg1))
-    xlist=c(xlist,Xg)
-}
-means=c()
-meanname=c()
-for(j in 1:length(xlist)){
-    area=as.character(g[j,1])
-    mean=mean(as.numeric(xlist[[j]][xlist[[j]]!= "n/a"]))
-    means=cbind(means,mean)
-    meanname=c(meanname,paste("mean(",area,")",sep=""))
-}
-pdf("@#{pdf_file}",11,8.5)
-y1=min(min(X[X!="n/a"],na.rm=T))
-y2=max(max(X[X!="n/a"],na.rm=T))
-par(mar=c(4.1,5.1,4.1,1.1))
-xlist
+X = read.table("@#{grouped_file}",header=F,row.names=1,check.names=F,fill=T)
+X = t(X)
+group_num = ncol(X)
 
-boxplot(xlist,ylab=expression(paste(alpha, " Diversity (chao1 diversity index)",sep="")),col=gcols,xaxt="n",cex.lab=1.4,cex.axis=1)
+xlist = c()
+for(i in 1:group_num){
+    t = as.vector(X[,i])
+    t = t[which(!is.na(t))]
+    t = list(t)
+    xlist = c(xlist,t)
+}
+
+groups = colnames(X)
+cols = cols_brewer[1:group_num]
+
+pdf('@#{pdf_file}')
+
+boxplot(xlist,ylab=expression(paste(alpha, " Diversity (@#{alpha_name} diversity index)",sep="")),col=cols,xaxt="n",cex.lab=1.4,cex.axis=1)
+axis(side=1,at=1:group_num,labels=groups,cex.axis=1)
 
 dev.off()

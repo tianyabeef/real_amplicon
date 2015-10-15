@@ -15,9 +15,16 @@ def alpha_diversity(cfg_in, vars=None):
     qiime = config.get_section('qiime')
     scripts = config.get_section('scripts')
 
+    # alpha_grouped
+    work.commands.append('%s -a %s -g %s -m %s -o %s'%(scripts['alpha_grouped'],
+                                                       params['alpha_div_collate_dir'],
+                                                       params['group'],
+                                                       params['alpha_metrics'],
+                                                       outfiles['alpha_grouped']))
+
     # alpha_boxplot
     work.commands.append('%s -a %s -m %s -o %s'%(scripts['alpha_boxplot'],
-                                                 params['alpha_div_collate_dir'],
+                                                 outfiles['alpha_grouped'],
                                                  params['alpha_metrics'],
                                                  outfiles['alpha_boxplot_dir']))
 

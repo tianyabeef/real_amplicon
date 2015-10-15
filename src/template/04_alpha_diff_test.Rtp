@@ -1,0 +1,32 @@
+X = read.table("@#{grouped_file}",header=F,row.names=1,check.names=F,fill=T)
+X = t(X)
+group_num = ncol(X)
+
+xlist = c()
+for(i in 1:group_num){
+    t = as.vector(X[,i])
+    t = t[which(!is.na(t))]
+    t = list(t)
+    xlist = c(xlist,t)
+}
+
+groups = colnames(X)
+
+means = c()
+meanname=c()
+for(i in 1:length(xlist)){
+    group_name = as.character(groups(i))
+    mean=mean(as.numeric(xlist[[i]]))
+    means=cbind(means,mean)
+    meanname=c(meanname,paste("mean(",group_name,")",sep=""))
+}
+
+if(group_num == 2){
+    p = wilcox.test(xlist[[1]],xlist[[2]])["p.value"]
+}else{
+    p=kruskal.test(xlist)["p.value"]
+}
+statsKWs<-cbind("@#{alpha_name}",means,p)
+colnames(statsKWs)<- c("alphaname",meanname,"pvalue")
+write.table(statsKWs,"@#{marker_file}",row.names=F,quote=F,sep="\t")
+

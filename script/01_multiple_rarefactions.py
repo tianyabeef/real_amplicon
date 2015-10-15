@@ -29,7 +29,7 @@ def read_params(args):
                   it can be overrited by STATFILE")
     parser.add_argument('-t','--statfile',dest='statfile',metavar='FILE',type=str,default=None,
             help="set the statfile produced by 01_stat.py")
-    parser.add_argument('-g','group',dest='group_file',metavar='FILE',type=str,default=None,
+    parser.add_argument('-g','--group',dest='group_file',metavar='FILE',type=str,default=None,
             help="set the group_file ")
 
     args = parser.parse_args()

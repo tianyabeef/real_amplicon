@@ -23,20 +23,54 @@ def read_params(args):
     params = vars(args)
     return params
 
+class Group(object):
+    def __init__(self,group_name):
+        self.name = group_name
+        self.alpha_mean = {}
+
+def write(marker_files,total_marker):
+    groups = {}
+    p_values = []
+    alpha_names = []
+    for marker_file in marker_files:
+        with open(marker_files) as mf:
+            group_names = mf.next().strip().split('\t')[1:-1]
+            for group_name in group_names:
+                if group_name not in groups:
+                    groups[group_name] = Group(group_name)
+            tabs = mf.next().strip().split('\t')
+            alpha_name = tabs.pop(0)
+            alpha_names.append(alpha_name)
+            p_value = tabs.pop(-1)
+            p_values.append(float(p_value))
+            for ind,tab in enumerate(tabs):
+                group_name = group_names[ind]
+                groups[group_name].alpha_mean[alpha_name] = float(tab)
+    with open(total_marker,'w') as fp:
+        fp.write('alpha_name\t%s\n'%'\t'.join(alpha_names))
+        fp.write('p_value\t%s\n'%'\t'.join(p_values))
+        for group,item in groups.iteritems():
+            out_str = group
+            for alpha_name in alpha_names:
+                out_str += '\t%s'%item.alpha_mean[alpha_name]
+            fp.write(out_str.strip() + '\n')
+
 if __name__ == '__main__':
     params = read_params(sys.argv)
     if not os.path.isdir(params['out_dir']):
         os.mkdir(params['out_dir'])
+    marker_files = []
     for alpha_name in params['alpha_metrics'].split(','):
         file = '%s/%s.txt'%(params['alpha_dir'],alpha_name)
-        pdf_file = '%s/%s.boxplot.pdf'%(params['out_dir'],alpha_name)
-        png_file = '%s/%s.boxplot.png'%(params['out_dir'],alpha_name)
+        marker_file = '%s/%s.marker.txt'%(params['out_dir'],alpha_name)
         vars = {'grouped_file':file,
-                'pdf_file':pdf_file,
+                'marker_file':marker_file,
                 'alpha_name':alpha_name}
         r_job = rp.RParser()
-        r_job.open(this_script_path + '/../src/template/04_alpha_diff_boxplot.Rtp')
+        r_job.open(this_script_path + '/../src/template/04_alpha_diff_test.Rtp')
         r_job.format(vars)
         r_job.write(params['out_dir'] + '/alpha_diff_boxplot.R')
         r_job.run()
-        os.system('convert %s %s'%(pdf_file,png_file))
+        marker_files.append(marker_file)
+    total_marker = params['out_dir'] + '/alpha_markers.xls'
+    write(marker_files,total_marker)
