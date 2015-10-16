@@ -7,7 +7,7 @@ import argparse
 import os
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1, this_script_path + '/../src')
-import RParser as rp
+import Parser as rp
 
 
 def read_params(args):
@@ -65,7 +65,7 @@ if __name__ == '__main__':
             'pdf_file':pdf_file,
             'group':params['group'],
             'top':30}
-    r_job = rp.RParser()
+    r_job = rp.Parser()
     r_job.open(this_script_path + '/../src/template/03_tax_heatmap.Rtp')
     r_job.format(vars)
     r_job.write(params['out_dir'] + '/heatmap.R')

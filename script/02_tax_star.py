@@ -6,7 +6,7 @@ import re
 import argparse
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1,this_script_path + '/../src')
-import RParser as rp
+import Parser as rp
 
 def read_params(args):
     parser = argparse.ArgumentParser(description='tax star plot at genus level | v1.0 at 2015/10/09 by liangzb')
@@ -72,7 +72,7 @@ if __name__ == '__main__':
     pdf_file = params['out_dir'] + '/tax_star.pdf'
     png_file = params['out_dir'] + '/tax_star.png'
 
-    r_job = rp.RParser()
+    r_job = rp.Parser()
     r_job.open(this_script_path + '/../src/template/02_tax_star.Rtp')
     vars = {'tax_ass_uniform':file_for_plot,
             'pdf_file':pdf_file}

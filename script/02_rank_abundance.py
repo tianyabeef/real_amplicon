@@ -2,11 +2,7 @@
 from __future__ import division
 import sys
 import os
-import re
 import argparse
-this_script_path = os.path.dirname(__file__)
-sys.path.insert(1,this_script_path + '/../src')
-import RParser as rp
 
 def read_params(args):
     parser = argparse.ArgumentParser(description='a wrapper for rank_abundance | v1.0 at 2015/10/09 by liangzb')

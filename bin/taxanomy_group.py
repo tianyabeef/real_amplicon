@@ -1,21 +1,5 @@
 from settings import *
 
-def parse_group(group_file):
-    sample_set = set()
-    group_set = {}
-    with open(group_file) as group:
-        for line in group:
-            sample_name,group_name = line.strip().split('\t')
-            if group_name not in group_set:
-                group_set[group_name] = set()
-            group_set[group_name].add(sample_name)
-            sample_set.add(sample_name)
-    sample_num_in_groups = map(lambda s:len(s),group_set)
-    min_sample_num_in_groups= min(sample_num_in_groups)
-    sample_num_total = len(sample_set)
-    group_num = len(group_set)
-    return sample_num_in_groups,min_sample_num_in_groups,sample_num_total,group_num
-
 def taxanomy_group(cfg_in,vars=None):
     work = Work(DEFAULT_CONFIG_DIR + '/taxanomy_group.cfg')
     work.set_params(cfg_in,vars)

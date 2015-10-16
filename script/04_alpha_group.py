@@ -45,7 +45,7 @@ def work_single(file,group):
     return alphas
 
 def write(outfile,alphas):
-    with open(outfile) as out:
+    with open(outfile,'w') as out:
         for group,alpha_list in alphas.iteritems():
             alpha_list = '\t'.join(alpha_list)
             out.write('%s\t%s\n'%(group,alpha_list))

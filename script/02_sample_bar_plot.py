@@ -5,7 +5,7 @@ import os
 import argparse
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1,this_script_path + '/../src')
-import RParser as rp
+import Parser as rp
 from ForBarPlot import Subject
 
 def read_params(args):
@@ -42,7 +42,7 @@ if __name__ == '__main__':
     for level in params['level_list']:
         outfile_list.append(work(level,params))
 
-    r_job = rp.RParser()
+    r_job = rp.Parser()
     r_job.open(this_script_path + '/../src/template/02_bar_plot.Rtp')
     for level in params['level_list']:
         work_dir = '%s/%s'%(params['out_dir'],TAX_LEVEL[level])

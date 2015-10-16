@@ -2,11 +2,10 @@
 from __future__ import division
 import sys
 import os
-import re
 import argparse
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1,this_script_path + '/../src')
-import RParser as rp
+import Parser as rp
 
 
 def read_params(args):
@@ -27,7 +26,7 @@ if __name__ == '__main__':
     pdf_file = '%s/specaccum.pdf'%params['out_dir']
     png_file = '%s/specaccum.png'%params['out_dir']
     Rscript = '%s/specaccum.R'%params['out_dir']
-    r_job = rp.RParser()
+    r_job = rp.Parser()
     r_job.open(this_script_path + '/../src/template/02_specaccum.Rtp')
     vars = {"otu_table":params['otu_table'],
             "pdf_file":pdf_file}

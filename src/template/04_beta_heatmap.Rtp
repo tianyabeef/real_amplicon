@@ -1,0 +1,11 @@
+library(NMF)
+infile = read.table("@#{for_plot}",header=T,check.names=F)
+Group = read.table("@#{group_file}",row.names=1,check.names=F)
+Group = as.character(Group[rownames(infile),])
+annotation <- data.frame(Group)
+
+pdf("@#{pdf_file}")
+par(mar=c(7,7,3,3))
+aheatmap(infile, Rowv=FALSE, Colv=TRUE, distfun="correlation", hclustfun="complete", annCol=annotation, main="@#{distance_name} Distance", )
+dev.off()
+

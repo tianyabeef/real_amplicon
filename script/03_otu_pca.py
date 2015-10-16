@@ -6,7 +6,7 @@ import argparse
 import os
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1,this_script_path + '/../src')
-import RParser as rp
+import Parser as rp
 
 def read_params(args):
     parser = argparse.ArgumentParser(description='''otu pca analysis | v1.0 at 2015/10/13 by liangzb ''')
@@ -30,7 +30,7 @@ if __name__ == '__main__':
             'group_file':params['group'],
             'pdf_file':pdf_file}
 
-    r_job = rp.RParser()
+    r_job = rp.Parser()
     r_job.open(this_script_path + '/../src/template/03_tax_pca.Rtp')
     r_job.format(vars)
     r_job.write(params['out_dir'] + '/tax_pca.R')

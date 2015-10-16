@@ -4,7 +4,7 @@ import argparse
 import os
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1,this_script_path + '/../src')
-import RParser as rp
+import Parser as rp
 from CoreOTU import Subject
 
 def read_params(args):
@@ -34,7 +34,7 @@ if __name__ == '__main__':
                       for_plot,core_otu,params['cutoff'])
     subject.work()
 
-    r_job = rp.RParser()
+    r_job = rp.Parser()
     r_job.open(this_script_path + '/../src/template/03_core_otu.Rtp')
     vars = {'for_plot':for_plot,
             'pdf_file':pdf_file}

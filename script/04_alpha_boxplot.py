@@ -7,7 +7,7 @@ import argparse
 import os
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1, this_script_path + '/../src')
-import RParser as rp
+import Parser as rp
 
 def read_params(args):
     parser = argparse.ArgumentParser(description='''alpha boxplot | v1.0 at 2015/10/14 by liangzb ''')
@@ -34,9 +34,9 @@ if __name__ == '__main__':
         vars = {'grouped_file':file,
                 'pdf_file':pdf_file,
                 'alpha_name':alpha_name}
-        r_job = rp.RParser()
+        r_job = rp.Parser()
         r_job.open(this_script_path + '/../src/template/04_alpha_diff_boxplot.Rtp')
         r_job.format(vars)
-        r_job.write(params['out_dir'] + '/alpha_diff_boxplot.R')
+        r_job.write(params['out_dir'] + '/%s_boxplot.R'%alpha_name)
         r_job.run()
         os.system('convert %s %s'%(pdf_file,png_file))

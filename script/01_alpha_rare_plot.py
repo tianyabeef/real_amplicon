@@ -5,7 +5,7 @@ import os
 import argparse
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1,this_script_path + '/../src')
-import RParser as rp
+import Parser as rp
 
 def read_params(args):
     parser = argparse.ArgumentParser(description='plot alpha rare | v1.0 at 2015/09/28 by liangzb')
@@ -27,7 +27,7 @@ if __name__ == '__main__':
     params = read_params(sys.argv)
     if not os.path.isdir(params['outdir']):
         os.mkdir(params['outdir'])
-    r_job = rp.RParser()
+    r_job = rp.Parser()
     r_job.open(this_script_path + '/../src/template/01_alpha_rare.Rtp')
     for alpha in params['alphas']:
         otu_table = '%s/%s.txt'%(params['indir'],alpha)

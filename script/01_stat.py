@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 from __future__ import division
 import sys
-import re
 import os
 import argparse
 this_script_path = os.path.dirname(__file__)

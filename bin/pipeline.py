@@ -198,13 +198,17 @@ def work_beta_diversity(pipeline, analysis_name, tree_file, infiles=None):
     work_dir = '%s/04_diversity_analysis/%s/beta'%(pipeline.config.get('params','work_dir'),analysis_name)
 
     vars = {'work_dir':work_dir,
-            'group':infiles['group_file']}
+            'group':infiles['group_file'],
+            'tree_file':tree_file,
+            'otu_biom':infiles['otu_biom'],
+            'stat_file':infiles['out_stat_file']}
     beta_diversity_outfiles = beta_diversity(pipeline.config,vars=vars)
-
+    pipeline.make_shell(work_dir + '/make.sh',
+                        [('beta_diversity',beta_diversity_outfiles['config'])])
+    pipeline.add_job('beta_div_' + analysis_name, beta_diversity_outfiles['shell'],prep='make_tree_' + analysis_name)
     return beta_diversity_outfiles
 
 if __name__ == '__main__':
-
     work_cfg = PWD + '/work.cfg'
 
     pipeline = Pipeline(work_cfg)
@@ -226,3 +230,4 @@ if __name__ == '__main__':
                    'out_stat_file':infiles['out_stat_file'],
                    'otu_biom':outfiles_03['otu_biom']}
         work_alpha_diversity(pipeline, analysis_name, tree_file, infiles=infiles)
+        work_beta_diversity(pipeline,analysis_name,tree_file,infiles=infiles)

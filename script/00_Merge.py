@@ -5,7 +5,7 @@ import os
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1,this_script_path + '/../src')
 import Merge as mg
-import RParser as rp
+import Parser as rp
 
 def read_params(args):
     parser = argparse.ArgumentParser(description='''16S/ITS data merge | v1.0 at 2015/09/16 by liangzb ''')
@@ -58,7 +58,7 @@ if __name__ == '__main__':
     subject.write_length()
 
     # R works
-    r_job = rp.RParser()
+    r_job = rp.Parser()
     r_job.open(this_script_path + '/../src/template/00_sum_length.Rtp')
     vars = {'pdf_out' : params['outdir'] + '/length_distrubution.pdf',
             'length_stat' : params['length_stat_file'],

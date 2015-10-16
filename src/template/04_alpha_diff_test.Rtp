@@ -15,7 +15,7 @@ groups = colnames(X)
 means = c()
 meanname=c()
 for(i in 1:length(xlist)){
-    group_name = as.character(groups(i))
+    group_name = as.character(groups[i])
     mean=mean(as.numeric(xlist[[i]]))
     means=cbind(means,mean)
     meanname=c(meanname,paste("mean(",group_name,")",sep=""))

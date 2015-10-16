@@ -16,8 +16,9 @@ groups = colnames(X)
 cols = cols_brewer[1:group_num]
 
 pdf('@#{pdf_file}')
+par(mar=c(4,5,3,1))
 
-boxplot(xlist,ylab=expression(paste(alpha, " Diversity (@#{alpha_name} diversity index)",sep="")),col=cols,xaxt="n",cex.lab=1.4,cex.axis=1)
+boxplot(xlist,ylab=expression(paste(alpha, " Diversity (@#{alpha_name} diversity index)",sep="")),main="Alpha diff boxplot",col=cols,xaxt="n",cex.lab=1.4,cex.axis=1)
 axis(side=1,at=1:group_num,labels=groups,cex.axis=1)
 
 dev.off()
