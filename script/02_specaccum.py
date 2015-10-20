@@ -26,7 +26,7 @@ if __name__ == '__main__':
     pdf_file = '%s/specaccum.pdf'%params['out_dir']
     png_file = '%s/specaccum.png'%params['out_dir']
     Rscript = '%s/specaccum.R'%params['out_dir']
-    r_job = rp.Parser()
+    r_job = rp.Rparser()
     r_job.open(this_script_path + '/../src/template/02_specaccum.Rtp')
     vars = {"otu_table":params['otu_table'],
             "pdf_file":pdf_file}

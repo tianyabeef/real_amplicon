@@ -65,7 +65,7 @@ if __name__ == '__main__':
             'pdf_file':pdf_file,
             'group':params['group'],
             'top':30}
-    r_job = rp.Parser()
+    r_job = rp.Rparser()
     r_job.open(this_script_path + '/../src/template/03_tax_heatmap.Rtp')
     r_job.format(vars)
     r_job.write(params['out_dir'] + '/heatmap.R')

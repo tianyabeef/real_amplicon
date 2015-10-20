@@ -71,7 +71,7 @@ if __name__ == '__main__':
         vars = {'grouped_file':file,
                 'marker_file':marker_file,
                 'alpha_name':alpha_name}
-        r_job = rp.Parser()
+        r_job = rp.Rparser()
         r_job.open(this_script_path + '/../src/template/04_alpha_diff_test.Rtp')
         r_job.format(vars)
         r_job.write(params['out_dir'] + '/%s_diff_test.R'%alpha_name)

@@ -27,7 +27,7 @@ if __name__ == '__main__':
     params = read_params(sys.argv)
     if not os.path.isdir(params['outdir']):
         os.mkdir(params['outdir'])
-    r_job = rp.Parser()
+    r_job = rp.Rparser()
     r_job.open(this_script_path + '/../src/template/01_alpha_rare.Rtp')
     for alpha in params['alphas']:
         otu_table = '%s/%s.txt'%(params['indir'],alpha)

@@ -40,7 +40,7 @@ if __name__ == '__main__':
     params = read_params(sys.argv)
     if not os.path.isdir(params['out_dir']):
         os.mkdir(params['out_dir'])
-    r_job = rp.Parser()
+    r_job = rp.Rparser()
     r_job.open(this_script_path + '/../src/template/04_beta_heatmap.Rtp')
 
     for name in ['weighted_unifrac','unweighted_unifrac']:

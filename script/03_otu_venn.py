@@ -70,7 +70,7 @@ if __name__ == '__main__':
     otu_in_group = read(params['otu_table'],sample_in_group,vars)
     write(otu_in_group,for_plot)
 
-    r_job = rp.Parser()
+    r_job = rp.Rparser()
     r_job.open(this_script_path + '/../src/template/03_otu_venn.Rtp')
     r_job.format(vars)
     r_job.write(params['out_dir'] + '/otu_venn.R')

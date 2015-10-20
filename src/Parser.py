@@ -4,7 +4,7 @@ from string import Template
 class MyTemplate(Template):
     delimiter = '@#'
 
-class Parser(object):
+class Rparser(object):
     def __init__(self):
         self.template = None
         self.R_script = None

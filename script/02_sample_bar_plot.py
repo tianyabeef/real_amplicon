@@ -42,7 +42,7 @@ if __name__ == '__main__':
     for level in params['level_list']:
         outfile_list.append(work(level,params))
 
-    r_job = rp.Parser()
+    r_job = rp.Rparser()
     r_job.open(this_script_path + '/../src/template/02_bar_plot.Rtp')
     for level in params['level_list']:
         work_dir = '%s/%s'%(params['out_dir'],TAX_LEVEL[level])

@@ -72,7 +72,7 @@ if __name__ == '__main__':
     pdf_file = params['out_dir'] + '/tax_star.pdf'
     png_file = params['out_dir'] + '/tax_star.png'
 
-    r_job = rp.Parser()
+    r_job = rp.Rparser()
     r_job.open(this_script_path + '/../src/template/02_tax_star.Rtp')
     vars = {'tax_ass_uniform':file_for_plot,
             'pdf_file':pdf_file}

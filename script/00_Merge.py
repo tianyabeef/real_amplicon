@@ -58,7 +58,7 @@ if __name__ == '__main__':
     subject.write_length()
 
     # R works
-    r_job = rp.Parser()
+    r_job = rp.Rparser()
     r_job.open(this_script_path + '/../src/template/00_sum_length.Rtp')
     vars = {'pdf_out' : params['outdir'] + '/length_distrubution.pdf',
             'length_stat' : params['length_stat_file'],

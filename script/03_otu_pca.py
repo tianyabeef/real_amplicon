@@ -30,7 +30,7 @@ if __name__ == '__main__':
             'group_file':params['group'],
             'pdf_file':pdf_file}
 
-    r_job = rp.Parser()
+    r_job = rp.Rparser()
     r_job.open(this_script_path + '/../src/template/03_tax_pca.Rtp')
     r_job.format(vars)
     r_job.write(params['out_dir'] + '/tax_pca.R')

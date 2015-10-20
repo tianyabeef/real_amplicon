@@ -34,7 +34,7 @@ if __name__ == '__main__':
                       for_plot,core_otu,params['cutoff'])
     subject.work()
 
-    r_job = rp.Parser()
+    r_job = rp.Rparser()
     r_job.open(this_script_path + '/../src/template/03_core_otu.Rtp')
     vars = {'for_plot':for_plot,
             'pdf_file':pdf_file}
