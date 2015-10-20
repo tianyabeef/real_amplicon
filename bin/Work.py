@@ -1,4 +1,5 @@
 import os
+import re
 import ConfigParser as cp
 
 
@@ -171,6 +172,23 @@ class Pipeline(Work):
             self.job_id = self.config.get('params','job_id')
         except cp.NoOptionError,ex:
             self.job_id = 'S'
+        self.check_config()
+
+    def check_config(self):
+        params = self.get_section('params')
+        assert params['data_type'] == '16S' or params['data_type'] == 'ITS'
+        assert os.path.isdir(params['work_dir'])
+        if params['fna_together']:
+            assert os.path.isfile(params['fna_together'])
+        for group_file in re.split('\s+',params['group_files']):
+            assert os.path.isfile(group_file)
+        if params['raw_data_dir']:
+            assert os.path.isdir(params['raw_data_dir'])
+        if params['fq_for_merge']:
+            for file in params['fq_for_merge']:
+                assert os.path.isfile(file)
+        if params['name_list']:
+            assert os.path.isfile(params['name_list'])
 
     @staticmethod
     def make_shell(work_shell,work_list):
