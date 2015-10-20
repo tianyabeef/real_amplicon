@@ -1,5 +1,6 @@
 import os
 import re
+import sys
 import ConfigParser as cp
 
 
@@ -161,7 +162,36 @@ class Work(object):
 #        shell.write("echo -e 'All target finished at : \c' && date\n")
         shell.close()
 
+class UserConfigError():
+    def __init__(self,param,reason):
+        message = 'config check error \n %s : %s\n'%(param,reason)
+        sys.stderr.write(message)
+        sys.exit()
 
+class UserConfigChecker(object):
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exception_type, exception_val, trace):
+        if exception_type is None:
+            pass
+        elif exception_type == KeyError:
+            sys.stderr.write('the config %s is missing!\n'%exception_val)
+            sys.exit()
+        elif exception_type == AssertionError:
+            sys.stderr.write('the config setting is error:\n\t%s\n'%exception_val)
+            sys.exit()
+        elif exception_type == ValueError:
+            sys.stderr.write('the config setting is error:\n\t%s\n'%exception_val)
+            sys.exit()
+        elif exception_type == cp.InterpolationMissingOptionError:
+            key = re.search('key\s+:\s+(.+)\n',str(exception_val)).group(1)
+            sys.stderr.write('the config %s can not find!\n'%key)
+            sys.exit()
+        else:
+            sys.stderr.write('%s : %s'%(exception_type,exception_val))
+            sys.exit()
 
 class Pipeline(Work):
 
@@ -170,25 +200,25 @@ class Pipeline(Work):
         self.set_config(config)
         try:
             self.job_id = self.config.get('params','job_id')
-        except cp.NoOptionError,ex:
+        except cp.NoOptionError:
             self.job_id = 'S'
         self.check_config()
 
     def check_config(self):
-        params = self.get_section('params')
-        assert params['data_type'] == '16S' or params['data_type'] == 'ITS'
-        assert os.path.isdir(params['work_dir'])
-        if params['fna_together']:
-            assert os.path.isfile(params['fna_together'])
-        for group_file in re.split('\s+',params['group_files']):
-            assert os.path.isfile(group_file)
-        if params['raw_data_dir']:
-            assert os.path.isdir(params['raw_data_dir'])
-        if params['fq_for_merge']:
-            for file in params['fq_for_merge']:
-                assert os.path.isfile(file)
-        if params['name_list']:
-            assert os.path.isfile(params['name_list'])
+        with UserConfigChecker():
+            params = self.config.get_section('params')
+            params['job_id']
+            assert params['data_type'] == '16S' or params['data_type'] == 'ITS', 'data_type : %s'%params['data_type']
+            assert os.path.isdir(params['work_dir']), 'work_dir : %s'%params['work_dir']
+            for file in re.split('\s+',params['group_files']):
+                assert os.path.isfile(file), 'group_files : %s'%file
+            assert os.path.isfile(params['alpha_group_file']), 'alpha_group_file : %s'%params['alpha_group_file']
+            assert os.path.isdir(params['raw_data_dir']), 'raw_data_dir : %s'%params['raw_data_dir']
+            for file in re.split('\s',params['fq_for_merge']):
+                assert os.path.isfile(file), 'fq_for_merge : %s'%file
+            assert os.path.isfile(params['name_list']), 'name_list : %s'%params['name_list']
+            params['require'] = int(params['require'])
+            assert os.path.isfile(params['pipeline_shell']), 'pipeline_shell : %s'%params['pipeline_shell']
 
     @staticmethod
     def make_shell(work_shell,work_list):
