@@ -39,7 +39,7 @@ def read_params(args):
         if params['mode'] == 'MAX':
             params['max'] = maximum
         elif params['mode'] == 'MIN':
-            params['min'] = minimum
+            params['max'] = minimum
     if params['max'] is None and params['statfile'] is None:
         parser.print_help()
         sys.exit()
