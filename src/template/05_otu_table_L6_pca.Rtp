@@ -1,0 +1,27 @@
+source("labels2colors.R")
+cols_brewer = c('#00447E','#F34800','#FFDD00','#930026','#64A10E','#A5CFED','#464E04','#BDD100','#4E0C66','#931025','#FEDE10','#00447E','#D00000','#64A10E','#F34800','#2B8BC3','#FDA100','#A6D4F2','#CDD7E2','#9295C1')
+
+library("ade4")
+
+X=read.table('@#{input_file}',header=TRUE,row.names=1,sep="\t",check.names=F)
+group=read.table('@#{group_file}',header=F,row.names=1)
+group=group[colnames(X),1]
+group=as.data.frame(group)
+rownames(group)=colnames(X)
+colors=labels2colors(group,colorSeq=cols_brewer)
+
+g=unique(group)
+g_order=g[order(g),1]
+gcols=unique(colors)
+gcols_order=gcols[order(g)]
+A=factor(group[,1])
+pdf(file='@#{out_file}',11,8.5)
+X.dudi=dudi.pca(t(X),center=T,scale=T,scan=F)
+con=X.dudi$eig/sum(X.dudi$eig)*100
+con=format(con,digits=2)
+par(mfrow = c(1, 1))
+
+s.class(X.dudi$li,A,cpoint = 1.2,col=gcols_order,cellipse =0.8,axesell = T,addaxes = T,grid=F)
+mtext(paste("PCA1(",con[1],"%)",sep=""),side=1,line = 4)
+mtext(paste("PCA2(",con[2],"%)",sep=""),side=2,line = 3)
+dev.off()
