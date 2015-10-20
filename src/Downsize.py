@@ -36,6 +36,7 @@ class Subject(object):
 
     def __init__(self,infile,outfile,statfile,
                  minimum,
+                 group,
                  keep=True,
                  random=True):
         self.infile = infile
@@ -43,6 +44,7 @@ class Subject(object):
         self.statfile = statfile
         self.minimum = minimum
         self.keep = keep
+        self.group = group
         self.random = random
         self.sample_dict = {}
         self.reads = []
@@ -56,6 +58,8 @@ class Subject(object):
             self.otu_dict[otu_name] = OTU(otu_name)
             for tab in tabs:
                 read = Reads(tab,otu_name)
+                if read.sample_name not in self.group:
+                    continue
                 if read.sample_name not in self.sample_dict:
                     sample = Sample(read.sample_name)
                     self.sample_dict[read.sample_name] = sample

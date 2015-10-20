@@ -5,6 +5,9 @@ from __future__ import division
 import sys
 import argparse
 import os
+this_script_path = os.path.dirname(__file__)
+sys.path.insert(1,this_script_path + '/../src')
+from Parser import parse_group_file
 
 def read_params(args):
     parser = argparse.ArgumentParser(description='''alpha grouped | v1.0 at 2015/10/15 by liangzb ''')
@@ -21,14 +24,6 @@ def read_params(args):
     args = parser.parse_args()
     params = vars(args)
     return params
-
-def get_group(group_file):
-    group = {}
-    with open(group_file) as fp:
-        for line in fp:
-            tabs = line.strip().split('\t')
-            group[tabs[0]] = tabs[1]
-    return group
 
 def work_single(file,group):
     alphas = {}
@@ -54,7 +49,7 @@ if __name__ == '__main__':
     params = read_params(sys.argv)
     if not os.path.isdir(params['out_dir']):
         os.mkdir(params['out_dir'])
-    group = get_group(params['group'])
+    group = parse_group_file(params['group'])
     for alpha_name in params['alpha_metrics'].split(','):
         file = '%s/%s.txt'%(params['alpha_dir'],alpha_name)
         outfile = '%s/%s.txt'%(params['out_dir'],alpha_name)

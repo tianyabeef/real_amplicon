@@ -5,6 +5,7 @@ import os
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1,this_script_path + '/../src')
 from Downsize import Subject
+from Parser import parse_stat_file,parse_group_file
 
 
 def read_params(args):
@@ -32,35 +33,14 @@ def read_params(args):
         parser.print_help()
         sys.exit()
     if params['minimum'] is None and params['statfile'] is not None:
-        params['minimum'] = find_minimum(params['statfile'],params['group'])
+        maximum,params['minimum'] = parse_stat_file(params['statfile'],group_file=params['group'])
+    params['group'] = parse_group_file(params['group'])
     return params
-
-def find_minimum(file,group):
-    sample_set = set()
-    if group is not None:
-        with open(group) as group:
-            for line in group:
-                sample_set.add(line.split('\t')[0])
-
-    with open(file) as fp:
-        line = fp.next()
-        while(line):
-            line = fp.next().strip()
-        header = fp.next()
-        minimum = 0xffffff
-        for line in fp:
-            tabs = line.split('\t')
-            if sample_set and tabs[0] not in sample_set:
-                continue
-            n = int(tabs[2])
-            if n < minimum:
-                minimum = n
-    return minimum
 
 if __name__ == '__main__':
     params = read_params(sys.argv)
     if not os.path.isdir(os.path.dirname(params['outfile'])):
         os.mkdir(os.path.dirname(params['outfile']))
-    s = Subject(params['otu_map'],params['outfile'],params['outstatfile'],params['minimum'],params['keep'],params['random'])
+    s = Subject(params['otu_map'],params['outfile'],params['outstatfile'],params['minimum'],params['group'],params['keep'],params['random'])
     s.work()
 

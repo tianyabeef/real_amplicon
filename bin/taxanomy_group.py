@@ -19,7 +19,9 @@ def taxanomy_group(cfg_in,vars=None):
     work.commands.append('%s -i %s -o %s'%(qiime['summarize_taxa'],
                                            params['otu_biom'],
                                            outfiles['summarize_dir']))
-
+    # summarize trans
+    work.commands.append('%s -i %s'%(scripts['summarize_trans'],
+                                     outfiles['summarize_dir']))
     # core otu
     if sample_num_total > 4:
         work.commands.append('%s -i %s -t %s -c %s -o %s'%(scripts['core_otu'],
@@ -46,7 +48,6 @@ def taxanomy_group(cfg_in,vars=None):
                                                      outfiles['summarize_dir'] + '/otu_table_L6.txt',
                                                      params['group'],
                                                      outfiles['tax_heatmap_outdir']))
-
     return outfiles
 
 if __name__ == '__main__':

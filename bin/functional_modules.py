@@ -5,6 +5,7 @@ from alpha_rare import alpha_rare
 from downsize import downsize
 from taxanomy_total import taxanomy_total
 from taxanomy_group import taxanomy_group
+from taxanomy_diff import taxanomy_diff
 from make_tree import make_tree
 from alpha_diversity import alpha_diversity
 from beta_diversity import beta_diversity

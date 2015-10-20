@@ -4,7 +4,7 @@ from string import Template
 class MyTemplate(Template):
     delimiter = '@#'
 
-class RParser(object):
+class Parser(object):
     def __init__(self):
         self.template = None
         self.R_script = None
@@ -52,3 +52,10 @@ def parse_stat_file(stat_file,group_file=None):
                 minimum = int(tabs[2])
     return maximum,minimum
 
+def parse_group_file(file):
+    group = {}
+    with open(file) as g:
+        for line in g:
+            tabs = line.strip().split('\t')
+            group[tabs[0]] = tabs[1]
+    return group
