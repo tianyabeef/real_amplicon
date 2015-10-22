@@ -54,6 +54,11 @@ def make_otu_table(cfg_in,vars=None):
                                            outfiles['otu_txt'],
                                            outfiles['uniform_profile']))
 
+    # get profile_tree
+    work.commands.append('%s -i %s -t %s -o %s'%(scripts['profile_tree'],
+                                                 outfiles['uniform_profile'],
+                                                 outfiles['tax_assign'],
+                                                 outfiles['profile_tree']))
 
     return outfiles
 

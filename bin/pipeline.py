@@ -96,6 +96,7 @@ def work_alpha_rare_all(pipeline, out_stat_file, infiles=None):
         'otu_biom': infiles['otu_biom'],
         'stat_file': out_stat_file,
         'tree_file': tree_outfiles['tree_file'],
+        'choice_mode': 'MIN'
     }
     outfiles = alpha_rare(pipeline.config, vars=vars)
     pipeline.make_shell(work_dir + '/make.sh',

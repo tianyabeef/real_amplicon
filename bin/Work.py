@@ -223,6 +223,8 @@ class Pipeline(Work):
     @staticmethod
     def make_shell(work_shell,work_list):
         from settings import FUNCTIONAL_SCRIPT_DIR
+        if not os.path.isdir(os.path.dirname(work_shell)):
+            os.system('mkdir -p %s'%os.path.dirname(work_shell))
         work_shell = open(work_shell,'w')
         for (work,config) in work_list:
             script = '%s/%s.py'%(FUNCTIONAL_SCRIPT_DIR,work)
@@ -265,6 +267,3 @@ class SubWork(Work):
         self.work_id = work_id
         cfg_in.set(work_id,'work_dir',cfg_in.get('all','work_dir'))
         self.config = cfg_in
-
-
-
