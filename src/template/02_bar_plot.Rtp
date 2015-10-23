@@ -36,17 +36,17 @@ if(ncol(data)<10 && max_sample_name_length<5){
 }else if(ncol(data)<10 && max_sample_name_length>10){
 	srt=60
 }else if(ncol(data)>10){
-	srt=90	
+	srt=90
 }
-text(seq(from=0.7*width, length=ncol(data), by=2*spa+width), font_size*max_sample_name_length*0.2, 
-	srt=srt, adj=0.5, labels=colnames(data), 
+text(seq(from=0.7*width, length=ncol(data), by=2*spa+width), font_size*max_sample_name_length*0.2,
+	srt=srt, adj=0.5, labels=colnames(data),
 	xpd=T, cex=font_size, pos=1, y=-0.1)
 mtext('@#{title}', side=3, line=1, cex=font_size*1.1)
 
 par(mar=c(0,0,0,0))
 plot(0, type="n", bty="n", xaxt="n", yaxt="n", xlab="")
 ncol = ceiling( tax_num / 7)
-legend("top", pch=15, col=cols, legend=rownames(data), bty="n", 
+legend("top", pch=15, col=cols, legend=rownames(data), bty="n",
 		pt.cex=5, cex=2, ncol=ncol, x.intersp=2, y.intersp=2)
 par(def.par)
 dev.off()
