@@ -58,7 +58,7 @@ class Subject(object):
             self.otu_dict[otu_name] = OTU(otu_name)
             for tab in tabs:
                 read = Reads(tab,otu_name)
-                if read.sample_name not in self.group:
+                if self.group is not None and read.sample_name not in self.group:
                     continue
                 if read.sample_name not in self.sample_dict:
                     sample = Sample(read.sample_name)
