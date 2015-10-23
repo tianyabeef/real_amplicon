@@ -1,5 +1,8 @@
 from settings import *
 from functional_modules import *
+import time
+
+
 
 PWD = os.getcwd()
 
@@ -235,7 +238,28 @@ def work_beta_diversity(pipeline, analysis_name, tree_file, infiles=None):
                      prep='make_tree_' + analysis_name)
     return beta_diversity_outfiles
 
-
+def work_html(pipeline,group_files,infiles=None):
+    word_dir = pipeline.config.get('params','work_dir')
+    data_type = pipeline.config.get('params', 'data_type')
+    job_id = pipeline.config.get('params','job_id')
+    group_files = group_files
+    work_dir = word_dir+"/"+job_id+"_report_"+time.strftime('%F')+"/"
+    vars = {
+	'work_dir':work_dir,
+	'group_files':group_files,
+	'data_type':data_type,
+	'job_id':job_id
+	}
+    get_result_outfile = get_result(pipeline.config,vars=vars)
+    get_html_outfile = get_html(pipeline.config,vars=vars)
+    pipeline.make_shell(work_dir+'/make.sh',[('get_result',get_result_outfile['config']),('get_html',get_html_outfile['config'])])
+    pipeline.merge_shell(work_dir + '/work.sh',
+                         [get_result_outfile['shell'],
+                          get_html_outfile['shell']])
+    pipeline.add_job('html',
+                     work_dir + '/work.sh',
+                     prep="html")
+    return get_html
 if __name__ == '__main__':
     work_cfg = PWD + '/work.cfg'
 
@@ -268,5 +292,6 @@ if __name__ == '__main__':
                              infiles=infiles)
         work_beta_diversity(pipeline,
                             analysis_name,
-                            tree_file,
-                            infiles=infiles)
+			    tree_file,
+			    infiles=infiles)
+    work_html(pipeline,user_config.get('params', 'group_files'))
