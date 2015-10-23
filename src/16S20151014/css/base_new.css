@@ -1,0 +1,85 @@
+h1 {
+	font-size:2.2em;
+	color: darkblue;
+	font-family: 黑体;
+	}
+h2 {font-size:1.8em;
+	color:#004583;
+	}
+h3 {
+	font-size:1.5em;
+	text-indent:0.5em;
+	color:#4a7dbb;
+	}
+h4 {
+	font-size:1.2em;
+	text-indent:1em;
+	}
+p.paragraph {
+	text-indent: 2em;
+	line-height: 1.5
+	}
+p.center {
+	text-align: center;
+	}
+p.name_fig {
+	text-align: center;
+	line-height: 1.5;
+	font-size: 0.9em;
+	margin-left:2em;
+	margin-right:2em;
+	}
+p.name_table {
+	text-align:center;
+	line-height: 1.5;
+	font-size: 0.9em;
+	margin-left:2em;
+	margin-right:2em;
+	}
+p.premark {
+	text-align: justify;
+	line-height: 1.5;
+	font-size: 1.2em;
+	margin-left:4em;
+	margin-right:4em;
+}
+p.tremark {
+	text-align:justify;
+	line-height: 1.5;
+	margin-left:2em;
+	font-size: 1.2em;
+	}
+.table {font-family:Calibri, Arial, Helvetica, sans-serif;width:100%; border-collapse:collapse; text-align:center;}
+.table td {text-align:center;}
+img.size1{height:500px;	width:500px;}
+img.size2{ height:500px; width:1000px;}
+
+
+
+.albumSlider {width:600px; margin:0 auto; border:2px solid #CCC; padding-right:10px; font-size:10px;position:relative;overflow:hidden;}
+.albumSlider .fullview{position:relative; float:left;}
+.albumSlider .fullview,
+.albumSlider .fullview img {width:480px; height:480px;}
+.albumSlider .fullview img {position:absolute; top:0; left:0;}
+.albumSlider .slider{width:110px;height:490px;background:#fff;position:absolute;right:3px; margin-top:-3px; border-left:2px solid #CCC;}
+.albumSlider .imglistwrap{height:448px; overflow:hidden;margin-right:5px; position:relative;}
+.albumSlider .imglist{position:relative;}
+.albumSlider ul{list-style-type: none; padding-left:0}
+.albumSlider li{height:96px;margin-top:0;clear:both; list-style:none;}
+.albumSlider li img{width:90px;height:90px; float:right; display:inline;margin:2px 2px 0 0;border:1px solid #EAF2D3;}
+.albumSlider a{width:103px;height:96px;display:block; outline:none;}
+.albumSlider li a:hover,
+.albumSlider li.current a{background:url(../images2/album-slider-arrow_box.png) no-repeat 0 0;}
+.albumSlider .button {width: 100px; height:16px;cursor:pointer;margin-left:5px;	background:url(../images2/album-slider-button.png) no-repeat 50% 100%;}
+.albumSlider .movebackward{background-position: 50% 0;}
+
+
+/* go 去顶部和底部*/
+.go{width:47px;height:106px;background-color:#FFF;position:fixed;_position:absolute;_top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||200)-(parseInt(this.currentStyle.marginBottom,10)||0)));right:12px;bottom:25%;border-radius:5px;box-shadow:0 0 2px #6E6E6E;*border:solid 1px #ddd;}
+.go a{background:url(../images2/retop.png) no-repeat;display:block;text-indent:999em;width:37px;margin:5px;border:0;overflow:hidden;float:left}
+.go .top{background-position:4px 7px;height:22px}
+.go .top:hover{background-position:-34px 7px;}
+.go .feedback{background-position:4px -18px;height:32px}
+.go .feedback:hover{background-position:-34px -18px}
+.go .bottom{background-position:4px -56px;height:22px}
+.go .bottom:hover{background-position:-34px -56px}
