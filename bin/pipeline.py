@@ -258,11 +258,10 @@ def work_html(pipeline,group_files,infiles=None):
                           get_html_outfile['shell']])
     pipeline.add_job('html',
                      work_dir + '/work.sh',
-                     prep="html")
+                     prep=pipeline.html_hold_jobs[:-1])
     return get_html
 if __name__ == '__main__':
     work_cfg = PWD + '/work.cfg'
-
     pipeline = Pipeline(work_cfg)
     user_config = pipeline.config
     data_type = user_config.get('params', 'data_type')
@@ -292,6 +291,6 @@ if __name__ == '__main__':
                              infiles=infiles)
         work_beta_diversity(pipeline,
                             analysis_name,
-			    tree_file,
-			    infiles=infiles)
+                            tree_file,
+                            infiles=infiles)
     work_html(pipeline,user_config.get('params', 'group_files'))

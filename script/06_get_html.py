@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*- #
 '''
 Created on Oct 22, 2015
 
@@ -5,7 +7,6 @@ Created on Oct 22, 2015
 '''
 import ConfigParser
 import sys
-import os
 import argparse
 import re
 from jinja2 import Environment,FileSystemLoader
@@ -56,7 +57,7 @@ class Beta_diversity_weighted(object):
 def save_table(input_dir):
 #save table
 
-    
+
     weight_unifrac_data_list=[]
     weight_unifrac_jqGrid_list=[]
     with open(input_dir) as lines:
@@ -87,8 +88,8 @@ def save_table(input_dir):
                         str += sample_name+":"+tabs[i+1]
                         str +='}'
                         break
-    weight_unifrac_data_list.append(str)   
-    weight_unifrac_jqGrid_list.append(jqGrid)         
+    weight_unifrac_data_list.append(str)
+    weight_unifrac_jqGrid_list.append(jqGrid)
     return [weight_unifrac_data_list,weight_unifrac_jqGrid_list]
 def read_params(args):
     parser = argparse.ArgumentParser(description='get_html ')
@@ -108,15 +109,15 @@ def get_html():
     group_files = config.get('params','group_files')
     html_template = config.get('params','html_template')
     data_type = config.get('params','data_type')
-    group_num = config.get('params','group_num')
+#    group_num = config.get('params','group_num')
     out_dir_report=work_dir+'/'+'report/'
-    image_dir = out_dir_report+'/image/'
-    origin = config.items('origin')
-    
+#    image_dir = out_dir_report+'/image/'
+#    origin = config.items('origin')
+
     group_files = re.split('\s+',config.get('params','group_files'))
     group_file_origin =group_files[0]
-    group_file = re.search('.+\/(.+)\..+', group_file_origin).group(1) 
-    
+    group_file = re.search('.+\/(.+)\..+', group_file_origin).group(1)
+
 #save table
     var_html = {}
     tabs=[]
@@ -130,10 +131,10 @@ def get_html():
         lines.next()
         for line in lines:
             tabs = line.strip().split("\t")
-            #sample_name amplicon_type tags mapped_reads mapped_ratio 
+            #sample_name amplicon_type tags mapped_reads mapped_ratio
             otuStatistical=OtuStatistical(tabs[0],data_type,tabs[1],tabs[8],tabs[9],tabs[4],tabs[5],tabs[2],tabs[3],tabs[10])
             otuStatisticals[tabs[0]]=otuStatistical
-        
+
 #save table
     otuStatisticalDownsizes={}
     with open(work_dir+"../"+config.get('origin','otu_all_downsize_txt'),'r') as lines:
@@ -144,7 +145,7 @@ def get_html():
             otuStatisticalDownsizes[tabs[0]] =    otuStatisticalDownsize
 
 
-#save table 
+#save table
     otuAssignmentsStatisticals={}
     with open(work_dir+"../"+config.get('origin','otu_statistic_txt'),'r') as lines:
         lines.next()
@@ -152,35 +153,35 @@ def get_html():
             tabs = line.strip().split('\t')
             otuAssignmentsStatistical=OtuAssignmentsStatistical(tabs[0],tabs[1])
             otuAssignmentsStatisticals[tabs[0]]=otuAssignmentsStatistical
-            
-#save table 
+
+#save table
     alpha_diversitys={}
     with open(work_dir+"../"+config.get('origin','group_alpha_statistic_txt').replace("#group",group_file),'r') as lines:
         lines.next()
         for line in lines:
             tabs = line.strip().split('\t')
             alpha_diversity=Alpha_diversity(tabs[0],tabs[1],tabs[2],tabs[3],tabs[4],tabs[5],tabs[6])
-            alpha_diversitys[tabs[0]]=alpha_diversity            
+            alpha_diversitys[tabs[0]]=alpha_diversity
 
-#save table 
+#save table
     alpha_diversity_diffs={}
     with open(work_dir+"../"+config.get('origin','group_alpha_makers_txt').replace("#group",group_file),'r') as lines:
         lines.next()
         for line in lines:
             tabs = line.strip().split('\t')
             alpha_diversity=Alpha_diversity(tabs[0],tabs[1],tabs[2],tabs[3],tabs[4],tabs[5],tabs[6])
-            alpha_diversity_diffs[tabs[0]]=alpha_diversity            
+            alpha_diversity_diffs[tabs[0]]=alpha_diversity
 
-            
+
 
 #save_table
     print work_dir+"../"+config.get('origin','group_beta_div_un_txt').replace("#group",group_file)
     beta  = save_table(work_dir+"../"+config.get('origin','group_beta_div_un_txt').replace("#group",group_file))
-    
+
 #save_table
     env = Environment(loader=FileSystemLoader(html_template+'js/',encoding='utf-8'))
     template = env.get_template('table_template.js')
-    sorted(otuStatisticals.iteritems(),key=operator.itemgetter(1),reverse=True)
+    otuStatisticals = sorted(otuStatisticals.iteritems(),key=operator.itemgetter(1),reverse=True)
     table = template.render(otuStatisticals=otuStatisticals,otuStatisticalDownsizes=otuStatisticalDownsizes,
                             otuAssignmentsStatisticals =otuAssignmentsStatisticals,alpha_diversitys=alpha_diversitys,
                             alpha_diversity_diffs = alpha_diversity_diffs,beta_data=beta[0],beta_jqGrid=beta[1],
@@ -212,3 +213,5 @@ def get_html():
 
 if __name__ == '__main__':
     get_html()
+
+

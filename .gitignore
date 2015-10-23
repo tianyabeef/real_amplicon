@@ -1,5 +1,6 @@
 *.pyc
-test*/
+test/
+test_name/
 qiime/
 biopython/
 hy/

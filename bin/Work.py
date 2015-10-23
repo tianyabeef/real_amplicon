@@ -203,6 +203,7 @@ class Pipeline(Work):
         except cp.NoOptionError:
             self.job_id = 'S'
         self.check_config()
+        self.html_hold_jobs = []
 
     def check_config(self):
         with UserConfigChecker():
@@ -239,6 +240,7 @@ class Pipeline(Work):
         total_shell.close()
 
     def add_job(self,job_name,shell,prep=None,vf='5G',queue='all.q'):
+        self.html_hold_jobs.append(job_name)
         qsub_name = '%s_%s'%(self.job_id,job_name)
         __o_file = '%s.o'%shell
         __e_file = '%s.e'%shell
@@ -249,7 +251,10 @@ class Pipeline(Work):
         cmd = '%s=`qsub -cwd -l vf=%s -q %s -N %s -e %s -o %s -terse'%(job_name,vf,queue,qsub_name,
                                                                            __e_file,__o_file)
         if prep is not None:
-            cmd += ' -hold_jid $%s'%prep
+            if prep.__class__ == list:
+                cmd += ' -hold_jid %s'%','.join(map(lambda s:'$'+s,prep))
+            else:
+                cmd += ' -hold_jid $%s'%prep
         cmd += ' %s`'%shell
         self.commands.append(cmd)
 
