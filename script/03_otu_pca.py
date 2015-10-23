@@ -1,9 +1,10 @@
 #!/usr/bin/env python
-# encoding: utf-8
+# -*- coding: utf-8 -*- #
 
 import sys
 import argparse
 import os
+from util import mkdir
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1,this_script_path + '/../src')
 import Parser as rp
@@ -22,8 +23,7 @@ def read_params(args):
 
 if __name__ == '__main__':
     params = read_params(sys.argv)
-    if not os.path.isdir(params['out_dir']):
-        os.mkdir(params['out_dir'])
+    mkdir(params['out_dir'])
     pdf_file = params['out_dir'] + '/otu_pca.pdf'
     png_file = params['out_dir'] + '/otu_pca.png'
     vars = {'otu_profile':params['otu_table'],
@@ -36,4 +36,6 @@ if __name__ == '__main__':
     r_job.write(params['out_dir'] + '/tax_pca.R')
     r_job.run()
     os.system('convert %s %s'%(pdf_file,png_file))
+
+
 

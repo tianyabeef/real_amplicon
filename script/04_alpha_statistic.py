@@ -5,6 +5,7 @@ from __future__ import division
 import sys
 import argparse
 import os
+from util import mkdir
 
 def read_params(args):
     parser = argparse.ArgumentParser(description='''alpha statistic | v1.0 at 2015/10/16 by liangzb ''')
@@ -50,7 +51,6 @@ def work_all(params):
 
 if __name__ == '__main__':
     params = read_params(sys.argv)
-    if not os.path.isdir(os.path.dirname(params['out_tsv'])):
-        os.mkdir(os.path.dirname(params['out_tsv']))
+    mkdir(os.path.dirname(params['out_tsv']))
 
     work_all(params)

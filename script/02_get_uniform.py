@@ -3,6 +3,7 @@ from __future__ import division
 import sys
 import os
 import argparse
+from util import mkdir
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1,this_script_path + '/../src')
 from Parser import TableParser
@@ -21,8 +22,7 @@ def read_params(args):
 
 if __name__ == '__main__':
     params = read_params(sys.argv)
-    if not os.path.isdir(os.path.dirname(params['outfile'])):
-        os.mkdir(os.path.dirname(params['outfile']))
+    mkdir(os.path.dirname(params['outfile']))
     table = TableParser(params['infile'])
     table.parse_table()
     table.get_uniform()

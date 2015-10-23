@@ -1,8 +1,10 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*- #
 from __future__ import division
 import sys
 import os
 import argparse
+from util import mkdir
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1,this_script_path + '/../src')
 import Parser as rp
@@ -21,8 +23,7 @@ def read_params(args):
 
 if __name__ == '__main__':
     params = read_params(sys.argv)
-    if not os.path.isdir(params['out_dir']):
-        os.mkdir(params['out_dir'])
+    mkdir(params['out_dir'])
     pdf_file = '%s/specaccum.pdf'%params['out_dir']
     png_file = '%s/specaccum.png'%params['out_dir']
     Rscript = '%s/specaccum.R'%params['out_dir']
@@ -34,3 +35,5 @@ if __name__ == '__main__':
     r_job.write(Rscript)
     r_job.run()
     os.system('convert %s %s'%(pdf_file,png_file))
+
+

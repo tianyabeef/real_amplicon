@@ -4,6 +4,7 @@ import sys
 import os
 import re
 import argparse
+from util import mkdir
 
 def read_params(args):
     parser = argparse.ArgumentParser(description='transform rdp out file to qiime | v1.0 at 2015/09/21 by liangzb')
@@ -69,11 +70,10 @@ def write_qiime(file,otu_tax,conf):
         out_str += '\t%s\n'%last_conf
     fp.write(out_str)
     fp.close()
-        
+
 if __name__ == '__main__':
     params = read_params(sys.argv)
-    if not os.path.isdir(os.path.dirname(params['outfile'])):
-        os.mkdir(os.path.dirname(params['outfile']))
+    mkdir(os.path.dirname(params['outfile']))
     otu_tax = read_rdp(params['infile'])
     write_qiime(params['outfile'],otu_tax,params['conf'])
 

@@ -2,6 +2,7 @@
 import sys
 import argparse
 import os
+from util import mkdir
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1,this_script_path + '/../src')
 from Downsize import Subject
@@ -39,8 +40,7 @@ def read_params(args):
 
 if __name__ == '__main__':
     params = read_params(sys.argv)
-    if not os.path.isdir(os.path.dirname(params['outfile'])):
-        os.mkdir(os.path.dirname(params['outfile']))
+    mkdir(os.path.dirname(params['outfile']))
     s = Subject(params['otu_map'],params['outfile'],params['outstatfile'],params['minimum'],params['group'],params['keep'],params['random'])
     s.work()
 

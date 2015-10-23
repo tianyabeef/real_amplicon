@@ -1,7 +1,9 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*- #
 import sys
 import argparse
 import os
+from util import mkdir
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1,this_script_path + '/../src')
 import Parser as rp
@@ -23,8 +25,7 @@ def read_params(args):
 
 if __name__ == '__main__':
     params = read_params(sys.argv)
-    if not os.path.isdir(params['out_dir']):
-        os.mkdir(params['out_dir'])
+    mkdir(params['out_dir'])
     for_plot = params['out_dir'] + '/for_plot.txt'
     core_otu = params['out_dir'] + '/core_otu.txt'
     pdf_file = params['out_dir'] + '/core_otu.pdf'
@@ -42,4 +43,6 @@ if __name__ == '__main__':
     r_job.write(params['out_dir'] + '/core_otu.R')
     r_job.run()
     os.system('convert %s %s'%(pdf_file,png_file))
+
+
 

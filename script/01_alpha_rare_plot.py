@@ -3,6 +3,7 @@ from __future__ import division
 import sys
 import os
 import argparse
+from util import mkdir
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1,this_script_path + '/../src')
 import Parser as rp
@@ -25,8 +26,7 @@ def read_params(args):
 
 if __name__ == '__main__':
     params = read_params(sys.argv)
-    if not os.path.isdir(params['outdir']):
-        os.mkdir(params['outdir'])
+    mkdir(params['outdir'])
     r_job = rp.Rparser()
     r_job.open(this_script_path + '/../src/template/01_alpha_rare.Rtp')
     for alpha in params['alphas']:

@@ -5,6 +5,7 @@ from __future__ import division
 import sys
 import argparse
 import os
+from util import mkdir
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1, this_script_path + '/../src')
 from Parser import parse_stat_file
@@ -59,8 +60,7 @@ def work(name,params):
 
 if __name__ == '__main__':
     params = read_params(sys.argv)
-    if not os.path.isdir(params['out_dir']):
-        os.mkdir(params['out_dir'])
+    mkdir(params['out_dir'])
 
     commands = []
     mapfile =  '%s/mapfile.txt'%params['out_dir']

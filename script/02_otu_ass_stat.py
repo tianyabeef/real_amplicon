@@ -5,6 +5,7 @@ import os
 import re
 import argparse
 import numpy as np
+from util import mkdir
 from collections import OrderedDict
 
 def read_params(args):
@@ -75,8 +76,7 @@ def write_output(result,outfile):
 
 if __name__ == '__main__':
     params = read_params(sys.argv)
-    if not os.path.isdir(os.path.dirname(params['out_file'])):
-        os.mkdir(os.path.dirname(params['out_file']))
+    mkdir(os.path.dirname(params['out_file']))
 
     result = read_otu_ass(params['tax_ass'])
     result = read_otu_mapfile(result,params['otu_map'])

@@ -1,11 +1,14 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*- #
 import sys
 import argparse
 import os
 import re
+from util import mkdir
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1, this_script_path + '/../src')
 import Parser as rp
+from Parser import parse_group_file
 from collections import OrderedDict
 
 
@@ -19,15 +22,8 @@ def read_params(args):
                         help="set the output dir")
     args = parser.parse_args()
     params = vars(args)
+    params['group'] = parse_group_file(params['group'])
     return params
-
-def read_group(group_file):
-    sample_in_group = {}
-    with open(group_file) as group:
-        for line in group:
-            tabs = line.strip().split('\t')
-            sample_in_group[tabs[0]] = tabs[1]
-    return sample_in_group
 
 def read(otu_table_file,sample_in_group,vars):
     otu_in_group = OrderedDict()
@@ -58,16 +54,14 @@ def write(otu_in_group,outfile):
 
 if __name__ == '__main__':
     params = read_params(sys.argv)
-    if not os.path.isdir(params['out_dir']):
-        os.mkdir(params['out_dir'])
+    mkdir(params['out_dir'])
     for_plot = params['out_dir'] + '/for_plot.txt'
     tiff_file = params['out_dir'] + '/venn.tiff'
     png_file = params['out_dir'] + '/venn.png'
     vars = {'for_plot':for_plot,
             'tiff_file':tiff_file}
 
-    sample_in_group = read_group(params['group'])
-    otu_in_group = read(params['otu_table'],sample_in_group,vars)
+    otu_in_group = read(params['otu_table'],params['group'],vars)
     write(otu_in_group,for_plot)
 
     r_job = rp.Rparser()
@@ -76,4 +70,6 @@ if __name__ == '__main__':
     r_job.write(params['out_dir'] + '/otu_venn.R')
     r_job.run()
     os.system('convert %s %s'%(tiff_file,png_file))
+
+
 

@@ -3,6 +3,7 @@ from __future__ import division
 import sys
 import os
 import argparse
+from util import mkdir
 from Bio import SeqIO
 
 def read_params(args):
@@ -38,6 +39,5 @@ def pickseq(infile,outfile,reads_set):
 
 if __name__ == '__main__':
     params = read_params(sys.argv)
-    if not os.path.isdir(os.path.dirname(params['outfile'])):
-        os.mkdir(os.path.dirname(params['outfile']))
+    mkdir(os.path.dirname(params['outfile']))
     pickseq(params['infile'],params['outfile'],get_reads_set(params['table']))

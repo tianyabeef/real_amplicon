@@ -1,9 +1,11 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*- #
 from __future__ import division
 import sys
 import os
 import re
 import argparse
+from util import mkdir
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1,this_script_path + '/../src')
 import Parser as rp
@@ -65,8 +67,7 @@ def get_file_for_star_plot(tax_ass,profile,outfile):
 
 if __name__ == '__main__':
     params = read_params(sys.argv)
-    if not os.path.isdir(params['out_dir']):
-        os.mkdir(params['out_dir'])
+    mkdir(params['out_dir'])
     file_for_plot = params['out_dir'] + '/for_star_plot.txt'
     get_file_for_star_plot(params['tax_ass'],params['profile'],file_for_plot)
     pdf_file = params['out_dir'] + '/tax_star.pdf'
@@ -80,5 +81,7 @@ if __name__ == '__main__':
     r_job.write(params['out_dir'] + '/tax_star.R')
     r_job.run()
     os.system('convert %s %s'%(pdf_file,png_file))
+
+
 
 

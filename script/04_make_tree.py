@@ -5,6 +5,7 @@ from __future__ import division
 import sys
 import argparse
 import os
+from util import mkdir
 
 def read_params(args):
     parser = argparse.ArgumentParser(description='''make tree wrapper | v1.0 at 2015/10/14 by liangzb ''')
@@ -44,8 +45,7 @@ def read_params(args):
 
 if __name__ == '__main__':
     params = read_params(sys.argv)
-    if not os.path.isdir(params['out_dir']):
-        os.mkdir(params['out_dir'])
+    mkdir(params['out_dir'])
     align_dir = '%s/align_result'%params['out_dir']
     align_file_name = os.path.splitext(os.path.basename(params['rep_set']))[0]
     align_result = '%s/%s_aligned.fasta'%(align_dir,align_file_name)

@@ -3,6 +3,7 @@ from __future__ import division
 import sys
 import os
 import argparse
+from util import mkdir
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1,this_script_path + '/../src')
 import GetSingleton as gs
@@ -32,8 +33,7 @@ def read_params(args):
 
 if __name__ == '__main__':
     params = read_params(sys.argv)
-    if not os.path.isdir(params['outdir']):
-        os.mkdir(params['outdir'])
+    mkdir(params['outdir'])
     subject = gs.Subject(params['infile'],params['outfa'],params['outstat'],params['single_list'])
     subject.find_record()
     subject.write_fa()

@@ -3,6 +3,7 @@ from __future__ import division
 import sys
 import os
 import argparse
+from util import mkdir
 
 def read_params(args):
     parser = argparse.ArgumentParser(description='a wrapper for biom | v1.0 at 2015/09/28 by liangzb')
@@ -19,8 +20,7 @@ def read_params(args):
 
 if __name__ == '__main__':
     params = read_params(sys.argv)
-    if not os.path.isdir(os.path.dirname(params['outfile'])):
-        os.mkdir(os.path.dirname(params['outfile']))
+    mkdir(os.path.dirname(params['outfile']))
     basename,suffix = os.path.splitext(params['outfile'])
     params['summary'] = basename + '_summary' + suffix
 

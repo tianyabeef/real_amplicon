@@ -2,6 +2,7 @@
 import sys
 import argparse
 import os
+from util import mkdir
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1,this_script_path + '/../src')
 import Merge as mg
@@ -48,8 +49,7 @@ def read_params(args):
 
 if __name__ == '__main__':
     params = read_params(sys.argv)
-    if not os.path.isdir(params['upload_dir']):
-        os.mkdir(params['upload_dir'])
+    mkdir(params['upload_dir'])
 
     subject = mg.Subject(params['infile_list'],params['upload_dir'],params['out_fasta_file'],params['out_stat_file'],params['required'],params['length_stat_file'],params['max_length'],params['min_length'],params['length_step'],name_table_file=params['name_table'])
     subject.read_name_table()

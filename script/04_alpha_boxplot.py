@@ -5,6 +5,7 @@ from __future__ import division
 import sys
 import argparse
 import os
+from util import mkdir
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1, this_script_path + '/../src')
 import Parser as rp
@@ -25,8 +26,7 @@ def read_params(args):
 
 if __name__ == '__main__':
     params = read_params(sys.argv)
-    if not os.path.isdir(params['out_dir']):
-        os.mkdir(params['out_dir'])
+    mkdir(params['out_dir'])
     for alpha_name in params['alpha_metrics'].split(','):
         file = '%s/%s.txt'%(params['alpha_dir'],alpha_name)
         pdf_file = '%s/%s.boxplot.pdf'%(params['out_dir'],alpha_name)

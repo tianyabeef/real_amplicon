@@ -4,6 +4,7 @@ import sys
 import re
 import os
 import argparse
+from util import mkdir
 
 def read_params(args):
     parser = argparse.ArgumentParser(description='convert uc to otutab | v1.0 at 2015/09/16 by liangzb')
@@ -43,12 +44,11 @@ def write(otu_dict,outfile):
         out_str += '\n'
         out.write(out_str)
     out.close()
-    
+
 
 if __name__ == '__main__':
     params = read_params(sys.argv)
-    if not os.path.isdir(os.path.dirname(params['outfile'])):
-        os.mkdir(os.path.dirname(params['outfile']))
+    mkdir(os.path.dirname(params['outfile']))
     otu_dict = get_dict(params['infile'])
     write(otu_dict,params['outfile'])
 

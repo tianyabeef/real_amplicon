@@ -4,6 +4,7 @@ import sys
 import re
 import os
 import argparse
+from util import mkdir
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1,this_script_path + '/../src')
 from Bio import SeqIO
@@ -32,7 +33,7 @@ def work(infile,outfile,prefix,if_with_size):
         if if_with_size:
             try:
                 size = re.search(';size=(\d+)').group(1)
-                id = '%s;size=%s'%(id,size) 
+                id = '%s;size=%s'%(id,size)
             except:
                 pass
         record.id = id
@@ -42,6 +43,5 @@ def work(infile,outfile,prefix,if_with_size):
 
 if __name__ == '__main__':
     params = read_params(sys.argv)
-    if not os.path.isdir(os.path.dirname(params['outfile'])):
-        os.mkdir(os.path.dirname(params['outfile']))
-    work(params['infile'],params['outfile'],params['prefix'],params['if_with_size']) 
+    mkdir(os.path.dirname(params['outfile']))
+    work(params['infile'],params['outfile'],params['prefix'],params['if_with_size'])

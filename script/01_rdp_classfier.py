@@ -3,6 +3,7 @@ from __future__ import division
 import sys
 import os
 import argparse
+from util import mkdir
 
 def read_params(args):
     parser = argparse.ArgumentParser(description='a wrapper for rdp classify | v1.0 at 2015/09/18 by liangzb')
@@ -25,12 +26,9 @@ def read_params(args):
 
 if __name__ == '__main__':
     params = read_params(sys.argv)
-    if not os.path.isdir(os.path.dirname(params['outfile'])):
-        os.mkdir(os.path.dirname(params['outfile']))
-    if params['hierfile'] and not os.path.isdir(os.path.dirname(params['hierfile'])):
-        print params['hierfile']
-        print not os.path.isdir(os.path.dirname(params['hierfile']))
-        os.mkdir(os.path.dirname(params['hierfile']))
+    mkdir(os.path.dirname(params['outfile']))
+    if params['hierfile']:
+        mkdir(os.path.dirname(params['hierfile']))
 
     commands = 'java -Xmx1g -jar %s classify '%params['jar']
     if params['data_type'] == '16S':

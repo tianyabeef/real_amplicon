@@ -3,6 +3,7 @@
 import sys
 import os
 import argparse
+from util import mkdir
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1,this_script_path + '/../src')
 from Parser import parse_group_file
@@ -19,6 +20,7 @@ def read_params(args):
                         help="set the output dir")
     args = parser.parse_args()
     params = vars(args)
+    params['group'] = parse_group_file(params['group'])
     if params['LEfSe_path'] is None:
         params['LEfSe_path'] = ''
     else:
@@ -64,11 +66,9 @@ def get_commands(infile,LEfSe_path,out_dir):
 
 if __name__ == '__main__':
     params = read_params(sys.argv)
-    if not os.path.isdir(params['out_dir']):
-        os.mkdir(params['out_dir'])
-    group = parse_group_file(params['group'])
+    mkdir(params['out_dir'])
     for_analysis = '%s/otu_table_for_lefse.txt'%params['out_dir']
-    do_format(params['infile'],for_analysis,group)
+    do_format(params['infile'],for_analysis,params['group'])
     commands = get_commands(for_analysis,params['LEfSe_path'],params['out_dir'])
     with open(params['out_dir'] + '/commands.sh','w') as fp:
         fp.write('\n'.join(commands))

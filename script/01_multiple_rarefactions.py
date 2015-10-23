@@ -3,6 +3,7 @@ from __future__ import division
 import sys
 import os
 import argparse
+from util import mkdir
 from skbio.stats import subsample
 
 this_script_path = os.path.dirname(__file__)
@@ -47,8 +48,7 @@ def read_params(args):
 
 if __name__ == '__main__':
     params = read_params(sys.argv)
-    if not os.path.isdir(params['outdir']):
-        os.mkdir(params['outdir'])
+    mkdir(params['outdir'])
 
 
     __range = []

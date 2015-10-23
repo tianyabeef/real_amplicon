@@ -5,6 +5,7 @@ from __future__ import division
 import sys
 import argparse
 import os
+from util import mkdir
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1, this_script_path + '/../src')
 import Parser as rp
@@ -51,8 +52,7 @@ def work(infile,outfile,showed_rows):
 
 if __name__ == '__main__':
     params = read_params(sys.argv)
-    if not os.path.isdir(params['out_dir']):
-        os.mkdir(params['out_dir'])
+    mkdir(params['out_dir'])
     for_plot = params['out_dir'] + '/for_plot.txt'
     showed_rows = params['out_dir'] + '/showed_rows.txt'
     pdf_file = params['out_dir'] + '/heatmap.pdf'
