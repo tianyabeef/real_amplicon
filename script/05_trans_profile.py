@@ -22,6 +22,8 @@ def read_params(args):
     return params
 
 def trans(infile,outfile,level=None):
+    prefix = level or '\w'
+    regex = re.compile('%s__'%prefix)
     with open(infile) as fp,open(outfile,'w') as out:
         head = fp.next()
         if head.startswith('# Constructed from'):
@@ -32,12 +34,8 @@ def trans(infile,outfile,level=None):
             tabs = line.strip().split('\t')
             taxes = tabs[0].split(';')
             for tax in taxes :
-                if level is None:
-                    if not re.search('\w__',tax):
-                        continue
-                else:
-                    if not re.search('\%s__'%level,tax):
-                        continue
+                if not re.search(regex,tax):
+                    continue
                 if tax not in profiles:
                     profiles[tax] = map(lambda a:float(a),tabs[1:])
                 else:

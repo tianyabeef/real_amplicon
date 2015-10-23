@@ -5,8 +5,6 @@ import re
 import os
 import argparse
 from util import mkdir
-this_script_path = os.path.dirname(__file__)
-sys.path.insert(1,this_script_path + '/../src')
 from Bio import SeqIO
 
 def read_params(args):
@@ -25,17 +23,15 @@ def read_params(args):
     return params
 
 def work(infile,outfile,prefix,if_with_size):
+    regex = re.compile(';size=(\d+)')
     otu_num = 0
     out = open(outfile,'w')
     for record in SeqIO.parse(open(infile),'fasta'):
         otu_num += 1
         id = '%s%s'%(prefix,otu_num)
         if if_with_size:
-            try:
-                size = re.search(';size=(\d+)').group(1)
-                id = '%s;size=%s'%(id,size)
-            except:
-                pass
+            size = re.search(regex,record.id).group(1)
+            id = '%s;size=%s'%(id,size)
         record.id = id
         record.description = ''
         out.write(record.format('fasta'))
