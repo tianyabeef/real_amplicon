@@ -34,7 +34,7 @@ def read_params(args):
 
 if __name__ == '__main__':
     params = read_params(sys.argv)
-    mkdir(params['outfile'])
+    mkdir(os.path.dirname(params['outfile']))
 
     subject = ps.Subject()
     subject.read_raw_data_stat(params['raw_data_stat'])
