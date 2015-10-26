@@ -1,0 +1,55 @@
+X=read.table("@#{infile}",header=TRUE,sep="\t",row.names=1,check.names=F)
+group=read.table("@#{group_file}",header=F,row.names=1,check.names=F)
+X=as.matrix(X)
+#colnames(X)=sub("X","",colnames(X))####if the first letter of more than one colnames(X) is num,execute this progress
+group_num = nrow(unique(group))
+group=group[colnames(X),1]
+group=as.data.frame(group)
+rownames(group)=colnames(X)
+g=unique(group)
+g_order=g[order(g),1]
+p=c()
+means=c()
+meanname=c()
+glist=c()
+xlist=c()
+for(i in 1:length(g_order)){
+    rname=which(group[,1]==g_order[i])
+    g0=rownames(group)[rname]
+    g0=g0[!is.na(g0)]
+    mean=apply(X, 1, function(row) unlist(mean(as.matrix(row[g0]),na.rm=T)))
+    means=cbind(means,mean)
+    meanname=c(meanname,paste("mean(",g_order[i],")",sep=""))
+    g1=list(as.character(g0))
+    glist=c(glist,g1)
+}
+kruskal=function(X,group,g){
+    p=c()
+    for(i in 1:nrow(X)){
+        xlist=c()
+        for(j in 1:length(g_order)){
+            rname=which(group[,1]==g_order[j])
+            g0=rownames(group)[rname]
+            g0=g0[!is.na(g0)]
+            Xg=list(X[i,g0])
+            xlist=c(xlist,Xg)
+        }
+        p0=kruskal.test(xlist)["p.value"][[1]][1]
+        p=c(p,p0)
+    }
+    p
+}
+if(group_num==2){
+    p <- apply(X, 1, function(row) unlist(wilcox.test(row[glist[[1]]],row[glist[[2]]],paired=FALSE)["p.value"]))
+}else{
+    p<-kruskal(X,group,g_order)
+}
+#p
+#fdr <- p.adjust(p, method = "fdr", n = length(p))
+statsKWs<-data.frame(rownames(X),means,p)
+ploc=ncol(statsKWs)
+colnames(statsKWs)<- c("taxonname",meanname,"pvalue")
+#statsKWs[,ploc]
+#statsKWs0<-as.data.frame(statsKWs[statsKWs[,ploc]<@#{p_cutoff} & !is.na(statsKWs[,ploc]),])
+#colnames(statsKWs0)=colnames(statsKWs)
+write.table(statsKWs,"@#{marker_file}",row.names=F,quote=F,sep="\t")

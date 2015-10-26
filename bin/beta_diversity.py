@@ -14,6 +14,10 @@ def beta_diversity(cfg_in, vars=None):
     outfiles = config.get_section('outfiles')
     qiime = config.get_section('qiime')
     scripts = config.get_section('scripts')
+    sample_num_in_groups,\
+    min_sample_num_in_groups,\
+    sample_num_total,\
+    group_num = parse_group(params['group'])
 
     # beta div
     work.commands.append('%s -i %s -o %s -t %s'%(qiime['beta_diversity'],
@@ -21,10 +25,21 @@ def beta_diversity(cfg_in, vars=None):
                                                  outfiles['beta_div_dir'],
                                                  params['tree_file']))
     # beta heatmap
-    work.commands.append('%s -d %s -g %s -o %s'%(scripts['beta_heatmap'],
-                                                 outfiles['beta_div_dir'],
-                                                 params['group'],
-                                                 outfiles['beta_heatmap_dir']))
+    if sample_num_total >= 4:
+        work.commands.append('%s -d %s -g %s -o %s'%(scripts['beta_heatmap'],
+                                                    outfiles['beta_div_dir'],
+                                                    params['group'],
+                                                    outfiles['beta_heatmap_dir']))
+    # beta pcoa
+    if min_sample_num_in_groups >= 5:
+        with_boxplot = True
+    else:
+        with_boxplot = False
+    work.commands.append('%s -d %s -g %s -o %s -w %s'%(scripts['beta_pcoa'],
+                                                       outfiles['beta_div_dir'],
+                                                       params['group'],
+                                                       outfiles['beta_pcoa_dir'],
+                                                       with_boxplot))
     # beta cluster
     command = '%s --jackknifed_beta_diversity %s --make_bootstrapped_tree %s '%(scripts['beta_cluster'],
                                                                                 qiime['jackknifed_beta_diversity'],

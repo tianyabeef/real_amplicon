@@ -8,40 +8,61 @@ from util import mkdir
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1,this_script_path + '/../src')
 import Parser as rp
-from CoreOTU import Subject
 
 def read_params(args):
-    parser = argparse.ArgumentParser(description='''tax diff | v1.0 at 2015/10/12 by liangzb ''')
-    parser.add_argument('-i','--otu_profile',dest='otu_table',metavar='FILE',type=str,required=True,
-            help="set the otu table file")
-    parser.add_argument('-t','--tax_assignment',dest='tax_ass',metavar='FILE',type=str,required=True,
-            help="set the tax assignment file")
-    parser.add_argument('-c','--percent_cutoff',dest='cutoff',metavar='FLOAT',type=float,default=1,
-            help="set the percent cutoff in [0.8, 0.9, 1], [default is 1]")
-    parser.add_argument('-o','--out_dir',dest='out_dir',metavar='DIR',type=str,required=True,
-            help="set the output dir")
+    parser = argparse.ArgumentParser(description='''tax diff | v1.0 at 2015/10/26 by liangzb ''')
+    parser.add_argument('-i','--infile',dest='infile',metavar='FILE',type=str,required=True,
+                        help="set the transed file")
+    parser.add_argument('-o','--outdir',dest='outdir',metavar='DIR',type=str,required=True,
+                        help="set the work dir")
+    parser.add_argument('-g','--group',dest='group',metavar='FILE',type=str,required=True,
+                        help="set the group file")
+    parser.add_argument('-c','--cutoff',dest='cutoff',metavar='FILE',type=float,default=0.05,
+                        help="set the p_value cutoff")
     args = parser.parse_args()
     params = vars(args)
+    params['marker'] = params['outdir'] + '/diff.marker.txt'
+    params['filt'] = params['outdir'] + '/diff.marker.filt_p_%s.txt'%params['cutoff']
+    params['profile'] = params['outdir'] + '/profile.for_plot_p_%s.txt'%params['cutoff']
     return params
+
+def filt(infile,filt_file):
+    marker_set = set()
+    with open(infile) as fp,open(filt_file,'w') as out:
+        out.write(fp.next())
+        for line in fp:
+            tabs = line.strip().split('\t')
+            try:
+                p_value = float(tabs[-1])
+            except ValueError,ex:
+                if str(ex).startswith('could not convert string to float'):
+                    continue
+            if p_value < params['cutoff']:
+                marker_set.add(tabs[0])
+                out.write(line)
+    return marker_set
+
+def get_profile(marker_set,infile,outfile):
+    with open(infile) as fp, open(outfile,'w') as out:
+        out.write(fp.next())
+        for line in fp:
+            name = line.split('\t')[0]
+            if name in marker_set:
+                out.write(line)
+
 
 if __name__ == '__main__':
     params = read_params(sys.argv)
-    mkdir(params['out_dir'])
-    for_plot = params['out_dir'] + '/for_plot.txt'
-    core_otu = params['out_dir'] + '/core_otu.txt'
-    pdf_file = params['out_dir'] + '/core_otu.pdf'
-    png_file = params['out_dir'] + '/core_otu.png'
-
-    subject = Subject(params['otu_table'],params['tax_ass'],
-                      for_plot,core_otu,params['cutoff'])
-    subject.work()
-
-    r_job = rp.Parser()
-    r_job.open(this_script_path + '/../src/template/03_core_otu.Rtp')
-    vars = {'for_plot':for_plot,
-            'pdf_file':pdf_file}
-    r_job.format(vars)
-    r_job.write(params['out_dir'] + '/core_otu.R')
+    mkdir(params['outdir'])
+    r_job = rp.Rparser()
+    r_job.open(this_script_path + '/../src/template/05_diff_test.Rtp')
+    var = {
+        'infile' : params['infile'],
+        'group_file' : params['group'],
+        'marker_file' : params['marker']
+    }
+    r_job.format(var)
+    r_job.write(params['outdir'] + '/diff.marker.R')
     r_job.run()
-    os.system('convert %s %s'%(pdf_file,png_file))
-
+    marker_set = filt(params['marker'],params['filt'])
+    get_profile(marker_set,params['infile'],params['profile'])

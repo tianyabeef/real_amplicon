@@ -11,7 +11,7 @@ if("@#{top}"=="all"){
 }
 
 group=read.table("@#{group}",sep="\t",header=F,row.names=1,check.names=F)
-name=read.table("@#{show_rowname}",header=F,check.names=F)
+#name=read.table("@#{show_rowname}",header=F,check.names=F)
 rows=rep(" ",nrow(data))
 for(i in 1:nrow(data)){
 #    if(name[i]==1){

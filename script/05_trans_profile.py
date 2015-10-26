@@ -47,7 +47,7 @@ if __name__ == '__main__':
     params = read_params(sys.argv)
     mkdir(os.path.dirname(params['outfile']))
     if params['mode'] == 'otu':
-        os.system('copy %s %s'%(params['infile'],params['outfile']))
+        os.system('cp %s %s'%(params['infile'],params['outfile']))
     elif params['mode'] == 'all':
         trans(params['infile'],params['outfile'])
     else:
