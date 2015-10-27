@@ -33,7 +33,7 @@ def get_result(cfg_in,vars=None):
     dirs.append(out_dir_results+"/02_OTU/all/wf_taxa_summary/")
     dirs.append(out_dir_results+"/03_Alpha_diversity/total_alpha_rare/")
     dirs.append(out_dir_results+"/04_Beta_diversity/")
-    dirs.append(out_dir_results+"/05_diff_marder/")
+    dirs.append(out_dir_results+"/05_diff_analysis/")
     makedirs(dirs)
     origin = config.items('origin')
     command = ''
@@ -47,7 +47,11 @@ def get_result(cfg_in,vars=None):
         dirs.append(out_dir_results+"/02_OTU/"+analysis_name+"/wf_taxa_summary/")
         dirs.append(out_dir_results+"/03_Alpha_diversity/"+analysis_name)
         dirs.append(out_dir_results+"/04_Beta_diversity/"+analysis_name)
-        dirs.append(out_dir_results+"/05_diff_marder/"+analysis_name)
+        dirs.append(out_dir_results+"/05_diff_analysis/"+analysis_name+"/LEfse/")
+        dirs.append(out_dir_results+"/05_diff_analysis/"+analysis_name+"/otu_diff/")
+        dirs.append(out_dir_results+"/05_diff_analysis/"+analysis_name+"/genus_diff/")
+        dirs.append(out_dir_results+"/05_diff_analysis/"+analysis_name+"/taxall_diff/")
+        dirs.append(out_dir_results+"/05_diff_analysis/"+analysis_name+"/phylum_diff/")
         makedirs(dirs)
     for key,value in origin:
         if(config.has_option('target', key)):
