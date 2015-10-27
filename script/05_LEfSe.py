@@ -33,13 +33,24 @@ def do_format(infile,outfile,group):
     with open(infile) as in_fp, open(outfile,'w') as out_fp:
         head = in_fp.next()
         samples = head.strip().split('\t')[1:]
-        for sample in samples:
-            groups.append(group[sample])
-        out_fp.write('class\t%s\n'%'\t'.join(samples))
-        out_fp.write('Taxon\t%s\n'%'\t'.join(groups))
+        remain_samples = []
+        for ind,sample in enumerate(samples):
+            try:
+                groups.append(group[sample])
+                remain_samples.append(sample)
+            except KeyError,ex:
+                print('%s sample in not in the group_file'%ex)
+                continue
+        samples = remain_samples
+        out_fp.write('class\t%s\n'%'\t'.join(groups))
+        out_fp.write('Taxon\t%s\n'%'\t'.join(samples))
         for line in in_fp:
             tabs = line.strip().split('\t')
             if tabs[0].endswith('Other'):
+                continue
+            if tabs[0].endswith('norank'):
+                continue
+            if tabs[0].endswith('unclassfied'):
                 continue
             tabs[0] = tabs[0].replace(';','|')
             out_fp.write('\t'.join(tabs) + '\n')
@@ -50,9 +61,9 @@ def get_commands(infile,LEfSe_path,out_dir):
     commands.append(command)
     command = '%srun_lefse.py %s/LDA.in %s/LDA.res'%(LEfSe_path,out_dir,out_dir)
     commands.append(command)
-    command = '%splot_res.py %s/LDA.res %s/LAD.pdf --format pdf --dpi 150'%(LEfSe_path,out_dir,out_dir)
+    command = '%splot_res.py %s/LDA.res %s/LDA.pdf --format pdf --dpi 150'%(LEfSe_path,out_dir,out_dir)
     commands.append(command)
-    command = '%splot_res.py %s/LDA.res %s/LAD.png --format png --dpi 150'%(LEfSe_path,out_dir,out_dir)
+    command = '%splot_res.py %s/LDA.res %s/LDA.png --format png --dpi 150'%(LEfSe_path,out_dir,out_dir)
     commands.append(command)
     command = '%splot_cladogram.py %s/LDA.res %s/LDA.cladogram.pdf --format pdf --dpi 150'%(LEfSe_path,out_dir,out_dir)
     commands.append(command)
