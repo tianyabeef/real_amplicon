@@ -244,11 +244,14 @@ def get_html():
     var_html['diff_analysis']=False
     
     env = Environment(loader=FileSystemLoader(out_dir_report+'/templates',encoding='utf-8'))
-    template = env.get_template('1.1reads_statistical.html')
+    template = env.get_template('report.html')
     finally_html = template.render(var_html)
     with open(work_dir+'report/index_loaded.html','w') as fp:
         fp.write(finally_html)
-
+    templetaPDF = env.get_template('pdf.html')
+    pdf = templetaPDF.render(var_html)
+    with open(work_dir+'report/pdf.html','w') ad fp:
+        fp.write(pdf)
 if __name__ == '__main__':
     get_html()
 
