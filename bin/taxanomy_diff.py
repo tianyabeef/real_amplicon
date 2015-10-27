@@ -17,14 +17,14 @@ def commands_factory(infile,outdir,mode,vars):
                                                   params['group'],
                                                   params['p_cutoff']))
     # pca
-    if vars['sample_num_total'] >= 5:
+    if vars['min_sample_num_in_groups'] >= 3:
         marker_profile = outdir + '/profile.for_plot_p_%s.txt'%params['p_cutoff']
         commands.append('%s -i %s -o %s -g %s'%(scripts['diff_pca'],
                                                 marker_profile,
                                                 outdir,
                                                 params['group']))
     # heatmap
-    if vars['sample_num_total'] >=4:
+    if vars['min_sample_num_in_groups'] >= 3:
         commands.append('%s -f %s -o %s -g %s -t %s'%(scripts['diff_heatmap'],
                                                     marker_profile,
                                                     outdir,
