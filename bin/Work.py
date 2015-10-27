@@ -219,7 +219,8 @@ class Pipeline(Work):
                 assert os.path.isfile(file), 'fq_for_merge : %s'%file
             assert os.path.isfile(params['name_list']), 'name_list : %s'%params['name_list']
             params['require'] = int(params['require'])
-            assert os.path.isfile(params['pipeline_shell']), 'pipeline_shell : %s'%params['pipeline_shell']
+            assert os.path.isdir(os.path.dirname(params['pipeline_shell'])), 'pipeline_shell : %s directory not exist'%params['pipeline_shell']
+#            assert os.path.isfile(params['pipeline_shell']), 'pipeline_shell : %s'%params['pipeline_shell']
 
     @staticmethod
     def make_shell(work_shell,work_list):
@@ -248,13 +249,16 @@ class Pipeline(Work):
             os.remove(__o_file)
         if os.path.isfile(__e_file):
             os.remove(__e_file)
-        cmd = '%s=`qsub -cwd -l vf=%s -q %s -N %s -e %s -o %s -terse'%(job_name,vf,queue,qsub_name,
+        job_name_satisfied = re.sub('\W','_',job_name)
+        cmd = '%s=`qsub -cwd -l vf=%s -q %s -N %s -e %s -o %s -terse'%(job_name_satisfied,vf,queue,qsub_name,
                                                                            __e_file,__o_file)
         if prep is not None:
             if prep.__class__ == list:
-                cmd += ' -hold_jid %s'%','.join(map(lambda s:'$'+s,prep))
+                prep_satisfied = map(lambda s:re.sub('\W','_',s),prep)
+                cmd += ' -hold_jid %s'%','.join(map(lambda s:'$'+s,prep_satisfied))
             else:
-                cmd += ' -hold_jid $%s'%prep
+                prep_satisfied = re.sub('\W','_',prep)
+                cmd += ' -hold_jid $%s'%prep_satisfied
         cmd += ' %s`'%shell
         self.commands.append(cmd)
 
