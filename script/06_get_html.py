@@ -133,8 +133,7 @@ def get_html():
             tabs = line.strip().split("\t")
             #sample_name amplicon_type tags mapped_reads mapped_ratio
             otuStatistical=OtuStatistical(tabs[0],data_type,tabs[1],tabs[8],tabs[9],tabs[4],tabs[5],tabs[2],tabs[3],tabs[10])
-            otuStatisticals[tabs[0]]=otuStatistical
-
+	    otuStatisticals[tabs[0]]=otuStatistical
 #save table
     otuStatisticalDownsizes={}
     with open(work_dir+"../"+config.get('origin','otu_all_downsize_txt'),'r') as lines:
@@ -144,6 +143,14 @@ def get_html():
             otuStatisticalDownsize=OtuStatisticalDownsize(tabs[0],tabs[1],tabs[2],tabs[3])
             otuStatisticalDownsizes[tabs[0]] =    otuStatisticalDownsize
 
+#save tabel CoreMicrobiome
+    coreMicrobiomes={}
+    with open(work_dir+"../"+config.get('origin','group_core_otu_txt').replace("#group",group_file),'r') as lines:
+        lines.next()
+        for line in lines:
+            tabs = line.strip().split("\t")
+            coreMicrobiome = CoreMicrobiome(tabs[0],tabs[1],tabs[2])
+            coreMicrobiomes[tabs[0]] = coreMicrobiome
 
 #save table
     otuAssignmentsStatisticals={}
@@ -185,7 +192,7 @@ def get_html():
     table = template.render(otuStatisticals=otuStatisticals,otuStatisticalDownsizes=otuStatisticalDownsizes,
                             otuAssignmentsStatisticals =otuAssignmentsStatisticals,alpha_diversitys=alpha_diversitys,
                             alpha_diversity_diffs = alpha_diversity_diffs,beta_data=beta[0],beta_jqGrid=beta[1],
-                            )
+coreMicrobiomes=coreMicrobiomes ,                           )
     with open(work_dir+'report/js/table.js','w') as fp:
         fp.write(table)
     #finally_get_html

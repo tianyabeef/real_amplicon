@@ -1,7 +1,8 @@
 // JavaScript Document
+
 var dataStatisticals = [
-        {% for key,otuStatistical in otuStatisticals %}
-	{sampleName:{{ otuStatistical.sampleName }},ampliconType:{{ otuStatistical.amplicon_type }},cleanReads:{{ otuStatistical.clean_read }},Q20:{{ otuStatistical.q20 }},Q30:{{ otuStatistical.q30 }},singleton:{{ otuStatistical.singleton }},singletonRatio:{{ otuStatistical.singleton_ratio }},mappeReads:{{ otuStatistical.mapped_reads }},mappedRatio:{{ otuStatistical.mappedRatio }},OTUs:{{ otuStatistical.otus }}},
+	{% for otuStatistical in otuStatisticals %}
+		{sampleName:{{ otuStatistical.sampleName }},ampliconType:{{ otuStatistical.amplicon_type }},cleanReads:{{ otuStatistical.clean_read }},Q20:{{ otuStatistical.q20 }},Q30:{{ otuStatistical.q30 }},singleton:{{ otuStatistical.singleton }},singletonRatio:{{ otuStatistical.singleton_ratio }},mappeReads:{{ otuStatistical.mapped_reads }},mappedRatio:{{ otuStatistical.mappedRatio }},OTUs:{{ otuStatistical.otus }}},
 	{% endfor %}
 	];
 jQuery().ready(function (){
@@ -88,7 +89,7 @@ var coreMicrobiomes=[
 
 var otuAssignmentsStatisticals=[
 	{% for otuAssignmentsStatistical in otuAssignmentsStatisticals %}
-		{otuName:{{ otuAssignmentsStatistical.name|e }},num:{{ otuAssignmentsStatistical.num }}},
+		{otuName:{{ otuAssignmentsStatistical.name|e }},num:{{ coreMicrobiome.num }}},
 	{% endfor %}	
 ];
  jQuery().ready(function (){

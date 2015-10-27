@@ -30,8 +30,8 @@ def get_result(cfg_in,vars=None):
     os.system('rm -Rf %s'%out_dir_results)
     dirs = []
     dirs.append(out_dir_results+"/01_Reads/")
-    dirs.append(out_dir_results+"/02_OTU/all/")
-    dirs.append(out_dir_results+"/03_Alpha_diversity/total_alpha_rare")
+    dirs.append(out_dir_results+"/02_OTU/all/wf_taxa_summary/")
+    dirs.append(out_dir_results+"/03_Alpha_diversity/total_alpha_rare/")
     dirs.append(out_dir_results+"/04_Beta_diversity/")
     dirs.append(out_dir_results+"/05_diff_marder/")
     makedirs(dirs)
@@ -44,7 +44,7 @@ def get_result(cfg_in,vars=None):
     for group_file in group_files:
         analysis_name = re.search(regex, group_file).group(1)
         dirs = []
-        dirs.append(out_dir_results+"/02_OTU/"+analysis_name)
+        dirs.append(out_dir_results+"/02_OTU/"+analysis_name+"/wf_taxa_summary/")
         dirs.append(out_dir_results+"/03_Alpha_diversity/"+analysis_name)
         dirs.append(out_dir_results+"/04_Beta_diversity/"+analysis_name)
         dirs.append(out_dir_results+"/05_diff_marder/"+analysis_name)
