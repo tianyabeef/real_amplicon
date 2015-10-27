@@ -1,62 +1,32 @@
 // JavaScript Document
-var mydata = [
-		{id:"1",invdate:"2010-05-24",name:"test",note:"note",tax:"10.00",total:"2111.00"} ,
-		{id:"2",invdate:"2010-05-25",name:"test2",note:"note2",tax:"20.00",total:"320.00"},
-		{id:"3",invdate:"2007-09-01",name:"test3",note:"note3",tax:"30.00",total:"430.00"},
-		{id:"4",invdate:"2007-10-04",name:"test",note:"note",tax:"10.00",total:"210.00"},
-		{id:"5",invdate:"2007-10-05",name:"test2",note:"note2",tax:"20.00",total:"320.00"},
-		{id:"6",invdate:"2007-09-06",name:"test3",note:"note3",tax:"30.00",total:"430.00"},
-		{id:"7",invdate:"2007-10-04",name:"test",note:"note",tax:"10.00",total:"210.00"},
-		{id:"8",invdate:"2007-10-03",name:"test2",note:"note2",amount:"300.00",tax:"21.00",total:"320.00"},
-		{id:"9",invdate:"2007-09-01",name:"test3",note:"note3",amount:"400.00",tax:"30.00",total:"430.00"},
-		{id:"11",invdate:"2007-10-01",name:"test",note:"note",amount:"200.00",tax:"10.00",total:"210.00"},
-		{id:"12",invdate:"2007-10-02",name:"test2",note:"note2",amount:"300.00",tax:"20.00",total:"320.00"},
-		{id:"13",invdate:"2007-09-01",name:"test3",note:"note3",amount:"400.00",tax:"30.00",total:"430.00"},
-		{id:"14",invdate:"2007-10-04",name:"test",note:"note",amount:"200.00",tax:"10.00",total:"210.00"},
-		{id:"15",invdate:"2007-10-05",name:"test2",note:"note2",amount:"300.00",tax:"20.00",total:"320.00"},
-		{id:"16",invdate:"2007-09-06",name:"test3",note:"note3",amount:"400.00",tax:"30.00",total:"430.00"},
-		{id:"17",invdate:"2007-10-04",name:"test",note:"note",amount:"200.00",tax:"10.00",total:"210.00"},
-		{id:"18",invdate:"2007-10-03",name:"test2",note:"note2",amount:"300.00",tax:"20.00",total:"320.00"},
-		{id:"19",invdate:"2007-09-01",name:"test3",note:"note3",amount:"400.00",tax:"30.00",total:"430.00"},
-		{id:"21",invdate:"2007-10-01",name:"test",note:"note",amount:"200.00",tax:"10.00",total:"210.00"},
-		{id:"22",invdate:"2007-10-02",name:"test2",note:"note2",amount:"300.00",tax:"20.00",total:"320.00"},
-		{id:"23",invdate:"2007-09-01",name:"test3",note:"note3",amount:"400.00",tax:"30.00",total:"430.00"},
-		{id:"24",invdate:"2007-10-04",name:"test",note:"note",amount:"200.00",tax:"10.00",total:"210.00"},
-		{id:"25",invdate:"2007-10-05",name:"test2",note:"note2",amount:"300.00",tax:"20.00",total:"320.00"},
-		{id:"26",invdate:"2007-09-06",name:"test3",note:"note3",amount:"400.00",tax:"30.00",total:"430.00"},
-		{id:"27",invdate:"2007-10-04",name:"test",note:"note",amount:"200.00",tax:"10.00",total:"210.00"},
-		{id:"28",invdate:"2007-10-03",name:"test2",note:"note2",amount:"300.00",tax:"20.00",total:"320.00"},
-		{id:"29",invdate:"2007-09-01",name:"test3",note:"note3",amount:"400.00",tax:"30.00",total:"430.00"}
-	];
-var dataStatistical = [
-		{name:"NDD",ampliconType:"16S",cleanReads:"78985",Q20:"90.00",Q30:"81.00",singleton:"54510",singletonRatio:"80",mappeReads:"56646",OTUs:"444"},
-		{name:"NDD",ampliconType:"16S",cleanReads:"78985",Q20:"90.00",Q30:"81.00",singleton:"54510",singletonRatio:"80",mappeReads:"56646",OTUs:"444"},
-		{name:"NDD",ampliconType:"16S",cleanReads:"78985",Q20:"90.00",Q30:"81.00",singleton:"54510",singletonRatio:"80",mappeReads:"56646",OTUs:"444"},
-		{name:"NDD",ampliconType:"16S",cleanReads:"78985",Q20:"90.00",Q30:"81.00",singleton:"54510",singletonRatio:"80",mappeReads:"56646",OTUs:"444"},
-		{name:"NDD",ampliconType:"16S",cleanReads:"78985",Q20:"90.00",Q30:"81.00",singleton:"54510",singletonRatio:"80",mappeReads:"56646",OTUs:"444"},
-		{name:"NDD",ampliconType:"16S",cleanReads:"78985",Q20:"90.00",Q30:"81.00",singleton:"54510",singletonRatio:"80",mappeReads:"56646",OTUs:"444"},
-		{name:"NDD",ampliconType:"16S",cleanReads:"78985",Q20:"90.00",Q30:"81.00",singleton:"54510",singletonRatio:"80",mappeReads:"56646",OTUs:"444"},
-		{name:"NDD",ampliconType:"16S",cleanReads:"78985",Q20:"90.00",Q30:"81.00",singleton:"54510",singletonRatio:"80",mappeReads:"56646",OTUs:"444"},
-		{name:"NDD",ampliconType:"16S",cleanReads:"78985",Q20:"90.00",Q30:"81.00",singleton:"54510",singletonRatio:"80",mappeReads:"56646",OTUs:"444"}
+var 
+dataStatisticals = [
+        
+	{% for key,otuStatistical in otuStatisticals %}
+	
+		{sampleName:{{ otuStatistical.sampleName }},ampliconType:{{ otuStatistical.amplicon_type }},cleanReads:{{ otuStatistical.clean_read }},Q20:{{ otuStatistical.q20 }},Q30:{{ otuStatistical.q30 }},singleton:{{ otuStatistical.singleton }},singletonRatio:{{ otuStatistical.singleton_ratio }},mappeReads:{{ otuStatistical.mapped_reads }},mappedRatio:{{ otuStatistical.mappedRatio }},OTUs:{{ otuStatistical.otus }}},
+	{% endfor %}
 	];
 jQuery().ready(function (){
 	jQuery("#list47").jqGrid({
-		data: dataStatistical,
+		data: dataStatisticals,
 		datatype: "local",
 		height: 150,
 		rowNum: 10,
 		rowList: [10,20,30],
-		colNames:['Sample name','Amplicon type', 'clean reads','Q20(%)','Q30(%)','singleton','singleton(%)','mapped reads','OTUs'],
+		colNames:['Sample name','Amplicon type', 'clean reads','Q20(%)','Q30(%)','singleton','singleton(%)','mapped reads','mapped reads(%)','OTUs'],
 		colModel:[
-			{name:'name',index:'name',align:"center", width:90},
+			{name:'sampleName',index:'sampleName',align:"center", width:90},
 			{name:'ampliconType',index:'ampliconType', align:"center",width:90},
-			{name:'cleanReads',index:'cleanReads', width:100,align:"center",sorttype:"int"},
-			{name:'Q20',index:'Q20', width:80, align:"center",sorttype:"float"},		
-			{name:'Q30',index:'Q30', width:80,align:"center",sorttype:"float"},
-			{name:'singleton',index:'singleton', width:150,align:"center",sortype:"int"},	
-			{name:'singletonRatio',index:'singletonRatio', align:"center",width:150, sortype:"int"},	
-			{name:'mappeReads',index:'mappedReads', align:"center",width:150, sortype:"int"},
-			{name:'OTUs',index:'OTUs', width:60,align:"center", sortype:"int"}
+			{name:'cleanReads',index:'cleanReads', width:90,align:"center",sorttype:"int"},
+			{name:'Q20',index:'Q20', width:90, align:"center",sorttype:"float"},		
+			{name:'Q30',index:'Q30', width:90,align:"center",sorttype:"float"},
+			{name:'singleton',index:'singleton', width:90,align:"center",sortype:"int"},	
+			{name:'singletonRatio',index:'singletonRatio', align:"center",width:90, sortype:"float"},	
+			{name:'mappeReads',index:'mappedReads', align:"center",width:90, sortype:"int"},
+			
+			{name:'mappeRatio',index:'mappedRatioss', align:"center",width:90, sortype:"float"},
+			{name:'OTUs',index:'OTUs', width:90,align:"center", sortype:"int"}
 		],
 		pager: "#plist47",
 		viewrecords: true,
@@ -65,89 +35,116 @@ jQuery().ready(function (){
 
  })
  
+
+
+var otuStatisticalDownsizes=[
+	
+ {% for key,otuStatisticalDownsize in otuStatisticalDownsizes %}
+		
+ {sampleName:{{ otuStatisticalDownsize.sample_name }},downsize:{{ otuStatisticalDownsize.downsize }},otus_before:{{ otuStatisticalDownsize.otus_before }},otus_after:{{ otuStatisticalDownsize.otus_after }}},
+	{% endfor %}
+];
 jQuery().ready(function (){
 	jQuery("#list48").jqGrid({
-		data: mydata,
+		data: otuStatisticalDownsizes,
 		datatype: "local",
 		height: 150,
 		rowNum: 10,
 		rowList: [10,20,30],
-		colNames:['Inv No','Date', 'Client', 'Amount','Tax','Total','Notes'],
+		colNames:['sampleName','downsize', 'otus_before', 'otus_after'],
 		colModel:[
-			{name:'id',index:'id', width:60, sorttype:"int"},
-			{name:'invdate',index:'invdate', width:90, sorttype:"date", formatter:"date"},
-			{name:'name',index:'name', width:100},
-			{name:'amount',index:'amount', width:80, align:"right",sorttype:"float", formatter:"number"},
-			{name:'tax',index:'tax', width:80, align:"right",sorttype:"float"},		
-			{name:'total',index:'total', width:80,align:"right",sorttype:"float"},		
-			{name:'note',index:'note', width:150, sortable:false}		
+			{name:'sampleName',index:'sampleName', width:90,align:"center"},
+			{name:'downsize',index:'downsize', width:90, sorttype:"int",align:"center"},
+			{name:'otus_before',index:'otus_before', width:90,align:"center", sortype:"int"},
+			{name:'otus_after',index:'otus_after', width:90,align:"center", sortype:"int"}	
 		],
 		pager: "#plist48",
 		viewrecords: true,
 		caption: "Manipulating Array Data"
 	});
  })
+
+
+
+var coreMicrobiomes=[
+	
+ {% for key,coreMicrobiome in coreMicrobiomes %}
+		
+ {otuId:{{ coreMicrobiome.otu_id }},taxonomyLevel:{{ coreMicrobiome.taxonomy_level }},taxonomyName:{{ coreMicrobiome.taxonomy_name }}},
+	{% endfor %}	
+];
  jQuery().ready(function (){
 	jQuery("#list49").jqGrid({
-		data: mydata,
+		data: coreMicrobiomes,
 		datatype: "local",
 		height: 150,
 		rowNum: 10,
 		rowList: [10,20,30],
-		colNames:['Inv No','Date', 'Client', 'Amount','Tax','Total','Notes'],
+		colNames:['otuId','taxonomyLevel', 'taxonomyName'],
 		colModel:[
-			{name:'id',index:'id', width:60, sorttype:"int"},
-			{name:'invdate',index:'invdate', width:90, sorttype:"date", formatter:"date"},
-			{name:'name',index:'name', width:100},
-			{name:'amount',index:'amount', width:80, align:"right",sorttype:"float", formatter:"number"},
-			{name:'tax',index:'tax', width:80, align:"right",sorttype:"float"},		
-			{name:'total',index:'total', width:80,align:"right",sorttype:"float"},		
-			{name:'note',index:'note', width:150, sortable:false}		
+			{name:'otuId',index:'otuId', width:90,align:"center", sortype:"int"},
+			{name:'taxonomyLevel',index:'taxonomyLevel', width:90,align:"center", sortype:"int"},
+			{name:'taxonomyName',index:'taxonomyName', width:90,align:"center", sortype:"int"}
 		],
 		pager: "#plist49",
 		viewrecords: true,
 		caption: "Manipulating Array Data"
 	});
  })
- jQuery().ready(function (){
+
+
+
+var otuAssignmentsStatisticals=[
+	
+	 {% for  key,otuAssignmentsStatistical in otuAssignmentsStatisticals %}
+		
+	 {otuName:{{ otuAssignmentsStatistical.name|e }},num:{{ otuAssignmentsStatistical.num }}},
+	
+	 {% endfor %}	
+];
+ 
+	jQuery().ready(function (){
 	jQuery("#list50").jqGrid({
-		data: mydata,
+		data: otuAssignmentsStatisticals,
 		datatype: "local",
 		height: 150,
 		rowNum: 10,
 		rowList: [10,20,30],
-		colNames:['Inv No','Date', 'Client', 'Amount','Tax','Total','Notes'],
+		colNames:['otuName','num'],
 		colModel:[
-			{name:'id',index:'id', width:60, sorttype:"int"},
-			{name:'invdate',index:'invdate', width:90, sorttype:"date", formatter:"date"},
-			{name:'name',index:'name', width:100},
-			{name:'amount',index:'amount', width:80, align:"right",sorttype:"float", formatter:"number"},
-			{name:'tax',index:'tax', width:80, align:"right",sorttype:"float"},		
-			{name:'total',index:'total', width:80,align:"right",sorttype:"float"},		
-			{name:'note',index:'note', width:150, sortable:false}		
+			{name:'otuName',index:'otuName', width:90,align:"center", sortype:"int"},
+			{name:'num',index:'num', width:90,align:"center", sortype:"int"}	
 		],
 		pager: "#plist50",
 		viewrecords: true,
 		caption: "Manipulating Array Data"
 	});
  })
+
+var alpha_diversitys=[
+	
+ {% for key,alphaDiversity in alpha_diversitys %}
+		
+ {sampleName:{{ alphaDiversity.name|e }},chao1:{{ alphaDiversity.chao1 }},goodsCoverage:{{ alphaDiversity.goods_coverage }},observedSpecies:{{ alphaDiversity.observed_species }},wholeTree:{{ alphaDiversity.whole_tree }},shannon:{{ alphaDiversity.shannon }},simpon:{{ alphaDiversity.simpon }}},
+	{% endfor %}	
+];
  
  jQuery().ready(function (){
 	jQuery("#list51").jqGrid({
-		data: mydata,
+		data: alpha_diversitys,
 		datatype: "local",
 		height: 150,
 		rowNum: 10,
 		rowList: [10,20,30],
-		colNames:['Inv No','Date', 'Client', 'Amount','Tax','Total','Notes'],
+		colNames:['sampleName','chao1', 'goodsCoverage', 'observedSpecies','wholeTree','shannon','simpon'],
 		colModel:[
-			{name:'id',index:'id', width:60, sorttype:"int"},
-			{name:'invdate',index:'invdate', width:90, sorttype:"date", formatter:"date"},
-			{name:'name',index:'name', width:100},
-			{name:'amount',index:'amount', width:80, align:"right",sorttype:"float", formatter:"number"},
-			{name:'tax',index:'tax', width:80, align:"right",sorttype:"float"},		
-			{name:'total',index:'total', width:80,align:"right",sorttype:"float"},		
-			{name:'note',index:'note', width:150, sortable:false}		
+			{name:'sampleName',index:'sampleName', width:90,align:"center", sortype:"int"},
+			{name:'chao1',index:'chao1', width:90,align:"center", sortype:"float"},
+			{name:'goodsCoverage',index:'goodsCoverage', width:90,align:"center", sortype:"float"},
+			{name:'observedSpecies',index:'observedSpecies', width:90,align:"center", sortype:"float"},
+			{name:'wholeTree',index:'wholeTree', width:90,align:"center", sortype:"float"},		
+			{name:'shannon',index:'shannon', width:90,align:"center", sortype:"float"},		
+			{name:'simpon',index:'simpon', width:90,align:"center", sortype:"float"}		
 		],
 		pager: "#plist51",
 		viewrecords: true,
@@ -155,24 +152,30 @@ jQuery().ready(function (){
 	});
  })
  
- 
+var alpha_diversity_diffs=[
+
+{% for key,alphaDiversity in alpha_diversity_diffs %}
+		
+{sampleName:{{ alphaDiversity.name|e }},chao1:{{ alphaDiversity.chao1 }},goodsCoverage:{{ alphaDiversity.goods_coverage }},observedSpecies:{{ alphaDiversity.observed_species }},wholeTree:{{ alphaDiversity.whole_tree }},shannon:{{ alphaDiversity.shannon }},simpon:{{ alphaDiversity.simpon }}},
+	{% endfor %}	
+];
  
  jQuery().ready(function (){
 	jQuery("#list52").jqGrid({
-		data: mydata,
+		data: alpha_diversity_diffs,
 		datatype: "local",
 		height: 150,
 		rowNum: 10,
 		rowList: [10,20,30],
-		colNames:['Inv No','Date', 'Client', 'Amount','Tax','Total','Notes'],
+		colNames:['sampleName','chao1', 'goodsCoverage', 'observedSpecies','wholeTree','shannon','simpon'],
 		colModel:[
-			{name:'id',index:'id', width:60, sorttype:"int"},
-			{name:'invdate',index:'invdate', width:90, sorttype:"date", formatter:"date"},
-			{name:'name',index:'name', width:100},
-			{name:'amount',index:'amount', width:80, align:"right",sorttype:"float", formatter:"number"},
-			{name:'tax',index:'tax', width:80, align:"right",sorttype:"float"},		
-			{name:'total',index:'total', width:80,align:"right",sorttype:"float"},		
-			{name:'note',index:'note', width:150, sortable:false}		
+			{name:'sampleName',index:'sampleName', width:90,align:"center", sortype:"float"},
+			{name:'chao1',index:'chao1', width:90,align:"center", sortype:"float"},
+			{name:'goodsCoverage',index:'goodsCoverage', width:90,align:"center", sortype:"float"},
+			{name:'observedSpecies',index:'observedSpecies', width:90,align:"center", sortype:"float"},
+			{name:'wholeTree',index:'wholeTree', width:90,align:"center", sortype:"float"},		
+			{name:'shannon',index:'shannon', width:90,align:"center", sortype:"float"},		
+			{name:'simpon',index:'simpon', width:90,align:"center", sortype:"float"}		
 		],
 		pager: "#plist52",
 		viewrecords: true,
@@ -180,22 +183,23 @@ jQuery().ready(function (){
 	});
  })
  
+ var beta_diversitys=[
+ {% for beta_diversity in beta_diversity_data %}
+ {{ beta_diversity }}	
+	{% endfor %}	
+ ];
  jQuery().ready(function (){
 	jQuery("#list53").jqGrid({
-		data: mydata,
+		data: beta_diversitys,
 		datatype: "local",
 		height: 150,
 		rowNum: 10,
 		rowList: [10,20,30],
-		colNames:['Inv No','Date', 'Client', 'Amount','Tax','Total','Notes'],
+		colNames:[{{ beta_diversity_sampeName }}],
 		colModel:[
-			{name:'id',index:'id', width:60, sorttype:"int"},
-			{name:'invdate',index:'invdate', width:90, sorttype:"date", formatter:"date"},
-			{name:'name',index:'name', width:100},
-			{name:'amount',index:'amount', width:80, align:"right",sorttype:"float", formatter:"number"},
-			{name:'tax',index:'tax', width:80, align:"right",sorttype:"float"},		
-			{name:'total',index:'total', width:80,align:"right",sorttype:"float"},		
-			{name:'note',index:'note', width:150, sortable:false}		
+			 {% for beta_diversity in beta_diversity_jqGrid %}
+			 {{ beta_diversity }}	
+				{% endfor %}		
 		],
 		pager: "#plist53",
 		viewrecords: true,
@@ -203,22 +207,23 @@ jQuery().ready(function (){
 	});
  })
 
+ var beta_un_diversitys=[
+ {% for beta_diversity in beta_un_diversity_data %}
+ {{ beta_diversity }}	
+	{% endfor %}	
+ ];
 jQuery().ready(function (){
 	jQuery("#list54").jqGrid({
-		data: mydata,
+		data: beta_un_diversitys,
 		datatype: "local",
 		height: 150,
 		rowNum: 10,
 		rowList: [10,20,30],
-		colNames:['Inv No','Date', 'Client', 'Amount','Tax','Total','Notes'],
+		colNames:[{{ beta_un_diversity_sampeName }}],
 		colModel:[
-			{name:'id',index:'id', width:60, sorttype:"int"},
-			{name:'invdate',index:'invdate', width:90, sorttype:"date", formatter:"date"},
-			{name:'name',index:'name', width:100},
-			{name:'amount',index:'amount', width:80, align:"right",sorttype:"float", formatter:"number"},
-			{name:'tax',index:'tax', width:80, align:"right",sorttype:"float"},		
-			{name:'total',index:'total', width:80,align:"right",sorttype:"float"},		
-			{name:'note',index:'note', width:150, sortable:false}		
+			 {% for beta_diversity in beta_un_diversity_jqGrid %}
+			 {{ beta_diversity }}	
+				{% endfor %}		
 		],
 		pager: "#plist54",
 		viewrecords: true,
