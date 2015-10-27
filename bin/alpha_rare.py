@@ -41,6 +41,11 @@ def alpha_rare(cfg_in,vars=None):
     work.commands.append('%s -i %s -o %s'%(qiime['collate_alpha'],
                                            alpha_diversity_dir,
                                            alpha_collate_dir))
+    # alpha statistic
+    work.commands.append('%s -a %s -m %s -o %s'%(scripts['alpha_statistic'],
+                                                 alpha_collate_dir,
+                                                 params['alpha_metrics'],
+                                                 outfiles['alpha_statistic']))
 
     # alpha rare plot
     work.commands.append('%s -g %s -d %s -o %s -a %s'%(scripts['alpha_rare'],
