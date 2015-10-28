@@ -8,6 +8,14 @@ Created on Oct 20, 2015
 import os
 import sys
 from settings import *
+def makedirs(dirs):
+    for dir in dirs:
+        if os.path.isdir(dir):
+            return None
+        if dir == '':
+            return None
+        os.system('mkdir -p %s'%dir)
+
 
 
 def get_html(cfg_in,vars=None):
@@ -32,6 +40,19 @@ def get_html(cfg_in,vars=None):
     os.system('rm -Rf %s'%out_dir_report)
     os.makedirs(out_dir_report)
     image_dir = out_dir_report+'/images/'
+    dirs = []
+    dirs.append(image_dir+"/alpha/")
+    dirs.append(image_dir+"/class/")
+    dirs.append(image_dir+"/family/")
+    dirs.append(image_dir+"/genus/")
+    dirs.append(image_dir+"/order/")
+    dirs.append(image_dir+"/phylum/")
+    dirs.append(image_dir+"/alpha_div_collated/")
+    dirs.append(image_dir+"/group/otu_diff/")
+    dirs.append(image_dir+"/group/genus_diff/")
+    dirs.append(image_dir+"/group/taxall_diff/")
+    dirs/append(image_dir+"/group/phylum_diff/")
+    makedirs(dirs)
     origin = config.items('origin')
 
     group_files = re.split('\s+',config.get('params','group_files'))
@@ -44,7 +65,7 @@ def get_html(cfg_in,vars=None):
             match = re.match(r".*png$",value)
             if(match):
                     value_rep = value.replace("#group",group_file)
-                    command.append('cp '+work_dir+'../'+value_rep+' '+image_dir+'\n')
+                    command.append('cp '+work_dir+'../'+value_rep+' '+image_dir+config.get('target',key)+'\n')
             else:
                 continue
         else:
