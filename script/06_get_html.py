@@ -50,9 +50,7 @@ class Alpha_diversity(object):
         self.whole_tree=whole_tree
         self.shannon=shannon
         self.simpon=simpon
-# class Beta_diversity_weighted(object):
-#     def __init__(self,name):
-#         self.name=name
+
 
 def save_table(input_dir):
 #save table
@@ -60,42 +58,92 @@ def save_table(input_dir):
     weight_unifrac_jqGrid_list=[]
     sampleName="'"
     with open(input_dir) as lines:
-        head = lines.next()
-        samples_name = head.strip().split('\t')[1:]
-        for line in lines:
-            str='{'
-            jqGrid = ''
+        head=lines.next()
+        samples_name = head.strip().split('\t')
+        samples_name.insert(0,"sampleName")
+        sampleName = ("','").join(samples_name)
+        jqGrid_head = "{name:'sampleName',index:'sampleName',width:90,align:'center'},"
+        weight_unifrac_jqGrid_list.append(jqGrid_head)
+        count = 0
+        samples_name = samples_name[1:]
+        for_time = []
+        for i,value in enumerate(samples_name):
+            for_time.append("%s%d"%("sample",i))
+        for count,line in enumerate(lines):
+            count += 1
             tabs = line.strip().split("\t")
-            str+='name:'+tabs[0]+','
-            for i,value in enumerate(samples_name):
-                if len(samples_name)<9:
-                    
-                    if i<len(samples_name)-1:
-                        sampleName += value+"','"
-                        str += value+":"+tabs[i+1]
-                        str += ","
-                        jqGrid += "name:"+value+",index:"+value+",aligen:center,width:90},"
+            str="{sampleName:\""+tabs[0]+"\","
+            for i,value in enumerate(for_time):
+                jqGrid = '{'
+                if len(for_time)<9:
+                    if i<len(for_time)-1:
+                        str += value+":\""+tabs[i+1]+"\","
+                        jqGrid += "name:'"+value+"',index:'"+value+"',aligen:'center',width:90},"
                     else:
-                        sampleName += value+"','"
-                        jqGrid += "name:"+value+",index:"+value+",aligen:center,width:90}"
-                        str += value+":"+tabs[i+1]
-                        str +='}'
+                        jqGrid += "name:'"+value+"',index:'"+value+"',aligen:'center',width:90}"
+                        str += value+":\""+tabs[i+1]+"\""
+                        str +='},'
                 else:
                     
                     if i<8:
-                        sampleName += value+"','"
-                        str += value+":"+tabs[i+1]
-                        str += ","
-                        jqGrid += "name:"+value+",index:"+value+",aligen:center,width:90},"
+                        str += value+":\""+tabs[i+1]+"\","
+                        jqGrid += "name:'"+value+"',index:'"+value+"',aligen:'center',width:90},"
                     else:
-                        sampleName += value+"'"
-                        jqGrid += "name:"+value+",index:"+value+",aligen:center,width:90}"
-                        str += value+":"+tabs[i+1]
+                        jqGrid += "name:'"+value+"',index:'"+value+"',aligen:'center',width:90}"
+                        str += value+":\""+tabs[i+1]+"\""
                         str +='}'
                         break
-        weight_unifrac_data_list.append(str)
-        weight_unifrac_jqGrid_list.append(jqGrid)
+                if count ==1:
+                    weight_unifrac_jqGrid_list.append(jqGrid)
+            weight_unifrac_data_list.append(str)
     return [weight_unifrac_data_list,weight_unifrac_jqGrid_list,sampleName]
+def save_table2(input_dir):
+#save table
+#save table
+    weight_unifrac_data_list=[]
+    weight_unifrac_jqGrid_list=[]
+    sampleName="'"
+    with open(input_dir) as lines:
+        head=lines.next()
+        samples_name = head.strip().split('\t')
+        sampleName = ("','").join(samples_name)
+        jqGrid_head = "{name:'taxonname',index:'taxonname',width:90,align:'center'},"
+        weight_unifrac_jqGrid_list.append(jqGrid_head)
+        count = 0
+        samples_name = samples_name[1:]
+        for_time = []
+        for i,value in enumerate(samples_name):
+            for_time.append("%s%d"%("sample",i))
+        for count,line in enumerate(lines):
+            count += 1
+            
+            tabs = line.strip().split("\t")
+            str="{taxonname:\""+tabs[0]+"\","
+            for i,value in enumerate(for_time):
+                jqGrid = '{'
+                if len(for_time)<9:
+                    if i<len(for_time)-1:
+                        str += value+":\""+tabs[i+1]+"\","
+                        jqGrid += "name:'"+value+"',index:'"+value+"',aligen:'center',width:90},"
+                    else:
+                        jqGrid += "name:'"+value+"',index:'"+value+"',aligen:'center',width:90}"
+                        str += value+":\""+tabs[i+1]+"\""
+                        str +='},'
+                else:
+                    
+                    if i<8:
+                        str += value+":\""+tabs[i+1]+"\","
+                        jqGrid += "name:'"+value+"',index:'"+value+"',aligen:'center',width:90},"
+                    else:
+                        jqGrid += "name:'"+value+"',index:'"+value+"',aligen:'center',width:90}"
+                        str += value+":\""+tabs[i+1]+"\""
+                        str +='}'
+                        break
+                if count ==1:
+                    weight_unifrac_jqGrid_list.append(jqGrid)
+            weight_unifrac_data_list.append(str)
+    return [weight_unifrac_data_list,weight_unifrac_jqGrid_list,sampleName]
+                  
 def read_params(args):
     parser = argparse.ArgumentParser(description='get_html ')
     parser.add_argument('-c','--config',dest='config',metavar='FILE',type=str,required=True,
@@ -159,7 +207,7 @@ def get_html():
         for line in lines:
             tabs = line.strip().split('\t')
             otuAssignmentsStatistical=OtuAssignmentsStatistical(tabs[0],tabs[1])
-            otuAssignmentsStatisticals[tabs[0]]=otuAssignmentsStatistical
+	    otuAssignmentsStatisticals[tabs[0]]=otuAssignmentsStatistical
 
 #save table
     alpha_diversitys={}
@@ -184,13 +232,13 @@ def get_html():
 #save_table
     beta_diversity= save_table(work_dir+"../"+config.get('origin','group_beta_div_txt').replace("#group",group_file))
 #save_table
-    diff_otu_marker= save_table(work_dir+"../"+config.get('origin','group_diff_otu_marker_txt').replace("#group",group_file))
+    diff_otu_marker= save_table2(work_dir+"../"+config.get('origin','group_diff_otu_marker_txt').replace("#group",group_file))
 #save_table
-    diff_genus_marker= save_table(work_dir+"../"+config.get('origin','group_diff_genus_marker_txt').replace("#group",group_file))
+    diff_genus_marker= save_table2(work_dir+"../"+config.get('origin','group_diff_genus_marker_txt').replace("#group",group_file))
 #save_table
-    diff_taxall_marker= save_table(work_dir+"../"+config.get('origin','group_diff_taxall_marker_txt').replace("#group",group_file))
+    diff_taxall_marker= save_table2(work_dir+"../"+config.get('origin','group_diff_taxall_marker_txt').replace("#group",group_file))
 #save_table
-    diff_phylum_marker= save_table(work_dir+"../"+config.get('origin','group_diff_phylum_marker_txt').replace("#group",group_file))
+    diff_phylum_marker= save_table2(work_dir+"../"+config.get('origin','group_diff_phylum_marker_txt').replace("#group",group_file))
 #save_table
     env = Environment(loader=FileSystemLoader(out_dir_report+'js/',encoding='utf-8'))
     template = env.get_template('table_template.js')
@@ -199,8 +247,8 @@ def get_html():
     table = template.render(otuStatisticals=otuStatisticals,otuStatisticalDownsizes=otuStatisticalDownsizes,
                             otuAssignmentsStatisticals =otuAssignmentsStatisticals,alpha_diversitys=alpha_diversitys,
                             alpha_diversity_diffs = alpha_diversity_diffs,beta_diversity_data=beta_diversity[0],beta_diversity_jqGrid=beta_diversity[1],
-                            beta_diversity_sampeName=beta_diversity[2],beta_un_diversity_data=beta_un_diversity[0],beta_un_diversity_jqGrid=beta_un_diversity[1],
-                            beta_un_diversity_sampeName=beta_un_diversity[2],coreMicrobiomes=coreMicrobiomes,
+                            beta_diversity_sampleName=beta_diversity[2],beta_un_diversity_data=beta_un_diversity[0],beta_un_diversity_jqGrid=beta_un_diversity[1],
+                            beta_un_diversity_sampleName=beta_un_diversity[2],coreMicrobiomes=coreMicrobiomes,
                             diff_otu_marker_data=diff_otu_marker[0],diff_otu_marker_jqGrid=diff_otu_marker[1],diff_otu_marker_sampleName=diff_otu_marker[2],
                             diff_genus_marker_data = diff_genus_marker[0],diff_genus_marker_jqGrid = diff_genus_marker[1],diff_genus_marker_sampleName = diff_genus_marker[2],
                             diff_taxall_marker_data = diff_taxall_marker[0], diff_taxall_marker_jqGrid = diff_taxall_marker[1],diff_taxall_marker_sampleName= diff_taxall_marker[2],

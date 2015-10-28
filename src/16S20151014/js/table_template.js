@@ -1,10 +1,7 @@
 // JavaScript Document
-var 
-dataStatisticals = [
-        
+var dataStatisticals = [
 	{% for key,otuStatistical in otuStatisticals %}
-	
-		{sampleName:""{{ otuStatistical.sampleName }}"",ampliconType:""{{ otuStatistical.amplicon_type }}"",cleanReads:""{{ otuStatistical.clean_read }}"",Q20:"{{ otuStatistical.q20 }}",Q30:"{{ otuStatistical.q30 }}",singleton:"{{ otuStatistical.singleton }}",singletonRatio:"{{ otuStatistical.singleton_ratio }}",mappeReads:"{{ otuStatistical.mapped_reads }}",mappedRatio:"{{ otuStatistical.mapped_ratio }}",OTUs:"{{ otuStatistical.otus }}"},
+		{sampleName:"{{ otuStatistical.sampleName }}",ampliconType:"{{ otuStatistical.amplicon_type }}",cleanReads:"{{ otuStatistical.clean_read }}",Q20:"{{ otuStatistical.q20 }}",Q30:"{{ otuStatistical.q30 }}",singleton:"{{ otuStatistical.singleton }}",singletonRatio:"{{ otuStatistical.singleton_ratio }}",mappedReads:"{{ otuStatistical.mapped_reads }}",mappedRatio:"{{ otuStatistical.mapped_ratio }}",OTUs:"{{ otuStatistical.otus }}"},
 	{% endfor %}
 	];
 jQuery().ready(function (){
@@ -23,9 +20,8 @@ jQuery().ready(function (){
 			{name:'Q30',index:'Q30', width:90,align:"center",sorttype:"float"},
 			{name:'singleton',index:'singleton', width:90,align:"center",sortype:"int"},	
 			{name:'singletonRatio',index:'singletonRatio', align:"center",width:90, sortype:"float"},	
-			{name:'mappeReads',index:'mappedReads', align:"center",width:90, sortype:"int"},
-			
-			{name:'mappeRatio',index:'mappedRatioss', align:"center",width:90, sortype:"float"},
+			{name:'mappedReads',index:'mappedReads', align:"center",width:90, sortype:"int"},
+			{name:'mappedRatio',index:'mappedRatioss', align:"center",width:90, sortype:"float"},
 			{name:'OTUs',index:'OTUs', width:90,align:"center", sortype:"int"}
 		],
 		pager: "#plist47",
@@ -60,7 +56,7 @@ jQuery().ready(function (){
 		],
 		pager: "#plist48",
 		viewrecords: true,
-		caption: "Manipulating Array Data"
+		caption: "抽平后样品OTU统计"
 	});
  })
 
@@ -88,7 +84,7 @@ var coreMicrobiomes=[
 		],
 		pager: "#plist49",
 		viewrecords: true,
-		caption: "Manipulating Array Data"
+		caption: "core microbiome OTU列表"
 	});
  })
 
@@ -98,7 +94,7 @@ var otuAssignmentsStatisticals=[
 	
 	 {% for  key,otuAssignmentsStatistical in otuAssignmentsStatisticals.items() %}
 		
-	 {otuName:"{{ otuAssignmentsStatistical.name|e }}",num:"{{ otuAssignmentsStatistical.num }}"},
+	 {otuName:"{{ key }}",num:"{{ otuAssignmentsStatistical.num }}"},
 	
 	 {% endfor %}	
 ];
@@ -117,7 +113,7 @@ var otuAssignmentsStatisticals=[
 		],
 		pager: "#plist50",
 		viewrecords: true,
-		caption: "Manipulating Array Data"
+		caption: "OTU注释统计"
 	});
  })
 
@@ -125,7 +121,7 @@ var alpha_diversitys=[
 	
  {% for key,alphaDiversity in alpha_diversitys.items() %}
 		
- {sampleName:"{{ alphaDiversity.name|e }}",chao1:"{{ alphaDiversity.chao1 }}",goodsCoverage:"{{ alphaDiversity.goods_coverage }}",observedSpecies:"{{ alphaDiversity.observed_species }}",wholeTree:"{{ alphaDiversity.whole_tree }}",shannon:"{{ alphaDiversity.shannon }}",simpon:"{{ alphaDiversity.simpon }}"},
+ {sampleName:"{{ alphaDiversity.alphaName }}",chao1:"{{ alphaDiversity.chao1 }}",goodsCoverage:"{{ alphaDiversity.goods_coverage }}",observedSpecies:"{{ alphaDiversity.observed_species }}",wholeTree:"{{ alphaDiversity.whole_tree }}",shannon:"{{ alphaDiversity.shannon }}",simpon:"{{ alphaDiversity.simpon }}"},
 	{% endfor %}	
 ];
  
@@ -148,7 +144,7 @@ var alpha_diversitys=[
 		],
 		pager: "#plist51",
 		viewrecords: true,
-		caption: "Manipulating Array Data"
+		caption: "样品Alpha多样性统计结果"
 	});
  })
  
@@ -156,7 +152,7 @@ var alpha_diversity_diffs=[
 
 {% for key,alphaDiversity in alpha_diversity_diffs.items() %}
 		
-{sampleName:"{{ alphaDiversity.name|e }}",chao1:"{{ alphaDiversity.chao1 }}",goodsCoverage:"{{ alphaDiversity.goods_coverage }}",observedSpecies:"{{ alphaDiversity.observed_species }}",wholeTree:"{{ alphaDiversity.whole_tree }}",shannon:"{{ alphaDiversity.shannon }}",simpon:"{{ alphaDiversity.simpon }}"},
+{sampleName:"{{ alphaDiversity.alphaName }}",chao1:"{{ alphaDiversity.chao1 }}",goodsCoverage:"{{ alphaDiversity.goods_coverage }}",observedSpecies:"{{ alphaDiversity.observed_species }}",wholeTree:"{{ alphaDiversity.whole_tree }}",shannon:"{{ alphaDiversity.shannon }}",simpon:"{{ alphaDiversity.simpon }}"},
 	{% endfor %}	
 ];
  
@@ -179,7 +175,7 @@ var alpha_diversity_diffs=[
 		],
 		pager: "#plist52",
 		viewrecords: true,
-		caption: "Manipulating Array Data"
+		caption: "Alpha diversity指数差异检验"
 	});
  })
  
@@ -195,7 +191,7 @@ var alpha_diversity_diffs=[
 		height: 150,
 		rowNum: 10,
 		rowList: [10,20,30],
-		colNames:[{{ beta_diversity_sampeName }}],
+		colNames:['{{ beta_diversity_sampleName }}'],
 		colModel:[
 			 {% for beta_diversity in beta_diversity_jqGrid %}
 			 {{ beta_diversity }}	
@@ -203,7 +199,7 @@ var alpha_diversity_diffs=[
 		],
 		pager: "#plist53",
 		viewrecords: true,
-		caption: "Manipulating Array Data"
+		caption: "样品Beta diversity统计表（weighted_unifrac）"
 	});
  })
 
@@ -219,7 +215,7 @@ jQuery().ready(function (){
 		height: 150,
 		rowNum: 10,
 		rowList: [10,20,30],
-		colNames:[{{ beta_un_diversity_sampeName }}],
+		colNames:['{{ beta_un_diversity_sampleName }}'],
 		colModel:[
 			 {% for beta_diversity in beta_un_diversity_jqGrid %}
 			 {{ beta_diversity }}	
@@ -227,75 +223,104 @@ jQuery().ready(function (){
 		],
 		pager: "#plist54",
 		viewrecords: true,
-		caption: "Manipulating Array Data"
+		caption: "样品Beta diversity统计表（unweighted_unifrac）"
 	});
  })
  
- jQuery().ready(function (){
+ 
+
+var diff_otu_markers=[
+ {% for value in diff_otu_marker_data %}
+ {{ value }}	
+	{% endfor %}	
+ ];  
+jQuery().ready(function (){
 	jQuery("#list55").jqGrid({
-		data: mydata,
+		data: diff_otu_markers,
 		datatype: "local",
 		height: 150,
 		rowNum: 10,
 		rowList: [10,20,30],
-		colNames:['Inv No','Date', 'Client', 'Amount','Tax','Total','Notes'],
+		colNames:['{{ diff_otu_marker_sampleName }}'],
 		colModel:[
-			{name:'id',index:'id', width:60, sorttype:"int"},
-			{name:'invdate',index:'invdate', width:90, sorttype:"date", formatter:"date"},
-			{name:'name',index:'name', width:100},
-			{name:'amount',index:'amount', width:80, align:"right",sorttype:"float", formatter:"number"},
-			{name:'tax',index:'tax', width:80, align:"right",sorttype:"float"},		
-			{name:'total',index:'total', width:80,align:"right",sorttype:"float"},		
-			{name:'note',index:'note', width:150, sortable:false}		
+			 {% for value in diff_otu_marker_jqGrid %}
+			 {{ value }}	
+				{% endfor %}		
 		],
 		pager: "#plist55",
 		viewrecords: true,
-		caption: "Manipulating Array Data"
+		caption: "差异显著OTU列表"
 	});
  })
 
-jQuery().ready(function (){
+var diff_genus_markers=[
+ {% for value in diff_genus_marker_data %}
+ {{ value }}	
+	{% endfor %}	
+ ]; 
+ jQuery().ready(function (){
 	jQuery("#list56").jqGrid({
-		data: mydata,
+		data: diff_genus_markers,
 		datatype: "local",
 		height: 150,
 		rowNum: 10,
 		rowList: [10,20,30],
-		colNames:['Inv No','Date', 'Client', 'Amount','Tax','Total','Notes'],
+		colNames:['{{ diff_genus_marker_sampleName }}'],
 		colModel:[
-			{name:'id',index:'id', width:60, sorttype:"int"},
-			{name:'invdate',index:'invdate', width:90, sorttype:"date", formatter:"date"},
-			{name:'name',index:'name', width:100},
-			{name:'amount',index:'amount', width:80, align:"right",sorttype:"float", formatter:"number"},
-			{name:'tax',index:'tax', width:80, align:"right",sorttype:"float"},		
-			{name:'total',index:'total', width:80,align:"right",sorttype:"float"},		
-			{name:'note',index:'note', width:150, sortable:false}		
+			 {% for value in diff_genus_marker_jqGrid %}
+			 {{ value }}	
+				{% endfor %}		
 		],
 		pager: "#plist56",
 		viewrecords: true,
-		caption: "Manipulating Array Data"
+		caption: "差异显著物种列表"
 	});
  })
  
+ var diff_taxall_markers=[
+ {% for value in diff_genus_marker_data %}
+ {{ value }}	
+	{% endfor %}	
+ ]; 
  jQuery().ready(function (){
 	jQuery("#list57").jqGrid({
-		data: mydata,
+		data: diff_taxall_markers,
 		datatype: "local",
 		height: 150,
 		rowNum: 10,
 		rowList: [10,20,30],
-		colNames:['Inv No','Date', 'Client', 'Amount','Tax','Total','Notes'],
+		colNames:['{{ diff_taxall_marker_sampleName }}'],
 		colModel:[
-			{name:'id',index:'id', width:60, sorttype:"int"},
-			{name:'invdate',index:'invdate', width:90, sorttype:"date", formatter:"date"},
-			{name:'name',index:'name', width:100},
-			{name:'amount',index:'amount', width:80, align:"right",sorttype:"float", formatter:"number"},
-			{name:'tax',index:'tax', width:80, align:"right",sorttype:"float"},		
-			{name:'total',index:'total', width:80,align:"right",sorttype:"float"},		
-			{name:'note',index:'note', width:150, sortable:false}		
+			 {% for value in diff_taxall_marker_jqGrid %}
+			 {{ value }}	
+				{% endfor %}		
 		],
 		pager: "#plist57",
 		viewrecords: true,
-		caption: "Manipulating Array Data"
+		caption: "所有水平差异显著物种列表"
 	});
  })
+ var diff_phylum_markers=[
+ {% for value in diff_phylum_marker_data %}
+ {{ value }}	
+	{% endfor %}	
+ ]; 
+ jQuery().ready(function (){
+	jQuery("#list58").jqGrid({
+		data: beta_diversitysj,
+		datatype: "local",
+		height: 150,
+		rowNum: 10,
+		rowList: [10,20,30],
+		colNames:['{{ diff_phylum_marker_sampleName }}'],
+		colModel:[
+			 {% for value in diff_phylum_marker_jqGrid %}
+			 {{ value }}	
+				{% endfor %}			
+		],
+		pager: "#plist58",
+		viewrecords: true,
+		caption: "门差异显著物种列表"
+	});
+ })
+
