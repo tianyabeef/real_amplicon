@@ -1,7 +1,12 @@
 library(grid)
 X=read.table('@#{tax_ass_uniform}',sep="\t",row.name=1,header=T, check.names=F)
-height = ceiling(ncol(X) / 6 + 3) * 3
+sample_num = ncol(X)
+if(sample_num < 6){
+
+}
+height = ceiling(sample_num / 6 + 3) * 3
 pdf('@#{pdf_file}',18,height)
-par(mar=c(2.1,0,1.1,0))
-stars(t(X), labels=colnames(X),len = 1,ncol=6,key.loc = c(8, -1),main = "Genus", draw.segments = TRUE , col.segments = rainbow(10),frame.plot=TRUE)
+#par(mar=c(2.1,0,1.1,0))
+mar=c(5,1,1,1)
+stars(t(X), labels=colnames(X),len = 1,ncol=6,key.loc = c(8, -1),main = "Genus", draw.segments = TRUE , col.segments = rainbow(10),frame.plot=F,mar=mar)
 dev.off()

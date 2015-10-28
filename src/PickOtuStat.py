@@ -1,7 +1,6 @@
 from __future__ import division
 import re
 import numpy as np
-from Bio import SeqIO
 
 class Sample(object):
     def __init__(self,name):
@@ -29,7 +28,7 @@ class Subject(object):
             if sample_name not in self.sample_set:
                 sample = Sample(sample_name)
                 self.sample_set[sample_name] = sample
-            sample = self.sample_set[sample_name] 
+            sample = self.sample_set[sample_name]
             sample.stats['tags'] = int(tags)
             sample.stats['bases'] = int(bases)
             sample.stats['q20'] = int(q20)
@@ -126,5 +125,3 @@ class Subject(object):
                                                                                          chimeras,chimeras_ratio,
                                                                                          Q20_ratio,Q30_ratio,len(sample.otus)))
         fp.close()
-     
-
