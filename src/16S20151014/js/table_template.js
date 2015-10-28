@@ -4,7 +4,7 @@ dataStatisticals = [
         
 	{% for key,otuStatistical in otuStatisticals %}
 	
-		{sampleName:{{ otuStatistical.sampleName }},ampliconType:{{ otuStatistical.amplicon_type }},cleanReads:{{ otuStatistical.clean_read }},Q20:{{ otuStatistical.q20 }},Q30:{{ otuStatistical.q30 }},singleton:{{ otuStatistical.singleton }},singletonRatio:{{ otuStatistical.singleton_ratio }},mappeReads:{{ otuStatistical.mapped_reads }},mappedRatio:{{ otuStatistical.mappedRatio }},OTUs:{{ otuStatistical.otus }}},
+		{sampleName:""{{ otuStatistical.sampleName }}"",ampliconType:""{{ otuStatistical.amplicon_type }}"",cleanReads:""{{ otuStatistical.clean_read }}"",Q20:"{{ otuStatistical.q20 }}",Q30:"{{ otuStatistical.q30 }}",singleton:"{{ otuStatistical.singleton }}",singletonRatio:"{{ otuStatistical.singleton_ratio }}",mappeReads:"{{ otuStatistical.mapped_reads }}",mappedRatio:"{{ otuStatistical.mapped_ratio }}",OTUs:"{{ otuStatistical.otus }}"},
 	{% endfor %}
 	];
 jQuery().ready(function (){
@@ -41,7 +41,7 @@ var otuStatisticalDownsizes=[
 	
  {% for key,otuStatisticalDownsize in otuStatisticalDownsizes %}
 		
- {sampleName:{{ otuStatisticalDownsize.sample_name }},downsize:{{ otuStatisticalDownsize.downsize }},otus_before:{{ otuStatisticalDownsize.otus_before }},otus_after:{{ otuStatisticalDownsize.otus_after }}},
+ {sampleName:"{{ otuStatisticalDownsize.sample_name }}",downsize:"{{ otuStatisticalDownsize.downsize }}",otus_before:"{{ otuStatisticalDownsize.otus_before }}",otus_after:"{{ otuStatisticalDownsize.otus_after }}"},
 	{% endfor %}
 ];
 jQuery().ready(function (){
@@ -68,9 +68,9 @@ jQuery().ready(function (){
 
 var coreMicrobiomes=[
 	
- {% for key,coreMicrobiome in coreMicrobiomes %}
+ {% for key,coreMicrobiome in coreMicrobiomes.items() %}
 		
- {otuId:{{ coreMicrobiome.otu_id }},taxonomyLevel:{{ coreMicrobiome.taxonomy_level }},taxonomyName:{{ coreMicrobiome.taxonomy_name }}},
+ {otuId:"{{ coreMicrobiome.otu_id }}",taxonomyLevel:"{{ coreMicrobiome.taxonomy_level }}",taxonomyName:"{{ coreMicrobiome.taxonomy_name }}"},
 	{% endfor %}	
 ];
  jQuery().ready(function (){
@@ -96,9 +96,9 @@ var coreMicrobiomes=[
 
 var otuAssignmentsStatisticals=[
 	
-	 {% for  key,otuAssignmentsStatistical in otuAssignmentsStatisticals %}
+	 {% for  key,otuAssignmentsStatistical in otuAssignmentsStatisticals.items() %}
 		
-	 {otuName:{{ otuAssignmentsStatistical.name|e }},num:{{ otuAssignmentsStatistical.num }}},
+	 {otuName:"{{ otuAssignmentsStatistical.name|e }}",num:"{{ otuAssignmentsStatistical.num }}"},
 	
 	 {% endfor %}	
 ];
@@ -123,9 +123,9 @@ var otuAssignmentsStatisticals=[
 
 var alpha_diversitys=[
 	
- {% for key,alphaDiversity in alpha_diversitys %}
+ {% for key,alphaDiversity in alpha_diversitys.items() %}
 		
- {sampleName:{{ alphaDiversity.name|e }},chao1:{{ alphaDiversity.chao1 }},goodsCoverage:{{ alphaDiversity.goods_coverage }},observedSpecies:{{ alphaDiversity.observed_species }},wholeTree:{{ alphaDiversity.whole_tree }},shannon:{{ alphaDiversity.shannon }},simpon:{{ alphaDiversity.simpon }}},
+ {sampleName:"{{ alphaDiversity.name|e }}",chao1:"{{ alphaDiversity.chao1 }}",goodsCoverage:"{{ alphaDiversity.goods_coverage }}",observedSpecies:"{{ alphaDiversity.observed_species }}",wholeTree:"{{ alphaDiversity.whole_tree }}",shannon:"{{ alphaDiversity.shannon }}",simpon:"{{ alphaDiversity.simpon }}"},
 	{% endfor %}	
 ];
  
@@ -154,9 +154,9 @@ var alpha_diversitys=[
  
 var alpha_diversity_diffs=[
 
-{% for key,alphaDiversity in alpha_diversity_diffs %}
+{% for key,alphaDiversity in alpha_diversity_diffs.items() %}
 		
-{sampleName:{{ alphaDiversity.name|e }},chao1:{{ alphaDiversity.chao1 }},goodsCoverage:{{ alphaDiversity.goods_coverage }},observedSpecies:{{ alphaDiversity.observed_species }},wholeTree:{{ alphaDiversity.whole_tree }},shannon:{{ alphaDiversity.shannon }},simpon:{{ alphaDiversity.simpon }}},
+{sampleName:"{{ alphaDiversity.name|e }}",chao1:"{{ alphaDiversity.chao1 }}",goodsCoverage:"{{ alphaDiversity.goods_coverage }}",observedSpecies:"{{ alphaDiversity.observed_species }}",wholeTree:"{{ alphaDiversity.whole_tree }}",shannon:"{{ alphaDiversity.shannon }}",simpon:"{{ alphaDiversity.simpon }}"},
 	{% endfor %}	
 ];
  

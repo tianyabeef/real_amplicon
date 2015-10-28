@@ -50,6 +50,7 @@ def get_html(cfg_in,vars=None):
         else:
             print '06_get_html.cfg no have '+key
     command.append('python %s -c %s '%(scripts['get_html'],config.get('outfiles','config')))
+    command.append('wkhtmltopdf %s %s '%(out_dir_report+'/pdf.html',out_dir_report+'/report.pdf'))
     work.commands.append(''.join(command))
 
     return outfiles
