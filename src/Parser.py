@@ -156,5 +156,8 @@ def parse_group_file(file):
     with open(file) as g:
         for line in g:
             tabs = line.strip().split('\t')
-            group[tabs[0]] = tabs[1]
+            if len(tabs) >= 2:
+                group[tabs[0]] = tabs[1]
+            else:
+                group[tabs[0]] = tabs[0]
     return group

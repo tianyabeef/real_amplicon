@@ -18,7 +18,7 @@ gcols_order=gcols[order(g)]
 ymax=max(as.numeric(as.character(table[table != "n/a"])))
 
 # plot blank canvas
-plot(0,0,xlim=c(0,max(readnumber)+1800),ylim=c(0,ymax),type="n",xlab="reads",ylab="chao1",cex.lab=1.4)
+plot(0,0,xlim=c(0,max(readnumber)+1800),ylim=c(0,ymax),type="n",xlab="reads",ylab="@#{alpha_name}",cex.lab=1.4)
 legend("topright",legend=g_order,col=gcols_order,seg.len=1.5,lwd=1.6,cex=0.8)
 
 # fitting function

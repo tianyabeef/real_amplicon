@@ -35,7 +35,8 @@ if __name__ == '__main__':
         png_file = '%s/%s.png'%(params['outdir'],alpha)
         vars = {"otu_table":otu_table,
                 "group_file":params['group_file'],
-                "pdf_file":pdf_file}
+                "pdf_file":pdf_file,
+                'alpha_name':alpha}
         r_job.format(vars)
         r_job.write('%s/%s.R'%(params['outdir'],alpha))
         r_job.run()
