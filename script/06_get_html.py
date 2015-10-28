@@ -183,7 +183,14 @@ def get_html():
     beta_un_diversity= save_table(work_dir+"../"+config.get('origin','group_beta_div_un_txt').replace("#group",group_file))
 #save_table
     beta_diversity= save_table(work_dir+"../"+config.get('origin','group_beta_div_txt').replace("#group",group_file))
-
+#save_table
+    diff_otu_marker= save_table(work_dir+"../"+config.get('origin','group_diff_otu_marker_txt').replace("#group",group_file))
+#save_table
+    diff_genus_marker= save_table(work_dir+"../"+config.get('origin','group_diff_genus_marker_txt').replace("#group",group_file))
+#save_table
+    diff_taxall_marker= save_table(work_dir+"../"+config.get('origin','group_diff_taxall_marker_txt').replace("#group",group_file))
+#save_table
+    diff_phylum_marker= save_table(work_dir+"../"+config.get('origin','group_diff_phylum_marker_txt').replace("#group",group_file))
 #save_table
     env = Environment(loader=FileSystemLoader(out_dir_report+'js/',encoding='utf-8'))
     template = env.get_template('table_template.js')
@@ -192,7 +199,11 @@ def get_html():
                             otuAssignmentsStatisticals =otuAssignmentsStatisticals,alpha_diversitys=alpha_diversitys,
                             alpha_diversity_diffs = alpha_diversity_diffs,beta_diversity_data=beta_diversity[0],beta_diversity_jqGrid=beta_diversity[1],
                             beta_diversity_sampeName=beta_diversity[2],beta_un_diversity_data=beta_un_diversity[0],beta_un_diversity_jqGrid=beta_un_diversity[1],
-                            beta_un_diversity_sampeName=beta_un_diversity[2],coreMicrobiomes=coreMicrobiomes,)
+                            beta_un_diversity_sampeName=beta_un_diversity[2],coreMicrobiomes=coreMicrobiomes,
+                            diff_otu_marker_data=diff_otu_marker[0],diff_otu_marker_jqGrid=diff_otu_marker[1],diff_otu_marker_sampleName=diff_otu_marker[2],
+                            diff_genus_marker_data = diff_genus_marker[0],diff_genus_marker_jqGrid = diff_genus_marker[1],diff_genus_marker_sampleName = diff_genus_marker[3],
+                            diff_taxall_marker_data = diff_taxall_marker[0], diff_taxall_marker_jqGrid = diff_taxall_marker[1],diff_taxall_marker_sampleName= diff_taxall_marker[3],
+                            diff_phylum_marker_data = diff_phylum_marker[0],diff_phylum_marker_jqGrid = diff_phylum_marker[1],diff_phylum_marker_sampleName = diff_phylum_marker[3])
     with open(work_dir+'report/js/table.js','w') as fp:
         fp.write(table)
     #finally_get_html
@@ -202,9 +213,10 @@ def get_html():
     var_html['core_microbiome']=len(coreMicrobiomes)
     var_html['star_picture_top']=10
     var_html['Phylogenetic_genus_top']=10
-    var_html['diff_otus']=10
-    var_html['diff_genus']=10
-    var_html['diff_species']=10
+    var_html['diff_otus']=len(diff_otu_marker[0])
+    var_html['diff_genus']=len(diff_genus_marker[0])
+    var_html['diff_species']=len(diff_taxall_marker[0])
+    var_html['diff_phylum']=len(diff_phylum_marker[0])
     var_html['group_num']=len(group_files)
     var_html['p_value']=0.05
     
@@ -232,11 +244,14 @@ def get_html():
     var_html['diff_analysis']=False
     
     env = Environment(loader=FileSystemLoader(out_dir_report+'/templates',encoding='utf-8'))
-    template = env.get_template('1.1reads_statistical.html')
+    template = env.get_template('report.html')
     finally_html = template.render(var_html)
     with open(work_dir+'report/index_loaded.html','w') as fp:
         fp.write(finally_html)
-
+    templetaPDF = env.get_template('pdf.html')
+    pdf = templetaPDF.render(var_html)
+    with open(work_dir+'report/pdf.html','w') ad fp:
+        fp.write(pdf)
 if __name__ == '__main__':
     get_html()
 

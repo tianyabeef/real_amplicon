@@ -1,4 +1,4 @@
-{% extends "base.html" %} 
+{% extends "base_pdf.html" %} 
 
 {% if reads_statistical %} 
 {% block reads_statistical_head %} 
@@ -478,6 +478,31 @@
                 <div class="imglistwrap"><ul class="imglist">
                     <li><a id="group" href='images/40.png' ><img src='images/40.png'/></a></li>
                     <li><a id="group" href='images/41.png' ><img src='images/41.png'/></a></li>                
+                </ul></div>
+                <div class="button moveforward" title="向下滚动"></div>
+                </div>
+                </div>
+
+				            <h4>门水平的差异分析</h4>
+            	<p class="paragraph">通过Kruskal-Wallis test分析可以找出在不同组间有明显差异(p<{{p_value}})的属如下（共{{diff_phylum}}个属或科）：</p>
+                <p class="name_table">表6-2-4差异显著物种列表</p>
+                
+                <div class="table">
+                <center>
+                    <table id="list58"></table>
+                    <div id="plist58"></div>
+                </center>
+                </div>  
+                            
+                <p class="tremark">注：第一列是物种名称；第二列至第{{ group_num + 2 }}列分别为{{group_num}}组样品的均值；最后一列是秩和检验的p值。</p> 
+                <p class="paragraph">为了直观，这些属比较的热图如下：</p>
+                <div class="albumSlider">
+                <div class="fullview"><img src="images/42.png"/></div>
+                <div class="slider">
+                <div class="button movebackward" title="向上滚动"></div>
+                <div class="imglistwrap"><ul class="imglist">
+                    <li><a id="group" href='images/42.png' ><img src='images/42.png'/></a></li>
+                    <li><a id="group" href='images/43.png' ><img src='images/43.png'/></a></li>                
                 </ul></div>
                 <div class="button moveforward" title="向下滚动"></div>
                 </div>
