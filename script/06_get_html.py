@@ -268,26 +268,38 @@ def get_html():
     var_html['diff_phylum']=len(diff_phylum_marker[0])
     var_html['group_num']=len(group_files)
     var_html['p_value']=0.05
-    
+
+    sample_num_in_groups,\
+    min_sample_num_in_groups,\
+    sample_num_total,\
+    group_num = parse_group(group_file_origin)
+
     var_html['reads_statistical']=True
     var_html['otu_statistical']=True
     var_html['downsize_html']=True
+    if min_sample_num_in_groups >= 5: 
+        var_html['alpha_diversity']=True
+        var_html['uniFra_analysis_pcoa']=True
     
-    var_html['core_microbiome_html']=True
-    var_html['otu_venn']=True
-    var_html['otu_pca']=True
+    if sample_num_total >= 4:
+        var_html['uniFra_analysis_heatmap']=True
     
+    if sample_num_total >= 5:
+        var_html['core_microbiome_html']=True
+        var_html['otu_pca']=True
+        var_html['otu_heatmap']=True 
+    if len 5 >= len(group_files) >= 2:
+        var_html['otu_venn']=True
+
     var_html['specaccum']=True
     
     var_html['otu_tax_assignments']=True
     var_html['otu_annotation_statistical']=True
     var_html['tax_summary']=True
-    var_html['otu_heatmap']=True
     var_html['otu_krona']=True
     var_html['phylogenetic_tree']=True
-    var_html['alpha_diversity']=True
-    var_html['alpha_diff']=True
-    var_html['uniFra_analysis']=True
+    if min_sample_num_in_groups >= 3:
+        var_html['alpha_diff']=True
     var_html['similarity_analysis']=True
     var_html['lefse']=True
     var_html['diff_analysis']=False
