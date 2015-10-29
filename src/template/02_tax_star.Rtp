@@ -1,6 +1,6 @@
 library(grid)
 X=read.table('@#{tax_ass_uniform}',sep="\t",row.name=1,header=T, check.names=F)
-#sample_num = ncol(X)
+sample_num = ncol(X)
 if(sample_num < 6){
 
 }
