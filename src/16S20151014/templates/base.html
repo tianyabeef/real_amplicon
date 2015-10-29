@@ -67,31 +67,36 @@
 					<a href="#物种注释结果统计" class="cs-navi-tab">物种注释结果统计</a></p>
 					<a href="#物种丰度分析" class="cs-navi-tab">物种丰度分析</a></p>
 					<a href="#物种热图分析" class="cs-navi-tab">物种热图分析</a></p>
-                    <a href="#物种注释结果KRONA展示" class="cs-navi-tab">物种注释结果KRONA展示</a></p>
-					<a href="#系统进化关系展示" class="cs-navi-tab">系统进化关系展示</a></p>
-					<a href="#Rank Abundance曲线" src="demo/validatebox.html" class="cs-navi-tab">Rank Abundance曲线</a></p>
+<!--                     <a href="#物种注释结果KRONA展示" class="cs-navi-tab">物种注释结果KRONA展示</a></p> -->
+<!-- 					<a href="#系统进化关系展示" class="cs-navi-tab">系统进化关系展示</a></p> -->
+					<a href="#Rank Abundance曲线"  class="cs-navi-tab">Rank Abundance曲线</a></p>
 				</div>
 				<div title="alpha多样性分析">
-					<a href="#单个样品多样性分析" src="demo/form.html" class="cs-navi-tab">单个样品多样性分析</a></p>
-					<a href="#单个样品差异分析" src="demo/form.html" class="cs-navi-tab">单个样品差异分析</a></p>
+					<a href="#单个样品多样性分析"  class="cs-navi-tab">单个样品多样性分析</a></p>
+					<a href="#单个样品差异分析"  class="cs-navi-tab">单个样品差异分析</a></p>
 				</div>
 				<div title="beta多样性分析">
-					<a href="#UniFrac分析" src="demo/window.html" class="cs-navi-tab">UniFrac分析</a></p>
-					<a href="#Analysis of Similarity (ANOSIM)" src="demo/dialog.html" class="cs-navi-tab">Analysis of Similarity (ANOSIM)</a></p>
+					<a href="#UniFrac热图分析" class="cs-navi-tab">UniFrac热图分析</a></p>
+					<a href="#PCoA分析"  class="cs-navi-tab">PCoA分析</a></p>
+					<a href="#Analysis of Similarity (ANOSIM)"  class="cs-navi-tab">Analysis of Similarity (ANOSIM)</a></p>
 				</div>
 				<div title="显著性差异分析">
-					<a href="#LDA EffectSize（LEfSe）分析" src="demo/datagrid.html" class="cs-navi-tab">LDA EffectSize（LEfSe）分析</a></p>
-					<a href="#组间差异分析" src="demo/propertygrid.html" class="cs-navi-tab">组间差异分析</a></p>
+					<a href="#LDA EffectSize（LEfSe）分析" class="cs-navi-tab">LDA EffectSize（LEfSe）分析</a></p>
+					<a href="#组间差异分析" class="cs-navi-tab">组间差异分析</a></p>
 					<!--<a href="#物种CCA/RDA分析" src="demo/tree.html" class="cs-navi-tab">物种CCA/RDA分析</a></p>-->
 				</div>
-                <div title="实验方法">
-					<a href="#测序方法" src="demo/datagrid.html" class="cs-navi-tab">测序方法</a></p>
-					<a href="#OTU分析" src="demo/propertygrid.html" class="cs-navi-tab">OTU分析</a></p>
-					<a href="#物种分类和丰度分析" src="demo/tree.html" class="cs-navi-tab">物种分类和丰度分析</a></p>
-                    <a href="#alpha多样性分析" src="demo/tree.html" class="cs-navi-tab">alpha多样性分析</a></p>
-                    <a href="#beta多样性分析" src="demo/tree.html" class="cs-navi-tab">beta多样性分析</a></p>
-                    <a href="#显著性差异分析" src="demo/tree.html" class="cs-navi-tab">显著性差异分析</a></p>
-				</div>
+<!--                 <div title="实验方法">
+                					<a href="#测序方法"  class="cs-navi-tab">测序方法</a></p>
+                					<a href="#OTU分析"  class="cs-navi-tab">OTU分析</a></p>
+                					<a href="#物种分类和丰度分析"  class="cs-navi-tab">物种分类和丰度分析</a></p>
+                    <a href="#alpha多样性分析"  class="cs-navi-tab">alpha多样性分析</a></p>
+                    <a href="#beta多样性分析" class="cs-navi-tab">beta多样性分析</a></p>
+                    <a href="#显著性差异分析" class="cs-navi-tab">显著性差异分析</a></p>
+                				</div>
+                <div title="结果文件说明">
+                               		<a href="#文件格式" class="cs-navi-tab">文件格式</a></p>
+                    <a href="#结果文件" class="cs-navi-tab">结果文件</a></p>
+                </div> -->
 		</div>
 	</div>
     <!------------------------------------------------------主要面板------------------------------------------------------------------------->
@@ -100,14 +105,8 @@
 		<h1 id="总体概述">总体工作流程概述</h1	>
         <p>&nbsp;</p>
         	<p class="center">
-				{%- if amplification==16S -%}
-            	<img src="images/16S_E.png"/>
-				{% endif %}
-				{%- if amplification==ITS -%}
-            	<img src="images/ITS_E.png"/>
-				{% endif %}
+            	<img src="images/1.png"/>
             </p>
-			
             <p class="name_fig">
             图1 测序原理图 
             </p>
@@ -187,7 +186,7 @@
 		{% endblock %}                
 
             
-		<h2>6 显著性差异分析	</h2>
+		<h2>6 显著性差异分析	（PCA:每组样品数>=3;heatmp:每组样品数>=3;Botplot:每组样品数>=5）</h2>
 		{% block lefse_head %}
 		{% endblock %}
 		{% block diff_analysis_head %}
