@@ -89,6 +89,8 @@
             
             <p class="tremark">注：第一列OTU ID是OTU名称；第二列taxonomy level是OTU所代表的物种所在的分类水平；第三列taxonomy name是OTU所代表的物种名称。</p>
 			{% endblock %} 
+			{% else %}
+			<p>样品数不足无法分析</p>
 			{% endif %}
 
 				
@@ -102,6 +104,8 @@
             <p class="name_fig">图2-5 OTU venn图（2-5组）</p>
             <p class="premark">不同颜色图形代表不同样品或者不同组别，不同颜色图形之间交叠部分数字为两个样品或两个组别之间共有的OTU个数。同理，多个颜色图形之间交叠部分数字为多个样品或组别之间共有OTU个数。Venn图容许2-5个样品或组别。</p>
 		{% endblock %} 
+		{% else %}
+			<p>样品数不足无法分析</p>
 		{% endif %}
 
 		
@@ -115,6 +119,8 @@
             <p class="name_fig">图2-5-1 基于OTU丰度的PCA分析。</p>
             <p class="premark">横坐标表示第一主成分，括号中的百分比则表示第一主成分对样品差异的贡献率；纵坐标表示第二主成分，括号中的百分比表示第二主成分对样品差异的贡献率。图中点分别表示各个样品。不同颜色代表样品属于不同的分组。例如图中G1（红色样品）和G3（绿色样品）在PC1轴的方向上分离开来，则表示PC1是导致G1和G2分离开来的主要元素。</p>
 		{% endblock %} 
+		{% else %}
+			<p>样品数不足无法分析</p>
 		{% endif %}
 
 
@@ -128,6 +134,8 @@
             <p class="name_fig">图2-6-1 物种累积曲线</p>
             <p class="premark">注：横坐标是样品的数量，纵坐标是OTUs的数量</p>
 		{% endblock %} 
+		{% else %}
+			<p>样品数不足无法分析</p>
 		{% endif %}
 
 
@@ -204,6 +212,8 @@
             <p class="premark">Heatmap是以颜色梯度来代表数据矩阵中数值的大小并能根据物种或样品丰度相似性进行聚类。如有样品分组信息，图中前两行为样品分组信息（如只有一种分组情况，则只有一行），颜色与图列对应。</p>
             <p class="paragraph">物种热图见文件夹“OTU_heatmap/”。</p>
 		{% endblock %} 
+		{% else %}
+			<p>样品数不足无法分析</p>
 		{% endif %}
 
 
@@ -277,7 +287,9 @@
             <div class="button moveforward" title="向下滚动"></div>
             </div>
             </div>
-		{% endblock %} 
+		{% endblock %}
+		{% else %}
+			<p>样品数不足无法分析</p>
 		{% endif %}
 
 
@@ -303,6 +315,8 @@
             
             <p class="tremark">注：第一列是Alpha diversity指数；第二列至第十列分别为十组样品的均值；最后一列为秩和检验的P-value值；</p>
 		{% endblock %} 
+		{% else %}
+			<p>样品数不足无法分析</p>
 		{% endif %}
 
 
@@ -345,6 +359,8 @@
             	<img class="size1" src="images/30.png"/>
             </p>            
             <p class="name_fig">图5-1-3 Beta多样性heatmap（上图为Weighted，下图为Unweighted）</p>
+		{% else %}
+			<p>样品数不足无法分析</p>
 		{% endif %}
 		{% if uniFra_analysis_pcoa %}
 		<h3 id="PCoA分析">5.2 PCoA分析（每组样品数>=5）</h3>
@@ -354,6 +370,8 @@
             </p>        
             <p class="name_fig">图5-2-1 PCoA分析图（A为Weight_UniFrac结果，B为Unweight_UniFrac结果）</p>
             <p class="premark">PcoA是一种研究数据相似性或者差异性的可视化方法，它没有改变样品点之间的项目位置关系，只改变了坐标系统。横坐标表示第一主坐标，括号中的百分比则表示第一主坐标对样品差异的贡献率；纵坐标表示第二主坐标，括号中的百分比表示第二主坐标对样品差异的贡献率。图中点分别表示各个样品。不同颜色代表样品属于不同的分组。横向的box图是不同分组在第一主坐标上的值的分布。</p>
+		{% else %}
+			<p>样品数不足无法分析</p>
 		{% endif %}
 		{% endblock %} 
 		
@@ -512,4 +530,6 @@
                 </div>
                 </div>
 		{% endblock %} 
+		{% else %}
+			<p>样品数不足无法分析</p>
 		{% endif %}
