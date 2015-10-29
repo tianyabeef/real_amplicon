@@ -220,7 +220,7 @@ def get_html():
 
 #save table
     alpha_diversity_diffs={}
-    with open(work_dir+"../"+config.get('origin','group_alpha_makers_txt').replace("#group",group_file),'r') as lines:
+    with open(work_dir+"../"+config.get('origin','group_alpha_markers_txt').replace("#group",group_file),'r') as lines:
         lines.next()
         for line in lines:
             tabs = line.strip().split('\t')
