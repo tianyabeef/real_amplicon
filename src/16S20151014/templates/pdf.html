@@ -1,6 +1,5 @@
 {% extends "base_pdf.html" %} 
-
-{% if reads_statistical %} 
+{% if reads_statistical %}
 {% block reads_statistical_head %} 
     	<h3 id="优化序列统计">1.1优化序列统计</h3>
         	<p class="paragraph">
@@ -69,7 +68,7 @@
 		
 {% if core_microbiome_html %} 
 {% block core_microbiome_head %}
-		<h3 id="Core microbiome分析">2.3 Core microbiome分析</h3>
+		<h3 id="Core microbiome分析">2.3 Core microbiome分析（总样品数>=5）</h3>
         	<p class="center">共有OTU数与样品的关系：</p>
             <p class="center">
             	<img class="size1" src="images/10.png"/>
@@ -89,12 +88,14 @@
             
             <p class="tremark">注：第一列OTU ID是OTU名称；第二列taxonomy level是OTU所代表的物种所在的分类水平；第三列taxonomy name是OTU所代表的物种名称。</p>
 			{% endblock %} 
+			{% else %}
+			<p>样品数不足无法分析</p>
 			{% endif %}
 
 				
 		{% if otu_venn %} 
 		{% block otu_venn_head %}
-			<h3 id="OTU Venn图分析">2.4 OTU Venn图分析</h3>
+			<h3 id="OTU Venn图分析">2.4 OTU Venn图分析(分组数量2~5组)</h3>
         	<p class="paragraph">在0.97的相似度下，得到了每个样品的OTU个数，利用Venn图可以展示多样品共有和各自特有OTU数目，直观展示样品间OTU的重叠情况。</p>
             <p class="center">
             	<img class="size1" src="images/11.png"/>
@@ -102,12 +103,14 @@
             <p class="name_fig">图2-5 OTU venn图（2-5组）</p>
             <p class="premark">不同颜色图形代表不同样品或者不同组别，不同颜色图形之间交叠部分数字为两个样品或两个组别之间共有的OTU个数。同理，多个颜色图形之间交叠部分数字为多个样品或组别之间共有OTU个数。Venn图容许2-5个样品或组别。</p>
 		{% endblock %} 
+		{% else %}
+			<p>样品数不足无法分析</p>
 		{% endif %}
 
 		
 		{% if otu_pca %} 
 		{% block otu_pca_head %}
-		<h3 id="OTU PCA分析">2.5 OTU PCA分析</h3>
+		<h3 id="OTU PCA分析">2.5 OTU PCA分析（总样品数>=5）</h3>
         	<p class="paragraph">PCA分析(Principal Component Analysis)，即主成分分析，是一种分析和简化数据集的技术。不同处理或不同环境间的样品可能表现出分散和聚集的分布情况，从而可以判断相同条件的样品组成是否具有相似性。</p>
             <p class="center">
             	<img class="size1" src="images/12.png"/>
@@ -115,12 +118,14 @@
             <p class="name_fig">图2-5-1 基于OTU丰度的PCA分析。</p>
             <p class="premark">横坐标表示第一主成分，括号中的百分比则表示第一主成分对样品差异的贡献率；纵坐标表示第二主成分，括号中的百分比表示第二主成分对样品差异的贡献率。图中点分别表示各个样品。不同颜色代表样品属于不同的分组。例如图中G1（红色样品）和G3（绿色样品）在PC1轴的方向上分离开来，则表示PC1是导致G1和G2分离开来的主要元素。</p>
 		{% endblock %} 
+		{% else %}
+			<p>样品数不足无法分析</p>
 		{% endif %}
 
 
 		{% if specaccum %} 
 		{% block specaccum_head %}
-		<h3 id="Specaccum物种累积曲线">2.6 Specaccum物种累积曲线（大于10个样品）</h3>
+		<h3 id="Specaccum物种累积曲线">2.6 Specaccum物种累积曲线（总样品数>=10）</h3>
         	<p class="paragraph">物种累积曲线(?species?accumulation?curves)?用于描述随着抽样量的加大物种增加的状况，是理解调查样地物种组成和预测物种丰富度的有效工具，在生物多样性和群落调查中，被广泛用于抽样量充分性的判断以及物种丰富度(?species?richness)?的估计。因此，通过物种累积曲线不仅可以判断抽样量是否充分，在抽样量充分的前提下，运用物种累积曲线还可以对物种丰富度进行预测。</p>
             <p class="center">
             	<img class="size1" src="images/14.png"/>
@@ -128,6 +133,8 @@
             <p class="name_fig">图2-6-1 物种累积曲线</p>
             <p class="premark">注：横坐标是样品的数量，纵坐标是OTUs的数量</p>
 		{% endblock %} 
+		{% else %}
+			<p>样品数不足无法分析</p>
 		{% endif %}
 
 
@@ -195,7 +202,7 @@
 		
 		{% if otu_heatmap %} 
 		{% block otu_heatmap_head %}
-		<h3 id="物种热图分析">3.4 物种热图分析</h3>
+		<h3 id="物种热图分析">3.4 物种热图分析（总样品数>=5）</h3>
         <p class="paragraph">Heatmap是以颜色梯度来代表数据矩阵中数值的大小并能根据物种或样品丰度相似性进行聚类的一种图形展示方式。聚类结果加上样品的处理或取样环境分组信息，可以直观观察到相同处理或相似环境样品的聚类情况，并直接反映了样品的群落组成的相似性和差异性。本分析内容在属分类等级进行heatmap聚类分析。纵向聚类表示所有物种在不同样品间表达的形似情况，距离越近，枝长越短，说明样品的物种组成及丰度越相似。横向聚类表示该物种在各样品丰度相似情况，与纵向聚类一样，距离越近，枝长越短，说明两物种在各样品间的组成越相似。</p>
             <p class="center">
             	<img class="size1" src="images/19.png"/>
@@ -204,6 +211,8 @@
             <p class="premark">Heatmap是以颜色梯度来代表数据矩阵中数值的大小并能根据物种或样品丰度相似性进行聚类。如有样品分组信息，图中前两行为样品分组信息（如只有一种分组情况，则只有一行），颜色与图列对应。</p>
             <p class="paragraph">物种热图见文件夹“OTU_heatmap/”。</p>
 		{% endblock %} 
+		{% else %}
+			<p>样品数不足无法分析</p>
 		{% endif %}
 
 
@@ -250,7 +259,7 @@
 		
 		{% if alpha_diversity %} 
 		{% block alpha_diversity_head %}
-				<h3 id="单个样品多样性分析">4.1 单个样品多样性分析</h3>
+				<h3 id="单个样品多样性分析">4.1 单个样品多样性分析（每组内样品数>=5）</h3>
         	<p class="name_table">表4-1-1 样品Alpha多样性统计结果</p>
             
             <div class="table">
@@ -277,7 +286,9 @@
             <div class="button moveforward" title="向下滚动"></div>
             </div>
             </div>
-		{% endblock %} 
+		{% endblock %}
+		{% else %}
+			<p>样品数不足无法分析</p>
 		{% endif %}
 
 
@@ -288,7 +299,7 @@
 		
 		{% if alpha_diff %} 
 		{% block alpha_diff_head %}
-		<h3 id="单个样品差异分析">4.2 单个样品差异分析</h3>
+		<h3 id="单个样品差异分析">4.2 单个样品差异分析(每组内样品数>=3)</h3>
             <p class="name_fig">图4-1组间Alpha多样性盒形图：</p>
             <p class="premark">盒形图可以显示5个统计量（最小值，第一个四分位数，中位数，第三个中位数和最大值，及由下到上的5条线），异常值以“o”标出。横轴是分组名称，纵轴是不同分组下的alpha多样性指数的值。</p>
             <p class="paragraph">分别对Alpha diversity的各个指数进行秩和检验分析(若两组样品比较则使用R中的wilcox.test函数，若两组以上的样品比较则使用R中的kruskal.test函数)，通过秩和检验筛选不同条件下的显著差异的Alpha diversity指数。结果见表4-2。</p>
@@ -303,6 +314,8 @@
             
             <p class="tremark">注：第一列是Alpha diversity指数；第二列至第十列分别为十组样品的均值；最后一列为秩和检验的P-value值；</p>
 		{% endblock %} 
+		{% else %}
+			<p>样品数不足无法分析</p>
 		{% endif %}
 
 
@@ -311,9 +324,10 @@
 
 
 		
-		{% if uniFra_analysis %} 
+		
 		{% block uniFra_analysis_head %}
-		<h3 id="UniFrac分析">5.1 UniFrac分析</h3>
+		{% if uniFra_analysis_heatmap %} 
+		<h3 id="UniFrac热图分析">5.1 UniFrac热图分析（每组样品数>=4）</h3>
         	<p class="paragraph">与Alpha多样性分析不同，Beta多样性（Beta diversity）分析是用来比较一对样品在物种多样性方面存在的差异大小。</p>
             <p class="paragraph">UniFrac是通过利用系统进化的信息来比较样品间的物种群落差异。其计算结果可以作为一种衡量beta diversity的指数，它考虑了物种间的进化距离，该指数越大表示样品间的差异越大。报告中给出的UniFrac结果分为加权UniFrac（weighted UniFrac）与非加权UniFirac（unweighted UniFrac）2种，其中weighted UniFrac考虑了序列的丰度，unweighted UniFrac不考虑序列丰度。图4-5 UniFrac距离分布heatmap，通过对UniFrac结果的聚类，具有相似beta多样性的样品聚类在一起，反应了样品间的相似性。详细统计结果见附件“weighted_unifrac.xls”与“unweighted_unifrac.xls”。</p>
             <p class="paragraph">截取部分Beta多样性值统计结果见表5-1-1和表5-1-2。</p>
@@ -344,15 +358,22 @@
             	<img class="size1" src="images/30.png"/>
             </p>            
             <p class="name_fig">图5-1-3 Beta多样性heatmap（上图为Weighted，下图为Unweighted）</p>
+		{% else %}
+			<p>样品数不足无法分析</p>
+		{% endif %}
+		{% if uniFra_analysis_pcoa %}
+		<h3 id="PCoA分析">5.2 PCoA分析（每组样品数>=5）</h3>
             <p class="paragraph">为了进一步展示样品间物种多样性差异，使用主坐标分析（Principal coordinates analysis，PCoA）的方法展示各个样品间的差异大小。图5-1-4给出了PCoA对样品间物种多样性的分析结果，如果两个样品距离较近，则表示这两个样品的物种组成较相近。</p>
             <p class="center">
             	<img class="size1" src="images/weighted_unifrac_pc.pcaplot.png"/><img class="size1" src="images/unweighted_unifrac_pc.pcaplot.png"/>
             </p>        
-            <p class="name_fig">图5-1-4 PCoA分析图（A为Weight_UniFrac结果，B为Unweight_UniFrac结果）</p>
+            <p class="name_fig">图5-2-1 PCoA分析图（A为Weight_UniFrac结果，B为Unweight_UniFrac结果）</p>
             <p class="premark">PcoA是一种研究数据相似性或者差异性的可视化方法，它没有改变样品点之间的项目位置关系，只改变了坐标系统。横坐标表示第一主坐标，括号中的百分比则表示第一主坐标对样品差异的贡献率；纵坐标表示第二主坐标，括号中的百分比表示第二主坐标对样品差异的贡献率。图中点分别表示各个样品。不同颜色代表样品属于不同的分组。横向的box图是不同分组在第一主坐标上的值的分布。</p>
-
-		{% endblock %} 
+		{% else %}
+			<p>样品数不足无法分析</p>
 		{% endif %}
+		{% endblock %} 
+		
 
 
 
@@ -366,7 +387,7 @@
 		
 		{% if similarity_analysis %} 
 		{% block similarity_analysis_head %}
-				<h3 id="Analysis of Similarity (ANOSIM)">5.2 Analysis of Similarity (ANOSIM)</h3>
+				<h3 id="Analysis of Similarity (ANOSIM)">5.3 Analysis of Similarity (ANOSIM)</h3>
         	<p class="paragraph">分析Bray–Curtis和weighted UniFrac时，把R-ANOSIM，P-ANOSIM和R2-ADONIS，P-ADONIS统计在一个表格里（请参见PNAS文章的第二页的表格）。</p>
             
             <div class="table">
@@ -383,7 +404,8 @@
 
 
 		
-		{% if lefse %} {% block lefse_head %}
+		{% if lefse %} 
+		{% block lefse_head %}
 		<h3 id="LDA EffectSize（LEfSe）分析">6.1 LDA EffectSize（LEfSe）分析</h3>
         	<p class="paragraph">LDA EffectSize（LEfSe分析）：LEfSe采用线性判别分析（LDA）来估算每个组分（物种）丰度对差异效果影响的大小，找出对样品划分产生显著性差异性影响的群落或物种。</p>
             <p class="center">
@@ -406,7 +428,7 @@
 		{% block diff_analysis_head %}
 		<h3 id="组间差异分析">6.2 组间差异分析</h3>
         	<h4>OTU水平的差异分析</h4>
-            	<p class="paragraph">下表是在不同组样品间有显著差异的OTUs（p<{{p_value}}, Kruskal-Wallis test），共{{diff_otus}}个,如表6-2-1显示。</p>
+            	<p class="paragraph">下表是在不同组样品间有显著差异的OTUs（p<{{ p_value }}, Kruskal-Wallis test），共{{ diff_otus }}个,如表6-2-1显示。</p>
                	<p class="name_table">表6-2-1差异显著OTU列表</p>
                 
                 <div class="table">
@@ -416,7 +438,7 @@
                 </center> 
                 </div> 
                            
-                <p class="tremark">注：第一列是OTU名称；第二列至第{{ group_num + 2 }}列分别为{{group_num}}组样品的均值；最后一列是秩和检验的p值；</p>
+                <p class="tremark">注：第一列是OTU名称；第二列至第{{ group_num + 2 }}列分别为{{ group_num }}组样品的均值；最后一列是秩和检验的p值；</p>
                 <p class="paragraph">为了直观地对这些OTUs进行展示，绘制对应热图和PCA图如下：</p>  
                 <div class="albumSlider">
                 <div class="fullview"><img src="images/36.png"/></div>
@@ -433,7 +455,7 @@
 
             
             <h4>属水平的差异分析</h4>
-            	<p class="paragraph">通过Kruskal-Wallis test分析可以找出在不同组间有明显差异(p<{{p_value}})的属如下（共{{diff_genus}}个属或科）：</p>
+            	<p class="paragraph">通过Kruskal-Wallis test分析可以找出在不同组间有明显差异(p<{{ p_value }})的属如下（共{{ diff_genus }}个属或科）：</p>
                 <p class="name_table">表6-2-2差异显著物种列表</p>
                 
                 <div class="table">
@@ -443,7 +465,7 @@
                 </center>
                 </div>  
                             
-                <p class="tremark">注：第一列是物种名称；第二列至第{{ group_num + 2 }}列分别为{{group_num}}组样品的均值；最后一列是秩和检验的p值。</p> 
+                <p class="tremark">注：第一列是物种名称；第二列至第{{ group_num + 2 }}列分别为{{ group_num }}组样品的均值；最后一列是秩和检验的p值。</p> 
                 <p class="paragraph">为了直观，这些属比较的热图如下：</p>
                 <div class="albumSlider">
                 <div class="fullview"><img src="images/38.png"/></div>
@@ -459,7 +481,7 @@
                 
                                  
             <h4>所有水平的差异分析</h4>
-            <p class="paragraph">使用R中的kruskal.test函数，分别从门纲目科属水平，通过秩和检验筛选不同条件下的显著差异的物种，共找到{{diff_species}}个。表6-2-3为地区间所有水平下的{{diff_species}}个差异物种统计表。</p>
+            <p class="paragraph">使用R中的kruskal.test函数，分别从门纲目科属水平，通过秩和检验筛选不同条件下的显著差异的物种，共找到{{ diff_species }}个。表6-2-3为样品间所有水平下的{{ diff_species }}个差异物种统计表。</p>
             <p class="name_table">表6-2-3所有水平差异显著物种列表</p>
             
                 <div class="table">
@@ -469,7 +491,7 @@
                 </center>
                 </div>
                   
-           	<p class="tremark">注：第一列是物种名称；第二列至第{{ group_num + 2 }}列分别为{{group_num}}组样品的均值；最后一列是秩和检验的p值。</p>
+           	<p class="tremark">注：第一列是物种名称；第二列至第{{ group_num + 2 }}列分别为{{ group_num }}组样品的均值；最后一列是秩和检验的p值。</p>
             <p class="paragraph">为了直观，这些物种比较的热图如下</p>
                 <div class="albumSlider">
                 <div class="fullview"><img src="images/40.png"/></div>
@@ -484,7 +506,7 @@
                 </div>
 
 				            <h4>门水平的差异分析</h4>
-            	<p class="paragraph">通过Kruskal-Wallis test分析可以找出在不同组间有明显差异(p<{{p_value}})的属如下（共{{diff_phylum}}个属或科）：</p>
+            	<p class="paragraph">通过Kruskal-Wallis test分析可以找出在不同组间有明显差异(p<{{ p_value }})的属如下（共{{ diff_phylum }}个属或科）：</p>
                 <p class="name_table">表6-2-4差异显著物种列表</p>
                 
                 <div class="table">
@@ -494,7 +516,7 @@
                 </center>
                 </div>  
                             
-                <p class="tremark">注：第一列是物种名称；第二列至第{{ group_num + 2 }}列分别为{{group_num}}组样品的均值；最后一列是秩和检验的p值。</p> 
+                <p class="tremark">注：第一列是物种名称；第二列至第{{ group_num + 2 }}列分别为{{ group_num }}组样品的均值；最后一列是秩和检验的p值。</p> 
                 <p class="paragraph">为了直观，这些属比较的热图如下：</p>
                 <div class="albumSlider">
                 <div class="fullview"><img src="images/42.png"/></div>
@@ -508,4 +530,6 @@
                 </div>
                 </div>
 		{% endblock %} 
+		{% else %}
+			<p>样品数不足无法分析</p>
 		{% endif %}

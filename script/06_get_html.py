@@ -288,18 +288,19 @@ def get_html():
         var_html['core_microbiome_html']=True
         var_html['otu_pca']=True
         var_html['otu_heatmap']=True 
+    
     if len 5 >= len(group_files) >= 2:
         var_html['otu_venn']=True
 
+   if min_sample_num_in_groups >= 3:
+        var_html['alpha_diff']=True
+
     var_html['specaccum']=True
-    
     var_html['otu_tax_assignments']=True
     var_html['otu_annotation_statistical']=True
     var_html['tax_summary']=True
-    var_html['otu_krona']=True
-    var_html['phylogenetic_tree']=True
-    if min_sample_num_in_groups >= 3:
-        var_html['alpha_diff']=True
+    var_html['otu_krona']=Flase
+    var_html['phylogenetic_tree']=Flase
     var_html['similarity_analysis']=True
     var_html['lefse']=True
     var_html['diff_analysis']=False
