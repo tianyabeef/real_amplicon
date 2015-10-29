@@ -31,9 +31,6 @@ def read_params(args):
     if params['for_plot'] is None and params['otu_table'] is None:
         parser.print_help()
         sys.exit()
-    if params['for_plot'] is None:
-        params['for_plot'] = params['out_dir'] + '/for_plot.txt'
-        work(params['otu_table'],params['for_plot'])
     return params
 
 def work(infile,outfile):
@@ -65,8 +62,10 @@ def work(infile,outfile):
 
 if __name__ == '__main__':
     params = read_params(sys.argv)
-    print params['for_plot']
     mkdir(params['out_dir'])
+    if params['for_plot'] is None:
+        params['for_plot'] = params['out_dir'] + '/for_plot.txt'
+        work(params['otu_table'],params['for_plot'])
 #    showed_rows = params['out_dir'] + '/showed_rows.txt'
     pdf_file = params['out_dir'] + '/heatmap.pdf'
     png_file = params['out_dir'] + '/heatmap.png'

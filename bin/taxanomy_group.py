@@ -23,7 +23,7 @@ def taxanomy_group(cfg_in,vars=None):
     work.commands.append('%s -i %s'%(scripts['summarize_trans'],
                                      outfiles['summarize_dir']))
     # core otu
-    if sample_num_total > 4:
+    if sample_num_total >= 5:
         work.commands.append('%s -i %s -t %s -c %s -o %s'%(scripts['core_otu'],
                                                            params['uniform_profile'],
                                                            params['tax_ass'],
@@ -37,13 +37,13 @@ def taxanomy_group(cfg_in,vars=None):
                                                      params['group'],
                                                      outfiles['otu_venn_outdir']))
     # tax_pca
-    if sample_num_total > 5:
+    if sample_num_total >= 5:
         work.commands.append('%s -i %s -g %s -o %s'%(scripts['otu_pca'],
                                                      params['uniform_profile'],
                                                      params['group'],
                                                      outfiles['otu_pca_outdir']))
     # heatmap
-    if sample_num_total > 4:
+    if sample_num_total >= 5:
         work.commands.append('%s -i %s -g %s -o %s -t %s'%(scripts['tax_heatmap'],
                                                            outfiles['summarize_dir'] + '/otu_table_L6.txt',
                                                            params['group'],
