@@ -92,10 +92,6 @@
                     <a href="#beta多样性分析" src="demo/tree.html" class="cs-navi-tab">beta多样性分析</a></p>
                     <a href="#显著性差异分析" src="demo/tree.html" class="cs-navi-tab">显著性差异分析</a></p>
 				</div>
-                <div title="结果文件说明">
-               		<a href="#文件格式" src="demo/datagrid.html" class="cs-navi-tab">文件格式</a></p>
-                    <a href="#结果文件" src="demo/datagrid.html" class="cs-navi-tab">结果文件</a></p>
-                </div>
 		</div>
 	</div>
     <!------------------------------------------------------主要面板------------------------------------------------------------------------->
@@ -104,8 +100,14 @@
 		<h1 id="总体概述">总体工作流程概述</h1	>
         <p>&nbsp;</p>
         	<p class="center">
-            	<img src="images/1.png"/>
+				{%- if amplification==16S -%}
+            	<img src="images/16S_E.png"/>
+				{% endif %}
+				{%- if amplification==ITS -%}
+            	<img src="images/ITS_E.png"/>
+				{% endif %}
             </p>
+			
             <p class="name_fig">
             图1 测序原理图 
             </p>
