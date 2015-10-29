@@ -39,7 +39,7 @@ def taxanomy_total(cfg_in,vars=None):
                                            outfiles['summarize_dir'],
                                            outfiles['bar_plot_dir']))
 
-    return outfiles 
+    return outfiles
 
 if __name__ == '__main__':
     config = sys.argv[1]
