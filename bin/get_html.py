@@ -51,7 +51,7 @@ def get_html(cfg_in,vars=None):
     dirs.append(image_dir+"/group/otu_diff/")
     dirs.append(image_dir+"/group/genus_diff/")
     dirs.append(image_dir+"/group/taxall_diff/")
-    dirs/append(image_dir+"/group/phylum_diff/")
+    dirs.append(image_dir+"/group/phylum_diff/")
     makedirs(dirs)
     origin = config.items('origin')
 
