@@ -78,7 +78,7 @@
 		<h3 id="Core microbiome分析">2.3 Core microbiome分析（总样品数>=5）</h3>
         	<p class="center">共有OTU数与样品的关系：</p>
             <p class="center">
-            	<img class="size1" src="images/group/core_otu.png"/>
+            	<img class="size2" src="images/group/core_otu.png"/>
             </p>
             <p class="name_fig">图2-3-1 共有OTU数与样品的关系。
             </p>
@@ -106,7 +106,7 @@
 			<h3 id="OTU Venn图分析">2.4 OTU Venn图分析(分组数量2~5组)</h3>
         	<p class="paragraph">在0.97的相似度下，得到了每个样品的OTU个数，利用Venn图可以展示多样品共有和各自特有OTU数目，直观展示样品间OTU的重叠情况。</p>
             <p class="center">
-            	<img class="size1" src="images/group/venn.png"/>
+            	<img class="size2" src="images/group/venn.png"/>
             </p>
             <p class="name_fig">图2-5 OTU venn图（2-5组）</p>
             <p class="premark">不同颜色图形代表不同样品或者不同组别，不同颜色图形之间交叠部分数字为两个样品或两个组别之间共有的OTU个数。同理，多个颜色图形之间交叠部分数字为多个样品或组别之间共有OTU个数。Venn图容许2-5个样品或组别。</p>
@@ -124,7 +124,7 @@
 		<h3 id="OTU PCA分析">2.5 OTU PCA分析（总样品数>=5）</h3>
         	<p class="paragraph">PCA分析(Principal Component Analysis)，即主成分分析，是一种分析和简化数据集的技术。不同处理或不同环境间的样品可能表现出分散和聚集的分布情况，从而可以判断相同条件的样品组成是否具有相似性。</p>
             <p class="center">
-            	<img class="size1" src="images/group/otu_pca.png"/>
+            	<img class="size2" src="images/group/otu_pca.png"/>
             </p>
             <p class="name_fig">图2-5-1 基于OTU丰度的PCA分析。</p>
             <p class="premark">横坐标表示第一主成分，括号中的百分比则表示第一主成分对样品差异的贡献率；纵坐标表示第二主成分，括号中的百分比表示第二主成分对样品差异的贡献率。图中点分别表示各个样品。不同颜色代表样品属于不同的分组。例如图中G1（红色样品）和G3（绿色样品）在PC1轴的方向上分离开来，则表示PC1是导致G1和G2分离开来的主要元素。</p>
@@ -140,7 +140,7 @@
 		<h3 id="Specaccum物种累积曲线">2.6 Specaccum物种累积曲线（总样品数>=10）</h3>
         	<p class="paragraph">物种累积曲线(?species?accumulation?curves)?用于描述随着抽样量的加大物种增加的状况，是理解调查样地物种组成和预测物种丰富度的有效工具，在生物多样性和群落调查中，被广泛用于抽样量充分性的判断以及物种丰富度(?species?richness)?的估计。因此，通过物种累积曲线不仅可以判断抽样量是否充分，在抽样量充分的前提下，运用物种累积曲线还可以对物种丰富度进行预测。</p>
             <p class="center">
-            	<img class="size1" src="images/specaccum.png"/>
+            	<img class="size2" src="images/specaccum.png"/>
             </p>
             <p class="name_fig">图2-6-1 物种累积曲线</p>
             <p class="premark">注：横坐标是样品的数量，纵坐标是OTUs的数量</p>
@@ -174,7 +174,7 @@
 		<h3 id="物种注释结果统计">3.2 物种注释结果统计</h3>
         	<p class="paragraph">根据物种注释情况，统计每个样品注释到各分类水平(Kingdom, Phylum, Class, Order, Family, Genus, Species)上的序列数目，由此可轻松了解注释到各分类水平的整体情况</p>
             <p class="center">
-            	<img class="size1" src="images/15.png"/>
+            	<img class="size2" src="images/15.png"/>
             </p>
             <p class="name_fig">图 3-2-1 各样品在各分类水平上的序列数目</p>
 		{% endif %}
@@ -194,15 +194,15 @@
             </p>
             <p class="name_fig">图3-3-1 样品门分类水平中物种profiling柱状图。</p>
             <p class="premark">横轴为样品名称，纵轴为相对丰度的比例。颜色对应不同物种名称，色块长度表示该色块所代表的物种的相对丰度的比例。</p>
-            <p class="paragraph">根据样品分组信息，分别在门、纲、目、科、属分类等级对不同group做物种profiling相应的柱状图。结果可见附件文件夹“wf_taxa_summary/”。图3-2展示了门分类等级上的物种profiling不同分组的boxplot图。</p>
+<!--             <p class="paragraph">根据样品分组信息，分别在门、纲、目、科、属分类等级对不同group做物种profiling相应的柱状图。结果可见附件文件夹“wf_taxa_summary/”。图3-2展示了门分类等级上的物种profiling不同分组的boxplot图。</p>
             <p class="center">
-            	<img class="size1" src="images/17.png"/>
+            	<img class="size2" src="images/17.png"/>
             </p>
             <p class="name_fig">图3-3-2 门分类水平中不同group的物种profiling柱状图。</p>
-            <p class="premark">横轴为分组名称，纵轴为相对丰度的比例。颜色对应不同物种名称，色块长度表示该色块所代表的物种的相对丰度的比例。</p>
+            <p class="premark">横轴为分组名称，纵轴为相对丰度的比例。颜色对应不同物种名称，色块长度表示该色块所代表的物种的相对丰度的比例。</p> -->
             <p class="paragraph">在属分类等级对{{star_picture_top}}的物种丰度做star图。图3-3展示了属分类等级上的{{star_picture_top}}的物种star图。</p>
             <p class="center">
-            	<img class="size1" src="images/tax_star.png"/>
+            	<img class="size2" src="images/tax_star.png"/>
             </p>
             <p class="name_fig">图3-3-3 属分类水平中不同group的{{star_picture_top}}物种profiling星图。</p>
             <p class="premark">一个星形图代表着一个样品的物种相对丰度信息。每个星形图中的扇形代表一个物种，用不同颜色区分，用扇形的半径来代表物种相对丰度的大小，扇形半径越长代表此扇形所对应的物种的相对丰度越高。</p>
@@ -221,7 +221,7 @@
 		<h3 id="物种热图分析">3.4 物种热图分析（总样品数>=5）</h3>
         <p class="paragraph">Heatmap是以颜色梯度来代表数据矩阵中数值的大小并能根据物种或样品丰度相似性进行聚类的一种图形展示方式。聚类结果加上样品的处理或取样环境分组信息，可以直观观察到相同处理或相似环境样品的聚类情况，并直接反映了样品的群落组成的相似性和差异性。本分析内容在属分类等级进行heatmap聚类分析。纵向聚类表示所有物种在不同样品间表达的形似情况，距离越近，枝长越短，说明样品的物种组成及丰度越相似。横向聚类表示该物种在各样品丰度相似情况，与纵向聚类一样，距离越近，枝长越短，说明两物种在各样品间的组成越相似。</p>
             <p class="center">
-            	<img class="size1" src="images/19.png"/>
+            	<img class="size2" src="images/group/heatmap.png"/>
             </p>
             <p class="name_fig">图3-4-1 物种丰度热图。</p>
             <p class="premark">Heatmap是以颜色梯度来代表数据矩阵中数值的大小并能根据物种或样品丰度相似性进行聚类。如有样品分组信息，图中前两行为样品分组信息（如只有一种分组情况，则只有一行），颜色与图列对应。</p>
@@ -260,7 +260,7 @@
 		<h3 id="系统进化关系展示">3.6 系统进化关系展示（更新）</h3>
         	<p class="paragraph">为了进一步研究OTUs的系统进化关系，通过多序列比对得到所有OTUs代表序列的系统发生关系。选取最大相对丰度排名前{{Phylogenetic_genus_top}}的属所对应的OTUs的系统发生关系数据，并结合每个OTUs的相对丰度及其代表序列的物种注释置信度信息，进行整合展示，由此可见这些属中的OTU之间的系统进化关系。</p>
             <p class="center">
-            	<img class="size1" src="images/21.png"/>
+            	<img class="size2" src="images/21.png"/>
             </p>
             <p class="name_fig">图 3-7 OTUs的系统发生关系及其物种注释</p>
 			<p class="premark">说明：圈图共有三层，由里往外：第一层是OTUs代表序列构建的系统发育树，分支的颜色表示其对应的属名，每种颜色代表一个属；第二层是OTUs的相对丰度分布，柱子的高度表示OTUs的相对丰度大小(由于相对丰度跨越数据量很大，将按照最小值进行转化后再可视化)；第三层是OTUs注释可信度分布，柱子的高度表示OTUs注释的可信度。</p>
@@ -372,10 +372,10 @@
             <p class="tremark">注：表5-1-1为加权物种分类丰度信息计算得到的Beta diversity统计结果，表5-1-2为未加权物种分类丰度信息计算得到的Beta diversity统计结果。</p>
             <p class="paragraph">根据各样品差异性的统计结果，对样品进行聚类分析并计算样品间距离，以判断各样品物种组成的相似性。所有样品的聚类分析结果如图5-1-3所示。样品越靠近，说明两个样品的物种组成越相似。分析结果见文件夹wf_bdiv_even2081_cluster。</p>
             <p class="center">
-            	<img class="size1" src="images/group/weighted_unifrac.heatmap.png"/>
+            	<img class="size2" src="images/group/weighted_unifrac.heatmap.png"/>
             </p>
             <p class="center">
-            	<img class="size1" src="images/group/unweighted_unifrac.heatmap.png"/>
+            	<img class="size2" src="images/group/unweighted_unifrac.heatmap.png"/>
             </p>            
             <p class="name_fig">图5-1-3 Beta多样性heatmap（上图为Weighted，下图为Unweighted）</p>
 		{% else %}
@@ -385,7 +385,7 @@
 		<h3 id="PCoA分析">5.2 PCoA分析（每组样品数>=5）</h3>
             <p class="paragraph">为了进一步展示样品间物种多样性差异，使用主坐标分析（Principal coordinates analysis，PCoA）的方法展示各个样品间的差异大小。图5-1-4给出了PCoA对样品间物种多样性的分析结果，如果两个样品距离较近，则表示这两个样品的物种组成较相近。</p>
             <p class="center">
-            	<img class="size1" src="images/weighted_unifrac_pc.pcaplot.png"/><img class="size1" src="images/unweighted_unifrac_pc.pcaplot.png"/>
+            	<img class="size2" src="images/weighted_unifrac_pc.pcaplot.png"/><img class="size2" src="images/unweighted_unifrac_pc.pcaplot.png"/>
             </p>        
             <p class="name_fig">图5-2-1 PCoA分析图（A为Weight_UniFrac结果，B为Unweight_UniFrac结果）</p>
             <p class="premark">PcoA是一种研究数据相似性或者差异性的可视化方法，它没有改变样品点之间的项目位置关系，只改变了坐标系统。横坐标表示第一主坐标，括号中的百分比则表示第一主坐标对样品差异的贡献率；纵坐标表示第二主坐标，括号中的百分比表示第二主坐标对样品差异的贡献率。图中点分别表示各个样品。不同颜色代表样品属于不同的分组。横向的box图是不同分组在第一主坐标上的值的分布。</p>
@@ -428,10 +428,10 @@
 		<h3 id="LDA EffectSize（LEfSe）分析">6.1 LDA EffectSize（LEfSe）分析</h3>
         	<p class="paragraph">LDA EffectSize（LEfSe分析）：LEfSe采用线性判别分析（LDA）来估算每个组分（物种）丰度对差异效果影响的大小，找出对样品划分产生显著性差异性影响的群落或物种。</p>
             <p class="center">
-            	<img class="size1" src="images/group/LDA.cladogram.png"/>
+            	<img class="size2" src="images/group/LDA.cladogram.png"/>
             </p>
             <p class="center">
-            	<img class="size1" src="images/group/LDA.png"/>
+            	<img class="size2" src="images/group/LDA.png"/>
             </p>
             <p class="name_fig">图6-1 LEfSe分析图</p>
             <p class="premark">上图为聚类树，不同颜色表示不同分组，不同颜色的节点表示在该颜色所代表的分组中起到重要作用的微生物群。黄色节点表示的是在不同分组中没有起到重要作用的微生物类群。图中英文字母所表示的物种名称在右侧图例中进行展示。下图是统计不同分组中有显著作用的微生物类群通过LDA(线性回归分析)后得到的LDA分值。</p>
