@@ -11,7 +11,7 @@ def parse_group(group_file):
                 group_set[group_name] = set()
             group_set[group_name].add(sample_name)
             sample_set.add(sample_name)
-    sample_num_in_groups = map(lambda s:len(s),group_set)
+    sample_num_in_groups = map(lambda s:len(s),group_set.itervalues())
     min_sample_num_in_groups= min(sample_num_in_groups)
     sample_num_total = len(sample_set)
     group_num = len(group_set)
