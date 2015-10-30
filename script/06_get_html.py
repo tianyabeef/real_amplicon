@@ -11,6 +11,10 @@ import argparse
 import re
 from jinja2 import Environment,FileSystemLoader
 import operator
+import os
+this_script_path = os.path.dirname(__file__)
+sys.path.insert(1,this_script_path + '/../bin')
+from settings import *
 class OtuStatistical(object):
     '''
     classdocs
@@ -57,45 +61,48 @@ def save_table(input_dir):
     weight_unifrac_data_list=[]
     weight_unifrac_jqGrid_list=[]
     sampleName="'"
-    with open(input_dir) as lines:
-        head=lines.next()
-        samples_name = head.strip().split('\t')
-        samples_name.insert(0,"sampleName")
-        sampleName = ("','").join(samples_name)
-        jqGrid_head = "{name:'sampleName',index:'sampleName',width:90,align:'center'},"
-        weight_unifrac_jqGrid_list.append(jqGrid_head)
-        count = 0
-        samples_name = samples_name[1:]
-        for_time = []
-        for i,value in enumerate(samples_name):
-            for_time.append("%s%d"%("sample",i))
-        for count,line in enumerate(lines):
-            count += 1
-            tabs = line.strip().split("\t")
-            str="{sampleName:\""+tabs[0]+"\","
-            for i,value in enumerate(for_time):
-                jqGrid = '{'
-                if len(for_time)<9:
-                    if i<len(for_time)-1:
-                        str += value+":\""+tabs[i+1]+"\","
-                        jqGrid += "name:'"+value+"',index:'"+value+"',aligen:'center',width:90},"
-                    else:
-                        jqGrid += "name:'"+value+"',index:'"+value+"',aligen:'center',width:90}"
-                        str += value+":\""+tabs[i+1]+"\""
-                        str +='},'
-                else:
-                    
-                    if i<8:
-                        str += value+":\""+tabs[i+1]+"\","
-                        jqGrid += "name:'"+value+"',index:'"+value+"',aligen:'center',width:90},"
-                    else:
-                        jqGrid += "name:'"+value+"',index:'"+value+"',aligen:'center',width:90}"
-                        str += value+":\""+tabs[i+1]+"\""
-                        str +='}'
-                        break
-                if count ==1:
-                    weight_unifrac_jqGrid_list.append(jqGrid)
-            weight_unifrac_data_list.append(str)
+    try:
+	with open(input_dir) as lines:
+		head=lines.next()
+		samples_name = head.strip().split('\t')
+		samples_name.insert(0,"sampleName")
+		sampleName = ("','").join(samples_name)
+		jqGrid_head = "{name:'sampleName',index:'sampleName',width:90,align:'center'},"
+		weight_unifrac_jqGrid_list.append(jqGrid_head)
+		count = 0
+		samples_name = samples_name[1:]
+		for_time = []
+		for i,value in enumerate(samples_name):
+			for_time.append("%s%d"%("sample",i))
+		for count,line in enumerate(lines):
+			count += 1
+			tabs = line.strip().split("\t")
+			str="{sampleName:\""+tabs[0]+"\","
+			for i,value in enumerate(for_time):
+				jqGrid = '{'
+				if len(for_time)<9:
+					if i<len(for_time)-1:
+						str += value+":\""+tabs[i+1]+"\","
+						jqGrid += "name:'"+value+"',index:'"+value+"',aligen:'center',width:90},"
+					else:
+						jqGrid += "name:'"+value+"',index:'"+value+"',aligen:'center',width:90}"
+						str += value+":\""+tabs[i+1]+"\""
+						str +='},'
+				else:
+					
+					if i<8:
+						str += value+":\""+tabs[i+1]+"\","
+						jqGrid += "name:'"+value+"',index:'"+value+"',aligen:'center',width:90},"
+					else:
+						jqGrid += "name:'"+value+"',index:'"+value+"',aligen:'center',width:90}"
+						str += value+":\""+tabs[i+1]+"\""
+						str +='}'
+						break
+				if count ==1:
+					weight_unifrac_jqGrid_list.append(jqGrid)
+			weight_unifrac_data_list.append(str)
+    except IOError as err:
+	print "have no "+input_dir+"\n"
     return [weight_unifrac_data_list,weight_unifrac_jqGrid_list,sampleName]
 def save_table2(input_dir):
 #save table
@@ -103,45 +110,48 @@ def save_table2(input_dir):
     weight_unifrac_data_list=[]
     weight_unifrac_jqGrid_list=[]
     sampleName="'"
-    with open(input_dir) as lines:
-        head=lines.next()
-        samples_name = head.strip().split('\t')
-        sampleName = ("','").join(samples_name)
-        jqGrid_head = "{name:'taxonname',index:'taxonname',width:90,align:'center'},"
-        weight_unifrac_jqGrid_list.append(jqGrid_head)
-        count = 0
-        samples_name = samples_name[1:]
-        for_time = []
-        for i,value in enumerate(samples_name):
-            for_time.append("%s%d"%("sample",i))
-        for count,line in enumerate(lines):
-            count += 1
-            
-            tabs = line.strip().split("\t")
-            str="{taxonname:\""+tabs[0]+"\","
-            for i,value in enumerate(for_time):
-                jqGrid = '{'
-                if len(for_time)<9:
-                    if i<len(for_time)-1:
-                        str += value+":\""+tabs[i+1]+"\","
-                        jqGrid += "name:'"+value+"',index:'"+value+"',aligen:'center',width:90},"
-                    else:
-                        jqGrid += "name:'"+value+"',index:'"+value+"',aligen:'center',width:90}"
-                        str += value+":\""+tabs[i+1]+"\""
-                        str +='},'
-                else:
-                    
-                    if i<8:
-                        str += value+":\""+tabs[i+1]+"\","
-                        jqGrid += "name:'"+value+"',index:'"+value+"',aligen:'center',width:90},"
-                    else:
-                        jqGrid += "name:'"+value+"',index:'"+value+"',aligen:'center',width:90}"
-                        str += value+":\""+tabs[i+1]+"\""
-                        str +='}'
-                        break
-                if count ==1:
-                    weight_unifrac_jqGrid_list.append(jqGrid)
-            weight_unifrac_data_list.append(str)
+    try:
+	with open(input_dir) as lines:
+		head=lines.next()
+		samples_name = head.strip().split('\t')
+		sampleName = ("','").join(samples_name)
+		jqGrid_head = "{name:'taxonname',index:'taxonname',width:90,align:'center'},"
+		weight_unifrac_jqGrid_list.append(jqGrid_head)
+		count = 0
+		samples_name = samples_name[1:]
+		for_time = []
+		for i,value in enumerate(samples_name):
+			for_time.append("%s%d"%("sample",i))
+		for count,line in enumerate(lines):
+			count += 1
+			
+			tabs = line.strip().split("\t")
+			str="{taxonname:\""+tabs[0]+"\","
+			for i,value in enumerate(for_time):
+				jqGrid = '{'
+				if len(for_time)<9:
+					if i<len(for_time)-1:
+						str += value+":\""+tabs[i+1]+"\","
+						jqGrid += "name:'"+value+"',index:'"+value+"',aligen:'center',width:90},"
+					else:
+						jqGrid += "name:'"+value+"',index:'"+value+"',aligen:'center',width:90}"
+						str += value+":\""+tabs[i+1]+"\""
+						str +='},'
+				else:
+					
+					if i<8:
+						str += value+":\""+tabs[i+1]+"\","
+						jqGrid += "name:'"+value+"',index:'"+value+"',aligen:'center',width:90},"
+					else:
+						jqGrid += "name:'"+value+"',index:'"+value+"',aligen:'center',width:90}"
+						str += value+":\""+tabs[i+1]+"\""
+						str +='}'
+						break
+				if count ==1:
+					weight_unifrac_jqGrid_list.append(jqGrid)
+			weight_unifrac_data_list.append(str)
+    except IOError as err:
+           print "have no "+input_dir+"\n"
     return [weight_unifrac_data_list,weight_unifrac_jqGrid_list,sampleName]
                   
 def read_params(args):
@@ -220,12 +230,15 @@ def get_html():
 
 #save table
     alpha_diversity_diffs={}
-    with open(work_dir+"../"+config.get('origin','group_alpha_markers_txt').replace("#group",group_file),'r') as lines:
-        lines.next()
-        for line in lines:
-            tabs = line.strip().split('\t')
-            alpha_diversity=Alpha_diversity(tabs[0],tabs[1],tabs[2],tabs[3],tabs[4],tabs[5],tabs[6])
-            alpha_diversity_diffs[tabs[0]]=alpha_diversity
+    try:
+        with open(work_dir+"../"+config.get('origin','group_alpha_markers_txt').replace("#group",group_file),'r') as lines:
+            lines.next()
+            for line in lines:
+                tabs = line.strip().split('\t')
+                alpha_diversity=Alpha_diversity(tabs[0],tabs[1],tabs[2],tabs[3],tabs[4],tabs[5],tabs[6])
+                alpha_diversity_diffs[tabs[0]]=alpha_diversity
+    except IOError as err:
+        print "have no group_alpha_markers_txt\n"
 
 #save_table
     beta_un_diversity= save_table(work_dir+"../"+config.get('origin','group_beta_div_un_txt').replace("#group",group_file))
@@ -289,18 +302,18 @@ def get_html():
         var_html['otu_pca']=True
         var_html['otu_heatmap']=True 
     
-    if len 5 >= len(group_files) >= 2:
+    if len(group_files) >= 2 & 5 >= len(group_files):
         var_html['otu_venn']=True
 
-   if min_sample_num_in_groups >= 3:
+    if min_sample_num_in_groups >= 3:
         var_html['alpha_diff']=True
 
     var_html['specaccum']=True
     var_html['otu_tax_assignments']=True
     var_html['otu_annotation_statistical']=True
     var_html['tax_summary']=True
-    var_html['otu_krona']=Flase
-    var_html['phylogenetic_tree']=Flase
+    var_html['otu_krona']=False
+    var_html['phylogenetic_tree']=False
     var_html['similarity_analysis']=True
     var_html['lefse']=True
     var_html['diff_analysis']=False

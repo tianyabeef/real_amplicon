@@ -47,6 +47,6 @@ par(mar=c(0,0,0,0))
 plot(0, type="n", bty="n", xaxt="n", yaxt="n", xlab="")
 ncol = ceiling( tax_num / 7)
 legend("top", pch=15, col=cols, legend=rownames(data), bty="n",
-		pt.cex=5, cex=2, ncol=ncol, x.intersp=2, y.intersp=2)
+		pt.cex=5, cex=2, ncol=ncol, x.intersp=2, y.intersp=2,xpd=TRUE)
 par(def.par)
 dev.off()
