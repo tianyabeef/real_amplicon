@@ -48,7 +48,11 @@
 		<h1 id="总体概述">总体工作流程概述</h1	>
         <p>&nbsp;</p>
         	<p class="center">
-            	<img src="images/1.png"/>
+				{% if amplification==16S%}
+            	<img src="images/16S_E.png"/>
+				{% else %}
+				<img src="images/ITS_E.png"/>
+				{% endif %}
             </p>
             <p class="name_fig">
             图1 测序原理图 
@@ -129,7 +133,7 @@
 		{% endblock %}                
 
             
-		<h2>6 显著性差异分析	</h2>
+		<h2>6 显著性差异分析	（PCA:每组样品数>=3;heatmp:每组样品数>=3;Botplot:每组样品数>=5）</h2>
 		{% block lefse_head %}
 		{% endblock %}
 		{% block diff_analysis_head %}
