@@ -1,13 +1,85 @@
 library(grid)
 X=read.table('@#{tax_ass_uniform}',sep="\t",row.name=1,header=T, check.names=F)
 sample_num = ncol(X)
-if(sample_num < 6){
+pdf('@#{pdf_file}',10,16)
+par(mar=c(2.1,0,4.1,1.1))
 
+if(sample_num <=9 ){
+    ylim=c(2,4)
+    if(sample_num<=2){
+        ylim=c(-2,2)
+    }
+    stars(
+        t(X),
+        labels=colnames(X),
+        len=1,ncol=3,
+        xpd=TRUE,main = "Genus",
+        draw.segments = T,
+        frame.plot=T,
+        key.loc=c(3.5,-1),
+        col.segments = rainbow(10),
+        ylim=ylim
+    )
 }
-#height = ceiling(sample_num / 6 + 3) * 3
-pdf('@#{pdf_file}',10,10)
-#par(mar=c(2.1,0,1.1,0))
-#mar=c(5,1,1,1)
-stars(t(X2), labels=colnames(X2),len=1,ncol=6,main = "Genus", draw.segments = T,frame.plot=F,xlim=c(0,16),ylim=c(0,1),key.loc=c(8,-1),col.segments = rainbow(10))
+if(sample_num>9 && sample_num<=16){
+    stars(
+        t(X),
+        labels=colnames(X),
+        len=1,ncol=4,
+        xpd=TRUE,main = "Genus",
+        draw.segments = T,
+        frame.plot=T,
+        key.loc=c(6,-1),
+        col.segments = rainbow(10),
+        ylim=c(3,4)
+    )
+}
+if(sample_num>16 && sample_num<=25){
+    stars(
+        t(X),
+        labels=colnames(X),
+        len=1,ncol=5,
+        xpd=TRUE,main = "Genus",
+        draw.segments = T,
+        frame.plot=T,
+        key.loc=c(7,-1),
+        col.segments = rainbow(10),
+        ylim=c(4,5)
+    )
+}
+if(sample_num>25 && sample_num<=36){
+    stars(
+        t(X),
+        labels=colnames(X),
+        len=1,ncol=6,
+        xpd=TRUE,main = "Genus",
+        draw.segments = T,
+        frame.plot=T,
+        key.loc=c(8,-1),
+        col.segments = rainbow(10),
+        ylim=c(5,6)
+    )
+}
+if(sample_num > 36){
+    loc=c(8,-1)
+    if(sample_num>49){
+        loc=c(10,-1)
+    }
+    if(sample_num>100){
+        loc=c(12,-1)
+    }
+    stars(
+        t(X),
+        labels=colnames(X),
+        len=1,
+        #ncol=8,
+        xpd=TRUE,main = "Genus",
+        draw.segments = T,
+        frame.plot=T,
+        key.loc=c(8,-1),
+        col.segments = rainbow(10),
+        ylim=c(-1,20)
+    )
+}
 
 dev.off()
