@@ -51,8 +51,24 @@ p.tremark {
 	}
 .table {font-family:Calibri, Arial, Helvetica, sans-serif;width:100%; border-collapse:collapse; text-align:center;}
 .table td {text-align:center;}
-img.size1{height:500px;	width:500px;}
-img.size2{ height:500px; width:1000px;}
+img.size1{  
+	margin:5px auto;
+	width:500px;
+	padding:0;
+	border:1px solid #333;
+  }
+img.size2{ 
+	margin:5px auto;
+	width:1000px;
+	padding:0;
+	border:1px solid #333;
+	}
+img.size3{
+	height:500px;	width:500px;
+  }
+img.size4{
+	height:500px; width:1000px;
+	}
 
 
 

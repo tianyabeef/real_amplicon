@@ -1,6 +1,8 @@
 {% extends "base_pdf.html" %} 
-{% if reads_statistical %}
+
+
 {% block reads_statistical_head %} 
+{% if reads_statistical %}
     	<h3 id="优化序列统计">1.1优化序列统计</h3>
         	<p class="paragraph">
             通常情况下，有效序列可直接用于后续生物信息学分析。但若需要得到更高质量及更精准的生物信息分析结果，则应对有效序列进行去杂优化。若将长度过短的序列纳入分析范围会降低分析质量，通过去除长度短于220bp，可得到供精准分析的优化序列。
@@ -8,12 +10,14 @@
             <p class="center"><img src="images/length_distrubution.png"/></p>
             <p class="name_fig">图1-1 序列长度的统计</p>
             <p class="premark">注：横坐标是序列的长度，纵坐标是reads的数量</p>
-{% endblock %} 
 {% endif %}
+{% endblock %} 
 
 
-{% if otu_statistical %} 
+
+ 
 {% block otu_statistical_head %}
+{% if otu_statistical %}
 <h3 id="OTU聚类">2.1 OTU聚类</h3>
 <p class="paragraph">
             首先我们将序列完全一样的clean reads归为一种tag，并统计每条tag对应的丰度（即reads数目），然后将tags根据其丰度大小进行排序，将其中的singletons（对应tag只有一条的序列）过滤掉，因为singletons可能由于测序错误造成，故将这部分序列去除，不进行后期OTU聚类），利用usearch在0.97相似度下进行聚类，对聚类后的序列进行嵌合体过滤后，得到用于物种分类的OTU(Operational Taxonomic Units)，最后将所有clean reads比对到OTU序列上，将能比对上OTU的reads提取出来，得到最终的mapped reads。
@@ -29,13 +33,14 @@
 </div>
 <p class="tremark">注:第一列sample name是样品名称；第二列Amplicon type是指明测序是16S或者ITS；第三列clean read是质控后的reads条数；第四列Q20（%）是碱基质量值大于20的reads的比例；第五列Q30（%）是碱基质量值大于30的reads的比例；第六列singleton是singleton的条数；第七列singleton(%)是singleton占clean reads的比例；第八列mapped reads是比对上OTU的reads占clean reads的数量；第九列OTUs是样品所含有的OTU个数。
 </p>
-{% endblock %} 
 {% endif %}
+{% endblock %} 
 
 
-		{% if downsize_html %}
-		{% block downsize_head %}
+
 		
+		{% block downsize_head %}
+		{% if downsize_html %}
 			<h3 id="抽平处理">2.2 抽平处理</h3>
         	<p class="paragraph">
             由于不同样品对应的reads数量差距较大，为了保证后期分析结果合理，我们对每个样品的数据进行随机抽平处理，抽平参数根据Alpha多样性指数的稀释曲线来确定。
@@ -62,12 +67,14 @@
             </div>
             <p class="tremark">注：第一列sample name是样品名称；第二列even_reads_num是抽平前的OTU个数，第三列final_otus是抽平后样品所含有的OTU个数。
             </p>
-		{% endblock %} 
 		{% endif %}
+		{% endblock %} 
+		
 
 		
-{% if core_microbiome_html %} 
+
 {% block core_microbiome_head %}
+		{% if core_microbiome_html %} 
 		<h3 id="Core microbiome分析">2.3 Core microbiome分析（总样品数>=5）</h3>
         	<p class="center">共有OTU数与样品的关系：</p>
             <p class="center">
@@ -87,14 +94,15 @@
             </div>
             
             <p class="tremark">注：第一列OTU ID是OTU名称；第二列taxonomy level是OTU所代表的物种所在的分类水平；第三列taxonomy name是OTU所代表的物种名称。</p>
-			{% endblock %} 
+			 
 			{% else %}
 			<p>样品数不足无法分析</p>
 			{% endif %}
-
+			{% endblock %}
 				
-		{% if otu_venn %} 
+		
 		{% block otu_venn_head %}
+		{% if otu_venn %} 
 			<h3 id="OTU Venn图分析">2.4 OTU Venn图分析(分组数量2~5组)</h3>
         	<p class="paragraph">在0.97的相似度下，得到了每个样品的OTU个数，利用Venn图可以展示多样品共有和各自特有OTU数目，直观展示样品间OTU的重叠情况。</p>
             <p class="center">
@@ -102,14 +110,17 @@
             </p>
             <p class="name_fig">图2-5 OTU venn图（2-5组）</p>
             <p class="premark">不同颜色图形代表不同样品或者不同组别，不同颜色图形之间交叠部分数字为两个样品或两个组别之间共有的OTU个数。同理，多个颜色图形之间交叠部分数字为多个样品或组别之间共有OTU个数。Venn图容许2-5个样品或组别。</p>
-		{% endblock %} 
+		 
 		{% else %}
 			<p>样品数不足无法分析</p>
 		{% endif %}
+		{% endblock %}
+
 
 		
-		{% if otu_pca %} 
+		 
 		{% block otu_pca_head %}
+		{% if otu_pca %}
 		<h3 id="OTU PCA分析">2.5 OTU PCA分析（总样品数>=5）</h3>
         	<p class="paragraph">PCA分析(Principal Component Analysis)，即主成分分析，是一种分析和简化数据集的技术。不同处理或不同环境间的样品可能表现出分散和聚集的分布情况，从而可以判断相同条件的样品组成是否具有相似性。</p>
             <p class="center">
@@ -117,14 +128,15 @@
             </p>
             <p class="name_fig">图2-5-1 基于OTU丰度的PCA分析。</p>
             <p class="premark">横坐标表示第一主成分，括号中的百分比则表示第一主成分对样品差异的贡献率；纵坐标表示第二主成分，括号中的百分比表示第二主成分对样品差异的贡献率。图中点分别表示各个样品。不同颜色代表样品属于不同的分组。例如图中G1（红色样品）和G3（绿色样品）在PC1轴的方向上分离开来，则表示PC1是导致G1和G2分离开来的主要元素。</p>
-		{% endblock %} 
 		{% else %}
 			<p>样品数不足无法分析</p>
 		{% endif %}
+		{% endblock %} 
 
 
-		{% if specaccum %} 
+		
 		{% block specaccum_head %}
+		{% if specaccum %} 
 		<h3 id="Specaccum物种累积曲线">2.6 Specaccum物种累积曲线（总样品数>=10）</h3>
         	<p class="paragraph">物种累积曲线(?species?accumulation?curves)?用于描述随着抽样量的加大物种增加的状况，是理解调查样地物种组成和预测物种丰富度的有效工具，在生物多样性和群落调查中，被广泛用于抽样量充分性的判断以及物种丰富度(?species?richness)?的估计。因此，通过物种累积曲线不仅可以判断抽样量是否充分，在抽样量充分的前提下，运用物种累积曲线还可以对物种丰富度进行预测。</p>
             <p class="center">
@@ -132,15 +144,15 @@
             </p>
             <p class="name_fig">图2-6-1 物种累积曲线</p>
             <p class="premark">注：横坐标是样品的数量，纵坐标是OTUs的数量</p>
-		{% endblock %} 
 		{% else %}
 			<p>样品数不足无法分析</p>
 		{% endif %}
-
+		{% endblock %}
 
 		
-		{% if otu_tax_assignments %} 
+		 
 		{% block otu_tax_assignments_head %}
+		{% if otu_tax_assignments %}
 		<h3 id="物种注释分析">3.1 物种注释分析</h3>
         	<p class="paragraph">从各个OTU中挑选出丰度最高的一条序列，作为该OTU的代表序列（代表序列见文件rep_set.fna）。使用rdp方法，将该代表序列与已知物种的{{amplification}}数据库进行比对，从而对每个OTU进行物种归类（物种注释结果见文件rep_set_tax_assignments.txt）。</p>
             <p class="name_table">表3-1-1 OTU注释统计</p>
@@ -151,28 +163,30 @@
                 <div id="plist50"></div>
             </center>
             </div>
-		{% endblock %} 
+		 
 		{% endif %}
-
+		{% endblock %}
 
 		
-		{% if otu_annotation_statistical %} 
+		 
 		{% block otu_annotation_statistical_head %}
+		{% if otu_annotation_statistical %}
 		<h3 id="物种注释结果统计">3.2 物种注释结果统计</h3>
         	<p class="paragraph">根据物种注释情况，统计每个样品注释到各分类水平(Kingdom, Phylum, Class, Order, Family, Genus, Species)上的序列数目，由此可轻松了解注释到各分类水平的整体情况</p>
             <p class="center">
             	<img class="size1" src="images/15.png"/>
             </p>
             <p class="name_fig">图 3-2-1 各样品在各分类水平上的序列数目</p>
-		{% endblock %} 
 		{% endif %}
+		{% endblock %} 
 
 
 
 
 		
-		{% if tax_summary %} 
+		
 		{% block tax_summary_head %}
+		{% if tax_summary %} 
 		<h3 id="物种丰度分析">3.3 物种丰度分析</h3>
         	<p class="paragraph">分别在门、纲、目、科、属分类等级对各个样品做物种profiling相应的柱状图。结果可见附件文件夹“wf_taxa_summary/”。图3-1展示了各样品在门分类等级上的物种profiling柱状图。</p>
             <p class="center">
@@ -192,16 +206,18 @@
             </p>
             <p class="name_fig">图3-3-3 属分类水平中不同group的{{star_picture_top}}物种profiling星图。</p>
             <p class="premark">一个星形图代表着一个样品的物种相对丰度信息。每个星形图中的扇形代表一个物种，用不同颜色区分，用扇形的半径来代表物种相对丰度的大小，扇形半径越长代表此扇形所对应的物种的相对丰度越高。</p>
-		{% endblock %} 
-		{% endif %}
+			{% endif %}
+			{% endblock %} 
+		
 
 
 
 
 
 		
-		{% if otu_heatmap %} 
+		
 		{% block otu_heatmap_head %}
+		{% if otu_heatmap %} 
 		<h3 id="物种热图分析">3.4 物种热图分析（总样品数>=5）</h3>
         <p class="paragraph">Heatmap是以颜色梯度来代表数据矩阵中数值的大小并能根据物种或样品丰度相似性进行聚类的一种图形展示方式。聚类结果加上样品的处理或取样环境分组信息，可以直观观察到相同处理或相似环境样品的聚类情况，并直接反映了样品的群落组成的相似性和差异性。本分析内容在属分类等级进行heatmap聚类分析。纵向聚类表示所有物种在不同样品间表达的形似情况，距离越近，枝长越短，说明样品的物种组成及丰度越相似。横向聚类表示该物种在各样品丰度相似情况，与纵向聚类一样，距离越近，枝长越短，说明两物种在各样品间的组成越相似。</p>
             <p class="center">
@@ -210,35 +226,37 @@
             <p class="name_fig">图3-4-1 物种丰度热图。</p>
             <p class="premark">Heatmap是以颜色梯度来代表数据矩阵中数值的大小并能根据物种或样品丰度相似性进行聚类。如有样品分组信息，图中前两行为样品分组信息（如只有一种分组情况，则只有一行），颜色与图列对应。</p>
             <p class="paragraph">物种热图见文件夹“OTU_heatmap/”。</p>
-		{% endblock %} 
+		 
 		{% else %}
 			<p>样品数不足无法分析</p>
 		{% endif %}
-
+		{% endblock %}
 
 
 
 
 
 		
-		{% if otu_krona %} 
+		
 		{% block otu_krona_head %}
+		{% if otu_krona %} 
 				<h3 id="物种注释结果KRONA展示">3.5 物种注释结果KRONA展示（研发）</h3>
         	<p class="paragraph">使用KRONA[4]对物种注释结果进行可视化展示, 展示结果中，圆圈从内到外依次代表不同的分类级别，扇形的大小代表不同OTU注释结果的相对比例,更多详细的信息请参考KRONA展示结果详解。示例图如下所示：</p>
             <p class="center">
             	<img class="size2" src="images/20.png" />
             </p>
             <p class="name_fig">图3-5-1 物种注释结果可视化展示</p>
-		{% endblock %} 
+		 
 		{% endif %}
-
+		{% endblock %}
 
 
 
 
 		
-		{% if phylogenetic_tree %} 
+	
 		{% block phylogenetic_tree_head %}
+		{% if phylogenetic_tree %} 
 		<h3 id="系统进化关系展示">3.6 系统进化关系展示（更新）</h3>
         	<p class="paragraph">为了进一步研究OTUs的系统进化关系，通过多序列比对得到所有OTUs代表序列的系统发生关系。选取最大相对丰度排名前{{Phylogenetic_genus_top}}的属所对应的OTUs的系统发生关系数据，并结合每个OTUs的相对丰度及其代表序列的物种注释置信度信息，进行整合展示，由此可见这些属中的OTU之间的系统进化关系。</p>
             <p class="center">
@@ -246,9 +264,9 @@
             </p>
             <p class="name_fig">图 3-7 OTUs的系统发生关系及其物种注释</p>
 			<p class="premark">说明：圈图共有三层，由里往外：第一层是OTUs代表序列构建的系统发育树，分支的颜色表示其对应的属名，每种颜色代表一个属；第二层是OTUs的相对丰度分布，柱子的高度表示OTUs的相对丰度大小(由于相对丰度跨越数据量很大，将按照最小值进行转化后再可视化)；第三层是OTUs注释可信度分布，柱子的高度表示OTUs注释的可信度。</p>
-		{% endblock %} 
+		 
 		{% endif %}
-
+		{% endblock %}
 
 
 
@@ -257,8 +275,9 @@
 
 
 		
-		{% if alpha_diversity %} 
+		
 		{% block alpha_diversity_head %}
+		{% if alpha_diversity %} 
 				<h3 id="单个样品多样性分析">4.1 单个样品多样性分析（每组内样品数>=5）</h3>
         	<p class="name_table">表4-1-1 样品Alpha多样性统计结果</p>
             
@@ -277,28 +296,29 @@
             <div class="imglistwrap"><ul class="imglist">
             	<li><a id="group" href='images/group/alpha_div_collated/chao1.png' ><img src='images/group/alpha_div_collated/chao1.png'/></a></li>
             	<li><a id="group" href='images/group/alpha_div_collated/goods_coverage.png' ><img src='images/group/alpha_div_collated/goods_coverage.png'/></a></li>
-                <li><a id="group" href='images/alpha_div_collated/observed_species.png' ><img src='images/alpha_div_collated/observed_species.png'/></a></li>
-                <li><a id="group" href='images/alpha_div_collated/PD_whole_tree.png' ><img src='images/alpha_div_collated/PD_whole_tree.png'/></a></li>
-                <li><a id="group" href='images/alpha_div_collated/shannon.png' ><img src='images/alpha_div_collated/shannon.png'/></a></li>
-                <li><a id="group" href='images/alpha_div_collated/simpson.png' ><img src='images/alpha_div_collated/simpson.png'/></a></li>
+                <li><a id="group" href='images/group/alpha_div_collated/observed_species.png' ><img src='images/group/alpha_div_collated/observed_species.png'/></a></li>
+                <li><a id="group" href='images/group/alpha_div_collated/PD_whole_tree.png' ><img src='images/group/alpha_div_collated/PD_whole_tree.png'/></a></li>
+                <li><a id="group" href='images/group/alpha_div_collated/shannon.png' ><img src='images/group/alpha_div_collated/shannon.png'/></a></li>
+                <li><a id="group" href='images/group/alpha_div_collated/simpson.png' ><img src='images/group/alpha_div_collated/simpson.png'/></a></li>
             
             </ul></div>
             <div class="button moveforward" title="向下滚动"></div>
             </div>
             </div>
-		{% endblock %}
+		
 		{% else %}
 			<p>样品数不足无法分析</p>
 		{% endif %}
-
+		{% endblock %}
 
 
 
 
 
 		
-		{% if alpha_diff %} 
+		
 		{% block alpha_diff_head %}
+		{% if alpha_diff %} 
 		<h3 id="单个样品差异分析">4.2 单个样品差异分析(每组内样品数>=3)</h3>
             <p class="name_fig">图4-1组间Alpha多样性盒形图：</p>
             <p class="premark">盒形图可以显示5个统计量（最小值，第一个四分位数，中位数，第三个中位数和最大值，及由下到上的5条线），异常值以“o”标出。横轴是分组名称，纵轴是不同分组下的alpha多样性指数的值。</p>
@@ -313,12 +333,11 @@
             </div>
             
             <p class="tremark">注：第一列是Alpha diversity指数；第二列至第十列分别为十组样品的均值；最后一列为秩和检验的P-value值；</p>
-		{% endblock %} 
+		
 		{% else %}
 			<p>样品数不足无法分析</p>
 		{% endif %}
-
-
+		{% endblock %} 
 
 
 
@@ -327,6 +346,7 @@
 		
 		{% block uniFra_analysis_head %}
 		{% if uniFra_analysis_heatmap %} 
+		
 		<h3 id="UniFrac热图分析">5.1 UniFrac热图分析（每组样品数>=4）</h3>
         	<p class="paragraph">与Alpha多样性分析不同，Beta多样性（Beta diversity）分析是用来比较一对样品在物种多样性方面存在的差异大小。</p>
             <p class="paragraph">UniFrac是通过利用系统进化的信息来比较样品间的物种群落差异。其计算结果可以作为一种衡量beta diversity的指数，它考虑了物种间的进化距离，该指数越大表示样品间的差异越大。报告中给出的UniFrac结果分为加权UniFrac（weighted UniFrac）与非加权UniFirac（unweighted UniFrac）2种，其中weighted UniFrac考虑了序列的丰度，unweighted UniFrac不考虑序列丰度。图4-5 UniFrac距离分布heatmap，通过对UniFrac结果的聚类，具有相似beta多样性的样品聚类在一起，反应了样品间的相似性。详细统计结果见附件“weighted_unifrac.xls”与“unweighted_unifrac.xls”。</p>
@@ -384,9 +404,8 @@
 
 
 
-		
-		{% if similarity_analysis %} 
 		{% block similarity_analysis_head %}
+		{% if similarity_analysis %} 
 				<h3 id="Analysis of Similarity (ANOSIM)">5.3 Analysis of Similarity (ANOSIM)</h3>
         	<p class="paragraph">分析Bray–Curtis和weighted UniFrac时，把R-ANOSIM，P-ANOSIM和R2-ADONIS，P-ADONIS统计在一个表格里（请参见PNAS文章的第二页的表格）。</p>
             
@@ -396,15 +415,16 @@
                	<div id="plist56"></div>
            	</center>
             </div> 
-		{% endblock %} 
+ 
 		{% endif %}
+		{% endblock %}
 
 
 
 
 
-		
-		{% if lefse %} {% block lefse_head %}
+		{% block lefse_head %}
+		{% if lefse %} 
 		<h3 id="LDA EffectSize（LEfSe）分析">6.1 LDA EffectSize（LEfSe）分析</h3>
         	<p class="paragraph">LDA EffectSize（LEfSe分析）：LEfSe采用线性判别分析（LDA）来估算每个组分（物种）丰度对差异效果影响的大小，找出对样品划分产生显著性差异性影响的群落或物种。</p>
             <p class="center">
@@ -415,16 +435,16 @@
             </p>
             <p class="name_fig">图6-1 LEfSe分析图</p>
             <p class="premark">上图为聚类树，不同颜色表示不同分组，不同颜色的节点表示在该颜色所代表的分组中起到重要作用的微生物群。黄色节点表示的是在不同分组中没有起到重要作用的微生物类群。图中英文字母所表示的物种名称在右侧图例中进行展示。下图是统计不同分组中有显著作用的微生物类群通过LDA(线性回归分析)后得到的LDA分值。</p>
-		{% endblock %} 
+		 
 		{% endif %}
+		{% endblock %}
 
 
 
 
-
-		
+		{% block diff_analysis_head %}		
 		{% if diff_analysis %} 
-		{% block diff_analysis_head %}
+		
 		<h3 id="组间差异分析">6.2 组间差异分析</h3>
         	<h4>OTU水平的差异分析</h4>
             	<p class="paragraph">下表是在不同组样品间有显著差异的OTUs（p<{{ p_value }}, Kruskal-Wallis test），共{{ diff_otus }}个,如表6-2-1显示。</p>
@@ -444,7 +464,7 @@
                 <div class="slider">
                 <div class="button movebackward" title="向上滚动"></div>
                 <div class="imglistwrap"><ul class="imglist">
-					<li><a id="group" href='images/group/group/otu_diff/heatmap.png' ><img src='images/group/group/otu_diff/heatmap.png'/></a></li>
+					<li><a id="group" href='images/group/otu_diff/heatmap.png' ><img src='images/group/otu_diff/heatmap.png'/></a></li>
                     <li><a id="group" href='images/group/otu_diff/diff_boxplot.png' ><img src='images/group/otu_diff/diff_boxplot.png'/></a></li>
                     <li><a id="group" href='images/group/otu_diff/diff_pca.png' ><img src='images/group/otu_diff/diff_pca.png'/></a></li>                
                 </ul></div>
@@ -472,7 +492,7 @@
                 <div class="slider">
                 <div class="button movebackward" title="向上滚动"></div>
                 <div class="imglistwrap"><ul class="imglist">
-                    <li><a id="group" href='images/group/group/genus_diff/heatmap.png' ><img src='images/group/group/genus_diff/heatmap.png'/></a></li>
+                    <li><a id="group" href='images/group/genus_diff/heatmap.png' ><img src='images/group/genus_diff/heatmap.png'/></a></li>
                     <li><a id="group" href='images/group/genus_diff/diff_boxplot.png' ><img src='images/group/genus_diff/diff_boxplot.png'/></a></li>
                     <li><a id="group" href='images/group/genus_diff/diff_pca.png' ><img src='images/group/genus_diff/diff_pca.png'/></a></li>                
                 </ul></div>
@@ -499,7 +519,7 @@
                 <div class="slider">
                 <div class="button movebackward" title="向上滚动"></div>
                 <div class="imglistwrap"><ul class="imglist">
-                    <li><a id="group" href='images/group/group/taxall_diff/heatmap.png' ><img src='images/group/group/taxall_diff/heatmap.png'/></a></li>
+                    <li><a id="group" href='images/group/taxall_diff/heatmap.png' ><img src='images/group/taxall_diff/heatmap.png'/></a></li>
                     <li><a id="group" href='images/group/taxall_diff/diff_boxplot.png' ><img src='images/group/taxall_diff/diff_boxplot.png'/></a></li>
                     <li><a id="group" href='images/group/taxall_diff/diff_pca.png' ><img src='images/group/taxall_diff/diff_pca.png'/></a></li>                    
                 </ul></div>
@@ -525,14 +545,15 @@
                 <div class="slider">
                 <div class="button movebackward" title="向上滚动"></div>
                 <div class="imglistwrap"><ul class="imglist">
-                    <li><a id="group" href='images/group/group/phylum_diff/heatmap.png' ><img src='images/group/group/phylum_diff/heatmap.png'/></a></li>
+                    <li><a id="group" href='images/group/phylum_diff/heatmap.png' ><img src='images/group/phylum_diff/heatmap.png'/></a></li>
                     <li><a id="group" href='images/group/phylum_diff/diff_boxplot.png' ><img src='images/group/phylum_diff/diff_boxplot.png'/></a></li>
                     <li><a id="group" href='images/group/phylum_diff/diff_pca.png' ><img src='images/group/phylum_diff/diff_pca.png'/></a></li>                 
                 </ul></div>
                 <div class="button moveforward" title="向下滚动"></div>
                 </div>
                 </div>
-		{% endblock %} 
+
 		{% else %}
 			<p>样品数不足无法分析</p>
 		{% endif %}
+		{% endblock %} 
