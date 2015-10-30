@@ -1,9 +1,9 @@
 cols_brewer = c('#00447E','#F34800','#FFDD00','#930026','#64A10E','#A5CFED','#464E04','#BDD100','#4E0C66','#931025','#FEDE10','#00447E','#D00000','#64A10E','#F34800','#2B8BC3','#FDA100','#A6D4F2','#CDD7E2','#9295C1')
 data <- read.table('@#{infile}',header=TRUE,row.names=1,sep='\t', check.names=F)
-pdf_width = 8
-if(ncol(data) > 8){
-	pdf_width = ncol(data)
-}
+pdf_width = 15
+#if(ncol(data) > 8){
+#	pdf_width = ncol(data)
+#}
 pdf('@#{pdf_file}',height=12,width=pdf_width)
 tax_num = nrow(data)
 cols = cols_brewer[1:tax_num-1]
@@ -24,8 +24,13 @@ if(max_sample_name_length < 10){
 	bottom_mar = (max_sample_name_length-10)*font_size*0.5 + 8
 }
 par(mar=c(bottom_mar,4,4,4))
-width = 2
-spa = 0.2
+width = 5
+if(ncol(data)>99){
+  spa =0
+}else{
+  total_spa = (-0.56*ncol(data)+58)/100
+  spa = (15*total_spa/ncol(data))/(15*(1-total_spa)/ncol(data))
+}
 barplot(as.matrix(data),col=cols,xaxt='n',font=2,space=spa,width=width)
 
 
@@ -38,10 +43,17 @@ if(ncol(data)<10 && max_sample_name_length<5){
 }else if(ncol(data)>10){
 	srt=90
 }
-text(seq(from=0.7*width, length=ncol(data), by=2*spa+width), font_size*max_sample_name_length*0.2,
-	srt=srt, adj=0.5, labels=colnames(data),
-	xpd=T, cex=font_size, pos=1, y=-0.1)
-mtext('@#{title}', side=3, line=1, cex=font_size*1.1)
+if(ncol(data)<=50){
+  text(seq(from=1.5*spa*width, length=ncol(data), by=1*spa*width+width), font_size*max_sample_name_length*0.2,
+       srt=srt, adj=0.5, labels=colnames(data),
+       xpd=T, cex=font_size, pos=1, y=-0.1)
+  mtext('@#{title}', side=3, line=1, cex=font_size*1.1)
+}else if(ncol(data)>50){
+  text(seq(from=1.5*spa*width, length=ncol(data), by=1*spa*width+width), font_size*max_sample_name_length*0.2,
+       srt=srt, adj=0.5, labels=colnames(data),
+       xpd=T, cex=font_size*0.8, pos=1, y=-0.1)
+  mtext('@#{title}', side=3, line=1, cex=font_size*1.1)
+}
 
 par(mar=c(0,0,0,0))
 plot(0, type="n", bty="n", xaxt="n", yaxt="n", xlab="")

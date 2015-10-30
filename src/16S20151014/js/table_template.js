@@ -147,7 +147,7 @@ var alpha_diversitys=[
 		caption: "样品Alpha多样性统计结果"
 	});
  })
- 
+{% if alpha_diff_exist %} 
 var alpha_diversity_diffs=[
 
 {% for key,alphaDiversity in alpha_diversity_diffs.items() %}
@@ -179,6 +179,10 @@ var alpha_diversity_diffs=[
 	});
  })
  
+{% endif %}
+
+
+{% if beta_diversity_exist %}
  var beta_diversitys=[
  {% for beta_diversity in beta_diversity_data %}
  {{ beta_diversity }}	
@@ -202,7 +206,9 @@ var alpha_diversity_diffs=[
 		caption: "样品Beta diversity统计表（weighted_unifrac）"
 	});
  })
+{% endif %}
 
+{% if beta_un_diversity_exist %}
  var beta_un_diversitys=[
  {% for beta_diversity in beta_un_diversity_data %}
  {{ beta_diversity }}	
@@ -226,9 +232,9 @@ jQuery().ready(function (){
 		caption: "样品Beta diversity统计表（unweighted_unifrac）"
 	});
  })
+ {% endif %}
  
- 
-
+{% if diff_otu_marker_exist %}
 var diff_otu_markers=[
  {% for value in diff_otu_marker_data %}
  {{ value }}	
@@ -252,7 +258,10 @@ jQuery().ready(function (){
 		caption: "差异显著OTU列表"
 	});
  })
+{% endif %}
 
+
+{% if diff_genus_marker_exist %}
 var diff_genus_markers=[
  {% for value in diff_genus_marker_data %}
  {{ value }}	
@@ -276,7 +285,9 @@ var diff_genus_markers=[
 		caption: "差异显著物种列表"
 	});
  })
- 
+{% endif %} 
+
+{% if diff_taxall_marker_exist %}
  var diff_taxall_markers=[
  {% for value in diff_genus_marker_data %}
  {{ value }}	
@@ -300,6 +311,10 @@ var diff_genus_markers=[
 		caption: "所有水平差异显著物种列表"
 	});
  })
+
+{% endif %}
+
+{% if diff_phylum_marker_exist %}
  var diff_phylum_markers=[
  {% for value in diff_phylum_marker_data %}
  {{ value }}	
@@ -323,4 +338,4 @@ var diff_genus_markers=[
 		caption: "门差异显著物种列表"
 	});
  })
-
+{% endif %}
