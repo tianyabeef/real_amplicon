@@ -1,4 +1,5 @@
-library(WGCNA)
+source('/data_center_01/pipeline/16S_ITS_pipeline_v3.0/src/template/labels2colors.R')
+
 table = read.table('@#{otu_table}', sep = "\t",head = T, check.names=F)
 group=read.table('@#{group_file}', sep = "\t",head = F,row.names=1, check.names=F)
 pdf('@#{pdf_file}')
@@ -19,7 +20,9 @@ ymax=max(as.numeric(as.character(table[table != "n/a"])))
 
 # plot blank canvas
 plot(0,0,xlim=c(0,max(readnumber)+1800),ylim=c(0,ymax),type="n",xlab="reads",ylab="@#{alpha_name}",cex.lab=1.4)
-legend("topright",legend=g_order,col=gcols_order,seg.len=1.5,lwd=1.6,cex=0.8)
+if( length( g_order ) <= 10){ 
+	legend("topright",legend=g_order,col=gcols_order,seg.len=1.5,lwd=1.6,cex=0.8) 
+}
 
 # fitting function
 otu <- function(reads, vmax, km){
