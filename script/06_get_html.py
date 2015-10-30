@@ -57,7 +57,8 @@ class Alpha_diversity(object):
 
 
 def save_table(input_dir):
-#save table
+#save tablei
+    exist=True
     weight_unifrac_data_list=[]
     weight_unifrac_jqGrid_list=[]
     sampleName="'"
@@ -102,11 +103,14 @@ def save_table(input_dir):
 					weight_unifrac_jqGrid_list.append(jqGrid)
 			weight_unifrac_data_list.append(str)
     except IOError as err:
+        exist=False
 	print "have no "+input_dir+"\n"
-    return [weight_unifrac_data_list,weight_unifrac_jqGrid_list,sampleName]
+        
+    return [weight_unifrac_data_list,weight_unifrac_jqGrid_list,sampleName,exist]
 def save_table2(input_dir):
 #save table
 #save table
+    exist=True
     weight_unifrac_data_list=[]
     weight_unifrac_jqGrid_list=[]
     sampleName="'"
@@ -151,8 +155,9 @@ def save_table2(input_dir):
 					weight_unifrac_jqGrid_list.append(jqGrid)
 			weight_unifrac_data_list.append(str)
     except IOError as err:
-           print "have no "+input_dir+"\n"
-    return [weight_unifrac_data_list,weight_unifrac_jqGrid_list,sampleName]
+            exist=False
+            print "have no "+input_dir+"\n"
+    return [weight_unifrac_data_list,weight_unifrac_jqGrid_list,sampleName,exist]
                   
 def read_params(args):
     parser = argparse.ArgumentParser(description='get_html ')
@@ -230,6 +235,7 @@ def get_html():
 
 #save table
     alpha_diversity_diffs={}
+    alpha_diff_exist=True
     try:
         with open(work_dir+"../"+config.get('origin','group_alpha_markers_txt').replace("#group",group_file),'r') as lines:
             lines.next()
@@ -238,6 +244,7 @@ def get_html():
                 alpha_diversity=Alpha_diversity(tabs[0],tabs[1],tabs[2],tabs[3],tabs[4],tabs[5],tabs[6])
                 alpha_diversity_diffs[tabs[0]]=alpha_diversity
     except IOError as err:
+        alpha_diff_exist=False
         print "have no group_alpha_markers_txt\n"
 
 #save_table
@@ -259,13 +266,13 @@ def get_html():
     otuStatisticalDownsizes = sorted(otuStatisticalDownsizes.iteritems(),key=operator.itemgetter(1),reverse=True)
     table = template.render(otuStatisticals=otuStatisticals,otuStatisticalDownsizes=otuStatisticalDownsizes,
                             otuAssignmentsStatisticals =otuAssignmentsStatisticals,alpha_diversitys=alpha_diversitys,
-                            alpha_diversity_diffs = alpha_diversity_diffs,beta_diversity_data=beta_diversity[0],beta_diversity_jqGrid=beta_diversity[1],
-                            beta_diversity_sampleName=beta_diversity[2],beta_un_diversity_data=beta_un_diversity[0],beta_un_diversity_jqGrid=beta_un_diversity[1],
-                            beta_un_diversity_sampleName=beta_un_diversity[2],coreMicrobiomes=coreMicrobiomes,
-                            diff_otu_marker_data=diff_otu_marker[0],diff_otu_marker_jqGrid=diff_otu_marker[1],diff_otu_marker_sampleName=diff_otu_marker[2],
-                            diff_genus_marker_data = diff_genus_marker[0],diff_genus_marker_jqGrid = diff_genus_marker[1],diff_genus_marker_sampleName = diff_genus_marker[2],
-                            diff_taxall_marker_data = diff_taxall_marker[0], diff_taxall_marker_jqGrid = diff_taxall_marker[1],diff_taxall_marker_sampleName= diff_taxall_marker[2],
-                            diff_phylum_marker_data = diff_phylum_marker[0],diff_phylum_marker_jqGrid = diff_phylum_marker[1],diff_phylum_marker_sampleName = diff_phylum_marker[2])
+                            alpha_diversity_diffs = alpha_diversity_diffs,alpha_diff_exist=alpha_diff_exist,beta_diversity_data=beta_diversity[0],beta_diversity_jqGrid=beta_diversity[1],
+                            beta_diversity_sampleName=beta_diversity[2],beta_diversity_exist=beta_diversity[3],beta_un_diversity_data=beta_un_diversity[0],beta_un_diversity_jqGrid=beta_un_diversity[1],
+                            beta_un_diversity_sampleName=beta_un_diversity[2],beta_un_diversity_exist=beta_un_diversity[3],coreMicrobiomes=coreMicrobiomes,
+                            diff_otu_marker_data=diff_otu_marker[0],diff_otu_marker_jqGrid=diff_otu_marker[1],diff_otu_marker_sampleName=diff_otu_marker[2],diff_otu_marker_exist=diff_otu_marker[3],
+                            diff_genus_marker_data = diff_genus_marker[0],diff_genus_marker_jqGrid = diff_genus_marker[1],diff_genus_marker_sampleName = diff_genus_marker[2],diff_genus_marker_exist=diff_genus_marker[3],
+                            diff_taxall_marker_data = diff_taxall_marker[0], diff_taxall_marker_jqGrid = diff_taxall_marker[1],diff_taxall_marker_sampleName= diff_taxall_marker[2],diff_taxall_marker_exist=diff_taxall_marker[3],
+                            diff_phylum_marker_data = diff_phylum_marker[0],diff_phylum_marker_jqGrid = diff_phylum_marker[1],diff_phylum_marker_sampleName = diff_phylum_marker[2],diff_phylum_marker_exist=diff_phylum_marker[3])
     with open(work_dir+'report/js/table.js','w') as fp:
         fp.write(table)
     #finally_get_html
