@@ -67,7 +67,11 @@ def save_table(input_dir):
 		head=lines.next()
 		samples_name = head.strip().split('\t')
 		samples_name.insert(0,"sampleName")
-		sampleName = ("','").join(samples_name)
+                if(len(samples_name)>10):
+                        samples_name_two = samples_name[:10]
+                        sampleName = ("','").join(samples_name_two)
+                else:
+		        sampleName = ("','").join(samples_name)
 		jqGrid_head = "{name:'sampleName',index:'sampleName',width:90,align:'center'},"
 		weight_unifrac_jqGrid_list.append(jqGrid_head)
 		count = 0
@@ -75,32 +79,41 @@ def save_table(input_dir):
 		for_time = []
 		for i,value in enumerate(samples_name):
 			for_time.append("%s%d"%("sample",i))
-		for count,line in enumerate(lines):
+                for count,line in enumerate(lines):
 			count += 1
 			tabs = line.strip().split("\t")
 			str="{sampleName:\""+tabs[0]+"\","
 			for i,value in enumerate(for_time):
 				jqGrid = '{'
 				if len(for_time)<9:
+                                    
 					if i<len(for_time)-1:
-						str += value+":\""+tabs[i+1]+"\","
+						str += '%s:"%.2f",'%(value,float(tabs[i+1].replace("NA","0")))
+                                                #str += value+":\""+tabs[i+1]+"\","
 						jqGrid += "name:'"+value+"',index:'"+value+"',aligen:'center',width:90},"
 					else:
 						jqGrid += "name:'"+value+"',index:'"+value+"',aligen:'center',width:90}"
-						str += value+":\""+tabs[i+1]+"\""
+						str += '%s:"%.2f"'%(value,float(tabs[i+1].replace("NA","0")))
+                                                #str += value+":\""+tabs[i+1]+"\""
 						str +='},'
+                                        if count ==1:
+                                            weight_unifrac_jqGrid_list.append(jqGrid)
 				else:
 					
 					if i<8:
-						str += value+":\""+tabs[i+1]+"\","
+						str += '%s:"%.2f",'%(value,float(tabs[i+1].replace("NA","0")))
+                                                #str += value+":\""+tabs[i+1]+"\","
 						jqGrid += "name:'"+value+"',index:'"+value+"',aligen:'center',width:90},"
+                                                if count ==1:
+                                                    weight_unifrac_jqGrid_list.append(jqGrid)
 					else:
 						jqGrid += "name:'"+value+"',index:'"+value+"',aligen:'center',width:90}"
-						str += value+":\""+tabs[i+1]+"\""
-						str +='}'
+                                                str += '%s:"%.2f"'%(value,float(tabs[i+1].replace("NA","0")))
+                                                #str += value+":\""+tabs[i+1]+"\""
+                                                str +='},'
+                                                if count ==1:
+                                                    weight_unifrac_jqGrid_list.append(jqGrid)
 						break
-				if count ==1:
-					weight_unifrac_jqGrid_list.append(jqGrid)
 			weight_unifrac_data_list.append(str)
     except IOError as err:
         exist=False
@@ -118,7 +131,11 @@ def save_table2(input_dir):
 	with open(input_dir) as lines:
 		head=lines.next()
 		samples_name = head.strip().split('\t')
-		sampleName = ("','").join(samples_name)
+		if(len(samples_name)>10):
+                        samples_name_two = samples_name[:10]
+                        sampleName = ("','").join(samples_name_two)
+                else:
+                        sampleName = ("','").join(samples_name)
 		jqGrid_head = "{name:'taxonname',index:'taxonname',width:90,align:'center'},"
 		weight_unifrac_jqGrid_list.append(jqGrid_head)
 		count = 0
@@ -135,21 +152,25 @@ def save_table2(input_dir):
 				jqGrid = '{'
 				if len(for_time)<9:
 					if i<len(for_time)-1:
-						str += value+":\""+tabs[i+1]+"\","
+                                                str += '%s:"%.2f",'%(value,float(tabs[i+1].replace('NA','0')))
+						#str += value+":\""+tabs[i+1]+"\","
 						jqGrid += "name:'"+value+"',index:'"+value+"',aligen:'center',width:90},"
 					else:
 						jqGrid += "name:'"+value+"',index:'"+value+"',aligen:'center',width:90}"
-						str += value+":\""+tabs[i+1]+"\""
+						str += '%s:"%.2f"'%(value,float(tabs[i+1].replace('NA','0')))
+                                                #str += value+":\""+tabs[i+1]+"\""
 						str +='},'
 				else:
 					
 					if i<8:
-						str += value+":\""+tabs[i+1]+"\","
+                                                str += '%s:"%.2f",'%(varlue,float(tabs[i+1].replace('NA','0')))
+						#str += value+":\""+tabs[i+1]+"\","
 						jqGrid += "name:'"+value+"',index:'"+value+"',aligen:'center',width:90},"
 					else:
 						jqGrid += "name:'"+value+"',index:'"+value+"',aligen:'center',width:90}"
-						str += value+":\""+tabs[i+1]+"\""
-						str +='}'
+						str += '%s:"%.2f"'%(value,float(tabs[i+1].replace('NA','0')))
+                                                #str += value+":\""+tabs[i+1]+"\""
+						str +='},'
 						break
 				if count ==1:
 					weight_unifrac_jqGrid_list.append(jqGrid)
@@ -166,6 +187,10 @@ def read_params(args):
     args = parser.parse_args()
     params = vars(args)
     return params
+
+def stringasfloat(string):
+    return '%.2f'%(float(string),)
+
 
 def get_html():
     params = read_params(sys.argv)
@@ -221,7 +246,7 @@ def get_html():
         lines.next()
         for line in lines:
             tabs = line.strip().split('\t')
-            otuAssignmentsStatistical=OtuAssignmentsStatistical(tabs[0],tabs[1])
+            otuAssignmentsStatistical=OtuAssignmentsStatistical(tabs[0],stringasfloat(tabs[1]))
 	    otuAssignmentsStatisticals[tabs[0]]=otuAssignmentsStatistical
 
 #save table
@@ -230,7 +255,7 @@ def get_html():
         lines.next()
         for line in lines:
             tabs = line.strip().split('\t')
-            alpha_diversity=Alpha_diversity(tabs[0],tabs[1],tabs[2],tabs[3],tabs[4],tabs[5],tabs[6])
+            alpha_diversity=Alpha_diversity(tabs[0],stringasfloat(tabs[1]),stringasfloat(tabs[2]),stringasfloat(tabs[3]),stringasfloat(tabs[4]),stringasfloat(tabs[5]),stringasfloat(tabs[6]))
             alpha_diversitys[tabs[0]]=alpha_diversity
 
 #save table
@@ -241,7 +266,7 @@ def get_html():
             lines.next()
             for line in lines:
                 tabs = line.strip().split('\t')
-                alpha_diversity=Alpha_diversity(tabs[0],tabs[1],tabs[2],tabs[3],tabs[4],tabs[5],tabs[6])
+                alpha_diversity=Alpha_diversity(tabs[0],'%.2f'%(float(tabs[1]),),stringasfloat(tabs[2]),stringasfloat(tabs[3]),stringasfloat(tabs[4]),stringasfloat(tabs[5]),stringasfloat(tabs[6]))
                 alpha_diversity_diffs[tabs[0]]=alpha_diversity
     except IOError as err:
         alpha_diff_exist=False
@@ -317,13 +342,14 @@ def get_html():
 
     var_html['specaccum']=True
     var_html['otu_tax_assignments']=True
-    var_html['otu_annotation_statistical']=True
+    var_html['otu_annotation_statistical']=False
     var_html['tax_summary']=True
     var_html['otu_krona']=False
     var_html['phylogenetic_tree']=False
     var_html['similarity_analysis']=True
     var_html['lefse']=True
-    var_html['diff_analysis']=False
+    if min_sample_num_in_groups >= 3:
+        var_html['diff_analysis']=True
     
     env = Environment(loader=FileSystemLoader(out_dir_report+'/templates',encoding='utf-8'))
     template = env.get_template('report.html')
