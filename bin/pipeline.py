@@ -1,12 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- \#
 
-
 from settings import *
 from functional_modules import *
 import time
-
-
 
 PWD = os.getcwd()
 
@@ -113,6 +110,24 @@ def work_alpha_rare_all(pipeline, out_stat_file, infiles=None):
                                                  outfiles['shell']])
 
     pipeline.add_job('alpha_rare_all', work_dir + '/work.sh', prep='OTU_all')
+    outfiles['tree_file'] = tree_outfiles['tree_file']
+    return outfiles
+
+
+def work_beta_anosim_adonis(pipeline, infiles=None, tree_file=None):
+    work_dir = '%s/04_diversity_analysis/beta_ANOSIM_ADONIS' % pipeline.config.get(
+        'params', 'work_dir')
+    vars = {
+        'work_dir': work_dir,
+        'otu_biom': infiles['otu_biom'],
+        'tree_file': tree_file
+    }
+    outfiles = beta_ANOSIM_ADONIS(pipeline.config, vars=vars)
+    pipeline.make_shell(work_dir + '/make.sh',
+                        [('beta_ANOSIM_ADONIS', outfiles['config'])])
+    pipeline.add_job('beta_anosim_adonis',
+                     outfiles['shell'],
+                     prep='alpha_rare_all')
     return outfiles
 
 
@@ -156,24 +171,28 @@ def work_03(pipeline, analysis_name, infiles=None):
     pipeline.add_job('OTU_group_' + analysis_name,
                      work_dir + '/work.sh',
                      prep='pick_otu')
-    otu_table_outfiles['summarize_dir'] = taxanomy_group_outfiles['summarize_dir']
+    otu_table_outfiles['summarize_dir'
+                       ] = taxanomy_group_outfiles['summarize_dir']
     return otu_table_outfiles
 
 
 def work_diff(pipeline, analysis_name, group_file, infiles=None):
     work_dir = '%s/05_diff_analysis/%s' % (pipeline.config.get(
         'params', 'work_dir'), analysis_name)
-    vars = {'work_dir':work_dir,
-            'group':group_file,
-            'summarize_dir':infiles['summarize_dir'],
-            'uniform_profile':infiles['uniform_profile']}
+    vars = {
+        'work_dir': work_dir,
+        'group': group_file,
+        'summarize_dir': infiles['summarize_dir'],
+        'uniform_profile': infiles['uniform_profile']
+    }
     outfiles = taxanomy_diff(pipeline.config, vars=vars)
     pipeline.make_shell(work_dir + '/make.sh',
                         [('taxanomy_diff', outfiles['config'])])
-    pipeline.add_job('diff_analysis_'  + analysis_name,
+    pipeline.add_job('diff_analysis_' + analysis_name,
                      outfiles['shell'],
                      prep='OTU_group_' + analysis_name)
     return outfiles
+
 
 def work_tree(pipeline, analysis_name, infiles=None):
     work_dir = '%s/04_diversity_analysis/%s/tree' % (
@@ -242,28 +261,32 @@ def work_beta_diversity(pipeline, analysis_name, tree_file, infiles=None):
                      prep='make_tree_' + analysis_name)
     return beta_diversity_outfiles
 
-def work_html(pipeline,group_files,infiles=None):
-    word_dir = pipeline.config.get('params','work_dir')
+
+def work_html(pipeline, group_files, infiles=None):
+    word_dir = pipeline.config.get('params', 'work_dir')
     data_type = pipeline.config.get('params', 'data_type')
-    job_id = pipeline.config.get('params','job_id')
+    job_id = pipeline.config.get('params', 'job_id')
     group_files = group_files
-    work_dir = word_dir+"/"+job_id+"_report_"+time.strftime('%F')+"/"
+    work_dir = word_dir + "/" + job_id + "_report_" + time.strftime('%F') + "/"
     vars = {
-	'work_dir':work_dir,
-	'group_files':group_files,
-	'data_type':data_type,
-	'job_id':job_id
-	}
-    get_result_outfile = get_result(pipeline.config,vars=vars)
-    get_html_outfile = get_html(pipeline.config,vars=vars)
-    pipeline.make_shell(work_dir+'/make.sh',[('get_result',get_result_outfile['config']),('get_html',get_html_outfile['config'])])
-    pipeline.merge_shell(work_dir + '/work.sh',
-                         [get_result_outfile['shell'],
-                          get_html_outfile['shell']])
+        'work_dir': work_dir,
+        'group_files': group_files,
+        'data_type': data_type,
+        'job_id': job_id
+    }
+    get_result_outfile = get_result(pipeline.config, vars=vars)
+    get_html_outfile = get_html(pipeline.config, vars=vars)
+    pipeline.make_shell(work_dir + '/make.sh',
+                        [('get_result', get_result_outfile['config']),
+                         ('get_html', get_html_outfile['config'])])
+    pipeline.merge_shell(work_dir + '/work.sh', [get_result_outfile['shell'],
+                                                 get_html_outfile['shell']])
     pipeline.add_job('html',
                      work_dir + '/work.sh',
                      prep=pipeline.html_hold_jobs[:-1])
     return get_html
+
+
 if __name__ == '__main__':
     work_cfg = PWD + '/work.cfg'
     pipeline = Pipeline(work_cfg)
@@ -277,12 +300,16 @@ if __name__ == '__main__':
     alpha_outfiles_all = work_alpha_rare_all(pipeline,
                                              outfiles_01['out_stat_file'],
                                              infiles=outfiles_02)
+    beta_anosim_adonis = work_beta_anosim_adonis(
+        pipeline,
+        infiles=outfiles_02,
+        tree_file=alpha_outfiles_all['tree_file'])
     for group_file in group_files:
         analysis_name = re.search('.+\/(.+)\..+', group_file).group(1)
         infiles = copy.deepcopy(outfiles_01)
         infiles['group_file'] = group_file
         outfiles_03 = work_03(pipeline, analysis_name, infiles=infiles)
-        work_diff(pipeline, analysis_name,group_file, infiles=outfiles_03)
+        work_diff(pipeline, analysis_name, group_file, infiles=outfiles_03)
         tree_file = work_tree(pipeline, analysis_name, infiles=outfiles_03)
         infiles = {
             'group_file': group_file,
@@ -297,4 +324,4 @@ if __name__ == '__main__':
                             analysis_name,
                             tree_file,
                             infiles=infiles)
-    work_html(pipeline,user_config.get('params', 'group_files'))
+    work_html(pipeline, user_config.get('params', 'group_files'))

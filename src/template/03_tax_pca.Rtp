@@ -15,7 +15,7 @@ if(nrow(X)==0){
 else{ 
 	group=as.data.frame(group)
 	colnames(X)=rownames(group)
-	colors=labels2colors(group[,1],colorSeq=cols_brewer )
+	colors=labels2colors(group[,1],colorSeq=cols_brewer)
 	g=unique(group)
 	g_order=g[order(g),1]
 	gcols=unique(colors)
@@ -32,7 +32,7 @@ else{
 	ymax=max(X.dudi$li[,2])
 	ylegend = (ymax - ymin) * 0.1
 	plot(X.dudi$li,col=colors,pch=20,cex=1.2,ylim=c(ymin,ymax+ylegend),xlab=paste("PCA1(",con[1],"%)",sep=""),ylab=paste("PCA2(",con[2],"%)",sep=""),cex.axis=1.5,cex.lab=2)
-	legend("topleft",A,col=gcols_order,pch=20,cex=1.5,horiz=F) 
+	legend("topleft",A,col=gcols_order,pch=20,cex=1.5,horiz=T) 
 }
 
 dev.off()
