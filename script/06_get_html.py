@@ -39,8 +39,8 @@ class OtuStatisticalDownsize(object):
 class CoreMicrobiome(object):
     def __init__(self,otu_id, taxonomy_level,taxonomy_name):
         self.otu_id=otu_id
-        self.taxonomy_levle=taxonomy_level
-        self.taxonomh_name=taxonomy_name
+        self.taxonomy_level=taxonomy_level
+        self.taxonomy_name=taxonomy_name
 class OtuAssignmentsStatistical(object):
     def __init__(self,assignmentsName,num):
         self.assignmentsName=assignmentsName
@@ -238,6 +238,7 @@ def get_html():
         for line in lines:
             tabs = line.strip().split("\t")
             coreMicrobiome = CoreMicrobiome(tabs[0],tabs[1],tabs[2])
+	    print tabs[0],tabs[1],tabs[2]
             coreMicrobiomes[tabs[0]] = coreMicrobiome
 
 #save table

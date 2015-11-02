@@ -76,7 +76,7 @@ var coreMicrobiomes=[
 		height: 150,
 		rowNum: 10,
 		rowList: [10,20,30],
-		colNames:['otuId','taxonomyLevel', 'taxonomyName'],
+		colNames:['otuName','taxonomyLevel', 'taxonomyName'],
 		colModel:[
 			{name:'otuId',index:'otuId', width:90,align:"center", sortype:"int"},
 			{name:'taxonomyLevel',index:'taxonomyLevel', width:200,align:"center", sortype:"int"},
