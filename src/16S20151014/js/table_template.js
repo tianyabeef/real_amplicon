@@ -108,8 +108,8 @@ var otuAssignmentsStatisticals=[
 		rowList: [10,20,30],
 		colNames:['otuName','num'],
 		colModel:[
-			{name:'otuName',index:'otuName', width:90,align:"center", sortype:"int"},
-			{name:'num',index:'num', width:90,align:"center", sortype:"int"}	
+			{name:'otuName',index:'otuName', width:140,align:"center", sortype:"int"},
+			{name:'num',index:'num', width:140,align:"center", sortype:"int"}	
 		],
 		pager: "#plist50",
 		viewrecords: true,
