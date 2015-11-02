@@ -90,9 +90,9 @@ def save_table(input_dir):
 					if i<len(for_time)-1:
 						str += '%s:"%.2f",'%(value,float(tabs[i+1].replace("NA","0")))
                                                 #str += value+":\""+tabs[i+1]+"\","
-						jqGrid += "name:'"+value+"',index:'"+value+"',aligen:'center',width:90},"
+						jqGrid += "name:'"+value+"',index:'"+value+"',align:'center',width:90},"
 					else:
-						jqGrid += "name:'"+value+"',index:'"+value+"',aligen:'center',width:90}"
+						jqGrid += "name:'"+value+"',index:'"+value+"',align:'center',width:90}"
 						str += '%s:"%.2f"'%(value,float(tabs[i+1].replace("NA","0")))
                                                 #str += value+":\""+tabs[i+1]+"\""
 						str +='},'
@@ -103,11 +103,11 @@ def save_table(input_dir):
 					if i<8:
 						str += '%s:"%.2f",'%(value,float(tabs[i+1].replace("NA","0")))
                                                 #str += value+":\""+tabs[i+1]+"\","
-						jqGrid += "name:'"+value+"',index:'"+value+"',aligen:'center',width:90},"
+						jqGrid += "name:'"+value+"',index:'"+value+"',align:'center',width:90},"
                                                 if count ==1:
                                                     weight_unifrac_jqGrid_list.append(jqGrid)
 					else:
-						jqGrid += "name:'"+value+"',index:'"+value+"',aligen:'center',width:90}"
+						jqGrid += "name:'"+value+"',index:'"+value+"',align:'center',width:90}"
                                                 str += '%s:"%.2f"'%(value,float(tabs[i+1].replace("NA","0")))
                                                 #str += value+":\""+tabs[i+1]+"\""
                                                 str +='},'
@@ -154,9 +154,9 @@ def save_table2(input_dir):
 					if i<len(for_time)-1:
                                                 str += '%s:"%.2f",'%(value,float(tabs[i+1].replace('NA','0')))
 						#str += value+":\""+tabs[i+1]+"\","
-						jqGrid += "name:'"+value+"',index:'"+value+"',aligen:'center',width:90},"
+						jqGrid += "name:'"+value+"',index:'"+value+"',align:'center',width:90},"
 					else:
-						jqGrid += "name:'"+value+"',index:'"+value+"',aligen:'center',width:90}"
+						jqGrid += "name:'"+value+"',index:'"+value+"',align:'center',width:90}"
 						str += '%s:"%.2f"'%(value,float(tabs[i+1].replace('NA','0')))
                                                 #str += value+":\""+tabs[i+1]+"\""
 						str +='},'
@@ -165,9 +165,9 @@ def save_table2(input_dir):
 					if i<8:
                                                 str += '%s:"%.2f",'%(varlue,float(tabs[i+1].replace('NA','0')))
 						#str += value+":\""+tabs[i+1]+"\","
-						jqGrid += "name:'"+value+"',index:'"+value+"',aligen:'center',width:90},"
+						jqGrid += "name:'"+value+"',index:'"+value+"',align:'center',width:90},"
 					else:
-						jqGrid += "name:'"+value+"',index:'"+value+"',aligen:'center',width:90}"
+						jqGrid += "name:'"+value+"',index:'"+value+"',align:'center',width:90}"
 						str += '%s:"%.2f"'%(value,float(tabs[i+1].replace('NA','0')))
                                                 #str += value+":\""+tabs[i+1]+"\""
 						str +='},'
@@ -238,7 +238,6 @@ def get_html():
         for line in lines:
             tabs = line.strip().split("\t")
             coreMicrobiome = CoreMicrobiome(tabs[0],tabs[1],tabs[2])
-	    print tabs[0],tabs[1],tabs[2]
             coreMicrobiomes[tabs[0]] = coreMicrobiome
 
 #save table
