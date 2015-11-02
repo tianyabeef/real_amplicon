@@ -2,7 +2,6 @@ library(gplots)
 library(RColorBrewer)
 cols_brewer = c('#00447E','#F34800','#FFDD00','#930026','#64A10E','#A5CFED','#464E04','#BDD100','#4E0C66','#931025','#FEDE10','#00447E','#D00000','#64A10E','#F34800','#2B8BC3','#FDA100','#A6D4F2','#CDD7E2','#9295C1')
 data=read.table("@#{heatmap_profile}",header=TRUE,row.names=1,sep="\t",check.names=F)
-data =data[,1:50]
 row.sums <- apply(data, 1, sum)
 data_sort <-sort(row.sums)
 data_sort_rev <-rev(data_sort)
