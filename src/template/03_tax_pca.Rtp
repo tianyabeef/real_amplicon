@@ -11,8 +11,7 @@ X=X[,rownames(group)]
 if(nrow(X)==0){
 	plot(0,type='n')
 	text(1,0,'no diff')
-}
-else{ 
+}else{ 
 	group=as.data.frame(group)
 	colnames(X)=rownames(group)
 	colors=labels2colors(group[,1],colorSeq=cols_brewer)
