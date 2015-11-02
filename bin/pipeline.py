@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*- \#
+
+
 from settings import *
 from functional_modules import *
 import time
