@@ -2,60 +2,76 @@ library(gplots)
 library(RColorBrewer)
 cols_brewer = c('#00447E','#F34800','#FFDD00','#930026','#64A10E','#A5CFED','#464E04','#BDD100','#4E0C66','#931025','#FEDE10','#00447E','#D00000','#64A10E','#F34800','#2B8BC3','#FDA100','#A6D4F2','#CDD7E2','#9295C1')
 data=read.table("@#{heatmap_profile}",header=TRUE,row.names=1,sep="\t",check.names=F)
-data=cbind(data1,data2,data3,data4,data5)
-row.sums <- apply(data, 1, sum)
-data_sort <-sort(row.sums)
-data_sort_rev <-rev(data_sort)
-if("@#{top}"=="all"){
-}else{
-    final_data <- data_sort_rev[1:30]
-    data <-data[attributes(final_data)$names,]
-}
-group=read.table("@#{group}",sep="\t",header=F,row.names=1,check.names=F)
-#name=read.table("@#{show_rowname}",header=F,check.names=F)
-rows=rep(" ",nrow(data))
-for(i in 1:nrow(data)){
-#    if(name[i]==1){
-        rows[i]=rownames(data)[i]
-#    }
-}
-group=group[colnames(data),1]
-group.color <- as.character(group)
-group.name <- levels(group)
-for(i in 1:length(group.name)){
-  group.color[which(group==group.name[i])] <- cols_brewer[1:length(group.name)][i]
-}
-group=as.data.frame(group)
-rownames(group)=colnames(data)
-pdf("@#{pdf_file}",12,16)
-par(oma=c(8,1.1,1,10.1))
-col = colorRampPalette(c("lightblue", "yellow", "orange", "red"),bias=3)(3000)
-#cexCol=1.8/nrow(data)*10
+if(nrow(data)==0){
+    	plot(0,type="n")
+    	text(1,0,"no diff")
 
-heatmap.2(as.matrix(data),
-          col=col,labRow=rows,ColSideColors=group_color,
-          cexRow=3,
-          offsetRow=0.1,cexCol=1.8,symkey=FALSE,density.info="none",
+}else{
+	row.sums <- apply(data, 1, sum)
+	data_sort <-sort(row.sums)
+	data_sort_rev <-rev(data_sort)
+	if("@#{top}"=="all"){
+	}else{
+		final_data <- data_sort_rev[1:30]
+		data <-data[attributes(final_data)$names,]
+	}
+	group=read.table("@#{group}",sep="\t",header=F,row.names=1,check.names=F)
+	#name=read.table("@#{show_rowname}",header=F,check.names=F)
+	rows=rep(" ",nrow(data))
+	for(i in 1:nrow(data)){
+		  #    if(name[i]==1){
+	rows[i]=rownames(data)[i]
+		  #    }
+	}
+	group=group[colnames(data),1]
+	group.color <- as.character(group)
+	group.name <- levels(group)
+	for(i in 1:length(group.name)){
+		group.color[which(group==group.name[i])] <- cols_brewer[1:length(group.name)][i]
+	}
+	group=as.data.frame(group)
+	rownames(group)=colnames(data)
+	pdf("@#{pdf_file}",12,16)
+	max.genus.name.length = max(mapply(nchar,rownames(data)))
+	if(max.genus.name.length < 10){
+		cexRow = 3
+	}else if(max.genus.name.length > 11 && max.genus.name.length < 20){
+		cexRow = 2
+	}else {
+		cexRow =1.8
+	}
+	oma.right = 0.7*max.genus.name.length-3.9
+	par(oma=c(0,0,0,oma.right))
+	col = colorRampPalette(c("lightblue", "yellow", "orange", "red"),bias=3)(3000)
+
+
+	cexCol=-0.0133*ncol(data)+2
+
+	heatmap.2(as.matrix(data),
+          col=col,labRow=rows,ColSideColors=group.color,
+          cexRow=cexRow,
+          offsetRow=0.1,cexCol=cexCol,symkey=FALSE,density.info="none",
           trace="none",margins=c(5,5),
-           lmat = rbind(c(5,5),c(0,4),c(0,1),c(3,2),c(6,6)),
-           lhei = c(0.5,0.8,0.2,4,0.5),
-           lwid = c(1.5,3),
+          lmat = rbind(c(5,5),c(0,4),c(0,1),c(3,2),c(6,6)),
+          lhei = c(0.5,0.8,0.2,4,0.5),
+          lwid = c(1.5,3),
           colsep=c(1:ncol(data)),rowsep=c(1:nrow(data)),sepcolor="black",sepwidth=c(0.01, 0.01),
           key.title=NA, # no title
           key.xlab="relative abundance",  # no xlab
-#          key.xtickfun=function() {
-#            breaks <- parent.frame()$breaks
-#            return(list(
-#              at=parent.frame()$scale01(c(breaks[1],breaks[length(breaks)])),
-#              labels=c(as.character(breaks[1]),as.character(round(as.numeric(breaks[length(breaks)]),4)))
-#            ))
-#          }
-)
-if(length(group.name)>10){
-  legend.cex=0.7
-}else{
-  legend.cex=1
+          #          key.xtickfun=function() {
+          #            breaks <- parent.frame()$breaks
+          #            return(list(
+          #              at=parent.frame()$scale01(c(breaks[1],breaks[length(breaks)])),
+          #              labels=c(as.character(breaks[1]),as.character(round(as.numeric(breaks[length(breaks)]),4)))
+          #            ))
+          #          }
+	)
+	if(length(group.name)>10){
+		legend.cex=0.7
+	}else{
+		legend.cex=1
+	}
+	legend("topleft",pch=15,col=group.color, legend=group.name, text.col = "green4",bg = 'gray90',
+       	pt.cex=2*legend.cex,cex=legend.cex,xpd=TRUE)
+	dev.off()
 }
-legend("topleft",pch=15,col=group.color, legend=group.name, text.col = "green4",bg = 'gray90',
-       pt.cex=2*legend.cex,cex=legend.cex,xpd=TRUE)
-dev.off()
