@@ -52,6 +52,7 @@ def get_result(cfg_in,vars=None):
         dirs.append(out_dir_results+"/02_OTU/"+analysis_name+"/wf_taxa_summary/")
         dirs.append(out_dir_results+"/03_Alpha_diversity/"+analysis_name)
         dirs.append(out_dir_results+"/04_Beta_diversity/"+analysis_name)
+        dirs.append(out_dir_results+"/03_Alpha_diversity/"+analysis_name+"/box_plot/")
         dirs.append(out_dir_results+"/05_diff_analysis/"+analysis_name+"/LEfSe/")
         dirs.append(out_dir_results+"/05_diff_analysis/"+analysis_name+"/otu_diff/")
         dirs.append(out_dir_results+"/05_diff_analysis/"+analysis_name+"/genus_diff/")

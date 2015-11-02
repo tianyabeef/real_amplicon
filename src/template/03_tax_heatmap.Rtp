@@ -33,13 +33,15 @@ if(nrow(data)==0){
 	rownames(group)=colnames(data)
 	max.genus.name.length = max(mapply(nchar,rownames(data)))
 	if(max.genus.name.length < 10){
+		oma.right = max.genus.name.length
 		cexRow = 3
 	}else if(max.genus.name.length > 11 && max.genus.name.length < 20){
 		cexRow = 2
+		oma.right = 0.7*max.genus.name.length-3.9
 	}else {
 		cexRow =1.8
+		oma.right = 0.7*max.genus.name.length-3.9
 	}
-	oma.right = 0.7*max.genus.name.length-3.9
 	par(oma=c(0,0,0,oma.right))
 	col = colorRampPalette(c("lightblue", "yellow", "orange", "red"),bias=3)(3000)
 
