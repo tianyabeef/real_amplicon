@@ -4,8 +4,8 @@ cols_brewer = c('#00447E','#F34800','#FFDD00','#930026','#64A10E','#A5CFED','#46
 data=read.table("@#{heatmap_profile}",header=TRUE,row.names=1,sep="\t",check.names=F)
 pdf("@#{pdf_file}",12,16)
 if(nrow(data)==0){
-    	plot(0,type="n")
-    	text(1,0,"no item for plot")
+	plot(0,type="n")
+	text(1,0,"no item for plot")
 }else{
 	row.sums <- apply(data, 1, sum)
 	data_sort <-sort(row.sums)
