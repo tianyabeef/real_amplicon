@@ -11,3 +11,4 @@ from alpha_diversity import alpha_diversity
 from beta_diversity import beta_diversity
 from get_result import get_result
 from get_html import get_html
+from beta_ANOSIM_ADONIS import beta_ANOSIM_ADONIS
