@@ -49,10 +49,10 @@ jQuery().ready(function (){
 		rowList: [10,20,30],
 		colNames:['sampleName','downsize', 'otus_before', 'otus_after'],
 		colModel:[
-			{name:'sampleName',index:'sampleName', width:90,align:"center"},
-			{name:'downsize',index:'downsize', width:90, sorttype:"int",align:"center"},
-			{name:'otus_before',index:'otus_before', width:90,align:"center", sortype:"int"},
-			{name:'otus_after',index:'otus_after', width:90,align:"center", sortype:"int"}	
+			{name:'sampleName',index:'sampleName', width:140,align:"center"},
+			{name:'downsize',index:'downsize', width:140, sorttype:"int",align:"center"},
+			{name:'otus_before',index:'otus_before', width:140,align:"center", sortype:"int"},
+			{name:'otus_after',index:'otus_after', width:140,align:"center", sortype:"int"}	
 		],
 		pager: "#plist48",
 		viewrecords: true,
@@ -79,8 +79,8 @@ var coreMicrobiomes=[
 		colNames:['otuId','taxonomyLevel', 'taxonomyName'],
 		colModel:[
 			{name:'otuId',index:'otuId', width:90,align:"center", sortype:"int"},
-			{name:'taxonomyLevel',index:'taxonomyLevel', width:90,align:"center", sortype:"int"},
-			{name:'taxonomyName',index:'taxonomyName', width:90,align:"center", sortype:"int"}
+			{name:'taxonomyLevel',index:'taxonomyLevel', width:200,align:"center", sortype:"int"},
+			{name:'taxonomyName',index:'taxonomyName', width:140,align:"center", sortype:"int"}
 		],
 		pager: "#plist49",
 		viewrecords: true,
