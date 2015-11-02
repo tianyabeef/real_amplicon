@@ -12,7 +12,7 @@ if(nrow(data)==0){
 	data_sort_rev <-rev(data_sort)
 	if("@#{top}"=="all"){
 	}else{
-		final_data <- data_sort_rev[1:30]
+		final_data <- data_sort_rev[1:@#{top}]
 		data <-data[attributes(final_data)$names,]
 	}
 	group=read.table("@#{group}",sep="\t",header=F,row.names=1,check.names=F)
