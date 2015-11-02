@@ -71,4 +71,4 @@ class Subject(object):
             core_otu.write('OTU ID\tTaxonomy\tname\n')
             for otu in self.otus.itervalues():
                 if otu.percent >= self.cutoff:
-                    core_otu.write('%s\t%s\t%s'%(otu.name,otu.tax_level,otu.tax_name))
+                    core_otu.write('%s\t%s\t%s\n'%(otu.name,otu.tax_level,otu.tax_name))
