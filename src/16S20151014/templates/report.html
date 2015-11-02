@@ -321,6 +321,22 @@
 		{% if alpha_diff %} 
 		<h3 id="单个样品差异分析">4.2 单个样品差异分析(每组内样品数>=3)</h3>
             <p class="name_fig">图4-1组间Alpha多样性盒形图：</p>
+                <div class="albumSlider">
+                <div class="fullview"><img src="images/group/box_plot/chao1.boxplot.png"/></div>
+                <div class="slider">
+                <div class="button movebackward" title="向上滚动"></div>
+                <div class="imglistwrap"><ul class="imglist">
+					<li><a id="group" href='images/group/box_plot/chao1.boxplot.png' ><img src='images/group/box_plot/chao1.boxplot.png'/></a></li>
+                    <li><a id="group" href='images/group/box_plot/goods_coverage.boxplot.png' ><img src='images/group/box_plot/goods_coverage.boxplot.png'/></a></li>
+                    <li><a id="group" href='images/group/box_plot/observed_species.boxplot.png' ><img src='images/group/box_plot/observed_species.boxplot.png'/></a></li>  
+                    <li><a id="group" href='images/group/box_plot/PD_whole_tree.boxplot.png' ><img src='images/group/box_plot/PD_whole_tree.boxplot.png'/></a></li>
+					<li><a id="group" href='images/group/box_plot/shannon.boxplot.png' ><img src='images/group/box_plot/shannon.boxplot.png'/></a></li>
+					<li><a id="group" href='images/group/box_plot/simpson.boxplot.png' ><img src='images/group/box_plot/simpson.boxplot.png'/></a></li>
+                </ul></div>
+                <div class="button moveforward" title="向下滚动"></div>
+                </div>
+                </div>
+
             <p class="premark">盒形图可以显示5个统计量（最小值，第一个四分位数，中位数，第三个中位数和最大值，及由下到上的5条线），异常值以“o”标出。横轴是分组名称，纵轴是不同分组下的alpha多样性指数的值。</p>
             <p class="paragraph">分别对Alpha diversity的各个指数进行秩和检验分析(若两组样品比较则使用R中的wilcox.test函数，若两组以上的样品比较则使用R中的kruskal.test函数)，通过秩和检验筛选不同条件下的显著差异的Alpha diversity指数。结果见表4-2。</p>
             <p class="name_table">表4-2 Alpha diversity指数差异检验</p>

@@ -48,6 +48,7 @@ def get_html(cfg_in,vars=None):
     dirs.append(image_dir+"/order/")
     dirs.append(image_dir+"/phylum/")
     dirs.append(image_dir+"/group/alpha_div_collated/")
+    dirs.append(image_dir+"/group/box_plot/")
     dirs.append(image_dir+"/group/otu_diff/")
     dirs.append(image_dir+"/group/genus_diff/")
     dirs.append(image_dir+"/group/taxall_diff/")
