@@ -15,7 +15,7 @@ if(nrow(X)==0){
 else{ 
 	group=as.data.frame(group)
 	colnames(X)=rownames(group)
-	colors=labels2colors(group[,1],colorSeq=cols_brewer )
+	colors=labels2colors(group[,1],colorSeq=cols_brewer)
 	g=unique(group)
 	g_order=g[order(g),1]
 	gcols=unique(colors)

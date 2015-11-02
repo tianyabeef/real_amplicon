@@ -12,7 +12,11 @@ table = table[,-c(1, 2, 3)]
 group=group[colnames(table),1]
 group=as.data.frame(group)
 rownames(group)=colnames(table)
-colors=labels2colors(group,colorSeq=cols_brewer)
+if(ncol(table) > 20){
+	times = ceiling(ncol(table) / 20)
+	cols_brewer = rep(cols_brewer,times)
+}
+colors=labels2colors(group[,1],colorSeq=cols_brewer)
 g=unique(group)
 g_order=g[order(g),1]
 gcols=unique(colors)
