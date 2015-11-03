@@ -497,7 +497,9 @@
                 <div class="button movebackward" title="向上滚动"></div>
                 <div class="imglistwrap"><ul class="imglist">
 					<li><a id="group" href='images/group/otu_diff/heatmap.png' ><img src='images/group/otu_diff/heatmap.png'/></a></li>
+					{% if diff_analysis_boxplot %}
                     <li><a id="group" href='images/group/otu_diff/diff_boxplot.png' ><img src='images/group/otu_diff/diff_boxplot.png'/></a></li>
+					{% endif %}
                     <li><a id="group" href='images/group/otu_diff/diff_pca.png' ><img src='images/group/otu_diff/diff_pca.png'/></a></li>                
                 </ul></div>
                 <div class="button moveforward" title="向下滚动"></div>
@@ -525,7 +527,9 @@
                 <div class="button movebackward" title="向上滚动"></div>
                 <div class="imglistwrap"><ul class="imglist">
                     <li><a id="group" href='images/group/genus_diff/heatmap.png' ><img src='images/group/genus_diff/heatmap.png'/></a></li>
+					{% if diff_analysis_boxplot %}
                     <li><a id="group" href='images/group/genus_diff/diff_boxplot.png' ><img src='images/group/genus_diff/diff_boxplot.png'/></a></li>
+					{% endif %}
                     <li><a id="group" href='images/group/genus_diff/diff_pca.png' ><img src='images/group/genus_diff/diff_pca.png'/></a></li>                
                 </ul></div>
                 <div class="button moveforward" title="向下滚动"></div>
@@ -552,7 +556,9 @@
                 <div class="button movebackward" title="向上滚动"></div>
                 <div class="imglistwrap"><ul class="imglist">
                     <li><a id="group" href='images/group/taxall_diff/heatmap.png' ><img src='images/group/taxall_diff/heatmap.png'/></a></li>
+					{% if diff_analysis_boxplot %}
                     <li><a id="group" href='images/group/taxall_diff/diff_boxplot.png' ><img src='images/group/taxall_diff/diff_boxplot.png'/></a></li>
+					{% endif %}
                     <li><a id="group" href='images/group/taxall_diff/diff_pca.png' ><img src='images/group/taxall_diff/diff_pca.png'/></a></li>                    
                 </ul></div>
                 <div class="button moveforward" title="向下滚动"></div>
@@ -578,7 +584,9 @@
                 <div class="button movebackward" title="向上滚动"></div>
                 <div class="imglistwrap"><ul class="imglist">
                     <li><a id="group" href='images/group/phylum_diff/heatmap.png' ><img src='images/group/phylum_diff/heatmap.png'/></a></li>
+					{% if diff_analysis_boxplot %}
                     <li><a id="group" href='images/group/phylum_diff/diff_boxplot.png' ><img src='images/group/phylum_diff/diff_boxplot.png'/></a></li>
+					{% endif %}
                     <li><a id="group" href='images/group/phylum_diff/diff_pca.png' ><img src='images/group/phylum_diff/diff_pca.png'/></a></li>                 
                 </ul></div>
                 <div class="button moveforward" title="向下滚动"></div>
