@@ -311,7 +311,6 @@ def get_html():
     var_html['diff_genus']=len(diff_genus_marker[0])
     var_html['diff_species']=len(diff_taxall_marker[0])
     var_html['diff_phylum']=len(diff_phylum_marker[0])
-    var_html['group_num']=len(group_files)
     var_html['p_value']=0.05
 
     sample_num_in_groups,\
