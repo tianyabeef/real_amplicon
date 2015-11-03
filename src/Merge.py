@@ -25,7 +25,7 @@ class Sample(object):
 
     def release_handle(self):
         self.out.close()
-        
+
     def _get_need_data(self,n):
         n = int(n)
         r = random.uniform(-0.1,0.1)
