@@ -12,7 +12,7 @@ if(nrow(data)<=1){
 	data_sort <-sort(row.sums)
 	data_sort_rev <-rev(data_sort)
 	if("@#{top}"=="all"){
-	}else{
+	}else if(nrow(data) >= @#{top}){
 		final_data <- data_sort_rev[1:@#{top}]
 		data <-data[attributes(final_data)$names,]
 	}

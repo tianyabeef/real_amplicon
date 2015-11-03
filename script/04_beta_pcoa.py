@@ -11,7 +11,7 @@ sys.path.insert(1, this_script_path + '/../src')
 import Parser as rp
 
 def read_params(args):
-    parser = argparse.ArgumentParser(description='''beta heatmap | v1.0 at 2015/10/16 by liangzb ''')
+    parser = argparse.ArgumentParser(description='''beta pcoa | v1.0 at 2015/10/16 by liangzb ''')
     parser.add_argument('-d','--beta_div_dir',dest='beta_dir',metavar='DIR',type=str,required=True,
                         help="set the beta div dir, produced by beta_diversity.py")
     parser.add_argument('-g','--group_file',dest='group_file',metavar='FILE',type=str,required=True,
@@ -26,11 +26,11 @@ def read_params(args):
 
 def work(r_job,name,params):
     file = os.popen('ls %s/%s*.txt'%(params['beta_dir'],name)).read().strip()
-    pdf_file = '%s/%s.heatmap.pdf'%(params['out_dir'],name)
-    png_file = '%s/%s.heatmap.png'%(params['out_dir'],name)
-    R_file = '%s/%s.heatmap.R'%(params['out_dir'],name)
+    pdf_file = '%s/%s.pcoa.pdf'%(params['out_dir'],name)
+    png_file = '%s/%s.pcoa.png'%(params['out_dir'],name)
+    R_file = '%s/%s.pcoa.R'%(params['out_dir'],name)
     distance_name = name.replace('_',' ').title()
-    vars = {'distance_table"':file,
+    vars = {'distance_table':file,
             'group_file':params['group_file'],
             'pdf_file':pdf_file,
             'distance_name':distance_name}
