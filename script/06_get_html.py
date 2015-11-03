@@ -335,7 +335,8 @@ def get_html():
     
     if group_num >= 2 and 5 >= group_num:
         var_html['otu_venn']=True
-
+    
+    var_html['rank_abundance']=True
     var_html['alpha_diversity']=True
     var_html['specaccum']=True
     var_html['otu_tax_assignments']=True
@@ -344,7 +345,8 @@ def get_html():
     var_html['otu_krona']=False
     var_html['phylogenetic_tree']=False
     var_html['similarity_analysis']=True
-    var_html['lefse']=True
+    if group_num >= 2:    
+        var_html['lefse']=True
     if min_sample_num_in_groups >= 3:
 	var_html['alpha_diff']=True
     if min_sample_num_in_groups >= 3 and group_num >= 2:
