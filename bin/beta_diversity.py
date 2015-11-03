@@ -35,11 +35,12 @@ def beta_diversity(cfg_in, vars=None):
         with_boxplot = True
     else:
         with_boxplot = False
-    work.commands.append('%s -d %s -g %s -o %s -w %s'%(scripts['beta_pcoa'],
-                                                       outfiles['beta_div_dir'],
-                                                       params['group'],
-                                                       outfiles['beta_pcoa_dir'],
-                                                       with_boxplot))
+    if sample_num_total >= 5:
+        work.commands.append('%s -d %s -g %s -o %s -w %s'%(scripts['beta_pcoa'],
+                                                           outfiles['beta_div_dir'],
+                                                           params['group'],
+                                                           outfiles['beta_pcoa_dir'],
+                                                           with_boxplot))
     # beta cluster
     command = '%s --jackknifed_beta_diversity %s --make_bootstrapped_tree %s '%(scripts['beta_cluster'],
                                                                                 qiime['jackknifed_beta_diversity'],
