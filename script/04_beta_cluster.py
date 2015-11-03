@@ -5,7 +5,7 @@ from __future__ import division
 import sys
 import argparse
 import os
-from util import mkdir
+from util import mkdir,image_trans
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1, this_script_path + '/../src')
 from Parser import parse_stat_file
@@ -55,7 +55,7 @@ def work(name,params):
                                       support,
                                       pdf)
     os.system(command)
-    os.system('convert %s %s'%(pdf,png))
+    image_trans(pdf,png)
     return command
 
 if __name__ == '__main__':

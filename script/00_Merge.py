@@ -4,7 +4,7 @@
 import sys
 import argparse
 import os
-from util import mkdir
+from util import mkdir,image_trans
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1,this_script_path + '/../src')
 import Merge as mg
@@ -68,4 +68,4 @@ if __name__ == '__main__':
     r_job.format(vars)
     r_job.write(params['outdir'] + '/length_distrubution.R')
     r_job.run()
-    os.system("convert %s %s"%(params['outdir'] + '/length_distrubution.pdf', params['outdir'] + '/length_distrubution.png'))
+    image_trans(params['outdir'] + '/length_distrubution.pdf', params['outdir'] + '/length_distrubution.png')

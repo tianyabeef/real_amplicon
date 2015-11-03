@@ -5,7 +5,7 @@ from __future__ import division
 import sys
 import argparse
 import os
-from util import mkdir
+from util import mkdir,image_trans
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1, this_script_path + '/../src')
 import Parser as rp
@@ -35,7 +35,7 @@ def work(r_job,name,params):
     r_job.format(vars)
     r_job.write(R_file)
     r_job.run()
-    os.system('convert %s %s'%(pdf_file,png_file))
+    image_trans(pdf_file,png_file)
 
 if __name__ == '__main__':
     params = read_params(sys.argv)

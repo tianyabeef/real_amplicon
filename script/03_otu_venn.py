@@ -4,7 +4,7 @@ import sys
 import argparse
 import os
 import re
-from util import mkdir
+from util import mkdir,image_trans
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1, this_script_path + '/../src')
 import Parser as rp
@@ -69,7 +69,5 @@ if __name__ == '__main__':
     r_job.format(vars)
     r_job.write(params['out_dir'] + '/otu_venn.R')
     r_job.run()
-    os.system('convert %s %s'%(tiff_file,png_file))
-
-
+    image_trans(tiff_file,png_file)
 

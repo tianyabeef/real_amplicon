@@ -4,7 +4,7 @@
 import sys
 import argparse
 import os
-from util import mkdir
+from util import mkdir,image_trans
 from collections import defaultdict
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1,this_script_path + '/../src')
@@ -104,4 +104,4 @@ if __name__ == '__main__':
     r_job.format(var)
     r_job.write(r_file)
     r_job.run()
-    os.system('convert %s %s'%(pdf_file,png_file))
+    image_trans(pdf_file,png_file)

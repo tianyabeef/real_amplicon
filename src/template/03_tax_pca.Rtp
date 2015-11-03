@@ -8,7 +8,7 @@ pdf(file="@#{pdf_file}",11,8.5)
 par(mar=c(4.1,5.1,4.1,2.1))
 
 X=X[,rownames(group)]
-if(nrow(X)==0){
+if(nrow(X)<=1){
 	plot(0,type='n')
 	text(1,0,'no diff')
 }else{ 
