@@ -336,8 +336,6 @@ def get_html():
     if len(group_files) >= 2 && 5 >= len(group_files):
         var_html['otu_venn']=True
 
-    if min_sample_num_in_groups >= 5:
-        var_html['alpha_diff']=True
 
     var_html['alpha_diversity']=True
     var_html['specaccum']=True
@@ -349,8 +347,10 @@ def get_html():
     var_html['similarity_analysis']=True
     var_html['lefse']=True
     if min_sample_num_in_groups >= 3:
+	var_html['alpha_diff']=True
         var_html['diff_analysis']=True
     if min_sample_num_in_groups >= 5:
+	var_html['alpha_diff_boxplot'] = True
         var_html['diff_analysis_boxplot']=True   
  
     env = Environment(loader=FileSystemLoader(out_dir_report+'/templates',encoding='utf-8'))
