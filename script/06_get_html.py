@@ -333,9 +333,8 @@ def get_html():
         var_html['otu_pca']=True
         var_html['otu_heatmap']=True 
     
-    if len(group_files) >= 2 && 5 >= len(group_files):
+    if len(group_files) >= 2 & 5 >= len(group_files):
         var_html['otu_venn']=True
-
 
     var_html['alpha_diversity']=True
     var_html['specaccum']=True
