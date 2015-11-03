@@ -322,7 +322,7 @@ def get_html():
     var_html['reads_statistical']=True
     var_html['otu_statistical']=True
     var_html['downsize_html']=True
-    if min_sample_num_in_groups >= 5: 
+    if sample_num_total >= 5: 
         var_html['uniFra_analysis_pcoa']=True
     
     if sample_num_total >= 4:
