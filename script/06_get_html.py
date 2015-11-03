@@ -323,7 +323,6 @@ def get_html():
     var_html['otu_statistical']=True
     var_html['downsize_html']=True
     if min_sample_num_in_groups >= 5: 
-        var_html['alpha_diversity']=True
         var_html['uniFra_analysis_pcoa']=True
     
     if sample_num_total >= 4:
@@ -334,12 +333,13 @@ def get_html():
         var_html['otu_pca']=True
         var_html['otu_heatmap']=True 
     
-    if len(group_files) >= 2 & 5 >= len(group_files):
+    if len(group_files) >= 2 && 5 >= len(group_files):
         var_html['otu_venn']=True
 
-    if min_sample_num_in_groups >= 3:
+    if min_sample_num_in_groups >= 5:
         var_html['alpha_diff']=True
 
+    var_html['alpha_diversity']=True
     var_html['specaccum']=True
     var_html['otu_tax_assignments']=True
     var_html['otu_annotation_statistical']=False

@@ -69,8 +69,13 @@ img.size3{
 img.size4{
 	height:500px; width:1000px;
 	}
-
-
+#page{
+	page-break-afte:always;
+}
+.error{
+	font-size:2em;
+	color:red;
+}
 
 .albumSlider {width:600px; margin:0 auto; border:2px solid #CCC; padding-right:10px; font-size:10px;position:relative;overflow:hidden;}
 .albumSlider .fullview{position:relative; float:left;}

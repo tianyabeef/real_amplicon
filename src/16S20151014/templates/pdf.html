@@ -1,8 +1,6 @@
 {% extends "base_pdf.html" %} 
 
 
-
-
 {% block reads_statistical_head %} 
 {% if reads_statistical %}
     	<h3 id="优化序列统计">1.1优化序列统计</h3>
@@ -98,7 +96,8 @@
             <p class="tremark">注：第一列OTU ID是OTU名称；第二列taxonomy level是OTU所代表的物种所在的分类水平；第三列taxonomy name是OTU所代表的物种名称。</p>
 			 
 			{% else %}
-			<p>样品数不足无法分析</p>
+			<h3 id="Core microbiome分析">2.3 Core microbiome分析（总样品数>=5）</h3>
+			<p class="error">样品数不足无法分析</p>
 			{% endif %}
 			{% endblock %}
 				
@@ -114,7 +113,8 @@
             <p class="premark">不同颜色图形代表不同样品或者不同组别，不同颜色图形之间交叠部分数字为两个样品或两个组别之间共有的OTU个数。同理，多个颜色图形之间交叠部分数字为多个样品或组别之间共有OTU个数。Venn图容许2-5个样品或组别。</p>
 		 
 		{% else %}
-			<p>样品数不足无法分析</p>
+			<h3 id="OTU Venn图分析">2.4 OTU Venn图分析(分组数量2~5组)</h3>
+			<p class="error">样品数不足无法分析</p>
 		{% endif %}
 		{% endblock %}
 
@@ -131,7 +131,8 @@
             <p class="name_fig">图2-5-1 基于OTU丰度的PCA分析。</p>
             <p class="premark">横坐标表示第一主成分，括号中的百分比则表示第一主成分对样品差异的贡献率；纵坐标表示第二主成分，括号中的百分比表示第二主成分对样品差异的贡献率。图中点分别表示各个样品。不同颜色代表样品属于不同的分组。例如图中G1（红色样品）和G3（绿色样品）在PC1轴的方向上分离开来，则表示PC1是导致G1和G2分离开来的主要元素。</p>
 		{% else %}
-			<p>样品数不足无法分析</p>
+			<h3 id="OTU PCA分析">2.5 OTU PCA分析（总样品数>=5）</h3>
+			<p class="error">样品数不足无法分析</p>
 		{% endif %}
 		{% endblock %} 
 
@@ -147,7 +148,8 @@
             <p class="name_fig">图2-6-1 物种累积曲线</p>
             <p class="premark">注：横坐标是样品的数量，纵坐标是OTUs的数量</p>
 		{% else %}
-			<p>样品数不足无法分析</p>
+			<h3 id="Specaccum物种累积曲线">2.6 Specaccum物种累积曲线（总样品数>=10）</h3>
+			<p class="error">样品数不足无法分析</p>
 		{% endif %}
 		{% endblock %}
 
@@ -230,15 +232,23 @@
             <p class="paragraph">物种热图见文件夹“OTU_heatmap/”。</p>
 		 
 		{% else %}
-			<p>样品数不足无法分析</p>
+		<h3 id="物种热图分析">3.4 物种热图分析（总样品数>=5）</h3>
+			<p class="error">样品数不足无法分析</p>
 		{% endif %}
 		{% endblock %}
 
-
-
-
-
-		
+		{% block rank_abundance_head %}
+		{% if rank_abundance %}
+			<h3 id="Rank Abundance曲线">3.5 Rank Abundance曲线</h3>
+        	<p class="paragraph">将样品中的OTUs按相对丰度(或者包含的序列数目)由大到小排序得到对应的排序编号，再以OTUs的排序编号为横坐标，OTUs中的相对丰度（也可用该等级OTU中序列数的相对百分含量）为纵坐标,将这些点用折线连接，即绘制得到Rank Abundance曲线</p>
+			<p class="paragraph">Rank Abundance曲线可直观的反应样品中包含的分类丰富度和均匀度，即在水平方向，分类的丰度由曲线的宽度来反映，分类的丰富度越高，曲线在横轴上的跨度越大；在垂直方向曲线的平滑程度，反映了样品中分类的均匀程度，曲线越平缓，物种分布越均匀</p>
+            <p class="center">
+            	<img class="size2" src="images/rank_abundance.png" />
+            </p>
+            <p class="name_fig">图3-5-1 Rank Abundance曲线</p>
+			<p class="premark">说明：横坐标为按OTUs丰度排序的序号(Rank)，纵坐标为对应的OTUs的丰度(Abundance)，不同的样品使用不同的颜色和线型的曲线表示。</p>
+		{% endif %}
+		{% endblock %}
 		
 		{% block otu_krona_head %}
 		{% if otu_krona %} 
@@ -280,7 +290,7 @@
 		
 		{% block alpha_diversity_head %}
 		{% if alpha_diversity %} 
-				<h3 id="单个样品多样性分析">4.1 单个样品多样性分析（每组内样品数>=5）</h3>
+		<h3 id="单个样品多样性分析">4.1 单个样品多样性分析</h3>
         	<p class="name_table">表4-1-1 样品Alpha多样性统计结果</p>
             
             <div class="table">
@@ -309,7 +319,8 @@
             </div>
 		
 		{% else %}
-			<p>样品数不足无法分析</p>
+		<h3 id="单个样品多样性分析">4.1 单个样品多样性分析</h3>
+			<p class="error">样品数不足无法分析</p>
 		{% endif %}
 		{% endblock %}
 
@@ -353,7 +364,8 @@
             <p class="tremark">注：第一列是Alpha diversity指数；第二列至第十列分别为十组样品的均值；最后一列为秩和检验的P-value值；</p>
 		
 		{% else %}
-			<p>样品数不足无法分析</p>
+		<h3 id="单个样品差异分析">4.2 单个样品差异分析(每组内样品数>=3)</h3>
+			<p class="error">样品数不足无法分析</p>
 		{% endif %}
 		{% endblock %} 
 
@@ -397,7 +409,8 @@
             </p>            
             <p class="name_fig">图5-1-3 Beta多样性heatmap（上图为Weighted，下图为Unweighted）</p>
 		{% else %}
-			<p>样品数不足无法分析</p>
+		<h3 id="UniFrac热图分析">5.1 UniFrac热图分析（每组样品数>=4）</h3>
+			<p class="error">样品数不足无法分析</p>
 		{% endif %}
 		{% if uniFra_analysis_pcoa %}
 		<h3 id="PCoA分析">5.2 PCoA分析（每组样品数>=5）</h3>
@@ -408,7 +421,8 @@
             <p class="name_fig">图5-2-1 PCoA分析图（A为Weight_UniFrac结果，B为Unweight_UniFrac结果）</p>
             <p class="premark">PcoA是一种研究数据相似性或者差异性的可视化方法，它没有改变样品点之间的项目位置关系，只改变了坐标系统。横坐标表示第一主坐标，括号中的百分比则表示第一主坐标对样品差异的贡献率；纵坐标表示第二主坐标，括号中的百分比表示第二主坐标对样品差异的贡献率。图中点分别表示各个样品。不同颜色代表样品属于不同的分组。横向的box图是不同分组在第一主坐标上的值的分布。</p>
 		{% else %}
-			<p>样品数不足无法分析</p>
+		<h3 id="PCoA分析">5.2 PCoA分析（每组样品数>=5）</h3>
+			<p class="error">样品数不足无法分析</p>
 		{% endif %}
 		{% endblock %} 
 		
@@ -572,6 +586,7 @@
                 </div>
 
 		{% else %}
-			<p>样品数不足无法分析</p>
+		<h3 id="组间差异分析">6.2 组间差异分析</h3>
+			<p class="error">样品数不足无法分析</p>
 		{% endif %}
 		{% endblock %} 
