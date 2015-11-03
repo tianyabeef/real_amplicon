@@ -4,7 +4,7 @@
 import sys
 import argparse
 import os
-from util import mkdir
+from util import mkdir,image_trans
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1,this_script_path + '/../src')
 import Parser as rp
@@ -35,7 +35,5 @@ if __name__ == '__main__':
     r_job.format(vars)
     r_job.write(params['out_dir'] + '/tax_pca.R')
     r_job.run()
-    os.system('convert %s %s'%(pdf_file,png_file))
-
-
+    image_trans(pdf_file,png_file)
 

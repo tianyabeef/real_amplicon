@@ -7,7 +7,7 @@ library("ade4")
 X=read.table('@#{input_file}',header=TRUE,row.names=1,sep="\t",check.names=F)
 group=read.table('@#{group_file}',header=F,row.names=1,check.names=F)
 pdf(file='@#{pdf_file}',11,8.5)
-if(nrow(X)==0){
+if(nrow(X)<=1){
 	plot(0,type='n')
 	text(1,0,'no diff')
 }else{ 

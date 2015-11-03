@@ -45,12 +45,12 @@ if(ncol(data)<10 && max_sample_name_length<5){
 }
 if(ncol(data)<=50){
   text(seq(from=1.5*spa*width, length=ncol(data), by=1*spa*width+width),
-       srt=srt, adj=0.5, labels=colnames(data),
+       srt=srt, adj=1, labels=colnames(data),
        xpd=T, cex=font_size, y=-5)
   mtext('@#{title}', side=3, line=1, cex=font_size*1.1)
 }else if(ncol(data)>50){
   text(seq(from=1.5*spa*width, length=ncol(data), by=1*spa*width+width),
-       srt=srt, adj=0.5, labels=colnames(data),
+       srt=srt, adj=1, labels=colnames(data),
        xpd=T, cex=font_size*0.8, y=-5)
   mtext('@#{title}', side=3, line=1, cex=font_size*1.1)
 }

@@ -4,7 +4,7 @@ from __future__ import division
 import sys
 import os
 import argparse
-from util import mkdir
+from util import mkdir,image_trans
 
 def read_params(args):
     parser = argparse.ArgumentParser(description='a wrapper for rank_abundance | v1.0 at 2015/10/09 by liangzb')
@@ -27,6 +27,4 @@ if __name__ == '__main__':
     os.system("%s -i %s -s '*' -o %s --no_legend"%(params['rank_abundance'],
                                                    params['biomfile'],
                                                    pdf_file))
-    os.system("convert -density '200x200^' %s %s"%(pdf_file,png_file))
-
-
+    image_trans(pdf_file,png_file)
