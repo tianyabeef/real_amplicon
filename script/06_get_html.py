@@ -311,7 +311,6 @@ def get_html():
     var_html['diff_genus']=len(diff_genus_marker[0])
     var_html['diff_species']=len(diff_taxall_marker[0])
     var_html['diff_phylum']=len(diff_phylum_marker[0])
-    var_html['group_num']=len(group_files)
     var_html['p_value']=0.05
 
     sample_num_in_groups,\
@@ -319,6 +318,7 @@ def get_html():
     sample_num_total,\
     group_num = parse_group(group_file_origin)
 
+    var_html['group_num']=group_num
     var_html['reads_statistical']=True
     var_html['otu_statistical']=True
     var_html['downsize_html']=True
@@ -333,9 +333,8 @@ def get_html():
         var_html['otu_pca']=True
         var_html['otu_heatmap']=True 
     
-    if len(group_files) >= 2 && 5 >= len(group_files):
+    if group_num >= 2 & 5 >= group_num:
         var_html['otu_venn']=True
-
 
     var_html['alpha_diversity']=True
     var_html['specaccum']=True
