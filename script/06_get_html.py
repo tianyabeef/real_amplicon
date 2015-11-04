@@ -344,7 +344,7 @@ def get_html():
     var_html['tax_summary']=True
     var_html['otu_krona']=False
     var_html['phylogenetic_tree']=False
-    var_html['similarity_analysis']=True
+    var_html['similarity_analysis']=False
     if group_num >= 2:    
         var_html['lefse']=True
     if min_sample_num_in_groups >= 3:
