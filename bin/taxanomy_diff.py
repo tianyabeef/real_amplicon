@@ -57,7 +57,7 @@ def taxanomy_diff(cfg_in,vars=None):
     group_num = parse_group(params['group'])
 
     # min_sample_num_in_groups must be more than 3
-    if vars['min_sample_num_in_groups'] < 3:
+    if min_sample_num_in_groups < 3:
         return outfiles
 
     #  LEfSe analysis
