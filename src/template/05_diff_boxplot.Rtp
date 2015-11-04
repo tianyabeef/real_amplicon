@@ -1,6 +1,6 @@
 library(ggplot2)
 library(grid)
-data <- read.table("@#{for_plot}",header=TRUE,sep="\t",check.names=F)
+data <- read.table("@#{for_plot}",header=TRUE,sep="\t",check.names=F,quote="")
 data$Sample <- factor(data$Sample,levels=unique(data$Sample))
 data$Tax <- factor(data$Tax,levels=unique(data$Tax))
 pdf("@#{pdf_file}",width=10, height=5)

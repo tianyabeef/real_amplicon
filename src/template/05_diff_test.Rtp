@@ -1,5 +1,5 @@
-X=read.table("@#{infile}",header=TRUE,sep="\t",row.names=1,check.names=F)
-group=read.table("@#{group_file}",header=F,row.names=1,check.names=F)
+X=read.table("@#{infile}",header=TRUE,sep="\t",row.names=1,check.names=F,quote="")
+group=read.table("@#{group_file}",header=F,row.names=1,check.names=F,quote="")
 X=as.matrix(X)
 #colnames(X)=sub("X","",colnames(X))####if the first letter of more than one colnames(X) is num,execute this progress
 group_num = nrow(unique(group))

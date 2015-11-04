@@ -1,5 +1,5 @@
 library(grid)
-X=read.table('@#{tax_ass_uniform}',sep="\t",row.name=1,header=T, check.names=F)
+X=read.table('@#{tax_ass_uniform}',sep="\t",row.name=1,header=T, check.names=F,quote="")
 sample_num = ncol(X)
 pdf('@#{pdf_file}',10,16)
 par(mar=c(2.1,0,4.1,1.1))

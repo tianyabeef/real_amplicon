@@ -1,6 +1,6 @@
 library(VennDiagram)
 library(grid)
-X = read.table("@#{for_plot}",sep='\t',row.names=1,header=F,check.names=F)
+X = read.table("@#{for_plot}",sep='\t',row.names=1,header=F,check.names=F,quote="")
 g = c()
 for(i in 1:nrow(X)){
 	a = X[i,]

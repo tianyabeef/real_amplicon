@@ -4,8 +4,8 @@ source("/data_center_01/pipeline/16S_ITS_pipeline_v3.0/src/template/labels2color
 
 library("ade4")
 
-X=read.table('@#{input_file}',header=TRUE,row.names=1,sep="\t",check.names=F)
-group=read.table('@#{group_file}',header=F,row.names=1,check.names=F)
+X=read.table('@#{input_file}',header=TRUE,row.names=1,sep="\t",check.names=F,quote="")
+group=read.table('@#{group_file}',header=F,row.names=1,check.names=F,quote="")
 pdf(file='@#{pdf_file}',11,8.5)
 if(nrow(X)<=1){
 	plot(0,type='n')

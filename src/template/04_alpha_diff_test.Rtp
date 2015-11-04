@@ -1,4 +1,4 @@
-X = read.table("@#{grouped_file}",header=F,row.names=1,check.names=F,fill=T)
+X = read.table("@#{grouped_file}",header=F,row.names=1,check.names=F,fill=T,quote="")
 X = t(X)
 group_num = ncol(X)
 

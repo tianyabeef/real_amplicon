@@ -1,5 +1,5 @@
 library('vegan')
-X=read.table('@#{otu_table}',head=T,row.names=1,sep="\t", check.names=F)
+X=read.table('@#{otu_table}',head=T,row.names=1,sep="\t", check.names=F,quote="")
 X=t(X)
 
 pdf('@#{pdf_file}',20,12)

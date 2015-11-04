@@ -1,6 +1,6 @@
 library(NMF)
-infile = read.table("@#{for_plot}",header=T,check.names=F)
-Group = read.table("@#{group_file}",row.names=1,check.names=F)
+infile = read.table("@#{for_plot}",header=T,check.names=F,quote="")
+Group = read.table("@#{group_file}",row.names=1,check.names=F,quote="")
 Group = as.character(Group[rownames(infile),])
 annotation <- data.frame(Group)
 

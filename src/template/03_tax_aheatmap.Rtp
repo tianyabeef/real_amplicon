@@ -1,5 +1,5 @@
 library (NMF)
 
-data=read.table("@#{heatmap_profile}",header=TRUE,sep="\t",check.names=F)
+data=read.table("@#{heatmap_profile}",header=TRUE,sep="\t",check.names=F,quote="")
 aheatmap(data, Rowv=FALSE, Colv=TRUE, distfun="correlation", hclustfun="complete",)
 

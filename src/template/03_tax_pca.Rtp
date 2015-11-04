@@ -1,8 +1,8 @@
 cols_brewer = c('#00447E','#F34800','#FFDD00','#930026','#64A10E','#A5CFED','#464E04','#BDD100','#4E0C66','#c7475b','#FF00FF','#00F5FF','#D00000','#049a0b','#f0301c','#2B8BC3','#FDA100','#54adf5','#CDD7E2','#9295C1')
 source('/data_center_01/pipeline/16S_ITS_pipeline_v3.0/src/template/labels2colors.R')
 
-X=read.table("@#{otu_profile}",header=TRUE,row.names=1,sep="\t",check.names=F)
-group=read.table("@#{group_file}",header=F,row.names=1,check.names=F)
+X=read.table("@#{otu_profile}",header=TRUE,row.names=1,sep="\t",check.names=F,quote="")
+group=read.table("@#{group_file}",header=F,row.names=1,check.names=F,quote="")
 
 pdf(file="@#{pdf_file}",11,8.5)
 par(mar=c(4.1,5.1,4.1,2.1))
