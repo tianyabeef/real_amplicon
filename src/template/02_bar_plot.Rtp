@@ -48,10 +48,15 @@ if(ncol(data)<=50){
        srt=srt, adj=1, labels=colnames(data),
        xpd=T, cex=font_size, y=-5)
   mtext('@#{title}', side=3, line=1, cex=font_size*1.1)
-}else if(ncol(data)>50){
+}else if(ncol(data)>50 && ncol(data)<=100){
   text(seq(from=1.5*spa*width, length=ncol(data), by=1*spa*width+width),
        srt=srt, adj=1, labels=colnames(data),
        xpd=T, cex=font_size*0.8, y=-5)
+  mtext('@#{title}', side=3, line=1, cex=font_size*1.1)
+}else{
+ text(seq(from=1.5*spa*width, length=ncol(data), by=1*spa*width+width),
+       srt=srt, adj=1, labels=colnames(data),
+       xpd=T, cex=font_size*0.6, y=-5)
   mtext('@#{title}', side=3, line=1, cex=font_size*1.1)
 }
 
