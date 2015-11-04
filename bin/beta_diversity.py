@@ -32,11 +32,11 @@ def beta_diversity(cfg_in, vars=None):
                                                     outfiles['beta_heatmap_dir']))
     # beta pcoa
     if min_sample_num_in_groups >= 5:
-        with_boxplot = True
+        with_boxplot = '--with_boxplot'
     else:
-        with_boxplot = False
+        with_boxplot = '--without_boxplot'
     if sample_num_total >= 5:
-        work.commands.append('%s -d %s -g %s -o %s -w %s'%(scripts['beta_pcoa'],
+        work.commands.append('%s -d %s -g %s -o %s %s'%(scripts['beta_pcoa'],
                                                            outfiles['beta_div_dir'],
                                                            params['group'],
                                                            outfiles['beta_pcoa_dir'],

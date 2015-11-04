@@ -42,12 +42,11 @@ def pick_otu(cfg_in,vars=None):
                                                                                   params['strand'],
                                                                                   params['identity'],
                                                                                   map_uc))
-    # uc to otu_sample table 
+    # uc to otu_sample table
     work.commands.append('%s -i %s -o %s'%(scripts['01_uc2otutab'],
                                            map_uc,
                                            outfiles['otus_all']))
     # otus_sample table to fa
-    seqs_fa = out_dir + '/seqs_all.fa'
     work.commands.append('%s -i %s -t %s -o %s'%(scripts['01_otutab2fa'],
                                                  params['fna_file'],
                                                  outfiles['otus_all'],
@@ -58,9 +57,9 @@ def pick_otu(cfg_in,vars=None):
                                                                           outfiles['single_dir'] + '/stat.txt',
                                                                           outfiles['single_dir'] + '/single.list',
                                                                           map_uc,
-                                                                          outfiles['out_stat_file'])) 
+                                                                          outfiles['out_stat_file']))
 
-    return  outfiles 
+    return  outfiles
 
 if __name__ == '__main__':
     config = sys.argv[1]

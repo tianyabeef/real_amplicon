@@ -18,8 +18,14 @@ def read_params(args):
                         help="set the group file")
     parser.add_argument('-o', '--out_dir', dest='out_dir', metavar='DIR', type=str, required=True,
                         help="set the output dir")
-    parser.add_argument('-w', '--with_boxplot', dest='with_boxplot', metavar='BOOL', type=bool, default=True,
-                        help="set the param 'False' to disable boxplot, [default is True]")
+    parser.add_argument('--without_boxplot',dest='with_boxplot',action='store_false',
+                        help="unplot boxplot")
+    parser.add_argument('--with_boxplot',dest='with_boxplot',action='store_true',
+                        help="plot boxplot")
+    parser.set_defaults(with_boxplot=True)
+
+    #  parser.add_argument('-w', '--with_boxplot', dest='with_boxplot', metavar='BOOL', type=bool, default=True,
+                        #  help="set the param 'False' to disable boxplot, [default is True]")
     args = parser.parse_args()
     params = vars(args)
     return params

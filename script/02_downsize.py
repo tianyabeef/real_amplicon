@@ -21,10 +21,20 @@ def read_params(args):
             help="set the output file")
     parser.add_argument('--out_statfile',dest='outstatfile',metavar='FILE',type=str,default=None,
             help="set the stat file")
-    parser.add_argument('-k','--keep_small_size',dest='keep',metavar='BOOL',type=bool,default=True,
-            help="if keep the small size, [default is True]")
-    parser.add_argument('-r','--random',dest='random',metavar='BOOL',type=bool,default=True,
-            help="if downsize random, [default is True]")
+    parser.add_argument('--keep_small_size',dest='keep',action='store_true',
+                        help="keep the small size [default]")
+    parser.add_argument('--no_keep_small_size',dest='keep',action='store_false',
+                        help="do not keep the small size")
+    parser.set_defaults(keep=True)
+#      parser.add_argument('-k','--keep_small_size',dest='keep',metavar='BOOL',type=bool,default=True,
+#              help="if keep the small size, [default is True]")
+    parser.add_argument('--random',dest='random',action='store_true',
+                        help="downsize random [default]")
+    parser.add_argument('--no_random',dest='random',action='store_false',
+                        help="do not downsize random")
+    parser.set_defaults(random=True)
+#      parser.add_argument('-r','--random',dest='random',metavar='BOOL',type=bool,default=True,
+            #  help="if downsize random, [default is True]")
     parser.add_argument('-g','--group',dest='group',metavar='FILE',type=str,default=None,
             help="if set the group file, in_stat_file will be overwrited")
 

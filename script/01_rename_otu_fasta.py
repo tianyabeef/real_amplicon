@@ -13,8 +13,13 @@ def read_params(args):
             help="set your input fasta file")
     parser.add_argument('-o','--outfile',dest='outfile',metavar='FILE',type=str,required=True,
             help="set your output file ")
-    parser.add_argument('--with_size',dest='if_with_size',metavar='BOOL',type=bool,default=False,
-            help="if you set this True, a size will be added to the seq id, [ default is False ]")
+    parser.add_argument('--with_size',dest='if_with_size',action='store_true',
+                        help="add a size to the seq id")
+    parser.add_argument('--without_size',dest='if_with_size',action='store_false',
+                        help="do not add a size to the seq id")
+    parser.set_defauts(if_with_size=False)
+#      parser.add_argument('--with_size',dest='if_with_size',metavar='BOOL',type=bool,default=False,
+#              help="if you set this True, a size will be added to the seq id, [ default is False ]")
     parser.add_argument('--prefix',dest='prefix',metavar='STR',type=str,default='denovo',
             help="set the prefix of the id , [ default is denovo ]")
 
