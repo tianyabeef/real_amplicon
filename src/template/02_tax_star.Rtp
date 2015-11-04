@@ -60,26 +60,41 @@ if(sample_num>25 && sample_num<=36){
         ylim=c(5,6)
     )
 }
-if(sample_num > 36){
+if(sample_num > 36 && sample_num<=56){
     loc=c(8,-1)
     if(sample_num>49){
         loc=c(10,-1)
-    }
-    if(sample_num>100){
-        loc=c(12,-1)
     }
     stars(
         t(X),
         labels=colnames(X),
         len=1,
-        #ncol=8,
+        # ncol=10,
         xpd=TRUE,main = "Genus",
         draw.segments = T,
         frame.plot=T,
-        key.loc=c(8,-1),
+        key.loc=loc,
         col.segments = rainbow(10),
-        ylim=c(-1,20)
+        ylim=c(-2,20)
     )
 }
+if(sample_num > 56){
+    loc=c(10,-1)
+    ymax = (floor((sample_num - 56) / 14) - 1) * 5 + 27
+    ylim=c(-3,ymax)
+    ymax
+    stars(
+        t(X),
+        labels=colnames(X),
+        len=1,
+        ncol=7,
+        xpd=TRUE,main = "Genus",
+        draw.segments = T,
+        frame.plot=T,
+        key.loc=loc,
+        col.segments = rainbow(10),
+        ylim=ylim
+    )
 
+}
 dev.off()
