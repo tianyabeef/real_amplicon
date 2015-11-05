@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Demo</title>
+<title>realbio</title>
 <link rel="stylesheet" type="text/css" href="css/base_new.css">
 <link rel="stylesheet" href="css/style.css" />
 
@@ -37,7 +37,7 @@
 		<div class="cs-north-bg">
         	<div class="cs-north-logo">
             	<img src="LOGO.png" />
-                <div class="cs-north-name">上海锐翌生物科技有限公司</div>
+                <div class="cs-north-name"></div>
             </div>
        	</div>
 	</div>
@@ -45,13 +45,14 @@
     <!------------------------------------------------------主要面板------------------------------------------------------------------------->
 
 	<div class="main">
-		<h1 id="总体概述">总体工作流程概述</h1	>
+	<div id="page">
+		<h1 id="总体概述">总体工作流程概述</h1>
         <p>&nbsp;</p>
         	<p class="center">
 				{% if amplification=="16S" %}
-            	<img class="size1" src="images/16S_e.png"/>
+            	<img class="size2" src="images/16S_e.png"/>
 				{% else %}
-		<img class="size1" src="images/ITS_e.png"/>
+            	<img class="size2" src="images/ITS_e.png"/>
 				{% endif %}
             </p>
             <p class="name_fig">
@@ -65,49 +66,58 @@
             <p class="name_fig">
             	图2 分析流程图 
             </p>
-            <p class="paragraph">对原始数据进行QC之后，用usearch软件对数据进行去嵌合体和聚类的操作，usearch聚类时，先将reads按照丰度从大到小排序，通过97%相似度的标准聚类，得到OTU(Operational Taxonomic Units)，每个OTU被认为可代表一个物种。接下来对每个样品的reads进行随机抽平处理，并提取对应的OTU序列。然后使用Qiime软件，做Alpha多样性指数的稀释曲线，根据稀释曲线选择合理的抽平参数，利用Qiime软件对得到的抽平后的OTU进行分析，首先从OTU中分别提取一条read作为代表序列，使用rdp方法，将该代表序列与{{amplification}}数据库比对，从而对每个OTU进行物种分类。归类后，根据每个OTU中序列的条数，从而得到OTU丰度表，最后根据该OTU丰度表进行后续分析。
+            <p class="paragraph">对原始数据进行QC之后，用Usearch软件对数据进行去嵌合体和聚类的操作，Usearch聚类时，先将Reads按照丰度从大到小排序，通过97%相似度的标准聚类，得到OTU(Operational Taxonomic Units)，每个OTU被认为可代表一个物种。接下来对每个样品的Reads进行随机抽平处理，并提取对应的OTU序列。然后使用Qiime软件，做Alpha多样性指数的稀释曲线，根据稀释曲线选择合理的抽平参数，利用Qiime软件对得到的抽平后的OTU进行分析，首先从OTU中分别提取一条Read作为代表序列，使用RDP方法，将该代表序列与{{amplification}}数据库比对，从而对每个OTU进行物种分类。归类后，根据每个OTU中序列的条数，从而得到OTU丰度表，最后根据该OTU丰度表进行后续分析。
             </p>
       	<p>&nbsp;</p>
+	</div>
+	<div id="page">
         <h1>结果</h1>
         <br>
         
         <h2>1.数据统计</h2>
         	<p class="paragraph">
-            通过Illumina平台（Hiseq或者Miseq）进行Paired-end测序，Paired End Reads通过reads之间的overlap关系拼接成长Reads，并对拼接后的reads进行质控，得到clean reads。拼接过程及质控标准见方法1。
+            通过Illumina平台（HiSeq或者MiSeq）进行Paired-end测序，Paired End Reads通过Reads之间的Overlap关系拼接成长Reads，并对拼接后的Reads进行质控，得到Clean Reads。拼接过程及质控标准见<a href="method.pdf" target="_blank">实验方法</a>中的方法1。
             </p>
 		
 		{% block reads_statistical_head %} 
 		{% endblock %}
-
+     </div>
         <h2 id="OTU分析">2.OTU分析</h2>
-		
+	<div id="page">
 		{% block otu_statistical_head %}
 		{% endblock %}
 		{% block downsize_head %}
 		{% endblock %}
-		
+	</div>
+	<div id="page">
  		{% block core_microbiome_head %}
 		{% endblock %}           
 
 		{% block otu_venn_head %}
 		{% endblock %}
+	</div>
+	<div id="page">
 		{% block otu_pca_head %}
 		{% endblock %}		
 		{% block specaccum_head %}
 		{% endblock %}
-		
+	</div>	
 
 		<h2>3 物种分类和丰度分析</h2>
-        
+    <div id="page">    
         {% block otu_tax_assignments_head %}
 		{% endblock %}  
 		{% block otu_annotation_statistical_head %}
 		{% endblock %}
-        	
+    </div>
+	
 		{% block tax_summary_head %}
-		{% endblock %}		
+		{% endblock %}	
+	<div id="page">
 		{% block otu_heatmap_head %}
 		{% endblock %}
+	</div>
+	<div id="page">
 		{% block rank_abundance_head %}
 		{% endblock %}
 		{% block otu_krona_head %}
@@ -117,16 +127,18 @@
 		{% endblock %}
 
 		
-        
+   </div>      
         <h2>4 alpha多样性分析</h2>
+	<div id="page">
 		{% block alpha_diversity_head %}
 		{% endblock %}
-
+    
+	
 		{% block alpha_diff_head %}
 		{% endblock %}
           
 
-            
+    <div id="page">        
 		<h2>5 beta多样性分析</h2>
 		{% block uniFra_analysis_head %}
 		{% endblock %}
@@ -162,7 +174,7 @@
 
 
 
-<p><a name="gobottom"></a></p><!--到底部-->
+
 
 
 
@@ -173,7 +185,7 @@
 
 
 
-	<div region="south" border="false" class="cs-south" >公司地址：上海市长宁区宣化路300号华宁国际广场南塔27楼； 电话：021-51001612； 邮箱：support@realbio.cn；</div>
+	<div region="south" border="false" class="cs-south" >公司地址：上海市浦东新区浦三路3058号长青企业广场119室； 电话：021-51001612； 邮箱：support@realbio.cn；</div>
 
 
 

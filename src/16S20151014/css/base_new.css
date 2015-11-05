@@ -55,13 +55,11 @@ img.size1{
 	margin:5px auto;
 	width:500px;
 	padding:0;
-	border:1px solid #333;
   }
 img.size2{ 
 	margin:5px auto;
 	width:1000px;
 	padding:0;
-	border:1px solid #333;
 	}
 img.size3{
 	height:500px;	width:500px;
@@ -70,7 +68,7 @@ img.size4{
 	height:500px; width:1000px;
 	}
 #page{
-	page-break-afte:always;
+	page-break-after:always;
 }
 .error{
 	font-size:2em;

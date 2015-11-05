@@ -355,7 +355,7 @@ def get_html():
         var_html['diff_analysis_boxplot']=True
     if min_sample_num_in_groups >= 5:
 	var_html['alpha_diff_boxplot'] = True
- 
+    var_html['group_file']=group_file 
     env = Environment(loader=FileSystemLoader(out_dir_report+'/templates',encoding='utf-8'))
     template = env.get_template('report.html')
     finally_html = template.render(var_html)
