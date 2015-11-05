@@ -88,11 +88,7 @@ class Subject(object):
     def merge_with_infile(self,infile):
         for record in SeqIO.parse(open(infile),'fastq'):
             description = record.description
-            try:
-                sample = re.search('(\S+)_\d+$',description).group(1)
-            except AttributeError:
-                sys.stderr.write('sample name maybe some error, use read description as sample_name')
-                sample = description
+            sample = re.search('(\S+)_\d+$',description).group(1)
             sample = self.init_sample(sample)
             if sample is None:
                 continue
