@@ -240,7 +240,19 @@ class Pipeline(Work):
             total_shell.write('sh %s\n'%shell)
         total_shell.close()
 
+    def check_file(self,file):
+        if not os.path.isfile(file):
+            return False
+        with open(file) as fp:
+            try:
+                fp.next()
+            except  StopIteration:
+                return False
+        return True
+
     def add_job(self,job_name,shell,prep=None,vf='5G',queue='all.q'):
+        if not self.check_file(shell):
+            return None
         self.html_hold_jobs.append(job_name)
         qsub_name = '%s_%s'%(self.job_id,job_name)
         __o_file = '%s.o'%shell
