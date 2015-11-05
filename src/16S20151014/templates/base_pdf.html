@@ -104,12 +104,12 @@
 	</div>	
 
 		<h2>3 物种分类和丰度分析</h2>
-    <div id="page">    
+        <div id="page">    
         {% block otu_tax_assignments_head %}
 		{% endblock %}  
 		{% block otu_annotation_statistical_head %}
 		{% endblock %}
-    </div>
+        </div>
 	
 		{% block tax_summary_head %}
 		{% endblock %}	
@@ -127,24 +127,23 @@
 		{% endblock %}
 
 		
-   </div>      
+        </div>      
         <h2>4 alpha多样性分析</h2>
 	<div id="page">
 		{% block alpha_diversity_head %}
 		{% endblock %}
     
-	
+	</div>
+	<div id="page">
 		{% block alpha_diff_head %}
 		{% endblock %}
-          
+        </div>  
 
-    <div id="page">        
 		<h2>5 beta多样性分析</h2>
 		{% block uniFra_analysis_head %}
 		{% endblock %}
 		{% block similarity_analysis_head %}
 		{% endblock %}                
-
             
 		<h2>6 显著性差异分析	（PCA:每组样品数>=3;heatmp:每组样品数>=3;Botplot:每组样品数>=5）</h2>
 		{% block lefse_head %}
