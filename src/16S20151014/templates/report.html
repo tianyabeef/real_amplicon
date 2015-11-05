@@ -206,7 +206,7 @@
             <p class="premark">横轴为分组名称，纵轴为相对丰度的比例。颜色对应不同物种名称，色块长度表示该色块所代表的物种的相对丰度的比例。</p> -->
             <p class="paragraph">在属分类等级对{{star_picture_top}}的物种丰度做Star图。图3-3展示了属分类等级上的{{star_picture_top}}的物种Star图。</p>
             <p class="center">
-            	<img class="size2" src="images/tax_star.png"/>
+            	<img class="size5" src="images/tax_star.png"/>
             </p>
             <p class="name_fig">图3-3-3 属分类水平中不同group的{{star_picture_top}}物种Profiling星图。</p>
             <p class="premark">一个星形图代表着一个样品的物种相对丰度信息。每个星形图中的扇形代表一个物种，用不同颜色区分，用扇形的半径来代表物种相对丰度的大小，扇形半径越长代表此扇形所对应的物种的相对丰度越高。</p>
@@ -482,7 +482,7 @@
 		
 		<h3 id="组间差异分析">6.2 组间差异分析</h3>
         	<h4>OTU水平的差异分析</h4>
-            	<p class="paragraph">下表是在不同组样品间有显著差异的OTUs（p<{{ p_value }}, Kruskal-Wallis test），共{{ diff_otus }}个,如表6-2-1显示。结果表格<a href="..\results\05_diff_analysis\{{ group }}\otu_diff\otu_diff.marker.txt" target="_blank">otu_diff.marker.txt</a></p>
+            	<p class="paragraph">下表是在不同组样品间有显著差异的OTUs（p<{{ p_value }}, Kruskal-Wallis test），共{{ diff_otus }}个,如表6-2-1显示。结果表格<a href="..\results\05_diff_analysis\{{ group_file }}\otu_diff.marker.txt" target="_blank">otu_diff.marker.txt</a></p>
                	<p class="name_table">表6-2-1差异显著OTU列表</p>
                 
                 <div class="table">
@@ -512,7 +512,7 @@
 
             
             <h4>属水平的差异分析</h4>
-            	<p class="paragraph">通过Kruskal-Wallis test分析可以找出在不同组间有明显差异(p<{{ p_value }})的属如下（共{{ diff_genus }}个属或科）。结果表格<a href="..\results\05_diff_analysis\{{ group }}\otu_diff\genus_diff.marker.txt" target="_blank">genus_diff.marker.txt</a></p>
+            	<p class="paragraph">通过Kruskal-Wallis test分析可以找出在不同组间有明显差异(p<{{ p_value }})的属如下（共{{ diff_genus }}个属或科）。结果表格<a href="..\results\05_diff_analysis\{{ group_file }}\genus_diff.marker.txt" target="_blank">genus_diff.marker.txt</a></p>
                 <p class="name_table">表6-2-2差异显著物种列表</p>
                 
                 <div class="table">
@@ -541,7 +541,7 @@
                 
                                  
             <h4>所有水平的差异分析</h4>
-            <p class="paragraph">使用R中的kruskal.test函数，分别从门纲目科属水平，通过秩和检验筛选不同条件下的显著差异的物种，共找到{{ diff_species }}个。表6-2-3为样品间所有水平下的{{ diff_species }}个差异物种统计表。结果表格<a href="..\results\05_diff_analysis\{{ group }}\otu_diff\taxall_diff.marker.txt" target="_blank">taxall_diff.marker.txt</a></p>
+            <p class="paragraph">使用R中的kruskal.test函数，分别从门纲目科属水平，通过秩和检验筛选不同条件下的显著差异的物种，共找到{{ diff_species }}个。表6-2-3为样品间所有水平下的{{ diff_species }}个差异物种统计表。结果表格<a href="..\results\05_diff_analysis\{{ group_file }}\taxall_diff.marker.txt" target="_blank">taxall_diff.marker.txt</a></p>
             <p class="name_table">表6-2-3所有水平差异显著物种列表</p>
             
                 <div class="table">

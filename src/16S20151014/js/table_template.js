@@ -121,7 +121,7 @@ var alpha_diversitys=[
 	
  {% for key,alphaDiversity in alpha_diversitys.items() %}
 		
- {sampleName:"{{ alphaDiversity.alphaName }}",chao1:"{{ alphaDiversity.chao1 }}",goodsCoverage:"{{ alphaDiversity.goods_coverage }}",observedSpecies:"{{ alphaDiversity.observed_species }}",wholeTree:"{{ alphaDiversity.whole_tree }}",shannon:"{{ alphaDiversity.shannon }}",simpon:"{{ alphaDiversity.simpon }}"},
+ {sampleName:"{{ alphaDiversity.alphaName }}",chao1:"{{ alphaDiversity.chao1 }}",goodsCoverage:"{{ alphaDiversity.goods_coverage }}",observedSpecies:"{{ alphaDiversity.observed_species }}",wholeTree:"{{ alphaDiversity.whole_tree }}",shannon:"{{ alphaDiversity.shannon }}",simpson:"{{ alphaDiversity.simpson }}"},
 	{% endfor %}	
 ];
  
@@ -132,7 +132,7 @@ var alpha_diversitys=[
 		height: 150,
 		rowNum: 10,
 		rowList: [10,20,30],
-		colNames:['sampleName','chao1', 'goodsCoverage', 'observedSpecies','wholeTree','shannon','simpon'],
+		colNames:['sampleName','chao1', 'goodsCoverage', 'observedSpecies','wholeTree','shannon','simpson'],
 		colModel:[
 			{name:'sampleName',index:'sampleName', width:90,align:"center", sortype:"int"},
 			{name:'chao1',index:'chao1', width:90,align:"center", sortype:"float"},
@@ -140,7 +140,7 @@ var alpha_diversitys=[
 			{name:'observedSpecies',index:'observedSpecies', width:90,align:"center", sortype:"float"},
 			{name:'wholeTree',index:'wholeTree', width:90,align:"center", sortype:"float"},		
 			{name:'shannon',index:'shannon', width:90,align:"center", sortype:"float"},		
-			{name:'simpon',index:'simpon', width:90,align:"center", sortype:"float"}		
+			{name:'simpson',index:'simpson', width:90,align:"center", sortype:"float"}		
 		],
 		pager: "#plist51",
 		viewrecords: true,
@@ -152,7 +152,7 @@ var alpha_diversity_diffs=[
 
 {% for key,alphaDiversity in alpha_diversity_diffs.items() %}
 		
-{sampleName:"{{ alphaDiversity.alphaName }}",chao1:"{{ alphaDiversity.chao1 }}",goodsCoverage:"{{ alphaDiversity.goods_coverage }}",observedSpecies:"{{ alphaDiversity.observed_species }}",wholeTree:"{{ alphaDiversity.whole_tree }}",shannon:"{{ alphaDiversity.shannon }}",simpon:"{{ alphaDiversity.simpon }}"},
+{sampleName:"{{ alphaDiversity.alphaName }}",chao1:"{{ alphaDiversity.chao1 }}",goodsCoverage:"{{ alphaDiversity.goods_coverage }}",observedSpecies:"{{ alphaDiversity.observed_species }}",wholeTree:"{{ alphaDiversity.whole_tree }}",shannon:"{{ alphaDiversity.shannon }}",simpson:"{{ alphaDiversity.simpson }}"},
 	{% endfor %}	
 ];
  
@@ -163,7 +163,7 @@ var alpha_diversity_diffs=[
 		height: 150,
 		rowNum: 10,
 		rowList: [10,20,30],
-		colNames:['sampleName','chao1', 'goodsCoverage', 'observedSpecies','wholeTree','shannon','simpon'],
+		colNames:['sampleName','chao1', 'goodsCoverage', 'observedSpecies','wholeTree','shannon','simpson'],
 		colModel:[
 			{name:'sampleName',index:'sampleName', width:90,align:"center", sortype:"float"},
 			{name:'chao1',index:'chao1', width:90,align:"center", sortype:"float"},
@@ -171,7 +171,7 @@ var alpha_diversity_diffs=[
 			{name:'observedSpecies',index:'observedSpecies', width:90,align:"center", sortype:"float"},
 			{name:'wholeTree',index:'wholeTree', width:90,align:"center", sortype:"float"},		
 			{name:'shannon',index:'shannon', width:90,align:"center", sortype:"float"},		
-			{name:'simpon',index:'simpon', width:90,align:"center", sortype:"float"}		
+			{name:'simpson',index:'simpson', width:90,align:"center", sortype:"float"}		
 		],
 		pager: "#plist52",
 		viewrecords: true,

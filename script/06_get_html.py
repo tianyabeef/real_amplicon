@@ -46,14 +46,14 @@ class OtuAssignmentsStatistical(object):
         self.assignmentsName=assignmentsName
         self.num=num
 class Alpha_diversity(object):
-    def __init__(self,alphaName,chao1, goods_coverage, observed_species, whole_tree, shannon, simpon):
+    def __init__(self,alphaName,chao1, goods_coverage, observed_species, whole_tree, shannon, simpson):
         self.alphaName=alphaName
         self.chao1 =chao1
         self.goods_coverage=goods_coverage
         self.observed_species=observed_species
         self.whole_tree=whole_tree
         self.shannon=shannon
-        self.simpon=simpon
+        self.simpson=simpson
 
 
 def save_table(input_dir):
