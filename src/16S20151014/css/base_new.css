@@ -68,7 +68,7 @@ img.size4{
 	height:500px; width:1000px;
 	}
 #page{
-	page-break-after:always;
+	page-break-inside: avoid !important;
 }
 .error{
 	font-size:2em;
