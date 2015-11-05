@@ -22,6 +22,7 @@ def read_params(args):
                         help="set the output dir")
     args = parser.parse_args()
     params = vars(args)
+    params['group_dir']=params['group']
     params['group'] = parse_group_file(params['group'])
     return params
 
@@ -59,7 +60,8 @@ if __name__ == '__main__':
     tiff_file = params['out_dir'] + '/venn.tiff'
     png_file = params['out_dir'] + '/venn.png'
     vars = {'for_plot':for_plot,
-            'tiff_file':tiff_file}
+            'tiff_file':tiff_file,
+            'group_file':params['group_dir']}
 
     otu_in_group = read(params['otu_table'],params['group'],vars)
     write(otu_in_group,for_plot)

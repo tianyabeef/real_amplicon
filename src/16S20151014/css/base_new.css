@@ -61,16 +61,24 @@ img.size2{
 	width:1000px;
 	padding:0;
 	}
+
 img.size3{
 	height:500px;	width:500px;
   }
 img.size4{
 	height:500px; width:1000px;
 	}
+img.size5{
+	margin:5px auto;
+        width:800px;
+        padding:0;
+}
 #page{
 	page-break-inside: avoid !important;
 }
 .error{
+	text-indent: 2em;
+	line-height: 1.5;
 	font-size:2em;
 	color:red;
 }

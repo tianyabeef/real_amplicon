@@ -46,14 +46,14 @@ class OtuAssignmentsStatistical(object):
         self.assignmentsName=assignmentsName
         self.num=num
 class Alpha_diversity(object):
-    def __init__(self,alphaName,chao1, goods_coverage, observed_species, whole_tree, shannon, simpon):
+    def __init__(self,alphaName,chao1, goods_coverage, observed_species, whole_tree, shannon, simpson):
         self.alphaName=alphaName
         self.chao1 =chao1
         self.goods_coverage=goods_coverage
         self.observed_species=observed_species
         self.whole_tree=whole_tree
         self.shannon=shannon
-        self.simpon=simpon
+        self.simpson=simpson
 
 
 def save_table(input_dir):
@@ -345,11 +345,10 @@ def get_html():
     var_html['otu_krona']=False
     var_html['phylogenetic_tree']=False
     var_html['similarity_analysis']=False
-    if group_num >= 2:    
-        var_html['lefse']=True
     if min_sample_num_in_groups >= 3:
 	var_html['alpha_diff']=True
     if min_sample_num_in_groups >= 3 and group_num >= 2:
+	var_html['lefse']=True
         var_html['diff_analysis']=True
     if  min_sample_num_in_groups >= 5 and group_num >= 2:
         var_html['diff_analysis_boxplot']=True

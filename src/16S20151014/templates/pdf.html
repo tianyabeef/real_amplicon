@@ -151,7 +151,7 @@
 {% block otu_tax_assignments_head %}
 {% if otu_tax_assignments %}
 	<h3 id="物种注释分析">3.1 物种注释分析</h3>
-       	<p class="paragraph">从各个OTU中挑选出丰度最高的一条序列，作为该OTU的代表序列（代表序列见文件rep_set.fna）。使用rdp方法，将该代表序列与已知物种的{{amplification}}数据库进行比对，从而对每个OTU进行物种归类（物种注释结果见文件<a href="..\02_OTU\all\tax_assignment.txt" target="_blank">tax_assignments.txt</a>）。</p>
+       	<p class="paragraph">从各个OTU中挑选出丰度最高的一条序列，作为该OTU的代表序列（代表序列见文件rep_set.fna）。使用rdp方法，将该代表序列与已知物种的{{amplification}}数据库进行比对，从而对每个OTU进行物种归类（物种注释结果见文件<a href="..\result\02_OTU\all\tax_assignment.txt" target="_blank">tax_assignments.txt</a>）。</p>
         <p class="name_table">表3-1-1 OTU注释统计</p>            
             <div class="table">
             <center>
@@ -201,7 +201,7 @@
 		<div id="page">
             <p class="paragraph">在属分类等级对{{star_picture_top}}的物种丰度做Star图。图3-3展示了属分类等级上的{{star_picture_top}}的物种Star图。</p>
             <p class="center">
-            	<img class="size2" src="images/tax_star.png"/>
+            	<img class="size5" src="images/tax_star.png"/>
             </p>
             <p class="name_fig">图3-3-3 属分类水平中不同group的{{star_picture_top}}物种Profiling星图。</p>
             <p class="premark">一个星形图代表着一个样品的物种相对丰度信息。每个星形图中的扇形代表一个物种，用不同颜色区分，用扇形的半径来代表物种相对丰度的大小，扇形半径越长代表此扇形所对应的物种的相对丰度越高。</p>
@@ -374,42 +374,41 @@
 		
 {% block uniFra_analysis_head %}
 {% if uniFra_analysis_heatmap %} 
-		
 	<h3 id="UniFrac热图分析">5.1 UniFrac热图分析（每组样品数>=4）</h3>
-	    <div id="page">
-        	<p class="paragraph">与Alpha多样性分析不同，Beta多样性（Beta diversity）分析是用来比较一对样品在物种多样性方面存在的差异大小。</p>
-            <p class="paragraph">UniFrac是通过利用系统进化的信息来比较样品间的物种群落差异。其计算结果可以作为一种衡量Beta Diversity的指数，它考虑了物种间的进化距离，该指数越大表示样品间的差异越大。报告中给出的UniFrac结果分为加权UniFrac（weighted UniFrac）与非加权UniFirac（unweighted UniFrac）2种，其中weighted UniFrac考虑了序列的丰度，unweighted UniFrac不考虑序列丰度。图4-5 UniFrac距离分布heatmap，通过对UniFrac结果的聚类，具有相似Beta多样性的样品聚类在一起，反应了样品间的相似性。详细统计结果见附件<a href="..\results\04_Beta_diversity\{{ group_file }}\weighted_unifrac_otu_table.txt" target="_blank">weighted_unifrac.xls</a>与<a href="..\results\04_Beta_diversity\{{ group_file }}\unweighted_unifrac_otu_table.txt" target="_blank">unweighted_unifrac.xls</a>。</p>
-            <p class="paragraph">截取部分Beta多样性值统计结果见表5-1-1和表5-1-2。</p>
-            <p class="name_table">表5-1-1样品Beta diversity统计表（weighted_unifrac）</p>
+        <p class="paragraph">与Alpha多样性分析不同，Beta多样性（Beta diversity）分析是用来比较一对样品在物种多样性方面存在的差异大小。</p>
+        <p class="paragraph">UniFrac是通过利用系统进化的信息来比较样品间的物种群落差异。其计算结果可以作为一种衡量Beta Diversity的指数，它考虑了物种间的进化距离，该指数越大表示样品间的差异越大。报告中给出的UniFrac结果分为加权UniFrac（weighted UniFrac）与非加权UniFirac（unweighted UniFrac）2种，其中weighted UniFrac考虑了序列的丰度，unweighted UniFrac不考虑序列丰度。图4-5 UniFrac距离分布heatmap，通过对UniFrac结果的聚类，具有相似Beta多样性的样品聚类在一起，反应了样品间的相似性。详细统计结果见附件<a href="..\results\04_Beta_diversity\{{ group_file }}\weighted_unifrac_otu_table.txt" target="_blank">weighted_unifrac.xls</a>与<a href="..\results\04_Beta_diversity\{{ group_file }}\unweighted_unifrac_otu_table.txt" target="_blank">unweighted_unifrac.xls</a>。</p>
+        <p class="paragraph">截取部分Beta多样性值统计结果见表5-1-1和表5-1-2。</p>
+        <div id="page">	
+	<p class="name_table">表5-1-1样品Beta diversity统计表（weighted_unifrac）</p>
             
-            <div class="table">
-                <center>
-                    <table id="list53"></table>
-                    <div id="plist53"></div>
-                </center>
-            </div>
+        <div class="table">
+            <center>
+                <table id="list53"></table>
+                <div id="plist53"></div>
+            </center>
         </div>
 	
-      	<div id="page">
-            <p class="name_table">表5-1-2样品Beta diversity统计表（unweighted_unifrac）</p>
+        <p class="name_table">表5-1-2样品Beta diversity统计表（unweighted_unifrac）</p>
             
-            <div class="table">
-                <center>
-                    <table id="list54"></table>
-                    <div id="plist54"></div> 
-                </center>          	
-            </div>
-            
-            <p class="tremark">注：表5-1-1为加权物种分类丰度信息计算得到的Beta diversity统计结果，表5-1-2为未加权物种分类丰度信息计算得到的Beta diversity统计结果。</p>
-            <p class="paragraph">根据各样品差异性的统计结果，对样品进行聚类分析并计算样品间距离，以判断各样品物种组成的相似性。所有样品的聚类分析结果如图5-1-3所示。样品越靠近，说明两个样品的物种组成越相似。</p>
-            <p class="center">
-            	<img class="size2" src="images/group/weighted_unifrac.heatmap.png"/>
-            </p>
-            <p class="center">
-            	<img class="size2" src="images/group/unweighted_unifrac.heatmap.png"/>
-            </p>            
-            <p class="name_fig">图5-1-3 Beta多样性heatmap（上图为Weighted，下图为Unweighted）</p>
+        <div class="table">
+            <center>
+                <table id="list54"></table>
+                <div id="plist54"></div> 
+            </center>          	
         </div>
+            
+        <p class="tremark">注：表5-1-1为加权物种分类丰度信息计算得到的Beta diversity统计结果，表5-1-2为未加权物种分类丰度信息计算得到的Beta diversity统计结果。</p>
+        <p class="paragraph">根据各样品差异性的统计结果，对样品进行聚类分析并计算样品间距离，以判断各样品物种组成的相似性。所有样品的聚类分析结果如图5-1-3所示。样品越靠近，说明两个样品的物种组成越相似。</p>
+        <p class="center">
+       		<img class="size2" src="images/group/weighted_unifrac.heatmap.png"/>
+        </p>
+    </div>
+    <div id="page"
+        <p class="center">
+            <img class="size2" src="images/group/unweighted_unifrac.heatmap.png"/>
+        </p>            
+        <p class="name_fig">图5-1-3 Beta多样性heatmap（上图为Weighted，下图为Unweighted）</p>
+    </div>
 {% else %}
 		<h3 id="UniFrac热图分析">5.1 UniFrac热图分析（每组样品数>=4）</h3>
 			<p class="error">样品数不足无法分析</p>
@@ -422,7 +421,6 @@
             </p>        
             <p class="name_fig">图5-2-1 PCoA分析图（A为Weight_UniFrac结果，B为Unweight_UniFrac结果）</p>
             <p class="premark">PcoA是一种研究数据相似性或者差异性的可视化方法，它没有改变样品点之间的项目位置关系，只改变了坐标系统。横坐标表示第一主坐标，括号中的百分比则表示第一主坐标对样品差异的贡献率；纵坐标表示第二主坐标，括号中的百分比表示第二主坐标对样品差异的贡献率。图中点分别表示各个样品。不同颜色代表样品属于不同的分组。横向的box图是不同分组在第一主坐标上的值的分布。</p>
-		</div>
 		{% else %}
 		<h3 id="PCoA分析">5.2 PCoA分析（每组样品数>=5）</h3>
 			<p class="error">样品数不足无法分析</p>
@@ -484,7 +482,7 @@
 		<h3 id="组间差异分析">6.2 组间差异分析</h3>
 		<div id="page">
         	<h4>OTU水平的差异分析</h4>
-            	<p class="paragraph">下表是在不同组样品间有显著差异的OTUs（p<{{ p_value }}, Kruskal-Wallis test），共{{ diff_otus }}个,如表6-2-1显示。结果表格<a href="..\results\05_diff_analysis\{{ group }}\otu_diff\otu_diff.marker.txt" target="_blank"></a></p>
+            	<p class="paragraph">下表是在不同组样品间有显著差异的OTUs（p<{{ p_value }}, Kruskal-Wallis test），共{{ diff_otus }}个,如表6-2-1显示。结果表格<a href="..\results\05_diff_analysis\{{ group_file }}\otu_diff.marker.txt" target="_blank">otu_diff.marker.txt</a></p>
                	<p class="name_table">表6-2-1差异显著OTU列表</p>
                 
                 <div class="table">
@@ -514,7 +512,7 @@
 
 		<div id="page">     
             <h4>属水平的差异分析</h4>
-            	<p class="paragraph">通过Kruskal-Wallis test分析可以找出在不同组间有明显差异(p<{{ p_value }})的属如下（共{{ diff_genus }}个属或科）。结果表格<a href="..\results\05_diff_analysis\{{ group }}\otu_diff\genus_diff.marker.txt" target="_blank"></a></p>
+            	<p class="paragraph">通过Kruskal-Wallis test分析可以找出在不同组间有明显差异(p<{{ p_value }})的属如下（共{{ diff_genus }}个属或科）。结果表格<a href="..\results\05_diff_analysis\{{ group_file }}\genus_diff.marker.txt" target="_blank">genus_diff.marker.txt</a></p>
                 <p class="name_table">表6-2-2差异显著物种列表</p>
                 
                 <div class="table">
@@ -544,7 +542,7 @@
 		</div>
 		<div id="page">
             <h4>所有水平的差异分析</h4>
-            <p class="paragraph">使用R中的kruskal.test函数，分别从门纲目科属水平，通过秩和检验筛选不同条件下的显著差异的物种，共找到{{ diff_species }}个。表6-2-3为样品间所有水平下的{{ diff_species }}个差异物种统计表。结果表格<a href="..\results\05_diff_analysis\{{ group }}\otu_diff\taxall_diff.marker.txt" target="_blank"></a></p>
+            <p class="paragraph">使用R中的kruskal.test函数，分别从门纲目科属水平，通过秩和检验筛选不同条件下的显著差异的物种，共找到{{ diff_species }}个。表6-2-3为样品间所有水平下的{{ diff_species }}个差异物种统计表。结果表格<a href="..\results\05_diff_analysis\{{ group_file }}\taxall_diff.marker.txt" target="_blank">taxall_diff.marker.txt</a></p>
             <p class="name_table">表6-2-3所有水平差异显著物种列表</p>
             
                 <div class="table">
