@@ -178,20 +178,20 @@ class UserConfigChecker(object):
             pass
         elif exception_type == KeyError:
             sys.stderr.write('the config %s is missing!\n'%exception_val)
-            sys.exit()
+            #  sys.exit()
         elif exception_type == AssertionError:
             sys.stderr.write('the config setting is error:\n\t%s\n'%exception_val)
-            sys.exit()
+            #  sys.exit()
         elif exception_type == ValueError:
             sys.stderr.write('the config setting is error:\n\t%s\n'%exception_val)
-            sys.exit()
+            #  sys.exit()
         elif exception_type == cp.InterpolationMissingOptionError:
             key = re.search('key\s+:\s+(.+)\n',str(exception_val)).group(1)
             sys.stderr.write('the config %s can not find!\n'%key)
-            sys.exit()
+            #  sys.exit()
         else:
             sys.stderr.write('%s : %s'%(exception_type,exception_val))
-            sys.exit()
+            #  sys.exit()
 
 class Pipeline(Work):
 
