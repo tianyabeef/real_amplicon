@@ -50,6 +50,11 @@ def get_result(cfg_in,vars=None):
         analysis_name = re.search(regex, group_file).group(1)
         dirs = []
         dirs.append(out_dir_results+"/02_OTU/"+analysis_name+"/wf_taxa_summary/")
+        dirs.append(out_dir_results+"/02_OTU/"+analysis_name+"/bar_plot/phylum/")
+        dirs.append(out_dir_results+"/02_OTU/"+analysis_name+"/bar_plot/order/")
+        dirs.append(out_dir_results+"/02_OTU/"+analysis_name+"/bar_plot/class/")
+        dirs.append(out_dir_results+"/02_OTU/"+analysis_name+"/bar_plot/genus/")
+        dirs.append(out_dir_results+"/02_OTU/"+analysis_name+"/bar_plot/family/")
         dirs.append(out_dir_results+"/03_Alpha_diversity/"+analysis_name)
         dirs.append(out_dir_results+"/04_Beta_diversity/"+analysis_name)
         dirs.append(out_dir_results+"/03_Alpha_diversity/"+analysis_name+"/box_plot/")

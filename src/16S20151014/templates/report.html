@@ -192,18 +192,46 @@
 		{% block tax_summary_head %}
 		{% if tax_summary %} 
 		<h3 id="物种丰度分析">3.3 物种丰度分析</h3>
-        	<p class="paragraph">分别在门、纲、目、科、属分类等级对各个样品做物种Profiling相应的柱状图。图3-1展示了各样品在属分类等级上的物种profiling柱状图。</p>
-            <p class="center">
+        	<p class="paragraph">分别在门、纲、目、科、属分类等级对各个样品做物种Profiling相应的柱状图。图3-3-1展示了各样品在属分类等级上的物种profiling柱状图。</p>
+			<div class="albumSlider">
+            <div class="fullview"><img src="images/genus/bar_plot.png"/></div>
+            <div class="slider">
+            <div class="button movebackward" title="向上滚动"></div>
+            <div class="imglistwrap"><ul class="imglist">
+            	<li><a id="group" href='images/genus/bar_plot.png' ><img src='images/genus/bar_plot.png'/></a></li>
+				<li><a id="group" href='images/family/bar_plot.png' ><img src='images/family/bar_plot.png'/></a></li>
+				<li><a id="group" href='images/class/bar_plot.png' ><img src='images/class/bar_plot.png'/></a></li>
+				<li><a id="group" href='images/order/bar_plot.png' ><img src='images/order/bar_plot.png'/></a></li>
+				<li><a id="group" href='images/phylum/bar_plot.png' ><img src='images/phylum/bar_plot.png'/></a></li>
+            
+            </ul></div>
+            <div class="button moveforward" title="向下滚动"></div>
+            </div>
+            </div>
+
+<!--             <p class="center">
             	<img class="size2" src="images/genus/bar_plot.png"/>
-            </p>
+            </p> -->
             <p class="name_fig">图3-3-1 样品门分类水平中物种Profiling柱状图。</p>
             <p class="premark">横轴为样品名称，纵轴为相对丰度的比例。颜色对应不同物种名称，色块长度表示该色块所代表的物种的相对丰度的比例。</p>
-<!--             <p class="paragraph">根据样品分组信息，分别在门、纲、目、科、属分类等级对不同group做物种profiling相应的柱状图。结果可见附件文件夹“wf_taxa_summary/”。图3-2展示了门分类等级上的物种profiling不同分组的boxplot图。</p>
-            <p class="center">
-            	<img class="size2" src="images/17.png"/>
-            </p>
+            <p class="paragraph">根据样品分组信息，分别在门、纲、目、科、属分类等级对不同group做物种profiling相应的柱状图。图3-3-2展示了门分类等级上的物种profiling不同分组的boxplot图。</p>
+			<div class="albumSlider">
+            <div class="fullview"><img src="images/group/genus/bar_plot.png"/></div>
+            <div class="slider">
+            <div class="button movebackward" title="向上滚动"></div>
+            <div class="imglistwrap"><ul class="imglist">
+            	<li><a id="group" href='images/group/genus/bar_plot.png' ><img src='images/group/genus/bar_plot.png'/></a></li>
+				<li><a id="group" href='images/group/family/bar_plot.png' ><img src='images/group/family/bar_plot.png'/></a></li>
+				<li><a id="group" href='images/group/class/bar_plot.png' ><img src='images/group/class/bar_plot.png'/></a></li>
+				<li><a id="group" href='images/group/order/bar_plot.png' ><img src='images/group/order/bar_plot.png'/></a></li>
+				<li><a id="group" href='images/group/phylum/bar_plot.png' ><img src='images/group/phylum/bar_plot.png'/></a></li>
+            
+            </ul></div>
+            <div class="button moveforward" title="向下滚动"></div>
+            </div>
+            </div>
             <p class="name_fig">图3-3-2 门分类水平中不同group的物种profiling柱状图。</p>
-            <p class="premark">横轴为分组名称，纵轴为相对丰度的比例。颜色对应不同物种名称，色块长度表示该色块所代表的物种的相对丰度的比例。</p> -->
+            <p class="premark">横轴为分组名称，纵轴为相对丰度的比例。颜色对应不同物种名称，色块长度表示该色块所代表的物种的相对丰度的比例。</p>
             <p class="paragraph">在属分类等级对{{star_picture_top}}的物种丰度做Star图。图3-3展示了属分类等级上的{{star_picture_top}}的物种Star图。</p>
             <p class="center">
             	<img class="size5" src="images/tax_star.png"/>
