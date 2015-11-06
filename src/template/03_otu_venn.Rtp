@@ -5,10 +5,6 @@ library(grid)
 X = read.table("@#{for_plot}",sep='\t',row.names=1,header=F,check.names=F,quote="")
 group=read.table("@#{group_file}",header=F,row.names=1,check.names=F,quote="")
 
-
-
-
-
 g = c()
 for(i in 1:nrow(X)){
 	a = X[i,]
@@ -66,9 +62,6 @@ if(gnum==2){
 		margin = 0.14
 	)	
 }else if(gnum==5){
-
-
-
 	group_name = c('@#{group_name1}','@#{group_name2}','@#{group_name3}','@#{group_name4}','@#{group_name5}')
 	gcols_order_finaly =tmp[group_name,2] 	
 	venn.plot <- venn.diagram(
