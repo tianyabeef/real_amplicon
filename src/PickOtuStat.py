@@ -22,7 +22,7 @@ class Subject(object):
 
     def read_raw_data_stat(self,file):
         fp=open(file)
-        head = fp.next()
+        fp.next()
         for line in fp:
             sample_name,tags,bases,q20,q30, = line.strip().split('\t')
             if sample_name not in self.sample_set:
@@ -47,7 +47,7 @@ class Subject(object):
         line = fp.next()
         while(line):
             line = fp.next().strip()
-        head = fp.next()
+        fp.next()
         for line in fp:
             sample_name,tags,single_reads,single_ratio = line.strip().split('\t')
             if sample_name not in self.sample_set:
@@ -111,7 +111,7 @@ class Subject(object):
         fp.write('OTU average: %2.2f\n'%np.mean(otu_num))
         fp.write('OTU std: %2.2f\n'%np.std(otu_num))
         fp.write('\n')
-        fp.write('sample_name\ttags\tmapped_tags\tmapped_ratio\tsingleton_tags\tsingleton_ratio\tchimera_tags\tchimera_ratio\tQ20_ratio\tQ30_ratio\tOTUs\n')
+        fp.write('sample_name\treads\tmapped_reads\tmapped_ratio\tsingleton_reads\tsingleton_ratio\tchimera_reads\tchimera_ratio\tQ20_ratio\tQ30_ratio\tOTUs\n')
         for sample_name in sorted(list(self.sample_set.iterkeys())):
             sample = self.sample_set[sample_name]
             tags = sample.stats['tags']

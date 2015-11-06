@@ -24,10 +24,10 @@ def read_params(args):
 def work_single(file):
     alphas = {}
     with open(file) as fp:
-        samples = fp.next().strip().split('\t')[3:]
+        samples = fp.next().rstrip().split('\t')[3:]
         for tail in fp:
             pass
-        tail = tail.strip().split()[3:]
+        tail = tail.rstrip().split()[3:]
     for ind,sample in enumerate(samples):
         alphas[sample] = tail[ind]
     return alphas
