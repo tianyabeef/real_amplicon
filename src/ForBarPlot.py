@@ -1,6 +1,23 @@
 from __future__ import division
 import re
 
+class Group(object):
+
+    def __init__(self,name):
+        self.name = name
+        self.samples = {}
+        self.percent = {}
+        self.other_percent = 0
+
+    def get_percent(self,used_tax):
+        self.sample_num = len(self.samples)
+        for sample in self.samples.itervalues():
+            for tax in used_tax:
+                if tax not in self.percent:
+                    self.percent[tax] = 0
+                self.percent[tax] += sample.percent[tax] / self.sample_num
+            self.other_percent += sample.other_percent / self.sample_num
+
 class Sample(object):
 
     def __init__(self,name):
@@ -77,7 +94,6 @@ class Subject(object):
     def run(self):
         fp = open(self.outfile,'w')
         dict_ = self.tax_total_profile
-#        fp.write('Sample\tTax\tPercent\n')
         self.read_profile()
         self.pick_top()
         out_str = 'tax_name'
@@ -95,9 +111,34 @@ class Subject(object):
         for sample in self.sample:
             out_str += '\t%s'%sample.other_percent
         fp.write(out_str.strip() + '\n')
-
-#            for tax in sorted(list(sample.percent.iterkeys()),
-#                    cmp=lambda a,b:cmp(dict_[b],dict_[a])):
-#                fp.write('%s\t%s\t%s\n'%(sample.name,tax,sample.percent[tax]))
-#            fp.write('%s\tOther\t%s\n'%(sample.name,sample.other_percent))
         fp.close()
+
+    def run_with_group(self,group):
+        fp = open(self.outfile,'w')
+        dict_ = self.tax_total_profile
+        self.read_profile()
+        self.pick_top()
+        out_str = 'tax_name'
+        groups = {}
+        for sample in self.sample:
+            g = group[sample.name]
+            if g not in groups:
+                groups[g] = Group(g)
+            groups[g].samples[sample.name] = sample
+            sample.pick_top(self.used_tax)
+        for g in groups.itervalues():
+            g.get_percent(self.used_tax)
+            out_str += '\t%s'%g.name
+        fp.write(out_str.strip() + '\n')
+        for tax in sorted(self.used_tax,
+                cmp=lambda a,b:cmp(dict_[b],dict_[a])):
+            out_str = tax
+            for g in groups.itervalues():
+                out_str += '\t%s'%g.percent[tax]
+            fp.write(out_str.strip() + '\n')
+        out_str = 'Other'
+        for g in groups.itervalues():
+            out_str += '\t%s'%g.other_percent
+        fp.write(out_str.strip() + '\n')
+        fp.close()
+

@@ -4,12 +4,12 @@ data <- read.table("@#{for_plot}",header=TRUE,sep="\t",check.names=F,quote="")
 data$Sample <- factor(data$Sample,levels=unique(data$Sample))
 data$Tax <- factor(data$Tax,levels=unique(data$Tax))
 pdf("@#{pdf_file}",width=10, height=5)
-
+data$Group = as.character(data$Group)
 p <-ggplot(data, aes(Tax,log2(Profile),fill=Group))
 
 p +
 geom_boxplot(outlier.size=1) +
-theme( axis.text=element_text(colour="black"), axis.text.x=element_text(angle=60, size=8,vjust=0.5) ) +
+theme( axis.text=element_text(colour="black"), axis.text.x=element_text(angle=60, size=8,hjust=1) ) +
 scale_fill_discrete(name="Group", h=c(100,1000), c=100, l=60) +
 labs(title="", x="", y="log2(Relative Abundance)") +
 theme(legend.position='left')

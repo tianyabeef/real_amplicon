@@ -22,6 +22,13 @@ def taxanomy_group(cfg_in,vars=None):
     # summarize trans
     work.commands.append('%s -i %s'%(scripts['summarize_trans'],
                                      outfiles['summarize_dir']))
+
+    # bar_plot
+    work.commands.append('%s -t %s -o %s -g %s'%(scripts['group_bar_plot'],
+                                                 outfiles['summarize_dir'],
+                                                 outfiles['bar_plot_dir'],
+                                                 params['group']))
+
     # core otu
     if sample_num_total >= 5:
         work.commands.append('%s -i %s -t %s -c %s -o %s'%(scripts['core_otu'],

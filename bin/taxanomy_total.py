@@ -10,7 +10,6 @@ def taxanomy_total(cfg_in,vars=None):
     scripts = config.get_section('scripts')
     qiime = config.get_section('qiime')
     outfiles = config.get_section('outfiles')
-    software = config.get_section('softwares')
 
     # summarize taxa
     work.commands.append('%s -i %s -o %s'%(qiime['summarize_taxa'],
