@@ -14,6 +14,11 @@ def read_params(args):
             help="set the input biom file")
     parser.add_argument('-o','--out_dir',dest='out_dir',metavar='DIR',type=str,required=True,
             help="set the output dir")
+    parser.add_argument('--legend',dest='legend',action='store_true',
+            help="plot with legend")
+    parser.add_argument('--no_legend',dest='legend',action='store_false',
+            help="plot without legend")
+    parser.set_defaults(legend=False)
 
     args = parser.parse_args()
     params = vars(args)
@@ -24,7 +29,12 @@ if __name__ == '__main__':
     mkdir(params['out_dir'])
     pdf_file = '%s/rank_abundance.pdf'%params['out_dir']
     png_file = '%s/rank_abundance.png'%params['out_dir']
-    os.system("%s -i %s -s '*' -o %s --no_legend"%(params['rank_abundance'],
-                                                   params['biomfile'],
-                                                   pdf_file))
+    if params['legend']:
+        os.system("%s -i %s -s '*' -o %s"%(params['rank_abundance'],
+                                           params['biomfile'],
+                                           pdf_file))
+    else:
+        os.system("%s -i %s -s '*' -o %s --no_legend"%(params['rank_abundance'],
+                                                       params['biomfile'],
+                                                       pdf_file))
     image_trans(pdf_file,png_file)

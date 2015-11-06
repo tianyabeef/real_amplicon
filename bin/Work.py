@@ -202,7 +202,10 @@ class Pipeline(Work):
             self.job_id = self.config.get('params','job_id')
         except cp.NoOptionError:
             self.job_id = 'S'
-        self.check_config()
+        try:
+            self.check_config()
+        except:
+            sys.stderr.write('config file check failed\n')
         self.html_hold_jobs = []
 
     def check_config(self):
