@@ -1,7 +1,7 @@
 // JavaScript Document
 var dataStatisticals = [
 	{% for key,otuStatistical in otuStatisticals %}
-		{sampleName:"{{ otuStatistical.sampleName }}",ampliconType:"{{ otuStatistical.amplicon_type }}",cleanReads:"{{ otuStatistical.clean_read }}",Q20:"{{ otuStatistical.q20 }}",Q30:"{{ otuStatistical.q30 }}",singleton:"{{ otuStatistical.singleton }}",singletonRatio:"{{ otuStatistical.singleton_ratio }}",mappedReads:"{{ otuStatistical.mapped_reads }}",mappedRatio:"{{ otuStatistical.mapped_ratio }}",OTUs:"{{ otuStatistical.otus }}"},
+		{sampleName:"{{ otuStatistical.sampleName }}",ampliconType:"{{ otuStatistical.amplicon_type }}",cleanReads:"{{ otuStatistical.clean_read }}",Q20:"{{ otuStatistical.q20 }}",Q30:"{{ otuStatistical.q30 }}",mappedReads:"{{ otuStatistical.mapped_reads }}",mappedRatio:"{{ otuStatistical.mapped_ratio }}",OTUs:"{{ otuStatistical.otus }}"},
 	{% endfor %}
 	];
 jQuery().ready(function (){
@@ -11,15 +11,13 @@ jQuery().ready(function (){
 		height: 150,
 		rowNum: 10,
 		rowList: [10,20,30],
-		colNames:['Sample name','Amplicon type', 'clean reads','Q20(%)','Q30(%)','singleton','singleton(%)','mapped reads','mapped reads(%)','OTUs'],
+		colNames:['Sample name','Amplicon type', 'clean reads','Q20(%)','Q30(%)','mapped reads','mapped reads(%)','OTUs'],
 		colModel:[
 			{name:'sampleName',index:'sampleName',align:"center", width:90},
 			{name:'ampliconType',index:'ampliconType', align:"center",width:90},
 			{name:'cleanReads',index:'cleanReads', width:90,align:"center",sorttype:"int"},
 			{name:'Q20',index:'Q20', width:90, align:"center",sorttype:"float"},		
 			{name:'Q30',index:'Q30', width:90,align:"center",sorttype:"float"},
-			{name:'singleton',index:'singleton', width:90,align:"center",sortype:"int"},	
-			{name:'singletonRatio',index:'singletonRatio', align:"center",width:90, sortype:"float"},	
 			{name:'mappedReads',index:'mappedReads', align:"center",width:90, sortype:"int"},
 			{name:'mappedRatio',index:'mappedRatioss', align:"center",width:90, sortype:"float"},
 			{name:'OTUs',index:'OTUs', width:90,align:"center", sortype:"int"}
