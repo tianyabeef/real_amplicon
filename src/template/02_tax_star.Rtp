@@ -16,7 +16,7 @@ if(sample_num <=9 ){
         xpd=TRUE,main = "Genus",
         draw.segments = T,
         frame.plot=T,
-        key.loc=c(3.5,-1),
+        key.loc=c(4,-1),
         col.segments = rainbow(10),
         ylim=ylim
     )

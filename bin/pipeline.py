@@ -276,9 +276,9 @@ def work_html(pipeline, group_files, infiles=None):
     }
     get_result_outfile = get_result(pipeline.config, vars=vars)
     get_html_outfile = get_html(pipeline.config, vars=vars)
-    pipeline.make_shell(work_dir + '/make.sh',
-                        [('get_result', get_result_outfile['config']),
-                         ('get_html', get_html_outfile['config'])])
+    #  pipeline.make_shell(work_dir + '/make.sh',
+                        #  [('get_result', get_result_outfile['config']),
+                         #  ('get_html', get_html_outfile['config'])])
     pipeline.merge_shell(work_dir + '/work.sh', [get_result_outfile['shell'],
                                                  get_html_outfile['shell']])
     pipeline.add_job('html',
