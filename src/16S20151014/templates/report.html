@@ -7,7 +7,7 @@
         	<p class="paragraph">
             通常情况下，有效序列可直接用于后续生物信息学分析。但若需要得到更高质量及更精准的生物信息分析结果，则应对有效序列进行去杂优化。若将长度过短的序列纳入分析范围会降低分析质量，通过去除长度短于220bp，可得到供精准分析的优化序列。
             </p>
-            <p class="center"><img src="images/length_distrubution.png"/></p>
+            <p class="center"><img class="size2" src="images/length_distrubution.png"/></p>
             <p class="name_fig">图1-1 序列长度的统计</p>
             <p class="premark">注：横坐标是序列的长度，纵坐标是Reads的数量</p>
 {% endif %}
@@ -176,11 +176,8 @@
 		{% block otu_annotation_statistical_head %}
 		{% if otu_annotation_statistical %}
 		<h3 id="物种注释结果统计">3.2 物种注释结果统计</h3>
-        	<p class="paragraph">根据物种注释情况，统计每个样品注释到各分类水平(Kingdom, Phylum, Class, Order, Family, Genus, Species)上的序列数目，由此可轻松了解注释到各分类水平的整体情况</p>
-            <p class="center">
-            	<img class="size2" src="images/15.png"/>
-            </p>
-            <p class="name_fig">图 3-2-1 各样品在各分类水平上的序列数目</p>
+        	<p class="paragraph">根据物种注释情况，统计每个样品注释到各分类水平(Kingdom, Phylum, Class, Order, Family, Genus, Species)上的相对丰度，由此可轻松了解注释到各分类水平的整体情况 </p>
+		<p class="paragraph">详细信息请见文件<a href="..\results\02_OTU\all\profile_tree.tsv" target="_blank">profile_tree.tsv。</a></p>
 		{% endif %}
 		{% endblock %} 
 
