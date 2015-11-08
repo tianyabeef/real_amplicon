@@ -428,7 +428,7 @@ def get_html():
     var_html['alpha_diversity'] = True
     var_html['specaccum'] = True
     var_html['otu_tax_assignments'] = True
-    var_html['otu_annotation_statistical'] = False
+    var_html['otu_annotation_statistical'] = True
     var_html['tax_summary'] = True
     var_html['otu_krona'] = False
     var_html['phylogenetic_tree'] = False
