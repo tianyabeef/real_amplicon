@@ -17,8 +17,6 @@ sys.path.insert(1, this_script_path + '/../bin')
 from settings import *
 
 
-
-
 class OtuStatistical(object):
     '''
     classdocs
@@ -70,12 +68,13 @@ class Alpha_diversity(object):
         self.shannon = shannon
         self.simpson = simpson
 
+
 def stringasfloat(string):
     num = float(string)
-    if(num >= 0.01):
-        value = format(float(string),'.2f')
+    if (num >= 0.01):
+        value = format(float(string), '.2f')
     else:
-        value = format(float(string),'.2e')
+        value = format(float(string), '.2e')
     return value
 
 
@@ -112,13 +111,15 @@ def save_table(input_dir):
 
                         if i < len(for_time) - 1:
                             str += '%s:"%s",' % (
-                                value, tringasfloat(tabs[i + 1].replace("NA", "0")))
+                                value,
+                                stringasfloat(tabs[i + 1].replace("NA", "0")))
                             #str += value+":\""+tabs[i+1]+"\","
                             jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90},"
                         else:
                             jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90}"
                             str += '%s:"%s"' % (
-                                value, stringasfloat(tabs[i + 1].replace("NA", "0")))
+                                value,
+                                stringasfloat(tabs[i + 1].replace("NA", "0")))
                             #str += value+":\""+tabs[i+1]+"\""
                             str += '},'
                         if count == 1:
@@ -127,7 +128,8 @@ def save_table(input_dir):
 
                         if i < 8:
                             str += '%s:"%s",' % (
-                                value, stringasfloat(tabs[i + 1].replace("NA", "0")))
+                                value,
+                                stringasfloat(tabs[i + 1].replace("NA", "0")))
                             #str += value+":\""+tabs[i+1]+"\","
                             jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90},"
                             if count == 1:
@@ -135,7 +137,8 @@ def save_table(input_dir):
                         else:
                             jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90}"
                             str += '%s:"%s"' % (
-                                value, stringasfloat(tabs[i + 1].replace("NA", "0")))
+                                value,
+                                stringasfloat(tabs[i + 1].replace("NA", "0")))
                             #str += value+":\""+tabs[i+1]+"\""
                             str += '},'
                             if count == 1:
@@ -183,26 +186,30 @@ def save_table2(input_dir):
                     if len(for_time) < 9:
                         if i < len(for_time) - 1:
                             str += '%s:"%s",' % (
-                                value, stringasfloat(tabs[i + 1].replace('NA', '0')))
+                                value,
+                                stringasfloat(tabs[i + 1].replace('NA', '0')))
                             #str += value+":\""+tabs[i+1]+"\","
                             jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90},"
                         else:
                             jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90}"
                             str += '%s:"%s"' % (
-                                value, stringasfloat(tabs[i + 1].replace('NA', '0')))
+                                value,
+                                stringasfloat(tabs[i + 1].replace('NA', '0')))
                             #str += value+":\""+tabs[i+1]+"\""
                             str += '},'
                     else:
 
                         if i < 8:
                             str += '%s:"%s",' % (
-                                varlue, stringasfloat(tabs[i + 1].replace('NA', '0')))
+                                varlue,
+                                stringasfloat(tabs[i + 1].replace('NA', '0')))
                             #str += value+":\""+tabs[i+1]+"\","
                             jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90},"
                         else:
                             jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90}"
                             str += '%s:"%s"' % (
-                                value, stringasfloat(tabs[i + 1].replace('NA', '0')))
+                                value,
+                                stringasfloat(tabs[i + 1].replace('NA', '0')))
                             #str += value+":\""+tabs[i+1]+"\""
                             str += '},'
                             break
@@ -228,8 +235,6 @@ def read_params(args):
     args = parser.parse_args()
     params = vars(args)
     return params
-
-
 
 
 def get_html():
@@ -323,8 +328,7 @@ def get_html():
             for line in lines:
                 tabs = line.strip().split('\t')
                 alpha_diversity = Alpha_diversity(
-                    tabs[0], stringasfloat(tabs[1])
-		    , stringasfloat(tabs[2]),
+                    tabs[0], stringasfloat(tabs[1]), stringasfloat(tabs[2]),
                     stringasfloat(tabs[3]), stringasfloat(tabs[4]),
                     stringasfloat(tabs[5]), stringasfloat(tabs[6]))
                 alpha_diversity_diffs[tabs[0]] = alpha_diversity
@@ -343,11 +347,12 @@ def get_html():
         'origin', 'group_diff_otu_marker_p_txt').replace("#group", group_file))
     #save_table
     diff_genus_marker = save_table2(work_dir + "../" + config.get(
-        'origin', 'group_diff_genus_marker_p_txt').replace("#group", group_file))
+        'origin', 'group_diff_genus_marker_p_txt').replace("#group",
+                                                           group_file))
     #save_table
     diff_taxall_marker = save_table2(work_dir + "../" + config.get(
         'origin', 'group_diff_taxall_marker_p_txt').replace("#group",
-                                                          group_file))
+                                                            group_file))
     #save_table
     diff_phylum_marker = save_table2(work_dir + "../" + config.get(
         'origin', 'group_diff_phylum_marker_txt').replace("#group",
