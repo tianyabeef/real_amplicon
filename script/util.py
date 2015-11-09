@@ -5,7 +5,7 @@ def mkdir(dirname):
         return None
     if dirname == '':
         return None
-    os.mkdir(dirname)
+    os.system("mkdir -p %s"%dirname)
     return None
 
 def image_trans(pdf,png):

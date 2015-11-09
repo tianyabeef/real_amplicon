@@ -30,7 +30,18 @@ if(nrow(X)<=1){
 	ymin=min(X.dudi$li[,2])
 	ymax=max(X.dudi$li[,2])
 	ylegend = (ymax - ymin) * 0.1
-	plot(X.dudi$li,col=colors,pch=20,cex=1.2,ylim=c(ymin,ymax+ylegend),xlab=paste("PCA1(",con[1],"%)",sep=""),ylab=paste("PCA2(",con[2],"%)",sep=""),cex.axis=1.5,cex.lab=2)
+
+    sample_num = ncol(X)
+    if(sample_num < 10){
+        cex = 3
+    }else if(sample_num < 20){
+        cex = 1.8
+    }else{
+        cex = 1.2
+    }
+
+
+	plot(X.dudi$li,col=colors,pch=19,cex=cex,ylim=c(ymin,ymax+ylegend),xlab=paste("PCA1(",con[1],"%)",sep=""),ylab=paste("PCA2(",con[2],"%)",sep=""),cex.axis=1.5,cex.lab=2)
 	legend("topleft",A,col=gcols_order,pch=20,cex=1.5,horiz=T) 
 }
 
