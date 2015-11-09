@@ -283,14 +283,17 @@ def get_html():
 
 #save tabel CoreMicrobiome
     coreMicrobiomes = {}
-    with open(work_dir + "../" + config.get(
-        'origin', 'group_core_otu_txt').replace("#group", group_file),
-              'r') as lines:
-        lines.next()
-        for line in lines:
-            tabs = line.strip().split("\t")
-            coreMicrobiome = CoreMicrobiome(tabs[0], tabs[1], tabs[2])
-            coreMicrobiomes[tabs[0]] = coreMicrobiome
+    try:
+        with open(work_dir + "../" + config.get(
+            'origin', 'group_core_otu_txt').replace("#group", group_file),
+                'r') as lines:
+            lines.next()
+            for line in lines:
+                tabs = line.strip().split("\t")
+                coreMicrobiome = CoreMicrobiome(tabs[0], tabs[1], tabs[2])
+                coreMicrobiomes[tabs[0]] = coreMicrobiome
+    except IOError:
+        sys.stderr.write('there is no core microbiomes!\n')
 
 #save table
     otuAssignmentsStatisticals = {}
@@ -466,5 +469,6 @@ def get_html():
     pdf = templetaPDF.render(var_html)
     with open(work_dir + 'report/pdf.html', 'w') as fp:
         fp.write(pdf)
+
 if __name__ == '__main__':
     get_html()
