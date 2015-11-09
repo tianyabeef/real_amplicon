@@ -28,7 +28,18 @@ ymax = max(X.dudi$li[,2])
 ymin = min(X.dudi$li[,2])
 ylegend = (ymax - ymin) * 0.1
 ylim = c(ymin, ymax+ylegend)
-plot(X.dudi$li,col=colors,pch=15,cex=1.2,xlab=paste("PCOA1(",con[1],"%)",sep=""),ylab=paste("PCOA2(",con[2],"%)",sep=""),cex.axis=1.5,cex.lab=1.7,ylim=ylim)
+
+
+sample_num = ncol(X)
+if(sample_num < 10){
+		cex = 3
+}else if(sample_num < 20){
+		cex = 2.2
+}else{
+		cex = 1.2
+}
+
+plot(X.dudi$li,col=colors,pch=19,cex=cex,xlab=paste("PCOA1(",con[1],"%)",sep=""),ylab=paste("PCOA2(",con[2],"%)",sep=""),cex.axis=1.5,cex.lab=1.7,ylim=ylim)
 legend("topleft",g_order,col=gcols_order,pch=15,cex=1,horiz=T)
 
 dev.off()
