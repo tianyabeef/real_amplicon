@@ -162,11 +162,13 @@ class Work(object):
 #        shell.write("echo -e 'All target finished at : \c' && date\n")
         shell.close()
 
-class UserConfigError():
-    def __init__(self,param,reason):
-        message = 'config check error \n %s : %s\n'%(param,reason)
-        sys.stderr.write(message)
-        sys.exit()
+class GroupFileError():
+    def __init__(self,group_file):
+        self.group_file = group_file
+
+    def __str__(self):
+        message = "the groupfile %s must in two cols!\n"%self.group_file
+        return message
 
 class UserConfigChecker(object):
 
@@ -188,6 +190,10 @@ class UserConfigChecker(object):
         elif exception_type == cp.InterpolationMissingOptionError:
             key = re.search('key\s+:\s+(.+)\n',str(exception_val)).group(1)
             sys.stderr.write('the config %s can not find!\n'%key)
+            #  sys.exit()
+        elif exception_type == GroupFileError:
+            sys.stderr.write(str(exception_val))
+            sys.stderr.write('please set the group_file correct!\n')
             #  sys.exit()
         else:
             sys.stderr.write('%s : %s'%(exception_type,exception_val))
@@ -216,7 +222,11 @@ class Pipeline(Work):
             assert os.path.isdir(params['work_dir']), 'work_dir : %s'%params['work_dir']
             for file in re.split('\s+',params['group_files']):
                 assert os.path.isfile(file), 'group_files : %s'%file
+                if not self.check_group_file(file):
+                    raise GroupFileError,file
             assert os.path.isfile(params['alpha_group_file']), 'alpha_group_file : %s'%params['alpha_group_file']
+            if not self.check_group_file(params['alpha_group_file']):
+                raise GroupFileError,params['alpha_group_file']
             assert os.path.isdir(params['raw_data_dir']), 'raw_data_dir : %s'%params['raw_data_dir']
             for file in re.split('\s',params['fq_for_merge']):
                 assert os.path.isfile(file), 'fq_for_merge : %s'%file
@@ -224,6 +234,14 @@ class Pipeline(Work):
             params['require'] = int(params['require'])
             assert os.path.isdir(os.path.dirname(params['pipeline_shell'])), 'pipeline_shell : %s directory not exist'%params['pipeline_shell']
 #            assert os.path.isfile(params['pipeline_shell']), 'pipeline_shell : %s'%params['pipeline_shell']
+
+    def check_group_file(self,group_file):
+        with open(group_file) as fp:
+            for line in fp:
+                tabs = line.split('\t')
+                if len(tabs) != 2 :
+                    return False
+        return True
 
     @staticmethod
     def make_shell(work_shell,work_list):
