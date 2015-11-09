@@ -85,7 +85,7 @@ def save_table(input_dir):
                 sampleName = ("','").join(samples_name_two)
             else:
                 sampleName = ("','").join(samples_name)
-            jqGrid_head = "{name:'sampleName',index:'sampleName',width:90,align:'center'},"
+            jqGrid_head = "{name:'sampleName',index:'sampleName',width:140,align:'center'},"
             weight_unifrac_jqGrid_list.append(jqGrid_head)
             count = 0
             samples_name = samples_name[1:]
@@ -156,7 +156,7 @@ def save_table2(input_dir):
                 sampleName = ("','").join(samples_name_two)
             else:
                 sampleName = ("','").join(samples_name)
-            jqGrid_head = "{name:'taxonname',index:'taxonname',width:90,align:'center'},"
+            jqGrid_head = "{name:'taxonname',index:'taxonname',width:140,align:'center'},"
             weight_unifrac_jqGrid_list.append(jqGrid_head)
             count = 0
             samples_name = samples_name[1:]
