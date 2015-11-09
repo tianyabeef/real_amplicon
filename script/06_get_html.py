@@ -79,6 +79,8 @@ def stringasfloat(string):
         value = format(num, '.2f')
     else:
         value = format(num, '.2e')
+    if num == 0:
+        value = 0
     return value
 
 
