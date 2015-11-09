@@ -17,7 +17,7 @@ def commands_factory(infile,outdir,mode,vars):
                                                   params['group'],
                                                   params['p_cutoff']))
     # pca
-    marker_profile = outdir + '/profile.for_plot_p_%s.txt'%params['p_cutoff']
+    marker_profile = outdir + '/profile.for_plot'
     commands.append('%s -i %s -o %s -g %s'%(scripts['diff_pca'],
                                             marker_profile,
                                             outdir,

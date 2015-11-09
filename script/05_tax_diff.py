@@ -21,9 +21,9 @@ def read_params(args):
                         help="set the p_value cutoff")
     args = parser.parse_args()
     params = vars(args)
-    params['marker'] = params['outdir'] + '/diff.marker.txt'
-    params['filt'] = params['outdir'] + '/diff.marker.filt_p_%s.txt'%params['cutoff']
-    params['profile'] = params['outdir'] + '/profile.for_plot_p_%s.txt'%params['cutoff']
+    params['marker'] = params['outdir'] + '/diff.marker.tsv'
+    params['filt'] = params['outdir'] + '/diff.marker.filt.tsv'
+    params['profile'] = params['outdir'] + '/profile.for_plot.txt'
     return params
 
 def filt(infile,filt_file):
