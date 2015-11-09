@@ -316,7 +316,7 @@
 		{% block alpha_diversity_head %}
 		{% if alpha_diversity %} 
 		<h3 id="单个样品多样性分析">4.1 单个样品多样性分析</h3>
-			<p  class="paragraph">Alpha多样性反映的是单个样品内部的物种多样性，包括observed species指数、chao指数，shannon指数以及simpson指数，PD_whole_tree指数等。Alpha多样性统计见<a href="..\results\03_Alpha_diversity\{{ group_file }}\alpha_statistic.tsv" target="_blank"></a></p>
+			<p  class="paragraph">Alpha多样性反映的是单个样品内部的物种多样性，包括observed species指数、chao指数，shannon指数以及simpson指数，PD_whole_tree指数等。Alpha多样性统计见<a href="..\results\03_Alpha_diversity\{{ group_file }}\alpha_statistic.tsv" target="_blank">alpha_statistic.tsv</a></p>
         	<p class="name_table">表4-1-1 样品Alpha多样性统计结果</p>
             
             <div class="table">
@@ -389,7 +389,7 @@
             </center>
             </div>
             
-            <p class="tremark">注：第一列是Alpha diversity指数；第二列至第{{ group_num + 2 }}列分别为{{ group_num }}组样品的均值；最后一列为秩和检验的P-value值；</p>
+            <p class="tremark">注：第一行是Alpha diversity指数；第二行至第{{ group_num + 2 }}行分别为{{ group_num }}组样品的均值；其中一行（P-value）为秩和检验的P-value值；</p>
 		
 		{% else %}
 		<h3 id="单个样品差异分析">4.2 单个样品差异分析(每组内样品数>=3)</h3>
@@ -507,7 +507,7 @@
 		
 		<h3 id="组间差异分析">6.2 组间差异分析</h3>
         	<h4>OTU水平的差异分析</h4>
-            	<p class="paragraph">下表是在不同组样品间有显著差异的OTUs（p<{{ p_value }}, Kruskal-Wallis test），共{{ diff_otus }}个,如表6-2-1显示。结果表格<a href="..\results\05_diff_analysis\{{ group_file }}\otu_diff.marker.txt" target="_blank">otu_diff.marker.txt</a></p>
+            	<p class="paragraph">下表是在不同组样品间有显著差异的OTUs（p<{{ p_value }}, Kruskal-Wallis test），共{{ diff_otus }}个,如表6-2-1显示。结果表格<a href="..\results\05_diff_analysis\{{ group_file }}\otu_diff.marker.filt.tsv" target="_blank">otu_diff.marker.filt.tsv</a></p>
                	<p class="name_table">表6-2-1差异显著OTU列表</p>
                 
                 <div class="table">
@@ -537,7 +537,7 @@
 
             
             <h4>属水平的差异分析</h4>
-            	<p class="paragraph">通过Kruskal-Wallis test分析可以找出在不同组间有明显差异(p<{{ p_value }})的属如下（共{{ diff_genus }}个属或科）。结果表格<a href="..\results\05_diff_analysis\{{ group_file }}\genus_diff.marker.txt" target="_blank">genus_diff.marker.txt</a></p>
+            	<p class="paragraph">通过Kruskal-Wallis test分析可以找出在不同组间有明显差异(p<{{ p_value }})的属如下（共{{ diff_genus }}个属或科）。结果表格<a href="..\results\05_diff_analysis\{{ group_file }}\genus_diff.marker.filt.tsv" target="_blank">genus_diff.marker.filt.tsv</a></p>
                 <p class="name_table">表6-2-2差异显著物种列表</p>
                 
                 <div class="table">
@@ -566,7 +566,7 @@
                 
                                  
             <h4>所有水平的差异分析</h4>
-            <p class="paragraph">使用R中的kruskal.test函数，分别从门纲目科属水平，通过秩和检验筛选不同条件下的显著差异的物种，共找到{{ diff_species }}个。表6-2-3为样品间所有水平下的{{ diff_species }}个差异物种统计表。结果表格<a href="..\results\05_diff_analysis\{{ group_file }}\taxall_diff.marker.txt" target="_blank">taxall_diff.marker.txt</a></p>
+            <p class="paragraph">使用R中的kruskal.test函数，分别从门纲目科属水平，通过秩和检验筛选不同条件下的显著差异的物种，共找到{{ diff_species }}个。表6-2-3为样品间所有水平下的{{ diff_species }}个差异物种统计表。结果表格<a href="..\results\05_diff_analysis\{{ group_file }}\taxall_diff.marker.filt.tsv" target="_blank">taxall_diff.marker.filt.tsv</a></p>
             <p class="name_table">表6-2-3所有水平差异显著物种列表</p>
             
                 <div class="table">
