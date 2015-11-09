@@ -105,7 +105,7 @@ def save_table(input_dir):
             for_time = []
             for i, value in enumerate(samples_name):
                 for_time.append("%s%d" % ("sample", i))
-            for count, line in enumerate(lines):
+            for line in lines:
                 count += 1
                 tabs = line.strip().split("\t")
                 str = "{sampleName:\"" + tabs[0] + "\","
@@ -115,15 +115,13 @@ def save_table(input_dir):
 
                         if i < len(for_time) - 1:
                             str += '%s:"%s",' % (
-                                value,
-                                stringasfloat(tabs[i + 1]))
+                                value, stringasfloat(tabs[i + 1]))
                             #str += value+":\""+tabs[i+1]+"\","
                             jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90},"
                         else:
                             jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90}"
                             str += '%s:"%s"' % (
-                                value,
-                                stringasfloat(tabs[i + 1]))
+                                value, stringasfloat(tabs[i + 1]))
                             #str += value+":\""+tabs[i+1]+"\""
                             str += '},'
                         if count == 1:
@@ -132,8 +130,7 @@ def save_table(input_dir):
 
                         if i < 8:
                             str += '%s:"%s",' % (
-                                value,
-                                stringasfloat(tabs[i + 1]))
+                                value, stringasfloat(tabs[i + 1]))
                             #str += value+":\""+tabs[i+1]+"\","
                             jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90},"
                             if count == 1:
@@ -141,14 +138,15 @@ def save_table(input_dir):
                         else:
                             jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90}"
                             str += '%s:"%s"' % (
-                                value,
-                                stringasfloat(tabs[i + 1]))
+                                value, stringasfloat(tabs[i + 1]))
                             #str += value+":\""+tabs[i+1]+"\""
                             str += '},'
                             if count == 1:
                                 weight_unifrac_jqGrid_list.append(jqGrid)
                             break
                 weight_unifrac_data_list.append(str)
+            if count == 0:
+                return [[],None,None,False]
     except IOError:
         exist = False
         print "have no " + input_dir + "\n"
@@ -180,7 +178,7 @@ def save_table2(input_dir):
             for_time = []
             for i, value in enumerate(samples_name):
                 for_time.append("%s%d" % ("sample", i))
-            for count, line in enumerate(lines):
+            for line in lines:
                 count += 1
 
                 tabs = line.strip().split("\t")
@@ -190,36 +188,34 @@ def save_table2(input_dir):
                     if len(for_time) < 9:
                         if i < len(for_time) - 1:
                             str += '%s:"%s",' % (
-                                value,
-                                stringasfloat(tabs[i + 1]))
+                                value, stringasfloat(tabs[i + 1]))
                             #str += value+":\""+tabs[i+1]+"\","
                             jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90},"
                         else:
                             jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90}"
                             str += '%s:"%s"' % (
-                                value,
-                                stringasfloat(tabs[i + 1]))
+                                value, stringasfloat(tabs[i + 1]))
                             #str += value+":\""+tabs[i+1]+"\""
                             str += '},'
                     else:
 
                         if i < 8:
                             str += '%s:"%s",' % (
-                                varlue,
-                                stringasfloat(tabs[i + 1]))
+                                varlue, stringasfloat(tabs[i + 1]))
                             #str += value+":\""+tabs[i+1]+"\","
                             jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90},"
                         else:
                             jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90}"
                             str += '%s:"%s"' % (
-                                value,
-                                stringasfloat(tabs[i + 1]))
+                                value, stringasfloat(tabs[i + 1]))
                             #str += value+":\""+tabs[i+1]+"\""
                             str += '},'
                             break
                     if count == 1:
                         weight_unifrac_jqGrid_list.append(jqGrid)
                 weight_unifrac_data_list.append(str)
+            if count == 0:
+                return [[],None,None,False]
     except IOError:
         exist = False
         print "have no " + input_dir + "\n"
@@ -274,7 +270,7 @@ def get_html():
                                             tabs[2], tabs[3], tabs[10])
             otuStatisticals[tabs[0]] = otuStatistical
 
-            #save table
+#save otu statistic table
     otuStatisticalDownsizes = {}
     with open(work_dir + "../" + config.get('origin', 'otu_all_downsize_txt'),
               'r') as lines:
@@ -290,7 +286,7 @@ def get_html():
     try:
         with open(work_dir + "../" + config.get(
             'origin', 'group_core_otu_txt').replace("#group", group_file),
-                'r') as lines:
+                  'r') as lines:
             lines.next()
             for line in lines:
                 tabs = line.strip().split("\t")
@@ -299,7 +295,7 @@ def get_html():
     except IOError:
         sys.stderr.write('there is no core microbiomes!\n')
 
-#save table
+#save otu assignment stat table
     otuAssignmentsStatisticals = {}
     with open(work_dir + "../" + config.get('origin', 'otu_statistic_txt'),
               'r') as lines:
@@ -310,7 +306,7 @@ def get_html():
                 tabs[0], stringasfloat(tabs[1]))
             otuAssignmentsStatisticals[tabs[0]] = otuAssignmentsStatistical
 
-#save table
+#save alpha diversity table
     alpha_diversitys = {}
     with open(work_dir + "../" + config.get(
         'origin', 'group_alpha_statistic_txt').replace("#group", group_file),
@@ -324,7 +320,7 @@ def get_html():
                 stringasfloat(tabs[5]), stringasfloat(tabs[6]))
             alpha_diversitys[tabs[0]] = alpha_diversity
 
-#save table
+#save alpha diff table
     alpha_diversity_diffs = {}
     alpha_diff_exist = True
     try:
