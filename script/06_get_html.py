@@ -101,13 +101,13 @@ def save_table(input_dir):
                     if len(for_time) < 9:
 
                         if i < len(for_time) - 1:
-                            str += '%s:"%.2f",' % (
+                            str += '%s:"%.2e",' % (
                                 value, float(tabs[i + 1].replace("NA", "0")))
                             #str += value+":\""+tabs[i+1]+"\","
                             jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90},"
                         else:
                             jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90}"
-                            str += '%s:"%.2f"' % (
+                            str += '%s:"%.2e"' % (
                                 value, float(tabs[i + 1].replace("NA", "0")))
                             #str += value+":\""+tabs[i+1]+"\""
                             str += '},'
@@ -116,7 +116,7 @@ def save_table(input_dir):
                     else:
 
                         if i < 8:
-                            str += '%s:"%.2f",' % (
+                            str += '%s:"%.2e",' % (
                                 value, float(tabs[i + 1].replace("NA", "0")))
                             #str += value+":\""+tabs[i+1]+"\","
                             jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90},"
@@ -124,7 +124,7 @@ def save_table(input_dir):
                                 weight_unifrac_jqGrid_list.append(jqGrid)
                         else:
                             jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90}"
-                            str += '%s:"%.2f"' % (
+                            str += '%s:"%.2e"' % (
                                 value, float(tabs[i + 1].replace("NA", "0")))
                             #str += value+":\""+tabs[i+1]+"\""
                             str += '},'
@@ -172,26 +172,26 @@ def save_table2(input_dir):
                     jqGrid = '{'
                     if len(for_time) < 9:
                         if i < len(for_time) - 1:
-                            str += '%s:"%.2f",' % (
+                            str += '%s:"%.2e",' % (
                                 value, float(tabs[i + 1].replace('NA', '0')))
                             #str += value+":\""+tabs[i+1]+"\","
                             jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90},"
                         else:
                             jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90}"
-                            str += '%s:"%.2f"' % (
+                            str += '%s:"%.2e"' % (
                                 value, float(tabs[i + 1].replace('NA', '0')))
                             #str += value+":\""+tabs[i+1]+"\""
                             str += '},'
                     else:
 
                         if i < 8:
-                            str += '%s:"%.2f",' % (
+                            str += '%s:"%.2e",' % (
                                 varlue, float(tabs[i + 1].replace('NA', '0')))
                             #str += value+":\""+tabs[i+1]+"\","
                             jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90},"
                         else:
                             jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90}"
-                            str += '%s:"%.2f"' % (
+                            str += '%s:"%.2e"' % (
                                 value, float(tabs[i + 1].replace('NA', '0')))
                             #str += value+":\""+tabs[i+1]+"\""
                             str += '},'
@@ -223,7 +223,7 @@ def read_params(args):
 def stringasfloat(string):
     num = float(string)
     if(num > 1):
-	value = num
+	value = format(float(string),'.2f')
     else:
 	value = format(float(string),'.2e')
     return value
