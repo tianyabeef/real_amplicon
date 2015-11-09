@@ -72,7 +72,7 @@ class Alpha_diversity(object):
 
 def stringasfloat(string):
     num = float(string)
-    if(num > 1):
+    if(num >= 0.01):
         value = format(float(string),'.2f')
     else:
         value = format(float(string),'.2e')
@@ -111,13 +111,13 @@ def save_table(input_dir):
                     if len(for_time) < 9:
 
                         if i < len(for_time) - 1:
-                            str += '%s:%s,' % (
+                            str += '%s:"%s",' % (
                                 value, tringasfloat(tabs[i + 1].replace("NA", "0")))
                             #str += value+":\""+tabs[i+1]+"\","
                             jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90},"
                         else:
                             jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90}"
-                            str += '%s:%s' % (
+                            str += '%s:"%s"' % (
                                 value, stringasfloat(tabs[i + 1].replace("NA", "0")))
                             #str += value+":\""+tabs[i+1]+"\""
                             str += '},'
@@ -126,7 +126,7 @@ def save_table(input_dir):
                     else:
 
                         if i < 8:
-                            str += '%s:%s,' % (
+                            str += '%s:"%s",' % (
                                 value, stringasfloat(tabs[i + 1].replace("NA", "0")))
                             #str += value+":\""+tabs[i+1]+"\","
                             jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90},"
@@ -134,7 +134,7 @@ def save_table(input_dir):
                                 weight_unifrac_jqGrid_list.append(jqGrid)
                         else:
                             jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90}"
-                            str += '%s:%s' % (
+                            str += '%s:"%s"' % (
                                 value, stringasfloat(tabs[i + 1].replace("NA", "0")))
                             #str += value+":\""+tabs[i+1]+"\""
                             str += '},'
@@ -182,26 +182,26 @@ def save_table2(input_dir):
                     jqGrid = '{'
                     if len(for_time) < 9:
                         if i < len(for_time) - 1:
-                            str += '%s:%s,' % (
+                            str += '%s:"%s",' % (
                                 value, stringasfloat(tabs[i + 1].replace('NA', '0')))
                             #str += value+":\""+tabs[i+1]+"\","
                             jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90},"
                         else:
                             jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90}"
-                            str += '%s:%s' % (
+                            str += '%s:"%s"' % (
                                 value, stringasfloat(tabs[i + 1].replace('NA', '0')))
                             #str += value+":\""+tabs[i+1]+"\""
                             str += '},'
                     else:
 
                         if i < 8:
-                            str += '%s:%s,' % (
+                            str += '%s:"%s",' % (
                                 varlue, stringasfloat(tabs[i + 1].replace('NA', '0')))
                             #str += value+":\""+tabs[i+1]+"\","
                             jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90},"
                         else:
                             jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90}"
-                            str += '%s:%s' % (
+                            str += '%s:"%s"' % (
                                 value, stringasfloat(tabs[i + 1].replace('NA', '0')))
                             #str += value+":\""+tabs[i+1]+"\""
                             str += '},'
