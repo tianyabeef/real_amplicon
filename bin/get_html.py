@@ -79,6 +79,8 @@ def get_html(cfg_in,vars=None):
             print '06_get_html.cfg no have '+key
     command.append('python %s -c %s \n'%(scripts['get_html'],config.get('outfiles','config')))
     command.append('wkhtmltopdf --margin-right 5mm --margin-left 5mm  --exclude-from-outline  --footer-right \'--[page]--\' --header-line --footer-line %s %s \n'%(out_dir_report+'/pdf.html',out_dir_report+'/report.pdf'))
+    #  command.append('rm %s/pdf.html\n'%out_dir_report)
+    #  command.append('rm %s/../results/work_html.sh %s/../results/work_html.cfg\n'%(out_dir_report,out_dir_report))
     work.commands.append(''.join(command))
 
     return outfiles

@@ -26,6 +26,7 @@ def alpha_rare(cfg_in,vars=None):
                                                                                params['choice_mode']))
     # alpha diversity
     alpha_diversity_dir = out_dir + '/alpha_div'
+    work.commands.append('rm -r %s/*.txt'%alpha_diversity_dir)
     command = '%s -i %s -o %s --metrics %s'%(qiime['alpha_diversity'],
                                              rarefaction_dir,
                                              alpha_diversity_dir,

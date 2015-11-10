@@ -148,7 +148,7 @@ def save_table(input_dir):
                             break
                 weight_unifrac_data_list.append(str)
             if count == 0:
-                return [[],None,None,False]
+                return [[],[],None,False]
     except IOError:
         exist = False
         print "have no " + input_dir + "\n"
@@ -217,7 +217,7 @@ def save_table2(input_dir):
                         weight_unifrac_jqGrid_list.append(jqGrid)
                 weight_unifrac_data_list.append(str)
             if count == 0:
-                return [[],None,None,False]
+                return [[],[],None,False]
     except IOError:
         exist = False
         print "have no " + input_dir + "\n"
@@ -285,16 +285,22 @@ def get_html():
 
 #save tabel CoreMicrobiome
     coreMicrobiomes = {}
+    var_html['core_otu_exists'] = True
     try:
         with open(work_dir + "../" + config.get(
             'origin', 'group_core_otu_txt').replace("#group", group_file),
                   'r') as lines:
             lines.next()
+            count = 0
             for line in lines:
+                count += 1
                 tabs = line.strip().split("\t")
                 coreMicrobiome = CoreMicrobiome(tabs[0], tabs[1], tabs[2])
                 coreMicrobiomes[tabs[0]] = coreMicrobiome
+            if count == 0:
+                var_html['core_otu_exists'] = False
     except IOError:
+        var_html['core_otu_exists'] = False
         sys.stderr.write('there is no core microbiomes!\n')
 
 #save otu assignment stat table
@@ -417,6 +423,10 @@ def get_html():
     var_html['diff_genus'] = len(diff_genus_marker[0])
     var_html['diff_species'] = len(diff_taxall_marker[0])
     var_html['diff_phylum'] = len(diff_phylum_marker[0])
+    var_html['diff_otu_marker_exist'] = diff_otu_marker[3]
+    var_html['diff_genus_marker_exist'] = diff_genus_marker[3]
+    var_html['diff_phylum_marker_exist'] = diff_phylum_marker[3]
+    var_html['diff_taxall_marker_exist'] = diff_taxall_marker[3]
     var_html['p_value'] = 0.05
 
     sample_num_in_groups,\
@@ -453,8 +463,15 @@ def get_html():
     var_html['similarity_analysis'] = False
     if min_sample_num_in_groups >= 3:
         var_html['alpha_diff'] = True
+    var_html['lefse_enough'] = False
     if min_sample_num_in_groups >= 3 and group_num >= 2:
-        var_html['lefse'] = True
+        var_html['lefse_enough'] = True
+        LDA_png = config.get('origin','group_lefse_LDA_png').replace('#group',group_file)
+        cmd_result = os.popen('file %s'%LDA_png).read().strip().split(': ')[-1]
+        if cmd_result == 'empty':
+            var_html['lefse'] = False
+        else:
+            var_html['lefse'] = True
         var_html['diff_analysis'] = True
     if min_sample_num_in_groups >= 5 and group_num >= 2:
         var_html['diff_analysis_boxplot'] = True
