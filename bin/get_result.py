@@ -71,7 +71,7 @@ def get_result(cfg_in,vars=None):
                 for group_file in group_files:
                     analysis_name = re.search(regex, group_file).group(1)
                     value_rep = value.replace("#group",analysis_name)
-                    command += 'cp '+work_dir+'../'+value_rep+' '+out_dir_results+config.get('target',key).replace("#group",analysis_name)+'\n'
+                    command += 'cp -rf '+work_dir+'../'+value_rep+' '+out_dir_results+config.get('target',key).replace("#group",analysis_name)+'\n'
             else:
                 command += 'cp '+work_dir+'../'+value+' '+out_dir_results+config.get('target', key)+'\n'
         else:

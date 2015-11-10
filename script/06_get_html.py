@@ -482,11 +482,11 @@ def get_html():
                                               encoding='utf-8'))
     template = env.get_template('report.html')
     finally_html = template.render(var_html)
-    with open(work_dir + 'report/index_loaded.html', 'w') as fp:
+    with open(config.get('outfiles','report_html'), 'w') as fp:
         fp.write(finally_html)
     templetaPDF = env.get_template('pdf.html')
     pdf = templetaPDF.render(var_html)
-    with open(work_dir + 'report/pdf.html', 'w') as fp:
+    with open(config.get('outfiles','pdf_html'), 'w') as fp:
         fp.write(pdf)
 
 if __name__ == '__main__':

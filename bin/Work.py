@@ -236,6 +236,8 @@ class Pipeline(Work):
 #            assert os.path.isfile(params['pipeline_shell']), 'pipeline_shell : %s'%params['pipeline_shell']
 
     def check_group_file(self,group_file):
+        if os.popen('file %s'%group_file).read().strip().split(': ')[-1] == 'empty':
+            return False
         with open(group_file) as fp:
             for line in fp:
                 tabs = line.split('\t')
