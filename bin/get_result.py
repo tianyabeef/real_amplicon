@@ -23,10 +23,12 @@ def get_result(cfg_in,vars=None):
     work.set_params(cfg_in,vars)
     work.load_default_config()
     config = work.config
+    params = config.get_section('params')
     outfiles = config.get_section('outfiles')
-    work_dir = config.get('params','work_dir')
-    group_files = config.get('params','group_files')
-    out_dir_results=work_dir+'/'+'results/'
+    work_dir = params['work_dir']
+    group_files = params['group_files']
+    out_dir_results = outfiles['out_dir']
+
     os.system('rm -Rf %s'%out_dir_results)
     dirs = []
     dirs.append(out_dir_results+"/01_Reads/")
@@ -73,10 +75,15 @@ def get_result(cfg_in,vars=None):
                     value_rep = value.replace("#group",analysis_name)
                     command += 'cp -rf '+work_dir+'../'+value_rep+' '+out_dir_results+config.get('target',key).replace("#group",analysis_name)+'\n'
             else:
-                command += 'cp '+work_dir+'../'+value+' '+out_dir_results+config.get('target', key)+'\n'
+                command += 'cp -rf '+work_dir+'../'+value+' '+out_dir_results+config.get('target', key)+'\n'
         else:
             sys.stderr.write('06_get_html.cfg target section no have '+key+'\n' )
     work.commands.append(command)
+    for docs in os.listdir(params['docs_dir']):
+        if docs.find(params['data_type']) >= 0:
+            origin = '%s/%s'%(params['docs_dir'],docs)
+            target = '%s/%s'%(outfiles['out_dir'],docs)
+            work.commands.append('cp -rf %s %s'%(origin,target))
     return outfiles
 
 if __name__ == '__main__':
