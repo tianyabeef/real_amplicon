@@ -49,7 +49,7 @@ def read_params(args):
 if __name__ == '__main__':
     params = read_params(sys.argv)
     mkdir(params['outdir'])
-
+    os.system('rm -f %s/*.biom'%params['outdir'])
 
     __range = []
     if range(params['max'] > 10000):
