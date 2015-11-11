@@ -276,18 +276,25 @@ def work_html(pipeline, group_files, infiles=None):
     }
     get_result_outfile = get_result(pipeline.config, vars=vars)
     get_html_outfile = get_html(pipeline.config, vars=vars)
-    pipeline.merge_shell(work_dir + '/work.sh', [get_result_outfile['shell'],
-                                                 get_html_outfile['shell']])
-    pipeline.add_job('html',
-                     work_dir + '/work.sh',
-                     prep=pipeline.html_hold_jobs[:-1])
+
     rm_files = []
     rm_files.append(get_result_outfile['shell'])
     rm_files.append(get_result_outfile['config'])
     rm_files.append(get_html_outfile['shell'])
     rm_files.append(get_html_outfile['config'])
     rm_files.append(get_html_outfile['pdf_html'])
-    return rm_files 
+
+    rm_shell = work_dir + '/clean.sh'
+    with open(rm_shell,'w') as out:
+        out.write('rm %s\n'%' '.join(rm_files))
+
+    pipeline.merge_shell(work_dir + '/work.sh', [get_result_outfile['shell'],
+                                                 get_html_outfile['shell'],
+                                                 rm_shell])
+    pipeline.add_job('html',
+                     work_dir + '/work.sh',
+                     prep=pipeline.html_hold_jobs[:-1])
+    #  return rm_files
 
 
 if __name__ == '__main__':
@@ -327,5 +334,5 @@ if __name__ == '__main__':
                             analysis_name,
                             tree_file,
                             infiles=infiles)
-    rm_files = work_html(pipeline, user_config.get('params', 'group_files'))
-    pipeline.commands.append('rm %s'%' '.join(rm_files))
+    work_html(pipeline, user_config.get('params', 'group_files'))
+    #  pipeline.commands.append('rm %s'%' '.join(rm_files))
