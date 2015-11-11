@@ -55,7 +55,7 @@ def merge_files(files,outfile):
 
 if __name__ == '__main__':
     params = read_params(sys.argv)
-    summarize_files = ['%s/%s_L%d.txt'%(params['summarize_dir'],params['prefix'],i) for i in range(1,6)]
+    summarize_files = ['%s/%s_L%d.txt'%(params['summarize_dir'],params['prefix'],i) for i in range(1,7)]
     work_trans(summarize_files[1],summarize_files[0])
     merged_file = '%s/%s_all.txt'%(params['summarize_dir'],params['prefix'])
     merge_files(summarize_files,merged_file)

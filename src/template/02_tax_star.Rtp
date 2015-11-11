@@ -80,7 +80,7 @@ if(sample_num > 36 && sample_num<=56){
 }
 if(sample_num > 56){
     loc=c(10,-1)
-    ymax = (floor((sample_num - 56) / 14) - 1) * 5 + 27
+    ymax = floor((sample_num - 56) / 14)* 5 + 32
     ylim=c(-3,ymax)
     ymax
     stars(
