@@ -11,6 +11,7 @@ if(nrow(X)<=1){
 	plot(0,type='n')
 	text(1,0,'no diff')
 }else{ 
+
 	group=as.data.frame(group)
 	colnames(X)=rownames(group)
 	colors=labels2colors(group[,1])
@@ -27,19 +28,23 @@ if(nrow(X)<=1){
 	ymin=min(X.dudi$li[,2])
 	ymax=max(X.dudi$li[,2])
 	ylegend = (ymax - ymin) * 0.1
+	xmin=min(X.dudi$li[,1])
+	xmax=max(X.dudi$li[,1])
+	xlegend = (xmax - xmin) * 0.1
 
     sample_num = ncol(X)
     if(sample_num < 10){
         cex = 3
     }else if(sample_num < 20){
-        cex = 1.8
+        cex = 2.2
     }else{
         cex = 1.2
     }
 
-
-	plot(X.dudi$li,col=colors,pch=19,cex=cex,ylim=c(ymin,ymax+ylegend),xlab=paste("PCA1(",con[1],"%)",sep=""),ylab=paste("PCA2(",con[2],"%)",sep=""),cex.axis=1.5,cex.lab=2)
-	legend("topleft",legend=g_order,col=gcols_order,pch=20,cex=1.5,horiz=T) 
+	xlim = c(xmin,xmax+xlegend)
+	ylim = c(ymin,ymax)
+	plot(X.dudi$li,col=colors,pch=19,cex=cex,ylim=ylim,xlim=xlim,xlab=paste("PCA1(",con[1],"%)",sep=""),ylab=paste("PCA2(",con[2],"%)",sep=""),cex.axis=1.5,cex.lab=2)
+	legend("topright",legend=g_order,col=gcols_order,pch=20,cex=1.5,horiz=F)
 }
 
 dev.off()
