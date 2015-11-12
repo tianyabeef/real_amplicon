@@ -467,8 +467,8 @@ def get_html():
     if min_sample_num_in_groups >= 3 and group_num >= 2:
         var_html['lefse_enough'] = True
         LDA_png = config.get('origin','group_lefse_LDA_png').replace('#group',group_file)
-        cmd_result = os.popen('file %s'%LDA_png).read().strip().split(': ')[-1]
-        if cmd_result == 'empty':
+	cmd_result = os.popen('file %s/../%s'%(work_dir,LDA_png)).read().strip().split(': ')[-1]
+	if cmd_result == 'empty':
             var_html['lefse'] = False
         else:
             var_html['lefse'] = True
@@ -478,7 +478,8 @@ def get_html():
     if min_sample_num_in_groups >= 5:
         var_html['alpha_diff_boxplot'] = True
     var_html['group_file'] = group_file
-    env = Environment(loader=FileSystemLoader(out_dir_report + '/templates',
+    html_dir = config.get('params','html_template')
+    env = Environment(loader=FileSystemLoader(html_dir + '/templates',
                                               encoding='utf-8'))
     template = env.get_template('report.html')
     finally_html = template.render(var_html)
