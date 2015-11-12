@@ -130,7 +130,7 @@
         
         <h2>1.数据统计</h2>
         	<p class="paragraph">
-            通过Illumina平台（MiSeq）进行Paired-end测序，Paired End Reads通过Reads之间的Overlap关系拼接成长Reads，并对拼接后的Reads进行质控，得到Clean Reads。拼接过程及质控标准见<a href="method.pdf" target="_blank">实验方法</a>中的方法1。
+            通过Illumina平台（MiSeq）进行Paired-end测序，Paired End Reads通过Reads之间的Overlap关系拼接成长Reads，并对拼接后的Reads进行质控，得到Clean Reads。拼接过程及质控标准见实验方法中的方法1。
             </p>
 		
 		{% block reads_statistical_head %} 
@@ -196,8 +196,11 @@
 		{% endblock %}
 		{% block diff_analysis_head %}
 		{% endblock %}
+		<h2><a href="../results/{{amplification}}分析方法.pdf" target="_blank">分析方法下载
+</a></h2>
+                <h2><a href="../results/{{amplification}}交付文档.pdf" target="_blank">交付文档下载
+</a></h2>
 		            
-            
             
                                      
 <!--		<h3 id="物种CCA/RDA分析">物种CCA/RDA分析</h3>
