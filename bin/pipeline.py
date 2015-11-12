@@ -284,10 +284,11 @@ def work_html(pipeline, group_files, infiles=None):
     rm_files.append(get_html_outfile['shell'])
     rm_files.append(get_html_outfile['config'])
     rm_files.append(get_html_outfile['pdf_html'])
+    rm_files.append('%s/templates'%(get_html_outfile['out_dir']))
 
     rm_shell = work_dir + '/clean.sh'
     with open(rm_shell,'w') as out:
-        out.write('rm %s\n'%' '.join(rm_files))
+        out.write('rm -rf %s\n'%' '.join(rm_files))
 
     pipeline.merge_shell(work_dir + '/work.sh', [get_result_outfile['shell'],
                                                  get_html_outfile['shell'],
