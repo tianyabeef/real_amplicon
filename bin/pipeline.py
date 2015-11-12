@@ -336,4 +336,3 @@ if __name__ == '__main__':
                             tree_file,
                             infiles=infiles)
     work_html(pipeline, user_config.get('params', 'group_files'))
-    #  pipeline.commands.append('rm %s'%' '.join(rm_files))

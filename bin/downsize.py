@@ -1,16 +1,16 @@
 from settings import *
 
 def check_group_row(file1,file2):
-    count1 = 0
-    count2 = 0
+    count1 = []
+    count2 = []
     with open(file1) as fp,open(file2) as fp2:
         for line in fp:
-            if line.strip():
-                count1 += 1
+            sample_name = line.split('\t')[0]
+            count1.append(sample_name)
         for line in fp2:
-            if line.strip():
-                count2 += 1
-    if count1 == count2:
+            sample_name = line.split('\t')[0]
+            count2.append(sample_name)
+    if count1.sort() == count2.sort():
         return True
     else:
         return False
