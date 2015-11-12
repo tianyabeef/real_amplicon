@@ -58,7 +58,8 @@ def work_02(pipeline, infiles=None):
         'work_dir': work_dir,
         'otu_table_in': infiles['otus_all'],
         'stat_file_in': infiles['out_stat_file'],
-        'seqs_all': infiles['seqs_all']
+        'seqs_all': infiles['seqs_all'],
+        'group': pipeline.config.get('params','alpha_group_file')
     }
     downsize_outfiles = downsize(pipeline.config, vars=vars)
 
@@ -87,7 +88,7 @@ def work_02(pipeline, infiles=None):
                           otu_table_outfiles['shell'],
                           taxanomy_total_outfiles['shell']])
     pipeline.add_job('OTU_all', work_dir + '/work.sh', prep='pick_otu')
-    return otu_table_outfiles
+    return otu_table_outfiles,downsize_outfiles['config']
 
 
 def work_alpha_rare_all(pipeline, out_stat_file, infiles=None):
@@ -130,8 +131,7 @@ def work_beta_anosim_adonis(pipeline, infiles=None, tree_file=None):
                      prep='alpha_rare_all')
     return outfiles
 
-
-def work_03(pipeline, analysis_name, infiles=None):
+def work_03(pipeline, analysis_name, infiles=None, pre_config=None):
     work_dir = '%s/03_OTU_groups/%s' % (pipeline.config.get(
         'params', 'work_dir'), analysis_name)
     vars = {
@@ -139,7 +139,8 @@ def work_03(pipeline, analysis_name, infiles=None):
         'otu_table_in': infiles['otus_all'],
         'stat_file_in': infiles['out_stat_file'],
         'seqs_all': infiles['seqs_all'],
-        'group': infiles['group_file']
+        'group': infiles['group_file'],
+        'pre_config':pre_config
     }
     downsize_outfiles = downsize(pipeline.config, vars=vars)
 
@@ -306,7 +307,7 @@ if __name__ == '__main__':
 
     outfiles_00 = work_00(pipeline)
     outfiles_01 = work_01(pipeline, infiles=outfiles_00)
-    outfiles_02 = work_02(pipeline, infiles=outfiles_01)
+    outfiles_02,pre_config = work_02(pipeline, infiles=outfiles_01)
     alpha_outfiles_all = work_alpha_rare_all(pipeline,
                                              outfiles_01['out_stat_file'],
                                              infiles=outfiles_02)
@@ -318,7 +319,7 @@ if __name__ == '__main__':
         analysis_name = re.search('.+\/(.+)\..+', group_file).group(1)
         infiles = copy.deepcopy(outfiles_01)
         infiles['group_file'] = group_file
-        outfiles_03 = work_03(pipeline, analysis_name, infiles=infiles)
+        outfiles_03 = work_03(pipeline, analysis_name, infiles=infiles, pre_config=pre_config)
         work_diff(pipeline, analysis_name, group_file, infiles=outfiles_03)
         tree_file = work_tree(pipeline, analysis_name, infiles=outfiles_03)
         infiles = {
@@ -335,4 +336,3 @@ if __name__ == '__main__':
                             tree_file,
                             infiles=infiles)
     work_html(pipeline, user_config.get('params', 'group_files'))
-    #  pipeline.commands.append('rm %s'%' '.join(rm_files))
