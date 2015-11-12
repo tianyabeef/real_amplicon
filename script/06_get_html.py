@@ -479,7 +479,7 @@ def get_html():
         var_html['alpha_diff_boxplot'] = True
     var_html['group_file'] = group_file
     html_dir = config.get('params','html_template')
-    env = Environment(loader=FileSystemLoader(out_dir_report + '/templates',
+    env = Environment(loader=FileSystemLoader(html_dir + '/templates',
                                               encoding='utf-8'))
     template = env.get_template('report.html')
     finally_html = template.render(var_html)
