@@ -467,8 +467,8 @@ def get_html():
     if min_sample_num_in_groups >= 3 and group_num >= 2:
         var_html['lefse_enough'] = True
         LDA_png = config.get('origin','group_lefse_LDA_png').replace('#group',group_file)
-        cmd_result = os.popen('file %s'%LDA_png).read().strip().split(': ')[-1]
-        if cmd_result == 'empty':
+	cmd_result = os.popen('file %s/../%s'%(work_dir,LDA_png)).read().strip().split(': ')[-1]
+	if cmd_result == 'empty':
             var_html['lefse'] = False
         else:
             var_html['lefse'] = True
