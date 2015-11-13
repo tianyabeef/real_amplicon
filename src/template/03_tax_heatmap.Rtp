@@ -44,7 +44,7 @@ if(nrow(data)<=1){
 		oma.right = 0.7*max.genus.name.length-3.9
 	}else {
 		cexRow =1.8
-		oma.right = 0.7*max.genus.name.length-3.9
+		oma.right = 0.8*max.genus.name.length-3.9
 	}
 	par(oma=c(0,0,0,oma.right))
 	col = colorRampPalette(c("lightblue", "yellow", "orange", "red"),bias=3)(3000)
