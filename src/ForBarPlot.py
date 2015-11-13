@@ -29,13 +29,16 @@ class Sample(object):
 
     def pick_top(self,used_tax):
         other = 0
+        uniform = 0
         for tax in self.tax.iterkeys():
             if tax in used_tax:
                 self.percent[tax] = self.tax[tax] / self.total_profile * 100
+                uniform += self.percent[tax]
             else:
                 other += self.tax[tax]
         other = other / self.total_profile
         self.other_percent = other * 100
+        uniform += self.other_percent
 
 
 class Subject(object):
@@ -109,15 +112,23 @@ class Subject(object):
             sample.pick_top(self.used_tax)
             out_str += '\t%s'%sample.name
         fp.write(out_str.strip() + '\n')
+        from collections import defaultdict
+        total_sample = defaultdict(float)
         for tax in sorted(self.used_tax,
                 cmp=lambda a,b:cmp(dict_[b],dict_[a])):
+            total = 0
             out_str = tax
             for sample in samples:
                 out_str += '\t%s'%sample.percent[tax]
+                total += sample.percent[tax]
+                total_sample[sample.name] += sample.percent[tax]
             fp.write(out_str.strip() + '\n')
         out_str = 'Other'
-        for sample in self.sample:
+        for sample in samples:
             out_str += '\t%s'%sample.other_percent
+            total_sample[sample.name] += sample.other_percent
+        for sample_name in total_sample:
+            print sample_name,total_sample[sample_name]
         fp.write(out_str.strip() + '\n')
         fp.close()
 

@@ -28,10 +28,11 @@ def taxanomy_total(cfg_in,vars=None):
                                                  outfiles['rank_abundance_dir']))
 
     # tax_star
-    work.commands.append('%s -t %s -i %s -o %s'%(scripts['tax_star'],
-                                                 params['tax_ass'],
-                                                 params['uniform_profile'],
-                                                 outfiles['tax_star_dir']))
+    work.commands.append('%s -t %s -i %s -o %s -s %s'%(scripts['tax_star'],
+                                                       params['tax_ass'],
+                                                       params['uniform_profile'],
+                                                       outfiles['tax_star_dir'],
+                                                       params['total_group_file']))
 
     # bar_plot
     work.commands.append('%s -t %s -o %s -g %s'%(scripts['sample_bar_plot'],

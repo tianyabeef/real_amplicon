@@ -3,12 +3,12 @@
 from __future__ import division
 import sys
 import os
-import re
 import argparse
 from util import mkdir,image_trans
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1,this_script_path + '/../src')
 import Parser as rp
+from Parser import parse_group_file
 
 def read_params(args):
     parser = argparse.ArgumentParser(description='tax star plot at genus level | v1.0 at 2015/10/09 by liangzb')
@@ -18,12 +18,16 @@ def read_params(args):
             help="set the uniform profile table")
     parser.add_argument('-o','--out_dir',dest='out_dir',metavar='DIR',type=str,required=True,
             help="set the output dir")
+    parser.add_argument('-s','--sort',dest='sort',metavar='FILE',type=str,default=None,
+            help="set the file to sort")
 
     args = parser.parse_args()
     params = vars(args)
+    if params['sort'] is not None:
+        params['sort'] = list(parse_group_file(params['sort']).iterkeys())
     return params
 
-def get_file_for_star_plot(tax_ass,profile,outfile):
+def get_file_for_star_plot(tax_ass,profile,outfile,sort_samples=None):
     tax = {}
     for line in open(tax_ass):
         tabs = line.strip().split('\t')
@@ -37,7 +41,7 @@ def get_file_for_star_plot(tax_ass,profile,outfile):
     profile_sum = {}
     with open(profile) as f:
         head = f.next()
-        head = re.sub('^(.+?)\t','genus_tax\t',head)
+        samples = head.rstrip().split('\t')[1:]
         for line in f:
             tabs = line.strip().split('\t')
             if tabs[0] not in tax:
@@ -49,7 +53,8 @@ def get_file_for_star_plot(tax_ass,profile,outfile):
                 for ind,tab in enumerate(tabs[1:]):
                     profile_sum[tax_name][ind] += float(tab)
     out_fp = open(outfile,'w')
-    out_fp.write(head)
+    sort_samples = sort_samples or samples
+    out_fp.write('genus_tax\t%s\n'%'\t'.join(sort_samples))
 
     def my_cmp(a,b):
         l1 = profile_sum[a]
@@ -60,8 +65,10 @@ def get_file_for_star_plot(tax_ass,profile,outfile):
 
     for tax in sorted(list(profile_sum.iterkeys()),cmp=my_cmp)[:10]:
         out_str = tax
-        for profile in profile_sum[tax]:
-            out_str += '\t%s'%profile
+        for sample in sort_samples:
+            index = samples.index(sample)
+            out_str += '\t%s'%profile_sum[tax][index]
+            #  out_str += '\t%s'%profile
         out_fp.write(out_str.strip() + '\n')
     out_fp.close()
 
@@ -69,7 +76,7 @@ if __name__ == '__main__':
     params = read_params(sys.argv)
     mkdir(params['out_dir'])
     file_for_plot = params['out_dir'] + '/for_star_plot.txt'
-    get_file_for_star_plot(params['tax_ass'],params['profile'],file_for_plot)
+    get_file_for_star_plot(params['tax_ass'],params['profile'],file_for_plot,params['sort'])
     pdf_file = params['out_dir'] + '/tax_star.pdf'
     png_file = params['out_dir'] + '/tax_star.png'
 
