@@ -279,6 +279,7 @@ def get_html():
         lines.next()
         for line in lines:
             tabs = line.strip().split('\t')
+            downsize = tabs[1]
             otuStatisticalDownsize = OtuStatisticalDownsize(tabs[0], tabs[1],
                                                             tabs[2], tabs[3])
             otuStatisticalDownsizes[tabs[0]] = otuStatisticalDownsize
@@ -428,6 +429,7 @@ def get_html():
     var_html['diff_phylum_marker_exist'] = diff_phylum_marker[3]
     var_html['diff_taxall_marker_exist'] = diff_taxall_marker[3]
     var_html['p_value'] = 0.05
+    var_html['downsize'] = downsize
 
     sample_num_in_groups,\
     min_sample_num_in_groups,\
