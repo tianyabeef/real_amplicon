@@ -74,7 +74,8 @@ def work_02(pipeline, infiles=None):
         'work_dir': work_dir,
         'otu_biom': otu_table_outfiles['otu_biom'],
         'uniform_profile': otu_table_outfiles['uniform_profile'],
-        'tax_ass': otu_table_outfiles['tax_assign']
+        'tax_ass': otu_table_outfiles['tax_assign'],
+        'total_group_file': pipeline.config.get('params','alpha_group_file')
     }
     taxanomy_total_outfiles = taxanomy_total(pipeline.config, vars=vars)
 

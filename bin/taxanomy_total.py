@@ -34,9 +34,10 @@ def taxanomy_total(cfg_in,vars=None):
                                                  outfiles['tax_star_dir']))
 
     # bar_plot
-    work.commands.append('%s -t %s -o %s'%(scripts['sample_bar_plot'],
-                                           outfiles['summarize_dir'],
-                                           outfiles['bar_plot_dir']))
+    work.commands.append('%s -t %s -o %s -g %s'%(scripts['sample_bar_plot'],
+                                                 outfiles['summarize_dir'],
+                                                 outfiles['bar_plot_dir'],
+                                                 params['total_group_file']))
 
     return outfiles
 

@@ -21,11 +21,15 @@ def read_params(args):
             help="set the output dir")
     parser.add_argument('-l','--level',dest='level_list',metavar='INTs',nargs='+',type=int,default=[2,3,4,5,6],
             help="set the tax level, 1..7 stands for kingdom..species, [default is 2 3 4 5 6]")
+    parser.add_argument('--with_group',dest='with_group',action='store_true',
+            help="plot group bar plot, if group is not set, this param will not be used")
+    parser.add_argument('--without_group',dest="with_group",action='store_false',
+            help="plot sample bar plot, if this params is set, group file will only for order")
+    parser.set_defaults(with_group=False)
     args = parser.parse_args()
     params = vars(args)
     params['group'] = parse_group_file(params['group'])
     return params
-
 
 TAX_LEVEL = ['root','kingdom','phylum','class','order','family','genus','species']
 
@@ -37,7 +41,10 @@ def work(level,params):
     outfile = '%s/for_plot.txt'%work_dir
     subject = Subject(TAX_LEVEL[level],profile,outfile)
     if params['group'] is not None:
-        subject.run_with_group(params['group'])
+        if params['with_group']:
+            subject.run_with_group(params['group'])
+        else:
+            subject.run(params['group'])
     else:
         subject.run()
 
