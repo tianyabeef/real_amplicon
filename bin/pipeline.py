@@ -171,7 +171,7 @@ def work_03(pipeline, analysis_name, infiles=None, pre_config=None):
                           taxanomy_group_outfiles['shell']])
     pipeline.add_job('OTU_group_' + analysis_name,
                      work_dir + '/work.sh',
-                     prep='pick_otu')
+                     prep='OTU_all')
     otu_table_outfiles['summarize_dir'
                        ] = taxanomy_group_outfiles['summarize_dir']
     return otu_table_outfiles

@@ -7,12 +7,13 @@ group=as.data.frame(group)
 rownames(group)=colnames(X)
 colors=labels2colors(group)
 colors = as.character(colors)
+
 g=unique(group)
 g_order=g[order(g),1]
 g_order=as.character(g_order)
 gcols_order=labels2colors(g_order)
-# gcols=unique(colors)
-# gcols_order=gcols[order(g)]
+gcols=unique(colors)
+gcols_order=gcols[order(g)]
 # A=factor(group[,1])
 
 d=dist(t(X))
