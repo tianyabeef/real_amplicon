@@ -91,20 +91,28 @@ class Subject(object):
                 cmp=my_cmp)[:20]
         self.used_tax = top
 
-    def run(self):
+    def run(self,group=None):
         fp = open(self.outfile,'w')
         dict_ = self.tax_total_profile
         self.read_profile()
         self.pick_top()
         out_str = 'tax_name'
+        sample_dict = {}
         for sample in self.sample:
+            sample_dict[sample.name] = sample
+        if group is not None:
+            samples = list(group.iterkeys())
+            samples = map(lambda s:sample_dict[s],samples)
+        else:
+            samples = self.sample
+        for sample in samples:
             sample.pick_top(self.used_tax)
             out_str += '\t%s'%sample.name
         fp.write(out_str.strip() + '\n')
         for tax in sorted(self.used_tax,
                 cmp=lambda a,b:cmp(dict_[b],dict_[a])):
             out_str = tax
-            for sample in self.sample:
+            for sample in samples:
                 out_str += '\t%s'%sample.percent[tax]
             fp.write(out_str.strip() + '\n')
         out_str = 'Other'

@@ -152,7 +152,7 @@ def parse_stat_file(stat_file,group_file=None):
 def parse_group_file(file):
     if file is None:
         return None
-    group = {}
+    group = OrderedDict()
     with open(file) as g:
         for line in g:
             tabs = line.strip().split('\t')
