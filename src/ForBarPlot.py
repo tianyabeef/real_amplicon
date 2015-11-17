@@ -131,25 +131,27 @@ class Subject(object):
         self.pick_top()
         out_str = 'tax_name'
         groups = {}
+        group_key_sort = list(group.itervalues())
         for sample in self.sample:
             g = group[sample.name]
             if g not in groups:
                 groups[g] = Group(g)
             groups[g].samples[sample.name] = sample
             sample.pick_top(self.used_tax)
-        for g in groups.itervalues():
+        groups_sort = map(lambda s:groups[s],group_key_sort)
+
+        for g in groups_sort:
             g.get_percent(self.used_tax)
             out_str += '\t%s'%g.name
         fp.write(out_str.strip() + '\n')
         for tax in sorted(self.used_tax,
                 cmp=lambda a,b:cmp(dict_[b],dict_[a])):
             out_str = tax
-            for g in groups.itervalues():
+            for g in groups_sort:
                 out_str += '\t%s'%g.percent[tax]
             fp.write(out_str.strip() + '\n')
         out_str = 'Other'
-        for g in groups.itervalues():
+        for g in groups_sort:
             out_str += '\t%s'%g.other_percent
         fp.write(out_str.strip() + '\n')
         fp.close()
-
