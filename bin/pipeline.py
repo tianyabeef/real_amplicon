@@ -30,27 +30,41 @@ def work_01(pipeline, infiles=None):
     }
     otu_table_outfiles = make_otu_table(pipeline.config, vars=vars)
 
-    vars = {
-        'work_dir': pick_otu_outfiles['out_dir'],
-        'otu_biom': otu_table_outfiles['otu_biom'],
-        'stat_file': pick_otu_outfiles['out_stat_file'],
-        'alpha_metrics': 'chao1,observed_species'
-    }
-    alpha_rare_outfiles = alpha_rare(pipeline.config, vars=vars)
+    #  vars = {
+        #  'work_dir': pick_otu_outfiles['out_dir'],
+        #  'otu_biom': otu_table_outfiles['otu_biom'],
+        #  'stat_file': pick_otu_outfiles['out_stat_file'],
+        #  'alpha_metrics': 'chao1,observed_species'
+    #  }
+    #  alpha_rare_outfiles = alpha_rare(pipeline.config, vars=vars)
 
     pipeline.make_shell(pick_otu_outfiles['out_dir'] + '/make.sh',
                         [('pick_otu', pick_otu_outfiles['config']),
-                         ('make_otu_table', otu_table_outfiles['config']),
-                         ('alpha_rare', alpha_rare_outfiles['config'])])
+                         ('make_otu_table', otu_table_outfiles['config'])])
+                         #  ('alpha_rare', alpha_rare_outfiles['config'])])
     pipeline.merge_shell(pick_otu_outfiles['out_dir'] + '/work.sh',
                          [pick_otu_outfiles['shell'],
-                          otu_table_outfiles['shell'],
-                          alpha_rare_outfiles['shell']])
+                          otu_table_outfiles['shell']])
+                          #  alpha_rare_outfiles['shell']])
     pipeline.add_job('pick_otu',
                      pick_otu_outfiles['out_dir'] + '/work.sh',
                      prep='data_merge')
+    pick_otu_outfiles['otu_biom'] = otu_table_outfiles['otu_biom']
     return pick_otu_outfiles
 
+def total_alpha_rare(pipeline, infiles=None):
+    vars = {
+        'work_dir': infiles['out_dir'],
+        'otu_biom': infiles['otu_biom'],
+        'stat_file': infiles['out_stat_file'],
+        'alpha_metrics': 'chao1,observed_species'
+    }
+    outfiles = alpha_rare(pipeline.config, vars=vars)
+    pipeline.make_shell(outfiles['out_dir'] + '/make.sh',
+                        [('alpha_rare', outfiles['config'])])
+    pipeline.add_job('alpha_rare',
+                     outfiles['shell'],
+                     prep='pick_otu')
 
 def work_02(pipeline, infiles=None):
     work_dir = pipeline.config.get('params', 'work_dir') + '/02_OTU_all'
@@ -309,6 +323,7 @@ if __name__ == '__main__':
 
     outfiles_00 = work_00(pipeline)
     outfiles_01 = work_01(pipeline, infiles=outfiles_00)
+    total_alpha_rare(pipeline,infiles=outfiles_01)
     outfiles_02,pre_config = work_02(pipeline, infiles=outfiles_01)
     alpha_outfiles_all = work_alpha_rare_all(pipeline,
                                              outfiles_01['out_stat_file'],
