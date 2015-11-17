@@ -131,7 +131,11 @@ class Subject(object):
         self.pick_top()
         out_str = 'tax_name'
         groups = {}
-        group_key_sort = list(group.itervalues())
+        _list = list(group.itervalues())
+        group_key_sort = []
+        for _i in _list:
+            if not _i in group_key_sort:
+                group_key_sort.append(_i)
         for sample in self.sample:
             g = group[sample.name]
             if g not in groups:
