@@ -23,12 +23,14 @@ con = round(con,2)
 pdf(file="@#{pdf_file}",11,8.5)
 par(mar=c(4.1,5.1,3.1,2.1))
 
+max_sample_name_length = max(mapply(nchar, as.character(group[,1])))
+
 ymax = max(X.dudi$li[,2])
 ymin = min(X.dudi$li[,2])
 ylegend = (ymax - ymin) * 0.1
 xmax = max(X.dudi$li[,1])
 xmin = min(X.dudi$li[,1])
-xlegend = (xmax - xmin) * 0.1
+xlegend = (xmax - xmin) * ( 0.1 * ceiling(max_sample_name_length / 4) )
 xlim = c(xmin, xmax+xlegend)
 ylim = c(ymin, ymax)
 
