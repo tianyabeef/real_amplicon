@@ -33,11 +33,11 @@ if(ncol(data)>99){
 }
 barplot(as.matrix(data),col=cols,xaxt='n',font=2,space=spa,width=width)
 
-if(ncol(data)<10 && max_sample_name_length<5){
+if(ncol(data)<=10 && max_sample_name_length<=5){
 	srt=0
-}else if(ncol(data)<10 && max_sample_name_length<10){
+}else if(ncol(data)<=10 && max_sample_name_length<=10){
 	srt=45
-}else if(ncol(data)<10 && max_sample_name_length>10){
+}else if(ncol(data)<=10 && max_sample_name_length>10){
 	srt=60
 }else if(ncol(data)>10){
 	srt=90
