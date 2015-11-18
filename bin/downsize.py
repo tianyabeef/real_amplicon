@@ -3,7 +3,7 @@ from settings import *
 def check_group_row(file1,file2):
     count1 = []
     count2 = []
-    with open(file1) as fp,open(file2) as fp2:
+    with open(file1) as fp, open(file2) as fp2:
         for line in fp:
             sample_name = line.split('\t')[0]
             count1.append(sample_name)

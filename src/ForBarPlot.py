@@ -1,5 +1,6 @@
 from __future__ import division
 import re
+from collections import defaultdict
 
 class Group(object):
 
@@ -23,23 +24,19 @@ class Sample(object):
     def __init__(self,name):
         self.name = name
         self.total_profile = 0
-        self.tax = {}
-        self.percent = {}
+        self.tax = defaultdict(float)
+        self.percent = defaultdict(float)
         self.other_percent = 0
 
     def pick_top(self,used_tax):
         other = 0
-        uniform = 0
         for tax in self.tax.iterkeys():
             if tax in used_tax:
                 self.percent[tax] = self.tax[tax] / self.total_profile * 100
-                uniform += self.percent[tax]
             else:
                 other += self.tax[tax]
         other = other / self.total_profile
         self.other_percent = other * 100
-        uniform += self.other_percent
-
 
 class Subject(object):
 
@@ -48,7 +45,7 @@ class Subject(object):
         self.level = level
         self.profile = profile
         self.outfile = outfile
-        self.tax_total_profile = {}
+        self.tax_total_profile = defaultdict(float)
         self.used_tax = []
 
     def read_profile(self):
@@ -70,12 +67,9 @@ class Subject(object):
         fp.close()
 
     def get_profile(self,tax,line):
-        for ind,profile in enumerate(
-                line.strip().split('\t')[1:]):
-            self.sample[ind].tax[tax] = float(profile)
+        for ind,profile in enumerate(line.strip().split('\t')[1:]):
+            self.sample[ind].tax[tax] += float(profile)
             self.sample[ind].total_profile += float(profile)
-            if tax not in self.tax_total_profile:
-                self.tax_total_profile[tax] = 0
             self.tax_total_profile[tax] += float(profile)
 
     def get_samples(self,header):

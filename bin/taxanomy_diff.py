@@ -61,11 +61,12 @@ def taxanomy_diff(cfg_in,vars=None):
         return outfiles
 
     #  LEfSe analysis
-    work.commands.append('%s -i %s -l %s -g %s -o %s'%(scripts['LEfSe'],
-                                                       params['summarize_dir'] + '/otu_table_all.txt',
-                                                       softwares['LEfSe_dir'],
-                                                       params['group'],
-                                                       outfiles['LEfSe_outdir']))
+    work.commands.append('%s -i %s -l %s -g %s -o %s --LDA %s'%(scripts['LEfSe'],
+                                                                params['summarize_dir'] + '/otu_table_all.txt',
+                                                                softwares['LEfSe_dir'],
+                                                                params['group'],
+                                                                outfiles['LEfSe_outdir'],
+                                                                params['LDA_cutoff']))
     vars = {
         'min_sample_num_in_groups' : min_sample_num_in_groups,
         'sample_num_total' : sample_num_total,

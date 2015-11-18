@@ -10,9 +10,9 @@ X=X[,rownames(group)]
 if(nrow(X)<=1){
 	plot(0,type='n')
 	text(1,0,'no diff')
-}else{ 
-
-	group=as.data.frame(group)
+}else{
+	group=as.data.frame(group) 
+	max_sample_name_length = max(mapply(nchar,as.character(group[,1])))
 	colnames(X)=rownames(group)
 	colors=labels2colors(group[,1])
 	g=unique(group)
@@ -30,7 +30,7 @@ if(nrow(X)<=1){
 	ylegend = (ymax - ymin) * 0.1
 	xmin=min(X.dudi$li[,1])
 	xmax=max(X.dudi$li[,1])
-	xlegend = (xmax - xmin) * 0.1
+	xlegend = (xmax - xmin) * ( 0.1 * ceiling(max_sample_name_length / 4) )
 
     sample_num = ncol(X)
     if(sample_num < 10){
@@ -47,4 +47,7 @@ if(nrow(X)<=1){
 	legend("topright",legend=g_order,col=gcols_order,pch=20,cex=1.5,horiz=F)
 }
 
+xmin
+xmax
+xlegend
 dev.off()

@@ -18,6 +18,8 @@ def read_params(args):
                         help="set the group file")
     parser.add_argument('-o','--out_dir', dest='out_dir', metavar='DIR',type=str,required=True,
                         help="set the output dir")
+    parser.add_argument('--LDA',dest='LDA', metavar='FLOAT',type=float,default=2,
+                        help="set the LDA cutoff, [default is 2]")
     args = parser.parse_args()
     params = vars(args)
     params['group'] = parse_group_file(params['group'])
@@ -55,11 +57,11 @@ def do_format(infile,outfile,group):
             tabs[0] = tabs[0].replace(';','|')
             out_fp.write('\t'.join(tabs) + '\n')
 
-def get_commands(infile,LEfSe_path,out_dir):
+def get_commands(infile,LEfSe_path,out_dir,LDA):
     commands = []
     command = '%sformat_input.py %s %s/LDA.in -c 1 -u 2 -o 1000000'%(LEfSe_path,infile,out_dir)
     commands.append(command)
-    command = '%srun_lefse.py %s/LDA.in %s/LDA.res'%(LEfSe_path,out_dir,out_dir)
+    command = '%srun_lefse.py %s/LDA.in %s/LDA.res -l %s'%(LEfSe_path,out_dir,out_dir,LDA)
     commands.append(command)
     command = '%splot_res.py %s/LDA.res %s/LDA.pdf --format pdf --dpi 150'%(LEfSe_path,out_dir,out_dir)
     commands.append(command)
@@ -80,7 +82,7 @@ if __name__ == '__main__':
     mkdir(params['out_dir'])
     for_analysis = '%s/otu_table_for_lefse.txt'%params['out_dir']
     do_format(params['infile'],for_analysis,params['group'])
-    commands = get_commands(for_analysis,params['LEfSe_path'],params['out_dir'])
+    commands = get_commands(for_analysis,params['LEfSe_path'],params['out_dir'],params['LDA'])
     with open(params['out_dir'] + '/commands.sh','w') as fp:
         fp.write('\n'.join(commands))
     for command in commands:
