@@ -1,10 +1,25 @@
+source('/data_center_01/pipeline/16S_ITS_pipeline_v3.0/src/template/labels2colors.R')
 library(NMF)
 infile = read.table("@#{for_plot}",header=T,check.names=F,quote="")
 Group = read.table("@#{group_file}",row.names=1,check.names=F,quote="")
 Group = as.character(Group[rownames(infile),])
 annotation <- data.frame(Group)
 
+cols = labels2colors(annotation$Group)
+cols <- data.frame(cols)
+colnames(cols) = "Group"
+cols$Group = as.character(cols$Group)
+
 par(mar=c(7,7,3,3))
-aheatmap(infile, Rowv=FALSE, Colv=TRUE, distfun="correlation", hclustfun="complete", annCol=annotation, main="@#{distance_name} Distance", filename="@#{pdf_file}")
+aheatmap(infile, 
+		 Rowv=FALSE, 
+		 Colv=TRUE, 
+		 distfun="correlation", 
+		 hclustfun="complete", 
+		 annCol=annotation, 
+		 main="@#{distance_name} Distance", 
+		 filename="@#{pdf_file}",
+		 annColors=cols
+)
 dev.off()
 
