@@ -23,13 +23,14 @@ def make_otu_table(cfg_in,vars=None):
                                                        outfiles['rep_set'],
                                                        params['pick_rep_set_method']))
     # assign taxonomy
-    work.commands.append('%s -j %s -i %s -d %s -o %s -c %s --hier_outfile %s'%(scripts['rdp_classfier'],
-                                                                               software['rdp_classifier'],
-                                                                               outfiles['rep_set'],
-                                                                               params['data_type'],
-                                                                               classifier_file,
-                                                                               params['classify_confident_cutoff'],
-                                                                               out_dir + '/rdp_hier.txt'))
+    work.commands.append('%s -j %s -i %s -d %s -o %s -c %s --hier_outfile %s -m %s'%(scripts['rdp_classfier'],
+                                                                                     software['rdp_classifier'],
+                                                                                     outfiles['rep_set'],
+                                                                                     params['data_type'],
+                                                                                     classifier_file,
+                                                                                     params['classify_confident_cutoff'],
+                                                                                     out_dir + '/rdp_hier.txt',
+                                                                                     params['rdp_memory']))
     work.commands.append('%s -i %s -c %s -o %s'%(scripts['transform_rdp_qiime'],
                                                  classifier_file,
                                                  params['classify_confident_cutoff'],

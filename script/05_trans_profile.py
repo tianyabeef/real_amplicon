@@ -34,7 +34,7 @@ def trans(infile,outfile,level=None):
             tabs = line.strip().split('\t')
             taxes = tabs[0].split(';')
             for tax in taxes :
-                if not re.search(regex,tax):
+                if not regex.search(tax):
                     continue
                 if tax not in profiles:
                     profiles[tax] = map(lambda a:float(a),tabs[1:])

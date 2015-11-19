@@ -1,25 +1,24 @@
 from __future__ import division
 import sys
-import os
 import re
-from MySeqRecord import SeqRecord
 from Bio import SeqIO
+#  from MySeqRecord import SeqRecord
 
-def __find_longer(self,seqrecord):
-    if ('count' not in self.__dict__) or ('count' not in seqrecord.__dict__):
-        raise IOError,"to use this function, object must have attribute 'count'"
-    seqa = seqrecord.seq
-    seqb = self.seq
-    if seqa in seqb:
-        self.count += 1
-        return self
-    elif seqb in seqa:
-        seqrecord.count += 1
-        return seqrecord
-    else:
-        return False
+#  def __find_longer(self,seqrecord):
+    #  if ('count' not in self.__dict__) or ('count' not in seqrecord.__dict__):
+        #  raise IOError,"to use this function, object must have attribute 'count'"
+    #  seqa = seqrecord.seq
+    #  seqb = self.seq
+    #  if seqa in seqb:
+        #  self.count += 1
+        #  return self
+    #  elif seqb in seqa:
+        #  seqrecord.count += 1
+        #  return seqrecord
+    #  else:
+        #  return False
 
-SeqRecord.find_longer = __find_longer
+#  SeqRecord.find_longer = __find_longer
 
 class Sample(object):
     def __init__(self,name):
@@ -27,11 +26,11 @@ class Sample(object):
         self.single_reads = 0
         self.total_reads = 0
 
-class NonAbundanceRecord(object):
-    def __init__(self):
-        self.count = 0
-        self.sample = None
-        
+#  class NonAbundanceRecord(object):
+    #  def __init__(self):
+        #  self.count = 0
+        #  self.sample = None
+
 class Subject(object):
     def __init__(self,infile,out_fa,out_stat,single_list):
         self.infile = infile
@@ -40,7 +39,7 @@ class Subject(object):
         self.single_list = single_list
         self.sample_set = {}
         self.container = {}
-                
+
     def write_stat(self):
         fp = open(self.out_stat,'w')
         total_reads = 0
@@ -58,7 +57,7 @@ class Subject(object):
         for sample in self.sample_set.itervalues():
             ratio = sample.single_reads / sample.total_reads * 100
             fp.write('%s\t%s\t%s\t%2.2f%%\n'%(sample.name,sample.total_reads,sample.single_reads,ratio))
-        fp.close()              
+        fp.close()
 
     def write_fa(self):
         fp = open(self.out_fa,'w')
@@ -90,4 +89,4 @@ class Subject(object):
                 self.container[str(record.seq)].sample = self.sample_set[sample_name]
             self.container[str(record.seq)].count += 1
         fp.close()
- 
+
