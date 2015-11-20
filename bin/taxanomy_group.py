@@ -45,10 +45,16 @@ def taxanomy_group(cfg_in,vars=None):
                                                      outfiles['otu_venn_outdir']))
     # tax_pca
     if sample_num_total >= 5:
-        work.commands.append('%s -i %s -g %s -o %s'%(scripts['otu_pca'],
-                                                     params['uniform_profile'],
-                                                     params['group'],
-                                                     outfiles['otu_pca_outdir']))
+        command = '%s -i %s -g %s -o %s'%(scripts['otu_pca'],
+                                          params['uniform_profile'],
+                                          params['group'],
+                                          outfiles['otu_pca_outdir'])
+        if min_sample_num_in_groups >= 5:
+            command += ' --with_boxplot'
+        else:
+            command += ' --without_boxplot'
+        work.commands.append(command)
+
     # heatmap
     if sample_num_total >= 5:
         work.commands.append('%s -i %s -g %s -o %s -t %s'%(scripts['tax_heatmap'],
