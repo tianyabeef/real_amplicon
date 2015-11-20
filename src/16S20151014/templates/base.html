@@ -26,14 +26,6 @@
 <script type="text/javascript" src="js/table.js"></script><!--表格-->
 
 
-
-
-
-
-
-
-
-
 </head>
 <body class="easyui-layout">
 
@@ -72,11 +64,11 @@
 <!-- 					<a href="#系统进化关系展示" class="cs-navi-tab">系统进化关系展示</a></p> -->
 					<a href="#Rank Abundance曲线"  class="cs-navi-tab">Rank Abundance曲线</a></p>
 				</div>
-				<div title="alpha多样性分析">
+				<div title="Alpha多样性分析">
 					<a href="#单个样品多样性分析"  class="cs-navi-tab">单个样品多样性分析</a></p>
 					<a href="#单个样品差异分析"  class="cs-navi-tab">单个样品差异分析</a></p>
 				</div>
-				<div title="beta多样性分析">
+				<div title="Beta多样性分析">
 					<a href="#UniFrac热图分析" class="cs-navi-tab">UniFrac热图分析</a></p>
 					<a href="#PCoA分析"  class="cs-navi-tab">PCoA分析</a></p>
 					<!-- <a href="#Analysis of Similarity (ANOSIM)"  class="cs-navi-tab">Analysis of Similarity (ANOSIM)</a></p> -->
@@ -176,7 +168,7 @@
 
 		
         
-        <h2>4 alpha多样性分析</h2>
+        <h2>4 Alpha多样性分析</h2>
 		{% block alpha_diversity_head %}
 		{% endblock %}
 
@@ -185,14 +177,14 @@
           
 
             
-		<h2>5 beta多样性分析</h2>
+		<h2>5 Beta多样性分析</h2>
 		{% block uniFra_analysis_head %}
 		{% endblock %}
 		{% block similarity_analysis_head %}
 		{% endblock %}                
 
             
-		<h2>6 显著性差异分析	（PCA:每组样品数>=3;heatmp:每组样品数>=3;Botplot:每组样品数>=5）</h2>
+		<h2>6 显著性差异分析	（PCA:每组样品数>=3;Heatmap:每组样品数>=3;Boxplot:每组样品数>=5）</h2>
 		{% block lefse_head %}
 		{% endblock %}
 		{% block diff_analysis_head %}

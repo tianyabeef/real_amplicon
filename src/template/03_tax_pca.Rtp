@@ -30,7 +30,7 @@ if(nrow(X)<=1){
 	ylegend = (ymax - ymin) * 0.1
 	xmin=min(X.dudi$li[,1])
 	xmax=max(X.dudi$li[,1])
-	xlegend = (xmax - xmin) * ( 0.1 * ceiling(max_sample_name_length / 4) )
+	xlegend = (xmax - xmin) * ( 0.12 * ceiling(max_sample_name_length / 4) )
 
     sample_num = ncol(X)
     if(sample_num < 10){

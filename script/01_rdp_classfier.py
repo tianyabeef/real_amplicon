@@ -9,6 +9,8 @@ def read_params(args):
     parser = argparse.ArgumentParser(description='a wrapper for rdp classify | v1.0 at 2015/09/18 by liangzb')
     parser.add_argument('-j','--jar',dest='jar',metavar='JAR',type=str,required=True,
             help="set the classifier.jar with absolute path")
+    parser.add_argument('-m','--memory',dest='memory',metavar='VF',type=str,default='5g',
+            help="set the rdp memory, [default is 5g]")
     parser.add_argument('-i','--infile',dest='infile',metavar='FILE',type=str,required=True,
             help="set the input fasta file to classify")
     parser.add_argument('-d','--data_type',dest='data_type',metavar='16S/ITS',choices=['16S','ITS'],type=str,default='16S',
@@ -30,7 +32,7 @@ if __name__ == '__main__':
     if params['hierfile']:
         mkdir(os.path.dirname(params['hierfile']))
 
-    commands = 'java -Xmx1g -jar %s classify '%params['jar']
+    commands = 'java -Xmx%s -jar %s classify '%(params['jar'],params['memory'])
     if params['data_type'] == '16S':
         commands += ' -g 16srrna '
     elif params['data_type'] == 'ITS':

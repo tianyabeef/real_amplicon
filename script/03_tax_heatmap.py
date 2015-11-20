@@ -43,7 +43,7 @@ def work(infile,outfile):
             tabs = line.strip().split('\t')
             taxes = tabs[0].split(';')
             for tax in taxes:
-                if tax.startswith('g__'):
+                if tax.startswith('g__') and tax[3:]:
                     tabs[0] = tax[3:]
                     break
             else:
