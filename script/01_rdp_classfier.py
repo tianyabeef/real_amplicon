@@ -32,7 +32,7 @@ if __name__ == '__main__':
     if params['hierfile']:
         mkdir(os.path.dirname(params['hierfile']))
 
-    commands = 'java -Xmx%s -jar %s classify '%(params['jar'],params['memory'])
+    commands = 'java -Xmx%s -jar %s classify '%(params['memory'],params['jar'])
     if params['data_type'] == '16S':
         commands += ' -g 16srrna '
     elif params['data_type'] == 'ITS':
