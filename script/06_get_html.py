@@ -430,7 +430,7 @@ def get_html():
     var_html['diff_taxall_marker_exist'] = diff_taxall_marker[3]
     cutoff_dir = config.get('params', 'cutoff')
     cutoff_config = ConfigParser.ConfigParser()
-    cutoff_config.read(work_dir + "../../" + cutoff_dir.replace("#group",group_file))
+    cutoff_config.read(work_dir + "../" + cutoff_dir.replace("#group",group_file))
     var_html['p_value'] = cutoff_config.get("params",'p_cutoff')
     var_html['LDA_cutoff']=cutoff_config.get("params",'LDA_cutoff')
     var_html['downsize'] = downsize

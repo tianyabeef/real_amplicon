@@ -2,6 +2,11 @@ source('/data_center_01/pipeline/16S_ITS_pipeline_v3.0/src/template/labels2color
 
 table = read.table('@#{otu_table}', sep = "\t",head = T, check.names=F,quote="")
 group=read.table('@#{group_file}', sep = "\t",head = F,row.names=1, check.names=F,quote="")
+color_list = group2corlor(group,sort_names=colnames(table)[-c(1,2,3)])
+sample_colors = color_list[[1]]
+group_colors =  color_list[[2]]
+group_names =   color_list[[3]]
+group = color_list[[4]]
 pdf('@#{pdf_file}')
 par(mar=c(5.1,5.1,3.1,2.1))
 
@@ -48,21 +53,12 @@ if(ncol(table)==4){
 
 }else{
 	table = table[,-c(1, 2, 3)]
-
-	group=group[colnames(table),1]
-	group=as.data.frame(group)
-	rownames(group)=colnames(table)
-
-	colors=labels2colors(group[,1])
-	g=unique(group)
-	g_order=g[order(g),1]
-	gcols_order=labels2colors(g_order)
 	ymax=max(as.numeric(as.character(table[table != "n/a"])))
 
 	# plot blank canvas
 	plot(0,0,xlim=c(0,max(readnumber)+1800),ylim=c(0,ymax),type="n",xlab="reads",ylab="@#{alpha_name}",cex.lab=1.4)
-	if( length( g_order ) <= 10){ 
-		legend("topright",legend=g_order,col=gcols_order,seg.len=1.5,lwd=1.6,cex=0.8) 
+	if( length( group_names ) <= 10){ 
+		legend("topright",legend=group_names,col=group_colors,seg.len=1.5,lwd=1.6,cex=0.8) 
 	}
 
 	# fitting function
@@ -75,7 +71,7 @@ if(ncol(table)==4){
 	  col = table[,i]
 	  col = as.numeric(as.character(col[col != "n/a"]))
 	  readnum = readnumber[1:length(col)]
-	  color=colors[i]
+	  color=sample_colors[i]
 	  min = Inf
 	  for(km in c(10,1000,4000,10000)){
 	    estimation <- tryCatch(

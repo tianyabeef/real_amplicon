@@ -20,15 +20,15 @@ def read_params(args):
             help="plot without legend")
     parser.set_defaults(legend=False)
     parser.add_argument('--log', dest='draw_log', action='store_true',
-            help='draw axis in log scale')
+            help='draw axis in log scale, [default]')
     parser.add_argument('--linear', dest='draw_log', action='store_false',
-            help='draw axis in linear scale, [default]')
-    parser.set_defaults(draw_log=False)
+            help='draw axis in linear scale')
+    parser.set_defaults(draw_log=True)
     parser.add_argument('--absolute', dest='absolute', action='store_true',
-            help='plot absolute abundance, [default]')
+            help='plot absolute abundance')
     parser.add_argument('--relative', dest='absolute', action='store_false',
-            help='plot ralative abundance')
-    parser.set_defaults(absolute=True)
+            help='plot ralative abundance, [default]')
+    parser.set_defaults(absolute=False)
 
     args = parser.parse_args()
     params = vars(args)
