@@ -1,5 +1,45 @@
-library (NMF)
-
-data=read.table("@#{heatmap_profile}",header=TRUE,sep="\t",check.names=F,quote="")
-aheatmap(data, Rowv=FALSE, Colv=TRUE, distfun="correlation", hclustfun="complete",)
-
+source('/data_center_01/pipeline/16S_ITS_pipeline_v3.0/src/template/labels2colors.R')
+library(NMF)
+library(RColorBrewer)
+data=read.table("@#{heatmap_profile}",header=T,row.names=1,sep="\t",check.names=F,quote="")
+group=read.table("@#{group}",sep="\t",header=F,row.names=1,check.names=F,quote="")
+color_list = group2corlor(group,sort_names=colnames(data))
+sample_colors=color_list[[1]]
+group_colors= color_list[[2]]
+group_names = color_list[[3]]
+group = color_list[[4]]
+annotation <- data.frame(Var1 = factor(group[,1], levels=group_names))
+Var1 = group_colors
+names(Var1) = group_names
+cols = list(Var1 = Var1)
+color = colorRampPalette(c("lightblue", "yellow", "orange", "red"),bias=3)(3000)
+cols
+if(nrow(data)<=1){
+	pdf("@#{pdf_file}",12,16)
+	plot(0,type="n")
+	text(1,0,"no item for plot")
+	dev.off()
+}else{
+	row.sums <- apply(data, 1, sum)
+	data_sort <- sort(row.sums)
+	data_sort_rev <- rev(data_sort)
+	if("@#{top}"=="all"){
+	}else if(nrow(data) >= @#{top}){
+		final_data <- data_sort_rev[1:@#{top}]
+		data <-data[attributes(final_data)$names,]
+	}
+	aheatmap(data,
+			 Rowv=TRUE,
+			 Colv=TRUE,
+			 breaks=1e-5,
+			 color = color,
+			 treeheight = 25,
+			 distfun="correlation",
+			 hclustfun="complete",
+			 annCol=annotation,
+			 annColors=cols,
+			 main="Profile Heatmap",
+			 filename="@#{pdf_file}"
+	)
+	dev.off()
+}

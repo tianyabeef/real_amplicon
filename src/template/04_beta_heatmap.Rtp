@@ -3,14 +3,16 @@ library(NMF)
 infile = read.table("@#{for_plot}",header=T,check.names=F,quote="")
 Group = read.table("@#{group_file}",row.names=1,check.names=F,quote="")
 color_list = group2corlor(Group,sort_names=colnames(infile))
-group_colors = color_list[[1]]
+sample_colors = color_list[[1]]
+group_colors = color_list[[2]]
 group_names = color_list[[3]]
 Group = color_list[[4]]
 annotation <- data.frame(Var1 = factor(Group[,1], levels=group_names))
 Var1 = group_colors 
-names(Var1) = Group[,1] 
+names(Var1) = group_names 
 cols = list(Var1 = Var1)
 par(mar=c(7,7,3,3))
+
 aheatmap(infile, 
 		 Rowv=FALSE, 
 		 Colv=TRUE, 
