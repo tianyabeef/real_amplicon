@@ -3,23 +3,13 @@ library(NMF)
 infile = read.table("@#{for_plot}",header=T,check.names=F,quote="")
 Group = read.table("@#{group_file}",row.names=1,check.names=F,quote="")
 color_list = group2corlor(Group,sort_names=colnames(infile))
-colnames(infile)
-group_colors = color_list[[2]]
+group_colors = color_list[[1]]
 group_names = color_list[[3]]
 Group = color_list[[4]]
-Group
-group_names
-# Group = as.character(Group[rownames(infile),])
-annotation <- data.frame(Group)
-annotation
-
-# cols = labels2colors(annotation$Group)
-cols <- data.frame(group_colors)
-colnames(cols) = "Group"
-cols$Group = as.character(cols$Group)
-rownames(cols) = rownames(group_names)
-group_colors
-cols
+annotation <- data.frame(Var1 = factor(Group[,1], levels=group_names))
+Var1 = group_colors 
+names(Var1) = Group[,1] 
+cols = list(Var1 = Var1)
 par(mar=c(7,7,3,3))
 aheatmap(infile, 
 		 Rowv=FALSE, 
@@ -27,9 +17,9 @@ aheatmap(infile,
 		 distfun="correlation", 
 		 hclustfun="complete", 
 		 annCol=annotation, 
+		 annColors=cols,
 		 main="@#{distance_name} Distance", 
-		 filename="@#{pdf_file}",
-		 annColors=cols
+		 filename="@#{pdf_file}"
 )
 dev.off()
 
