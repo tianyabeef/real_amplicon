@@ -2,7 +2,8 @@ source('/data_center_01/pipeline/16S_ITS_pipeline_v3.0/src/template/labels2color
 
 table = read.table('@#{otu_table}', sep = "\t",head = T, check.names=F,quote="")
 group=read.table('@#{group_file}', sep = "\t",head = F,row.names=1, check.names=F,quote="")
-color_list = group2corlor(group,sort_names=colnames(table)[-c(1,2,3)])
+# color_list = group2corlor(group,sort_names=colnames(table)[-c(1,2,3)])
+color_list = group2corlor(group)
 sample_colors = color_list[[1]]
 group_colors =  color_list[[2]]
 group_names =   color_list[[3]]
@@ -53,6 +54,7 @@ if(ncol(table)==4){
 
 }else{
 	table = table[,-c(1, 2, 3)]
+	table = table[,rownames(group)]
 	ymax=max(as.numeric(as.character(table[table != "n/a"])))
 
 	# plot blank canvas

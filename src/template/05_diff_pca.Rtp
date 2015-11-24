@@ -4,8 +4,9 @@ library("ade4")
 
 X=read.table('@#{input_file}',header=TRUE,row.names=1,sep="\t",check.names=F,quote="")
 group=read.table('@#{group_file}',header=F,row.names=1,check.names=F,quote="")
+X = X[,rownames(group)]
 
-color_list = group2corlor(group,sort_names=colnames(X))
+color_list = group2corlor(group)
 sample_colors = color_list[[1]]
 group_colors = color_list[[2]]
 group_names = color_list[[3]]

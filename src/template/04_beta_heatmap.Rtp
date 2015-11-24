@@ -2,7 +2,8 @@ source('/data_center_01/pipeline/16S_ITS_pipeline_v3.0/src/template/labels2color
 library(NMF)
 infile = read.table("@#{for_plot}",header=T,check.names=F,quote="")
 Group = read.table("@#{group_file}",row.names=1,check.names=F,quote="")
-color_list = group2corlor(Group,sort_names=colnames(infile))
+infile = infile[rownames(Group),rownames(Group)]
+color_list = group2corlor(Group)
 sample_colors = color_list[[1]]
 group_colors = color_list[[2]]
 group_names = color_list[[3]]
