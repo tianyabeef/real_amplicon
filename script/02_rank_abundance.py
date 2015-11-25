@@ -19,6 +19,16 @@ def read_params(args):
     parser.add_argument('--no_legend',dest='legend',action='store_false',
             help="plot without legend")
     parser.set_defaults(legend=False)
+    parser.add_argument('--log', dest='draw_log', action='store_true',
+            help='draw axis in log scale, [default]')
+    parser.add_argument('--linear', dest='draw_log', action='store_false',
+            help='draw axis in linear scale')
+    parser.set_defaults(draw_log=True)
+    parser.add_argument('--absolute', dest='absolute', action='store_true',
+            help='plot absolute abundance')
+    parser.add_argument('--relative', dest='absolute', action='store_false',
+            help='plot ralative abundance, [default]')
+    parser.set_defaults(absolute=False)
 
     args = parser.parse_args()
     params = vars(args)
@@ -30,11 +40,16 @@ if __name__ == '__main__':
     pdf_file = '%s/rank_abundance.pdf'%params['out_dir']
     png_file = '%s/rank_abundance.png'%params['out_dir']
     if params['legend']:
-        os.system("%s -i %s -s '*' -o %s"%(params['rank_abundance'],
+        command = "%s -i %s -s '*' -o %s"%(params['rank_abundance'],
                                            params['biomfile'],
-                                           pdf_file))
+                                           pdf_file)
     else:
-        os.system("%s -i %s -s '*' -o %s --no_legend"%(params['rank_abundance'],
+        command = "%s -i %s -s '*' -o %s --no_legend"%(params['rank_abundance'],
                                                        params['biomfile'],
-                                                       pdf_file))
+                                                       pdf_file)
+    if not params['draw_log']:
+        command += ' --x_linear_scale --y_linear_scale'
+    if params['absolute']:
+        command += ' --absolute_counts'
+    os.system(command)
     image_trans(pdf_file,png_file)

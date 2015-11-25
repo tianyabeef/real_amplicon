@@ -1,5 +1,5 @@
 cols_brewer = c('#00447E','#F34800','#64A10E','#930026','#464E04','#049a0b','#4E0C66','#D00000','#FF6C00','#FF00FF','#c7475b','#00F5FF','#BDA500','#A5CFED','#f0301c','#2B8BC3','#FDA100','#54adf5','#CDD7E2','#9295C1')
- labels2colors <- function (labels, colorSeq = NULL, naColor = "grey", 
+labels2colors <- function (labels, colorSeq = NULL, naColor = "grey", 
   commonColorCode = TRUE) 
 {
 	if (is.null(colorSeq)){
@@ -41,10 +41,21 @@ cols_brewer = c('#00447E','#F34800','#64A10E','#930026','#464E04','#049a0b','#4E
 	fin = !is.na(nLabels)
 	colors[!fin] = naColor
 	finLabels = nLabels[fin]
-	colors[fin][finLabels != 0] = extColorSeq[finLabels[finLabels != 
-	0]]
+	colors[fin][finLabels != 0] = extColorSeq[finLabels[finLabels != 0]]
 	if (!is.null(dim(labels))) 
 	dim(colors) = dim(labels)
 	colors
 }
-
+group2corlor <- function (group, sort_names = NULL) {
+	if(!is.null(sort_names)){
+		group = as.data.frame(group[sort_names,1])
+		rownames(group) = sort_names
+		colnames(group) = 'Group'
+	}
+	sample_name = row.names(group);
+	group_name = group[,1]
+	sample_colors = labels2colors(group_name);
+	group_colors = unique(sample_colors);
+	group_names = as.character(unique(group_name))
+	list(sample_colors,group_colors,group_names,group)
+}

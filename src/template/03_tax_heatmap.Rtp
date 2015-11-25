@@ -2,6 +2,13 @@ source('/data_center_01/pipeline/16S_ITS_pipeline_v3.0/src/template/labels2color
 library(gplots)
 library(RColorBrewer)
 data=read.table("@#{heatmap_profile}",header=TRUE,row.names=1,sep="\t",check.names=F,quote="")
+group=read.table("@#{group}",sep="\t",header=F,row.names=1,check.names=F,quote="")
+data = data[,rownames(group)]
+color_list = group2corlor(group)
+sample_colors=color_list[[1]]
+group_colors= color_list[[2]]
+group_names = color_list[[3]]
+group = color_list[[4]]
 pdf("@#{pdf_file}",12,16)
 if(nrow(data)<=1){
 	plot(0,type="n")
@@ -15,26 +22,10 @@ if(nrow(data)<=1){
 		final_data <- data_sort_rev[1:@#{top}]
 		data <-data[attributes(final_data)$names,]
 	}
-	group=read.table("@#{group}",sep="\t",header=F,row.names=1,check.names=F,quote="")
-	#name=read.table("@#{show_rowname}",header=F,check.names=F)
 	rows=rep(" ",nrow(data))
 	for(i in 1:nrow(data)){
-		  #    if(name[i]==1){
-	rows[i]=rownames(data)[i]
-		  #    }
+		rows[i]=rownames(data)[i]
 	}
-	group=group[colnames(data),1]
-	group=as.data.frame(group)
-	rownames(group)=colnames(data)
-	colors=labels2colors(group)
-	colors = as.character(colors)
-	g=unique(group)
-	g_order=g[order(g),1]
-	g_order=as.character(g_order)
-	gcols_order=labels2colors(g_order)
-
-	group=as.data.frame(group)
-	rownames(group)=colnames(data)
 	max.genus.name.length = max(mapply(nchar,rownames(data)))
 	if(max.genus.name.length < 10){
 		oma.right = max.genus.name.length
@@ -49,11 +40,10 @@ if(nrow(data)<=1){
 	par(oma=c(0,0,0,oma.right))
 	col = colorRampPalette(c("lightblue", "yellow", "orange", "red"),bias=3)(3000)
 
-
 	cexCol=-0.0133*ncol(data)+2
 
 	heatmap.2(as.matrix(data),
-          col=col,labRow=rows,ColSideColors=colors,
+          col=col,labRow=rows,ColSideColors=sample_colors,
           cexRow=cexRow,
           offsetRow=0.1,cexCol=cexCol,symkey=FALSE,density.info="none",
           trace="none",margins=c(5,5),
@@ -63,20 +53,13 @@ if(nrow(data)<=1){
           colsep=c(1:ncol(data)),rowsep=c(1:nrow(data)),sepcolor="black",sepwidth=c(0.01, 0.01),
           key.title=NA, # no title
           key.xlab="relative abundance",  # no xlab
-          #          key.xtickfun=function() {
-          #            breaks <- parent.frame()$breaks
-          #            return(list(
-          #              at=parent.frame()$scale01(c(breaks[1],breaks[length(breaks)])),
-          #              labels=c(as.character(breaks[1]),as.character(round(as.numeric(breaks[length(breaks)]),4)))
-          #            ))
-          #          }
 	)
-	if(length(g_order)>10){
+	if(length(group_names)>10){
 		legend.cex=0.7
 	}else{
 		legend.cex=1
 	}
-	legend("topleft",pch=15,col=gcols_order, legend=g_order, text.col = "green4",bg = 'gray90',
+	legend("topleft",pch=15,col=group_colors, legend=group_names, text.col = "green4",bg = 'gray90',
        	pt.cex=2*legend.cex,cex=legend.cex,xpd=TRUE)
 }
 dev.off()

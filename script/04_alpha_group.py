@@ -40,11 +40,14 @@ def work_single(file,group):
         alphas[group_name].append(tail[ind])
     return alphas
 
-def write(outfile,alphas):
+def write(outfile,alphas,group):
+    group_sort = list(group.itervalues())
+    group_names = sorted(set(group_sort),key=group_sort.index)
     with open(outfile,'w') as out:
-        for group,alpha_list in alphas.iteritems():
+        for group_name in group_names:
+            alpha_list = alphas[group_name]
             alpha_list = '\t'.join(alpha_list)
-            out.write('%s\t%s\n'%(group,alpha_list))
+            out.write('%s\t%s\n'%(group_name,alpha_list))
 
 if __name__ == '__main__':
     params = read_params(sys.argv)
@@ -54,4 +57,4 @@ if __name__ == '__main__':
         file = '%s/%s.txt'%(params['alpha_dir'],alpha_name)
         outfile = '%s/%s.txt'%(params['out_dir'],alpha_name)
         alphas = work_single(file,group)
-        write(outfile,alphas)
+        write(outfile,alphas,group)
