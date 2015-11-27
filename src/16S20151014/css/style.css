@@ -49,8 +49,10 @@ a:active {
 	width:200px;padding:0px;border-left:1px solid #99BBE8;
 }
 .cs-south {
-	height:25px;background:url('themes/gray/images/panel_title.gif') repeat-x;padding:0px;text-align:center;
-}
+	line-height:30px;
+	background:url('themes/gray/images/panel_title.gif') repeat-x;padding:0px;text-align:center;
+	background-color:#919191;
+	margin-top:50px;}
 .cs-navi-tab {
 	padding:5px;
 }
