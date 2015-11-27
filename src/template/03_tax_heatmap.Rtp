@@ -42,14 +42,42 @@ if(nrow(data)<=1){
 
 	cexCol=-0.0133*ncol(data)+2
 
+	Colv=TRUE
+	Rowv=TRUE
+	lmat = rbind(c(5,5),c(0,4),c(0,1),c(3,2),c(0,6))
+	lhei = c(0.5,0.8,0.2,4,0.5)
+	lwid = c(1,3)
+	legend_pos = 'topleft'
+	if("@#{dendrogram}" == 'none'){
+		Colv=FALSE
+		Rowv=FALSE
+		lmat = rbind(c(5,5),c(0,4),c(0,1),c(3,2),c(0,6))
+		lhei = c(0.5,0.1,0.2,4,0.5)
+		lwid = c(0.1,3)
+		legend_pos = 'topleft'
+	}else if("@#{dendrogram}" == 'row'){
+		Colv=FALSE
+		Rowv=TRUE
+		lmat = rbind(c(5,5),c(0,4),c(0,1),c(3,2),c(0,6))
+		lhei = c(0.5,0.1,0.2,4,0.5)
+		lwid = c(1,3)
+		legend_pos = 'topleft'
+	}else if("@#{dendrogram}" == 'column'){
+		Colv=TRUE
+		Rowv=FALSE
+		lmat = rbind(c(0,5),c(0,4),c(0,1),c(3,2),c(0,6))
+		lhei = c(0.5,0.5,0.2,4,0.5)
+		lwid = c(0.1,3)
+		legend_pos = 'topright' 
+	}
 	heatmap.2(as.matrix(data),
           col=col,labRow=rows,ColSideColors=sample_colors,
-          cexRow=cexRow,
-          offsetRow=0.1,cexCol=cexCol,symkey=FALSE,density.info="none",
-          trace="none",margins=c(5,5),
-          lmat = rbind(c(5,5),c(0,4),c(0,1),c(3,2),c(6,6)),
-          lhei = c(0.5,0.8,0.2,4,0.5),
-          lwid = c(1,3),
+          cexRow=cexRow,cexCol=cexCol,
+		  Colv=Colv,Rowv=Rowv,
+          offsetRow=0.1,symkey=FALSE,density.info="none",
+          trace="none",
+		  margins=c(5,5),
+		  lmat = lmat,lhei=lhei,lwid=lwid,
           colsep=c(1:ncol(data)),rowsep=c(1:nrow(data)),sepcolor="black",sepwidth=c(0.01, 0.01),
           key.title=NA, # no title
           key.xlab="relative abundance",  # no xlab
@@ -59,7 +87,10 @@ if(nrow(data)<=1){
 	}else{
 		legend.cex=1
 	}
-	legend("topleft",pch=15,col=group_colors, legend=group_names, text.col = "green4",bg = 'gray90',
-       	pt.cex=2*legend.cex,cex=legend.cex,xpd=TRUE)
+	legend(legend_pos,pch=15,col=group_colors, legend=group_names, 
+		   # text.col = "green4",
+		   # bg = 'gray90',
+		   # pt.cex=2*legend.cex,cex=legend.cex,
+		   xpd=T)
 }
 dev.off()

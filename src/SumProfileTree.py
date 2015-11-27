@@ -58,7 +58,14 @@ class Subject(object):
         for otu,otu_tax in self.otu_tax.iteritems():
             root_level = self.tax_level[0]
             father_level = root_level
-            tax_name = otu_tax[root_level]
+            try:
+                tax_name = otu_tax[root_level]
+            except KeyError:
+                if otu_tax:
+                    print otu_tax
+                    raise
+                else:
+                    continue
             if tax_name not in self.root_nodes:
                 root_node = Node(root_level,tax_name,self.samples,groups=self.groups)
                 self.node_list[tax_name] = root_node

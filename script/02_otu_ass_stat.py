@@ -34,7 +34,14 @@ def read_otu_ass(otu_ass_file):
             tabs = line.strip().split('\t')
             taxes = tabs[1].split(';')
             for tax in taxes:
-                short_name = re.search('^(\w)__',tax).group(1)
+                try:
+                    short_name = re.search('^(\w)__',tax).group(1)
+                except AttributeError:
+                    if tax:
+                        print tax
+                        raise
+                    else:
+                        continue
                 keyname = 'Assigned to %s'%tax_level_dict[short_name]
                 if keyname not in ass_num:
                     ass_num[keyname] = 0

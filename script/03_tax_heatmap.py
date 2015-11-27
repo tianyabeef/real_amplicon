@@ -24,6 +24,8 @@ def read_params(args):
                         help="set the output dir")
     parser.add_argument('-t', '--top', dest='top', metavar='INT', type=str, default='30',
                         help="set the top num, [default is 30]")
+    parser.add_argument('--dendrogram', dest='dendrogram', metavar='STR', choices=['both','row','column','none'], default='both',
+                        help="set the dendrogram, can be ('both', 'row', 'column', 'none'), [default is both]")
     args = parser.parse_args()
     params = vars(args)
     if params['top'] != 'all':
@@ -40,7 +42,7 @@ def work(infile,outfile):
             head = in_fp.next()
         out.write(head.strip('#'))
         for line in in_fp:
-            tabs = line.strip().split('\t')
+            tabs = line.rstrip().split('\t')
             taxes = tabs[0].split(';')
             for tax in taxes:
                 if tax.startswith('g__') and tax[3:]:
@@ -66,7 +68,8 @@ if __name__ == '__main__':
     vars = {'heatmap_profile':params['for_plot'],
             'pdf_file':pdf_file,
             'group':params['group'],
-            'top':params['top']}
+            'top':params['top'],
+            'dendrogram':params['dendrogram']}
     r_job = rp.Rparser()
     r_job.open(this_script_path + '/../src/template/03_tax_heatmap.Rtp')
     r_job.format(vars)

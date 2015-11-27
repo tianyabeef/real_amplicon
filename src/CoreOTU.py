@@ -32,7 +32,14 @@ class Subject(object):
             for line in tax_ass:
                 otu,tax,conf = line.strip().split('\t')
                 tax = tax.split(';')[-1]
-                tax_short,tax_name = re.search('(\w)__(.+)',tax).groups()
+                try:
+                    tax_short,tax_name = re.search('(\w)__(.+)',tax).groups()
+                except AttributeError:
+                    if tax:
+                        print tax
+                        raise
+                    else:
+                        continue
                 tax_level = self.tax_level_dic[tax_short]
                 self.otus[otu] = OTU(otu,tax_level,tax_name)
 
@@ -43,7 +50,10 @@ class Subject(object):
                 head = table.next()
             for line in table:
                 tabs = line.strip().split('\t')
-                otu = self.otus[tabs.pop(0)]
+                try:
+                    otu = self.otus[tabs.pop(0)]
+                except KeyError:
+                    continue
                 n = 0
                 for tab in tabs:
                     if float(tab) > 0:

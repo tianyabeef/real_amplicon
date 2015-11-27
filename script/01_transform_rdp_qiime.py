@@ -56,7 +56,7 @@ def write_qiime(file,otu_tax,conf):
     fp = open(file,'w')
     out_str = ''
     for otu in sorted(list(otu_tax.iterkeys()),cmp=my_cmp):
-        out_str += otu + '\t'
+        pre_out_str = otu + '\t'
         last_conf = 0
         for short_name in short_name_order:
             if short_name not in otu_tax[otu]:
@@ -65,9 +65,12 @@ def write_qiime(file,otu_tax,conf):
             if tax.tax_conf < conf:
                 break
             last_conf = tax.tax_conf
-            out_str += '%s__%s;'%(short_name,tax.tax_name)
-        out_str = out_str.strip(';')
-        out_str += '\t%s\n'%last_conf
+            pre_out_str += '%s__%s;'%(short_name,tax.tax_name)
+        if last_conf < conf:
+            continue
+        pre_out_str = pre_out_str.strip(';')
+        pre_out_str += '\t%s\n'%last_conf
+        out_str += pre_out_str
     fp.write(out_str)
     fp.close()
 
