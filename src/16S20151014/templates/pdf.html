@@ -497,12 +497,22 @@
                            
                 <p class="tremark">注：第一列是OTU名称；第二列至第{{ group_num + 2 }}列分别为{{ group_num }}组样品的均值；最后一列是秩和检验的p值；</p>
 				<p class="paragraph">为了直观地对这些OTUs进行展示，绘制对应图形如下：</p>  
-                <p class="center">
-                	<img class="size2" src='images/group/otu_diff/heatmap.png'/>
-                </p>
-                <p class="center">
-                	<img class="size1" src='images/group/otu_diff/diff_boxplot.png'/><img class="size1" src='images/group/otu_diff/diff_pca.png'/>
-                </p>
+					{% if diff_otus > 14 and sample_sum < 30 %}
+					<p class="center">
+						<img class="size2" src='images/group/otu_diff/heatmap.png'/>
+					</p>
+					<p class="center">
+						<img class="size1" src='images/group/otu_diff/diff_boxplot.png'/><img class="size1" src='images/group/otu_diff/diff_pca.png'/>
+					</p>
+					{% else %}
+					<p class="center">
+						<img class="size1" src='images/group/otu_diff/heatmap.png'/>
+					</p>
+					<p class="center">
+						<img class="size1" src='images/group/otu_diff/diff_boxplot.png'/><img class="size1" src='images/group/otu_diff/diff_pca.png'/>
+					</p>
+					{% endif %}
+	
 				<p class="name_fig"> 图6-2-1 差异OTU的Heatmap/Boxplot/PCA结果展示</p>
 			{% else %}
 				<p class="error"> 未找到OTU差异 </p>
@@ -524,9 +534,15 @@
                             
                 <p class="tremark">注：第一列是物种名称；第二列至第{{ group_num + 2 }}列分别为{{ group_num }}组样品的均值；最后一列是秩和检验的p值。</p> 
                 <p class="paragraph">为了直观地对这些差异属进行展示，绘制对应图形如下：</p>
+				{% if diff_genus > 14 and sample_sum < 30 %}
                 <p class="center">
                 	<img class="size2" src='images/group/genus_diff/heatmap.png'/>
                 </p>
+				{% else %}
+				<p class="center">
+                	<img class="size1" src='images/group/genus_diff/heatmap.png'/>
+                </p>
+				{% endif %}
                 <p class="center">
                 	<img class="size1" src='images/group/genus_diff/diff_boxplot.png'/><img class="size1" src='images/group/genus_diff/diff_pca.png'/>
                	</p>
@@ -586,9 +602,15 @@
                   
            	<p class="tremark">注：第一列是物种名称；第二列至第{{ group_num + 2 }}列分别为{{ group_num }}组样品的均值；最后一列是秩和检验的p值。</p>
 			<p class="paragraph">为了直观地对这些差异物种进行展示，绘制对应图形如下：</p>
+			{% if diff_species > 14 and sample_sum < 30 %}
             <p class="center">
             	<img class="size2" src='images/group/taxall_diff/heatmap.png'/>
             </p>
+			{% elseif %}
+            <p class="center">
+            	<img class="size1" src='images/group/taxall_diff/heatmap.png'/>
+            </p>
+			{% endif %}
             <p class="center">
             	<img class="size1" src='images/group/taxall_diff/diff_boxplot.png'/><img class="size1" src='images/group/taxall_diff/diff_pca.png'/>
             </p>
