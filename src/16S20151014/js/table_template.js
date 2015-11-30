@@ -8,7 +8,7 @@ jQuery().ready(function (){
 	jQuery("#list47").jqGrid({
 		data: dataStatisticals,
 		datatype: "local",
-		height: 150,
+		height: 230,
 		rowNum: 10,
 		rowList: [10,20,30],
 		colNames:['Sample name','Amplicon type', 'clean reads','Q20(%)','Q30(%)','mapped reads','mapped reads(%)','OTUs'],
@@ -42,7 +42,7 @@ jQuery().ready(function (){
 	jQuery("#list48").jqGrid({
 		data: otuStatisticalDownsizes,
 		datatype: "local",
-		height: 150,
+		height: 230,
 		rowNum: 10,
 		rowList: [10,20,30],
 		colNames:['sampleName','downsize', 'otus_before', 'otus_after'],
@@ -71,7 +71,7 @@ var coreMicrobiomes=[
 	jQuery("#list49").jqGrid({
 		data: coreMicrobiomes,
 		datatype: "local",
-		height: 150,
+		height: 230,
 		rowNum: 10,
 		rowList: [10,20,30],
 		colNames:['otuName','taxonomyLevel', 'taxonomyName'],
@@ -101,7 +101,7 @@ var otuAssignmentsStatisticals=[
 	jQuery("#list50").jqGrid({
 		data: otuAssignmentsStatisticals,
 		datatype: "local",
-		height: 150,
+		height: 230,
 		rowNum: 10,
 		rowList: [10,20,30],
 		colNames:['otuName','num'],
@@ -127,7 +127,7 @@ var alpha_diversitys=[
 	jQuery("#list51").jqGrid({
 		data: alpha_diversitys,
 		datatype: "local",
-		height: 150,
+		height: 230,
 		rowNum: 10,
 		rowList: [10,20,30],
 		colNames:['sampleName','chao1', 'goodsCoverage', 'observedSpecies','wholeTree','shannon','simpson'],
@@ -158,7 +158,7 @@ var alpha_diversity_diffs=[
 	jQuery("#list52").jqGrid({
 		data: alpha_diversity_diffs,
 		datatype: "local",
-		height: 150,
+		height: 230,
 		rowNum: 10,
 		rowList: [10,20,30],
 		colNames:['sampleName','chao1', 'goodsCoverage', 'observedSpecies','wholeTree','shannon','simpson'],
@@ -190,7 +190,7 @@ var alpha_diversity_diffs=[
 	jQuery("#list53").jqGrid({
 		data: beta_diversitys,
 		datatype: "local",
-		height: 150,
+		height: 230,
 		rowNum: 10,
 		rowList: [10,20,30],
 		colNames:['{{ beta_diversity_sampleName }}'],
@@ -216,7 +216,7 @@ jQuery().ready(function (){
 	jQuery("#list54").jqGrid({
 		data: beta_un_diversitys,
 		datatype: "local",
-		height: 150,
+		height: 230,
 		rowNum: 10,
 		rowList: [10,20,30],
 		colNames:['{{ beta_un_diversity_sampleName }}'],
@@ -242,7 +242,7 @@ jQuery().ready(function (){
 	jQuery("#list55").jqGrid({
 		data: diff_otu_markers,
 		datatype: "local",
-		height: 150,
+		height: 230,
 		rowNum: 10,
 		rowList: [10,20,30],
 		colNames:['{{ diff_otu_marker_sampleName }}'],
@@ -269,7 +269,7 @@ var diff_genus_markers=[
 	jQuery("#list56").jqGrid({
 		data: diff_genus_markers,
 		datatype: "local",
-		height: 150,
+		height: 230,
 		rowNum: 10,
 		rowList: [10,20,30],
 		colNames:['{{ diff_genus_marker_sampleName }}'],
@@ -295,7 +295,7 @@ var diff_genus_markers=[
 	jQuery("#list57").jqGrid({
 		data: diff_taxall_markers,
 		datatype: "local",
-		height: 150,
+		height: 230,
 		rowNum: 10,
 		rowList: [10,20,30],
 		colNames:['{{ diff_taxall_marker_sampleName }}'],
@@ -322,7 +322,7 @@ var diff_genus_markers=[
 	jQuery("#list58").jqGrid({
 		data: beta_diversitysj,
 		datatype: "local",
-		height: 150,
+		height: 230,
 		rowNum: 10,
 		rowList: [10,20,30],
 		colNames:['{{ diff_phylum_marker_sampleName }}'],
