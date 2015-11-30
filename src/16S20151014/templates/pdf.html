@@ -23,12 +23,9 @@
 统计各个样品每个OTU中的丰度信息，OTU的丰度初步说明了样品的物种丰富程度。{{sample_sum}}个样品共产生{{otu_sum}}个OTU。每个样品OTU统计结果见表2-1-1，详细信息表见<a href="..\results\01_Reads\pick_otu_summary.tsv" target="_blank">pick_otu_summary.tsv</a>，样品OTU统计表单。
 	</p>
 	<p class="name_table">表2-1-1 样品数据和OTU统计</p>
-    <div class="table">
         <center>
             <table id="list47"></table>
-            <div id="plist47"></div>
         </center>
-    </div>
 	<!-- <p class="tremark">注:第一列Sample Name是样品名称；第二列Amplicon Type是指明测序是16S或者ITS；第三列Clean Read是质控后的Reads条数；第四列Q20（%）是碱基质量值大于20的reads的比例；第五列Q30（%）是碱基质量值大于30的Reads的比例；第六列Singleton是Singleton的条数；第七列Singleton(%)是Singleton占Clean Reads的比例；第八列Mapped Reads是比对上OTU的Reads占Clean Reads的数量；第九列OTUs是样品所含有的OTU个数。 -->
 	<p class="tremark">注:第一列Sample Name是样品名称；第二列Amplicon Type是指明测序是16S或者ITS；第三列Clean Read是质控后的Reads条数；第四列Q20（%）是碱基质量值大于20的reads的比例；第五列Q30（%）是碱基质量值大于30的Reads的比例；第六列Mapped Reads是比对上OTU的Reads占Clean Reads的数量；第七列Mapped Reads(%)是比对上OTU的Reads占Clean Reads的比例；第八列OTUs是样品所含有的OTU个数。
 
@@ -56,12 +53,9 @@
 		<p class="paragraph">根据Alpha多样性分析，兼顾测序饱和度和样品完整性，我们对每个样品随机抽取{{ downsize }}条Reads。抽平后的样品OTU统计见<a href="..\results\02_OTU\all\otu_downsize_stat.tsv" target="_blank">otu_downsize_stat.tsv</a>中，表2-2-1 展示部分结果：
 		</p>
 		<p class="name_table">表2-2-1 抽平后样品OTU统计</p>
-            <div class="table">
             <center>
             	<table id="list48"></table>
-				<div id="plist48"></div>
             </center>
-            </div>
 		<p class="tremark">注：第一列Sample Name是样品名称；第二列Downsize是抽平数量，第三列otu_berfore抽平前的OTU个数，第三列otus_after是抽平后样品所含有的OTU个数。
         </p>
 {% endif %}
@@ -83,12 +77,9 @@
         <p class="premark">图中表示的是覆盖一定比例以上样品的OTU的数目，横坐标是覆盖样品的比例，纵坐标是统计的覆盖大于此比例样品的OTU的数目。</p>
         <p class="paragraph">结合OTU所代表的物种，可以找出Core microbiome（即覆盖100%样品的微生物组）。该项目的Core microbiome共包含{{core_microbiome}}个OTUs，<a href="..\results\02_OTU\{{ group_file }}\core_otu.tsv" target="_blank">core_otu.tsv</a>其部分物种信息如下：</p>
         <p class="name_table">表2-3-1 Core microbiome OTU列表</p>   
-            <div class="table">
             <center>
             	<table id="list49"></table>
-                <div id="plist49"></div>
             </center>
-            </div>
             
 		<p class="tremark">注：第一列OTU ID是OTU名称；第二列Taxonomy Level是OTU所代表的物种所在的分类水平；第三列Taxonomy Name是OTU所代表的物种名称。</p>	 
 	{% else %}
@@ -159,12 +150,9 @@
 	<h3 id="物种注释分析">3.1 物种注释分析</h3>
        	<p class="paragraph">从各个OTU中挑选出丰度最高的一条序列，作为该OTU的代表序列（代表序列见文件rep_set.fna）。使用RDP方法，将该代表序列与已知物种的{{amplification}}数据库进行比对，从而对每个OTU进行物种归类（物种注释结果见文件<a href="..\result\02_OTU\all\tax_assignment.tsv" target="_blank">tax_assignments.tsv</a>）。</p>
         <p class="name_table">表3-1-1 OTU注释统计</p>            
-            <div class="table">
             <center>
             	<table id="list50"></table>
-                <div id="plist50"></div>
             </center>
-            </div>
 		 
 {% endif %}
 {% endblock %}
@@ -197,7 +185,7 @@
             	<img class="size1" src='images/class/bar_plot.png'/><img class="size1" src='images/order/bar_plot.png'/>
             </p>
             <p class="center">
-            	<img class="size2" src='images/phylum/bar_plot.png'/>
+            	<img class="size1" src='images/phylum/bar_plot.png'/>
             </p>
             <p class="name_fig">图3-3-1 样品门分类水平中物种Profiling柱状图</p>
             <p class="premark">横轴为样品名称，纵轴为相对丰度的比例。颜色对应不同物种名称，色块长度表示该色块所代表的物种的相对丰度的比例。</p>
@@ -209,7 +197,7 @@
             	<img class="size1" src='images/group/class/bar_plot.png'/><img class="size1" src='images/group/order/bar_plot.png'/>
             </p>
             <p class="center">
-            	<img class="size2" src='images/group/phylum/bar_plot.png'/>
+            	<img class="size1" src='images/group/phylum/bar_plot.png'/>
             </p>
 
             <p class="name_fig">图3-3-2 门分类水平中不同group的物种Profiling柱状图</p>
@@ -307,12 +295,9 @@
 	<p  class="paragraph">Alpha多样性反映的是单个样品内部的物种多样性，包括observed species指数、chao指数，shannon指数以及simpson指数，PD_whole_tree指数等。Alpha多样性统计见<a href="..\results\03_Alpha_diversity\{{ group_file }}\alpha_statistic.tsv" target="_blank">alpha_statistic.tsv</a></p>
         <p class="name_table">表4-1-1 样品Alpha多样性统计结果</p>
             
-        <div class="table">
             <center>
             	<table id="list51"></table>
-                <div id="plist51"></div>
             </center>
-        </div>
             
         <p class="tremark">注：第一列Sample Name是样品名称；第二列至最后一列是样品的不同的Alpha多样性指数的数值。</p>
         <p class="center">
@@ -360,12 +345,9 @@
         <p class="paragraph">分别对Alpha Diversity的各个指数进行秩和检验分析(若两组样品比较即使用R中的wilcox.test函数，若两组以上的样品比较则使用R中的kruskal.test函数)，通过秩和检验筛选不同条件下的显著差异的Alpha Diversity指数。结果见<a href="..\results\03_Alpha_diversity\{{ group_file }}\alpha_marker.tsv" target="_blank">alpha_marker.tsv</a>。</p>
         <p class="name_table">表4-2-1 Alpha diversity指数差异检验</p>
             
-		<div class="table">
             <center>
             	<table id="list52"></table>
-                <div id="plist52"></div>
             </center>
-        </div>
             
         <p class="tremark">注：第一行是Alpha Diversity指数；第二行至第{{ group_num + 2 }}行分别为{{ group_num }}组样品的均值；其中（P-value）行为秩和检验的P-value值；</p>
 		
@@ -386,21 +368,15 @@
 	
 		<p class="name_table">表5-1-1样品Beta Diversity统计表（Weighted Unifrac）</p>
             
-        <div class="table">
             <center>
                 <table id="list53"></table>
-                <div id="plist53"></div>
             </center>
-        </div>
 	
         <p class="name_table">表5-1-2样品Beta Diversity统计表（Unweighted Unifrac）</p>
             
-        <div class="table">
             <center>
                 <table id="list54"></table>
-                <div id="plist54"></div> 
             </center>          	
-        </div>
             
         <p class="tremark">注：表5-1-1为加权物种分类丰度信息计算得到的Beta Diversity统计结果，表5-1-2为未加权物种分类丰度信息计算得到的Beta Diversity统计结果。</p>
         <p class="paragraph">根据各样品差异性的统计结果，对样品进行聚类分析并计算样品间距离，以判断各样品物种组成的相似性。所有样品的聚类分析结果如图5-1-3所示。样品越靠近，说明两个样品的物种组成越相似。</p>
@@ -443,12 +419,9 @@
 				<h3 id="Analysis of Similarity (ANOSIM)">5.3 Analysis of Similarity (ANOSIM)</h3>
         	<p class="paragraph">分析Bray–Curtis和weighted UniFrac时，把R-ANOSIM，P-ANOSIM和R2-ADONIS，P-ADONIS统计在一个表格里（请参见PNAS文章的第二页的表格）。</p>
             
-            <div class="table">
             <center>
                	<table id="list56"></table>
-               	<div id="plist56"></div>
            	</center>
-            </div> 
  
 		{% endif %}
 		{% endblock %}
@@ -488,12 +461,9 @@
             	<p class="paragraph">下表是在不同组样品间有显著差异的OTUs（p<{{ p_value }}, Kruskal-Wallis test），共{{ diff_otus }}个,如表6-2-1显示。结果表格<a href="..\results\05_diff_analysis\{{ group_file }}\otu_diff.marker.filt.tsv" target="_blank">otu_diff.marker.filt.tsv</a></p>
                	<p class="name_table">表6-2-1差异显著OTU列表</p>
                 
-                <div class="table">
                 <center>
                     <table id="list55"></table>
-                    <div id="plist55"></div>
                 </center> 
-                </div> 
                            
                 <p class="tremark">注：第一列是OTU名称；第二列至第{{ group_num + 2 }}列分别为{{ group_num }}组样品的均值；最后一列是秩和检验的p值；</p>
 				<p class="paragraph">为了直观地对这些OTUs进行展示，绘制对应图形如下：</p>  
@@ -525,12 +495,9 @@
             	<p class="paragraph">通过Kruskal-Wallis test分析可以找出在不同组间有明显差异(p<{{ p_value }})的属如下（共{{ diff_genus }}个属或科）。结果表格<a href="..\results\05_diff_analysis\{{ group_file }}\genus_diff.marker.filt.tsv" target="_blank">genus_diff.marker.filt.tsv</a></p>
                 <p class="name_table">表6-2-2差异显著物种列表</p>
                 
-                <div class="table">
                 <center>
                     <table id="list56"></table>
-                    <div id="plist56"></div>
                 </center>
-                </div>  
                             
                 <p class="tremark">注：第一列是物种名称；第二列至第{{ group_num + 2 }}列分别为{{ group_num }}组样品的均值；最后一列是秩和检验的p值。</p> 
                 <p class="paragraph">为了直观地对这些差异属进行展示，绘制对应图形如下：</p>
@@ -593,12 +560,9 @@
             <p class="paragraph">使用R中的kruskal.test函数，分别从门纲目科属水平，通过秩和检验筛选不同条件下的显著差异的物种，共找到{{ diff_species }}个。表6-2-3为样品间所有水平下的{{ diff_species }}个差异物种统计表。结果表格<a href="..\results\05_diff_analysis\{{ group_file }}\taxall_diff.marker.filt.tsv" target="_blank">taxall_diff.marker.filt.tsv</a></p>
             <p class="name_table">表6-2-3所有水平差异显著物种列表</p>
             
-                <div class="table">
                 <center>
                     <table id="list57"></table>
-                    <div id="plist57"></div>
                 </center>
-                </div>
                   
            	<p class="tremark">注：第一列是物种名称；第二列至第{{ group_num + 2 }}列分别为{{ group_num }}组样品的均值；最后一列是秩和检验的p值。</p>
 			<p class="paragraph">为了直观地对这些差异物种进行展示，绘制对应图形如下：</p>
