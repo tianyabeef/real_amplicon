@@ -19,7 +19,7 @@ def makedirs(dirs):
         os.system('mkdir -p %s'%dir)
 
 def get_result(cfg_in,vars=None):
-    work = Work(DEFAULT_CONFIG_DIR + '/get_html.cfg')
+    work = Work(DEFAULT_CONFIG_DIR + '/get_result.cfg')
     work.set_params(cfg_in,vars)
     work.load_default_config()
     config = work.config

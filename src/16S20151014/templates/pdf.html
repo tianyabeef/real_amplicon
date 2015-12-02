@@ -471,17 +471,20 @@
 					<p class="center">
 						<img class="size2" src='images/group/otu_diff/heatmap.png'/>
 					</p>
-					<p class="center">
-						<img class="size1" src='images/group/otu_diff/diff_boxplot.png'/><img class="size1" src='images/group/otu_diff/diff_pca.png'/>
-					</p>
+			
+	
+
 					{% else %}
 					<p class="center">
 						<img class="size1" src='images/group/otu_diff/heatmap.png'/>
 					</p>
-					<p class="center">
-						<img class="size1" src='images/group/otu_diff/diff_boxplot.png'/><img class="size1" src='images/group/otu_diff/diff_pca.png'/>
-					</p>
 					{% endif %}
+					<p class="center">
+					{% if diff_analysis_boxplot %}	
+					<img class="size1" src='images/group/otu_diff/diff_boxplot.png'/>
+					{% endif %}
+					<img class="size1" src='images/group/otu_diff/diff_pca.png'/>
+					</p>
 	
 				<p class="name_fig"> 图6-2-1 差异OTU的Heatmap/Boxplot/PCA结果展示</p>
 			{% else %}
@@ -511,7 +514,10 @@
                 </p>
 				{% endif %}
                 <p class="center">
-                	<img class="size1" src='images/group/genus_diff/diff_boxplot.png'/><img class="size1" src='images/group/genus_diff/diff_pca.png'/>
+                {% if diff_analysis_boxplot %}	
+		<img class="size1" src='images/group/genus_diff/diff_boxplot.png'/>
+		{% endif %}
+		<img class="size1" src='images/group/genus_diff/diff_pca.png'/>
                	</p>
 
 				<p class="name_fig"> 图6-2-2 属水平差异物种的Heatmap/Boxplot/PCA结果展示</p>
@@ -576,7 +582,10 @@
 					</p>
 				{% endif %}
             <p class="center">
-            	<img class="size1" src='images/group/taxall_diff/diff_boxplot.png'/><img class="size1" src='images/group/taxall_diff/diff_pca.png'/>
+            	{% if diff_analysis_boxplot %}
+		<img class="size1" src='images/group/taxall_diff/diff_boxplot.png'/>
+		{% endif %}
+		<img class="size1" src='images/group/taxall_diff/diff_pca.png'/>
             </p>
 
 				<p class="name_fig"> 图6-2-3 所有水平差异物种的Heatmap/Boxplot/PCA结果展示</p>

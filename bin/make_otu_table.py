@@ -60,7 +60,10 @@ def make_otu_table(cfg_in,vars=None):
                                                  outfiles['uniform_profile'],
                                                  outfiles['tax_assign'],
                                                  outfiles['profile_tree']))
-
+    # get krona
+    work.commands.append('perl %s %s -o %s' % (scripts['krona'],
+                                                classifier_file,
+                                                outfiles['krona_html']))
     return outfiles
 
 if __name__ == '__main__':
