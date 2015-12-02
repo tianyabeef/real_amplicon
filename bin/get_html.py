@@ -23,7 +23,7 @@ def get_html(cfg_in,vars=None):
 
     reload(sys)
     sys.setdefaultencoding('utf-8')
-    work = Work(DEFAULT_CONFIG_DIR + '/get_html_2.cfg')
+    work = Work(DEFAULT_CONFIG_DIR + '/get_html.cfg')
     work.set_params(cfg_in,vars)
     work.load_default_config()
     config = work.config
