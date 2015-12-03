@@ -62,9 +62,9 @@ def make_otu_table(cfg_in,vars=None):
                                                  outfiles['tax_assign'],
                                                  outfiles['profile_tree']))
     # get krona
-    work.commands.append('%s %s -o %s' % (krona['ImportRDP'],
-                                          classifier_file,
-                                          outfiles['krona_html']))
+    work.commands.append('perl %s %s -o %s' % (krona['ImportRDP'],
+                                               classifier_file,
+                                               outfiles['krona_html']))
     return outfiles
 
 if __name__ == '__main__':
