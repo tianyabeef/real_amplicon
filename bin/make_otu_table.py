@@ -11,6 +11,7 @@ def make_otu_table(cfg_in,vars=None):
     qiime = config.get_section('qiime')
     scripts = config.get_section('scripts')
     software = config.get_section('softwares')
+    krona = config.get_section('krona')
 
     # intermediate result
     out_dir = outfiles['out_dir']
@@ -61,9 +62,9 @@ def make_otu_table(cfg_in,vars=None):
                                                  outfiles['tax_assign'],
                                                  outfiles['profile_tree']))
     # get krona
-    work.commands.append('perl %s %s -o %s' % (scripts['krona'],
-                                                classifier_file,
-                                                outfiles['krona_html']))
+    work.commands.append('%s %s -o %s' % (krona['ImportRDP'],
+                                          classifier_file,
+                                          outfiles['krona_html']))
     return outfiles
 
 if __name__ == '__main__':

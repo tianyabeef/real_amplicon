@@ -224,12 +224,18 @@
 		</div>
 		<p class="name_fig">图3-3-2 不同group各分类水平中的物种Profiling柱状图</p>
 		<p class="premark">横轴为分组名称，纵轴为相对丰度的比例。颜色对应不同物种名称，色块长度表示该色块所代表的物种的相对丰度的比例。</p>
+
 		<p class="paragraph">在属分类等级对{{star_picture_top}}的物种丰度做Star图。图3-3-3展示了属分类等级上的top{{star_picture_top}}的物种Star图。</p>
-		<p class="center">
-			<img class="size5" src="images/tax_star.png"/>
-		</p>
-		<p class="name_fig">图3-3-3 属分类水平中不同group的top{{star_picture_top}}物种Profiling星图</p>
-		<p class="remark">一个星形图代表着一个样品的物种相对丰度信息。每个星形图中的扇形代表一个物种，用不同颜色区分，用扇形的半径来代表物种相对丰度的大小，扇形半径越长代表此扇形所对应的物种的相对丰度越高。</p>
+        {% if star_picture %}
+            <p class="center">
+                <img class="size5" src="images/tax_star.png"/>
+            </p>
+            <p class="name_fig">图3-3-3 属分类水平中不同group的top{{star_picture_top}}物种Profiling星图</p>
+            <p class="remark">一个星形图代表着一个样品的物种相对丰度信息。每个星形图中的扇形代表一个物种，用不同颜色区分，用扇形的半径来代表物种相对丰度的大小，扇形半径越长代表此扇形所对应的物种的相对丰度越高。</p>
+        {% else %}
+            <p class="error">样品数3个以下时不具有比较意义</p>
+        {% endif %}
+
 	{% endif %}
 {% endblock %} 
 		

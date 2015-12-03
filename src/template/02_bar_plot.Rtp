@@ -31,7 +31,11 @@ if(ncol(data)>99){
   total_spa = (-0.56*ncol(data)+58)/100
   spa = (15*total_spa/ncol(data))/(15*(1-total_spa)/ncol(data))
 }
-barplot(as.matrix(data),col=cols,xaxt='n',font=2,space=spa,width=width)
+if(ncol(data)==1){
+     barplot(as.matrix(data),col=cols,xaxt='n',font=2,space=spa,width=width,xlim=c(3,15))
+}else{
+    barplot(as.matrix(data),col=cols,xaxt='n',font=2,space=spa,width=width)
+}
 
 if(ncol(data)<=10 && max_sample_name_length<=5){
 	srt=0
@@ -42,7 +46,12 @@ if(ncol(data)<=10 && max_sample_name_length<=5){
 }else if(ncol(data)>10){
 	srt=90
 }
-if(ncol(data)<=50){
+if(ncol(data) == 1){
+  text(9.5,
+       srt=srt, adj=1, labels=colnames(data),
+       xpd=T, cex=font_size, y=-5)
+  mtext('@#{title}', side=3, line=1, cex=font_size*1.1)
+}else if(ncol(data)<=50){
   text(seq(from=1.5*spa*width, length=ncol(data), by=1*spa*width+width),
        srt=srt, adj=1, labels=colnames(data),
        xpd=T, cex=font_size, y=-5)

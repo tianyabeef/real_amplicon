@@ -444,6 +444,11 @@ def get_html():
     var_html['reads_statistical'] = True
     var_html['otu_statistical'] = True
     var_html['downsize_html'] = True
+
+    var_html['star_picture'] = True
+    if sample_num_total <= 3:
+        var_html['star_picture'] = False
+
     if sample_num_total >= 5:
         var_html['uniFra_analysis_pcoa'] = True
 
