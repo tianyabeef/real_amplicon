@@ -69,7 +69,7 @@ def get_html(cfg_in,vars=None):
     command.append('cp -rf '+html_template+'/* '+out_dir_report+'\n')
     for key,value in origin:
         if(config.has_option('origin', key)):
-            match = re.match(r".*png$",value)
+            match = re.match(r".*png$|.*html$",value)
             if(match):
                     value_rep = value.replace("#group",group_file)
                     command.append('cp '+work_dir+'../'+value_rep+' '+image_dir+config.get('target',key)+'\n')
