@@ -21,7 +21,7 @@
 	<h3 id="OTU聚类">2.1 OTU聚类</h3>
 	<p class="paragraph">
 				首先我们将序列完全一样的Clean Reads根据其丰度大小进行排序，将其中的Singletons过滤掉，（因为Singletons可能由于测序错误造成，故将这部分序列去除，不进行后期OTU聚类），利用Usearch在0.97相似度下进行聚类，对聚类后的序列进行嵌合体过滤后，得到用于物种分类的OTU(Operational Taxonomic Units)，最后将所有Clean Reads比对到OTU序列上，将能比对上OTU的Reads提取出来，得到最终的Mapped Reads。
-	统计各个样品每个OTU中的丰度信息，OTU的丰度初步说明了样品的物种丰富程度。{{sample_sum}}个样品共产生{{otu_sum}}个OTU。每个样品OTU统计结果见表2-1-1，详细信息表见<a href="..\results\01_Reads\pick_otu_summary.tsv" target="_blank">pick_otu_summary.tsv</a>，样品OTU统计表单。
+	统计各个样品每个OTU中的丰度信息，OTU的丰度初步说明了样品的物种丰富程度。{{sample_sum}}个样品共产生{{otu_sum}}个OTU。每个样品OTU统计结果见表2-1-1，详细信息表见<a href="javascript:void(0)" onClick="StartExcel('..\results\01_Reads\pick_otu_summary.tsv')">pick_otu_summary.tsv</a>，样品OTU统计表单。
 		</p>
 	<p class="name_table">表2-1-1 样品数据和OTU统计</p>
 
@@ -55,7 +55,7 @@
 		<p class="name_fig">图2-2-1 表示样品物种丰富度Alpha多样性指数稀释曲线图</p>
 		
 		<p class="premark">图中一条曲线代表一个样品，横轴表示从某个样品中随机抽取的Clean Reads数目，纵轴表示该Reads数目对应的Alpha多样性指数的大小，随着测序深度的增加，当曲线趋于平缓时表示此时的测序数据量比较合理。</p>
-		<p class="paragraph">根据Alpha多样性分析，兼顾测序饱和度和样品完整性，我们对每个样品随机抽取{{ downsize }}条Reads。抽平后的样品OTU统计见<a href="..\results\02_OTU\all\otu_downsize_stat.tsv" target="_blank">otu_downsize_stat.tsv</a>中，表2-2-1 展示部分结果：
+		<p class="paragraph">根据Alpha多样性分析，兼顾测序饱和度和样品完整性，我们对每个样品随机抽取{{ downsize }}条Reads。抽平后的样品OTU统计见<a href="javascript:void(0)" onClick="StartExcel('..\results\02_OTU\all\otu_downsize_stat.tsv')">otu_downsize_stat.tsv</a>中，表2-2-1 展示部分结果：
 		</p>
 		<p class="name_table">表2-2-1 抽平后样品OTU统计</p>
 		<div class="table">
@@ -83,7 +83,7 @@
 				<p class="name_fig">图2-3-1 共有OTU数与样品的关系
 				</p>
 				<p class="premark">图中表示的是覆盖一定比例以上样品的OTU的数目，横坐标是覆盖样品的比例，纵坐标是统计的覆盖大于此比例样品的OTU的数目。</p>
-				<p class="paragraph">结合OTU所代表的物种，可以找出Core microbiome（即覆盖100%样品的微生物组）。该项目的Core microbiome共包含{{core_microbiome}}个OTUs，<a href="..\results\02_OTU\{{ group_file }}\core_otu.tsv" target="_blank">core_otu.tsv</a>其部分物种信息如下：</p>
+				<p class="paragraph">结合OTU所代表的物种，可以找出Core microbiome（即覆盖100%样品的微生物组）。该项目的Core microbiome共包含{{core_microbiome}}个OTUs，<a href="javascript:void(0)" onClick="StartExcel('..\results\02_OTU\{{ group_file }}\core_otu.tsv')">core_otu.tsv</a>其部分物种信息如下：</p>
 				<p class="name_table">表2-3-1 Core microbiome OTU列表</p>
 				
 				<div class="table">
@@ -160,7 +160,7 @@
 {% block otu_tax_assignments_head %}
 	{% if otu_tax_assignments %}
 		<h3 id="物种注释分析">3.1 物种注释分析</h3>
-		<p class="paragraph">从各个OTU中挑选出丰度最高的一条序列，作为该OTU的代表序列（代表序列见文件rep_set.fna）。使用RDP方法，将该代表序列与已知物种的{{amplification}}数据库进行比对，从而对每个OTU进行物种归类（物种注释结果见文件<a href="..\results\02_OTU\all\tax_assignment.tsv" target="_blank">tax_assignments.tsv</a>）。</p>
+		<p class="paragraph">从各个OTU中挑选出丰度最高的一条序列，作为该OTU的代表序列（代表序列见文件rep_set.fna）。使用RDP方法，将该代表序列与已知物种的{{amplification}}数据库进行比对，从而对每个OTU进行物种归类（物种注释结果见文件<a href="javascript:void(0)" onClick="StartExcel('..\results\02_OTU\all\tax_assignment.tsv')">tax_assignments.tsv</a>）。</p>
 		<p class="name_table">表3-1-1 OTU注释统计</p>
 		
 		<div class="table">
@@ -178,7 +178,7 @@
 	{% if otu_annotation_statistical %}
 		<h3 id="物种注释结果统计">3.2 物种注释结果统计</h3>
 			<p class="paragraph">根据物种注释情况，统计每个样品注释到各分类水平(Kingdom, Phylum, Class, Order, Family, Genus)上的相对丰度，由此可轻松了解注释到各分类水平的整体情况 </p>
-		<p class="paragraph">详细信息请见文件<a href="..\results\02_OTU\all\profile_tree.tsv" target="_blank">profile_tree.tsv。</a></p>
+		<p class="paragraph">详细信息请见文件<a href="javascript:void(0)" onClick="StartExcel('..\results\02_OTU\all\profile_tree.tsv')">profile_tree.tsv。</a></p>
 	{% endif %}
 {% endblock %} 
 
@@ -291,7 +291,7 @@
 {% block alpha_diversity_head %}
 	{% if alpha_diversity %} 
 		<h3 id="单个样品多样性分析">4.1 单个样品多样性分析</h3>
-		<p  class="paragraph">Alpha多样性反映的是单个样品内部的物种多样性，包括observed species指数、chao1指数，shannon指数以及simpson指数，PD_whole_tree指数等。Alpha多样性统计见<a href="..\results\03_Alpha_diversity\{{ group_file }}\alpha_statistic.tsv" target="_blank">alpha_statistic.tsv</a></p>
+		<p  class="paragraph">Alpha多样性反映的是单个样品内部的物种多样性，包括observed species指数、chao1指数，shannon指数以及simpson指数，PD_whole_tree指数等。Alpha多样性统计见<a href="javascript:void(0)" onClick="StartExcel('..\results\03_Alpha_diversity\{{ group_file }}\alpha_statistic.tsv')">alpha_statistic.tsv</a></p>
 		<p class="name_table">表4-1-1 样品Alpha多样性统计结果</p>
 		
 		<div class="table">
@@ -353,7 +353,7 @@
 			<p class="name_fig">图4-2-1组间Alpha多样性盒形图：</p> 
             <p class="premark">注：盒形图可以显示5个统计量（最小值，第一个四分位数，中位数，第三个中位数和最大值，及由下到上的5条线），异常值以“o”标出。横轴是分组名称，纵轴是不同分组下的alpha多样性指数的值。</p>
 		{% endif %}	
-			<p class="paragraph">分别对Alpha Diversity的各个指数进行秩和检验分析(若两组样品比较即使用R中的wilcox.test函数，若两组以上的样品比较则使用R中的kruskal.test函数)，通过秩和检验筛选不同条件下的显著差异的Alpha Diversity指数。结果见<a href="..\results\03_Alpha_diversity\{{ group_file }}\alpha_marker.tsv" target="_blank">alpha_marker.tsv</a>。</p>
+			<p class="paragraph">分别对Alpha Diversity的各个指数进行秩和检验分析(若两组样品比较即使用R中的wilcox.test函数，若两组以上的样品比较则使用R中的kruskal.test函数)，通过秩和检验筛选不同条件下的显著差异的Alpha Diversity指数。结果见<a href="javascript:void(0)" onClick="StartExcel('..\results\03_Alpha_diversity\{{ group_file }}\alpha_marker.tsv')">alpha_marker.tsv</a>。</p>
             <p class="name_table">表4-2-1 Alpha diversity指数差异检验</p>
             
             <div class="table">
@@ -374,7 +374,7 @@
 	{% if uniFra_analysis_heatmap %} 
 		<h3 id="UniFrac热图分析">5.1 UniFrac热图分析（每组样品数>=4）</h3>
 		<p class="paragraph">与Alpha多样性分析不同，Beta多样性（Beta Diversity）分析是用来比较一对样品在物种多样性方面存在的差异大小。</p>
-		<p class="paragraph">UniFrac是通过利用系统进化的信息来比较样品间的物种群落差异。其计算结果可以作为一种衡量Beta Diversity的指数，它考虑了物种间的进化距离，该指数越大表示样品间的差异越大。报告中给出的UniFrac结果分为加权UniFrac（Weighted UniFrac）与非加权UniFirac（Unweighted UniFrac）2种，其中Weighted UniFrac考虑了序列的丰度，Unweighted UniFrac不考虑序列丰度。图4-5 UniFrac距离分布Heatmap，通过对UniFrac结果的聚类，具有相似Beta多样性的样品聚类在一起，反应了样品间的相似性。详细统计结果见附件<a href="..\results\04_Beta_diversity\{{ group_file }}\weighted_unifrac_otu_table.tsv" target="_blank">weighted_unifrac.tsv</a>与<a href="..\results\04_Beta_diversity\{{ group_file }}\unweighted_unifrac_otu_table.tsv" target="_blank">unweighted_unifrac.tsv</a>。</p>
+		<p class="paragraph">UniFrac是通过利用系统进化的信息来比较样品间的物种群落差异。其计算结果可以作为一种衡量Beta Diversity的指数，它考虑了物种间的进化距离，该指数越大表示样品间的差异越大。报告中给出的UniFrac结果分为加权UniFrac（Weighted UniFrac）与非加权UniFirac（Unweighted UniFrac）2种，其中Weighted UniFrac考虑了序列的丰度，Unweighted UniFrac不考虑序列丰度。图4-5 UniFrac距离分布Heatmap，通过对UniFrac结果的聚类，具有相似Beta多样性的样品聚类在一起，反应了样品间的相似性。详细统计结果见附件<a href="javascript:void(0)" onClick="StartExcel('..\results\04_Beta_diversity\{{ group_file }}\weighted_unifrac_otu_table.tsv')">weighted_unifrac.tsv</a>与<a href="javascript:void(0)" onClick="StartExcel('..\results\04_Beta_diversity\{{ group_file }}\unweighted_unifrac_otu_table.tsv')" >unweighted_unifrac.tsv</a>。</p>
 		<p class="paragraph">截取部分Beta多样性值统计结果见表5-1-1和表5-1-2。</p>
 		<p class="name_table">表5-1-1样品Beta Diversity统计表（Weighted Unifrac）</p>
 		
@@ -461,7 +461,7 @@
 		<h3 id="组间差异分析">6.2 组间差异分析</h3>
 		<h4>OTU水平的差异分析</h4>
 		{% if diff_otu_marker_exist %}
-			<p class="paragraph">下表是在不同组样品间有显著差异的OTUs（p<{{ p_value }}, Kruskal-Wallis test），共{{ diff_otus }}个,如表6-2-1显示。结果表格<a href="..\results\05_diff_analysis\{{ group_file }}\otu_diff.marker.filt.tsv" target="_blank">otu_diff.marker.filt.tsv</a></p>
+			<p class="paragraph">下表是在不同组样品间有显著差异的OTUs（p < {{ p_value }}, Kruskal-Wallis test），共{{ diff_otus }}个,如表6-2-1显示。结果表格<a href="javascript:void(0)" onClick="StartExcel('..\results\05_diff_analysis\{{ group_file }}\otu_diff.marker.filt.tsv')">otu_diff.marker.filt.tsv</a></p>
 			<p class="name_table">表6-2-1差异显著OTU列表</p>
 			
 			<div class="table">
@@ -499,7 +499,7 @@
             
 		<h4>属水平的差异分析</h4>
 		{% if diff_genus_marker_exist %}
-			<p class="paragraph">通过Kruskal-Wallis test分析可以找出在不同组间有明显差异(p<{{ p_value }})的属如下（共{{ diff_genus }}个属或科）。结果表格<a href="..\results\05_diff_analysis\{{ group_file }}\genus_diff.marker.filt.tsv" target="_blank">genus_diff.marker.filt.tsv</a></p>
+			<p class="paragraph">通过Kruskal-Wallis test分析可以找出在不同组间有明显差异(p < {{ p_value }})的属如下（共{{ diff_genus }}个属或科）。结果表格<a href="javascript:void(0)" onClick="StartExcel('..\results\05_diff_analysis\{{ group_file }}\genus_diff.marker.filt.tsv')">genus_diff.marker.filt.tsv</a></p>
 			<p class="name_table">表6-2-2差异显著物种列表</p>
 			
 			<div class="table">
@@ -565,7 +565,7 @@
 
 		<h4>所有水平的差异分析</h4>
 		{% if diff_taxall_marker_exist %}
-            <p class="paragraph">使用R中的kruskal.test函数，分别从门纲目科属水平，通过秩和检验筛选不同条件下的显著差异的物种，共找到{{ diff_species }}个。表6-2-3为样品间所有水平下的{{ diff_species }}个差异物种统计表。结果表格<a href="..\results\05_diff_analysis\{{ group_file }}\taxall_diff.marker.filt.tsv" target="_blank">taxall_diff.marker.filt.tsv</a></p>
+            <p class="paragraph">使用R中的kruskal.test函数，分别从门纲目科属水平，通过秩和检验筛选不同条件下的显著差异的物种，共找到{{ diff_species }}个。表6-2-3为样品间所有水平下的{{ diff_species }}个差异物种统计表。结果表格<a href="javascript:void(0)" onClick="StartExcel('..\results\05_diff_analysis\{{ group_file }}\taxall_diff.marker.filt.tsv')">taxall_diff.marker.filt.tsv</a></p>
             <p class="name_table">表6-2-3所有水平差异显著物种列表</p>
             
                 <div class="table">
