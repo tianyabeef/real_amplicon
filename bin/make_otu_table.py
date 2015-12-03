@@ -36,6 +36,8 @@ def make_otu_table(cfg_in,vars=None):
                                                  classifier_file,
                                                  params['classify_confident_cutoff'],
                                                  outfiles['tax_assign']))
+    work.commands.append('''less %s | perl -e 'print "otu_id\\ttax_name\\tconfidence\\n";while(<>){print;}' >%s'''%(outfiles['tax_assign'],
+                                                                                                                outfiles['tax_assign_tsv']))
     # assign statistic
     work.commands.append('%s -i %s -t %s -o %s'%(scripts['otu_ass_stat'],
                                                 params['otu_mapping_file'],
