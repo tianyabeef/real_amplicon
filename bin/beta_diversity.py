@@ -41,6 +41,17 @@ def beta_diversity(cfg_in, vars=None):
                                                            params['group'],
                                                            outfiles['beta_pcoa_dir'],
                                                            with_boxplot))
+    # beta nmds
+    if min_sample_num_in_groups >=5:
+        with_boxplot = '--with_boxplot'
+    else:
+        with_boxplot = '--without_boxplot'
+    if sample_num_total >= 5:
+        work.commands.append('%s -d %s -g %s -o %s %s' % (scripts['beta_nmds'],
+                                                            outfiles['beta_div_dir'],
+                                                            params['group'],
+                                                            outfiles['beta_nmds_dir'],
+                                                            with_boxplot))
     # beta cluster
     command = '%s --jackknifed_beta_diversity %s --make_bootstrapped_tree %s '%(scripts['beta_cluster'],
                                                                                 qiime['jackknifed_beta_diversity'],
