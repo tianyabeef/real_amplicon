@@ -414,6 +414,20 @@
 			<p class="error">样品数不足无法分析</p>
 	</div>
 {% endif %}
+
+{% if uniFra_analysis_nmds %}
+		<h3 id="NMDS分析">5.3 NMDS分析（每组样品数>=5）</h3>
+			<p class="paragraph">为了进一步展示样品间物种多样性差异，使用NMDS分析（Nonmetric Multidimensional Scaling）的方法展示各个样品间的差异大小。图5-3-1给出了NMDS对样品间物种多样性的分析结果，如果两个样品距离较近，则表示这两个样品的物种组成较相近。</p>
+			<p class="center">
+				<img class="size1" src="images/group/weighted_unifrac.nmds.png"/><img class="size1" src="images/group/unweighted_unifrac.nmds.png"/>
+			</p>        
+			<p class="name_fig">图5-3-1 NMDS分析图（A为Weight_UniFrac结果，B为Unweight_UniFrac结果）</p>
+			<p class="premark">图中点分别表示各个样品,点与点之间的距离表示差异程度。不同颜色代表样品属于不同的分组。横向的box图是不同分组在第一主坐标上的值的分布。</p>
+{% else %}
+		<h3 id="NMDS分析">5.3 NMDS分析（每组样品数>=5）</h3>
+			<p class="error">样品数不足无法分析</p>
+{% endif %}
+
 {% endblock %} 
 		
 
