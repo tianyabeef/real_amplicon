@@ -27,7 +27,7 @@
 	<h3 id="OTU聚类">2.1 OTU聚类</h3>
 	<p class="paragraph">
 				首先我们将序列完全一样的Clean Reads根据其丰度大小进行排序，将其中的Singletons过滤掉，（因为Singletons可能由于测序错误造成，故将这部分序列去除，不进行后期OTU聚类），利用Usearch在0.97相似度下进行聚类，对聚类后的序列进行嵌合体过滤后，得到用于物种分类的OTU(Operational Taxonomic Units)，最后将所有Clean Reads比对到OTU序列上，将能比对上OTU的Reads提取出来，得到最终的Mapped Reads。
-	统计各个样品每个OTU中的丰度信息，OTU的丰度初步说明了样品的物种丰富程度。{{sample_sum}}个样品共产生{{otu_sum}}个OTU。每个样品OTU统计结果见表2-1-1，详细信息表见<a href="javascript:void(0)" onClick="StartExcel('..\results\01_Reads\pick_otu_summary.tsv')">pick_otu_summary.tsv</a>，样品OTU统计表单。
+	统计各个样品每个OTU中的丰度信息，OTU的丰度初步说明了样品的物种丰富程度。{{sample_sum}}个样品共产生{{otu_sum}}个OTU。每个样品OTU统计结果见表2-1-1，详细信息表见<a href="javascript:void(0)" onClick="StartExcel('..\\results\\01_Reads\\pick_otu_summary.tsv')">pick_otu_summary.tsv</a>，样品OTU统计表单。
 		</p>
 	<p class="name_table">表2-1-1 样品数据和OTU统计</p>
 
@@ -175,7 +175,6 @@
 			<div id="plist50"></div>
 		</center>
 		</div>
-		<iframe name="myFrame" src="images/krona.html" width=100% height=668px></iframe>
 	{% endif %}
 {% endblock %}
 		
@@ -275,12 +274,10 @@
 		
 {% block otu_krona_head %}
 	{% if otu_krona %} 
-		<h3 id="物种注释结果KRONA展示">3.5 物种注释结果KRONA展示（研发）</h3>
-		<p class="paragraph">使用KRONA[4]对物种注释结果进行可视化展示, 展示结果中，圆圈从内到外依次代表不同的分类级别，扇形的大小代表不同OTU注释结果的相对比例,更多详细的信息请参考KRONA展示结果详解。示例图如下所示：</p>
-		<p class="center">
-			<img class="size2" src="images/20.png" />
-		</p>
-		<p class="name_fig">图3-5-1 物种注释结果可视化展示</p>
+		<h3 id="物种注释结果KRONA展示">3.6 物种注释结果KRONA展示</h3>
+		<p class="paragraph">使用KRONA软件对物种注释结果进行可视化展示, 展示结果中，圆圈从内到外依次代表不同的分类级别，扇形的大小代表不同OTU注释结果的相对比例。图3-6-1如下所示：</p>
+		<iframe name="myFrame" src="images/krona.html" width=100% height=668px></iframe>
+		<p class="name_fig">图3-6-1 物种注释结果可视化展示</p>
 		 
 	{% endif %}
 {% endblock %}
@@ -435,6 +432,19 @@
 		<p class="premark">PcoA是一种研究数据相似性或者差异性的可视化方法，它没有改变样品点之间的项目位置关系，只改变了坐标系统。横坐标表示第一主坐标，括号中的百分比则表示第一主坐标对样品差异的贡献率；纵坐标表示第二主坐标，括号中的百分比表示第二主坐标对样品差异的贡献率。图中点分别表示各个样品。不同颜色代表样品属于不同的分组。横向的box图是不同分组在第一主坐标上的值的分布。</p>
 	{% else %}
 		<h3 id="PCoA分析">5.2 PCoA分析（每组样品数>=5）</h3>
+		<p class="error">样品数不足无法分析</p>
+	{% endif %}
+
+	{% if uniFra_analysis_nmds %}
+		<h3 id="NMDS分析">5.3 NMDS分析（每组样品数>=5）</h3>
+		<p class="paragraph">为了进一步展示样品间物种多样性差异，使用NMDS分析（Nonmetric Multidimensional Scaling）的方法展示各个样品间的差异大小。图5-3-1给出了NMDS对样品间物种多样性的分析结果，如果两个样品距离较近，则表示这两个样品的物种组成较相近。</p>
+		<p class="center">
+			<img class="size1" src="images/group/weighted_unifrac.nmds.png"/><img class="size1" src="images/group/unweighted_unifrac.nmds.png"/>
+		</p>        
+		<p class="name_fig">图5-3-1 NMDS分析图（A为Weight_UniFrac结果，B为Unweight_UniFrac结果）</p>
+		<p class="premark">图中点分别表示各个样品,点与点之间的距离表示差异程度。不同颜色代表样品属于不同的分组。横向的box图是不同分组在第一主坐标上的值的分布。</p>
+	{% else %}
+		<h3 id="NMDS分析">5.3 NMDS分析（每组样品数>=5）</h3>
 		<p class="error">样品数不足无法分析</p>
 	{% endif %}
 {% endblock %} 

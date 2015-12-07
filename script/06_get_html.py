@@ -449,9 +449,6 @@ def get_html():
     if sample_num_total <= 3:
         var_html['star_picture'] = False
 
-    if sample_num_total >= 5:
-        var_html['uniFra_analysis_pcoa'] = True
-
     if sample_num_total >= 4:
         var_html['uniFra_analysis_heatmap'] = True
 
@@ -459,6 +456,8 @@ def get_html():
         var_html['core_microbiome_html'] = True
         var_html['otu_pca'] = True
         var_html['otu_heatmap'] = True
+        var_html['uniFra_analysis_pcoa'] = True
+        var_html['uniFra_analysis_nmds'] = True
 
     if group_num >= 2 and 5 >= group_num:
         var_html['otu_venn'] = True
@@ -470,7 +469,7 @@ def get_html():
     var_html['otu_tax_assignments'] = True
     var_html['otu_annotation_statistical'] = True
     var_html['tax_summary'] = True
-    var_html['otu_krona'] = False
+    var_html['otu_krona'] = True
     var_html['phylogenetic_tree'] = False
     var_html['similarity_analysis'] = False
     if min_sample_num_in_groups >= 3:
