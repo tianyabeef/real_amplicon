@@ -45,14 +45,17 @@ def downsize(cfg_in,vars=None):
             keep_small_size = '--keep_small_size'
         else:
             keep_small_size = '--no_keep_small_size'
-        command = ('%s -s %s -i %s -o %s --out_statfile %s %s '%(scripts['downsize'],
-                                                                params['stat_file_in'],
-                                                                params['otu_table_in'],
-                                                                outfiles['otu_table'],
-                                                                outfiles['downsize_stat'],
-                                                                keep_small_size))
+        command = '%s -i %s -o %s --out_statfile %s %s' % (scripts['downsize'],
+                                                           params['otu_table_in'],
+                                                           outfiles['otu_table'],
+                                                           outfiles['downsize_stat'],
+                                                           keep_small_size)
+        if params['minimum']:
+            command += ' -m %s' % params['minimum']
+        else:
+            command += ' -s %s' % params['stat_file_in']
         if params['group']:
-            command += '-g %s'%params['group']
+            command += ' -g %s' % params['group']
         work.commands.append(command)
 
         work.commands.append('%s -i %s -t %s -o %s'%(scripts['otutab2fa'],
@@ -61,3 +64,7 @@ def downsize(cfg_in,vars=None):
                                                     outfiles['seqs_fa']))
 
     return outfiles
+
+if __name__ == '__main__':
+    config = sys.argv[1]
+    downsize(config)

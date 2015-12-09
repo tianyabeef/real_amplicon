@@ -33,6 +33,6 @@ if(sample_num < 10){
   cex = 1.2
 }
 
-plot(nmds$points,col=colors,pch=19,cex=0.7,cex.axis=1.5,cex.lab=1.7,ylim=ylim,xlim=xlim)
+plot(nmds$points,col=colors,pch=19,cex=cex,cex.axis=1.5,cex.lab=1.7,ylim=ylim,xlim=xlim)
 legend("topright",legend=g_order,col=gcols_order,pch=15,cex=1,horiz=F)
 dev.off()

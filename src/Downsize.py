@@ -1,26 +1,29 @@
 import random
 import re
 
+
 class Reads(object):
 
-    def __init__(self,id,otu_name):
+    def __init__(self, id, otu_name):
         self.name = id
-        self.id = re.search('(\d+)$',id).group(1)
+        self.id = re.search('(\d+)$', id).group(1)
         self.otu_name = otu_name
-        self.sample_name = re.search('(.*)_\d+$',id).group(1)
+        self.sample_name = re.search('(.*)_\d+$', id).group(1)
+
 
 class Sample(object):
 
-    def __init__(self,name):
+    def __init__(self, name):
         self.name = name
         self.total_num = 0
         self.used_num = 0
         self.otu_before = set()
         self.otu_final = set()
 
+
 class OTU(object):
 
-    def __init__(self,name):
+    def __init__(self, name):
         self.name = name
         self.reads = []
 
@@ -32,9 +35,10 @@ class OTU(object):
             out_str += read.name + '\t'
         return out_str.strip() + '\n'
 
+
 class Subject(object):
 
-    def __init__(self,infile,outfile,statfile,
+    def __init__(self, infile, outfile, statfile,
                  minimum,
                  group,
                  keep=True,
@@ -57,7 +61,7 @@ class Subject(object):
             otu_name = tabs.pop(0)
             self.otu_dict[otu_name] = OTU(otu_name)
             for tab in tabs:
-                read = Reads(tab,otu_name)
+                read = Reads(tab, otu_name)
                 if self.group is not None and read.sample_name not in self.group:
                     continue
                 if read.sample_name not in self.sample_dict:
@@ -70,13 +74,13 @@ class Subject(object):
         fp.close()
 
     @staticmethod
-    def my_cmp(a,b):
+    def my_cmp(a, b):
         if a.sample_name > b.sample_name:
             return 1
         elif a.sample_name < b.sample_name:
             return -1
         else:
-            return cmp(a.id,b.id)
+            return cmp(a.id, b.id)
 
     def get_downsize(self):
         if self.random:
@@ -95,20 +99,20 @@ class Subject(object):
             otu.reads.append(read)
 
     def output(self):
-        fp = open(self.outfile,'w')
+        fp = open(self.outfile, 'w')
         for otu in self.otu_dict.itervalues():
             fp.write(str(otu))
         fp.close()
 
     def writestat(self):
-        fp = open(self.statfile,'w')
+        fp = open(self.statfile, 'w')
         fp.write('sample_name\teven_reads_num\totu_num_before\totu_num_final\n')
         for sample_name in sorted(list(self.sample_dict.iterkeys())):
             sample = self.sample_dict[sample_name]
-            fp.write('%s\t%s\t%s\t%s\n'%(sample_name,
-                                         sample.used_num,
-                                         len(sample.otu_before),
-                                         len(sample.otu_final)))
+            fp.write('%s\t%s\t%s\t%s\n' % (sample_name,
+                                           sample.used_num,
+                                           len(sample.otu_before),
+                                           len(sample.otu_final)))
         fp.close()
 
     def work(self):
@@ -117,4 +121,3 @@ class Subject(object):
         self.output()
         if self.statfile is not None:
             self.writestat()
-
