@@ -64,3 +64,7 @@ def downsize(cfg_in,vars=None):
                                                     outfiles['seqs_fa']))
 
     return outfiles
+
+if __name__ == '__main__':
+    config = sys.argv[1]
+    downsize(config)
