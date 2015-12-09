@@ -55,7 +55,7 @@ def downsize(cfg_in,vars=None):
         else:
             command += ' -s %s' % params['stat_file_in']
         if params['group']:
-            command += '-g %s'%params['group']
+            command += ' -g %s' % params['group']
         work.commands.append(command)
 
         work.commands.append('%s -i %s -t %s -o %s'%(scripts['otutab2fa'],
