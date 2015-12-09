@@ -45,12 +45,15 @@ def downsize(cfg_in,vars=None):
             keep_small_size = '--keep_small_size'
         else:
             keep_small_size = '--no_keep_small_size'
-        command = ('%s -s %s -i %s -o %s --out_statfile %s %s '%(scripts['downsize'],
-                                                                params['stat_file_in'],
-                                                                params['otu_table_in'],
-                                                                outfiles['otu_table'],
-                                                                outfiles['downsize_stat'],
-                                                                keep_small_size))
+        command = '%s -i %s -o %s --out_statfile %s %s' % (scripts['downsize'],
+                                                           params['otu_table_in'],
+                                                           outfiles['otu_table'],
+                                                           outfiles['downsize_stat'],
+                                                           keep_small_size)
+        if params['minimum']:
+            command += ' -m %s' % params['minimum']
+        else:
+            command += ' -s %s' % params['stat_file_in']
         if params['group']:
             command += '-g %s'%params['group']
         work.commands.append(command)
