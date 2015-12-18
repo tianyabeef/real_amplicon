@@ -22,6 +22,8 @@ def read_params(args):
                         help="set the group file")
     parser.add_argument('-o', '--out_dir', dest='out_dir', metavar='DIR', type=str, required=True,
                         help="set the output dir")
+    parser.add_argument('-l', '--tax_level', dest='level', metavar='STR', type=str, default='genus',
+                        help="set the tax level, [default is genus]")
     parser.add_argument('-t', '--top', dest='top', metavar='INT', type=str, default='30',
                         help="set the top num, [default is 30]")
     parser.add_argument('--dendrogram', dest='dendrogram', metavar='STR', choices=['both','row','column','none'], default='both',
@@ -35,7 +37,7 @@ def read_params(args):
         sys.exit()
     return params
 
-def work(infile,outfile):
+def work(infile,outfile,level):
     with open(infile) as in_fp, open(outfile,'w') as out:
         head = in_fp.next()
         if head.startswith('# Constructed from biom'):
@@ -45,7 +47,7 @@ def work(infile,outfile):
             tabs = line.rstrip().split('\t')
             taxes = tabs[0].split(';')
             for tax in taxes:
-                if tax.startswith('g__') and tax[3:]:
+                if tax.startswith('%s__' % level[0]) and tax[3:]:
                     tabs[0] = tax[3:]
                     break
             else:
@@ -61,7 +63,7 @@ if __name__ == '__main__':
     mkdir(params['out_dir'])
     if params['for_plot'] is None:
         params['for_plot'] = params['out_dir'] + '/for_plot.txt'
-        work(params['otu_table'],params['for_plot'])
+        work(params['otu_table'],params['for_plot'],params['level'])
     pdf_file = params['out_dir'] + '/heatmap.pdf'
     png_file = params['out_dir'] + '/heatmap.png'
 
