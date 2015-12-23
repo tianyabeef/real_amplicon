@@ -1,271 +1,252 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>锐翌基因</title>
-<link href="images/label.png" rel="shortcut icon" />
-<link rel="stylesheet" type="text/css" href="css/base_new.css">
-<link rel="stylesheet" href="css/style.css" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>锐翌基因</title>
+    <link href="images/label.png" rel="shortcut icon"/>
+    <link rel="stylesheet" type="text/css" href="css/base_new.css">
+    <link rel="stylesheet" href="css/style.css"/>
 
 
-
-
-<link rel="stylesheet" type="text/css" href="themes/default/easyui.css"><!--左侧目录导航样式-->
-<link rel="stylesheet" type="text/css" media="screen" href="css/ui.jqgrid.css" /><!--表格的样式-->
-<link rel="stylesheet" type="text/css" media="screen" href="css/smoothness/jquery.ui.all.css" /><!--表格样式-->
-<link rel="stylesheet" type="text/css" media="screen" href="js/fancybox/jquery.fancybox-1.3.4.css"/><!--图片的样式-->
-<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
-<script type="text/javascript" src="js/jquery.easyui.min.js"></script><!--左侧目录导航-->
-<script type="text/javascript" src="js/i18n/grid.locale-en.js"></script><!--表格语言-->
-<script type="text/javascript" src="js/jquery.jqGrid.min.js"></script><!--表格-->
-<script type="text/javascript" src="js/fancybox/jquery.mousewheel-3.0.4.pack.js"></script><!--图片-->
-<script type="text/javascript" src="js/fancybox/jquery.fancybox-1.3.4.pack.js"></script><!--图片-->
-<script type="text/javascript" src="js/jquery.albumSlider.min.js" ></script>
-<script type="text/javascript" src="js/common.js"></script>
-<script type="text/javascript" src="js/scrolltop.js"></script>
-<script type="text/javascript" src="js/table.js"></script><!--表格-->
-<script language="Javascript">
-	function StartExcel(strAllName){
-		var oExcel;
-		var oWorkbook;
-		if(strAllName==null || strAllName==""){
-			alert("不存在表格");
-			return;
-		}
-		if (window.ActiveXObject){
-			oExcel = new ActiveXObject("Excel.Application");
-		}else{
-	//		alert("建议使用IE浏览器");
-			window.open(strAllName , "_blank")
-			return;
-		}
-		oExcel.Workbooks.Open(strAllName);
-	  //  oExcel.DisplayAlerts = false;
-		oExcel.Visible = true;
-	//	oExcel.Quit();
-    }
-</script>
+    <link rel="stylesheet" type="text/css" href="themes/default/easyui.css"><!--左侧目录导航样式-->
+    <link rel="stylesheet" type="text/css" media="screen" href="css/ui.jqgrid.css"/><!--表格的样式-->
+    <link rel="stylesheet" type="text/css" media="screen" href="css/smoothness/jquery.ui.all.css"/><!--表格样式-->
+    <link rel="stylesheet" type="text/css" media="screen" href="js/fancybox/jquery.fancybox-1.3.4.css"/><!--图片的样式-->
+    <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery.easyui.min.js"></script><!--左侧目录导航-->
+    <script type="text/javascript" src="js/i18n/grid.locale-en.js"></script><!--表格语言-->
+    <script type="text/javascript" src="js/jquery.jqGrid.min.js"></script><!--表格-->
+    <script type="text/javascript" src="js/fancybox/jquery.mousewheel-3.0.4.pack.js"></script><!--图片-->
+    <script type="text/javascript" src="js/fancybox/jquery.fancybox-1.3.4.pack.js"></script><!--图片-->
+    <script type="text/javascript" src="js/jquery.albumSlider.min.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/scrolltop.js"></script>
+    <script type="text/javascript" src="js/table.js"></script><!--表格-->
+    <script language="Javascript">
+        function StartExcel(strAllName) {
+            var oExcel;
+            var oWorkbook;
+            if (strAllName == null || strAllName == "") {
+                alert("不存在表格");
+                return;
+            }
+            if (window.ActiveXObject) {
+                oExcel = new ActiveXObject("Excel.Application");
+            } else {
+                //		alert("建议使用IE浏览器");
+                window.open(strAllName, "_blank")
+                return;
+            }
+            oExcel.Workbooks.Open(strAllName);
+            //  oExcel.DisplayAlerts = false;
+            oExcel.Visible = true;
+            //	oExcel.Quit();
+        }
+    </script>
 
 </head>
 <body class="easyui-layout">
 
-	<!------------------------------------------顶部loge------------------------------------------------->
-	<div region="north" border="true" class="cs-north">
-		<div class="cs-north-bg">
-        	<div class="cs-north-logo">
-            	<img src="LOGO.png" />
-                <div class="cs-north-name"></div>
-            </div>
-       	</div>
-	</div>
-    <!-----------------------------------左侧分类------------------------------------------------------>
-	<div region="west" border="true" split="true" title="目录" class="cs-west">
-		<div class="easyui-accordion" fit="true" border="false"> 
-        		<div title="总体概述">
-                	<a href="#总体概述" id="zong" class="cs-navi-tab">总体概述</a></p>
-                </div>       
-				<div title="数据统计">
-					<a href="#优化序列统计" id="raw_data" class="cs-navi-tab">优化序列统计</a></p>
-				</div>
-				<div title="OTU分析">
-					<a href="#OTU聚类"  class="cs-navi-tab">OTU聚类</a></p>
-					<a href="#抽平处理"  class="cs-navi-tab">抽平处理</a></p>
-					<a href="#Core microbiome分析"  class="cs-navi-tab">Core microbiome分析</a></p>
-					<a href="#OTU Venn图分析"  class="cs-navi-tab">OTU Venn图分析</a></p>
-					<a href="#OTU PCA分析" src="demo/panel.html" class="cs-navi-tab">OTU PCA分析</a></p>
-					<a href="#Specaccum物种累积曲线" src="demo/tabs.html" class="cs-navi-tab">Specaccum物种累积曲线</a></p>
-				</div>
-				<div title="物种分类和丰度分析">
-					<a href="#物种注释分析"  class="cs-navi-tab">物种注释分析</a></p>
-					<a href="#物种注释结果统计" class="cs-navi-tab">物种注释结果统计</a></p>
-					<a href="#物种丰度分析" class="cs-navi-tab">物种丰度分析</a></p>
-					<a href="#物种热图分析" class="cs-navi-tab">物种热图分析</a></p> 
-					<a href="#Rank Abundance曲线"  class="cs-navi-tab">Rank Abundance曲线</a></p>
-					<a href="#物种注释结果KRONA展示" class="cs-navi-tab">物种注释结果KRONA展示</a></p>
-<!-- 					<a href="#系统进化关系展示" class="cs-navi-tab">系统进化关系展示</a></p> -->
-				</div>
-				<div title="Alpha多样性分析">
-					<a href="#单个样品多样性分析"  class="cs-navi-tab">单个样品多样性分析</a></p>
-					<a href="#单个样品差异分析"  class="cs-navi-tab">单个样品差异分析</a></p>
-				</div>
-				<div title="Beta多样性分析">
-					<a href="#UniFrac热图分析" class="cs-navi-tab">UniFrac热图分析</a></p>
-					<a href="#PCoA分析"  class="cs-navi-tab">PCoA分析</a></p>
-					<a href="#NMDS分析"  class="cs-navi-tab">NMDS分析</a></p>	
-					<!-- <a href="#Analysis of Similarity (ANOSIM)"  class="cs-navi-tab">Analysis of Similarity (ANOSIM)</a></p> -->
-				</div>
-				<div title="显著性差异分析">
-					<a href="#LDA EffectSize（LEfSe）分析" class="cs-navi-tab">LDA EffectSize（LEfSe）分析</a></p>
-					<a href="#组间差异分析" class="cs-navi-tab">组间差异分析</a></p>
-					<!--<a href="#物种CCA/RDA分析" src="demo/tree.html" class="cs-navi-tab">物种CCA/RDA分析</a></p>-->
-				</div>
-<!--                 <div title="实验方法">
-                					<a href="#测序方法"  class="cs-navi-tab">测序方法</a></p>
-                					<a href="#OTU分析"  class="cs-navi-tab">OTU分析</a></p>
-                					<a href="#物种分类和丰度分析"  class="cs-navi-tab">物种分类和丰度分析</a></p>
-                    <a href="#alpha多样性分析"  class="cs-navi-tab">alpha多样性分析</a></p>
-                    <a href="#beta多样性分析" class="cs-navi-tab">beta多样性分析</a></p>
-                    <a href="#显著性差异分析" class="cs-navi-tab">显著性差异分析</a></p>
-                				</div>
-                <div title="结果文件说明">
-                               		<a href="#文件格式" class="cs-navi-tab">文件格式</a></p>
-                    <a href="#结果文件" class="cs-navi-tab">结果文件</a></p>
-                </div> -->
-		</div>
-	</div>
-    <!------------------------------------------------------主要面板------------------------------------------------------------------------>
-	<div id="mainPanle" region="center" border="true" border="false">
-	<div class="main">
-		<h1 id="总体概述">总体工作流程概述</h1>
+<!------------------------------------------顶部loge------------------------------------------------->
+<div region="north" border="true" class="cs-north">
+    <div class="cs-north-bg">
+        <div class="cs-north-logo">
+            <img src="LOGO.png"/>
+            <div class="cs-north-name"></div>
+        </div>
+    </div>
+</div>
+<!-----------------------------------左侧分类------------------------------------------------------>
+<div region="west" border="true" split="true" title="目录" class="cs-west">
+    <div class="easyui-accordion" fit="true" border="false">
+        <div title="总体概述">
+            <a href="#总体概述" id="zong" class="cs-navi-tab">总体概述</a></p>
+        </div>
+        <div title="数据统计">
+            <a href="#优化序列统计" id="raw_data" class="cs-navi-tab">优化序列统计</a></p>
+        </div>
+        <div title="OTU分析">
+            <a href="#OTU聚类" class="cs-navi-tab">OTU聚类</a></p>
+            <a href="#抽平处理" class="cs-navi-tab">抽平处理</a></p>
+            <a href="#Core microbiome分析" class="cs-navi-tab">Core microbiome分析</a></p>
+            <a href="#OTU Venn图分析" class="cs-navi-tab">OTU Venn图分析</a></p>
+            <a href="#OTU PCA分析" src="demo/panel.html" class="cs-navi-tab">OTU PCA分析</a></p>
+            <a href="#Specaccum物种累积曲线" src="demo/tabs.html" class="cs-navi-tab">Specaccum物种累积曲线</a></p>
+        </div>
+        <div title="物种分类和丰度分析">
+            <a href="#物种注释分析" class="cs-navi-tab">物种注释分析</a></p>
+            <a href="#物种注释结果统计" class="cs-navi-tab">物种注释结果统计</a></p>
+            <a href="#物种丰度分析" class="cs-navi-tab">物种丰度分析</a></p>
+            <a href="#物种热图分析" class="cs-navi-tab">物种热图分析</a></p>
+            <a href="#Rank Abundance曲线" class="cs-navi-tab">Rank Abundance曲线</a></p>
+            <a href="#物种注释结果KRONA展示" class="cs-navi-tab">物种注释结果KRONA展示</a></p>
+            <!-- 					<a href="#系统进化关系展示" class="cs-navi-tab">系统进化关系展示</a></p> -->
+        </div>
+        <div title="Alpha多样性分析">
+            <a href="#单个样品多样性分析" class="cs-navi-tab">单个样品多样性分析</a></p>
+            <a href="#单个样品差异分析" class="cs-navi-tab">单个样品差异分析</a></p>
+        </div>
+        <div title="Beta多样性分析">
+            <a href="#UniFrac热图分析" class="cs-navi-tab">UniFrac热图分析</a></p>
+            <a href="#PCoA分析" class="cs-navi-tab">PCoA分析</a></p>
+            <a href="#NMDS分析" class="cs-navi-tab">NMDS分析</a></p>
+            <!-- <a href="#Analysis of Similarity (ANOSIM)"  class="cs-navi-tab">Analysis of Similarity (ANOSIM)</a></p> -->
+        </div>
+        <div title="显著性差异分析">
+            <a href="#LDA EffectSize（LEfSe）分析" class="cs-navi-tab">LDA EffectSize（LEfSe）分析</a></p>
+            <a href="#组间差异分析" class="cs-navi-tab">组间差异分析</a></p>
+            <!--<a href="#物种CCA/RDA分析" src="demo/tree.html" class="cs-navi-tab">物种CCA/RDA分析</a></p>-->
+        </div>
+        <!--                 <div title="实验方法">
+                                            <a href="#测序方法"  class="cs-navi-tab">测序方法</a></p>
+                                            <a href="#OTU分析"  class="cs-navi-tab">OTU分析</a></p>
+                                            <a href="#物种分类和丰度分析"  class="cs-navi-tab">物种分类和丰度分析</a></p>
+                            <a href="#alpha多样性分析"  class="cs-navi-tab">alpha多样性分析</a></p>
+                            <a href="#beta多样性分析" class="cs-navi-tab">beta多样性分析</a></p>
+                            <a href="#显著性差异分析" class="cs-navi-tab">显著性差异分析</a></p>
+                                        </div>
+                        <div title="结果文件说明">
+                                               <a href="#文件格式" class="cs-navi-tab">文件格式</a></p>
+                            <a href="#结果文件" class="cs-navi-tab">结果文件</a></p>
+                        </div> -->
+    </div>
+</div>
+<!------------------------------------------------------主要面板------------------------------------------------------------------------>
+<div id="mainPanle" region="center" border="true" border="false">
+    <div class="main">
+        <h1 id="总体概述">总体工作流程概述</h1>
         <p>&nbsp;</p>
-        	<p class="center">
-				{% if amplification=="16S" %}
-            	<img class="size2" src="images/16S_e.png"/>
-				{% else %}
-            	<img class="size2" src="images/ITS_e.png"/>
-				{% endif %}
-            </p>
-            <p class="name_fig">
-            图1 测序原理图 
-            </p>
-            <p class="premark">设计{{amplification}}特定引物扩增特异区域，得到{% if amplification=="16S" %}425bp{% else %}320bp{% endif %}左右扩增片段。加接头，采用MiSeq平台，测序得到2X300bp的Paired-End数据，通过拼接，可以得到较长序列，从而进行{{amplification}}分析
-			</p>
-            <p class="center">
-            	<img class="size2" src="images/2.png"/>
-            </p>
-            <p class="name_fig">
-            	图2 分析流程图 
-            </p>
-            <p class="paragraph">对原始数据进行QC之后，用Usearch软件对数据进行去嵌合体和聚类的操作，Usearch聚类时，先将Reads按照丰度从大到小排序，通过97%相似度的标准聚类，得到OTU(Operational Taxonomic Units)，每个OTU被认为可代表一个物种。接下来对每个样品的Reads进行随机抽平处理，并提取对应的OTU序列。然后使用Qiime软件，做Alpha多样性指数的稀释曲线，根据稀释曲线选择合理的抽平参数，利用Qiime软件对得到的抽平后的OTU进行分析，首先从OTU中分别提取一条Read作为代表序列，使用RDP方法，将该代表序列与{{amplification}}数据库比对，从而对每个OTU进行物种分类。归类后，根据每个OTU中序列的条数，从而得到OTU丰度表，最后根据该OTU丰度表进行后续分析。
-            </p>
-      	<p>&nbsp;</p>
+        <p class="center">
+            {% if amplification=="16S" %}
+            <img class="size2" src="images/16S_e.png"/>
+            {% else %}
+            <img class="size2" src="images/ITS_e.png"/>
+            {% endif %}
+        </p>
+        <p class="name_fig">
+            图1 测序原理图
+        </p>
+        <p class="premark">设计{{amplification}}特定引物扩增特异区域，得到{% if amplification=="16S" %}425bp{% else %}320bp{% endif
+            %}左右扩增片段。加接头，采用MiSeq平台，测序得到2X300bp的Paired-End数据，通过拼接，可以得到较长序列，从而进行{{amplification}}分析
+        </p>
+        <p class="center">
+            <img class="size2" src="images/2.png"/>
+        </p>
+        <p class="name_fig">
+            图2 分析流程图
+        </p>
+        <p class="paragraph">
+            对原始数据进行QC之后，用Usearch软件对数据进行去嵌合体和聚类的操作，Usearch聚类时，先将Reads按照丰度从大到小排序，通过97%相似度的标准聚类，得到OTU(Operational Taxonomic
+            Units)，每个OTU被认为可代表一个物种。接下来对每个样品的Reads进行随机抽平处理，并提取对应的OTU序列。然后使用Qiime软件，做Alpha多样性指数的稀释曲线，根据稀释曲线选择合理的抽平参数，利用Qiime软件对得到的抽平后的OTU进行分析，首先从OTU中分别提取一条Read作为代表序列，使用RDP方法，将该代表序列与{{amplification}}数据库比对，从而对每个OTU进行物种分类。归类后，根据每个OTU中序列的条数，从而得到OTU丰度表，最后根据该OTU丰度表进行后续分析。
+        </p>
+        <p>&nbsp;</p>
         <h1>结果</h1>
         <br>
-        
+
         <h2>1.数据统计</h2>
-        	<p class="paragraph">
-            通过Illumina平台（MiSeq）进行Paired-end测序，Paired End Reads通过Reads之间的Overlap关系拼接成长Reads，并对拼接后的Reads进行质控，得到Clean Reads。拼接过程及质控标准见实验方法中的方法1。
-            </p>
-		
-		{% block reads_statistical_head %} 
-		{% endblock %}
+        <p class="paragraph">
+            通过Illumina平台（MiSeq）进行Paired-end测序，Paired End Reads通过Reads之间的Overlap关系拼接成长Reads，并对拼接后的Reads进行质控，得到Clean
+            Reads。拼接过程及质控标准见实验方法中的方法1。
+        </p>
+
+        {% block reads_statistical_head %}
+        {% endblock %}
 
         <h2 id="OTU分析">2.OTU分析</h2>
-		
-		{% block otu_statistical_head %}
-		{% endblock %}
-		{% block downsize_head %}
-		{% endblock %}
-		
- 		{% block core_microbiome_head %}
-		{% endblock %}           
 
-		{% block otu_venn_head %}
-		{% endblock %}
-		{% block otu_pca_head %}
-		{% endblock %}		
-		{% block specaccum_head %}
-		{% endblock %}
-		
+        {% block otu_statistical_head %}
+        {% endblock %}
+        {% block downsize_head %}
+        {% endblock %}
 
-		<h2>3 物种分类和丰度分析</h2>
-        
+        {% block core_microbiome_head %}
+        {% endblock %}
+
+        {% block otu_venn_head %}
+        {% endblock %}
+        {% block otu_pca_head %}
+        {% endblock %}
+        {% block specaccum_head %}
+        {% endblock %}
+
+
+        <h2>3 物种分类和丰度分析</h2>
+
         {% block otu_tax_assignments_head %}
-		{% endblock %}  
-		{% block otu_annotation_statistical_head %}
-		{% endblock %}
-        	
-		{% block tax_summary_head %}
-		{% endblock %}		
-		{% block otu_heatmap_head %}
-		{% endblock %}
-		{% block rank_abundance_head %}
-		{% endblock %}
-		{% block otu_krona_head %}
-		{% endblock %}
+        {% endblock %}
+        {% block otu_annotation_statistical_head %}
+        {% endblock %}
 
-		{% block phylogenetic_tree_head %}
-		{% endblock %}
+        {% block tax_summary_head %}
+        {% endblock %}
+        {% block otu_heatmap_head %}
+        {% endblock %}
+        {% block rank_abundance_head %}
+        {% endblock %}
+        {% block otu_krona_head %}
+        {% endblock %}
 
-		
-        
+        {% block phylogenetic_tree_head %}
+        {% endblock %}
+
+
         <h2>4 Alpha多样性分析</h2>
-		{% block alpha_diversity_head %}
-		{% endblock %}
+        {% block alpha_diversity_head %}
+        {% endblock %}
 
-		{% block alpha_diff_head %}
-		{% endblock %}
-          
-
-            
-		<h2>5 Beta多样性分析</h2>
-		{% block uniFra_analysis_head %}
-		{% endblock %}
-		{% block similarity_analysis_head %}
-		{% endblock %}                
-
-            
-		<h2>6 显著性差异分析	（PCA:每组样品数>=3;Heatmap:每组样品数>=3;Boxplot:每组样品数>=5）</h2>
-		{% block lefse_head %}
-		{% endblock %}
-		{% block diff_analysis_head %}
-		{% endblock %}
-		<h2>备注</h2>
-		    <p class="paragraph">网页中表格的数值保留了两位有效数字，在Excel表中保留原始数值没有做处理。</p>
-	<!--	<h2><a href="../results/{{amplification}}分析方法.pdf" target="_blank">分析方法下载
-</a></h2>
-                <h2><a href="../results/{{amplification}}交付文档.pdf" target="_blank">交付文档下载
-</a></h2>  -->
-		            
-            
-                                     
-<!--		<h3 id="物种CCA/RDA分析">物种CCA/RDA分析</h3>
-        	<p class="paragraph">典型对应分析(CCA)是基于对应发展的一种排序方法，将对应分析与多元回归分析相结合，每一步计算均与环境因子进行回归，又称多元直接梯度分析。主要用来反映菌群与环境因子之间的关系。RDA是基于线性模型，CCA是基于单峰模型。分析可以检测环境因子、样品、菌群三者之间的关系或者两两之间的关系。</p>
-            <p class="center">
-            	<img class="size1"  src="images/图片42.png"/>
-            </p>
-            <p class="name_fig">图6-8 CCA图</p>
-            <p class="premark">箭头代表不同的环境因子，射线越长表示该环境因子影响越大。环境因子之间的夹角为锐角时表示两个环境因子之间呈正相关关系，钝角时呈负相关关系。环境因子的射线越长，说明该影响因子的影响程度越大。黑色字表示样品，红色字表示物种，此处选择top40的物种。</p>-->
-		
+        {% block alpha_diff_head %}
+        {% endblock %}
 
 
+        <h2>5 Beta多样性分析</h2>
+        {% block uniFra_analysis_head %}
+        {% endblock %}
+        {% block similarity_analysis_head %}
+        {% endblock %}
 
 
+        <h2>6 显著性差异分析 （PCA:每组样品数>=3;Heatmap:每组样品数>=3;Boxplot:每组样品数>=5）</h2>
+        {% block lefse_head %}
+        {% endblock %}
+        {% block diff_analysis_head %}
+        {% endblock %}
+        <h2>备注</h2>
+        <p class="paragraph">网页中表格的数值保留了两位有效数字，在Excel表中保留原始数值没有做处理。</p>
+        <!--	<h2><a href="../results/{{amplification}}分析方法.pdf" target="_blank">分析方法下载
+    </a></h2>
+                    <h2><a href="../results/{{amplification}}交付文档.pdf" target="_blank">交付文档下载
+    </a></h2>  -->
 
 
+        <!--		<h3 id="物种CCA/RDA分析">物种CCA/RDA分析</h3>
+                    <p class="paragraph">典型对应分析(CCA)是基于对应发展的一种排序方法，将对应分析与多元回归分析相结合，每一步计算均与环境因子进行回归，又称多元直接梯度分析。主要用来反映菌群与环境因子之间的关系。RDA是基于线性模型，CCA是基于单峰模型。分析可以检测环境因子、样品、菌群三者之间的关系或者两两之间的关系。</p>
+                    <p class="center">
+                        <img class="size1"  src="images/图片42.png"/>
+                    </p>
+                    <p class="name_fig">图6-8 CCA图</p>
+                    <p class="premark">箭头代表不同的环境因子，射线越长表示该环境因子影响越大。环境因子之间的夹角为锐角时表示两个环境因子之间呈正相关关系，钝角时呈负相关关系。环境因子的射线越长，说明该影响因子的影响程度越大。黑色字表示样品，红色字表示物种，此处选择top40的物种。</p>-->
 
 
+        <p><a name="gobottom"></a></p><!--到底部-->
 
 
+    </div>
 
-<p><a name="gobottom"></a></p><!--到底部-->
-
-
-
-	</div>
-
-	</div>
-    
+</div>
 
 
-
-	<div region="south" border="false" class="cs-south" >公司地址：上海市浦东新区浦三路3058号长青企业广场119室； 电话：021-51001612； 邮箱：support@realbio.cn；</div>
-
-
-
-
-
-
+<div region="south" border="false" class="cs-south">公司地址：上海市浦东新区浦三路3058号长青企业广场119室； 电话：021-51001612；
+    邮箱：support@realbio.cn；
+</div>
 
 
 <!--去顶部和底部-->
 <div class="go">
-	<a title="返回顶部" class="top" href="#总体概述"></a>
-	<a title="如果您有意见，请反馈给我们！" class="feedback" href="javascript:void(0);" target="_self"></a>
-	<a title="返回底部" class="bottom" href="#gobottom"></a>
+    <a title="返回顶部" class="top" href="#总体概述"></a>
+    <a title="如果您有意见，请反馈给我们！" class="feedback" href="javascript:void(0);" target="_self"></a>
+    <a title="返回底部" class="bottom" href="#gobottom"></a>
 </div>
 
 
-    
 </body>
 </html>

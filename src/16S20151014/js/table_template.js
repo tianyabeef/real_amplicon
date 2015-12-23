@@ -16,7 +16,7 @@ jQuery().ready(function (){
 			{name:'sampleName',index:'sampleName',align:"center", width:90},
 			{name:'ampliconType',index:'ampliconType', align:"center",width:90},
 			{name:'cleanReads',index:'cleanReads', width:90,align:"center",sorttype:"int"},
-			{name:'Q20',index:'Q20', width:90, align:"center",sorttype:"float"},		
+			{name:'Q20',index:'Q20', width:90, align:"center",sorttype:"float"},
 			{name:'Q30',index:'Q30', width:90,align:"center",sorttype:"float"},
 			{name:'mappedReads',index:'mappedReads', align:"center",width:90, sortype:"int"},
 			{name:'mappedRatio',index:'mappedRatioss', align:"center",width:90, sortype:"float"},
@@ -28,13 +28,13 @@ jQuery().ready(function (){
 	});
 
  })
- 
+
 
 
 var otuStatisticalDownsizes=[
-	
+
  {% for key,otuStatisticalDownsize in otuStatisticalDownsizes %}
-		
+
  {sampleName:"{{ otuStatisticalDownsize.sample_name }}",downsize:"{{ otuStatisticalDownsize.downsize }}",otus_before:"{{ otuStatisticalDownsize.otus_before }}",otus_after:"{{ otuStatisticalDownsize.otus_after }}"},
 	{% endfor %}
 ];
@@ -50,7 +50,7 @@ jQuery().ready(function (){
 			{name:'sampleName',index:'sampleName', width:140,align:"center"},
 			{name:'downsize',index:'downsize', width:140, sorttype:"int",align:"center"},
 			{name:'otus_before',index:'otus_before', width:140,align:"center", sortype:"int"},
-			{name:'otus_after',index:'otus_after', width:140,align:"center", sortype:"int"}	
+			{name:'otus_after',index:'otus_after', width:140,align:"center", sortype:"int"}
 		],
 		pager: "#plist48",
 		viewrecords: true,
@@ -61,11 +61,11 @@ jQuery().ready(function (){
 
 
 var coreMicrobiomes=[
-	
+
  {% for key,coreMicrobiome in coreMicrobiomes.items() %}
-		
+
  {otuId:"{{ coreMicrobiome.otu_id }}",taxonomyLevel:"{{ coreMicrobiome.taxonomy_level }}",taxonomyName:"{{ coreMicrobiome.taxonomy_name }}"},
-	{% endfor %}	
+	{% endfor %}
 ];
  jQuery().ready(function (){
 	jQuery("#list49").jqGrid({
@@ -89,14 +89,14 @@ var coreMicrobiomes=[
 
 
 var otuAssignmentsStatisticals=[
-	
+
 	 {% for  key,otuAssignmentsStatistical in otuAssignmentsStatisticals.items() %}
-		
+
 	 {otuName:"{{ key }}",num:"{{ otuAssignmentsStatistical.num }}"},
-	
-	 {% endfor %}	
+
+	 {% endfor %}
 ];
- 
+
 	jQuery().ready(function (){
 	jQuery("#list50").jqGrid({
 		data: otuAssignmentsStatisticals,
@@ -107,7 +107,7 @@ var otuAssignmentsStatisticals=[
 		colNames:['otuName','num'],
 		colModel:[
 			{name:'otuName',index:'otuName', width:140,align:"center", sortype:"int"},
-			{name:'num',index:'num', width:140,align:"center", sortype:"int"}	
+			{name:'num',index:'num', width:140,align:"center", sortype:"int"}
 		],
 		pager: "#plist50",
 		viewrecords: true,
@@ -116,13 +116,13 @@ var otuAssignmentsStatisticals=[
  })
 
 var alpha_diversitys=[
-	
+
  {% for key,alphaDiversity in alpha_diversitys.items() %}
-		
+
  {sampleName:"{{ alphaDiversity.alphaName }}",chao1:"{{ alphaDiversity.chao1 }}",goodsCoverage:"{{ alphaDiversity.goods_coverage }}",observedSpecies:"{{ alphaDiversity.observed_species }}",wholeTree:"{{ alphaDiversity.whole_tree }}",shannon:"{{ alphaDiversity.shannon }}",simpson:"{{ alphaDiversity.simpson }}"},
-	{% endfor %}	
+	{% endfor %}
 ];
- 
+
  jQuery().ready(function (){
 	jQuery("#list51").jqGrid({
 		data: alpha_diversitys,
@@ -136,24 +136,24 @@ var alpha_diversitys=[
 			{name:'chao1',index:'chao1', width:90,align:"center", sortype:"float"},
 			{name:'goodsCoverage',index:'goodsCoverage', width:90,align:"center", sortype:"float"},
 			{name:'observedSpecies',index:'observedSpecies', width:90,align:"center", sortype:"float"},
-			{name:'wholeTree',index:'wholeTree', width:90,align:"center", sortype:"float"},		
-			{name:'shannon',index:'shannon', width:90,align:"center", sortype:"float"},		
-			{name:'simpson',index:'simpson', width:90,align:"center", sortype:"float"}		
+			{name:'wholeTree',index:'wholeTree', width:90,align:"center", sortype:"float"},
+			{name:'shannon',index:'shannon', width:90,align:"center", sortype:"float"},
+			{name:'simpson',index:'simpson', width:90,align:"center", sortype:"float"}
 		],
 		pager: "#plist51",
 		viewrecords: true,
 		caption: "样品Alpha多样性统计结果"
 	});
  })
-{% if alpha_diff_exist %} 
+{% if alpha_diff_exist %}
 var alpha_diversity_diffs=[
 
 {% for key,alphaDiversity in alpha_diversity_diffs.items() %}
-		
+
 {sampleName:"{{ alphaDiversity.alphaName }}",chao1:"{{ alphaDiversity.chao1 }}",goodsCoverage:"{{ alphaDiversity.goods_coverage }}",observedSpecies:"{{ alphaDiversity.observed_species }}",wholeTree:"{{ alphaDiversity.whole_tree }}",shannon:"{{ alphaDiversity.shannon }}",simpson:"{{ alphaDiversity.simpson }}"},
-	{% endfor %}	
+	{% endfor %}
 ];
- 
+
  jQuery().ready(function (){
 	jQuery("#list52").jqGrid({
 		data: alpha_diversity_diffs,
@@ -167,24 +167,24 @@ var alpha_diversity_diffs=[
 			{name:'chao1',index:'chao1', width:90,align:"center", sortype:"float"},
 			{name:'goodsCoverage',index:'goodsCoverage', width:90,align:"center", sortype:"float"},
 			{name:'observedSpecies',index:'observedSpecies', width:90,align:"center", sortype:"float"},
-			{name:'wholeTree',index:'wholeTree', width:90,align:"center", sortype:"float"},		
-			{name:'shannon',index:'shannon', width:90,align:"center", sortype:"float"},		
-			{name:'simpson',index:'simpson', width:90,align:"center", sortype:"float"}		
+			{name:'wholeTree',index:'wholeTree', width:90,align:"center", sortype:"float"},
+			{name:'shannon',index:'shannon', width:90,align:"center", sortype:"float"},
+			{name:'simpson',index:'simpson', width:90,align:"center", sortype:"float"}
 		],
 		pager: "#plist52",
 		viewrecords: true,
 		caption: "Alpha diversity指数差异检验"
 	});
  })
- 
+
 {% endif %}
 
 
 {% if beta_diversity_exist %}
  var beta_diversitys=[
  {% for beta_diversity in beta_diversity_data %}
- {{ beta_diversity }}	
-	{% endfor %}	
+ {{ beta_diversity }}
+	{% endfor %}
  ];
  jQuery().ready(function (){
 	jQuery("#list53").jqGrid({
@@ -196,8 +196,8 @@ var alpha_diversity_diffs=[
 		colNames:['{{ beta_diversity_sampleName }}'],
 		colModel:[
 			 {% for beta_diversity in beta_diversity_jqGrid %}
-			 {{ beta_diversity }}	
-				{% endfor %}		
+			 {{ beta_diversity }}
+				{% endfor %}
 		],
 		pager: "#plist53",
 		viewrecords: true,
@@ -209,8 +209,8 @@ var alpha_diversity_diffs=[
 {% if beta_un_diversity_exist %}
  var beta_un_diversitys=[
  {% for beta_diversity in beta_un_diversity_data %}
- {{ beta_diversity }}	
-	{% endfor %}	
+ {{ beta_diversity }}
+	{% endfor %}
  ];
 jQuery().ready(function (){
 	jQuery("#list54").jqGrid({
@@ -222,8 +222,8 @@ jQuery().ready(function (){
 		colNames:['{{ beta_un_diversity_sampleName }}'],
 		colModel:[
 			 {% for beta_diversity in beta_un_diversity_jqGrid %}
-			 {{ beta_diversity }}	
-				{% endfor %}		
+			 {{ beta_diversity }}
+				{% endfor %}
 		],
 		pager: "#plist54",
 		viewrecords: true,
@@ -231,13 +231,13 @@ jQuery().ready(function (){
 	});
  })
  {% endif %}
- 
+
 {% if diff_otu_marker_exist %}
 var diff_otu_markers=[
  {% for value in diff_otu_marker_data %}
- {{ value }}	
-	{% endfor %}	
- ];  
+ {{ value }}
+	{% endfor %}
+ ];
 jQuery().ready(function (){
 	jQuery("#list55").jqGrid({
 		data: diff_otu_markers,
@@ -248,8 +248,8 @@ jQuery().ready(function (){
 		colNames:['{{ diff_otu_marker_sampleName }}'],
 		colModel:[
 			 {% for value in diff_otu_marker_jqGrid %}
-			 {{ value }}	
-				{% endfor %}		
+			 {{ value }}
+				{% endfor %}
 		],
 		pager: "#plist55",
 		viewrecords: true,
@@ -262,9 +262,9 @@ jQuery().ready(function (){
 {% if diff_genus_marker_exist %}
 var diff_genus_markers=[
  {% for value in diff_genus_marker_data %}
- {{ value }}	
-	{% endfor %}	
- ]; 
+ {{ value }}
+	{% endfor %}
+ ];
  jQuery().ready(function (){
 	jQuery("#list56").jqGrid({
 		data: diff_genus_markers,
@@ -275,22 +275,22 @@ var diff_genus_markers=[
 		colNames:['{{ diff_genus_marker_sampleName }}'],
 		colModel:[
 			 {% for value in diff_genus_marker_jqGrid %}
-			 {{ value }}	
-				{% endfor %}		
+			 {{ value }}
+				{% endfor %}
 		],
 		pager: "#plist56",
 		viewrecords: true,
 		caption: "差异显著物种列表"
 	});
  })
-{% endif %} 
+{% endif %}
 
 {% if diff_taxall_marker_exist %}
  var diff_taxall_markers=[
- {% for value in diff_genus_marker_data %}
- {{ value }}	
-	{% endfor %}	
- ]; 
+ {% for value in diff_taxall_marker_data %}
+ {{ value }}
+	{% endfor %}
+ ];
  jQuery().ready(function (){
 	jQuery("#list57").jqGrid({
 		data: diff_taxall_markers,
@@ -301,8 +301,8 @@ var diff_genus_markers=[
 		colNames:['{{ diff_taxall_marker_sampleName }}'],
 		colModel:[
 			 {% for value in diff_taxall_marker_jqGrid %}
-			 {{ value }}	
-				{% endfor %}		
+			 {{ value }}
+				{% endfor %}
 		],
 		pager: "#plist57",
 		viewrecords: true,
@@ -315,9 +315,9 @@ var diff_genus_markers=[
 {% if diff_phylum_marker_exist %}
  var diff_phylum_markers=[
  {% for value in diff_phylum_marker_data %}
- {{ value }}	
-	{% endfor %}	
- ]; 
+ {{ value }}
+	{% endfor %}
+ ];
  jQuery().ready(function (){
 	jQuery("#list58").jqGrid({
 		data: beta_diversitysj,
@@ -328,8 +328,8 @@ var diff_genus_markers=[
 		colNames:['{{ diff_phylum_marker_sampleName }}'],
 		colModel:[
 			 {% for value in diff_phylum_marker_jqGrid %}
-			 {{ value }}	
-				{% endfor %}			
+			 {{ value }}
+				{% endfor %}
 		],
 		pager: "#plist58",
 		viewrecords: true,
