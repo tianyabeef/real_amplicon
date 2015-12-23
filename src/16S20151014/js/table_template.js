@@ -287,7 +287,7 @@ var diff_genus_markers=[
 
 {% if diff_taxall_marker_exist %}
  var diff_taxall_markers=[
- {% for value in diff_genus_marker_data %}
+ {% for value in diff_taxall_marker_data %}
  {{ value }}	
 	{% endfor %}	
  ]; 
