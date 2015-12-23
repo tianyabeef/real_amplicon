@@ -26,23 +26,23 @@
 <script type="text/javascript" src="js/table.js"></script><!--表格-->
 <script language="Javascript">
 	function StartExcel(strAllName){
-    var oExcel;
-    var oWorkbook;
-	if(strAllName==null || strAllName==""){
-		alert("不存在表格");
-		return;
-	}
-	if (window.ActiveXObject){
-		oExcel = new ActiveXObject("Excel.Application");
-	}else{
-		alert("建议使用IE浏览器");
-		window.open(strAllName , "_blank")
-		return;
-	}
-    oExcel.Workbooks.Open(strAllName);
-  //  oExcel.DisplayAlerts = false;
-    oExcel.Visible = true;
-//	oExcel.Quit();
+		var oExcel;
+		var oWorkbook;
+		if(strAllName==null || strAllName==""){
+			alert("不存在表格");
+			return;
+		}
+		if (window.ActiveXObject){
+			oExcel = new ActiveXObject("Excel.Application");
+		}else{
+	//		alert("建议使用IE浏览器");
+			window.open(strAllName , "_blank")
+			return;
+		}
+		oExcel.Workbooks.Open(strAllName);
+	  //  oExcel.DisplayAlerts = false;
+		oExcel.Visible = true;
+	//	oExcel.Quit();
     }
 </script>
 

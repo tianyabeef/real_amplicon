@@ -16,7 +16,7 @@ if(sample_num <=9 ){
         xpd=TRUE,main = "Genus",
         draw.segments = T,
         frame.plot=T,
-        key.loc=c(4,-1),
+        key.loc=c(3.5,-1),
         col.segments = rainbow(10),
         ylim=ylim
     )
@@ -69,32 +69,71 @@ if(sample_num > 36 && sample_num<=56){
         t(X),
         labels=colnames(X),
         len=1,
-        # ncol=10,
         xpd=TRUE,main = "Genus",
         draw.segments = T,
         frame.plot=T,
         key.loc=loc,
         col.segments = rainbow(10),
-        ylim=c(-2,20)
+        ylim=c(-2,18)
     )
 }
-if(sample_num > 56){
+if(sample_num > 56 && sample_num<=63){
     loc=c(10,-1)
-    ymax = floor((sample_num - 56) / 14)* 5 + 32
-    ylim=c(-3,ymax)
-    ymax
     stars(
         t(X),
         labels=colnames(X),
         len=1,
-        ncol=7,
         xpd=TRUE,main = "Genus",
         draw.segments = T,
         frame.plot=T,
         key.loc=loc,
         col.segments = rainbow(10),
-        ylim=ylim
+        ylim=c(1,15)
     )
 
 }
+if(sample_num > 63 && sample_num <= 72){
+    loc=c(10,-1)
+    stars(
+        t(X),
+        labels=colnames(X),
+        len=1,
+        xpd=TRUE,main = "Genus",
+        draw.segments = T,
+        frame.plot=T,
+        key.loc=loc,
+        col.segments = rainbow(10),
+        ylim=c(2,18)
+    )
+
+}
+if(sample_num > 72 && sample_num < 90){
+    loc = c(12,-1)
+    stars(
+        t(X),
+        labels = colnames(X),
+        len=1,
+        xpd=TRUE, main = "Genus",
+        draw.segments = T,
+        frame.plot = T,
+        key.loc = loc,
+        col.segments = rainbow(10),
+        ylim = c(3,15)
+    )
+}
+if(sample_num > 90){
+    loc = c(12,-1)
+    stars(
+        t(X),
+        labels = colnames(X),
+        len=1,
+        xpd=TRUE, main = "Genus",
+        draw.segments = T,
+        frame.plot = T,
+        key.loc = loc,
+        col.segments = rainbow(10),
+        ylim = c(3,15)
+    )
+}
 dev.off()
+
