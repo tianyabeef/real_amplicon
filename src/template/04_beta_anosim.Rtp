@@ -1,0 +1,24 @@
+source('/data_center_01/pipeline/16S_ITS_pipeline_v3.0/src/template/labels2colors.R')
+library('vegan')
+
+X=read.table("@#{distance_table}",header=TRUE,row.names=1,sep="\t",check.names=F,quote="")
+group=read.table("@#{group_file}",header=F,row.names=1,check.names=F,quote="")
+X = X[,rownames(group)]
+color_list = group2corlor(group)
+sample_colors = color_list[[1]]
+group_colors = color_list[[2]]
+group_names = color_list[[3]]
+group = color_list[[4]]
+
+X.anosim = anosim(vegdist(X), group[,1])
+
+pdf("@#{pdf_file}",11,8.5)
+par(mar=c(4.1,5.1,3.1,2.1))
+
+plot(X.anosim,
+	col=c('#FF6C00', group_colors),
+	ylab=paste("@#{distance_name}","Rank"),
+	main=paste("@#{distance_name}","Anosim")
+)
+
+dev.off()

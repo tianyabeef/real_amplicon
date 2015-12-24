@@ -1,7 +1,16 @@
 // JavaScript Document
 var dataStatisticals = [
 	{% for key,otuStatistical in otuStatisticals %}
-		{sampleName:"{{ otuStatistical.sampleName }}",ampliconType:"{{ otuStatistical.amplicon_type }}",cleanReads:"{{ otuStatistical.clean_read }}",Q20:"{{ otuStatistical.q20 }}",Q30:"{{ otuStatistical.q30 }}",mappedReads:"{{ otuStatistical.mapped_reads }}",mappedRatio:"{{ otuStatistical.mapped_ratio }}",OTUs:"{{ otuStatistical.otus }}"},
+		{
+			sampleName:"{{ otuStatistical.sampleName|safe }}",
+			ampliconType:"{{ otuStatistical.amplicon_type }}",
+			cleanReads:"{{ otuStatistical.clean_read }}",
+			Q20:"{{ otuStatistical.q20 }}",
+			Q30:"{{ otuStatistical.q30 }}",
+			mappedReads:"{{ otuStatistical.mapped_reads }}",
+			mappedRatio:"{{ otuStatistical.mapped_ratio }}",
+			OTUs:"{{ otuStatistical.otus }}"
+		},
 	{% endfor %}
 	];
 jQuery().ready(function (){
@@ -35,7 +44,12 @@ var otuStatisticalDownsizes=[
 
  {% for key,otuStatisticalDownsize in otuStatisticalDownsizes %}
 
- {sampleName:"{{ otuStatisticalDownsize.sample_name }}",downsize:"{{ otuStatisticalDownsize.downsize }}",otus_before:"{{ otuStatisticalDownsize.otus_before }}",otus_after:"{{ otuStatisticalDownsize.otus_after }}"},
+ {
+	 sampleName:"{{ otuStatisticalDownsize.sample_name|safe }}",
+	 downsize:"{{ otuStatisticalDownsize.downsize }}",
+	 otus_before:"{{ otuStatisticalDownsize.otus_before }}",
+	 otus_after:"{{ otuStatisticalDownsize.otus_after }}"
+ },
 	{% endfor %}
 ];
 jQuery().ready(function (){
@@ -64,7 +78,11 @@ var coreMicrobiomes=[
 
  {% for key,coreMicrobiome in coreMicrobiomes.items() %}
 
- {otuId:"{{ coreMicrobiome.otu_id }}",taxonomyLevel:"{{ coreMicrobiome.taxonomy_level }}",taxonomyName:"{{ coreMicrobiome.taxonomy_name }}"},
+ {
+	 otuId:"{{ coreMicrobiome.otu_id|safe }}",
+	 taxonomyLevel:"{{ coreMicrobiome.taxonomy_level|safe }}",
+	 taxonomyName:"{{ coreMicrobiome.taxonomy_name|safe }}"
+ },
 	{% endfor %}
 ];
  jQuery().ready(function (){
@@ -90,11 +108,14 @@ var coreMicrobiomes=[
 
 var otuAssignmentsStatisticals=[
 
-	 {% for  key,otuAssignmentsStatistical in otuAssignmentsStatisticals.items() %}
+    {% for  key,otuAssignmentsStatistical in otuAssignmentsStatisticals.items() %}
 
-	 {otuName:"{{ key }}",num:"{{ otuAssignmentsStatistical.num }}"},
+	{
+		otuName:"{{ key }}",
+		num:"{{ otuAssignmentsStatistical.num }}"
+    },
 
-	 {% endfor %}
+	{% endfor %}
 ];
 
 	jQuery().ready(function (){
@@ -119,7 +140,15 @@ var alpha_diversitys=[
 
  {% for key,alphaDiversity in alpha_diversitys.items() %}
 
- {sampleName:"{{ alphaDiversity.alphaName }}",chao1:"{{ alphaDiversity.chao1 }}",goodsCoverage:"{{ alphaDiversity.goods_coverage }}",observedSpecies:"{{ alphaDiversity.observed_species }}",wholeTree:"{{ alphaDiversity.whole_tree }}",shannon:"{{ alphaDiversity.shannon }}",simpson:"{{ alphaDiversity.simpson }}"},
+{
+    sampleName:"{{ alphaDiversity.alphaName|safe }}",
+    chao1:"{{ alphaDiversity.chao1 }}",
+    goodsCoverage:"{{ alphaDiversity.goods_coverage }}",
+    observedSpecies:"{{ alphaDiversity.observed_species }}",
+    wholeTree:"{{ alphaDiversity.whole_tree }}",
+    shannon:"{{ alphaDiversity.shannon }}",
+    simpson:"{{ alphaDiversity.simpson }}"
+},
 	{% endfor %}
 ];
 
@@ -150,7 +179,15 @@ var alpha_diversity_diffs=[
 
 {% for key,alphaDiversity in alpha_diversity_diffs.items() %}
 
-{sampleName:"{{ alphaDiversity.alphaName }}",chao1:"{{ alphaDiversity.chao1 }}",goodsCoverage:"{{ alphaDiversity.goods_coverage }}",observedSpecies:"{{ alphaDiversity.observed_species }}",wholeTree:"{{ alphaDiversity.whole_tree }}",shannon:"{{ alphaDiversity.shannon }}",simpson:"{{ alphaDiversity.simpson }}"},
+{
+    sampleName:"{{ alphaDiversity.alphaName|safe}}",
+        chao1:"{{ alphaDiversity.chao1 }}",
+    goodsCoverage:"{{ alphaDiversity.goods_coverage }}",
+    observedSpecies:"{{ alphaDiversity.observed_species }}",
+    wholeTree:"{{ alphaDiversity.whole_tree }}",
+    shannon:"{{ alphaDiversity.shannon }}",
+    simpson:"{{ alphaDiversity.simpson }}"
+},
 	{% endfor %}
 ];
 
@@ -181,11 +218,11 @@ var alpha_diversity_diffs=[
 
 
 {% if beta_diversity_exist %}
- var beta_diversitys=[
- {% for beta_diversity in beta_diversity_data %}
- {{ beta_diversity }}
-	{% endfor %}
- ];
+var beta_diversitys=[
+    {% for beta_diversity in beta_diversity_data %}
+        {{ beta_diversity }}
+    {% endfor %}
+];
  jQuery().ready(function (){
 	jQuery("#list53").jqGrid({
 		data: beta_diversitys,
@@ -313,11 +350,11 @@ var diff_genus_markers=[
 {% endif %}
 
 {% if diff_phylum_marker_exist %}
- var diff_phylum_markers=[
- {% for value in diff_phylum_marker_data %}
- {{ value }}
-	{% endfor %}
- ];
+    var diff_phylum_markers=[
+    {% for value in diff_phylum_marker_data %}
+        {{ value }}
+    {% endfor %}
+];
  jQuery().ready(function (){
 	jQuery("#list58").jqGrid({
 		data: beta_diversitysj,
@@ -328,8 +365,8 @@ var diff_genus_markers=[
 		colNames:['{{ diff_phylum_marker_sampleName }}'],
 		colModel:[
 			 {% for value in diff_phylum_marker_jqGrid %}
-			 {{ value }}
-				{% endfor %}
+			     {{ value }}
+             {% endfor %}
 		],
 		pager: "#plist58",
 		viewrecords: true,
