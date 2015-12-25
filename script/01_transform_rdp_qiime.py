@@ -6,18 +6,22 @@ import re
 import argparse
 from util import mkdir
 
+
 def read_params(args):
     parser = argparse.ArgumentParser(description='transform rdp out file to qiime | v1.0 at 2015/09/21 by liangzb')
-    parser.add_argument('-i','--infile',dest='infile',metavar='FILE',type=str,required=True,
-            help="set the input file")
-    parser.add_argument('-c','--conf',dest='conf',metavar='FLOAT',type=float,default=0.8,
-            help="set the confidence cutoff, [ default is 0.8 ]")
-    parser.add_argument('-o','--outdir',dest='outfile',metavar='FILE',type=str,required=True,
-            help="set the output file")
+    parser.add_argument('-i', '--infile', dest='infile', metavar='FILE', type=str, required=True,
+                        help="set the input file")
+    parser.add_argument('-c', '--conf', dest='conf', metavar='FLOAT', type=float, default=0.8,
+                        help="set the confidence cutoff, [ default is 0.8 ]")
+    parser.add_argument('-o', '--outdir', dest='outfile', metavar='FILE', type=str, required=True,
+                        help="set the output file")
+    parser.add_argument('--rm_pollutes', dest='pollutes', metavar='STRs', nargs='*', type=str, default=None,
+                        help="set the pollutes that should be removed, regrex is supported")
 
     args = parser.parse_args()
     params = vars(args)
     return params
+
 
 class Tax(object):
     def __init__(self):
@@ -25,13 +29,30 @@ class Tax(object):
         self.tax_name = ''
         self.tax_conf = 0
 
-def my_cmp(a,b):
-    n1 = re.search('(\d+)',a).group(1)
-    n2 = re.search('(\d+)',b).group(1)
-    return cmp(int(n1),int(n2))
 
-short_name = {'domain':'k','phylum':'p','class':'c','order':'o','family':'f','genus':'g','species':'s'}
-short_name_order = ['k','p','c','o','f','g','s']
+def my_cmp(a, b):
+    n1 = re.search('(\d+)', a).group(1)
+    n2 = re.search('(\d+)', b).group(1)
+    return cmp(int(n1), int(n2))
+
+
+short_name = {'domain': 'k', 'phylum': 'p', 'class': 'c', 'order': 'o', 'family': 'f', 'genus': 'g', 'species': 's'}
+short_name_order = ['k', 'p', 'c', 'o', 'f', 'g', 's']
+
+
+def get_pollute_regrex(pollutes):
+    regrex_list = []
+    for pollute in pollutes:
+        regrex_list.append(re.compile(pollute))
+    return regrex_list
+
+
+def find_pollutes(tax_str, pollutes):
+    for pollute in pollutes:
+        if pollute.search(tax_str):
+            return True
+    return False
+
 
 def read_rdp(file):
     otu_tax = {}
@@ -40,7 +61,7 @@ def read_rdp(file):
         tabs = line.strip().split('\t')
         otu_name = tabs[0]
         otu_tax[otu_name] = {}
-        for index in range(5,len(tabs),3):
+        for index in range(5, len(tabs), 3):
             tax = Tax()
             tax.tax_name = tabs[index].strip('"')
             tax.tax_level = tabs[index + 1]
@@ -52,10 +73,12 @@ def read_rdp(file):
     fp.close()
     return otu_tax
 
-def write_qiime(file,otu_tax,conf):
-    fp = open(file,'w')
+
+def write_qiime(file, otu_tax, conf, pollutes):
+    fp = open(file, 'w')
     out_str = ''
-    for otu in sorted(list(otu_tax.iterkeys()),cmp=my_cmp):
+    for otu in sorted(list(otu_tax.iterkeys()), cmp=my_cmp):
+
         pre_out_str = otu + '\t'
         last_conf = 0
         for short_name in short_name_order:
@@ -65,18 +88,21 @@ def write_qiime(file,otu_tax,conf):
             if tax.tax_conf < conf:
                 break
             last_conf = tax.tax_conf
-            pre_out_str += '%s__%s;'%(short_name,tax.tax_name)
+            pre_out_str += '%s__%s;' % (short_name, tax.tax_name)
         if last_conf < conf:
             continue
         pre_out_str = pre_out_str.strip(';')
-        pre_out_str += '\t%s\n'%last_conf
+        pre_out_str += '\t%s\n' % last_conf
+        if find_pollutes(pre_out_str, pollutes):
+            continue
         out_str += pre_out_str
     fp.write(out_str)
     fp.close()
+
 
 if __name__ == '__main__':
     params = read_params(sys.argv)
     mkdir(os.path.dirname(params['outfile']))
     otu_tax = read_rdp(params['infile'])
-    write_qiime(params['outfile'],otu_tax,params['conf'])
-
+    pollute_regrex = get_pollute_regrex(params['pollutes'])
+    write_qiime(params['outfile'], otu_tax, params['conf'], pollute_regrex)
