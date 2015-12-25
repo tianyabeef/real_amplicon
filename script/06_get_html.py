@@ -486,7 +486,7 @@ def get_html():
     var_html['otu_krona'] = True
     var_html['phylogenetic_tree'] = False
     var_html['similarity_analysis'] = False
-    if min_sample_num_in_groups >= 3:
+    if min_sample_num_in_groups >= 3 and group_num >= 2:
         var_html['alpha_diff'] = True
     var_html['lefse_enough'] = False
     if min_sample_num_in_groups >= 3 and group_num >= 2:
