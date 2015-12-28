@@ -23,13 +23,22 @@ def read_params(args):
                         help="set the p_value cutoff")
     parser.add_argument('--paired', dest='paired', action='store_true',
                         help="paired compare")
-    parser.set_defaults(with_boxplot=False)
+    parser.set_defaults(paired=False)
     args = parser.parse_args()
     params = vars(args)
     params['marker'] = params['outdir'] + '/diff.marker.tsv'
     params['filt'] = params['outdir'] + '/diff.marker.filt.tsv'
     params['profile'] = params['outdir'] + '/profile.for_plot.txt'
+    params['paired'] = judge(params['paired'])
     return params
+
+
+def judge(value):
+    if value:
+        value = 'TRUE'
+    else:
+        value = 'FALSE'
+    return value
 
 
 def filt(infile, filt_file):
@@ -67,7 +76,7 @@ if __name__ == '__main__':
         'infile': params['infile'],
         'group_file': params['group'],
         'marker_file': params['marker'],
-        'pair': params['paired'],
+        'paired': params['paired'],
     }
     r_job.format(var)
     r_job.write(params['outdir'] + '/diff.marker.R')

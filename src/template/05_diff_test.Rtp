@@ -40,7 +40,8 @@ kruskal=function(X,group,g){
     p
 }
 if(group_num==2){
-    p <- apply(X, 1, function(row) unlist(wilcox.test(row[glist[[1]]],row[glist[[2]]],paired=@#{paired})["p.value"]))
+	paired=@#{paired}
+    p <- apply(X, 1, function(row) unlist(wilcox.test(row[glist[[1]]],row[glist[[2]]],paired=paired)["p.value"]))
 }else{
     p<-kruskal(X,group,g_order)
 }
