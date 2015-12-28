@@ -21,7 +21,9 @@ a:active {
  color:#ff7f24;
 }
 .cs-north {
-	height:60px;background:#B3DFDA;
+	height:60px;
+    background:#B3DFDA;
+
 }
 .cs-north-bg {
 	width:100%;
@@ -55,6 +57,7 @@ a:active {
 	margin-top:50px;}
 .cs-navi-tab {
 	padding:5px;
+	display:block;
 }
 .cs-tab-menu {
 	width:120px;
