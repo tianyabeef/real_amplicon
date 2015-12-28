@@ -162,7 +162,8 @@ def save_table(input_dir):
                 return [[], [], None, False]
     except IOError:
         exist = False
-        print "have no " + input_dir + "\n"
+        print
+        "have no " + input_dir + "\n"
 
     return [weight_unifrac_data_list, weight_unifrac_jqGrid_list, sampleName,
             exist]
@@ -233,7 +234,8 @@ def save_table2(input_dir):
                 return [[], [], None, False]
     except IOError:
         exist = False
-        print "have no " + input_dir + "\n"
+        print
+        "have no " + input_dir + "\n"
     return [weight_unifrac_data_list, weight_unifrac_jqGrid_list, sampleName,
             exist]
 
@@ -359,7 +361,8 @@ def get_html():
                 alpha_diversity_diffs[tabs[0]] = alpha_diversity
     except IOError:
         alpha_diff_exist = False
-        print "have no group_alpha_markers_txt\n"
+        print
+        "have no group_alpha_markers_txt\n"
 
     # save_table
     beta_un_diversity = save_table(work_dir + "../" + config.get(
@@ -470,6 +473,7 @@ def get_html():
         var_html['core_microbiome_html'] = True
         var_html['otu_pca'] = True
         var_html['otu_heatmap'] = True
+        var_html['uniFra_analysis_anosim'] = True
         var_html['uniFra_analysis_pcoa'] = True
         var_html['uniFra_analysis_nmds'] = True
 
