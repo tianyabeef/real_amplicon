@@ -4,8 +4,10 @@ import re
 from string import Template
 from collections import OrderedDict
 
+
 class MyTemplate(Template):
     delimiter = '@#'
+
 
 class Rparser(object):
     def __init__(self):
@@ -13,28 +15,27 @@ class Rparser(object):
         self.R_script = None
         self.file = None
 
-    def open(self,template):
+    def open(self, template):
         fp = open(template)
         template = fp.read()
         fp.close()
         self.template = MyTemplate(template)
 
-    def format(self,var):
+    def format(self, var):
         self.R_script = self.template.safe_substitute(var)
 
-    def write(self,outfile):
-        fp = open(outfile,'w')
+    def write(self, outfile):
+        fp = open(outfile, 'w')
         fp.write(self.R_script)
         self.file = outfile
         fp.close()
 
     def run(self):
-        os.system('R CMD BATCH --slave %(Rfile)s %(Rfile)sout'%{'Rfile':self.file})
+        os.system('R CMD BATCH --slave %(Rfile)s %(Rfile)sout' % {'Rfile': self.file})
 
 
 class TableParser(object):
-
-    def __init__(self,profile):
+    def __init__(self, profile):
         self.profile = profile
         self.sample_list = []
         self.otu_list = []
@@ -56,7 +57,7 @@ class TableParser(object):
                 otu_name = tabs.pop(0)
                 self.otu_list.append(otu_name)
                 self.OTUs[otu_name] = {}
-                for ind,sample in enumerate(self.sample_list):
+                for ind, sample in enumerate(self.sample_list):
                     profile = float(tabs[ind])
                     self.samples_sum[sample] += profile
                     self.samples[sample][otu_name] = profile
@@ -70,33 +71,32 @@ class TableParser(object):
                 self.samples[sample][otu] /= self.samples_sum[sample]
                 self.OTUs[otu][sample] /= self.samples_sum[sample]
 
-    def write_table(self,outfile):
-        with open(outfile,'w') as fp:
-            fp.write('OTU ID\t%s\n'%'\t'.join(self.sample_list))
+    def write_table(self, outfile):
+        with open(outfile, 'w') as fp:
+            fp.write('OTU ID\t%s\n' % '\t'.join(self.sample_list))
             for otu in self.otu_list:
                 out_str = otu
                 for sample in self.sample_list:
-                    out_str += '\t%s'%self.OTUs[otu][sample]
+                    out_str += '\t%s' % self.OTUs[otu][sample]
                 fp.write(out_str.strip() + '\n')
 
 
 class TaxParser(object):
-
-    def __init__(self,tax_file):
+    def __init__(self, tax_file):
         self.tax_file = tax_file
-        self.sorted_level = ['kingdom','phylum','class','order','family','genus','species']
+        self.sorted_level = ['kingdom', 'phylum', 'class', 'order', 'family', 'genus', 'species']
         self.tax_dict = {
-            'k':'kingdom',
-            'p':'phylum',
-            'c':'class',
-            'o':'order',
-            'f':'family',
-            'g':'genus',
-            's':'species',
+            'k': 'kingdom',
+            'p': 'phylum',
+            'c': 'class',
+            'o': 'order',
+            'f': 'family',
+            'g': 'genus',
+            's': 'species',
         }
         self.OTUs = {}
 
-    def init_otu(self,otu_name):
+    def init_otu(self, otu_name):
         if otu_name not in self.OTUs:
             self.OTUs[otu_name] = OrderedDict()
         for tax in self.sorted_level:
@@ -106,8 +106,8 @@ class TaxParser(object):
         with open(self.tax_file) as fp:
             for line in fp:
                 try:
-                    otu_name,tax_all,conf = line.strip().split('\t')
-                except ValueError,ex:
+                    otu_name, tax_all, conf = line.strip().split('\t')
+                except ValueError, ex:
                     if str(ex) == 'need more than 1 value to unpack':
                         continue
                     else:
@@ -117,24 +117,25 @@ class TaxParser(object):
                 taxes = tax_all.split(';')
                 for tax in taxes:
                     try:
-                        short_name = re.search('(\w)__',tax).group(1)
+                        short_name = re.search('(\w)__', tax).group(1)
                     except AttributeError:
                         continue
                     level = self.tax_dict[short_name]
                     self.OTUs[otu_name][level] = tax
 
     def remove_other(self):
-        for otu,subitem in self.OTUs.iteritems():
+        for otu, subitem in self.OTUs.iteritems():
             levels = list(subitem.iterkeys())
             for level in levels:
                 if self.OTUs[otu][level] == 'Other':
                     del self.OTUs[otu][level]
 
-def parse_stat_file(stat_file,group_file=None):
+
+def parse_stat_file(stat_file, group_file=None):
     group = parse_group_file(group_file)
     with open(stat_file) as fp:
         line = fp.next()
-        while(line):
+        while (line):
             line = fp.next().strip()
         fp.next()
         maximum = 0
@@ -147,7 +148,8 @@ def parse_stat_file(stat_file,group_file=None):
                 maximum = int(tabs[1])
             if minimum > int(tabs[2]):
                 minimum = int(tabs[2])
-    return maximum,minimum
+    return maximum, minimum
+
 
 def parse_group_file(file):
     if file is None:
