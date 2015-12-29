@@ -31,7 +31,7 @@ def beta_diversity(cfg_in, vars=None):
                                                        params['group'],
                                                        outfiles['beta_heatmap_dir']))
     # beta pcoa
-    if min_sample_num_in_groups >= 5:
+    if min_sample_num_in_groups >= 5 and group_num >= 2:
         with_boxplot = '--with_boxplot'
     else:
         with_boxplot = '--without_boxplot'
@@ -42,7 +42,7 @@ def beta_diversity(cfg_in, vars=None):
                                                           outfiles['beta_pcoa_dir'],
                                                           with_boxplot))
     # beta nmds
-    if min_sample_num_in_groups >= 5:
+    if min_sample_num_in_groups >= 5 and group_num >= 2:
         with_boxplot = '--with_boxplot'
     else:
         with_boxplot = '--without_boxplot'
@@ -53,7 +53,7 @@ def beta_diversity(cfg_in, vars=None):
                                                           outfiles['beta_nmds_dir'],
                                                           with_boxplot))
     # beta anosim
-    if min_sample_num_in_groups >= 5:
+    if min_sample_num_in_groups >= 5 and group_num >= 2:
         work.commands.append('%s -d %s -g %s -o %s' % (scripts['beta_anosim'],
                                                        outfiles['beta_div_dir'],
                                                        params['group'],

@@ -473,11 +473,12 @@ def get_html():
         var_html['core_microbiome_html'] = True
         var_html['otu_pca'] = True
         var_html['otu_heatmap'] = True
-        var_html['uniFra_analysis_anosim'] = True
-        var_html['uniFra_analysis_pcoa'] = True
-        var_html['uniFra_analysis_nmds'] = True
+        if group_num >= 2:
+            var_html['uniFra_analysis_anosim'] = True
+            var_html['uniFra_analysis_pcoa'] = True
+            var_html['uniFra_analysis_nmds'] = True
 
-    if group_num >= 2 and 5 >= group_num:
+    if 2 <= group_num <= 5:
         var_html['otu_venn'] = True
 
     var_html['rank_abundance'] = True
