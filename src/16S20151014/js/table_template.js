@@ -159,15 +159,16 @@ var alpha_diversitys=[
 		height: 230,
 		rowNum: 10,
 		rowList: [10,20,30],
-		colNames:['sampleName','chao1', 'goodsCoverage', 'observedSpecies','wholeTree','shannon','simpson'],
+		colNames:['sampleName','chao1','observedSpecies','wholeTree','shannon','simpson','goodsCoverage'],
 		colModel:[
 			{name:'sampleName',index:'sampleName', width:90,align:"center", sortype:"int"},
 			{name:'chao1',index:'chao1', width:90,align:"center", sortype:"float"},
-			{name:'goodsCoverage',index:'goodsCoverage', width:90,align:"center", sortype:"float"},
 			{name:'observedSpecies',index:'observedSpecies', width:90,align:"center", sortype:"float"},
 			{name:'wholeTree',index:'wholeTree', width:90,align:"center", sortype:"float"},
 			{name:'shannon',index:'shannon', width:90,align:"center", sortype:"float"},
-			{name:'simpson',index:'simpson', width:90,align:"center", sortype:"float"}
+			{name:'simpson',index:'simpson', width:90,align:"center", sortype:"float"},
+			{name:'goodsCoverage',index:'goodsCoverage', width:90,align:"center", sortype:"float"}
+
 		],
 		pager: "#plist51",
 		viewrecords: true,
