@@ -1,0 +1,19 @@
+library('vegan')
+
+weighted_unifrac=read.table("@#{weighted_unifrac}",header=TRUE,row.names=1,sep="\t",check.names=F,quote="")
+unweighted_unifrac=read.table("@#{unweighted_unifrac}",header=TRUE,row.names=1,sep="\t",check.names=F,quote="")
+group=read.table("@#{group_file}",header=F,row.names=1,check.names=F,quote="")
+
+weighted_unifrac = weighted_unifrac[,rownames(group)]
+unweighted_unifrac = unweighted_unifrac[,rownames(group)]
+
+mrpp.weighted_unifrac = mrpp(vegdist(weighted_unifrac), group[,1])
+mrpp.unweighted_unifrac = mrpp(vegdist(unweighted_unifrac), group[,1])
+
+t1 = as.data.frame(mrpp.weighted_unifrac$classdelta)
+t2 = as.data.frame(mrpp.unweighted_unifrac$classdelta)
+t1[2] = t1[1]
+t1[3] = t2[1]
+t1[1] = rownames(t1)
+colnames(t1) = c('groupname', 'classdelta.weighted_unifrac', 'classdelta.unweighted_unifrac')
+write.table(t1, file="@#{outfile}", quote=F, sep='\t', row.names=F)
