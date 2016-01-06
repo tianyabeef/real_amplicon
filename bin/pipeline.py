@@ -109,8 +109,7 @@ def work_02(pipeline, infiles=None):
 
 
 def work_alpha_rare_all(pipeline, out_stat_file, infiles=None):
-    work_dir = '%s/04_diversity_analysis/total_alpha_rare' % pipeline.config.get(
-            'params', 'work_dir')
+    work_dir = '%s/04_diversity_analysis/total_alpha_rare' % pipeline.config.get('params', 'work_dir')
     vars = {'work_dir': work_dir, 'rep_set': infiles['rep_set']}
     tree_outfiles = make_tree(pipeline.config, vars=vars)
     vars = {
@@ -133,8 +132,7 @@ def work_alpha_rare_all(pipeline, out_stat_file, infiles=None):
 
 
 def work_beta_anosim_adonis(pipeline, infiles=None, tree_file=None):
-    work_dir = '%s/04_diversity_analysis/beta_ANOSIM_ADONIS' % pipeline.config.get(
-            'params', 'work_dir')
+    work_dir = '%s/04_diversity_analysis/beta_ANOSIM_ADONIS' % pipeline.config.get('params', 'work_dir')
     vars = {
         'work_dir': work_dir,
         'otu_biom': infiles['otu_biom'],
@@ -150,8 +148,7 @@ def work_beta_anosim_adonis(pipeline, infiles=None, tree_file=None):
 
 
 def work_03(pipeline, analysis_name, infiles=None, pre_config=None):
-    work_dir = '%s/03_OTU_groups/%s' % (pipeline.config.get(
-            'params', 'work_dir'), analysis_name)
+    work_dir = '%s/03_OTU_groups/%s' % (pipeline.config.get('params', 'work_dir'), analysis_name)
     vars = {
         'work_dir': work_dir,
         'otu_table_in': infiles['otus_all'],
@@ -170,34 +167,42 @@ def work_03(pipeline, analysis_name, infiles=None, pre_config=None):
     otu_table_outfiles = make_otu_table(pipeline.config, vars=vars)
 
     vars = {
+        'work_dir': '%s/tax_rep_tree' % work_dir,
+        'rep_set': otu_table_outfiles['tax_set']
+    }
+    tax_rep_tree = make_tree(pipeline.config, vars=vars)
+
+    vars = {
         'work_dir': work_dir,
         'group': infiles['group_file'],
         'otu_biom': otu_table_outfiles['otu_biom'],
         'uniform_profile': otu_table_outfiles['uniform_profile'],
-        'tax_ass': otu_table_outfiles['tax_assign']
+        'tax_ass': otu_table_outfiles['tax_assign'],
+        'newick': tax_rep_tree['tree_file'],
     }
     taxanomy_group_outfiles = taxanomy_group(pipeline.config, vars=vars)
 
     pipeline.make_shell(work_dir + '/make.sh',
                         [('downsize', downsize_outfiles['config']),
                          ('make_otu_table', otu_table_outfiles['config']),
-                         ('taxanomy_total', taxanomy_group_outfiles['config'])
+                         ('make_tree', tax_rep_tree['config']),
+                         ('taxanomy_total', taxanomy_group_outfiles['config']),
                          ])
     pipeline.merge_shell(work_dir + '/work.sh',
                          [downsize_outfiles['shell'],
                           otu_table_outfiles['shell'],
-                          taxanomy_group_outfiles['shell']])
+                          tax_rep_tree['shell'],
+                          taxanomy_group_outfiles['shell'],
+                          ])
     pipeline.add_job('OTU_group_' + analysis_name,
                      work_dir + '/work.sh',
                      prep='OTU_all')
-    otu_table_outfiles['summarize_dir'
-    ] = taxanomy_group_outfiles['summarize_dir']
+    otu_table_outfiles['summarize_dir'] = taxanomy_group_outfiles['summarize_dir']
     return otu_table_outfiles
 
 
 def work_diff(pipeline, analysis_name, group_file, infiles=None):
-    work_dir = '%s/05_diff_analysis/%s' % (pipeline.config.get(
-            'params', 'work_dir'), analysis_name)
+    work_dir = '%s/05_diff_analysis/%s' % (pipeline.config.get('params', 'work_dir'), analysis_name)
     vars = {
         'work_dir': work_dir,
         'group': group_file,
@@ -213,6 +218,8 @@ def work_diff(pipeline, analysis_name, group_file, infiles=None):
     return outfiles
 
 
+# TODO:
+# make work_tree a script not a module
 def work_tree(pipeline, analysis_name, infiles=None):
     work_dir = '%s/04_diversity_analysis/%s/tree' % (
         pipeline.config.get('params', 'work_dir'), analysis_name)
@@ -227,9 +234,7 @@ def work_tree(pipeline, analysis_name, infiles=None):
 
 
 def work_alpha_diversity(pipeline, analysis_name, tree_file, infiles=None):
-    work_dir = '%s/04_diversity_analysis/%s/alpha' % (pipeline.config.get(
-            'params', 'work_dir'), analysis_name)
-
+    work_dir = '%s/04_diversity_analysis/%s/alpha' % (pipeline.config.get('params', 'work_dir'), analysis_name)
     vars = {
         'work_dir': work_dir,
         'alpha_group_file': infiles['group_file'],

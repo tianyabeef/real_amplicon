@@ -62,6 +62,11 @@ def taxanomy_group(cfg_in,vars=None):
                                                            params['group'],
                                                            outfiles['tax_heatmap_outdir'],
                                                            params['heatmap_top']))
+    # plot phylo tree
+    work.commands.append('%s --newick %s --tax_ass %s -o %s' % (scripts['plot_phylo_tree'],
+                                                                params['newick'],
+                                                                params['tax_ass'],
+                                                                outfiles['phylo_tree_outdir']))
     return outfiles
 
 if __name__ == '__main__':
