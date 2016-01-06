@@ -157,7 +157,7 @@ class Work(object):
         #        shell.write("echo -e 'Begin at : \c' && date\n")
         for cmd in self.commands:
             shell.write(cmd + '\n')
-        #            shell.write(cmd + " && echo -e 'This-Work-is-Completed! : \c' && date\n")
+        # shell.write(cmd + " && echo -e 'This-Work-is-Completed! : \c' && date\n")
         #        shell.write("echo -e 'All target finished at : \c' && date\n")
         shell.close()
 
@@ -168,6 +168,12 @@ class GroupFileError():
 
     def __str__(self):
         message = "the groupfile %s must in two cols!\n" % self.group_file
+        return message
+
+
+class AlphaGroupFileError(GroupFileError):
+    def __str__(self):
+        message = "the alpha group file %s must contain all samples!\n" % self.group_file
         return message
 
 
@@ -220,6 +226,8 @@ class Pipeline(Work):
             params['job_id']
             assert params['data_type'] == '16S' or params['data_type'] == 'ITS', 'data_type : %s' % params['data_type']
             assert os.path.isdir(params['work_dir']), 'work_dir : %s' % params['work_dir']
+            assert os.path.isfile(params['name_list']), 'name_list : %s' % params['name_list']
+            sample_num = os.popen("awk '{print $2}' %s| sort -u|wc -l" % params['name_list']).read().rstrip()
             for file in re.split('\s+', params['group_files']):
                 assert os.path.isfile(file), 'group_files : %s' % file
                 if not self.check_group_file(file):
@@ -227,20 +235,22 @@ class Pipeline(Work):
             assert os.path.isfile(params['alpha_group_file']), 'alpha_group_file : %s' % params['alpha_group_file']
             if not self.check_group_file(params['alpha_group_file']):
                 raise GroupFileError, params['alpha_group_file']
+            if os.popen("awk '{print $1}' %s|sort -u|wc -l" % params['alpha_group_file']).read().rstrip() != sample_num:
+                raise AlphaGroupFileError, params['alpha_group_file']
             assert os.path.isdir(params['raw_data_dir']), 'raw_data_dir : %s' % params['raw_data_dir']
             for file in re.split('\s', params['fq_for_merge']):
                 assert os.path.isfile(file), 'fq_for_merge : %s' % file
-            assert os.path.isfile(params['name_list']), 'name_list : %s' % params['name_list']
             params['require'] = int(params['require'])
             assert os.path.isdir(os.path.dirname(params['pipeline_shell'])), 'pipeline_shell : %s directory not exist' % \
                                                                              params['pipeline_shell']
-        #            assert os.path.isfile(params['pipeline_shell']), 'pipeline_shell : %s'%params['pipeline_shell']
 
     def check_group_file(self, group_file):
         if os.popen('file %s' % group_file).read().strip().split(': ')[-1] == 'empty':
             return False
+        count = 0
         with open(group_file) as fp:
             for line in fp:
+                count += 1
                 tabs = line.split('\t')
                 if len(tabs) != 2:
                     return False
