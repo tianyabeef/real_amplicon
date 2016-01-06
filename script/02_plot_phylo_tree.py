@@ -23,7 +23,7 @@ def read_params(args):
     parser.add_argument('--tax_ass', dest='tax_ass', metavar='FILE', type=str, required=True,
                         help="set the tax_assignment.txt")
     parser.add_argument('-o', '--outdir', dest='outdir', metavar='DIR', type=str, required=True,
-                        help="set the output tax_rep.fna")
+                        help="set the outdir")
 
     args = parser.parse_args()
     params = vars(args)
