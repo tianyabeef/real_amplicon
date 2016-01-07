@@ -431,9 +431,6 @@ def get_html():
     with open(work_dir + 'report/js/table.js', 'w') as fp:
         fp.write(table)
     # save_table
-    env = Environment(loader=FileSystemLoader(out_dir_report + 'js/',
-                                              encoding='utf-8'),
-                      autoescape=False)
     template = env.get_template('table_template_pdf.js')
     table = template.render(
             otuStatisticals=otuStatisticals,
