@@ -430,6 +430,51 @@ def get_html():
             diff_phylum_marker_exist=diff_phylum_marker[3])
     with open(work_dir + 'report/js/table.js', 'w') as fp:
         fp.write(table)
+    # save_table
+    env = Environment(loader=FileSystemLoader(out_dir_report + 'js/',
+                                              encoding='utf-8'),
+                      autoescape=False)
+    template = env.get_template('table_template_pdf.js')
+    otuStatisticals = sorted(otuStatisticals.iteritems(),
+                             key=operator.itemgetter(1),
+                             reverse=True)
+    otuStatisticalDownsizes = sorted(otuStatisticalDownsizes.iteritems(),
+                                     key=operator.itemgetter(1),
+                                     reverse=True)
+    table = template.render(
+            otuStatisticals=otuStatisticals,
+            otuStatisticalDownsizes=otuStatisticalDownsizes,
+            otuAssignmentsStatisticals=otuAssignmentsStatisticals,
+            alpha_diversitys=alpha_diversitys,
+            alpha_diversity_diffs=alpha_diversity_diffs,
+            alpha_diff_exist=alpha_diff_exist,
+            beta_diversity_data=beta_diversity[0],
+            beta_diversity_jqGrid=beta_diversity[1],
+            beta_diversity_sampleName=beta_diversity[2],
+            beta_diversity_exist=beta_diversity[3],
+            beta_un_diversity_data=beta_un_diversity[0],
+            beta_un_diversity_jqGrid=beta_un_diversity[1],
+            beta_un_diversity_sampleName=beta_un_diversity[2],
+            beta_un_diversity_exist=beta_un_diversity[3],
+            coreMicrobiomes=coreMicrobiomes,
+            diff_otu_marker_data=diff_otu_marker[0],
+            diff_otu_marker_jqGrid=diff_otu_marker[1],
+            diff_otu_marker_sampleName=diff_otu_marker[2],
+            diff_otu_marker_exist=diff_otu_marker[3],
+            diff_genus_marker_data=diff_genus_marker[0],
+            diff_genus_marker_jqGrid=diff_genus_marker[1],
+            diff_genus_marker_sampleName=diff_genus_marker[2],
+            diff_genus_marker_exist=diff_genus_marker[3],
+            diff_taxall_marker_data=diff_taxall_marker[0],
+            diff_taxall_marker_jqGrid=diff_taxall_marker[1],
+            diff_taxall_marker_sampleName=diff_taxall_marker[2],
+            diff_taxall_marker_exist=diff_taxall_marker[3],
+            diff_phylum_marker_data=diff_phylum_marker[0],
+            diff_phylum_marker_jqGrid=diff_phylum_marker[1],
+            diff_phylum_marker_sampleName=diff_phylum_marker[2],
+            diff_phylum_marker_exist=diff_phylum_marker[3])
+    with open(work_dir + 'report/js/table_pdf.js', 'w') as fp:
+        fp.write(table)
     # finally_get_html
 
     #    sample_num_in_groups,min_sample_mun_in_groups,sample_num_total,group_num = parse_group(group_file_origin)
