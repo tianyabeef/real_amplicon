@@ -110,7 +110,7 @@ def save_table(input_dir):
                 sampleName = ("','").join(samples_name_two)
             else:
                 sampleName = ("','").join(samples_name)
-            jqGrid_head = "{name:'sampleName',index:'sampleName',width:140,align:'center'},"
+            jqGrid_head = "{field: 'sampleName',title: 'Sample name',align: 'center',sortable: true,filterControl: 'input'},"
             weight_unifrac_jqGrid_list.append(jqGrid_head)
             count = 0
             samples_name = samples_name[1:]
@@ -130,9 +130,9 @@ def save_table(input_dir):
                             str += '%s:"%s",' % (
                                 value, stringasfloat(tabs[i + 1]))
                             # str += value+":\""+tabs[i+1]+"\","
-                            jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90},"
+                            jqGrid += "field:'" + value + "',title:'" + value + "',align:'center',filterControl:'input',sortable:true},"
                         else:
-                            jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90}"
+                            jqGrid += "field:'" + value + "',title:'" + value + "',align:'center',filterControl:'input',sortable:true}"
                             str += '%s:"%s"' % (
                                 value, stringasfloat(tabs[i + 1]))
                             # str += value+":\""+tabs[i+1]+"\""
@@ -145,11 +145,11 @@ def save_table(input_dir):
                             str += '%s:"%s",' % (
                                 value, stringasfloat(tabs[i + 1]))
                             # str += value+":\""+tabs[i+1]+"\","
-                            jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90},"
+                            jqGrid += "field:'" + value + "',title:'" + value + "',align:'center',filterControl:'input',sortable:true},"
                             if count == 1:
                                 weight_unifrac_jqGrid_list.append(jqGrid)
                         else:
-                            jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90}"
+                            jqGrid += "field:'" + value + "',title:'" + value + "',align:'center',filterControl:'input',sortable:true}"
                             str += '%s:"%s"' % (
                                 value, stringasfloat(tabs[i + 1]))
                             # str += value+":\""+tabs[i+1]+"\""
@@ -186,7 +186,7 @@ def save_table2(input_dir):
                 sampleName = ("','").join(samples_name_two)
             else:
                 sampleName = ("','").join(samples_name)
-            jqGrid_head = "{name:'taxonname',index:'taxonname',width:140,align:'center'},"
+            jqGrid_head = "{field: 'taxonname',title: 'taxonname',align: 'center',sortable: true,filterControl: 'input'},"
             weight_unifrac_jqGrid_list.append(jqGrid_head)
             count = 0
             samples_name = samples_name[1:]
@@ -206,9 +206,9 @@ def save_table2(input_dir):
                             str += '%s:"%s",' % (
                                 value, stringasfloat(tabs[i + 1]))
                             # str += value+":\""+tabs[i+1]+"\","
-                            jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90},"
+                            jqGrid += "field:'" + value + "',title:'" + value + "',align: 'center',filterControl: 'input',sortable: true},"
                         else:
-                            jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90}"
+                            jqGrid += "field:'" + value + "',title:'" + value + "',align: 'center',filterControl: 'input',sortable: true}"
                             str += '%s:"%s"' % (
                                 value, stringasfloat(tabs[i + 1]))
                             # str += value+":\""+tabs[i+1]+"\""
@@ -219,9 +219,9 @@ def save_table2(input_dir):
                             str += '%s:"%s",' % (
                                 varlue, stringasfloat(tabs[i + 1]))
                             # str += value+":\""+tabs[i+1]+"\","
-                            jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90},"
+                            jqGrid += "field:'" + value + "',title:'" + value + "',align: 'center',filterControl: 'input',sortable: true},"
                         else:
-                            jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90}"
+                            jqGrid += "field:'" + value + "',title:'" + value + "',align: 'center',filterControl: 'input',sortable: true}"
                             str += '%s:"%s"' % (
                                 value, stringasfloat(tabs[i + 1]))
                             # str += value+":\""+tabs[i+1]+"\""
