@@ -142,10 +142,15 @@ def read_tax(tax_ass):
 def get_tree_style():
     ts = TreeStyle()
     ts.mode = 'c'
+    ts.margin_top = 80
+    ts.margin_bottom = 50
+    ts.margin_left = 50
+    ts.margin_right = 50
     ts.show_leaf_name = False
     ts.show_branch_length = False
     ts.show_branch_support = False
     ts.show_scale = False
+    ts.title.add_face(TextFace("Tax Assignment Tree", fsize=30), column=0)
     return ts
 
 
@@ -154,7 +159,6 @@ def set_node_style(tree, total_profile):
     for node in tree.traverse():
         try:
             profile = total_profile.loc[node.name].sum() / sample_num
-            print profile
         except KeyError:
             profile = 10 / 500
         nstyle = NodeStyle()
