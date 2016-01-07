@@ -67,6 +67,11 @@ def taxanomy_group(cfg_in,vars=None):
                                                                 params['newick'],
                                                                 params['tax_ass'],
                                                                 outfiles['phylo_tree_outdir']))
+    # plot tax tree
+    work.commands.append('%s --profile %s --tax_ass %s -o %s'%(scripts['plot_tax_tree'],
+                                                               params['uniform_profile'],
+                                                               params['tax_ass'],
+                                                               outfiles['tax_tree_outdir']))
     return outfiles
 
 if __name__ == '__main__':

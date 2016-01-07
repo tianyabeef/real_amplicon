@@ -8,7 +8,7 @@ import argparse
 import os
 
 from cogent.parse.tree import DndParser, PhyloNode
-from util import mkdir, image_trans, cols_brewer
+from util import mkdir, image_trans, COLS_BREWER
 
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1, this_script_path + '/../src')
@@ -65,7 +65,7 @@ def get_support_file(group, tree_file, support_file):
 
     color_map = {}
     for ind, group_name in enumerate(list(set(group.itervalues()))):
-        color_map[group_name] = cols_brewer[ind]
+        color_map[group_name] = COLS_BREWER[ind]
     color_dict = {}
     t = DndParser(open(tree_file, 'U'), constructor=PhyloNode, unescape_name=True)
     nodes = t.getNodesDict()

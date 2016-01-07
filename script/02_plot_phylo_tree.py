@@ -13,7 +13,7 @@ from collections import OrderedDict
 from ete3.coretype.tree import TreeError
 from ete3 import Tree, TreeStyle, NodeStyle
 from ete3 import TextFace, faces, AttrFace, CircleFace
-from util import cols_brewer, mkdir, image_trans
+from util import COLS_BREWER, mkdir, image_trans
 
 
 def read_params(args):
@@ -56,7 +56,7 @@ def get_dict(tax_ass):
                 phylum_genus[p] = g
     color_dict = OrderedDict()
     for ind, p in enumerate(list(phylum_genus.iterkeys())):
-        color_dict[p] = cols_brewer[ind % 20]
+        color_dict[p] = COLS_BREWER[ind % 20]
     return color_dict, genus_in_phylum
 
 
