@@ -142,7 +142,7 @@ def read_tax(tax_ass):
 def get_tree_style():
     ts = TreeStyle()
     ts.mode = 'c'
-    ts.margin_top = 80
+    ts.margin_top = 100
     ts.margin_bottom = 50
     ts.margin_left = 50
     ts.margin_right = 50
@@ -150,7 +150,11 @@ def get_tree_style():
     ts.show_branch_length = False
     ts.show_branch_support = False
     ts.show_scale = False
-    ts.title.add_face(TextFace("Tax Assignment Tree", fsize=30), column=0)
+    title = TextFace("Tax Assignment Tree", fsize=100)
+    title.hz_align = 1
+    ts.title.add_face(TextFace(" "), column=0)
+    ts.title.add_face(TextFace(" "), column=0)
+    ts.title.add_face(TextFace("      Tax Assignment Tree", fsize=50), column=0)
     return ts
 
 
