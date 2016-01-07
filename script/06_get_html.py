@@ -435,12 +435,6 @@ def get_html():
                                               encoding='utf-8'),
                       autoescape=False)
     template = env.get_template('table_template_pdf.js')
-    otuStatisticals = sorted(otuStatisticals.iteritems(),
-                             key=operator.itemgetter(1),
-                             reverse=True)
-    otuStatisticalDownsizes = sorted(otuStatisticalDownsizes.iteritems(),
-                                     key=operator.itemgetter(1),
-                                     reverse=True)
     table = template.render(
             otuStatisticals=otuStatisticals,
             otuStatisticalDownsizes=otuStatisticalDownsizes,
