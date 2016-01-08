@@ -475,8 +475,8 @@ def get_html():
         var_html['otu_heatmap'] = True
         var_html['uniFra_analysis_pcoa'] = True
         var_html['uniFra_analysis_nmds'] = True
-        if group_num >= 2:
-            var_html['uniFra_analysis_anosim'] = True
+    if min_sample_num_in_groups >= 5 and group_num >= 2:
+        var_html['uniFra_analysis_anosim'] = True
 
     if 2 <= group_num <= 5:
         var_html['otu_venn'] = True
