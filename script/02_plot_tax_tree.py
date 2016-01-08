@@ -214,5 +214,5 @@ if __name__ == '__main__':
 
     pdf_file = '%s/tax_tree.pdf' % params['outdir']
     png_file = '%s/tax_tree.png' % params['outdir']
-    t.render(pdf_file, tree_style=ts, dpi=300)
+    t.render(pdf_file, tree_style=ts, dpi=100)
     image_trans(pdf_file, png_file)
