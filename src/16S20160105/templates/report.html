@@ -1,0 +1,922 @@
+{% extends "base.html" %}
+
+
+{% block reads_statistical_head %}
+    {% if reads_statistical %}
+        <p class="paragraph">
+            <a href="..\results\01_Reads\" target="_blank">
+                结果目录：01_Reads
+            </a>
+        </p>
+        <h3 id="优化序列统计">1.1优化序列统计</h3>
+        <p class="paragraph">
+            对16S rDNA高变区测序序列进行测序，测序为V3-V4区；
+            通过Pandaseq[1]软件利用重叠关系将双末端测序得到的成对Reads拼接成一条序列，得到高变区的长Reads。然后使用内部撰写的程序对拼接后的Reads进行如下处理，获取Clean Reads：
+            1）去除平均质量值低于20的Reads；
+            2）去除Reads含N的碱基数超过3个的Reads；
+            3）Reads长度范围为220~500 nt。
+        </p>
+        <p class="name_table">表4-2-1-1 优化数据统计</p>
+        <div class="center_table">
+            <div id="toolbar13" class="pull-left-self">
+                <select class="form-control">
+                    <option value="">Export Basic</option>
+                    <option value="all">Export All</option>
+                    <option value="selected">Export Selected</option>
+                </select>
+            </div>
+            <table id="table13" data-height="560" data-pagination="true" data-filter-control="true" data-show-export="true" data-page-list="[10, 25, 50, 100, 200, All]"></table>   
+        </div>
+        <p class="tremark">第一列sample：样品，第二列seqs，reads数量，第三列Bases：碱基数量，第四列Average length:reads的平均长度</p>
+        <p class="name_table">表4-2-1-2 长度分布</p>
+        <div class="center_table">
+            <div id="toolbar14" class="pull-left-self">
+                <select class="form-control">
+                    <option value="">Export Basic</option>
+                    <option value="all">Export All</option>
+                    <option value="selected">Export Selected</option>
+                </select>
+            </div>
+            <table id="table14" data-height="560" data-pagination="true" data-filter-control="true" data-show-export="true" data-page-list="[10, 25, 50, 100, 200, All]"></table>   
+        </div>
+        <p class="tremark">第一列length：碱基长度，第二列seqs，reads数量，第三列Precent：该区间的reads数量在总reads数量的百分比</p>
+        <p class="center">
+            <img class="size1" src="images/length_distrubution.png"/>
+        </p>
+        <p class="name_fig">图1-1 序列长度的统计</p>
+        <p class="premark">注：横坐标是序列的长度，纵坐标是Reads的数量</p>
+        <h3>各个样品数据统计</h3>
+        <p class="name_table">表4-2-2 各样本序列统计</p>
+        <div class="center_table">
+            <div id="toolbar15" class="pull-left-self">
+                <select class="form-control">
+                    <option value="">Export Basic</option>
+                    <option value="all">Export All</option>
+                    <option value="selected">Export Selected</option>
+                </select>
+            </div>
+            <table id="table15" data-height="560" data-pagination="true" data-filter-control="true" data-show-export="true" data-page-list="[10, 25, 50, 100, 200, All]"></table>   
+        </div>
+        <p class="tremark">第一列Sample：样品名，第二列seq：reads的数量，第三列：Base（bp）</p>
+    {% endif %}
+{% endblock %}
+
+
+{% block otu_statistical_head %}
+    {% if otu_statistical %}
+        <p class="paragraph">
+            <a href="..\results\02_OTU\" target="_blank">结果目录：02_OTU</a>
+        </p>
+        <h3 id="OTU聚类">2.1 OTU聚类</h3>
+        <p class="paragraph">
+            首先我们将序列完全一样的Clean
+            Reads根据其丰度大小进行排序，将其中的Singletons过滤掉，（因为Singletons可能由于测序错误造成，故将这部分序列去除，不进行后期OTU聚类），利用Usearch在0.97相似度下进行聚类，对聚类后的序列进行嵌合体过滤后，得到用于物种分类的OTU(Operational
+            Taxonomic Units)，最后将所有Clean Reads比对到OTU序列上，将能比对上OTU的Reads提取出来，得到最终的Mapped Reads。
+            统计各个样品每个OTU中的丰度信息，OTU的丰度初步说明了样品的物种丰富程度。{{ sample_sum }}个样品共产生{{ otu_sum }}个OTU。每个样品OTU统计结果见表2-1-1，详细信息表见
+            <a href="javascript:void(0)" onClick="StartExcel('..\\results\\01_Reads\\pick_otu_summary.tsv')">
+                pick_otu_summary.tsv
+            </a>
+            ，样品OTU统计表单。
+        </p>
+        <p class="name_table">表2-1-1 样品数据和OTU统计</p>
+
+        <div class="center_table">
+            <div id="toolbar1" class="pull-left-self">
+                <select class="form-control">
+                    <option value="">Export Basic</option>
+                    <option value="all">Export All</option>
+                    <option value="selected">Export Selected</option>
+                </select>
+            </div>
+            <table id="table1" data-height="580" data-pagination="true" data-filter-control="true" data-show-export="true" data-page-list="[10, 25, 50, 100, 200, All]"></table>
+        </div>
+
+        <p class="tremark">注:第一列Sample Name是样品名称；第二列Amplicon Type是指明测序是16S或者ITS；第三列Clean
+            Read是质控后的Reads条数；第四列Q20（%）是碱基质量值大于20的reads的比例；第五列Q30（%）是碱基质量值大于30的Reads的比例；第六列Mapped
+            Reads是比对上OTU的Reads占Clean
+            Reads的数量；第七列Mapped Reads(%)是比对上OTU的Reads占Clean Reads的比例；第八列OTUs是样品所含有的OTU个数。
+        </p>
+    {% endif %}
+{% endblock %}
+
+{% block downsize_head %}
+    {% if downsize_html %}
+        <h3 id="抽平处理">2.2 抽平处理</h3>
+        <p class="paragraph">
+            由于不同样品对应的Reads数量差距较大，为了保证后期分析结果合理，我们对每个样品的数据进行随机抽平处理，抽平参数根据Alpha多样性指数的稀释曲线来确定。
+        </p>
+        <p class="paragraph">
+            Alpha多样性反映的是单个样品内部的物种多样性，包括observed species指数、chao指数。
+        </p>
+
+
+        <p class="center">
+            <img class="size1" src="images/alpha/chao1.png"/><img class="size1"
+                                                                  src="images/alpha/observed_species.png"/>
+        </p>
+        <p class="name_fig">图2-2-1 表示样品物种丰富度Alpha多样性指数稀释曲线图</p>
+
+        <p class="premark">图中一条曲线代表一个样品，横轴表示从某个样品中随机抽取的Clean
+            Reads数目，纵轴表示该Reads数目对应的Alpha多样性指数的大小，随着测序深度的增加，当曲线趋于平缓时表示此时的测序数据量比较合理。</p>
+        <p class="paragraph">根据Alpha多样性分析，兼顾测序饱和度和样品完整性，我们对每个样品随机抽取{{ downsize }}条Reads。抽平后的样品OTU统计见
+            <a href="javascript:void(0)" onClick="StartExcel('..\\results\\02_OTU\\all\\otu_downsize_stat.tsv')">
+                otu_downsize_stat.tsv
+            </a>
+            中，表2-2-1 展示部分结果：
+        </p>
+        <p class="name_table">表2-2-1 抽平后样品OTU统计</p>
+        <div class="center_table">
+            <div id="toolbar2" class="pull-left-self">
+                <select class="form-control">
+                    <option value="">Export Basic</option>
+                    <option value="all">Export All</option>
+                    <option value="selected">Export Selected</option>
+                </select>
+            </div>
+            <table id="table2" data-height="560" data-pagination="true" data-filter-control="true" data-show-export="true" data-page-list="[10, 25, 50, 100, 200, All]"></table>
+        </div>
+        <p class="tremark">
+            注：第一列Sample Name是样品名称；第二列Downsize是抽平数量，第三列otu_berfore抽平前的OTU个数，第三列otus_after是抽平后样品所含有的OTU个数。
+        </p>
+    {% endif %}
+{% endblock %}
+
+
+{% block core_microbiome_head %}
+    {% if core_microbiome_html %}
+        <h3 id="Core microbiome分析">2.3 Core microbiome分析（总样品数>=5）</h3>
+        {% if core_otu_exists %}
+            <p class="center">共有OTU数与样品的关系</p>
+            <p class="center">
+                <img class="size1" src="images/group/core_otu.png"/>
+            </p>
+            <p class="name_fig">
+                图2-3-1 共有OTU数与样品的关系
+            </p>
+            <p class="premark">图中表示的是覆盖一定比例以上样品的OTU的数目，横坐标是覆盖样品的比例，纵坐标是统计的覆盖大于此比例样品的OTU的数目。</p>
+            <p class="paragraph">结合OTU所代表的物种，可以找出Core microbiome（即覆盖100%样品的微生物组）。该项目的Core
+                microbiome共包含{{ core_microbiome }}个OTUs，
+                <a href="javascript:void(0)"
+                   onClick="StartExcel('..\\results\\02_OTU\\{{ group_file }}\\core_otu.tsv')">
+                    core_otu.tsv
+                </a>
+                其部分物种信息如下：
+            </p>
+            <p class="name_table">表2-3-1 Core microbiome OTU列表</p>
+
+            <div class="center_table">
+                <div id="toolbar3" class="pull-left-self">
+                    <select class="form-control">
+                        <option value="">Export Basic</option>
+                        <option value="all">Export All</option>
+                        <option value="selected">Export Selected</option>
+                    </select>
+                </div>
+                <table id="table3" data-height="560" data-pagination="true" data-filter-control="true" data-show-export="true" data-page-list="[10, 25, 50, 100, 200, All]"></table>
+            </div>
+
+            <p class="tremark">
+                注：第一列OTU ID是OTU名称；第二列Taxonomy Level是OTU所代表的物种所在的分类水平；第三列Taxonomy Name是OTU所代表的物种名称。
+            </p>
+        {% else %}
+            <p class="error"> 未找到Core Microbiome </p>
+        {% endif %}
+    {% else %}
+        <h3 id="Core microbiome分析">2.3 Core microbiome分析（总样品数>=5）</h3>
+        <p class="error">样品数不足无法分析</p>
+    {% endif %}
+{% endblock %}
+
+
+{% block otu_venn_head %}
+    {% if otu_venn %}
+        <h3 id="OTU Venn图分析">2.4 OTU Venn图分析(分组数量2~5组)</h3>
+        <p class="paragraph">
+            在0.97的相似度下，得到了每个样品的OTU个数，利用Venn图可以展示多样品共有和各自特有OTU数目，直观展示样品间OTU的重叠情况。
+        </p>
+        <p class="center">
+            <img class="size1" src="images/group/venn.png"/>
+        </p>
+        <p class="name_fig">图2-4-1 OTU venn图（2-5组）</p>
+        <p class="premark">
+            不同颜色图形代表不同样品或者不同组别，不同颜色图形之间交叠部分数字为两个样品或两个组别之间共有的OTU个数。同理，多个颜色图形之间交叠部分数字为多个样品或组别之间共有OTU个数。Venn图容许2-5个样品或组别。
+        </p>
+
+    {% else %}
+        <h3 id="OTU Venn图分析">2.4 OTU Venn图分析(分组数量2~5组)</h3>
+        <p class="error">样品数不足无法分析</p>
+    {% endif %}
+{% endblock %}
+
+
+{% block otu_pca_head %}
+    {% if otu_pca %}
+        <h3 id="OTU PCA分析">2.5 OTU PCA分析（总样品数>=5）</h3>
+        <p class="paragraph">
+            PCA分析(Principal Component
+            Analysis)，即主成分分析，是一种分析和简化数据集的技术。不同处理或不同环境间的样品可能表现出分散和聚集的分布情况，从而可以判断相同条件的样品组成是否具有相似性。
+        </p>
+        <p class="center">
+            <img class="size2" src="images/group/otu_pca.png"/>
+        </p>
+        <p class="name_fig">图2-5-1 基于OTU丰度的PCA分析</p>
+        <p class="premark">
+            横坐标表示第一主成分，括号中的百分比则表示第一主成分对样品差异的贡献率；纵坐标表示第二主成分，括号中的百分比表示第二主成分对样品差异的贡献率。图中点分别表示各个样品。不同颜色代表样品属于不同的分组。</p>
+    {% else %}
+        <h3 id="OTU PCA分析">2.5 OTU PCA分析（总样品数>=5）</h3>
+        <p class="error">样品数不足无法分析</p>
+    {% endif %}
+{% endblock %}
+
+
+{% block specaccum_head %}
+    {% if specaccum %}
+        <h3 id="Specaccum物种累积曲线">2.6 Specaccum物种累积曲线（总样品数>=10）</h3>
+        <p class="paragraph">物种累积曲线(Species Accumulation
+            Curves)用于描述随着抽样量的加大物种增加的状况，是理解调查样地物种组成和预测物种丰富度的有效工具，在生物多样性和群落调查中，被广泛用于抽样量充分性的判断以及物种丰富度(Species
+            Richness)的估计。因此，通过物种累积曲线不仅可以判断抽样量是否充分，在抽样量充分的前提下，运用物种累积曲线还可以对物种丰富度进行预测。
+        </p>
+        <p class="center">
+            <img class="size2" src="images/specaccum.png"/>
+        </p>
+        <p class="name_fig">图2-6-1 物种累积曲线</p>
+        <p class="premark">注：横坐标是样品的数量，纵坐标是OTUs的数量</p>
+    {% else %}
+        <h3 id="Specaccum物种累积曲线">2.6 Specaccum物种累积曲线（总样品数>=10）</h3>
+        <p class="error">样品数不足无法分析</p>
+    {% endif %}
+{% endblock %}
+
+
+{% block otu_tax_assignments_head %}
+    {% if otu_tax_assignments %}
+        <h3 id="物种注释分析">3.1 物种注释分析</h3>
+        <p class="paragraph">
+            从各个OTU中挑选出丰度最高的一条序列，作为该OTU的代表序列（代表序列见文件rep_set.fna）。使用RDP方法，将该代表序列与已知物种的{{ amplification }}数据库进行比对，从而对每个OTU进行物种归类（物种注释结果见文件
+            <a href="javascript:void(0)" onClick="StartExcel('..\\results\\02_OTU\\all\\tax_assignment.tsv')">
+                tax_assignments.tsv
+            </a>
+            ）。
+        </p>
+        <p class="name_table">表3-1-1 OTU注释统计</p>
+
+        <div class="center_table">
+            <div id="toolbar4" class="pull-left-self">
+                <select class="form-control">
+                    <option value="">Export Basic</option>
+                    <option value="all">Export All</option>
+                    <option value="selected">Export Selected</option>
+                </select>
+            </div>
+            <table id="table4" data-height="560" data-pagination="true" data-filter-control="true" data-show-export="true" data-page-list="[10, 25, 50, 100, 200, All]"></table>
+        </div>
+    {% endif %}
+{% endblock %}
+
+
+{% block otu_annotation_statistical_head %}
+    {% if otu_annotation_statistical %}
+        <h3 id="物种注释结果统计">3.2 物种注释结果统计</h3>
+        <p class="paragraph">根据物种注释情况，统计每个样品注释到各分类水平(Kingdom, Phylum, Class, Order, Family,
+            Genus)上的相对丰度，由此可轻松了解注释到各分类水平的整体情况
+        </p>
+        <p class="paragraph">详细信息请见文件
+            <a href="javascript:void(0)" onClick="StartExcel('..\\results\\02_OTU\\all\\profile_tree.tsv')">
+                profile_tree.tsv。
+            </a>
+        </p>
+    {% endif %}
+{% endblock %}
+
+
+{% block tax_summary_head %}
+    {% if tax_summary %}
+        <h3 id="物种丰度分析">3.3 物种丰度分析</h3>
+        <p class="paragraph">分别在门、纲、目、科、属分类等级对各个样品做物种Profiling相应的柱状图。如图3-3-1展示。</p>
+                <!-- main slider carousel -->
+        <div class="row">
+            <div class="col-md-12" id="slider">                    
+                <div class="col-md-12" id="carousel-bounding-box">
+                    <div id="myCarousel1" class="carousel slide">
+                        <!-- 轮播（Carousel）项目 -->
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <img src="images/genus/bar_plot.png" alt="genus">
+                            </div>
+                            <div class="item">
+                                <img src="images/family/bar_plot.png" alt="family">
+                            </div>
+                            <div class="item">
+                                <img src="images/order/bar_plot.png" alt="order">
+                            </div>
+                            <div class="item">
+                                <img src="images/class/bar_plot.png" alt="class">
+                            </div>
+                            <div class="item">
+                                <img src="images/phylum/bar_plot.png" alt="phylum">
+                            </div>
+                        </div>
+                        <!-- 轮播（Carousel）导航 -->
+                        <a class="carousel-control left" href="#myCarousel1" data-slide="prev"><span class="img-switch-btn"></span></a>
+                        <a class="carousel-control right" href="#myCarousel1" data-slide="next"><span class="img-switch-btn2"></span></a>
+                           <!-- 控制按钮 -->
+                        <div style="text-align:center;">
+                            <input type="button" class="btn btn-success btn-sm" id="slide-1-0" value="genus">
+                            <input type="button" class="btn btn-success btn-sm" id="slide-1-1" value="family">            
+                            <input type="button" class="btn btn-success btn-sm" id="slide-1-2" value="order">
+                            <input type="button" class="btn btn-success btn-sm" id="slide-1-3" value="class">
+                            <input type="button" class="btn btn-success btn-sm" id="slide-1-4" value="phylum">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p class="name_fig">图3-3-1 样品各分类水平中物种Profiling柱状图</p>
+        <p class="premark">横轴为样品名称，纵轴为相对丰度的比例。颜色对应不同物种名称，色块长度表示该色块所代表的物种的相对丰度的比例。</p>
+        <p class="paragraph">根据样品分组信息，分别在门、纲、目、科、属分类等级对不同group做物种Profiling相应的柱状图。如图3-3-2展示。</p>
+                <!-- main slider carousel -->
+        <div class="row">
+            <div class="col-md-12" id="slider">                    
+                <div class="col-md-12" id="carousel-bounding-box">
+                    <div id="myCarousel2" class="carousel slide">
+                        <!-- 轮播（Carousel）项目 -->
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <img src="images/group/genus/bar_plot.png" alt="genus">
+                            </div>
+                            <div class="item">
+                                <img src="images/group/family/bar_plot.png" alt="family">
+                            </div>
+                            <div class="item">
+                                <img src="images/group/order/bar_plot.png" alt="order">
+                            </div>
+                            <div class="item">
+                                <img src="images/group/class/bar_plot.png" alt="class">
+                            </div>
+                            <div class="item">
+                                <img src="images/group/phylum/bar_plot.png" alt="phylum">
+                            </div>
+                        </div>
+                        <!-- 轮播（Carousel）导航 -->
+                        <a class="carousel-control left" href="#myCarousel2" data-slide="prev"><span class="img-switch-btn"></span></a>
+                        <a class="carousel-control right" href="#myCarousel2" data-slide="next"><span class="img-switch-btn2"></span></a>
+                           <!-- 控制按钮 -->
+                        <div style="text-align:center;">
+                            <input type="button" class="btn btn-success btn-sm" id="slide-2-0" value="genus">
+                            <input type="button" class="btn btn-success btn-sm" id="slide-2-1" value="family">            
+                            <input type="button" class="btn btn-success btn-sm" id="slide-2-2" value="order">
+                            <input type="button" class="btn btn-success btn-sm" id="slide-2-3" value="class">
+                            <input type="button" class="btn btn-success btn-sm" id="slide-2-4" value="phylum">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p class="name_fig">图3-3-2 不同group各分类水平中的物种Profiling柱状图</p>
+        <p class="premark">
+            横轴为分组名称，纵轴为相对丰度的比例。颜色对应不同物种名称，色块长度表示该色块所代表的物种的相对丰度的比例。
+        </p>
+
+        <p class="paragraph">
+            在属分类等级对{{ star_picture_top }}的物种丰度做Star图。图3-3-3展示了属分类等级上的top{{ star_picture_top }}的物种Star图。
+        </p>
+        {% if star_picture %}
+            <p class="center">
+                <img class="size5" src="images/tax_star.png"/>
+            </p>
+            <p class="name_fig">图3-3-3 属分类水平中不同group的top{{ star_picture_top }}物种Profiling星图</p>
+            <p class="remark">
+                一个星形图代表着一个样品的物种相对丰度信息。每个星形图中的扇形代表一个物种，用不同颜色区分，用扇形的半径来代表物种相对丰度的大小，扇形半径越长代表此扇形所对应的物种的相对丰度越高。
+            </p>
+        {% else %}
+            <p class="error">样品数3个以下时不具有比较意义</p>
+        {% endif %}
+
+    {% endif %}
+{% endblock %}
+
+{% block otu_heatmap_head %}
+    {% if otu_heatmap %}
+        <h3 id="物种热图分析">3.4 物种热图分析（总样品数>=5）</h3>
+        <p class="paragraph">
+            Heatmap是以颜色梯度来代表数据矩阵中数值的大小并能根据物种或样品丰度相似性进行聚类的一种图形展示方式。聚类结果加上样品的处理或取样环境分组信息，可以直观观察到相同处理或相似环境样品的聚类情况，并直接反映了样品的群落组成的相似性和差异性。本分析内容在属分类等级进行Heatmap聚类分析。纵向聚类表示所有物种在不同样品间表达的形似情况，距离越近，枝长越短，说明样品的物种组成及丰度越相似。横向聚类表示该物种在各样品丰度相似情况，与纵向聚类一样，距离越近，枝长越短，说明两物种在各样品间的组成越相似。
+        </p>
+        <p class="center">
+            <img class="size2" src="images/group/heatmap.png"/>
+        </p>
+        <p class="name_fig">图3-4-1 物种丰度热图</p>
+        <p class="premark">
+            Heatmap是以颜色梯度来代表数据矩阵中数值的大小并能根据物种或样品丰度相似性进行聚类。如有样品分组信息，图中前一行为样品分组信息，颜色与图列对应。
+        </p>
+    {% else %}
+        <h3 id="物种热图分析">3.4 物种热图分析（总样品数>=5）</h3>
+        <p class="error">样品数不足无法分析</p>
+    {% endif %}
+{% endblock %}
+
+{% block rank_abundance_head %}
+    {% if rank_abundance %}
+        <h3 id="Rank Abundance曲线">3.5 Rank Abundance曲线</h3>
+        <p class="paragraph">
+            将样品中的OTUs按相对丰度(或者包含的序列数目)由大到小排序得到对应的排序编号，再以OTUs的排序编号为横坐标，OTUs中的相对丰度（也可用该等级OTU中序列数的相对百分含量）为纵坐标,将这些点用折线连接，即绘制得到Rank
+            Abundance曲线
+        </p>
+        <p class="paragraph">Rank
+            Abundance曲线可直观的反应样品中包含的分类丰富度和均匀度，即在水平方向，分类的丰度由曲线的宽度来反映，分类的丰富度越高，曲线在横轴上的跨度越大；在垂直方向曲线的平滑程度，反映了样品中分类的均匀程度，曲线越平缓，物种分布越均匀。
+        </p>
+        <p class="center">
+            <img class="size2" src="images/rank_abundance.png"/>
+        </p>
+        <p class="name_fig">图3-5-1 Rank Abundance曲线</p>
+        <p class="premark">
+            注：横坐标为按OTUs丰度排序的序号(Rank)，纵坐标为对应的OTUs的丰度(Abundance)，不同的样品使用不同的颜色和线型的曲线表示。
+        </p>
+    {% endif %}
+{% endblock %}
+
+{% block otu_krona_head %}
+    {% if otu_krona %}
+        <h3 id="物种注释结果KRONA展示">3.6 物种注释结果KRONA展示</h3>
+        <p class="paragraph">
+            使用KRONA软件对物种注释结果进行可视化展示, 展示结果中，圆圈从内到外依次代表不同的分类级别，扇形的大小代表不同OTU注释结果的相对比例。图3-6-1如下所示：
+        </p>
+        <iframe name="myFrame" src="images/krona.html" width=100% height=668px></iframe>
+        <p class="name_fig">图3-6-1 物种注释结果可视化展示</p>
+
+    {% endif %}
+{% endblock %}
+
+
+{% block phylogenetic_tree_head %}
+    {% if phylogenetic_tree %}
+        <h3 id="系统进化关系展示">3.6 系统进化关系展示（更新）</h3>
+        <p class="paragraph">
+            为了进一步研究OTUs的系统进化关系，通过多序列比对得到所有OTUs代表序列的系统发生关系。选取最大相对丰度排名前{{ Phylogenetic_genus_top }}的属所对应的OTUs的系统发生关系数据，并结合每个OTUs的相对丰度及其代表序列的物种注释置信度信息，进行整合展示，由此可见这些属中的OTU之间的系统进化关系。
+        </p>
+        <p class="center">
+            <img class="size2" src="images/21.png"/>
+        </p>
+        <p class="name_fig">图 3-7 OTUs的系统发生关系及其物种注释</p>
+        <p class="premark">
+            说明：圈图共有三层，由里往外：第一层是OTUs代表序列构建的系统发育树，分支的颜色表示其对应的属名，每种颜色代表一个属；第二层是OTUs的相对丰度分布，柱子的高度表示OTUs的相对丰度大小(由于相对丰度跨越数据量很大，将按照最小值进行转化后再可视化)；第三层是OTUs注释可信度分布，柱子的高度表示OTUs注释的可信度。
+        </p>
+
+    {% endif %}
+{% endblock %}
+
+
+{% block alpha_diversity_head %}
+    {% if alpha_diversity %}
+        <p class="paragraph">
+            <a href="..\results\03_Alpha_diversity\{{ group_file }}" target="_blank">
+                结果目录：03_Alpha_diversity
+            </a>
+        </p>
+        <h3 id="单个样品多样性分析">4.1 单个样品多样性分析</h3>
+        <p class="paragraph">Alpha多样性反映的是单个样品内部的物种多样性，包括observed
+            species指数、chao1指数，shannon指数以及simpson指数，PD_whole_tree指数等。Alpha多样性统计见
+            <a href="javascript:void(0)"
+               onClick="StartExcel('..\\results\\03_Alpha_diversity\\{{ group_file }}\\alpha_statistic.tsv')">
+                alpha_statistic.tsv
+            </a>
+        </p>
+        <p class="name_table">表4-1-1 样品Alpha多样性统计结果</p>
+
+        <div class="center_table">
+            <div id="toolbar5" class="pull-left-self">
+                <select class="form-control">
+                    <option value="">Export Basic</option>
+                    <option value="all">Export All</option>
+                    <option value="selected">Export Selected</option>
+                </select>
+            </div>
+            <table id="table5" data-height="580" data-pagination="true" data-filter-control="true" data-show-export="true" data-page-list="[10, 25, 50, 100, 200, All]"></table>
+        </div>
+
+        <p class="tremark">注：第一列Sample Name是样品名称；第二列至最后一列是样品的不同的Alpha多样性指数的数值。</p>
+        <!-- main slider carousel -->
+        <div class="row">
+            <div class="col-md-12" id="slider">                    
+                <div class="col-md-12" id="carousel-bounding-box">
+                    <div id="myCarousel3" class="carousel slide">
+                        <!-- 轮播（Carousel）项目 -->
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <img src="images/group/alpha_div_collated/chao1.png" alt="First slide">
+                            </div>
+                            <div class="item">
+                                <img src="images/group/alpha_div_collated/goods_coverage.png" alt="second slide">
+                            </div>
+                            <div class="item">
+                                <img src="images/group/alpha_div_collated/observed_species.png" alt="third slide">
+                            </div>
+                            <div class="item">
+                                <img src="images/group/alpha_div_collated/PD_whole_tree.png" alt="four slide">
+                            </div>
+                            <div class="item">
+                                <img src="images/group/alpha_div_collated/shannon.png" alt="five slide">
+                            </div>
+                            <div class="item">
+                                <img src="images/group/alpha_div_collated/simpson.png" alt="six slide">
+                            </div>
+                        </div>
+                        <!-- 轮播（Carousel）导航 -->
+                        <a class="carousel-control left" href="#myCarousel3" data-slide="prev"><span class="img-switch-btn"></span></a>
+                        <a class="carousel-control right" href="#myCarousel3" data-slide="next"><span class="img-switch-btn2"></span></a>
+                           <!-- 控制按钮 -->
+                        <div style="text-align:center;">
+                            <input type="button" class="btn btn-success btn-sm" id="slide-3-0" value="chao1">
+                            <input type="button" class="btn btn-success btn-sm" id="slide-3-1" value="goods_coverage">            
+                            <input type="button" class="btn btn-success btn-sm" id="slide-3-2" value="observed_species">
+                            <input type="button" class="btn btn-success btn-sm" id="slide-3-3" value="PD_whole_tree">
+                            <input type="button" class="btn btn-success btn-sm" id="slide-3-4" value="shannon">
+                            <input type="button" class="btn btn-success btn-sm" id="slide-3-5" value="simpson">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="name_fig"> 图4-1-1 样品物种丰度Alpha多样性指数稀释曲线图 </p>
+        <p class="premark"> 注：图中一种颜色代表一组样品，横轴表示抽取的reads数量，纵轴表示相应Alpha多样性指数的值。</p>
+    {% else %}
+        <h3 id="单个样品多样性分析">4.1 单个样品多样性分析</h3>
+        <p class="error">样品数不足无法分析</p>
+    {% endif %}
+{% endblock %}
+
+
+{% block alpha_diff_head %}
+    {% if alpha_diff %}
+        <h3 id="单个样品差异分析">4.2 单个样品差异分析(每组内样品数>=3)</h3>
+        {% if alpha_diff_boxplot %}
+            <!-- main slider carousel -->
+            <div class="row">
+                <div class="col-md-12" id="slider">                    
+                    <div class="col-md-12" id="carousel-bounding-box">
+                        <div id="myCarousel4" class="carousel slide">
+                            <!-- 轮播（Carousel）项目 -->
+                            <div class="carousel-inner">
+                                <div class="item active">
+                                    <img src="images/group/box_plot/chao1.boxplot.png" alt="chao1">
+                                </div>
+                                <div class="item">
+                                    <img src="images/group/box_plot/goods_coverage.boxplot.png" alt="goods_coverage">
+                                </div>
+                                <div class="item">
+                                    <img src="images/group/box_plot/observed_species.boxplot.png" alt="observed_species">
+                                </div>
+                                <div class="item">
+                                    <img src="images/group/box_plot/PD_whole_tree.boxplot.png" alt="PD_whole_tree">
+                                </div>
+                                <div class="item">
+                                    <img src="images/group/box_plot/shannon.boxplot.png" alt="shannon">
+                                </div>
+                                <div class="item">
+                                    <img src="images/group/box_plot/simpson.boxplot.png" alt="simpson">
+                                </div>
+                            </div>
+                            <!-- 轮播（Carousel）导航 -->
+                            <a class="carousel-control left" href="#myCarousel4" data-slide="prev"><span class="img-switch-btn"></span></a>
+                            <a class="carousel-control right" href="#myCarousel4" data-slide="next"><span class="img-switch-btn2"></span></a>
+                               <!-- 控制按钮 -->
+                            <div style="text-align:center;">
+                                <input type="button" class="btn btn-success btn-sm" id="slide-4-0" value="chao1">
+                                <input type="button" class="btn btn-success btn-sm" id="slide-4-1" value="goods_coverage">            
+                                <input type="button" class="btn btn-success btn-sm" id="slide-4-2" value="observed_species">
+                                <input type="button" class="btn btn-success btn-sm" id="slide-4-3" value="PD_whole_tree">
+                                <input type="button" class="btn btn-success btn-sm" id="slide-4-4" value="shannon">
+                                <input type="button" class="btn btn-success btn-sm" id="slide-4-5" value="simpson">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="name_fig">图4-2-1组间Alpha多样性盒形图：</p>
+            <p class="premark">
+                注：盒形图可以显示5个统计量（最小值，第一个四分位数，中位数，第三个中位数和最大值，及由下到上的5条线），异常值以“o”标出。横轴是分组名称，纵轴是不同分组下的alpha多样性指数的值。</p>
+        {% endif %}
+        <p class="paragraph">分别对Alpha
+            Diversity的各个指数进行秩和检验分析(若两组样品比较即使用R中的wilcox.test函数，若两组以上的样品比较则使用R中的kruskal.test函数)，通过秩和检验筛选不同条件下的显著差异的Alpha
+            Diversity指数。结果见
+            <a href="javascript:void(0)"
+               onClick="StartExcel('..\\results\\03_Alpha_diversity\\{{ group_file }}\\alpha_marker.tsv')">
+                alpha_marker.tsv
+            </a>。
+        </p>
+        <p class="name_table">表4-2-1 Alpha diversity指数差异检验</p>
+
+        <div class="center_table">
+            <div id="toolbar6" class="pull-left-self">
+                <select class="form-control">
+                    <option value="">Export Basic</option>
+                    <option value="all">Export All</option>
+                    <option value="selected">Export Selected</option>
+                </select>
+            </div>
+            <table id="table6" data-height="560" data-pagination="true" data-filter-control="true" data-show-export="true" data-page-list="[10, 25, 50, 100, 200, All]"></table>
+        </div>
+
+        <p class="tremark">注：第一行是Alpha Diversity指数；第二行至第{{ group_num + 2 }}行分别为{{ group_num }}组样品的均值；其中一行（P-value）为秩和检验的P-value值；</p>
+    {% else %}
+        <h3 id="单个样品差异分析">4.2 单个样品差异分析(每组内样品数>=3)</h3>
+        <p class="error">样品数不足无法分析</p>
+    {% endif %}
+{% endblock %}
+
+
+{% block uniFra_analysis_head %}
+    {% if uniFra_analysis_heatmap %}
+        <p class="paragraph">
+            <a href="..\results\04_Beta_diversity\{{ group_file }}" target="_blank">
+                结果目录：04_Beta_diversity
+            </a>
+        </p>
+        <h3 id="UniFrac热图分析">5.1 UniFrac热图分析（每组样品数>=4）</h3>
+        <p class="paragraph">与Alpha多样性分析不同，Beta多样性（Beta Diversity）分析是用来比较一对样品在物种多样性方面存在的差异大小。</p>
+        <p class="paragraph">UniFrac是通过利用系统进化的信息来比较样品间的物种群落差异。其计算结果可以作为一种衡量Beta
+            Diversity的指数，它考虑了物种间的进化距离，该指数越大表示样品间的差异越大。报告中给出的UniFrac结果分为加权UniFrac（Weighted
+            UniFrac）与非加权UniFirac（Unweighted
+            UniFrac）2种，其中Weighted UniFrac考虑了序列的丰度，Unweighted UniFrac不考虑序列丰度。图4-5
+            UniFrac距离分布Heatmap，通过对UniFrac结果的聚类，具有相似Beta多样性的样品聚类在一起，反应了样品间的相似性。详细统计结果见附件
+            <a href="javascript:void(0)"
+               onClick="StartExcel('..\\results\\04_Beta_diversity\\{{ group_file }}\\weighted_unifrac_otu_table.tsv')">
+                weighted_unifrac.tsv
+            </a>
+            与
+            <a href="javascript:void(0)"
+               onClick="StartExcel('..\\results\\04_Beta_diversity\\{{ group_file }}\\unweighted_unifrac_otu_table.tsv')">
+                unweighted_unifrac.tsv
+            </a>。
+        </p>
+        <p class="paragraph">截取部分Beta多样性值统计结果见表5-1-1和表5-1-2。</p>
+        <p class="name_table">表5-1-1样品Beta Diversity统计表（Weighted Unifrac）</p>
+
+        <div class="center_table">
+            <div id="toolbar7" class="pull-left-self">
+                <select class="form-control">
+                    <option value="">Export Basic</option>
+                    <option value="all">Export All</option>
+                    <option value="selected">Export Selected</option>
+                </select>
+            </div>
+            <table id="table7" data-height="560" data-pagination="true" data-filter-control="true" data-show-export="true" data-page-list="[10, 25, 50, 100, 200, All]"></table>
+        </div>
+
+        <p class="name_table">表5-1-2样品Beta Diversity统计表（Unweighted Unifrac）</p>
+
+        <div class="center_table">
+            <div id="toolbar8" class="pull-left-self">
+                <select class="form-control">
+                    <option value="">Export Basic</option>
+                    <option value="all">Export All</option>
+                    <option value="selected">Export Selected</option>
+                </select>
+            </div>
+            <table id="table8" data-height="560" data-pagination="true" data-filter-control="true" data-show-export="true" data-page-list="[10, 25, 50, 100, 200, All]"></table>
+        </div>
+
+        <p class="tremark">
+            注：表5-1-1为加权物种分类丰度信息计算得到的Beta Diversity统计结果，表5-1-2为未加权物种分类丰度信息计算得到的Beta Diversity统计结果。
+        </p>
+        <p class="paragraph">
+            根据各样品差异性的统计结果，对样品进行聚类分析并计算样品间距离，以判断各样品物种组成的相似性。所有样品的聚类分析结果如图5-1-3所示。样品越靠近，说明两个样品的物种组成越相似。
+        </p>
+        <p class="center">
+            <img class="size1" src="images/group/weighted_unifrac.heatmap.png"/>
+            <img class="size1" src="images/group/unweighted_unifrac.heatmap.png"/>
+        </p>
+        <p class="name_fig">图5-1-3 Beta多样性heatmap（左图为Weighted，右图为Unweighted）</p>
+    {% else %}
+        <h3 id="UniFrac热图分析">5.1 UniFrac热图分析（每组样品数>=4）</h3>
+        <p class="error">样品数不足无法分析</p>
+    {% endif %}
+
+    {% if uniFra_analysis_anosim %}
+        <h3 id="Anosim分析">5.2 Anosim分析（每组样品数>=5）</h3>
+        <p class="paragraph">
+            为了展示分组合理性，进行Analysis of similarities (ANOSIM)分析。
+            图5-2-1给出了Anosim分析的结果，如果R值大于0，说明组间差异大于组内差异，分组较为合理，
+            反之R值若小于0，则说明组间差异小于组内差异，分组欠妥。P值越小组间差异越大。
+        </p>
+        <p class="center">
+            <img class="size1" src="images/group/weighted_unifrac.anosim.png"/>
+            <img class="size1" src="images/group/unweighted_unifrac.anosim.png"/>
+        </p>
+        <p class="name_fig">图5-2-1 Anosim分析图（左图为Weighted_Unifrac结果，右图为Unweighted_Unifrac结果）</p>
+        <p class="premark">
+            图中纵坐标表示unifrac距离的秩，横坐标表示所有样品（Between）以及每个分组。
+        </p>
+    {% else %}
+        <h3 id="Anosim分析">5.2 Anosim分析（每组样品数>=5）</h3>
+        <p class="error">样品数不足无法分析</p>
+    {% endif %}
+
+    {% if uniFra_analysis_pcoa %}
+        <h3 id="PCoA分析">5.3 PCoA分析（每组样品数>=5）</h3>
+        <p class="paragraph">
+            为了进一步展示样品间物种多样性差异，使用主坐标分析（Principal Coordinates Analysis，PCoA）的方法展示各个样品间的差异大小。
+            图5-2-1给出了PCoA对样品间物种多样性的分析结果，如果两个样品距离较近，则表示这两个样品的物种组成较相近。
+        </p>
+        <p class="center">
+            <img class="size1" src="images/group/weighted_unifrac.pcoa.png"/>
+            <img class="size1" src="images/group/unweighted_unifrac.pcoa.png"/>
+        </p>
+        <p class="name_fig">图5-3-1 PCoA分析图（左图为Weight_UniFrac结果，右图为Unweight_UniFrac结果）</p>
+        <p class="premark">
+            PCoA是一种研究数据相似性或者差异性的可视化方法，它没有改变样品点之间的项目位置关系，只改变了坐标系统。
+            横坐标表示第一主坐标，括号中的百分比则表示第一主坐标对样品差异的贡献率；
+            纵坐标表示第二主坐标，括号中的百分比表示第二主坐标对样品差异的贡献率。
+            图中点分别表示各个样品。不同颜色代表样品属于不同的分组。横向的box图是不同分组在第一主坐标上的值的分布。
+        </p>
+    {% else %}
+        <h3 id="PCoA分析">5.3 PCoA分析（每组样品数>=5）</h3>
+        <p class="error">样品数不足无法分析</p>
+    {% endif %}
+
+    {% if uniFra_analysis_nmds %}
+        <h3 id="NMDS分析">5.4 NMDS分析（每组样品数>=5）</h3>
+        <p class="paragraph">
+            为了进一步展示样品间物种多样性差异，使用NMDS分析（Nonmetric Multidimensional
+            Scaling）的方法展示各个样品间的差异大小。图5-3-1给出了NMDS对样品间物种多样性的分析结果，如果两个样品距离较近，则表示这两个样品的物种组成较相近。
+        </p>
+        <p class="center">
+            <img class="size1" src="images/group/weighted_unifrac.nmds.png"/>
+            <img class="size1" src="images/group/unweighted_unifrac.nmds.png"/>
+        </p>
+        <p class="name_fig">图5-4-1 NMDS分析图（左图为Weight_UniFrac结果，右图为Unweight_UniFrac结果）</p>
+        <p class="premark">
+            图中点分别表示各个样品,点与点之间的距离表示差异程度。不同颜色代表样品属于不同的分组。横向的box图是不同分组在第一主坐标上的值的分布。
+        </p>
+    {% else %}
+        <h3 id="NMDS分析">5.4 NMDS分析（每组样品数>=5）</h3>
+        <p class="error">样品数不足无法分析</p>
+    {% endif %}
+{% endblock %}
+
+
+{% block lefse_head %}
+    <h3 id="LDA EffectSize（LEfSe）分析">6.1 LDA EffectSize（LEfSe）分析</h3>
+    {% if lefse or  diff_analysis %}
+        <p class="paragraph">
+            <a href="..\results\05_diff_analysis\{{ group_file }}" target="_blank">结果目录：05_diff_analysis</a>
+        </p>
+    {% endif %}
+    {% if lefse %}
+        <p class="paragraph">
+            LDA EffectSize（LEfSe分析）：LEfSe采用线性判别分析（LDA）来估算每个组分（物种）丰度对差异效果影响的大小，找出对样品划分产生显著性差异性影响的群落或物种。
+        </p>
+        <p class="center">
+            <img class="size2" src="images/group/LDA.cladogram.png"/>
+        </p>
+        <p class="center">
+            <img class="size2" src="images/group/LDA.png"/>
+        </p>
+        <p class="name_fig">图6-1-1 LEfSe分析图</p>
+        <p class="premark">
+            上图为聚类树，不同颜色表示不同分组，不同颜色的节点表示在该颜色所代表的分组中起到重要作用的微生物群。黄色节点表示的是在不同分组中没有起到重要作用的微生物类群。图中英文字母所表示的物种名称在右侧图例中进行展示。
+            下图是统计不同分组中有显著作用的微生物类群通过LDA(线性回归分析)后得到的LDA分值（LDA阀值{{ LDA_cutoff }}）。
+        </p>
+
+    {% elif lefse_enough %}
+        <p class="error">未找到显著性差异</p>
+    {% else %}
+        <p class="error">样品量不足无法分析</p>
+    {% endif %}
+{% endblock %}
+
+{% block diff_analysis_head %}
+    {% if diff_analysis %}
+        <h3 id="组间差异分析">6.2 组间差异分析</h3>
+        <h4>OTU水平的差异分析</h4>
+        {% if diff_otu_marker_exist %}
+            <p class="paragraph">
+                下表是在不同组样品间有显著差异的OTUs（p < {{ p_value }}, Kruskal-Wallis test），共{{ diff_otus }}个,如表6-2-1显示。结果表格
+                <a href="javascript:void(0)"
+                   onClick="StartExcel('..\\results\\05_diff_analysis\\{{ group_file }}\\otu_diff\\otu_diff.marker.filt.tsv')">
+                    otu_diff.marker.filt.tsv
+                </a>
+            </p>
+            <p class="name_table">表6-2-1差异显著OTU列表</p>
+
+        <div class="center_table">
+            <div id="toolbar9" class="pull-left-self">
+                <select class="form-control">
+                    <option value="">Export Basic</option>
+                    <option value="all">Export All</option>
+                    <option value="selected">Export Selected</option>
+                </select>
+            </div>
+            <table id="table9" data-height="560" data-pagination="true" data-filter-control="true" data-show-export="true" data-page-list="[10, 25, 50, 100, 200, All]"></table>
+        </div>
+
+        <p class="tremark">注：第一列是OTU名称；第二列至第{{ group_num + 2 }}列分别为{{ group_num }}组样品的均值；最后一列是秩和检验的p值；</p>
+        <p class="paragraph">为了直观地对这些OTUs进行展示，绘制对应图形如下：</p>
+        <p class="center">
+            <img class="size1" src="images/group/otu_diff/heatmap.png" alt="First slide">
+        </p>
+        <p class="name_fig"> 图6-2-1 差异OTU的Heatmap结果展示</p>
+        <p class="center">
+        <img class="size1" src="images/group/otu_diff/diff_boxplot.png" alt="second slide">
+        </p>
+        <p class="name_fig"> 图6-2-2 差异OTU的Boxplot结果展示</p>
+        <p class="center">
+            <img class="size1" src="images/group/otu_diff/diff_pca.png" alt="third slide">
+        </p>
+        <p class="name_fig"> 图6-2-3 差异OTU的PCA结果展示</p>
+
+
+        {% else %}
+            <p class="error">未找到OTU水平差异</p>
+        {% endif %}
+
+        <h4>属水平的差异分析</h4>
+        {% if diff_genus_marker_exist %}
+            <p class="paragraph">通过Kruskal-Wallis test分析可以找出在不同组间有明显差异(p < {{ p_value }})的属如下（共{{ diff_genus }}个属）。结果表格
+                <a href="javascript:void(0)"
+                   onClick="StartExcel('..\\results\\05_diff_analysis\\{{ group_file }}\\genus_diff\\genus_diff.marker.filt.tsv')">
+                    genus_diff.marker.filt.tsv
+                </a>
+            </p>
+            <p class="name_table">表6-2-2差异显著物种列表</p>
+
+        <div class="center_table">
+            <div id="toolbar10" class="pull-left-self">
+                <select class="form-control">
+                    <option value="">Export Basic</option>
+                    <option value="all">Export All</option>
+                    <option value="selected">Export Selected</option>
+                </select>
+            </div>
+            <table id="table10" data-height="560" data-pagination="true" data-filter-control="true" data-show-export="true" data-page-list="[10, 25, 50, 100, 200, All]"></table>
+        </div>
+
+        <p class="tremark">注：第一列是物种名称；第二列至第{{ group_num + 2 }}列分别为{{ group_num }}组样品的均值；最后一列是秩和检验的p值。</p>
+        <p class="paragraph">为了直观地对这些差异属进行展示，绘制对应图形如下：</p>
+        <p class="center">
+            <img class="size1" src="images/group/genus_diff/heatmap.png" alt="First slide">
+        </p>
+        <p class="name_fig"> 图6-2-4 属水平差异物种的Heatmap结果展示</p>
+        <p class="center">
+            <img class="size1" src="images/group/genus_diff/diff_boxplot.png" alt="second slide">
+        </p>
+        <p class="name_fig"> 图6-2-5 属水平差异物种的Boxplot结果展示</p>
+        <p class="center">
+            <img class="size1" src="images/group/genus_diff/diff_pca.png" alt="third slide">
+        </p>
+        <p class="name_fig"> 图6-2-6 属水平差异物种的PCA结果展示</p>
+
+
+        {% else %}
+            <p class="error">未找到属水平差异</p>
+        {% endif %}
+
+        <h4>所有水平的差异分析</h4>
+        {% if diff_taxall_marker_exist %}
+            <p class="paragraph">通过Kruskal-Wallis test分析可以找出在不同组间有明显差异(p
+                < {{ p_value }})的物种(包含所有水平)如下（共{{ diff_species }}个）。结果表格
+                <a href="javascript:void(0)"
+                   onClick="StartExcel('..\\results\\05_diff_analysis\\{{ group_file }}\\taxall_diff\\taxall_diff.marker.filt.tsv')">
+                    taxall_diff.marker.filt.tsv
+                </a>
+            </p>
+            <p class="name_table">表6-2-3所有水平差异显著物种列表</p>
+
+        <div class="center_table">
+            <div id="toolbar11" class="pull-left-self">
+                <select class="form-control">
+                    <option value="">Export Basic</option>
+                    <option value="all">Export All</option>
+                    <option value="selected">Export Selected</option>
+                </select>
+            </div>
+            <table id="table11" data-height="560" data-pagination="true" data-filter-control="true" data-show-export="true" data-page-list="[10, 25, 50, 100, 200, All]"></table>   
+        </div>
+
+        <p class="tremark">注：第一列是物种名称；第二列至第{{ group_num + 2 }}列分别为{{ group_num }}组样品的均值；最后一列是秩和检验的p值。</p>
+        <p class="paragraph">为了直观地对这些差异物种进行展示，绘制对应图形如下：</p>
+        <p class="center">
+            <img class="size1" src="images/group/taxall_diff/heatmap.png" alt="First slide">
+        </p>
+        <p class="name_fig"> 图6-2-7 所有水平差异物种的Heatmap结果展示</p>
+        <p class="center">
+            <img class="size1" src="images/group/taxall_diff/diff_boxplot.png" alt="second slide">
+        </p>
+        <p class="name_fig"> 图6-2-8 所有水平差异物种的Boxplot结果展示</p>
+        <p class="center">
+            <img class="size1" src="images/group/taxall_diff/diff_pca.png" alt="third slide">
+        </p>
+        <p class="name_fig"> 图6-2-9 所有水平差异物种的PCA结果展示</p>
+
+
+
+        {% else %}
+            <p class="error">未找到所有水平差异</p>
+        {% endif %}
+
+    {% else %}
+        <h3 id="组间差异分析">6.2 组间差异分析</h3>
+        <p class="error">样品数不足无法分析</p>
+    {% endif %}
+{% endblock %} 

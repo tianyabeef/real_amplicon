@@ -110,7 +110,7 @@ def save_table(input_dir):
                 sampleName = ("','").join(samples_name_two)
             else:
                 sampleName = ("','").join(samples_name)
-            jqGrid_head = "{name:'sampleName',index:'sampleName',width:140,align:'center'},"
+            jqGrid_head = "{field: 'sampleName',title: 'Sample name',align: 'center',sortable: true,filterControl: 'input'},"
             weight_unifrac_jqGrid_list.append(jqGrid_head)
             count = 0
             samples_name = samples_name[1:]
@@ -130,9 +130,9 @@ def save_table(input_dir):
                             str += '%s:"%s",' % (
                                 value, stringasfloat(tabs[i + 1]))
                             # str += value+":\""+tabs[i+1]+"\","
-                            jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90},"
+                            jqGrid += "field:'" + value + "',title:'" + value + "',align:'center',filterControl:'input',sortable:true},"
                         else:
-                            jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90}"
+                            jqGrid += "field:'" + value + "',title:'" + value + "',align:'center',filterControl:'input',sortable:true}"
                             str += '%s:"%s"' % (
                                 value, stringasfloat(tabs[i + 1]))
                             # str += value+":\""+tabs[i+1]+"\""
@@ -145,11 +145,11 @@ def save_table(input_dir):
                             str += '%s:"%s",' % (
                                 value, stringasfloat(tabs[i + 1]))
                             # str += value+":\""+tabs[i+1]+"\","
-                            jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90},"
+                            jqGrid += "field:'" + value + "',title:'" + value + "',align:'center',filterControl:'input',sortable:true},"
                             if count == 1:
                                 weight_unifrac_jqGrid_list.append(jqGrid)
                         else:
-                            jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90}"
+                            jqGrid += "field:'" + value + "',title:'" + value + "',align:'center',filterControl:'input',sortable:true}"
                             str += '%s:"%s"' % (
                                 value, stringasfloat(tabs[i + 1]))
                             # str += value+":\""+tabs[i+1]+"\""
@@ -186,7 +186,7 @@ def save_table2(input_dir):
                 sampleName = ("','").join(samples_name_two)
             else:
                 sampleName = ("','").join(samples_name)
-            jqGrid_head = "{name:'taxonname',index:'taxonname',width:140,align:'center'},"
+            jqGrid_head = "{field: 'taxonname',title: 'taxonname',align: 'center',sortable: true,filterControl: 'input'},"
             weight_unifrac_jqGrid_list.append(jqGrid_head)
             count = 0
             samples_name = samples_name[1:]
@@ -206,9 +206,9 @@ def save_table2(input_dir):
                             str += '%s:"%s",' % (
                                 value, stringasfloat(tabs[i + 1]))
                             # str += value+":\""+tabs[i+1]+"\","
-                            jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90},"
+                            jqGrid += "field:'" + value + "',title:'" + value + "',align: 'center',filterControl: 'input',sortable: true},"
                         else:
-                            jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90}"
+                            jqGrid += "field:'" + value + "',title:'" + value + "',align: 'center',filterControl: 'input',sortable: true}"
                             str += '%s:"%s"' % (
                                 value, stringasfloat(tabs[i + 1]))
                             # str += value+":\""+tabs[i+1]+"\""
@@ -219,9 +219,9 @@ def save_table2(input_dir):
                             str += '%s:"%s",' % (
                                 varlue, stringasfloat(tabs[i + 1]))
                             # str += value+":\""+tabs[i+1]+"\","
-                            jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90},"
+                            jqGrid += "field:'" + value + "',title:'" + value + "',align: 'center',filterControl: 'input',sortable: true},"
                         else:
-                            jqGrid += "name:'" + value + "',index:'" + value + "',align:'center',width:90}"
+                            jqGrid += "field:'" + value + "',title:'" + value + "',align: 'center',filterControl: 'input',sortable: true}"
                             str += '%s:"%s"' % (
                                 value, stringasfloat(tabs[i + 1]))
                             # str += value+":\""+tabs[i+1]+"\""
@@ -429,6 +429,42 @@ def get_html():
             diff_phylum_marker_sampleName=diff_phylum_marker[2],
             diff_phylum_marker_exist=diff_phylum_marker[3])
     with open(work_dir + 'report/js/table.js', 'w') as fp:
+        fp.write(table)
+    # save_table
+    template = env.get_template('table_template_pdf.js')
+    table = template.render(
+            otuStatisticals=otuStatisticals,
+            otuStatisticalDownsizes=otuStatisticalDownsizes,
+            otuAssignmentsStatisticals=otuAssignmentsStatisticals,
+            alpha_diversitys=alpha_diversitys,
+            alpha_diversity_diffs=alpha_diversity_diffs,
+            alpha_diff_exist=alpha_diff_exist,
+            beta_diversity_data=beta_diversity[0],
+            beta_diversity_jqGrid=beta_diversity[1],
+            beta_diversity_sampleName=beta_diversity[2],
+            beta_diversity_exist=beta_diversity[3],
+            beta_un_diversity_data=beta_un_diversity[0],
+            beta_un_diversity_jqGrid=beta_un_diversity[1],
+            beta_un_diversity_sampleName=beta_un_diversity[2],
+            beta_un_diversity_exist=beta_un_diversity[3],
+            coreMicrobiomes=coreMicrobiomes,
+            diff_otu_marker_data=diff_otu_marker[0],
+            diff_otu_marker_jqGrid=diff_otu_marker[1],
+            diff_otu_marker_sampleName=diff_otu_marker[2],
+            diff_otu_marker_exist=diff_otu_marker[3],
+            diff_genus_marker_data=diff_genus_marker[0],
+            diff_genus_marker_jqGrid=diff_genus_marker[1],
+            diff_genus_marker_sampleName=diff_genus_marker[2],
+            diff_genus_marker_exist=diff_genus_marker[3],
+            diff_taxall_marker_data=diff_taxall_marker[0],
+            diff_taxall_marker_jqGrid=diff_taxall_marker[1],
+            diff_taxall_marker_sampleName=diff_taxall_marker[2],
+            diff_taxall_marker_exist=diff_taxall_marker[3],
+            diff_phylum_marker_data=diff_phylum_marker[0],
+            diff_phylum_marker_jqGrid=diff_phylum_marker[1],
+            diff_phylum_marker_sampleName=diff_phylum_marker[2],
+            diff_phylum_marker_exist=diff_phylum_marker[3])
+    with open(work_dir + 'report/js/table_pdf.js', 'w') as fp:
         fp.write(table)
     # finally_get_html
 

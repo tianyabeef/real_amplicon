@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>锐翌基因</title>
+    <link href="images/label.png" rel="shortcut icon"/>
+    <link rel="stylesheet" type="text/css" href="css/base_new.css">
+    <link rel="stylesheet" href="css/style.css"/>
+    <!-- Core JavaScript Files -->
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script type="text/javascript" src="js/custom.js"></script>
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+    <!-- Squad theme CSS -->
+    <link href="css/style2.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="js/table/bootstrap-table.min.css">
+    <!-- table css -->
+    <script type="text/javascript" src="js/table/bootstrap-table.min.js"></script>
+    <script type="text/javascript" src="js/table/bootstrap-table-zh-CN.min.js"></script>
+    <script type="text/javascript" src="js/table/bootstrap-table-filter-control.js"></script>
+    <script type="text/javascript" src="js/table/bootstrap-table-export.js"></script>
+    <script type="text/javascript" src="js/table/tableExport.js"></script>
+    <script language="Javascript">
+    $(document).ready(function(){
+        $(".center img").on("click",function() {
+            window.open(this.src.replace("png","pdf"));                        
+            }); 
+        $(".item img").on("click",function() {
+            window.open(this.src.replace("png","pdf"));                        
+            }); 
+    });
+    function StartExcel(strAllName) {
+        var oExcel;
+        var oWorkbook;
+        if (strAllName == null || strAllName == "") {
+            alert("不存在表格");
+            return;
+        }
+        if (window.ActiveXObject) {
+            oExcel = new ActiveXObject("Excel.Application");
+        } else {
+            //      alert("建议使用IE浏览器");
+            window.open(strAllName, "_blank")
+            return;
+        }
+        oExcel.Workbooks.Open(strAllName);
+        //  oExcel.DisplayAlerts = false;
+        oExcel.Visible = true;
+        //  oExcel.Quit();
+    }
+    </script>
+<body class="easyui-layout">
+
+<!-- ###########################################顶部loge############################################# -->
+<div region="north" border="true" class="cs-north">
+    <div class="cs-north-bg">
+        <div class="cs-north-logo">
+            <img src="LOGO.png"/>
+            <div class="cs-north-name"></div>
+        </div>
+    </div>
+</div>
+<!-- #####################################################主要面板####################################### -->
+<div class="main">
+    <div class="page">
+        <h1 id="总体概述">总体工作流程概述</h1>
+        <p>&nbsp;</p>
+        <p class="center">
+            {% if amplification=="16S" %}
+                <img class="size2" src="images/16S_e.png"/>
+            {% else %}
+                <img class="size2" src="images/ITS_e.png"/>
+            {% endif %}
+        </p>
+        <p class="name_fig">
+            图1 测序原理图
+        </p>
+        <p class="premark">设计{{ amplification }}特定引物扩增特异区域，得到{% if amplification=="16S" %}425bp{% else %}
+            320bp{% endif %}左右扩增片段。加接头，采用MiSeq平台，测序得到2X300bp的Paired-End数据，通过拼接，可以得到较长序列，从而进行{{ amplification }}分析
+        </p>
+        <p class="center">
+            <img class="size2" src="images/2.png"/>
+        </p>
+        <p class="name_fig">
+            图2 分析流程图
+        </p>
+        <p class="paragraph">
+            对原始数据进行QC之后，用Usearch软件对数据进行去嵌合体和聚类的操作，Usearch聚类时，先将Reads按照丰度从大到小排序，通过97%相似度的标准聚类，得到OTU(Operational Taxonomic
+            Units)，每个OTU被认为可代表一个物种。接下来对每个样品的Reads进行随机抽平处理，并提取对应的OTU序列。然后使用Qiime软件，做Alpha多样性指数的稀释曲线，根据稀释曲线选择合理的抽平参数，利用Qiime软件对得到的抽平后的OTU进行分析，首先从OTU中分别提取一条Read作为代表序列，使用RDP方法，将该代表序列与{{ amplification }}数据库比对，从而对每个OTU进行物种分类。归类后，根据每个OTU中序列的条数，从而得到OTU丰度表，最后根据该OTU丰度表进行后续分析。
+        </p>
+        <p>&nbsp;</p>
+    </div>
+
+    <div class="page">
+        <h1>结果</h1>
+        <br>
+
+        <h2>1.数据统计</h2>
+        <p class="paragraph">
+            通过Illumina平台（MiSeq）进行Paired-end测序，Paired End Reads通过Reads之间的Overlap关系拼接成长Reads，并对拼接后的Reads进行质控，得到Clean
+            Reads。拼接过程及质控标准见<a href="method.pdf" target="_blank">实验方法</a>中的方法1。
+        </p>
+        {% block reads_statistical_head %}
+        {% endblock %}
+    </div>
+
+    <div class="page">
+        <h2 id="OTU分析">2.OTU分析</h2>
+        {% block otu_statistical_head %}
+        {% endblock %}
+        {% block downsize_head %}
+        {% endblock %}
+    </div>
+
+    <div class="page">
+        {% block core_microbiome_head %}
+        {% endblock %}
+
+        {% block otu_venn_head %}
+        {% endblock %}
+    </div>
+
+    <div class="page">
+        {% block otu_pca_head %}
+        {% endblock %}
+        {% block specaccum_head %}
+        {% endblock %}
+    </div>
+
+
+    <div class="page">
+        <h2>3 物种分类和丰度分析</h2>
+        {% block otu_tax_assignments_head %}
+        {% endblock %}
+        {% block otu_annotation_statistical_head %}
+        {% endblock %}
+    </div>
+
+    {% block tax_summary_head %}
+    {% endblock %}
+
+
+    <div class="page">
+        {% block otu_heatmap_head %}
+        {% endblock %}
+    </div>
+
+    <div class="page">
+        {% block rank_abundance_head %}
+        {% endblock %}
+        {% block otu_krona_head %}
+        {% endblock %}
+
+        {% block phylogenetic_tree_head %}
+        {% endblock %}
+
+
+    </div>
+
+    <div class="page">
+        <h2>4 Alpha多样性分析</h2>
+        {% block alpha_diversity_head %}
+        {% endblock %}
+    </div>
+
+    <div class="page">
+        {% block alpha_diff_head %}
+        {% endblock %}
+        <h2>5 Beta多样性分析</h2>
+    </div>
+
+    {% block uniFra_analysis_head %}
+    {% endblock %}
+    {% block similarity_analysis_head %}
+    {% endblock %}
+    <div class="page">
+        <h2>6 显著性差异分析 （PCA:每组样品数>=3;Heatmap:每组样品数>=3;Boxplot:每组样品数>=5）</h2>
+        {% block lefse_head %}
+        {% endblock %}
+    </div>
+    {% block diff_analysis_head %}
+    {% endblock %}
+</div>
+
+<div region="south" border="false" class="cs-south">公司地址：上海市浦东新区浦三路3058号长青企业广场119室； 电话：021-51001612；
+    邮箱：support@realbio.cn；
+</div>
+    <script type="text/javascript" src="js/table_pdf.js"></script>
+</body>
+</html>
