@@ -34,6 +34,7 @@ class Rparser(object):
         os.system('R CMD BATCH --slave %(Rfile)s %(Rfile)sout' % {'Rfile': self.file})
 
 
+# TODO: rewrite it with pandas
 class TableParser(object):
     def __init__(self, profile):
         self.profile = profile

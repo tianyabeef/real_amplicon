@@ -1,11 +1,15 @@
 #!/usr/bin/env python
-# encoding: utf-8
+# -*- coding: utf-8 -*- \#
+"""
+@author = 'liangzb'
+@date = '2016-01-11'
+plot tree and bar with profile
+"""
 
-from __future__ import division
 import sys
-import argparse
 import os
-from util import mkdir, image_trans, tax_profile_filter
+import argparse
+from util import tax_profile_filter, mkdir, image_trans
 
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1, this_script_path + '/../src')
@@ -25,11 +29,9 @@ def read_params(args):
                         help="set the output dir")
     parser.add_argument('-l', '--tax_level', dest='level', metavar='STR', type=str, default='genus',
                         help="set the tax level, [default is genus]")
-    parser.add_argument('-t', '--top', dest='top', metavar='INT', type=str, default='30',
-                        help="set the top num, [default is 30]")
-    parser.add_argument('--dendrogram', dest='dendrogram', metavar='STR', choices=['both', 'row', 'column', 'none'],
-                        default='both',
-                        help="set the dendrogram, can be ('both', 'row', 'column', 'none'), [default is both]")
+    parser.add_argument('-t', '--top', dest='top', metavar='INT', type=str, default='20',
+                        help="set the top num, [default is 20]")
+
     args = parser.parse_args()
     params = vars(args)
     if params['top'] != 'all':
@@ -46,17 +48,17 @@ if __name__ == '__main__':
     if params['for_plot'] is None:
         params['for_plot'] = params['out_dir'] + '/for_plot.txt'
         tax_profile_filter(params['otu_table'], params['for_plot'], params['level'])
-    pdf_file = params['out_dir'] + '/heatmap.pdf'
-    png_file = params['out_dir'] + '/heatmap.png'
+    pdf_file = params['out_dir'] + '/bar_tree.pdf'
+    png_file = params['out_dir'] + '/bar_tree.png'
 
-    vars = {'heatmap_profile': params['for_plot'],
+    vars = {'profile': params['for_plot'],
             'pdf_file': pdf_file,
             'group': params['group'],
             'top': params['top'],
-            'dendrogram': params['dendrogram']}
+            }
     r_job = rp.Rparser()
-    r_job.open(this_script_path + '/../src/template/03_tax_heatmap.Rtp')
+    r_job.open(this_script_path + '/../src/template/03_tax_bar_tree.Rtp')
     r_job.format(vars)
-    r_job.write(params['out_dir'] + '/heatmap.R')
+    r_job.write(params['out_dir'] + '/bar_tree.R')
     r_job.run()
     image_trans(pdf_file, png_file)

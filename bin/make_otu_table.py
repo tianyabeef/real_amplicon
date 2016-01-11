@@ -42,6 +42,11 @@ def make_otu_table(cfg_in, vars=None):
     work.commands.append('''less %s | perl -e 'print "otu_id\\ttax_name\\tconfidence\\n";while(<>){print;}' >%s''' % (
         outfiles['tax_assign'],
         outfiles['tax_assign_tsv']))
+    # pick genus rep set
+    work.commands.append('%s --rep_set %s --tax_ass %s -o %s' % (scripts['get_genus_rep'],
+                                                                 outfiles['rep_set'],
+                                                                 outfiles['tax_assign'],
+                                                                 outfiles['tax_set']))
     # assign statistic
     work.commands.append('%s -i %s -t %s -o %s' % (scripts['otu_ass_stat'],
                                                    params['otu_mapping_file'],

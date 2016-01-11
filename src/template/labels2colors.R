@@ -16,8 +16,7 @@ labels2colors <- function (labels, colorSeq = NULL, naColor = "grey",
 		factors = factor(c(as.matrix(as.data.frame(labels))))
 		nLabels = as.numeric(factors)
 		dim(nLabels) = dim(labels)
-	}
-	else {
+	} else {
 		labels = as.matrix(as.data.frame(labels))
 		factors = list()
 		for (c in 1:ncol(labels)) factors[[c]] = factor(labels[, 
@@ -32,8 +31,7 @@ labels2colors <- function (labels, colorSeq = NULL, naColor = "grey",
 		extColorSeq = colorSeq
 		for (rep in 1:nRepeats) extColorSeq = c(extColorSeq, 
 			paste(colorSeq, ".", rep, sep = ""))
-	}
-	else {
+	} else {
 		nRepeats = 1
 		extColorSeq = colorSeq
 	}
