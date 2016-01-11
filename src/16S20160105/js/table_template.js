@@ -425,73 +425,10 @@ $('#table7').bootstrapTable({
         title: 'state',
         checkbox: true,
         
-    }, {
-        field: 'sampleName',
-        title: 'sampleName',
-        align: 'center',
-        sortable: true,
-        filterControl: 'input',
-    },
+    }, 
 	{% for beta_diversity in beta_diversity_jqGrid %}
 	{{ beta_diversity }}
 	{% endfor %}
-/*
-    , {
-        field: 'sample0',
-        title: 'FC2',
-        align: 'center',
-        filterControl: 'input',
-        sortable: true,
-    }, {
-        field: 'sample1',
-        title: 'FT4',
-        align: 'center',
-        filterControl: 'input',
-        sortable: true,
-    }, {
-        field: 'sample2',
-        title: 'FT2',
-        align: 'center',
-        filterControl: 'input',
-        sortable: true,
-    }, {
-        field: 'sample3',
-        title: 'FC1',
-        align: 'center',
-        filterControl: 'input',
-        sortable: true,
-    }, {
-        field: 'sample4',
-        title: 'FT3',
-        align: 'center',
-        filterControl: 'input',
-        sortable: true,
-    }, {
-        field: 'sample5',
-        title: 'FT6',
-        align: 'center',
-        filterControl: 'input',
-        sortable: true,
-    }, {
-        field: 'sample6',
-        title: 'FC8',
-        align: 'center',
-        filterControl: 'input',
-        sortable: true,
-    }, {
-        field: 'sample7',
-        title: 'FT5',
-        align: 'center',
-        filterControl: 'input',
-        sortable: true,
-    }, {
-        field: 'sample8',
-        title: 'FC5',
-        align: 'center',
-        filterControl: 'input',
-        sortable: true,
-    }*/
-
     ],
     data: beta_diversitys
 });
@@ -523,12 +460,6 @@ $('#table8').bootstrapTable({
         title: 'state',
         checkbox: true,
         
-    }, {
-        field: 'sampleName',
-        title: 'sampleName',
-        align: 'center',
-        sortable: true,
-        filterControl: 'input',
     }, 
     {% for beta_diversity in beta_un_diversity_jqGrid %}
 		{{ beta_diversity }}
@@ -537,24 +468,7 @@ $('#table8').bootstrapTable({
 	],
     data: beta_un_diversitys
 });
-/*jQuery().ready(function (){
-	jQuery("#list54").jqGrid({
-		data: beta_un_diversitys,
-		datatype: "local",
-		height: 230,
-		rowNum: 10,
-		rowList: [10,20,30],
-		colNames:['{{ beta_un_diversity_sampleName }}'],
-		colModel:[
-			 {% for beta_diversity in beta_un_diversity_jqGrid %}
-			 {{ beta_diversity }}
-				{% endfor %}
-		],
-		pager: "#plist54",
-		viewrecords: true,
-		caption: "样品Beta diversity统计表（unweighted_unifrac）"
-	});
- })*/
+
  {% endif %}
 
 
@@ -588,24 +502,6 @@ $('#table9').bootstrapTable({
     ],
     data: diff_otu_markers
 });
-/*jQuery().ready(function (){
-	jQuery("#list55").jqGrid({
-		data: diff_otu_markers,
-		datatype: "local",
-		height: 230,
-		rowNum: 10,
-		rowList: [10,20,30],
-		colNames:['{{ diff_otu_marker_sampleName }}'],
-		colModel:[
-			 {% for value in diff_otu_marker_jqGrid %}
-			 {{ value }}
-				{% endfor %}
-		],
-		pager: "#plist55",
-		viewrecords: true,
-		caption: "差异显著OTU列表"
-	});
- })*/
 {% endif %}
 
 
@@ -660,24 +556,7 @@ $('#table10').bootstrapTable({
     data: diff_genus_markers
 });
 
- /*jQuery().ready(function (){
-	jQuery("#list56").jqGrid({
-		data: diff_genus_markers,
-		datatype: "local",
-		height: 230,
-		rowNum: 10,
-		rowList: [10,20,30],
-		colNames:['{{ diff_genus_marker_sampleName }}'],
-		colModel:[
-			 {% for value in diff_genus_marker_jqGrid %}
-			 {{ value }}
-				{% endfor %}
-		],
-		pager: "#plist56",
-		viewrecords: true,
-		caption: "差异显著物种列表"
-	});
- })*/
+
 {% endif %}
 
 
