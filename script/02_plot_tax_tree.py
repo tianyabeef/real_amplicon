@@ -32,8 +32,8 @@ def read_params(args):
                         help="set the profile file")
     parser.add_argument('--tax_ass', dest='tax_ass', metavar='FILE', type=str, required=True,
                         help="set the tax_assignment.txt")
-    parser.add_argument('--top', dest='top', metavar='INT', type=int, default=10,
-                        help="set the top num, [default is 10]")
+    parser.add_argument('--top', dest='top', metavar='INT', type=int, default=20,
+                        help="set the top num, [default is 20]")
     parser.add_argument('-o', '--outdir', dest='outdir', metavar='DIR', type=str, required=True,
                         help="set the outdir")
 
