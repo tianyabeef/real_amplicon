@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/data_center_01/home/liangzb/.pyenv/versions/anaconda-2.2.0/bin/python
 # -*- coding: utf-8 -*- \#
 """
 @author = 'liangzb'
@@ -7,18 +7,8 @@ a tree data structure, referenced from ete3
 """
 
 from collections import defaultdict, deque
-
-
-class TreeError(Exception):
-    """
-    A problem occurred during a TreeNode operation
-    """
-
-    def __init__(self, value=''):
-        self.value = value
-
-    def __str__(self):
-        return repr(self.value)
+from ete3 import NodeStyle
+from ete3.coretype.tree import TreeError
 
 
 class Tree(object):
@@ -116,6 +106,8 @@ class TreeNode(object):
         self.name = name
         self.up = None
         self.children = []
+        self.__min_size = self.MIN_SIZE
+        self.__style = NodeStyle()
         self.__level = level
         self.__profile = 0
         self.__dist = 1
@@ -204,6 +196,26 @@ class TreeNode(object):
         return len(self.children) == 0
 
     @property
+    def min_size(self):
+        return self.__min_size
+
+    @min_size.setter
+    def min_size(self, value):
+        try:
+            self.__min_size = float(value)
+        except ValueError:
+            pass
+
+    @property
+    def style(self):
+        return self.__style
+
+    @style.setter
+    def style(self, value):
+        if isinstance(value, NodeStyle):
+            self.__style = value
+
+    @property
     def tree(self):
         return self.__tree
 
@@ -240,7 +252,7 @@ class TreeNode(object):
             value = float(value)
         except ValueError:
             pass
-        if value > self.MIN_SIZE:
+        if value >= self.min_size:
             self.__size = value
 
     @property

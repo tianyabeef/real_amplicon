@@ -81,10 +81,16 @@ def taxanomy_group(cfg_in, vars=None):
                                                                 params['tax_ass'],
                                                                 outfiles['phylo_tree_outdir']))
     # plot tax tree
-    work.commands.append('%s --profile %s --tax_ass %s -o %s' % (scripts['plot_tax_tree'],
-                                                                 params['uniform_profile'],
-                                                                 params['tax_ass'],
-                                                                 outfiles['tax_tree_outdir']))
+    command = '%s --profile %s --tax_ass %s --top %s -o %s' % (scripts['plot_tax_tree'],
+                                                               params['uniform_profile'],
+                                                               params['tax_ass'],
+                                                               params['tax_tree_top'],
+                                                               outfiles['tax_tree_outdir']
+                                                               )
+    # plot tax tree with branch circle
+    work.commands.append('%s --with_branch_circle' % command)
+    # plot tax tree with leaf pie
+    work.commands.append('%s -g %s --with_leaf_pie' % (command, params['group']))
     return outfiles
 
 
