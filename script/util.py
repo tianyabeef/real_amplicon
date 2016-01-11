@@ -53,3 +53,25 @@ def float_trans(string):
     if num == 0:
         value = 0
     return value
+
+
+def tax_profile_filter(infile, outfile, level):
+    with open(infile) as in_fp, open(outfile, 'w') as out:
+        head = in_fp.next()
+        if head.startswith('# Constructed from biom'):
+            head = in_fp.next()
+        out.write(head.strip('#'))
+        for line in in_fp:
+            tabs = line.rstrip().split('\t')
+            taxes = tabs[0].split(';')
+            for tax in taxes:
+                if tax.startswith('%s__' % level[0]) and tax[3:]:
+                    tabs[0] = tax[3:]
+                    break
+            else:
+                continue
+            out.write('\t'.join(tabs) + '\n')
+            n = 0
+            for tab in tabs[1:]:
+                if float(tab) > 0:
+                    n += 1
