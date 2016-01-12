@@ -1,0 +1,130 @@
+<h2>5 Beta多样性分析</h2>
+
+<h3 id="UniFrac热图分析">5.1 UniFrac热图分析（每组样品数>=4）</h3>
+
+{% if uniFra_analysis_heatmap %}
+    <p class="paragraph">
+        <a href="..\results\04_Beta_diversity\{{ group_file }}" target="_blank">
+            结果目录：04_Beta_diversity
+        </a>
+    </p>
+    <p class="paragraph">与Alpha多样性分析不同，Beta多样性（Beta Diversity）分析是用来比较一对样品在物种多样性方面存在的差异大小。</p>
+    <p class="paragraph">
+        UniFrac是通过利用系统进化的信息来比较样品间的物种群落差异。
+        其计算结果可以作为一种衡量Beta Diversity的指数，它考虑了物种间的进化距离，该指数越大表示样品间的差异越大。
+        报告中给出的UniFrac结果分为加权UniFrac（Weighted UniFrac）与
+        非加权UniFirac（Unweighted UniFrac）2种，
+        其中Weighted UniFrac考虑了序列的丰度，Unweighted UniFrac不考虑序列丰度。
+        图4-5 UniFrac距离分布Heatmap，通过对UniFrac结果的聚类，具有相似Beta多样性的样品聚类在一起，反应了样品间的相似性。
+        详细统计结果见附件
+        <a href="javascript:void(0)"
+           onClick="StartExcel('..\\results\\04_Beta_diversity\\{{ group_file }}\\weighted_unifrac_otu_table.tsv')">
+            weighted_unifrac.tsv
+        </a>
+        与
+        <a href="javascript:void(0)"
+           onClick="StartExcel('..\\results\\04_Beta_diversity\\{{ group_file }}\\unweighted_unifrac_otu_table.tsv')">
+            unweighted_unifrac.tsv
+        </a>。
+    </p>
+    <p class="paragraph">截取部分Beta多样性值统计结果见表5-1-1和表5-1-2。</p>
+    <p class="name_table">表5-1-1样品Beta Diversity统计表（Weighted Unifrac）</p>
+
+    <div class="center_table">
+        <div id="toolbar7" class="pull-left-self">
+            <select class="form-control">
+                <option value="">Export Basic</option>
+                <option value="all">Export All</option>
+                <option value="selected">Export Selected</option>
+            </select>
+        </div>
+        <table id="table7" data-height="560" data-pagination="true" data-filter-control="true"
+               data-show-export="true" data-page-list="[10, 25, 50, 100, 200, All]"></table>
+    </div>
+
+    <p class="name_table">表5-1-2样品Beta Diversity统计表（Unweighted Unifrac）</p>
+
+    <div class="center_table">
+        <div id="toolbar8" class="pull-left-self">
+            <select class="form-control">
+                <option value="">Export Basic</option>
+                <option value="all">Export All</option>
+                <option value="selected">Export Selected</option>
+            </select>
+        </div>
+        <table id="table8" data-height="560" data-pagination="true" data-filter-control="true"
+               data-show-export="true" data-page-list="[10, 25, 50, 100, 200, All]"></table>
+    </div>
+
+    <p class="tremark">
+        注：表5-1-1为加权物种分类丰度信息计算得到的Beta Diversity统计结果，表5-1-2为未加权物种分类丰度信息计算得到的Beta Diversity统计结果。
+    </p>
+    <p class="paragraph">
+        根据各样品差异性的统计结果，对样品进行聚类分析并计算样品间距离，以判断各样品物种组成的相似性。所有样品的聚类分析结果如图5-1-3所示。样品越靠近，说明两个样品的物种组成越相似。
+    </p>
+    <p class="center">
+        <img class="size1" src="images/group/weighted_unifrac.heatmap.png"/>
+        <img class="size1" src="images/group/unweighted_unifrac.heatmap.png"/>
+    </p>
+    <p class="name_fig">图5-1-3 Beta多样性heatmap（左图为Weighted，右图为Unweighted）</p>
+{% else %}
+    <p class="error">样品数不足无法分析</p>
+{% endif %}
+
+<h3 id="Anosim分析">5.2 Anosim分析（每组样品数>=5）</h3>
+{% if uniFra_analysis_anosim %}
+    <p class="paragraph">
+        为了展示分组合理性，进行Analysis of similarities (ANOSIM)分析。
+        图5-2-1给出了Anosim分析的结果，如果R值大于0，说明组间差异大于组内差异，分组较为合理，
+        反之R值若小于0，则说明组间差异小于组内差异，分组欠妥。P值越小组间差异越大。
+    </p>
+    <p class="center">
+        <img class="size1" src="images/group/weighted_unifrac.anosim.png"/>
+        <img class="size1" src="images/group/unweighted_unifrac.anosim.png"/>
+    </p>
+    <p class="name_fig">图5-2-1 Anosim分析图（左图为Weighted_Unifrac结果，右图为Unweighted_Unifrac结果）</p>
+    <p class="premark">
+        图中纵坐标表示unifrac距离的秩，横坐标表示所有样品（Between）以及每个分组。
+    </p>
+{% else %}
+    <p class="error">样品数不足无法分析</p>
+{% endif %}
+
+<h3 id="PCoA分析">5.3 PCoA分析（每组样品数>=5）</h3>
+{% if uniFra_analysis_pcoa %}
+    <p class="paragraph">
+        为了进一步展示样品间物种多样性差异，使用主坐标分析（Principal Coordinates Analysis，PCoA）的方法展示各个样品间的差异大小。
+        图5-2-1给出了PCoA对样品间物种多样性的分析结果，如果两个样品距离较近，则表示这两个样品的物种组成较相近。
+    </p>
+    <p class="center">
+        <img class="size1" src="images/group/weighted_unifrac.pcoa.png"/>
+        <img class="size1" src="images/group/unweighted_unifrac.pcoa.png"/>
+    </p>
+    <p class="name_fig">图5-3-1 PCoA分析图（左图为Weight_UniFrac结果，右图为Unweight_UniFrac结果）</p>
+    <p class="premark">
+        PCoA是一种研究数据相似性或者差异性的可视化方法，它没有改变样品点之间的项目位置关系，只改变了坐标系统。
+        横坐标表示第一主坐标，括号中的百分比则表示第一主坐标对样品差异的贡献率；
+        纵坐标表示第二主坐标，括号中的百分比表示第二主坐标对样品差异的贡献率。
+        图中点分别表示各个样品。不同颜色代表样品属于不同的分组。横向的box图是不同分组在第一主坐标上的值的分布。
+    </p>
+{% else %}
+    <p class="error">样品数不足无法分析</p>
+{% endif %}
+
+<h3 id="NMDS分析">5.4 NMDS分析（每组样品数>=5）</h3>
+{% if uniFra_analysis_nmds %}
+    <p class="paragraph">
+        为了进一步展示样品间物种多样性差异，使用NMDS分析（Nonmetric Multidimensional
+        Scaling）的方法展示各个样品间的差异大小。图5-3-1给出了NMDS对样品间物种多样性的分析结果，如果两个样品距离较近，则表示这两个样品的物种组成较相近。
+    </p>
+    <p class="center">
+        <img class="size1" src="images/group/weighted_unifrac.nmds.png"/>
+        <img class="size1" src="images/group/unweighted_unifrac.nmds.png"/>
+    </p>
+    <p class="name_fig">图5-4-1 NMDS分析图（左图为Weight_UniFrac结果，右图为Unweight_UniFrac结果）</p>
+    <p class="premark">
+        图中点分别表示各个样品,点与点之间的距离表示差异程度。不同颜色代表样品属于不同的分组。横向的box图是不同分组在第一主坐标上的值的分布。
+    </p>
+{% else %}
+    <p class="error">样品数不足无法分析</p>
+{% endif %}

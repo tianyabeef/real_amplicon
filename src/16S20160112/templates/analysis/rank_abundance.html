@@ -1,0 +1,22 @@
+{% if rank_abundance %}
+    <h3 id="Rank Abundance曲线">3.5 Rank Abundance曲线</h3>
+    <p class="paragraph">
+        将样品中的OTUs按相对丰度(或者包含的序列数目)由大到小排序得到对应的排序编号，
+        再以OTUs的排序编号为横坐标，OTUs中的相对丰度（也可用该等级OTU中序列数的相对百分含量）为纵坐标,
+        将这些点用折线连接，即绘制得到Rank Abundance曲线。
+    </p>
+    <p class="paragraph">
+        Rank Abundance曲线可直观的反应样品中包含的分类丰富度和均匀度，
+        即在水平方向，分类的丰度由曲线的宽度来反映，分类的丰富度越高，曲线在横轴上的跨度越大；
+        在垂直方向曲线的平滑程度，反映了样品中分类的均匀程度，曲线越平缓，物种分布越均匀。
+    </p>
+    <p class="center">
+        <img class="size2" src="images/rank_abundance.png"/>
+    </p>
+    <p class="name_fig">
+        图3-5-1 Rank Abundance曲线
+    </p>
+    <p class="premark">
+        注：横坐标为按OTUs丰度排序的序号(Rank)，纵坐标为对应的OTUs的丰度(Abundance)，不同的样品使用不同的颜色和线型的曲线表示。
+    </p>
+{% endif %}

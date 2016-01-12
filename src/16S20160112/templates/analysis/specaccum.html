@@ -1,0 +1,20 @@
+<h3 id="Specaccum物种累积曲线">2.6 Specaccum物种累积曲线（总样品数>=10）</h3>
+{% if specaccum %}
+    <p class="paragraph">
+        物种累积曲线(Species Accumulation Curves)用于描述随着抽样量的加大物种增加的状况，
+        是理解调查样地物种组成和预测物种丰富度的有效工具，
+        在生物多样性和群落调查中，被广泛用于抽样量充分性的判断以及物种丰富度(Species Richness)的估计。
+        因此，通过物种累积曲线不仅可以判断抽样量是否充分，在抽样量充分的前提下，运用物种累积曲线还可以对物种丰富度进行预测。
+    </p>
+    <p class="center">
+        <img class="size2" src="images/specaccum.png"/>
+    </p>
+    <p class="name_fig">
+        图2-6-1 物种累积曲线
+    </p>
+    <p class="premark">
+        注：横坐标是样品的数量，纵坐标是OTUs的数量
+    </p>
+{% else %}
+    <p class="error">样品数不足无法分析</p>
+{% endif %}

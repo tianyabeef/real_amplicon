@@ -1,0 +1,50 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>锐翌基因</title>
+<link href="images/label.png" rel="shortcut icon"/>
+<link rel="stylesheet" type="text/css" href="css/base_new.css">
+<link rel="stylesheet" href="css/style.css"/>
+<!-- Core JavaScript Files -->
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<!-- Custom Theme JavaScript -->
+<script type="text/javascript" src="js/custom.js"></script>
+<!-- Bootstrap Core CSS -->
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+<!-- Squad theme CSS -->
+<link href="css/style2.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="js/table/bootstrap-table.min.css">
+<!-- table css and js -->
+<script type="text/javascript" src="js/table/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="js/table/bootstrap-table-zh-CN.min.js"></script>
+<script type="text/javascript" src="js/table/bootstrap-table-filter-control.js"></script>
+<script type="text/javascript" src="js/table/bootstrap-table-export.js"></script>
+<script type="text/javascript" src="js/table/tableExport.js"></script>
+<script language="Javascript">
+    $(document).ready(function () {
+        $(".center img").on("click", function () {
+            window.open(this.src.replace("png", "pdf"));
+        });
+        $(".item img").on("click", function () {
+            window.open(this.src.replace("png", "pdf"));
+        });
+    });
+    function StartExcel(strAllName) {
+        var oExcel;
+        var oWorkbook;
+        if (strAllName == null || strAllName == "") {
+            alert("不存在表格");
+            return;
+        }
+        if (window.ActiveXObject) {
+            oExcel = new ActiveXObject("Excel.Application");
+        } else {
+            //		alert("建议使用IE浏览器");
+            window.open(strAllName, "_blank")
+            return;
+        }
+        oExcel.Workbooks.Open(strAllName);
+        //  oExcel.DisplayAlerts = false;
+        oExcel.Visible = true;
+        //	oExcel.Quit();
+    }
+</script>
