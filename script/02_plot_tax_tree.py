@@ -9,17 +9,19 @@ This create newick format from qiime tax assignment file and otu profile
 from __future__ import division
 import os
 import sys
+import math
 import argparse
 import numpy as np
 import pandas as pd
 from collections import OrderedDict
-from ete3 import Tree, TreeStyle, NodeStyle, TextFace
+from ete3 import Tree, TreeStyle, NodeStyle, TextFace, PieChartFace, CircleFace
 from util import LEVELS, TAX_DICT, SEARCH_REG, COLS_BREWER, float_trans, mkdir, image_trans
 
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1, this_script_path + '/../src')
 from TaxTree import Tree as TaxTree
 from TaxTree import TreeNode as Node
+from Parser import parse_group_file
 
 COLOR_DICT = OrderedDict()
 for ind, level in enumerate(LEVELS):
@@ -32,13 +34,22 @@ def read_params(args):
                         help="set the profile file")
     parser.add_argument('--tax_ass', dest='tax_ass', metavar='FILE', type=str, required=True,
                         help="set the tax_assignment.txt")
+    parser.add_argument('-g', '--group_file', dest='group', metavar='FILE', type=str, default=None,
+                        help="set the group file if need")
     parser.add_argument('--top', dest='top', metavar='INT', type=int, default=20,
                         help="set the top num, [default is 20]")
     parser.add_argument('-o', '--outdir', dest='outdir', metavar='DIR', type=str, required=True,
                         help="set the outdir")
+    parser.add_argument('--with_leaf_pie', dest='with_leaf_pie', action='store_true',
+                        help="plot with leaf pie chart, [default is false]")
+    parser.set_defaults(with_leaf_pie=False)
+    parser.add_argument('--with_branch_circle', dest='with_branch_circle', action='store_true',
+                        help="plot with branch circle, [default is false]")
+    parser.set_defaults(with_branch_circle=False)
 
     args = parser.parse_args()
     params = vars(args)
+    params['group'] = parse_group_file(params['group'])
     return params
 
 
@@ -162,39 +173,101 @@ def get_tree_style():
     title = TextFace("     Tax Assignment Tree", fsize=10)
     title.hz_align = 2
     title.vt_align = 2
-    ts.scale = 1
     ts.title.add_face(TextFace(" "), column=0)
     ts.title.add_face(TextFace(" "), column=0)
     ts.title.add_face(title, column=0)
     return ts
 
 
-def set_node_style(tree, node_dict, ts):
+def set_node_default(tree, node_dict):
     root_node = tree & 'root'
     for node in tree.traverse():
         if node is root_node:
-            node.set_style(NodeStyle(size=0))
             continue
+        node = node_dict[node.name]
         nstyle = NodeStyle()
+        node.style = nstyle
         nstyle["shape"] = "circle"
-        nstyle["size"] = node_dict[node.name].size
-        try:
-            nstyle["fgcolor"] = COLOR_DICT[node_dict[node.name].level]
-        except KeyError:
-            nstyle["fgcolor"] = "grey"
         nstyle["hz_line_type"] = 3
         nstyle["hz_line_color"] = "black"
         nstyle["hz_line_width"] = 1
         nstyle["vt_line_color"] = "black"
         nstyle["vt_line_width"] = 1
-        node.set_style(nstyle)
+
+
+def add_node_circle(tree, node_dict):
+    root_node = tree & 'root'
+    for node in tree.traverse():
+        if node is root_node:
+            continue
+        nstyle = node_dict[node.name].style
+        nstyle["size"] = node_dict[node.name].size
+        try:
+            nstyle["fgcolor"] = COLOR_DICT[node_dict[node.name].level]
+        except KeyError:
+            nstyle["fgcolor"] = "grey"
+
+
+def add_branch_text(tree, tree_style, node_dict):
+    root_node = tree & 'root'
+    for node in tree.traverse():
+        if node is root_node:
+            continue
         T1 = TextFace(node.name, ftype="Monaco", fsize=10)
         T1.hz_align = 0
         node.add_face(T1, 0, 'branch-top')
-        T2 = TextFace(float_trans(node_dict[node.name].profile), ftype="Monaco", fsize=10)
+        T2 = TextFace('%s%%' % float_trans(node_dict[node.name].profile * 100), ftype="Monaco", fsize=10)
         T2.hz_align = 0
         node.add_face(T2, 0, 'branch-bottom')
+        # print node_dict[node.name].size
         node.dist = node_dict[node.name].branch_length
+        tree_style.scale = 1
+
+
+def set_node_style(tree, node_dict):
+    root_node = tree & 'root'
+    for node in tree.traverse():
+        if node is root_node:
+            node.set_style(NodeStyle(size=0))
+            continue
+        node.set_style(node_dict[node.name].style)
+
+
+def remove_node_circle(tree, node_dict):
+    root_node = tree & 'root'
+    for node in tree.traverse():
+        if node is root_node:
+            continue
+        else:
+            node_dict[node.name].style['size'] = 0
+            node_dict[node.name].min_size = 0
+            node_dict[node.name].size = 0
+
+
+def add_pie_face(tree, ts, total_profile, group):
+    for leaf_name in tree.iter_leaf_names():
+        node = tree & leaf_name
+        profile_list = total_profile[node.name]
+        if group is not None:
+            profile_list_grouped = OrderedDict()
+            for sample_name, profile in profile_list.iteritems():
+                profile_list_grouped[group[sample_name]] = profile
+            profile_list = pd.Series(profile_list_grouped)
+        col_num = len(profile_list)
+        times = int(math.ceil(col_num / len(COLS_BREWER)))
+        cols = (COLS_BREWER * times)[:col_num]
+        summary = sum(profile_list)
+        percents = map(lambda s: s / summary * 100, profile_list)
+        P = PieChartFace(percents=percents, width=50, height=50, colors=cols)
+        node.add_face(P, 0, 'aligned')
+    for ind, g in enumerate(profile_list.index):
+        ts.legend.add_face(TextFace(" "), 0)
+        ts.legend.add_face(TextFace(" "), 1)
+        T = TextFace('  %s  ' % g)
+        ts.legend.add_face(T, 0)
+        C = CircleFace(radius=10, color=cols[ind], style="circle")
+        ts.legend.add_face(C, 1)
+        ts.legend_position = 1
 
 
 if __name__ == '__main__':
@@ -210,9 +283,21 @@ if __name__ == '__main__':
         out.write(str(tree))
     t = Tree(newick_file, format=1)
     ts = get_tree_style()
-    set_node_style(t, tree.nodes, ts)
 
-    pdf_file = '%s/tax_tree.pdf' % params['outdir']
-    png_file = '%s/tax_tree.png' % params['outdir']
+    set_node_default(t, node_dict=tree.nodes)
+    suf = ''
+    if params['with_branch_circle']:
+        add_node_circle(t, node_dict=tree.nodes)
+        suf += '_circle'
+    if params['with_leaf_pie'] and not params['with_branch_circle']:
+        remove_node_circle(t, node_dict=tree.nodes)
+    if params['with_leaf_pie']:
+        add_pie_face(t, ts, total_profile.T, group=params['group'])
+        suf += '_pie'
+    add_branch_text(t, tree_style=ts, node_dict=tree.nodes)
+    set_node_style(t, node_dict=tree.nodes)
+
+    pdf_file = '%s/tax_tree%s.pdf' % (params['outdir'], suf)
+    png_file = '%s/tax_tree%s.png' % (params['outdir'], suf)
     t.render(pdf_file, tree_style=ts, dpi=100)
     image_trans(pdf_file, png_file)
