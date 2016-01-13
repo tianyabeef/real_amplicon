@@ -70,7 +70,8 @@ topbarplot <- function(profile, number = NULL, palette = NULL)
 	profile <- as.matrix(profile[order(-rowsums)[1:number], ])
 	Others  <- 1 - apply(profile, 2, sum)
 	profile <- rbind(profile, Others)
-	barplot(profile, col = col, space = 0.25, width = 0.8, horiz = T, xaxt = "n", las = 1, ylim = c(0, ncol(profile)))
+	barplot(profile, col = col, space = 0.25, width = 0.8, horiz = T, xaxt = "n", las = 1, ylim = c(0, ncol(profile)),
+			family="mono")
 	mtext(paste(number, "Main Species in Samples"), side = 3, line = 1, cex = 2)
 	specol <- col
 	names(specol) <- rownames(profile)
@@ -87,7 +88,9 @@ names(grpcol) <- levels(pregroup[, 1])
 dist = dist(t(data))
 print(dist)
 layout(t(c(1,2,2,2,3)))
-par(mar = c(5,5,5,0))
+max_sample_name_length = max(mapply(nchar,colnames(data)))
+mar_left = (max_sample_name_length - 3) * 0.5
+par(mar = c(5,5,5,mar_left))
 data.order <- treeplot(dist, group, grpcol)
 data <- data[, data.order]
 par(mar = c(5,3,5,0))
