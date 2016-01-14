@@ -4,99 +4,13 @@
     {% include "includes/header.html" %}
 </head>
 <body class="easyui-layout">
-<!-- #################################################### top navigation #################################### -->
-{% include "includes/navigator.html" %}
+
+
 
 <!-- ############################################### 主要面板 ###################################################################### -->
-<div id="mainPanle" region="center" border="true" border="false">
-    <div class="main">
-        {% block customer_info -%}
-        {%- endblock %}
-        {% block analysis_pipeline -%}
-        {%- endblock %}
-        <p>&nbsp;</p>
-        <h1>结果</h1>
-        <br>
-        {% block reads_statistic_head -%}
-        {%- endblock %}
+{% block main %}
 
-        {% block otu_statistic_head %}
-        {% endblock %}
+{% endblock %}
 
-        {% block downsize_head %}
-        {% endblock %}
-
-        {% block core_microbiome_head %}
-        {% endblock %}
-
-        {% block otu_venn_head %}
-        {% endblock %}
-
-        {% block otu_pca_head %}
-        {% endblock %}
-
-        {% block specaccum_head %}
-        {% endblock %}
-
-
-        <h2>3 物种分类和丰度分析</h2>
-        {% block otu_tax_assignments_head %}
-        {% endblock %}
-
-        {% block otu_annotation_statistical_head %}
-        {% endblock %}
-
-        {% block tax_summary_head %}
-        {% endblock %}
-
-        {% block otu_heatmap_head %}
-        {% endblock %}
-
-        {% block rank_abundance_head %}
-        {% endblock %}
-
-        {% block otu_krona_head %}
-        {% endblock %}
-
-        {% block phylogenetic_tree_head %}
-        {% endblock %}
-
-        {% block alpha_diversity_head %}
-        {% endblock %}
-
-        {% block alpha_diff_head %}
-        {% endblock %}
-
-
-        {% block uniFra_analysis_head %}
-        {% endblock %}
-
-        {% block similarity_analysis_head %}
-        {% endblock %}
-
-        {% block diff_analysis_head %}
-        {% endblock %}
-        <h2>备注</h2>
-        <p class="paragraph">网页中表格的数值保留了两位有效数字，在Excel表中保留原始数值没有做处理。</p>
-        <p><a name="gobottom"></a></p><!--到底部-->
-    </div>
-</div>
-
-
-<div id="footer" class="footer">
-    <div region="south" border="false" class="cs-south">公司地址：上海市浦东新区浦三路3058号长青企业广场119室；
-        电话：021-51001612；邮箱：support@realbio.cn；
-    </div>
-</div>
-
-
-<!-- ###########################################################去顶部和底部################################################# -->
-<div class="go">
-    <a title="返回顶部" class="top" href="#总体概述"></a>
-    <a title="如果您有意见，请反馈给我们！" class="feedback" href="javascript:void(0);" target="_self"></a>
-    <a title="返回底部" class="bottom" href="#gobottom"></a>
-</div>
-
-<script type="text/javascript" src="js/table.js"></script>
 </body>
 </html>

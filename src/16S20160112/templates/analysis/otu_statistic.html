@@ -1,9 +1,10 @@
 {% if otu_statistical %}
-    <h2 id="OTU分析">2.OTU分析</h2>
+<div class="page">
+    <h2 id="OTU分析">五、OTU分析</h2>
     <p class="paragraph">
         <a href="..\results\02_OTU\" target="_blank">结果目录：02_OTU</a>
     </p>
-    <h3 id="OTU聚类">2.1 OTU聚类</h3>
+    <h3 id="OTU聚类">5.1 OTU聚类</h3>
     <p class="paragraph">
         首先我们将序列完全一样的Clean Reads根据其丰度大小进行排序，将其中的Singletons过滤掉，
         （因为Singletons可能由于测序错误造成，故将这部分序列去除，不进行后期OTU聚类），
@@ -17,7 +18,7 @@
         </a>
         ，样品OTU统计表单。
     </p>
-    <p class="name_table">表2-1-1 样品数据和OTU统计</p>
+    <p class="name_table">表5-1-1 样品数据和OTU统计</p>
 
     <div class="center_table">
         <div id="toolbar1" class="pull-left-self">
@@ -30,15 +31,14 @@
         <table id="table1" data-height="580" data-pagination="true" data-filter-control="true"
                data-show-export="true" data-page-list="[10, 25, 50, 100, 200, All]"></table>
     </div>
-
-    <p class="tremark">
-        注:第一列Sample Name是样品名称；
-        第二列Amplicon Type是指明测序是16S或者ITS；
-        第三列Clean Read是质控后的Reads条数；
-        第四列Q20（%）是碱基质量值大于20的reads的比例；
-        第五列Q30（%）是碱基质量值大于30的Reads的比例；
-        第六列Mapped Reads是比对上OTU的Reads占Clean Reads的数量；
-        第七列Mapped Reads(%)是比对上OTU的Reads占Clean Reads的比例；
-        第八列OTUs是样品所含有的OTU个数。
-    </p>
+    <p class="tremark">    注:第一列Sample Name是样品名称；</p>
+    <p class="tremark">    第二列Amplicon Type是指明测序是16S或者ITS；</p>
+    <p class="tremark">    第三列Clean Read是质控后的Reads条数；</p>
+    <p class="tremark">    第四列Q20（%）是碱基质量值大于20的reads的比例；</p>
+    <p class="tremark">    第五列Q30（%）是碱基质量值大于30的Reads的比例；</p>
+    <p class="tremark">    第六列Mapped Reads是比对上OTU的Reads占Clean Reads的数量；</p>
+    <p class="tremark">    第七列Mapped Reads(%)是比对上OTU的Reads占Clean Reads的比例；</p>
+    <p class="tremark">    第八列OTUs是样品所含有的OTU个数。</p>
+    
+</div>
 {% endif %}

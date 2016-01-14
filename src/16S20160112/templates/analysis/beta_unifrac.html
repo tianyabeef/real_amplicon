@@ -1,6 +1,6 @@
-<h2>5 Beta多样性分析</h2>
+<h1>8 Beta多样性分析</h1>
 
-<h3 id="UniFrac热图分析">5.1 UniFrac热图分析（每组样品数>=4）</h3>
+<h2 id="UniFrac热图分析">8.1 UniFrac热图分析（每组样品数>=4）</h2>
 
 {% if uniFra_analysis_heatmap %}
     <p class="paragraph">
@@ -28,7 +28,7 @@
         </a>。
     </p>
     <p class="paragraph">截取部分Beta多样性值统计结果见表5-1-1和表5-1-2。</p>
-    <p class="name_table">表5-1-1样品Beta Diversity统计表（Weighted Unifrac）</p>
+    <p class="name_table">表8-1-1样品Beta Diversity统计表（Weighted Unifrac）</p>
 
     <div class="center_table">
         <div id="toolbar7" class="pull-left-self">
@@ -42,7 +42,7 @@
                data-show-export="true" data-page-list="[10, 25, 50, 100, 200, All]"></table>
     </div>
 
-    <p class="name_table">表5-1-2样品Beta Diversity统计表（Unweighted Unifrac）</p>
+    <p class="name_table">表8-1-2样品Beta Diversity统计表（Unweighted Unifrac）</p>
 
     <div class="center_table">
         <div id="toolbar8" class="pull-left-self">
@@ -57,21 +57,21 @@
     </div>
 
     <p class="tremark">
-        注：表5-1-1为加权物种分类丰度信息计算得到的Beta Diversity统计结果，表5-1-2为未加权物种分类丰度信息计算得到的Beta Diversity统计结果。
+        注：表8-1-1为加权物种分类丰度信息计算得到的Beta Diversity统计结果，表5-1-2为未加权物种分类丰度信息计算得到的Beta Diversity统计结果。
     </p>
     <p class="paragraph">
-        根据各样品差异性的统计结果，对样品进行聚类分析并计算样品间距离，以判断各样品物种组成的相似性。所有样品的聚类分析结果如图5-1-3所示。样品越靠近，说明两个样品的物种组成越相似。
+        根据各样品差异性的统计结果，对样品进行聚类分析并计算样品间距离，以判断各样品物种组成的相似性。所有样品的聚类分析结果如图8-1-3所示。样品越靠近，说明两个样品的物种组成越相似。
     </p>
     <p class="center">
         <img class="size1" src="images/group/weighted_unifrac.heatmap.png"/>
         <img class="size1" src="images/group/unweighted_unifrac.heatmap.png"/>
     </p>
-    <p class="name_fig">图5-1-3 Beta多样性heatmap（左图为Weighted，右图为Unweighted）</p>
+    <p class="name_fig">图8-1-3 Beta多样性heatmap（左图为Weighted，右图为Unweighted）</p>
 {% else %}
     <p class="error">样品数不足无法分析</p>
 {% endif %}
 
-<h3 id="Anosim分析">5.2 Anosim分析（每组样品数>=5）</h3>
+<h2 id="Anosim分析">8.2 Anosim分析（每组样品数>=5）</h2>
 {% if uniFra_analysis_anosim %}
     <p class="paragraph">
         为了展示分组合理性，进行Analysis of similarities (ANOSIM)分析。
@@ -82,7 +82,7 @@
         <img class="size1" src="images/group/weighted_unifrac.anosim.png"/>
         <img class="size1" src="images/group/unweighted_unifrac.anosim.png"/>
     </p>
-    <p class="name_fig">图5-2-1 Anosim分析图（左图为Weighted_Unifrac结果，右图为Unweighted_Unifrac结果）</p>
+    <p class="name_fig">图8-2-1 Anosim分析图（左图为Weighted_Unifrac结果，右图为Unweighted_Unifrac结果）</p>
     <p class="premark">
         图中纵坐标表示unifrac距离的秩，横坐标表示所有样品（Between）以及每个分组。
     </p>
@@ -90,7 +90,11 @@
     <p class="error">样品数不足无法分析</p>
 {% endif %}
 
-<h3 id="PCoA分析">5.3 PCoA分析（每组样品数>=5）</h3>
+<h2 id="MRPP">8.3 MRPP</h2>
+
+
+
+<h2 id="PCoA分析">8.4 PCoA分析（每组样品数>=5）</h2>
 {% if uniFra_analysis_pcoa %}
     <p class="paragraph">
         为了进一步展示样品间物种多样性差异，使用主坐标分析（Principal Coordinates Analysis，PCoA）的方法展示各个样品间的差异大小。
@@ -100,7 +104,7 @@
         <img class="size1" src="images/group/weighted_unifrac.pcoa.png"/>
         <img class="size1" src="images/group/unweighted_unifrac.pcoa.png"/>
     </p>
-    <p class="name_fig">图5-3-1 PCoA分析图（左图为Weight_UniFrac结果，右图为Unweight_UniFrac结果）</p>
+    <p class="name_fig">图8-4-1 PCoA分析图（左图为Weight_UniFrac结果，右图为Unweight_UniFrac结果）</p>
     <p class="premark">
         PCoA是一种研究数据相似性或者差异性的可视化方法，它没有改变样品点之间的项目位置关系，只改变了坐标系统。
         横坐标表示第一主坐标，括号中的百分比则表示第一主坐标对样品差异的贡献率；
@@ -111,7 +115,7 @@
     <p class="error">样品数不足无法分析</p>
 {% endif %}
 
-<h3 id="NMDS分析">5.4 NMDS分析（每组样品数>=5）</h3>
+<h2 id="NMDS分析">8.5 NMDS分析（每组样品数>=5）</h2>
 {% if uniFra_analysis_nmds %}
     <p class="paragraph">
         为了进一步展示样品间物种多样性差异，使用NMDS分析（Nonmetric Multidimensional
@@ -121,10 +125,22 @@
         <img class="size1" src="images/group/weighted_unifrac.nmds.png"/>
         <img class="size1" src="images/group/unweighted_unifrac.nmds.png"/>
     </p>
-    <p class="name_fig">图5-4-1 NMDS分析图（左图为Weight_UniFrac结果，右图为Unweight_UniFrac结果）</p>
+    <p class="name_fig">图8-5-1 NMDS分析图（左图为Weight_UniFrac结果，右图为Unweight_UniFrac结果）</p>
     <p class="premark">
         图中点分别表示各个样品,点与点之间的距离表示差异程度。不同颜色代表样品属于不同的分组。横向的box图是不同分组在第一主坐标上的值的分布。
     </p>
 {% else %}
     <p class="error">样品数不足无法分析</p>
 {% endif %}
+
+<h2 id="NMDS分析">8.6 UPGMA层次聚类</h2>
+    <p class="paragraph">UPGMA（Unweighted pair group method with arithmetic mean，非加权组平均法）常用来解决分类问题的一种聚类分析方法，其假设的前提是：在进化过程中所有核苷酸/氨基酸的变异率相同。通过UPGMA构建系统进化树，使得结果可视化，可以直观显示不同的环境样本中微生物进化的差异程度。</p>
+    <p class="center">
+        <img class="size1" src="images/group/weighted_unifrac.nmds.png"/>
+        <img class="size1" src="images/group/unweighted_unifrac.nmds.png"/>
+    </p>
+    <p class="name_fig"> 图8-6-1 UPGMA层次聚类分析</p>
+    <p class="premark">
+        注：树枝不同颜色代表不同的分组
+    </p>
+

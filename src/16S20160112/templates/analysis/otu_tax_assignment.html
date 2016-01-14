@@ -1,5 +1,7 @@
+            <h1>六、物种分类和丰度分析</h1>
 {% if otu_tax_assignments %}
-    <h3 id="物种注释分析">3.1 物种注释分析</h3>
+<div class="page">
+    <h2 id="物种注释分析">6.1 物种注释分析</h2>
     <p class="paragraph">
         从各个OTU中挑选出丰度最高的一条序列，作为该OTU的代表序列（代表序列见文件rep_set.fna）。
         使用RDP方法，将该代表序列与已知物种的{{ amplification }}数据库进行比对，从而对每个OTU进行物种归类
@@ -9,7 +11,7 @@
         </a>
         ）。
     </p>
-    <p class="name_table">表3-1-1 OTU注释统计</p>
+    <p class="name_table">表6-1-1 OTU注释统计</p>
     <div class="center_table">
         <div id="toolbar4" class="pull-left-self">
             <select class="form-control">
@@ -22,4 +24,5 @@
                data-show-export="true" data-page-list="[10, 25, 50, 100, 200, All]">
         </table>
     </div>
+</div>
 {% endif %}
