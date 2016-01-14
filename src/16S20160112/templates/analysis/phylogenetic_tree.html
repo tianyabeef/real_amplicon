@@ -1,19 +1,15 @@
 {% if phylogenetic_tree %}
-    <h3 id="系统进化关系展示">3.6 系统进化关系展示（更新）</h3>
+    <h3 id="物种进化树">6.9 物种进化树</h3>
     <p class="paragraph">
         为了进一步研究OTUs的系统进化关系，通过多序列比对得到所有OTUs代表序列的系统发生关系。
         选取最大相对丰度排名前{{ Phylogenetic_genus_top }}的属所对应的OTUs的系统发生关系数据，
         并结合每个OTUs的相对丰度及其代表序列的物种注释置信度信息，进行整合展示，由此可见这些属中的OTU之间的系统进化关系。
     </p>
     <p class="center">
-        <img class="size2" src="images/21.png"/>
-    </p>
-    <p class="name_fig">图 3-7 OTUs的系统发生关系及其物种注释</p>
+        <img class="size2" src="images/phylogenetic_tree.png"/>
+    </p>图5-9-1 物种进化树</p>
     <p class="premark">
-        说明：圈图共有三层，由里往外：
-        第一层是OTUs代表序列构建的系统发育树，分支的颜色表示其对应的属名，每种颜色代表一个属；
-        第二层是OTUs的相对丰度分布，柱子的高度表示OTUs的相对丰度大小(由于相对丰度跨越数据量很大，将按照最小值进行转化后再可视化)；
-        第三层是OTUs注释可信度分布，柱子的高度表示OTUs注释的可信度。
+       注：分支的颜色表示对应的不同门水平分类
     </p>
 
 {% endif %}

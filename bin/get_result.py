@@ -52,12 +52,27 @@ def get_result(cfg_in, vars=None):
                     value_rep = value.replace("#group", analysis_name)
                     target_file = out_dir_results + config.get('target', key).replace("#group", analysis_name)
                     makedir(os.path.dirname(target_file))
-                    command += 'cp -rf ' + work_dir + '../' + value_rep + ' '
-                    command += target_file + '\n'
+                    match = re.match(r"*dir$",key)
+                    if match:
+                        command += 'cp -rf ' + work_dir + '../' + value_rep + '/*.png '
+                        command += target_file + '\n'
+                        command += 'cp -rf ' + work_dir + '../' + value_rep + '/*.pdf '
+                        command += target_file + '\n'
+                        command += 'cp -rf ' + work_dir + '../' + value_rep + '/*.txt '
+                        command += target_file + '\n'
+                    else:
+                        command += 'cp -rf ' + work_dir + '../' + value_rep + ' '
+                        command += target_file + '\n'
             else:
                 target_file = out_dir_results + config.get('target', key)
                 makedir(os.path.dirname(target_file))
-                command += 'cp -rf ' + work_dir + '../' + value + ' ' + target_file + '\n'
+                match = re.match(r"*dir$",key)
+                if match:
+                    command += 'cp -rf ' + work_dir + '../' + value + '/*.txt ' + target_file + '\n'
+                    command += 'cp -rf ' + work_dir + '../' + value + '/*.pdf ' + target_file + '\n'
+                    command += 'cp -rf ' + work_dir + '../' + value + '/*.png ' + target_file + '\n'
+                else:
+                    command += 'cp -rf ' + work_dir + '../' + value + ' ' + target_file + '\n'
         else:
             sys.stderr.write('06_get_html.cfg target section no have ' + key + '\n')
     work.commands.append(command)

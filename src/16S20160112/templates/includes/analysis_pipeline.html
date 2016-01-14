@@ -1,178 +1,175 @@
-<h1 id="总体概述">
-    总体工作流程概述
-</h1>
-<h3 id="Illumina 测序实验流程">
-    2.1 Illumina 测序实验流程
-</h3>
-<p class="center">
-    <img class="size2" src="images/experimental_process.png"/>
-</p>
-<h3 id="基因组DNA抽提和质检">
-    2.2 基因组DNA抽提和质检
-</h3>
-<p class="paragraph">
-    利用Thermo NanoDrop 2000紫外微量分光光度计和1% 琼脂糖凝胶电泳进行总
-</p>
-<h3 id="引物设计并合成">
-    2.3 引物设计并合成
-</h3>
-<p class="paragraph">
-    16S rDNA扩增选择区域为V3-V4区，使用的通用引物为341F和806R。
-    在通用引物的5’端加2上适合Miseq测序的index序列和接头序列，完成特异性引物的设计。
-</p>
-<h3 id="PCR扩增">
-    2.4 PCR扩增和产物纯化
-</h3>
-<p class="paragraph">
-    以稀释后的基因组DNA为模板，使用KAPA HiFi Hotstart ReadyMix PCR kit高保真酶进行PCR，确保扩增的准确性和高效性。
-    用2%琼脂糖凝胶电泳检测PCR产物，并用AxyPrep DNA凝胶回收试剂盒（AXYGEN公司）切胶回收PCR产物。
-    回收后，利用Thermo NanoDrop 2000紫外微量分光光度计和2%琼脂糖凝胶电泳进行文库质检。
-</p>
-<h3 id="PCR产物定量和均一化">
-    2.5 PCR产物定量和均一化
-</h3>
-<p class="paragraph">
-    文库质检合格后，使用Qubit进行文库定量，并根据每个样品的数据量要求，进行相应比例的混合。
-</p>
-<h3 id="Illumina 测序">
-    2.6 Illumina 测序
-</h3>
-<p class="paragraph">
-    使用Illumina HiSeq PE250进行上机测序。
-</p>
-<h3 id="生物信息分析流程">
-    生物信息分析流程
-</h3>
-<p>&nbsp;</p>
-<p class="center">
-    {% if amplification=="16S" %}
-        <img class="size2" src="images/16S_e.png"/>
-    {% else %}
-        <img class="size2" src="images/ITS_e.png"/>
-    {% endif %}
-</p>
-<p class="name_fig">
-    图1 测序原理图
-</p>
-<p class="premark">
-    设计{{ amplification }}特定引物扩增特异区域，得到
-    {% if amplification=="16S" %}
-        425bp
-    {% else %}
-        320bp
-    {% endif %}
-    左右扩增片段。加接头，采用MiSeq平台，测序得到2X300bp的Paired-End数据，通过拼接，可以得到较长序列，从而进行{{ amplification }}分析。
-</p>
-<p class="center">
-    <img class="size2" src="images/2.png"/>
-</p>
-<p class="name_fig">
-    图2 分析流程图
-</p>
-<p class="paragraph">
-    对原始数据进行QC之后，用Usearch软件对数据进行去嵌合体和聚类的操作，Usearch聚类时，
-    先将Reads按照丰度从大到小排序，通过97%相似度的标准聚类，得到OTU(Operational Taxonomic Units)，每个OTU被认为可代表一个物种。
-    接下来对每个样品的Reads进行随机抽平处理，并提取对应的OTU序列。
-    然后使用Qiime软件，做Alpha多样性指数的稀释曲线，根据稀释曲线选择合理的抽平参数，
-    利用Qiime软件对得到的抽平后的OTU进行分析，首先从OTU中分别提取一条Read作为代表序列，
-    使用RDP方法，将该代表序列与{{ amplification }}数据库比对，从而对每个OTU进行物种分类。
-    归类后，根据每个OTU中序列的条数，从而得到OTU丰度表，最后根据该OTU丰度表进行后续分析。
-</p>
-<h3 id="项目分析内容">3.2项目分析内容</h3>
-<div class="container">
-    <div class="row clearfix">
-        <div class="col-md-12 column">
-            <table class="table table-bordered">
-                <thead>
-                <tr class="success">
-                    <th>
+<div class="page">
+    <h1 id="实验流程">二、实验流程</h1>
+    <h2 id="Illumina测序实验流程">2.1、Illumina 测序实验流程</h2>
+    <p class="center">
+        <img class="size2" src="images/experimental_process.png"/>
+    </p>
 
-                    </th>
-                    <th>
-                        一、物种注释与评估
-                    </th>
-                    <th>
+    <h2 id="基因组DNA抽提和质检">2.2 基因组DNA抽提和质检</h2>
+    <p class="paragraph">
+        利用Thermo NanoDrop 2000紫外微量分光光度计和1% 琼脂糖凝胶电泳进行总
+    </p>
 
-                    </th>
-                    <th>
-                        二、物种分类与丰度分析
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>
-                        <input type="checkbox" checked="checked">
-                    </td>
-                    <td>
-                        测序数据统计
-                    </td>
-                    <td>
-                        <input type="checkbox" checked="checked">
-                    </td>
-                    <td>
-                        物种注释分析
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="checkbox" checked="checked">
-                    </td>
-                    <td>
-                        数据优化统计
-                    </td>
-                    <td>
-                        <input type="checkbox" checked="checked">
-                    </td>
-                    <td>
-                        物种注释结果统计
-                    </td>
-                </tr>
-                <tr class="error">
-                    <td>
-                        <input type="checkbox">
-                    </td>
-                    <td>
-                        OTU聚类
-                    </td>
-                    <td>
-                        <input type="checkbox">
-                    </td>
-                    <td>
-                        物种丰度分析
-                    </td>
-                </tr>
-                <tr class="warning">
-                    <td>
-                        <input type="checkbox">
-                    </td>
-                    <td>
-                        抽平处理
-                    </td>
-                    <td>
-                        <input type="checkbox">
-                    </td>
-                    <td>
-                        物种热图分析
-                    </td>
-                </tr>
-                <tr class="info">
-                    <td>
-                        <input type="checkbox">
-                    </td>
-                    <td>
-                        Core microbiome分析
-                    </td>
-                    <td>
-                        <input type="checkbox">
-                    </td>
-                    <td>
-                        Rank Abundance曲线
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+    <h2 id="引物设计并合成">2.3 引物设计并合成</h2>
+    <p class="paragraph">
+        16S rDNA扩增选择区域为V3-V4区，使用的通用引物为341F和806R。
+        在通用引物的5’端加2上适合Miseq测序的index序列和接头序列，完成特异性引物的设计。
+    </p>
+
+    <h2 id="PCR扩增">2.4 PCR扩增和产物纯化</h2>
+    <p class="paragraph">
+        以稀释后的基因组DNA为模板，使用KAPA HiFi Hotstart ReadyMix PCR kit高保真酶进行PCR，确保扩增的准确性和高效性。
+        用2%琼脂糖凝胶电泳检测PCR产物，并用AxyPrep DNA凝胶回收试剂盒（AXYGEN公司）切胶回收PCR产物。
+        回收后，利用Thermo NanoDrop 2000紫外微量分光光度计和2%琼脂糖凝胶电泳进行文库质检。
+    </p>
+
+    <h2 id="PCR产物定量和均一化">2.5 PCR产物定量和均一化</h2>
+    <p class="paragraph">
+        文库质检合格后，使用Qubit进行文库定量，并根据每个样品的数据量要求，进行相应比例的混合。
+    </p>
+
+    <h2 id="Illumina测序">2.6 Illumina 测序</h2>
+    <p class="paragraph">
+        使用Illumina HiSeq PE250进行上机测序。
+    </p>
+</div>
+
+
+<div id="page">
+    <h1 id="生物信息分析流程">三、生物信息分析流程</h1>
+    <h2 >3.1生物信息分析流程</h2>
+    <p>&nbsp;</p>
+    <p class="center">
+        {% if amplification=="16S" %}
+            <img class="size2" src="images/16S_e.png"/>
+        {% else %}
+            <img class="size2" src="images/ITS_e.png"/>
+        {% endif %}
+    </p>
+    <p class="name_fig">
+        图1 测序原理图
+    </p>
+    <p class="premark">
+        设计{{ amplification }}特定引物扩增特异区域，得到
+        {% if amplification=="16S" %}
+            425bp
+        {% else %}
+            320bp
+        {% endif %}
+        左右扩增片段。加接头，采用MiSeq平台，测序得到2X300bp的Paired-End数据，通过拼接，可以得到较长序列，从而进行{{ amplification }}分析。
+    </p>
+    <p class="center">
+        <img class="size2" src="images/2.png"/>
+    </p>
+    <p class="name_fig">
+        图2 分析流程图
+    </p>
+    <p class="paragraph">
+        对原始数据进行QC之后，用Usearch软件对数据进行去嵌合体和聚类的操作，Usearch聚类时，
+        先将Reads按照丰度从大到小排序，通过97%相似度的标准聚类，得到OTU(Operational Taxonomic Units)，每个OTU被认为可代表一个物种。
+        接下来对每个样品的Reads进行随机抽平处理，并提取对应的OTU序列。
+        然后使用Qiime软件，做Alpha多样性指数的稀释曲线，根据稀释曲线选择合理的抽平参数，
+        利用Qiime软件对得到的抽平后的OTU进行分析，首先从OTU中分别提取一条Read作为代表序列，
+        使用RDP方法，将该代表序列与{{ amplification }}数据库比对，从而对每个OTU进行物种分类。
+        归类后，根据每个OTU中序列的条数，从而得到OTU丰度表，最后根据该OTU丰度表进行后续分析。
+    </p>
+
+    <h2 id="项目分析内容">3.2项目分析内容</h2>
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr class="success">
+                        <th>
+
+                        </th>
+                        <th>
+                            一、物种注释与评估
+                        </th>
+                        <th>
+
+                        </th>
+                        <th>
+                            二、物种分类与丰度分析
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <input type="checkbox" checked="checked">
+                        </td>
+                        <td>
+                            测序数据统计
+                        </td>
+                        <td>
+                            <input type="checkbox" checked="checked">
+                        </td>
+                        <td>
+                            物种注释分析
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="checkbox" checked="checked">
+                        </td>
+                        <td>
+                            数据优化统计
+                        </td>
+                        <td>
+                            <input type="checkbox" checked="checked">
+                        </td>
+                        <td>
+                            物种注释结果统计
+                        </td>
+                    </tr>
+                    <tr class="error">
+                        <td>
+                            <input type="checkbox">
+                        </td>
+                        <td>
+                            OTU聚类
+                        </td>
+                        <td>
+                            <input type="checkbox">
+                        </td>
+                        <td>
+                            物种丰度分析
+                        </td>
+                    </tr>
+                    <tr class="warning">
+                        <td>
+                            <input type="checkbox">
+                        </td>
+                        <td>
+                            抽平处理
+                        </td>
+                        <td>
+                            <input type="checkbox">
+                        </td>
+                        <td>
+                            物种热图分析
+                        </td>
+                    </tr>
+                    <tr class="info">
+                        <td>
+                            <input type="checkbox">
+                        </td>
+                        <td>
+                            Core microbiome分析
+                        </td>
+                        <td>
+                            <input type="checkbox">
+                        </td>
+                        <td>
+                            Rank Abundance曲线
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
+    <p class="tremark">设计到的所以分析内容全部列表，然后“√”选项目设计到的分析内容</p>
 </div>
-<p class="tremark">设计到的所以分析内容全部列表，然后“√”选项目设计到的分析内容</p>

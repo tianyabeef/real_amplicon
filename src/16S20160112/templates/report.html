@@ -1,7 +1,90 @@
 {% extends "base.html" %}
 
-{% block bustomer_info %}
+{% block main %}
+<!-- #################################################### top navigation #################################### -->
+{% include "includes/navigator.html" %}
+<!-- #####################################################主要面板####################################### -->
+<div id="mainPanle" region="center" border="true" border="false">
+    <div class="main">
+
+        {% include 'incdlues/customer_info.html' %}
+
+        {% include "includes/project_info.html" %}
+
+        {% include 'includes/analysis_pipeline.html' %}
+
+        {% include 'analysis/reads_statistic.html' %}
+
+        {% include 'analysis/otu_statistic.html' %}
+
+        {% include 'analysis/downsize.html' %}
+
+        {% include 'analysis/core_microbiome.html' %}
+
+        {% include 'analysis/otu_venn.html' %}
+
+        {% include 'analysis/otu_pca.html' %}
+
+        {% include 'analysis/specaccum.html' %}
+
+        {% include 'analysis/otu_tax_assignment.html' %}
+
+        {% include 'analysis/annotation_statistic.html' %}
+
+        {% include 'analysis/tax_summary.html' %}
+
+        {% include 'analysis/species_clustering.html' %}
+
+        {% include 'analysis/otu_heatmap.html' %}
+
+        {% include 'analysis/rank_abundance.html' %}
+
+        {% include "analysis/tree_species_classification.html" %}
+
+        {% include 'analysis/otu_krona.html' %}
+
+        {% include 'analysis/phylogenetic_tree.html' %}
+
+        {% include 'analysis/alpha_diversity.html' %}
+
+        {% include 'analysis/alpha_diff.html' %}
+
+        {% include 'analysis/beta_unifrac.html' %}
+
+        {% include 'analysis/diff_analysis.html' %}
+
+        {% include 'analysis/diff_analysis.html' %}
+
+        {% include "analysis/personalize.html" %}
+
+
+        <h2>备注</h2>
+        <p class="paragraph">网页中表格的数值保留了两位有效数字，在Excel表中保留原始数值没有做处理。</p>
+        <p><a name="gobottom"></a></p><!--到底部-->
+    </div>
+</div>
+
+
+{% include "includes/foot.html" %}
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+<!-- {% block bustomer_info %}
     {% include 'incdlues/customer_info.html' %}
+{% endblock %}
+
+{% block project_info%}
+    {% include "includes/project_info.html" %}
 {% endblock %}
 
 {% block analysis_pipeline %}
@@ -48,12 +131,20 @@
     {% include 'analysis/tax_summary.html' %}
 {% endblock %}
 
+{% block species_clustering_head %}
+    {% include 'analysis/species_clustering.html' %}
+{% endblock %}
+
 {% block otu_heatmap_head %}
     {% include 'analysis/otu_heatmap.html' %}
 {% endblock %}
 
 {% block rank_abundance_head %}
     {% include 'analysis/rank_abundance.html' %}
+{% endblock %}
+
+{% block tree_species_classification_head %}
+    {% include "analysis/tree_species_classification.html" %}
 {% endblock %}
 
 {% block otu_krona_head %}
@@ -78,4 +169,12 @@
 
 {% block diff_analysis_head %}
     {% include 'analysis/diff_analysis.html' %}
+{% endblock %}
+
+{% block diff_analysis_head %}
+    {% include 'analysis/diff_analysis.html' %}
 {% endblock %} 
+
+{% block personalize_head %}
+    {% include "analysis/personalize_head.html" %}
+{% endblock %} -->

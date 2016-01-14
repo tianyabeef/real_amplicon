@@ -1,5 +1,6 @@
 {% if downsize_html %}
-    <h3 id="抽平处理">2.2 抽平处理</h3>
+<div class="page">
+    <h3 id="抽平处理">5.2 抽平处理</h3>
     <p class="paragraph">
         由于不同样品对应的Reads数量差距较大，为了保证后期分析结果合理，我们对每个样品的数据进行随机抽平处理，
         抽平参数根据Alpha多样性指数的稀释曲线来确定。
@@ -12,7 +13,7 @@
         <img class="size1" src="images/alpha/chao1.png"/>
         <img class="size1" src="images/alpha/observed_species.png"/>
     </p>
-    <p class="name_fig">图2-2-1 表示样品物种丰富度Alpha多样性指数稀释曲线图</p>
+    <p class="name_fig">图5-2-1 表示样品物种丰富度Alpha多样性指数稀释曲线图</p>
 
     <p class="premark">
         图中一条曲线代表一个样品，
@@ -26,10 +27,10 @@
         <a href="javascript:void(0)" onClick="StartExcel('..\\results\\02_OTU\\all\\otu_downsize_stat.tsv')">
             otu_downsize_stat.tsv
         </a>
-        中，表2-2-1 展示部分结果：
+        中，表5-2-1 展示部分结果：
     </p>
     <p class="name_table">
-        表2-2-1 抽平后样品OTU统计
+        表5-2-1 抽平后样品OTU统计
     </p>
     <div class="center_table">
         <div id="toolbar2" class="pull-left-self">
@@ -43,10 +44,9 @@
                data-show-export="true" data-page-list="[10, 25, 50, 100, 200, All]">
         </table>
     </div>
-    <p class="tremark">
-        注：第一列Sample Name是样品名称;
-        第二列Downsize是抽平数量;
-        第三列otu_berfore抽平前的OTU个数;
-        第三列otus_after是抽平后样品所含有的OTU个数。
-    </p>
+    <p class="tremark">注：第一列Sample Name是样品名称;</p>
+    <p class="tremark">第二列Downsize是抽平数量;</p>
+    <p class="tremark">第三列otu_berfore抽平前的OTU个数;</p>
+    <p class="tremark">第三列otus_after是抽平后样品所含有的OTU个数。</p>
+</div>
 {% endif %}
