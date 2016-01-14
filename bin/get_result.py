@@ -52,7 +52,7 @@ def get_result(cfg_in, vars=None):
                     value_rep = value.replace("#group", analysis_name)
                     target_file = out_dir_results + config.get('target', key).replace("#group", analysis_name)
                     makedir(os.path.dirname(target_file))
-                    match = re.match(r"*dir$",key)
+                    match = re.match(r".*dir$",key)
                     if match:
                         command += 'cp -rf ' + work_dir + '../' + value_rep + '/*.png '
                         command += target_file + '\n'
@@ -66,7 +66,7 @@ def get_result(cfg_in, vars=None):
             else:
                 target_file = out_dir_results + config.get('target', key)
                 makedir(os.path.dirname(target_file))
-                match = re.match(r"*dir$",key)
+                match = re.match(r".*dir$",key)
                 if match:
                     command += 'cp -rf ' + work_dir + '../' + value + '/*.txt ' + target_file + '\n'
                     command += 'cp -rf ' + work_dir + '../' + value + '/*.pdf ' + target_file + '\n'
