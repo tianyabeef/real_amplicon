@@ -201,6 +201,10 @@ class UserConfigChecker(object):
             sys.stderr.write(str(exception_val))
             sys.stderr.write('please set the group_file correct!\n')
             #  sys.exit()
+        elif exception_type == AlphaGroupFileError:
+            sys.stderr.write(str(exception_val))
+            sys.stderr.write('please set the alpha_group_file correct!\n')
+            # sys.exit()
         else:
             sys.stderr.write('%s : %s' % (exception_type, exception_val))
             #  sys.exit()

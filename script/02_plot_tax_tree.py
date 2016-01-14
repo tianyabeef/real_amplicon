@@ -15,7 +15,7 @@ import numpy as np
 import pandas as pd
 from collections import OrderedDict
 from ete3 import Tree, TreeStyle, NodeStyle, TextFace, PieChartFace, CircleFace
-from util import LEVELS, TAX_DICT, SEARCH_REG, COLS_BREWER, float_trans, mkdir, image_trans
+from util import LEVELS, TAX_DICT, SEARCH_REG, COLS_BREWER, float_trans, mkdir, image_trans, table_uniform
 
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1, this_script_path + '/../src')
@@ -51,12 +51,6 @@ def read_params(args):
     params = vars(args)
     params['group'] = parse_group_file(params['group'])
     return params
-
-
-def table_uniform(table):
-    for col_name, col in table.iteritems():
-        table[col_name] = col.map(lambda s: s / col.sum())
-    return table
 
 
 def get_tax(level=None):

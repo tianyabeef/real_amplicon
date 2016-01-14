@@ -46,7 +46,7 @@ def taxanomy_group(cfg_in, vars=None):
                                                        outfiles['otu_venn_outdir']))
     elif group_num > 5:
         work.commands.append('%s %s %s %s' % (scripts['otu_flower'],
-                                              params['unifrom_profile'],
+                                              params['uniform_profile'],
                                               params['group'],
                                               outfiles['otu_venn_outdir']))
     # tax_pca

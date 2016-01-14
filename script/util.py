@@ -1,5 +1,6 @@
 import re
 import os
+import pandas as pd
 
 COLS_BREWER = ['#00447E', '#F34800', '#64A10E', '#930026', '#464E04', '#049a0b', '#4E0C66', '#D00000', '#FF6C00',
                '#FF00FF', '#c7475b', '#00F5FF', '#BDA500', '#A5CFED', '#f0301c', '#2B8BC3', '#FDA100', '#54adf5',
@@ -75,3 +76,12 @@ def tax_profile_filter(infile, outfile, level):
             for tab in tabs[1:]:
                 if float(tab) > 0:
                     n += 1
+    table = pd.DataFrame.from_csv(outfile, sep='\t')
+    table = table_uniform(table)
+    table.to_csv(outfile, sep='\t')
+
+
+def table_uniform(table):
+    for col_name, col in table.iteritems():
+        table[col_name] = col.map(lambda s: s / col.sum())
+    return table
