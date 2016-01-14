@@ -40,6 +40,8 @@ def read_params(args):
                         help="set the top num, [default is 20]")
     parser.add_argument('-o', '--outdir', dest='outdir', metavar='DIR', type=str, required=True,
                         help="set the outdir")
+    parser.add_argument('--plot_in_samples', dest='plot_in_samples', action='store_true',
+                        help="plot every sample's tree")
     parser.add_argument('--with_leaf_pie', dest='with_leaf_pie', action='store_true',
                         help="plot with leaf pie chart, [default is false]")
     parser.set_defaults(with_leaf_pie=False)
@@ -183,9 +185,9 @@ def set_node_default(tree, node_dict):
         node.style = nstyle
         nstyle["shape"] = "circle"
         nstyle["hz_line_type"] = 3
-        nstyle["hz_line_color"] = "black"
+        nstyle["hz_line_color"] = node.branch_color or 'black'
         nstyle["hz_line_width"] = 1
-        nstyle["vt_line_color"] = "black"
+        nstyle["vt_line_color"] = node.branch_color or 'black'
         nstyle["vt_line_width"] = 1
 
 
@@ -264,6 +266,28 @@ def add_pie_face(tree, ts, total_profile, group):
         ts.legend_position = 1
 
 
+def plot_one_tree(newick_file, profile_dict, node_dict, params, prefix=''):
+    t = Tree(newick_file, format=1)
+    ts = get_tree_style()
+    set_node_default(t, node_dict=node_dict)
+    suf = ''
+    if params['with_branch_circle']:
+        add_node_circle(t, node_dict=node_dict)
+        suf += '_circle'
+    if params['with_leaf_pie'] and not params['with_branch_circle']:
+        remove_node_circle(t, node_dict=node_dict)
+    if params['with_leaf_pie']:
+        add_pie_face(t, ts, profile_dict, group=params['group'])
+        suf += '_pie'
+    add_branch_text(t, tree_style=ts, node_dict=node_dict)
+    set_node_style(t, node_dict=node_dict)
+
+    pdf_file = '%s/%s_tax_tree%s.pdf' % (params['outdir'], prefix, suf)
+    png_file = '%s/%s_tax_tree%s.png' % (params['outdir'], prefix, suf)
+    t.render(pdf_file, tree_style=ts, dpi=100)
+    image_trans(pdf_file, png_file)
+
+
 if __name__ == '__main__':
     params = read_params(sys.argv)
     mkdir(params['outdir'])
@@ -275,23 +299,15 @@ if __name__ == '__main__':
     tree.adjust_profile()
     with open(newick_file, 'w') as out:
         out.write(str(tree))
-    t = Tree(newick_file, format=1)
-    ts = get_tree_style()
-
-    set_node_default(t, node_dict=tree.nodes)
-    suf = ''
-    if params['with_branch_circle']:
-        add_node_circle(t, node_dict=tree.nodes)
-        suf += '_circle'
-    if params['with_leaf_pie'] and not params['with_branch_circle']:
-        remove_node_circle(t, node_dict=tree.nodes)
-    if params['with_leaf_pie']:
-        add_pie_face(t, ts, total_profile.T, group=params['group'])
-        suf += '_pie'
-    add_branch_text(t, tree_style=ts, node_dict=tree.nodes)
-    set_node_style(t, node_dict=tree.nodes)
-
-    pdf_file = '%s/tax_tree%s.pdf' % (params['outdir'], suf)
-    png_file = '%s/tax_tree%s.png' % (params['outdir'], suf)
-    t.render(pdf_file, tree_style=ts, dpi=100)
-    image_trans(pdf_file, png_file)
+    plot_one_tree(newick_file, total_profile.T, tree.nodes, params)
+    if params['plot_in_samples']:
+        tree_in_sample = {}
+        for sample_name in total_profile:
+            tree_in_sample[sample_name] = read_tax(modified_tax, total_profile[sample_name])
+            tree_in_sample[sample_name].adjust_profile()
+        out_dir = params['outdir']
+        for sample, sample_tree in tree_in_sample.iteritems():
+            params['with_leaf_pie'] = False
+            params['outdir'] = '%s/samples' % out_dir
+            mkdir(params['outdir'])
+            plot_one_tree(newick_file, total_profile[sample], sample_tree.nodes, params, prefix=sample)

@@ -88,7 +88,7 @@ def taxanomy_group(cfg_in, vars=None):
                                                                outfiles['tax_tree_outdir']
                                                                )
     # plot tax tree with branch circle
-    work.commands.append('%s --with_branch_circle' % command)
+    work.commands.append('%s --with_branch_circle --plot_in_samples' % command)
     # plot tax tree with leaf pie
     work.commands.append('%s -g %s --with_leaf_pie' % (command, params['group']))
     return outfiles
