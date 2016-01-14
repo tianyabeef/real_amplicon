@@ -1,0 +1,138 @@
+
+    {% if otu_statistical %}
+        <h3 id="OTU聚类">5.1 OTU聚类</h3>
+        <p class="paragraph">
+            首先我们将序列完全一样的Clean
+            Reads根据其丰度大小进行排序，将其中的Singletons过滤掉，（因为Singletons可能由于测序错误造成，故将这部分序列去除，不进行后期OTU聚类），利用Usearch在0.97相似度下进行聚类，对聚类后的序列进行嵌合体过滤后，得到用于物种分类的OTU(Operational
+            Taxonomic Units)，最后将所有Clean Reads比对到OTU序列上，将能比对上OTU的Reads提取出来，得到最终的Mapped Reads。
+            统计各个样品每个OTU中的丰度信息，OTU的丰度初步说明了样品的物种丰富程度。{{ sample_sum }}个样品共产生{{ otu_sum }}个OTU。每个样品OTU统计结果见表5-1-1，详细信息表见<a
+                href="..\results\01_Reads\pick_otu_summary.tsv" target="_blank">pick_otu_summary.tsv</a>，样品OTU统计表单。
+        </p>
+        <p class="name_table">表5-1-1 样品数据和OTU统计</p>
+        <table id="table1" data-height="413"></table>
+        <p class="tremark">注:第一列Sample Name是样品名称；第二列Amplicon Type是指明测序是16S或者ITS；第三列Clean
+            Read是质控后的Reads条数；第四列Q20（%）是碱基质量值大于20的reads的比例；第五列Q30（%）是碱基质量值大于30的Reads的比例；第六列Mapped
+            Reads是比对上OTU的Reads占Clean Reads的数量；第七列Mapped Reads(%)是比对上OTU的Reads占Clean Reads的比例；第八列OTUs是样品所含有的OTU个数。
+
+        </p>
+    {% endif %}
+
+
+
+
+
+
+    {% if downsize_html %}
+        <h3 id="抽平处理">5.2 抽平处理</h3>
+        <p class="paragraph">
+            由于不同样品对应的Reads数量差距较大，为了保证后期分析结果合理，我们对每个样品的数据进行随机抽平处理，抽平参数根据Alpha多样性指数的稀释曲线来确定。
+        </p>
+        <p class="paragraph">
+            Alpha多样性反映的是单个样品内部的物种多样性，包括observed species指数、chao指数。
+        </p>
+        <p class="center">
+            <img class="size1" src="images/alpha/chao1.png"/><img class="size1"
+                                                                  src="images/alpha/observed_species.png"/>
+        </p>
+        <p class="name_fig">图5-2-1 表示样品物种丰富度Alpha多样性指数稀释曲线图</p>
+        <p class="premark">图中一条曲线代表一个样品，横轴表示从某个样品中随机抽取的Clean
+            Reads数目，纵轴表示该Reads数目对应的Alpha多样性指数的大小，随着测序深度的增加，当曲线趋于平缓时表示此时的测序数据量比较合理。</p>
+        <p class="paragraph">根据Alpha多样性分析，兼顾测序饱和度和样品完整性，我们对每个样品随机抽取{{ downsize }}条Reads。抽平后的样品OTU统计见<a
+                href="..\results\02_OTU\all\otu_downsize_stat.tsv" target="_blank">otu_downsize_stat.tsv</a>中，表5-2-1
+            展示部分结果：
+        </p>
+        <p class="name_table">表5-2-1 抽平后样品OTU统计</p>
+        <table id="table2" data-height="413"></table>
+        <p class="tremark">注：第一列Sample Name是样品名称；第二列Downsize是抽平数量，第三列otu_berfore抽平前的OTU个数，第三列otus_after是抽平后样品所含有的OTU个数。
+        </p>
+    {% endif %}
+
+
+
+
+
+
+    {% if core_microbiome_html %}
+        <h3 id="Core microbiome分析">5.3 Core microbiome分析（总样品数>=5）</h3>
+        {% if core_otu_exists %}
+            <p class="center">共有OTU数与样品的关系</p>
+            <p class="center">
+                <img class="size1" src="images/group/core_otu.png"/>
+            </p>
+            <p class="name_fig">图5-3-1 共有OTU数与样品的关系
+            </p>
+            <p class="premark">图中表示的是覆盖一定比例以上样品的OTU的数目，横坐标是覆盖样品的比例，纵坐标是统计的覆盖大于此比例样品的OTU的数目。</p>
+            <p class="paragraph">结合OTU所代表的物种，可以找出Core microbiome（即覆盖100%样品的微生物组）。该项目的Core
+                microbiome共包含{{ core_microbiome }}个OTUs，<a href="..\results\02_OTU\{{ group_file }}\core_otu.tsv"
+                                                           target="_blank">core_otu.tsv</a>其部分物种信息如下：</p>
+            <p class="name_table">表5-3-1 Core microbiome OTU列表</p>
+    
+            <table id="table3" data-height="413"></table>
+
+
+            <p class="tremark">注：第一列OTU ID是OTU名称；第二列Taxonomy Level是OTU所代表的物种所在的分类水平；第三列Taxonomy Name是OTU所代表的物种名称。</p>
+        {% else %}
+            <p class="error"> 未找到Core Microbiome </p>
+        {% endif %}
+    {% else %}
+        <h3 id="Core microbiome分析">5.3 Core microbiome分析（总样品数>=5）</h3>
+        <p class="error">样品数不足无法分析</p>
+    {% endif %}
+
+
+
+
+    {% if otu_venn %}
+        <h3 id="OTU Venn图分析">5.4 OTU Venn图分析(分组数量2~5组)</h3>
+        <p class="paragraph">在0.97的相似度下，得到了每个样品的OTU个数，利用Venn图可以展示多样品共有和各自特有OTU数目，直观展示样品间OTU的重叠情况。</p>
+        <p class="center">
+            <img class="size1" src="images/group/venn.png"/>
+        </p>
+        <p class="name_fig">图5-4-1 OTU venn图（2-5组）</p>
+        <p class="premark">
+            不同颜色图形代表不同样品或者不同组别，不同颜色图形之间交叠部分数字为两个样品或两个组别之间共有的OTU个数。同理，多个颜色图形之间交叠部分数字为多个样品或组别之间共有OTU个数。Venn图容许2-5个样品或组别。</p>
+
+    {% else %}
+        <h3 id="OTU Venn图分析">5.4 OTU Venn图分析(分组数量2~5组)</h3>
+        <p class="error">样品数不足无法分析</p>
+    {% endif %}
+
+
+
+
+
+{% block otu_pca_head %}
+    {% if otu_pca %}
+        <h3 id="OTU PCA分析">5.5 OTU PCA分析（总样品数>=5）</h3>
+        <p class="paragraph">PCA分析(Principal Component
+            Analysis)，即主成分分析，是一种分析和简化数据集的技术。不同处理或不同环境间的样品可能表现出分散和聚集的分布情况，从而可以判断相同条件的样品组成是否具有相似性。</p>
+        <p class="center">
+            <img class="size2" src="images/group/otu_pca.png"/>
+        </p>
+        <p class="name_fig">图5-5-1 基于OTU丰度的PCA分析</p>
+        <p class="premark">
+            横坐标表示第一主成分，括号中的百分比则表示第一主成分对样品差异的贡献率；纵坐标表示第二主成分，括号中的百分比表示第二主成分对样品差异的贡献率。图中点分别表示各个样品。不同颜色代表样品属于不同的分组。</p>
+    {% else %}
+        <h3 id="OTU PCA分析">5.5 OTU PCA分析（总样品数>=5）</h3>
+        <p class="error">样品数不足无法分析</p>
+    {% endif %}
+{% endblock %}
+
+
+
+{% block specaccum_head %}
+    {% if specaccum %}
+        <h3 id="Specaccum物种累积曲线">5.6 Specaccum物种累积曲线（总样品数>=10）</h3>
+        <p class="paragraph">物种累积曲线(Species Accumulation
+            Curves)用于描述随着抽样量的加大物种增加的状况，是理解调查样地物种组成和预测物种丰富度的有效工具，在生物多样性和群落调查中，被广泛用于抽样量充分性的判断以及物种丰富度(Species
+            Richness)的估计。因此，通过物种累积曲线不仅可以判断抽样量是否充分，在抽样量充分的前提下，运用物种累积曲线还可以对物种丰富度进行预测。</p>
+        <p class="center">
+            <img class="size2" src="images/specaccum.png"/>
+        </p>
+        <p class="name_fig">图5-6-1 物种累积曲线</p>
+        <p class="premark">注：横坐标是样品的数量，纵坐标是OTUs的数量</p>
+    {% else %}
+        <h3 id="Specaccum物种累积曲线">5.6 Specaccum物种累积曲线（总样品数>=10）</h3>
+        <p class="error">样品数不足无法分析</p>
+    {% endif %}
+{% endblock %}

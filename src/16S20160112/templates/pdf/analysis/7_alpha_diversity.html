@@ -1,0 +1,86 @@
+{% if alpha_diversity %}
+    <h2 id="单个样品多样性分析">7.1 单个样品多样性分析</h2>
+    <p class="paragraph">Alpha多样性反映的是单个样品内部的物种多样性，包括observed
+        species指数、chao指数，shannon指数以及simpson指数，PD_whole_tree指数等。Alpha多样性统计见<a
+                href="..\results\03_Alpha_diversity\{{ group_file }}\alpha_statistic.tsv" target="_blank">alpha_statistic.tsv</a>
+    </p>
+    <p class="name_table">表7-1-1 样品Alpha多样性统计结果</p>
+
+    <table id="table5" data-height="413"></table>
+
+
+    <p class="tremark">注：第一列Sample Name是样品名称；第二列至最后一列是样品的不同的Alpha多样性指数的数值。</p>
+    <p class="center">
+        <img class="size1" src='images/group/alpha_div_collated/chao1.png'/><img class="size1"
+                                                                                 src='images/group/alpha_div_collated/goods_coverage.png'/>
+    </p>
+    <p class="center">
+        <img class="size1" src='images/group/alpha_div_collated/observed_species.png'/><img class="size1"
+                                                                                            src='images/group/alpha_div_collated/PD_whole_tree.png'/>
+    </p>
+    <p class="center">
+        <img class="size1" src='images/group/alpha_div_collated/shannon.png'/><img class="size1"
+                                                                                   src='images/group/alpha_div_collated/simpson.png'/>
+    </p>
+
+    <p class="name_fig"> 图7-1-1 样品物种丰度Alpha多样性指数稀释曲线图 </p>
+    <p class="premark"> 注：图中一种颜色代表一组样品，横轴表示抽取的reads数量，纵轴表示相应Alpha多样性指数的值。</p>
+
+{% else %}
+    <h3 id="单个样品多样性分析">7.1 单个样品多样性分析</h3>
+    <p class="error">样品数不足无法分析</p>
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% if alpha_diff %}
+    <h2 id="单个样品差异分析">7.2 单个样品差异分析(每组内样品数>=3)</h2>
+    {% if alpha_diff_boxplot %}
+        <p class="center">
+            <img class="size1" src='images/group/box_plot/chao1.boxplot.png'/><img class="size1"
+                                                                                   src='images/group/box_plot/goods_coverage.boxplot.png'/>
+        </p>
+        <p class="center">
+            <img class="size1" src='images/group/box_plot/observed_species.boxplot.png'/><img class="size1"
+                                                                                              src='images/group/box_plot/PD_whole_tree.boxplot.png'/>
+        </p>
+        <p class="center">
+            <img class="size1" src='images/group/box_plot/shannon.boxplot.png'/><img class="size1"
+                                                                                     src='images/group/box_plot/simpson.boxplot.png'/>
+        </p>
+
+        <p class="name_fig">图7-2-1组间Alpha多样性盒形图：</p>
+        <p class="premark">
+            注：盒形图可以显示5个统计量（最小值，第一个四分位数，中位数，第三个中位数和最大值，及由下到上的5条线），异常值以“o”标出。横轴是分组名称，纵轴是不同分组下的alpha多样性指数的值。</p>
+    {% endif %}
+    <p class="paragraph">分别对Alpha
+        Diversity的各个指数进行秩和检验分析(若两组样品比较即使用R中的wilcox.test函数，若两组以上的样品比较则使用R中的kruskal.test函数)，通过秩和检验筛选不同条件下的显著差异的Alpha
+        Diversity指数。结果见<a href="..\results\03_Alpha_diversity\{{ group_file }}\alpha_marker.tsv" target="_blank">alpha_marker.tsv</a>。
+    </p>
+    <p class="name_table">表7-2-1 Alpha diversity指数差异检验</p>
+
+    <table id="table6" data-height="413"></table>
+
+
+    <p class="tremark">注：第一行是Alpha Diversity指数；第二行至第{{ group_num + 2 }}行分别为{{ group_num }}组样品的均值；其中（P-value）行为秩和检验的P-value值；</p>
+
+{% else %}
+    <h3 id="单个样品差异分析">7.2 单个样品差异分析(每组内样品数>=3)</h3>
+    <p class="error">样品数不足无法分析</p>
+{% endif %}
+

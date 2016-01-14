@@ -1,0 +1,2962 @@
+commit 1c9593d72efc8f2211017f9fbac2401c59f17498
+Author: hy <hy@realbio.cn>
+Date:   Thu Jan 14 12:20:55 2016 +0800
+
+    dd
+
+commit 5c83ae31f0f9a100f8edc06db7401e426f8f59d3
+Author: Dell <Dell@Dell-PC>
+Date:   Thu Jan 14 12:14:54 2016 +0800
+
+    config
+
+commit 82e3302045d5da44a545645ee7c04d5e63fe70b6
+Author: Lyon <lozybean@163.com>
+Date:   Tue Jan 12 11:53:10 2016 +0800
+
+    change reault directory maker
+
+commit 146a25798dc131f4254997d479a93cf72594b1af
+Author: Lyon <lozybean@163.com>
+Date:   Tue Jan 12 11:24:14 2016 +0800
+
+    restructure html templates
+
+commit 38a0501a3835d4b45c9256f0773070286ce9ed8d
+Merge: fa7fd34 b9d65ae
+Author: Lyon0804 <lozybean@163.com>
+Date:   Tue Jan 12 09:14:29 2016 +0800
+
+    Merge pull request #74 from tianyabeef/master
+    
+    16S20160105 新的版本
+
+commit b9d65aedc5350ec19eb013ee9b33aa21f26e5900
+Merge: 4331e7c fa7fd34
+Author: hy <hy@realbio.cn>
+Date:   Tue Jan 12 09:11:13 2016 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit 4331e7cb2eb9433158b19b50815f30c19d198fbd
+Author: hy <hy@realbio.cn>
+Date:   Tue Jan 12 09:11:04 2016 +0800
+
+    16S20160105
+
+commit fa7fd348ca3c8b531323dd22c8ec9026cfaec557
+Author: Lyon <lozybean@163.com>
+Date:   Mon Jan 11 21:27:12 2016 +0800
+
+    add tax tree with leaf pie
+
+commit fa357ad161d910f5f6e6296d34757d62ae27df87
+Author: Lyon <lozybean@163.com>
+Date:   Mon Jan 11 21:23:41 2016 +0800
+
+    add tax tree with leaf pie
+
+commit 060119c3930ea8448ab202ef824ef2b8d2079cd3
+Author: Lyon <lozybean@163.com>
+Date:   Mon Jan 11 16:25:53 2016 +0800
+
+    add result copy files
+
+commit 90808d28e3f7bca942a912ccf06c4f6e94a5027d
+Merge: 3ce6509 474d0b5
+Author: Lyon0804 <lozybean@163.com>
+Date:   Mon Jan 11 16:07:47 2016 +0800
+
+    Merge pull request #73 from tianyabeef/master
+    
+    修改图片和表格
+
+commit 474d0b576c5ef12c7ac1d54d64d100fbcf6c9d1c
+Author: hy <hy@realbio.cn>
+Date:   Mon Jan 11 16:04:05 2016 +0800
+
+    rm themes
+
+commit 68d440395b8340eebc1d12907991a29413ea80e7
+Author: Dell <Dell@Dell-PC>
+Date:   Mon Jan 11 15:49:18 2016 +0800
+
+    table_template.js
+
+commit e2bf47dc33d7658cfbb2f38b8b1d96d39ca90b1e
+Merge: 038701d 3ce6509
+Author: hy <hy@realbio.cn>
+Date:   Mon Jan 11 15:44:53 2016 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit 3ce6509638dc6c4c73596b5c8b7db15abe0c0be1
+Author: Lyon <lozybean@163.com>
+Date:   Mon Jan 11 15:16:22 2016 +0800
+
+    chmod +x
+
+commit 0e8c603ed22d9593d79a214f5986a89dd1364d8c
+Author: Lyon <lozybean@163.com>
+Date:   Mon Jan 11 15:13:36 2016 +0800
+
+    add tax_bar_tree plot
+
+commit 6f71f67ef714905ba324606eff715ed723d4b1ff
+Author: Lyon <lozybean@163.com>
+Date:   Mon Jan 11 11:47:36 2016 +0800
+
+    chmod +x
+
+commit 8a7918d900b871b5a9687dce7444a8517343c48c
+Author: Lyon <lozybean@163.com>
+Date:   Mon Jan 11 11:46:41 2016 +0800
+
+    change default top tax in plot_tax_tree
+
+commit 82ecde0f26cefb5da69b7b6230a4d7db28068ecf
+Author: Lyon <lozybean@163.com>
+Date:   Mon Jan 11 11:46:05 2016 +0800
+
+    add otu flower when group > 5
+
+commit fd14554b576fa9a934ab4518fa00d43937dea641
+Author: Lyon <lozybean@163.com>
+Date:   Fri Jan 8 17:57:26 2016 +0800
+
+    change the dpi to 100
+
+commit f777c91924bb711fb7dc54562b9328110c8483d2
+Author: Lyon <lozybean@163.com>
+Date:   Fri Jan 8 17:51:31 2016 +0800
+
+    modified the tax tree plot
+
+commit ffc867b2f938ecfd3b82d53377adad27fc308f93
+Author: Lyon <lozybean@163.com>
+Date:   Fri Jan 8 13:44:34 2016 +0800
+
+    change anosim limit
+
+commit 038701d4f609d535236bf2e842c9dc9adbd77b18
+Author: Dell <Dell@Dell-PC>
+Date:   Thu Jan 7 20:21:01 2016 +0800
+
+    t6
+
+commit 1617036f552fdb08a64279e608d16141ff060a2a
+Author: Dell <Dell@Dell-PC>
+Date:   Thu Jan 7 20:18:15 2016 +0800
+
+    t5
+
+commit 36b88fe94aed46db9e9fa2e4c5e4727f3699a7b1
+Author: Dell <Dell@Dell-PC>
+Date:   Thu Jan 7 20:16:19 2016 +0800
+
+    t5
+
+commit a80af09a6713c7d89a8e3158b684cdb422a0e635
+Author: Dell <Dell@Dell-PC>
+Date:   Thu Jan 7 20:09:11 2016 +0800
+
+    tt3
+
+commit 4370a7a01ebbf5b6dc751a65ff51e95b61dbe7ad
+Author: Dell <Dell@Dell-PC>
+Date:   Thu Jan 7 19:35:32 2016 +0800
+
+    t2
+
+commit b5b9ab5a554efe22d08d2bb39c047a737edd1f78
+Author: Dell <Dell@Dell-PC>
+Date:   Thu Jan 7 19:34:43 2016 +0800
+
+    tt
+
+commit 20574fd558871631f84d3f90a92e665dccd18fa0
+Author: Dell <Dell@Dell-PC>
+Date:   Thu Jan 7 19:29:27 2016 +0800
+
+    tests
+
+commit b8177a577cddb752ff359c61ea644b84c4c97f8b
+Author: hy <hy@realbio.cn>
+Date:   Thu Jan 7 18:51:44 2016 +0800
+
+    dd
+
+commit c1bf2b66d690ac3b1ea665a0887453eb7f58c5fe
+Author: hy <hy@realbio.cn>
+Date:   Thu Jan 7 18:12:54 2016 +0800
+
+    dd
+
+commit 96aae38c78e8badeb41fe5b4fecfba63718098a8
+Author: hy <hy@realbio.cn>
+Date:   Thu Jan 7 18:01:47 2016 +0800
+
+    dd
+
+commit 1a9ab4918f987dc64432ac914fdc1c2d7d874e8b
+Author: Dell <Dell@Dell-PC>
+Date:   Thu Jan 7 17:50:11 2016 +0800
+
+    themes to themes2
+
+commit bec9752e6f0bed440f0e57896220112c32e86693
+Author: Lyon <lozybean@163.com>
+Date:   Thu Jan 7 16:13:25 2016 +0800
+
+    fix tax tree plot
+
+commit ca4458c36f25894b6d4262f64c87baf1ddf6e8d7
+Author: Lyon <lozybean@163.com>
+Date:   Thu Jan 7 15:28:34 2016 +0800
+
+    add tax tree plot margin
+
+commit 834530420e59d823afb0b0b00a70464727e6106b
+Author: Lyon <lozybean@163.com>
+Date:   Thu Jan 7 15:20:00 2016 +0800
+
+    add plot_tax_tree to config
+
+commit ec8598587fbab8012fd33de54efe85f95dbc69d6
+Author: Lyon <lozybean@163.com>
+Date:   Thu Jan 7 15:17:35 2016 +0800
+
+    chmod +x
+
+commit 752025364179a3451893d2222d395e1ad1953049
+Author: Lyon <lozybean@163.com>
+Date:   Thu Jan 7 15:16:05 2016 +0800
+
+    add tax tree plot
+
+commit 48e3310766479c1ee933f133ab480c3aba169dd4
+Author: Lyon <lozybean@163.com>
+Date:   Wed Jan 6 20:54:48 2016 +0800
+
+    chmod +x
+
+commit 02010161051da8636688c91486e41631858eb08c
+Author: Lyon <lozybean@163.com>
+Date:   Wed Jan 6 20:52:14 2016 +0800
+
+    add get genus rep script
+
+commit 3049d4f6d2162940b449ef41f33631bd51c33ca2
+Author: Lyon <lozybean@163.com>
+Date:   Wed Jan 6 20:33:33 2016 +0800
+
+    chmod +x
+
+commit 2c4f6b06296f1dc15aef8857793c984b5840e8dc
+Author: Lyon <lozybean@163.com>
+Date:   Wed Jan 6 20:31:28 2016 +0800
+
+    add phylo tree analysis
+
+commit 571b3cd472fbd1f636ac674a5af16f5eeea205a7
+Author: Lyon <lozybean@163.com>
+Date:   Wed Jan 6 10:16:07 2016 +0800
+
+    add alpha group file check, make sure alpha group file contain all samples
+
+commit 159c80d207f19a1eafa09e3e9394e016dbc9e943
+Author: Lyon <lozybean@163.com>
+Date:   Tue Jan 5 10:17:02 2016 +0800
+
+    chmod +x
+
+commit db7c43b9ee549ecec167a1238104a7746c4f06b3
+Author: Lyon <lozybean@163.com>
+Date:   Tue Jan 5 10:13:53 2016 +0800
+
+    add beta mrpp analysis
+
+commit 827eb6a04c35131c706047bc08bd90451ce000af
+Merge: 044b34c 6afabcd
+Author: Lyon0804 <lozybean@163.com>
+Date:   Wed Dec 30 18:31:17 2015 +0800
+
+    Merge pull request #72 from tianyabeef/master
+    
+    alpha table.js修改
+
+commit 6afabcd13c9df6896387d77a07d354fbad873d20
+Author: hy <hy@realbio.cn>
+Date:   Wed Dec 30 18:29:30 2015 +0800
+
+    alpha table.js
+
+commit 044b34c08cbcee5e45e03b8c4d6d31d927c37a70
+Author: Lyon <lozybean@163.com>
+Date:   Wed Dec 30 17:26:41 2015 +0800
+
+    fix alpha group bug
+
+commit 94bba3d0005ccf4fe0536d6664af7632e0378cd1
+Author: Lyon <lozybean@163.com>
+Date:   Tue Dec 29 18:53:14 2015 +0800
+
+    chmod +x
+
+commit 6b969ed3e1fa8133894d17f1cc9adf0d72514fac
+Author: Lyon <lozybean@163.com>
+Date:   Tue Dec 29 18:35:58 2015 +0800
+
+    add my qiime dir
+
+commit db82d8b969c3d7fcf5275c84bb42782439cd3bc4
+Author: Lyon <lozybean@163.com>
+Date:   Tue Dec 29 18:31:16 2015 +0800
+
+    change beta cluster color
+
+commit 905b119396106271343a6e0de4696191cc26a1ce
+Author: Lyon <lozybean@163.com>
+Date:   Tue Dec 29 13:43:41 2015 +0800
+
+    fix
+
+commit 18af922593d813dd29914e8937da40c86b5c2043
+Author: Lyon <lozybean@163.com>
+Date:   Tue Dec 29 11:07:04 2015 +0800
+
+    add group num >= 2 for some analysis
+
+commit 74ff4169dd8b51d82806b87efd9dc1c2e1402479
+Author: Lyon <lozybean@163.com>
+Date:   Tue Dec 29 09:46:48 2015 +0800
+
+    remove old anosim adonis from pipeline
+
+commit b270aa9e1b0afd6522ba350b390b28794b0a1f24
+Author: Lyon <lozybean@163.com>
+Date:   Mon Dec 28 17:48:13 2015 +0800
+
+    fix html and diff test bug
+
+commit 58f0ee0bfd1c7967fb2a371aa7d37978a2b29124
+Author: Lyon <lozybean@163.com>
+Date:   Mon Dec 28 16:52:10 2015 +0800
+
+    fix html and diff test bug
+
+commit c27de8dd2a076611437927b024ee11e1efd225e6
+Author: Lyon <lozybean@163.com>
+Date:   Mon Dec 28 15:36:42 2015 +0800
+
+    add anosim to report
+
+commit 528974738e805a5a6ea7d3ca946e3ec4b81e68fd
+Author: Lyon <lozybean@163.com>
+Date:   Fri Dec 25 16:54:21 2015 +0800
+
+    add paired diff
+
+commit f2e2b0f0e329c17cd5ed77e4237edecf4a11a97e
+Author: Lyon <lozybean@163.com>
+Date:   Fri Dec 25 14:16:31 2015 +0800
+
+    group num >= 2 when do alpha diff
+
+commit 885b14814ed12bf7cbeccf9d049baff755e64f19
+Author: Lyon <lozybean@163.com>
+Date:   Fri Dec 25 12:04:50 2015 +0800
+
+    add pollute remove
+
+commit 860e6dc210a0685f5181910cf9d654d7b30f86e0
+Author: Lyon <lozybean@163.com>
+Date:   Thu Dec 24 18:07:31 2015 +0800
+
+    trans html character
+
+commit 4b5146617d97fad9f296bc286ea2faa6dc7b3f5e
+Author: Lyon <lozybean@163.com>
+Date:   Wed Dec 23 13:27:38 2015 +0800
+
+    fix html
+
+commit b11cfcec67ce86a119b11f80adad9ba9f80d216b
+Author: Lyon <lozybean@163.com>
+Date:   Wed Dec 23 09:53:33 2015 +0800
+
+    rm alert
+
+commit 3c86bbf7af7cbe7acba738075e340d4d3c353145
+Author: Lyon <lozybean@163.com>
+Date:   Fri Dec 18 17:35:03 2015 +0800
+
+    add heatmap level
+
+commit 10530db5fb45ba06e74558ac0412819e781551b9
+Author: Lyon <lozybean@163.com>
+Date:   Thu Dec 17 16:26:09 2015 +0800
+
+    add LEfSe parameter
+
+commit 9e364f29fb3eb97767d25ffa46f2110727d739ca
+Author: Lyon <lozybean@163.com>
+Date:   Wed Dec 16 10:03:48 2015 +0800
+
+    fix alpha rare bug
+
+commit 7bbe9f38f261eaee55b1043895135f1d82fc0c40
+Author: Lyon <lozybean@163.com>
+Date:   Wed Dec 9 13:40:00 2015 +0800
+
+    add stars range
+
+commit c16601f1a524672f0eba0746d869b4ef86cf5d7f
+Author: Lyon <lozybean@163.com>
+Date:   Wed Dec 9 13:38:41 2015 +0800
+
+    add stars regin
+
+commit 85f34c12109609fa4ab18418a07904e2e37e7af7
+Merge: b92a019 ec3cbbd
+Author: Lyon0804 <lozybean@163.com>
+Date:   Wed Dec 9 13:23:37 2015 +0800
+
+    Merge pull request #70 from tianyabeef/master
+    
+    beta heatmap
+
+commit ec3cbbd522b1d825b7b3e621117ce876eee76298
+Merge: b97c9c9 b92a019
+Author: hy <hy@realbio.cn>
+Date:   Wed Dec 9 13:12:03 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit b97c9c9467e280cc10aec45c8f3be76be9dcec94
+Author: hy <hy@realbio.cn>
+Date:   Wed Dec 9 13:11:42 2015 +0800
+
+    beta heatmap
+
+commit b92a0192297c5482c5ddbe2223797258521b2ac2
+Author: Lyon <lozybean@163.com>
+Date:   Wed Dec 9 10:38:21 2015 +0800
+
+    make some adjust
+
+commit b5de0babc60ca2404358c3494bd973e91c69c3db
+Author: Lyon <lozybean@163.com>
+Date:   Wed Dec 9 10:16:02 2015 +0800
+
+    add force minimum config
+
+commit 66a6246b7d271924c4eb2fafa71128db7a81eabe
+Merge: 42a4569 ccc9c13
+Author: Lyon0804 <lozybean@163.com>
+Date:   Wed Dec 9 09:42:57 2015 +0800
+
+    Merge pull request #69 from tianyabeef/master
+    
+    16s pdf
+
+commit 42a4569ffb2d4363f483cb7b48af0f59ebaf90b3
+Author: Lyon <lozybean@163.com>
+Date:   Wed Dec 9 09:41:55 2015 +0800
+
+    add force minimum config
+
+commit ccc9c13c2b4b64079d2ae1c6c8178ababf9deba5
+Merge: 0e2a071 e1e6605
+Author: hy <hy@realbio.cn>
+Date:   Mon Dec 7 17:27:43 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit 0e2a0715a5fb6b21db507a45b13303b8acfb6cc4
+Author: hy <hy@realbio.cn>
+Date:   Mon Dec 7 17:27:35 2015 +0800
+
+    16.pdf
+
+commit e1e66051fab1a874495b3b79916338158a6be585
+Merge: 3c89de1 8eca8a9
+Author: Lyon0804 <lozybean@163.com>
+Date:   Mon Dec 7 13:38:37 2015 +0800
+
+    Merge pull request #68 from tianyabeef/master
+    
+    nmds 新增
+
+commit 8eca8a9ec05fcc166495e79906f5964f9fb116d0
+Author: hy <hy@realbio.cn>
+Date:   Mon Dec 7 13:35:51 2015 +0800
+
+    nmds
+
+commit 69049c1b2d94a07c2eefdb8e306512d2bf58e69b
+Merge: 85ca08d 3c89de1
+Author: hy <hy@realbio.cn>
+Date:   Mon Dec 7 13:33:45 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit 85ca08d1f383440a74f6b705880913534187e534
+Author: hy <hy@realbio.cn>
+Date:   Mon Dec 7 13:33:38 2015 +0800
+
+    nmds
+
+commit 3c89de140d0067cb3e6227128622c2ad5233bdb5
+Merge: 7a41b21 224054b
+Author: Lyon0804 <lozybean@163.com>
+Date:   Fri Dec 4 10:42:30 2015 +0800
+
+    Merge pull request #67 from tianyabeef/master
+    
+    nmds
+
+commit 224054b739af1ed3d39865ce7ead2cdec1e5157e
+Merge: 08655fd 7a41b21
+Author: hy <hy@realbio.cn>
+Date:   Fri Dec 4 10:41:14 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit 08655fd761967164994448b37a394dbd9612d659
+Author: hy <hy@realbio.cn>
+Date:   Fri Dec 4 10:41:06 2015 +0800
+
+    nmds
+
+commit 7a41b212142b4caf166f7c4ec8f31d36e253e143
+Merge: daf5367 3c101b6
+Author: Lyon0804 <lozybean@163.com>
+Date:   Thu Dec 3 21:12:29 2015 +0800
+
+    Merge pull request #66 from tianyabeef/master
+    
+    krona 的复制的正则表达式
+
+commit 3c101b6630a5decc8cc5ece10c7eccf318806bce
+Merge: 44b0291 daf5367
+Author: hy <hy@realbio.cn>
+Date:   Thu Dec 3 19:05:26 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit 44b0291fad386c7941c6b06a7b947130dd541697
+Author: hy <hy@realbio.cn>
+Date:   Thu Dec 3 19:05:19 2015 +0800
+
+    re.match()
+
+commit daf5367b8a0e98275f3c42fa804f302b384b8d05
+Merge: d5365f4 e5cee5c
+Author: Lyon0804 <lozybean@163.com>
+Date:   Thu Dec 3 18:28:20 2015 +0800
+
+    Merge pull request #65 from tianyabeef/master
+    
+    pdf
+
+commit e5cee5cf573b2acefbcd704f2153e8cd3dcc5ef6
+Author: hy <hy@realbio.cn>
+Date:   Thu Dec 3 18:26:23 2015 +0800
+
+    krona
+
+commit d49fa8c4507614ea2f1017aa1dc53bd217da979a
+Author: hy <hy@realbio.cn>
+Date:   Thu Dec 3 18:13:41 2015 +0800
+
+    02_OTU/all/tax_assignment.tsv
+
+commit d5365f48f795da369843eb015e22a8fa01999c32
+Author: Lyon <lozybean@163.com>
+Date:   Thu Dec 3 17:43:14 2015 +0800
+
+    add tax_assignment.tsv
+
+commit c3ca4df3b2cd8e7629b1bf0b2c81458fea323bdd
+Merge: 6eee077 52356d5
+Author: Lyon0804 <lozybean@163.com>
+Date:   Thu Dec 3 17:33:56 2015 +0800
+
+    Merge pull request #64 from tianyabeef/master
+    
+    file_Dir
+
+commit 52356d5a99059510cf0dfe4848b31ca3df274e9c
+Merge: 6c38c72 6eee077
+Author: hy <hy@realbio.cn>
+Date:   Thu Dec 3 17:16:37 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit 6c38c727fc2c0ef3a9220512fd1baeba6ce57dab
+Author: hy <hy@realbio.cn>
+Date:   Thu Dec 3 17:16:26 2015 +0800
+
+    pdf
+
+commit 6eee0779bc087ddb7d61dbb272d8544d6e261048
+Merge: b55574a f9026d8
+Author: Lyon <lozybean@163.com>
+Date:   Thu Dec 3 15:20:23 2015 +0800
+
+    Merge branch 'master' of github.com:lozybean/16S_ITS_pipeline_v3.0
+
+commit b55574a7ff972c3e48cf134c840aba22d5c2321e
+Author: Lyon <lozybean@163.com>
+Date:   Thu Dec 3 15:19:01 2015 +0800
+
+    fix KronaTools
+
+commit f9026d89bdefaa5c152fde101f6abcf96d8c3a95
+Merge: 81f1ad7 37834b4
+Author: Lyon0804 <lozybean@163.com>
+Date:   Thu Dec 3 13:43:33 2015 +0800
+
+    Merge pull request #63 from tianyabeef/master
+    
+    html
+
+commit 81f1ad7e243de9c419960cfc98c72ae0ba7c41d8
+Author: Lyon <lozybean@163.com>
+Date:   Thu Dec 3 13:36:44 2015 +0800
+
+    do not show stars when sample num <= 3 and fix bar plot when sample num == 1
+
+commit 37834b4127fd00ee85a7da303586240fdcf9787e
+Merge: 43f63af b789147
+Author: hy <hy@realbio.cn>
+Date:   Thu Dec 3 13:06:24 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit 43f63afa55dde8b60c95e7b9d962f08c9d81af08
+Author: hy <hy@realbio.cn>
+Date:   Thu Dec 3 13:03:17 2015 +0800
+
+    pdf
+
+commit b7891475bd13a03f3f851238e644b47b7ee75c50
+Merge: 02f8dc7 c3d2aad
+Author: Lyon0804 <lozybean@163.com>
+Date:   Wed Dec 2 14:19:47 2015 +0800
+
+    Merge pull request #62 from tianyabeef/master
+    
+    pdf
+
+commit c3d2aad7a54c23c5867fdee6a3a81d8c1c91549f
+Author: hy <hy@realbio.cn>
+Date:   Wed Dec 2 14:16:22 2015 +0800
+
+    krona
+
+commit f2bc029ca7cb8e69566b01cc5d463cae440f3dd0
+Merge: 4ffd315 02f8dc7
+Author: hy <hy@realbio.cn>
+Date:   Mon Nov 30 17:03:25 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit 4ffd3159403028fc48c85f07d263b33034e08299
+Author: hy <hy@realbio.cn>
+Date:   Mon Nov 30 17:03:08 2015 +0800
+
+    pdf
+
+commit 02f8dc7865a95263aa9e75ee5fbe3fcf8c07c2d9
+Merge: 95a8bfa 7c9c63a
+Author: Lyon0804 <lozybean@163.com>
+Date:   Mon Nov 30 16:35:49 2015 +0800
+
+    Merge pull request #61 from tianyabeef/master
+    
+    pdf
+
+commit 7c9c63a965ad17a66142e2819d9c37f06d09ae27
+Author: hy <hy@realbio.cn>
+Date:   Mon Nov 30 16:34:10 2015 +0800
+
+    pdf
+
+commit 95a8bfac582a2002e3ce6b87f6f281ba03b03c8d
+Author: Lyon <lozybean@163.com>
+Date:   Fri Nov 27 16:57:05 2015 +0800
+
+    rm tax below conf
+
+commit 4e1709bdfb8ab8daf83c579d0f37b5747816fcd6
+Merge: 0080cdc 55ceffd
+Author: Lyon0804 <lozybean@163.com>
+Date:   Fri Nov 27 13:02:05 2015 +0800
+
+    Merge pull request #59 from tianyabeef/master
+    
+    pdf
+
+commit 55ceffd10d01e443caffd8108f48499abec88326
+Merge: 381f889 0080cdc
+Author: hy <hy@realbio.cn>
+Date:   Fri Nov 27 11:34:28 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit 381f889ba5401e0aefaaa744d7a45f83232b601a
+Author: hy <hy@realbio.cn>
+Date:   Fri Nov 27 11:34:16 2015 +0800
+
+    pdf
+
+commit 0080cdc097169d636e2195beeb3baef00be8b378
+Merge: 8343814 0c1a0fd
+Author: Lyon0804 <lozybean@163.com>
+Date:   Fri Nov 27 10:46:05 2015 +0800
+
+    Merge pull request #58 from tianyabeef/master
+    
+    pdf
+
+commit 0c1a0fdf37c15fdf408b73fe9e99ff223dc762da
+Author: hy <hy@realbio.cn>
+Date:   Fri Nov 27 10:44:15 2015 +0800
+
+    pdf
+
+commit 8343814a47d2a02a1eaf506536fb29ac26039d94
+Merge: bd2ee03 8f456e1
+Author: Lyon0804 <lozybean@163.com>
+Date:   Thu Nov 26 10:50:54 2015 +0800
+
+    Merge pull request #57 from tianyabeef/master
+    
+    alpha
+
+commit 8f456e1a2fe5de872151ed69ab75615231c832ef
+Author: hy <hy@realbio.cn>
+Date:   Thu Nov 26 10:49:09 2015 +0800
+
+    alpha
+
+commit bd2ee038aef9a2514fdef1f6486ec704ff445dbc
+Merge: 63e4006 2416e94
+Author: Lyon0804 <lozybean@163.com>
+Date:   Wed Nov 25 13:36:08 2015 +0800
+
+    Merge pull request #56 from tianyabeef/master
+    
+    2.png
+
+commit 2416e9452893573b31c9371114fd95f9e2fcc283
+Author: hy <hy@realbio.cn>
+Date:   Wed Nov 25 13:32:25 2015 +0800
+
+    2.png
+
+commit 1b6026cd6af811539a3d3965b6e5c6baa2bb9014
+Merge: 8b247ea 63e4006
+Author: hy <hy@realbio.cn>
+Date:   Wed Nov 25 13:28:13 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit 8b247ea7ddefdec41d9be3560b506dfe8965c3a1
+Author: hy <hy@realbio.cn>
+Date:   Wed Nov 25 13:28:00 2015 +0800
+
+    2.png
+
+commit 63e40060b4b08dfa19f9e5f2749a7ec4fb31f0a2
+Author: Lyon <lozybean@163.com>
+Date:   Wed Nov 25 10:05:15 2015 +0800
+
+    rm singleton stat temporary
+
+commit 614ab5892a58a762178e1ff5b015754276eb0a4a
+Author: Lyon <lozybean@163.com>
+Date:   Tue Nov 24 18:20:14 2015 +0800
+
+    order color by group file
+
+commit 36bc76a45147dfdff40b05eba9c65c7491917f2c
+Author: Lyon <lozybean@163.com>
+Date:   Tue Nov 24 16:59:31 2015 +0800
+
+    add tax aheatmap
+
+commit d1b011262eb362452944db23a4c21b27ce701ea2
+Author: Lyon <lozybean@163.com>
+Date:   Tue Nov 24 14:30:54 2015 +0800
+
+    fix beta heatmap color
+
+commit 51e27ea21dea5aa2b970365a09fb5a4910017845
+Author: Lyon <lozybean@163.com>
+Date:   Mon Nov 23 21:42:59 2015 +0800
+
+    change color function
+
+commit 2d899b4da35aeff02ff861ccb92193179cd4aec8
+Author: Lyon <lozybean@163.com>
+Date:   Mon Nov 23 21:42:22 2015 +0800
+
+    change color function
+
+commit bab4eac6e6075edbd0ad6dd0a90ecb0d94e73e7a
+Author: Lyon <lozybean@163.com>
+Date:   Mon Nov 23 10:53:45 2015 +0800
+
+    rank_abundance defaults to linear
+
+commit 065a8c031f3eb51e165590681c5d8ce3bb1e3a81
+Author: Lyon <lozybean@163.com>
+Date:   Mon Nov 23 09:13:45 2015 +0800
+
+    fix some bugs
+
+commit c519fbe6e100eab6ca936fe8950efaf84eaa21af
+Author: Lyon <lozybean@163.com>
+Date:   Fri Nov 20 18:15:01 2015 +0800
+
+    add otu pca with boxplot
+
+commit 4a761c2a0849ba97269eda6181ab0da180273a87
+Merge: ea520cd 955b1a1
+Author: Lyon0804 <lozybean@163.com>
+Date:   Fri Nov 20 15:33:38 2015 +0800
+
+    Merge pull request #55 from tianyabeef/master
+    
+    diff
+
+commit ea520cd8a7d68067aabc1ec7e10cd141705e1d69
+Author: Lyon <lozybean@163.com>
+Date:   Fri Nov 20 15:23:57 2015 +0800
+
+    sort cols_brewer
+
+commit 955b1a13c44ab2234650e1e76a6b6dc4e910ae90
+Merge: cb71368 1b77797
+Author: hy <hy@realbio.cn>
+Date:   Fri Nov 20 15:21:29 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit cb71368d3be17b37f24362d97fbc5e095e6b247d
+Author: hy <hy@realbio.cn>
+Date:   Fri Nov 20 15:21:11 2015 +0800
+
+    diff
+
+commit 1b777975248a574956b5f77db88487f0d7411b00
+Author: Lyon <lozybean@163.com>
+Date:   Thu Nov 19 17:40:55 2015 +0800
+
+    add rdp memory param
+
+commit d36dad12199e4bf43ca066cb99d6ef7ea2c508fd
+Author: Lyon <lozybean@163.com>
+Date:   Thu Nov 19 15:30:27 2015 +0800
+
+    fix report paragraph
+
+commit 5c50a346c3405fbe5373bceb10a2c138131fb074
+Merge: d1fd3aa c9d7ae6
+Author: Lyon <lozybean@163.com>
+Date:   Thu Nov 19 14:17:44 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit c9d7ae6e357a2a3b682caefd906709e69e87efc3
+Merge: 27eba78 76141fa
+Author: Lyon0804 <lozybean@163.com>
+Date:   Thu Nov 19 13:38:21 2015 +0800
+
+    Merge pull request #54 from tianyabeef/master
+    
+    LDA-cutoff
+
+commit 76141faa187a014abce82d80f6a3d9395abec520
+Author: hy <hy@realbio.cn>
+Date:   Thu Nov 19 09:04:30 2015 +0800
+
+    png
+
+commit d1fd3aa8b82c2f6248434bdab9a58c5dc028dfbf
+Author: Lyon <lozybean@163.com>
+Date:   Wed Nov 18 15:49:37 2015 +0800
+
+    fix heatmap
+
+commit cd562e708f92268a9b561fb59dac96e3f3b15261
+Merge: 8454dae 27eba78
+Author: hy <hy@realbio.cn>
+Date:   Wed Nov 18 12:30:51 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit 8454daef2fd659fbc3a3ff624a5440ed70551d0d
+Author: hy <hy@realbio.cn>
+Date:   Wed Nov 18 12:30:33 2015 +0800
+
+    LDA-cutoff
+
+commit 27eba78903d943d6527bdbb8c1144bacba757d21
+Author: Lyon <lozybean@163.com>
+Date:   Wed Nov 18 11:34:16 2015 +0800
+
+    add LDA cutoff param
+
+commit af1eb5afaeda075cde8dbf2764410c2fac8ce442
+Author: Lyon <lozybean@163.com>
+Date:   Wed Nov 18 10:22:45 2015 +0800
+
+    accumulation profile when bar plot
+
+commit 655d3d26b68a585220f6812f133d55e9be8c8d48
+Author: Lyon <lozybean@163.com>
+Date:   Tue Nov 17 17:38:19 2015 +0800
+
+    add beta cluster
+
+commit 0b11697dd211750d5a6ca824f68a52c168f2c75b
+Author: Lyon <lozybean@163.com>
+Date:   Tue Nov 17 14:59:32 2015 +0800
+
+    apart alpha rare
+
+commit 4710f526e530c48054331b91ba1a0a70ec3cb587
+Merge: 481a6d2 c5f9596
+Author: Lyon0804 <lozybean@163.com>
+Date:   Tue Nov 17 14:39:14 2015 +0800
+
+    Merge pull request #53 from tianyabeef/master
+    
+    alpha
+
+commit c5f9596f6570d5a44efad52dd441ef1a2296925e
+Author: hy <hy@realbio.cn>
+Date:   Tue Nov 17 13:46:25 2015 +0800
+
+    alpha
+
+commit 481a6d2cc2addec104a90a52b8d0adcdd7fc69da
+Author: Lyon <lozybean@163.com>
+Date:   Tue Nov 17 11:13:49 2015 +0800
+
+    group bar sort
+
+commit 382cc7c11dae0d7804d0c9a417cbe1ca5bcae699
+Author: Lyon <lozybean@163.com>
+Date:   Tue Nov 17 09:39:03 2015 +0800
+
+    group bar plot sort
+
+commit b2108514f6a793558a48eac7235d5ebd91cd3252
+Author: Lyon <lozybean@163.com>
+Date:   Fri Nov 13 19:37:17 2015 +0800
+
+    rm print debug lines
+
+commit 87c9a5b8bb5ee41f716b56857a36054e3901d4b5
+Author: Lyon <lozybean@163.com>
+Date:   Fri Nov 13 19:34:42 2015 +0800
+
+    sort tax plot
+
+commit 19faeb6ddcfadee62399bcd623f8ef7c62496937
+Merge: 3fcbda0 3196249
+Author: Lyon0804 <lozybean@163.com>
+Date:   Fri Nov 13 19:34:02 2015 +0800
+
+    Merge pull request #52 from tianyabeef/master
+    
+    downsize
+
+commit 31962495730d676a79a0710c5e66e57df9d0b369
+Author: hy <hy@realbio.cn>
+Date:   Fri Nov 13 16:36:17 2015 +0800
+
+    heatmap
+
+commit c36be98a94641647f09a50fca3eabdae468c1bcf
+Merge: 7336121 3fcbda0
+Author: hy <hy@realbio.cn>
+Date:   Fri Nov 13 16:01:42 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit 733612178f36a16d66f5991bee23166a98cf636c
+Author: hy <hy@realbio.cn>
+Date:   Fri Nov 13 16:01:26 2015 +0800
+
+    downsize
+
+commit 3fcbda07fc3996bb057ad9c8a5d1c7ffc9de7d4f
+Author: Lyon <lozybean@163.com>
+Date:   Fri Nov 13 15:29:14 2015 +0800
+
+    plot bar by sort
+
+commit d1caef34ece5ad87f89f06c5ed021b33b38761fd
+Merge: afafc86 5d2c818
+Author: Lyon0804 <lozybean@163.com>
+Date:   Fri Nov 13 12:45:45 2015 +0800
+
+    Merge pull request #51 from tianyabeef/master
+    
+    交付文档
+
+commit 5d2c81887ef40c8920b7c7c4a8cb9e344db30124
+Author: hy <hy@realbio.cn>
+Date:   Fri Nov 13 12:44:24 2015 +0800
+
+    label
+
+commit 971397bdd57fe8aa88ff2262d029c2b13e37ae6f
+Author: hy <hy@realbio.cn>
+Date:   Fri Nov 13 12:01:15 2015 +0800
+
+    float
+
+commit c817225e1ce7afc96181b3a1a3450003d5d53579
+Merge: 0ff4d08 afafc86
+Author: hy <hy@realbio.cn>
+Date:   Fri Nov 13 11:42:35 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit 0ff4d08574c49d358f8b7bcde6385511158a37df
+Author: hy <hy@realbio.cn>
+Date:   Fri Nov 13 11:42:22 2015 +0800
+
+    jiaofuwendang.pdf
+
+commit afafc866778e63395d2db91e8cfae2cbee3ea640
+Author: Lyon <lozybean@163.com>
+Date:   Fri Nov 13 10:20:44 2015 +0800
+
+    fix some bug
+
+commit 8a86d7a178d382a17d10d0d1c3d0fc8f9106197c
+Merge: bfa797e de9c7c9
+Author: Lyon0804 <lozybean@163.com>
+Date:   Thu Nov 12 16:56:04 2015 +0800
+
+    Merge pull request #50 from tianyabeef/master
+    
+    work_dir
+
+commit bfa797ee1f5546061d20c4e7a0ea016cf6467f9b
+Author: Lyon <lozybean@163.com>
+Date:   Thu Nov 12 16:10:40 2015 +0800
+
+    rm template in result
+
+commit de9c7c96470c40c73155dbb498bd2e9b8694347a
+Author: hy <hy@realbio.cn>
+Date:   Thu Nov 12 15:49:29 2015 +0800
+
+    remplates
+
+commit 2852947848863a3b4189ac21bf3e162bebcf0b8c
+Author: hy <hy@realbio.cn>
+Date:   Thu Nov 12 15:45:47 2015 +0800
+
+    templates
+
+commit 4e6fa1923eff4b0c54221c4dae1990537ad46d70
+Merge: 306c991 091ca2b
+Author: hy <hy@realbio.cn>
+Date:   Thu Nov 12 15:10:50 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit 306c991fed99a06fbb03b7f4b4efc2f0621ed2a6
+Author: hy <hy@realbio.cn>
+Date:   Thu Nov 12 15:10:40 2015 +0800
+
+    work_dir
+
+commit 091ca2bd2ba1f9cc46714b79e1715a9f144a948b
+Author: Lyon <lozybean@163.com>
+Date:   Thu Nov 12 15:02:47 2015 +0800
+
+    modify check group file method
+
+commit 11e198688b50117c8b3b224496cb99c0e14c8805
+Author: Lyon <lozybean@163.com>
+Date:   Thu Nov 12 14:43:33 2015 +0800
+
+    only link when use total sample
+
+commit 8c813403d658eb6406a872c9ea4df048e854c524
+Merge: 4cbfaed cccad63
+Author: Lyon0804 <lozybean@163.com>
+Date:   Thu Nov 12 14:42:49 2015 +0800
+
+    Merge pull request #49 from tianyabeef/master
+    
+    <a>
+
+commit cccad63beb03ff6afa1baec6f06efcbaf5d2af04
+Merge: 53d24ea 4cbfaed
+Author: hy <hy@realbio.cn>
+Date:   Thu Nov 12 11:01:39 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit 53d24eae61264b472968014614a4743139b651f1
+Author: hy <hy@realbio.cn>
+Date:   Thu Nov 12 11:01:24 2015 +0800
+
+    html
+
+commit 4cbfaed4c5c6f80d3c971f6e6b74d9beb991ca20
+Author: Lyon <lozybean@163.com>
+Date:   Thu Nov 12 10:28:18 2015 +0800
+
+    change pcoa legend
+
+commit 86b344f988b23b846a07048bac19d2dd7d747153
+Merge: d030fb1 110f92d
+Author: Lyon0804 <lozybean@163.com>
+Date:   Thu Nov 12 09:57:41 2015 +0800
+
+    Merge pull request #48 from tianyabeef/master
+    
+    html
+
+commit 110f92d536ab10557d920d567d9e52830d31e1d5
+Merge: c1a2085 d030fb1
+Author: hy <hy@realbio.cn>
+Date:   Thu Nov 12 09:49:13 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit c1a2085c169cc0680ae9ad58dd78c2b33d2ca5b3
+Author: hy <hy@realbio.cn>
+Date:   Thu Nov 12 09:49:00 2015 +0800
+
+    html
+
+commit d030fb14b59a299b8fc044ab769223bf2aaaa64c
+Merge: 801409c 1e4e681
+Author: Lyon0804 <lozybean@163.com>
+Date:   Wed Nov 11 17:28:29 2015 +0800
+
+    Merge pull request #47 from tianyabeef/master
+    
+    class <-> order
+
+commit 1e4e68108ffeb3bca72b4c13f4f42b4d4e2394cf
+Author: hy <hy@realbio.cn>
+Date:   Wed Nov 11 15:44:34 2015 +0800
+
+    class <-> order
+
+commit 801409c2c07b7915c615a65e1359432b8ae2be72
+Author: Lyon <lozybean@163.com>
+Date:   Wed Nov 11 15:26:29 2015 +0800
+
+    change rm method to clean.sh
+
+commit 264bed5ad755dcd3970d4870aa0d8122e378123f
+Author: Lyon <lozybean@163.com>
+Date:   Wed Nov 11 14:38:09 2015 +0800
+
+    fix color
+
+commit e22d1b3510f33bfd09669aeafe6c33980ebf7426
+Author: Lyon <lozybean@163.com>
+Date:   Tue Nov 10 16:28:26 2015 +0800
+
+    add docs
+
+commit 6d7dc6f35947f93d36a413a59a99fddb3d9cf587
+Author: Lyon <lozybean@163.com>
+Date:   Tue Nov 10 15:44:09 2015 +0800
+
+    adjust result
+
+commit f03653003a0bd8cfdcfb47bcc8b7f176da08126f
+Author: Lyon <lozybean@163.com>
+Date:   Tue Nov 10 12:54:38 2015 +0800
+
+    adjust html
+
+commit f88995a459a992050d4d3d5a10d0982dd7b42ba3
+Author: Lyon <lozybean@163.com>
+Date:   Tue Nov 10 09:43:17 2015 +0800
+
+    rm exists biom when do alpha rare
+
+commit 18ef79ba298acbb140cc95c1363a29c718f2a333
+Merge: e783238 40d028d
+Author: Lyon0804 <lozybean@163.com>
+Date:   Tue Nov 10 09:40:34 2015 +0800
+
+    Merge pull request #46 from tianyabeef/master
+    
+    tsv
+
+commit 40d028d60fd7ad50e0efdab78aa6b70c9b1b916b
+Author: hy <hy@realbio.cn>
+Date:   Tue Nov 10 09:24:41 2015 +0800
+
+    tsv
+
+commit e7832387e43e099225bf209895e97b72c69482c9
+Author: Lyon <lozybean@163.com>
+Date:   Mon Nov 9 19:50:01 2015 +0800
+
+    show zero as 0
+
+commit 6bc9fdf3c809351b06ed2215a4de172d15da04a5
+Author: Lyon <lozybean@163.com>
+Date:   Mon Nov 9 19:46:08 2015 +0800
+
+    modify 06_get_html.py
+
+commit 640a6128be9a2cc31162d6859d878ff6effc58da
+Author: Lyon <lozybean@163.com>
+Date:   Mon Nov 9 19:30:09 2015 +0800
+
+    fix string to float
+
+commit 125335135ad5f2314cfcd690e794e297f27f151a
+Author: Lyon <lozybean@163.com>
+Date:   Mon Nov 9 19:04:47 2015 +0800
+
+    fix html
+
+commit 2339fa3df624dfd065add0b04f87b066d0bc1ebb
+Author: Lyon <lozybean@163.com>
+Date:   Mon Nov 9 19:00:39 2015 +0800
+
+    fix get_html
+
+commit ef8666ab715114cb4c5f8df45674409b5f3fcde5
+Merge: 59b6468 1c751e2
+Author: Lyon0804 <lozybean@163.com>
+Date:   Mon Nov 9 17:04:40 2015 +0800
+
+    Merge pull request #45 from tianyabeef/master
+    
+    float
+
+commit 1c751e2da31f11662975a3098797e37b4b85701a
+Author: hy <hy@realbio.cn>
+Date:   Mon Nov 9 17:02:09 2015 +0800
+
+    float
+
+commit 3f93eb9b004e69aa5ac3cf0f4020e66858e98719
+Author: hy <hy@realbio.cn>
+Date:   Mon Nov 9 16:34:27 2015 +0800
+
+    float
+
+commit f816186f8c5a5815230e139399746ed585abe232
+Merge: ded0b20 59b6468
+Author: hy <hy@realbio.cn>
+Date:   Mon Nov 9 16:20:51 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit ded0b203c667f6dc03927fdaeef7bfff7af26827
+Author: hy <hy@realbio.cn>
+Date:   Mon Nov 9 16:20:41 2015 +0800
+
+    float
+
+commit bb364b07f750f4cd935262f7a6f2847e48d6623b
+Author: hy <hy@realbio.cn>
+Date:   Mon Nov 9 16:18:34 2015 +0800
+
+    float
+
+commit 59b64685ed8aa78dd289a9232c2fd9dd7ff43798
+Author: Lyon <lozybean@163.com>
+Date:   Mon Nov 9 15:40:03 2015 +0800
+
+    add group_file test
+
+commit a5d3cafe785faeeacd301418b75b11d8cdf9ab1b
+Author: Lyon <lozybean@163.com>
+Date:   Mon Nov 9 14:24:38 2015 +0800
+
+    change diff file
+
+commit 585b754c4523eb88314b6e555078b1604cbdccb7
+Merge: f567411 914f04c
+Author: Lyon0804 <lozybean@163.com>
+Date:   Mon Nov 9 14:24:05 2015 +0800
+
+    Merge pull request #44 from tianyabeef/master
+    
+    add table name
+
+commit 914f04cd85a6f0654b2f5a962ac371239b231557
+Author: hy <hy@realbio.cn>
+Date:   Mon Nov 9 14:20:10 2015 +0800
+
+    float 2
+
+commit 4312dbeccba6eecbce471ff517ce3ee02537a385
+Merge: e0eeafa f567411
+Author: hy <hy@realbio.cn>
+Date:   Mon Nov 9 12:17:32 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit e0eeafa6841f333d5cab446ae01caa2ea43b1380
+Author: hy <hy@realbio.cn>
+Date:   Mon Nov 9 12:17:14 2015 +0800
+
+     add table name
+
+commit f56741156c94afd9fd3ea3b57a77a7e74fecfd85
+Author: Lyon <lozybean@163.com>
+Date:   Mon Nov 9 12:04:01 2015 +0800
+
+    fix some plot
+
+commit 0910dbb2caf9e78f0bec3f1eea78c634301d2087
+Merge: e50c4e1 705583e
+Author: Lyon0804 <lozybean@163.com>
+Date:   Sun Nov 8 10:33:33 2015 +0800
+
+    Merge pull request #43 from tianyabeef/master
+    
+    otu
+
+commit 705583efb3ca7dd9647494c583cb28679e5c9684
+Author: hy <hy@realbio.cn>
+Date:   Sun Nov 8 10:31:30 2015 +0800
+
+    otu
+
+commit 988b9c7aee135ac49181f24c10772a88db3159b4
+Author: hy <hy@realbio.cn>
+Date:   Sun Nov 8 10:21:12 2015 +0800
+
+    otu
+
+commit e50c4e1e4e02a8c1f1ceddb4ed64b0dbfd1d1834
+Author: Lyon <lozybean@163.com>
+Date:   Sat Nov 7 18:11:03 2015 +0800
+
+    fix group bar plot copy
+
+commit 22b42e21f56ee803f684b1ecd521fed94f73eba4
+Merge: 3fe62f9 04cb77e
+Author: Lyon0804 <lozybean@163.com>
+Date:   Fri Nov 6 19:55:09 2015 +0800
+
+    Merge pull request #42 from tianyabeef/master
+    
+    modify
+
+commit 04cb77e6a806eeb685415e91011219b8fff643d6
+Merge: 1ecd8d2 3fe62f9
+Author: hy <hy@realbio.cn>
+Date:   Fri Nov 6 19:52:06 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit 1ecd8d2242eccdd061104ea1f09c52170223a8d1
+Author: hy <hy@realbio.cn>
+Date:   Fri Nov 6 19:51:39 2015 +0800
+
+    bar_plot
+
+commit 3fe62f9e5a9761e26fc10dcb5251f0537acd147b
+Author: Lyon <lozybean@163.com>
+Date:   Fri Nov 6 17:49:01 2015 +0800
+
+    rm fna params
+
+commit 7ebb4682bb21470dff0e7b2d49fc89179bbc8b2e
+Author: Lyon <lozybean@163.com>
+Date:   Fri Nov 6 17:05:32 2015 +0800
+
+    add group barplot
+
+commit 3901c3c712f6dd704cf92c3f760229c3eadbe899
+Merge: 7591557 0971384
+Author: Lyon <lozybean@163.com>
+Date:   Fri Nov 6 14:37:33 2015 +0800
+
+    Merge branch 'master' of github.com:lozybean/16S_ITS_pipeline_v3.0
+
+commit 759155794c46421bddc84b31ceac76254998205f
+Author: Lyon <lozybean@163.com>
+Date:   Fri Nov 6 14:37:16 2015 +0800
+
+    fix some bug
+
+commit 091bccb5b38e10031eb472ff9cbaf9901e9283c9
+Author: Lyon <lozybean@163.com>
+Date:   Fri Nov 6 10:53:49 2015 +0800
+
+    modify check config
+
+commit 09713849f556f4ea31006f22f95870c59c13e52b
+Merge: 9975b27 ef644a6
+Author: Lyon0804 <lozybean@163.com>
+Date:   Fri Nov 6 10:51:47 2015 +0800
+
+    Merge pull request #41 from tianyabeef/master
+    
+    modify
+
+commit ef644a6b292cc82c934b25430889776f1ffd484b
+Merge: 19ae0d6 9975b27
+Author: hy <hy@realbio.cn>
+Date:   Fri Nov 6 09:12:19 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit 19ae0d63c742032da1a3cb0c0ca9969de5951ddf
+Author: hy <hy@realbio.cn>
+Date:   Fri Nov 6 09:12:09 2015 +0800
+
+    single
+
+commit 9975b273836474bb4677161220cd9b71f40661d9
+Author: Lyon <lozybean@163.com>
+Date:   Thu Nov 5 20:02:43 2015 +0800
+
+    rm
+
+commit 9436b7af28ca052d752933153b8b9d0daa040498
+Author: Lyon <lozybean@163.com>
+Date:   Thu Nov 5 20:01:16 2015 +0800
+
+    bug fix
+
+commit 3dfc16db89585f6eaf9d0c2dc15bf1f0b33afd0d
+Author: Lyon <lozybean@163.com>
+Date:   Thu Nov 5 18:42:44 2015 +0800
+
+    fix Merge.py
+
+commit c20c92440c618b014037d4411781263d1fef7802
+Merge: dc00bed c53b067
+Author: Lyon0804 <lozybean@163.com>
+Date:   Thu Nov 5 17:42:47 2015 +0800
+
+    Merge pull request #40 from tianyabeef/master
+    
+    group color
+
+commit c53b067787c9ee186f30d0dbbd96daf432081571
+Author: hy <hy@realbio.cn>
+Date:   Thu Nov 5 17:40:36 2015 +0800
+
+    group_color
+
+commit 5e44a4722bad137fafa2d7570e93093c0390b96d
+Merge: d924ee7 dc00bed
+Author: hy <hy@realbio.cn>
+Date:   Thu Nov 5 11:12:02 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit d924ee786259425fe59e09c9a0e690a26856f878
+Author: hy <hy@realbio.cn>
+Date:   Thu Nov 5 11:11:05 2015 +0800
+
+    if lefse
+
+commit dc00bed546f8130730cac46166feb75a80895545
+Merge: dac0613 659655b
+Author: Lyon <lozybean@163.com>
+Date:   Thu Nov 5 10:57:25 2015 +0800
+
+    Merge branch 'master' of github.com:lozybean/16S_ITS_pipeline_v3.0
+
+commit dac06136385b3cb4f6e59bec2ef622483710a5b4
+Author: Lyon <lozybean@163.com>
+Date:   Thu Nov 5 10:57:11 2015 +0800
+
+    check empty shell
+
+commit 659655bb74937f31440e9a16d55bcf950000e93c
+Merge: bc61a61 be7ae70
+Author: Lyon0804 <lozybean@163.com>
+Date:   Thu Nov 5 10:56:48 2015 +0800
+
+    Merge pull request #39 from tianyabeef/master
+    
+    html
+
+commit be7ae705a288d9b71a9a5775cb9cf76b234afd97
+Author: hy <hy@realbio.cn>
+Date:   Thu Nov 5 10:40:17 2015 +0800
+
+    html
+
+commit 5af94090f82bb43ae50b30a546128a9ec3d0f9e1
+Merge: c746b3c bc61a61
+Author: hy <hy@realbio.cn>
+Date:   Thu Nov 5 09:37:14 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit c746b3c4518d5052c0065e6e376efc99db1fc445
+Author: hy <hy@realbio.cn>
+Date:   Thu Nov 5 09:36:56 2015 +0800
+
+    3.3
+
+commit bc61a610cecde40fbdb3cf4ab3bd13898a65e41f
+Merge: 3716f50 46db066
+Author: Lyon0804 <lozybean@163.com>
+Date:   Thu Nov 5 09:14:59 2015 +0800
+
+    Merge pull request #38 from tianyabeef/master
+    
+    html
+
+commit 46db066fd45cb124f2a8228f6d8e310e82e4c296
+Author: hy <hy@realbio.cn>
+Date:   Thu Nov 5 08:50:37 2015 +0800
+
+    html
+
+commit c7039617b84e260a4523560574be77e35c05a620
+Author: hy <hy@realbio.cn>
+Date:   Thu Nov 5 08:46:19 2015 +0800
+
+    pdf
+
+commit 3716f5000795ac93f3ebde89e135b3d8a7a001da
+Merge: 4ca20ba 75c92c1
+Author: Lyon0804 <lozybean@163.com>
+Date:   Wed Nov 4 16:07:50 2015 +0800
+
+    Merge pull request #37 from tianyabeef/master
+    
+    braplot
+
+commit 75c92c1def3cd21b7cde9186ff2235d07ef0a3fc
+Author: hy <hy@realbio.cn>
+Date:   Wed Nov 4 14:45:23 2015 +0800
+
+    braplot
+
+commit 4ca20ba8498c53ce2ec9abbd139812a86a698477
+Author: Lyon <lozybean@163.com>
+Date:   Wed Nov 4 14:31:50 2015 +0800
+
+    fix tax_star
+
+commit d2c2f269a76f90e8f12f02de87f94a20b83765bd
+Author: Lyon <lozybean@163.com>
+Date:   Wed Nov 4 13:41:56 2015 +0800
+
+    rm quote
+
+commit 1d61d7a67c7d41c72742debba85d542db238365a
+Author: Lyon <lozybean@163.com>
+Date:   Wed Nov 4 11:52:03 2015 +0800
+
+    fix bugs
+
+commit 35d241bfb5918144fd920ce9fe1633cf79e9da58
+Author: Lyon <lozybean@163.com>
+Date:   Wed Nov 4 10:47:02 2015 +0800
+
+    fix bugs
+
+commit c6420a84eb18f3af66b927d1e810785855ebb176
+Merge: 7774dce 124cd40
+Author: Lyon <lozybean@163.com>
+Date:   Wed Nov 4 09:40:56 2015 +0800
+
+    Merge branch 'master' of github.com:lozybean/16S_ITS_pipeline_v3.0
+
+commit 7774dce32e90523590096808374ecddf19824826
+Author: Lyon <lozybean@163.com>
+Date:   Wed Nov 4 09:40:05 2015 +0800
+
+    fix the tax_diff
+
+commit 124cd400d4d2b52fcbb209dc8b504be721a941ad
+Merge: 71ca0ef 9b924b9
+Author: Lyon0804 <lozybean@163.com>
+Date:   Tue Nov 3 20:48:36 2015 +0800
+
+    Merge pull request #36 from tianyabeef/master
+    
+    similarity_analysis
+
+commit 9b924b9bb9ae1e96f36bf0ba8e09a5ae8a17ff80
+Author: hy <hy@realbio.cn>
+Date:   Tue Nov 3 17:04:37 2015 +0800
+
+    similarity_analysis
+
+commit 71ca0efbaa34a253a407821c662fce82bfa5181b
+Author: Lyon <lozybean@163.com>
+Date:   Tue Nov 3 16:47:44 2015 +0800
+
+    rm test
+
+commit a2a6a5c3a335cffd89c53397492ef7fc8aca3608
+Merge: eb3fbc9 872dfb5
+Author: Lyon0804 <lozybean@163.com>
+Date:   Tue Nov 3 16:19:57 2015 +0800
+
+    Merge pull request #35 from tianyabeef/master
+    
+    size
+
+commit 872dfb5279877de6719e2763a949eba7c06dc4c8
+Merge: cdfa3f2 eb3fbc9
+Author: hy <hy@realbio.cn>
+Date:   Tue Nov 3 16:18:45 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit cdfa3f22123c264f0480150d2ce315fc881b80fb
+Author: hy <hy@realbio.cn>
+Date:   Tue Nov 3 16:18:37 2015 +0800
+
+    size1
+
+commit eb3fbc905e0a02c3fd57eb394ca3b34a628c42a5
+Author: Lyon <lozybean@163.com>
+Date:   Tue Nov 3 16:13:51 2015 +0800
+
+    fix heatmap
+
+commit 92138bbccd226e98d39b1f5a6cd24c56c490ae82
+Merge: dc9be8c c852f1c
+Author: Lyon <lozybean@163.com>
+Date:   Tue Nov 3 15:59:41 2015 +0800
+
+    Merge branch 'master' of github.com:lozybean/16S_ITS_pipeline_v3.0
+
+commit dc9be8c7f79987c604e520d23c781a991e59a0c2
+Author: Lyon <lozybean@163.com>
+Date:   Tue Nov 3 15:59:02 2015 +0800
+
+    fix pcoa
+
+commit c852f1c8652c6eb75dc8a300787b04d2cbbf1619
+Merge: 13d2b70 70c809b
+Author: Lyon0804 <lozybean@163.com>
+Date:   Tue Nov 3 15:58:33 2015 +0800
+
+    Merge pull request #34 from tianyabeef/master
+    
+    pcoa
+
+commit 70c809be354a42b3c816ca57ca09fed3fa4ae991
+Merge: 9d2d64d 13d2b70
+Author: hy <hy@realbio.cn>
+Date:   Tue Nov 3 15:54:00 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit 9d2d64d6830b25d53b408a58a6fc1d3e35a4cfaa
+Author: hy <hy@realbio.cn>
+Date:   Tue Nov 3 15:53:54 2015 +0800
+
+    pcoa
+
+commit 13d2b702be147fdc40dde9435d48ce3d7f6a9415
+Merge: dfb7750 09148bc
+Author: Lyon0804 <lozybean@163.com>
+Date:   Tue Nov 3 15:24:17 2015 +0800
+
+    Merge pull request #33 from tianyabeef/master
+    
+    size1
+
+commit 09148bc627e0306641400d33a9af6a06d7c34a76
+Author: hy <hy@realbio.cn>
+Date:   Tue Nov 3 15:19:48 2015 +0800
+
+    size2
+
+commit 0d6b353c1a9f1df08c34d0841c237f64633921e4
+Merge: 8334494 dfb7750
+Author: hy <hy@realbio.cn>
+Date:   Tue Nov 3 15:10:17 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit 83344949a9384ba8ffdcc68ad32ae14ed06a6075
+Author: hy <hy@realbio.cn>
+Date:   Tue Nov 3 15:10:11 2015 +0800
+
+    rank
+
+commit dfb7750bd09c7efc3263ccd61fc1ac82c81e6288
+Merge: 869194d 4b8c08d
+Author: Lyon0804 <lozybean@163.com>
+Date:   Tue Nov 3 14:32:20 2015 +0800
+
+    Merge pull request #32 from tianyabeef/master
+    
+    group_mun>2
+
+commit 4b8c08dc7147dcc5e9f54dc5627c152b5979e710
+Merge: b3f84ee 869194d
+Author: hy <hy@realbio.cn>
+Date:   Tue Nov 3 14:30:31 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit b3f84eef428a73603c205a22e88bd4e0b7aee8d4
+Author: hy <hy@realbio.cn>
+Date:   Tue Nov 3 14:30:22 2015 +0800
+
+    group_name>2
+
+commit 869194dabd09da4c06d9c650bb93073ed9ca78d0
+Merge: efa45ec f04e81e
+Author: Lyon0804 <lozybean@163.com>
+Date:   Tue Nov 3 14:09:06 2015 +0800
+
+    Merge pull request #31 from tianyabeef/master
+    
+    group_mun
+
+commit f04e81e4327a0d39825b731c79c498e847cfd3a7
+Author: hy <hy@realbio.cn>
+Date:   Tue Nov 3 14:06:34 2015 +0800
+
+    group_num
+
+commit 381a75695e180eedde185904858e8a66b94a3dad
+Author: hy <hy@realbio.cn>
+Date:   Tue Nov 3 14:05:41 2015 +0800
+
+    &&
+
+commit 8800b46374d9d678aaad6e4bdb4f62f57022a1b0
+Merge: 7ffeb1f efa45ec
+Author: hy <hy@realbio.cn>
+Date:   Tue Nov 3 14:00:51 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit 7ffeb1f28549b389fa43f986e71468ffe0cf47ad
+Author: hy <hy@realbio.cn>
+Date:   Tue Nov 3 14:00:43 2015 +0800
+
+    &&
+
+commit efa45ec5e2ded533e9c602b28c01fa0915734f78
+Merge: 6f08c5f 9fa7e5c
+Author: Lyon0804 <lozybean@163.com>
+Date:   Tue Nov 3 13:03:49 2015 +0800
+
+    Merge pull request #30 from tianyabeef/master
+    
+    {% if alpha_diff_boxplot %}
+
+commit 9fa7e5c64c67dd111c32e2ff71d866e0b6e4fe91
+Merge: 1cdfacc 6f08c5f
+Author: hy <hy@realbio.cn>
+Date:   Tue Nov 3 13:01:43 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit 1cdfacc9f9c8752069c014146f7579998af1ef28
+Author: hy <hy@realbio.cn>
+Date:   Tue Nov 3 13:01:36 2015 +0800
+
+     alpha_diff_boxplot
+
+commit 6f08c5f813b071733964c28192a55da1b6ae6b5e
+Merge: e924c11 a525051
+Author: Lyon0804 <lozybean@163.com>
+Date:   Tue Nov 3 10:16:21 2015 +0800
+
+    Merge pull request #29 from tianyabeef/master
+    
+    modified
+
+commit a525051308f79de3d0118d909c5efc6b2e28f1dd
+Author: hy <hy@realbio.cn>
+Date:   Tue Nov 3 10:15:29 2015 +0800
+
+    report_3
+
+commit ddf9ead9bb5d781295f432b0c9d43862cbbe05ea
+Author: hy <hy@realbio.cn>
+Date:   Tue Nov 3 10:13:12 2015 +0800
+
+    report_2
+
+commit 3a552afd26bd47d01c3925d3daf59e765beb8ab1
+Merge: 08c6e62 e924c11
+Author: hy <hy@realbio.cn>
+Date:   Tue Nov 3 10:06:35 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit 08c6e621039a36da7d13bf151cf1c0c4ec77be90
+Author: hy <hy@realbio.cn>
+Date:   Tue Nov 3 10:06:23 2015 +0800
+
+    report
+
+commit e924c11c66931ac4f84b69194508822a0e99bafc
+Author: Lyon <lozybean@163.com>
+Date:   Tue Nov 3 10:05:53 2015 +0800
+
+    fix heatmap legend
+
+commit 8c0281760967ffff8de572a4286b29b6e660873c
+Author: Lyon <lozybean@163.com>
+Date:   Tue Nov 3 09:40:48 2015 +0800
+
+    improve density of image
+
+commit a76606f4d1493df71b956b2fe17b442fbd6a1ff9
+Merge: 9a9b3bc 3f9e2c7
+Author: Lyon0804 <lozybean@163.com>
+Date:   Mon Nov 2 17:15:20 2015 +0800
+
+    Merge pull request #28 from tianyabeef/master
+    
+    report.html
+
+commit 3f9e2c7f30efb024c17c4f3affe6f64d28bfff15
+Merge: b70415a 9a9b3bc
+Author: hy <hy@realbio.cn>
+Date:   Mon Nov 2 17:12:16 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit b70415a88dbce6765680ee728b96ac8b7d4a79f3
+Author: hy <hy@realbio.cn>
+Date:   Mon Nov 2 17:12:07 2015 +0800
+
+    report.html
+
+commit 9a9b3bce379f920fc3435f32ec105e8fbe3255c3
+Author: Lyon <lozybean@163.com>
+Date:   Mon Nov 2 16:52:08 2015 +0800
+
+    fix heatmap
+
+commit e1414effdd4f739dca3436d4dfe75a6b30cb7daa
+Author: Lyon <lozybean@163.com>
+Date:   Mon Nov 2 16:46:44 2015 +0800
+
+    fix some plot
+
+commit 353118e96a95c7894d4274672a3bec45bfa1c878
+Merge: 4842161 1e3c5c5
+Author: Lyon0804 <lozybean@163.com>
+Date:   Mon Nov 2 16:46:06 2015 +0800
+
+    Merge pull request #27 from tianyabeef/master
+    
+    modify
+
+commit 1e3c5c5a2d87dec1ab325c7116027911ce5ef525
+Merge: 94f47f2 4842161
+Author: hy <hy@realbio.cn>
+Date:   Mon Nov 2 16:45:28 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit 94f47f212bf76b514826d077e0608a055a0b094c
+Author: hy <hy@realbio.cn>
+Date:   Mon Nov 2 16:45:17 2015 +0800
+
+    modify
+
+commit 4842161000db2ac0e332a71bc99a00bc4921d69a
+Author: Lyon <lozybean@163.com>
+Date:   Mon Nov 2 16:24:27 2015 +0800
+
+    fix diff pca
+
+commit ea31e3615b538a5fb873f4e617193f52f9728b6a
+Author: Lyon <lozybean@163.com>
+Date:   Mon Nov 2 16:19:14 2015 +0800
+
+    change default diff heatmap
+
+commit 48dbfc8711f08cd1300239d27e174d319c4b95ee
+Merge: 8a13e43 4f3c7ef
+Author: Lyon0804 <lozybean@163.com>
+Date:   Mon Nov 2 16:17:57 2015 +0800
+
+    Merge pull request #26 from tianyabeef/master
+    
+    modify
+
+commit 4f3c7ef5bd4de976dbd3443b18e5248cce46dba8
+Merge: 9b0d495 8a13e43
+Author: hy <hy@realbio.cn>
+Date:   Mon Nov 2 16:05:33 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit 9b0d495a72660a112251cca3c6a35ec8bac210a5
+Author: hy <hy@realbio.cn>
+Date:   Mon Nov 2 16:05:18 2015 +0800
+
+    modify
+
+commit 8a13e43197121165994b57cf082d134fbe028363
+Author: Lyon <lozybean@163.com>
+Date:   Mon Nov 2 15:41:23 2015 +0800
+
+    add adonis
+
+commit 34e29c843a39112b6bfac61644d1103590e54e0b
+Merge: 421465f 0b70295
+Author: hy <hy@realbio.cn>
+Date:   Mon Nov 2 15:08:34 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit 421465f68815f33a99cc69b0e538b3111b5b8c84
+Author: hy <hy@realbio.cn>
+Date:   Mon Nov 2 15:08:17 2015 +0800
+
+    heatmpa
+
+commit 9e7533d91f42d6f13e377e4d5a0d3e9467100db9
+Merge: 0144b4e 0b70295
+Author: Lyon <lozybean@163.com>
+Date:   Mon Nov 2 11:14:20 2015 +0800
+
+    Merge branch 'master' of github.com:lozybean/16S_ITS_pipeline_v3.0
+
+commit 0b702950b7c3efa8722bc7734d43e1bff26001ca
+Merge: af4170a 20cd3e4
+Author: Lyon0804 <lozybean@163.com>
+Date:   Mon Nov 2 11:06:23 2015 +0800
+
+    Merge pull request #25 from tianyabeef/master
+    
+    report。html
+
+commit 20cd3e4bdb13f821d1543e1594c87c05e450f52b
+Merge: 58bfc6f af4170a
+Author: hy <hy@realbio.cn>
+Date:   Mon Nov 2 11:05:26 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit 58bfc6faa3466c237560982feae304ba90a2e5a4
+Author: hy <hy@realbio.cn>
+Date:   Mon Nov 2 11:05:20 2015 +0800
+
+    report.html
+
+commit 0144b4ede59025ed7b73374688a3c4e635e9516f
+Author: Lyon <lozybean@163.com>
+Date:   Mon Nov 2 10:59:08 2015 +0800
+
+    fix coreotu
+
+commit 96819b321f852d34ffc90ee16651a27a87ffdbba
+Author: Lyon <lozybean@163.com>
+Date:   Mon Nov 2 10:55:04 2015 +0800
+
+    fix alpha rare
+
+commit af4170ab38a327c4c366c23b7005ec8c020fb38c
+Merge: da08adc cfee2cb
+Author: Lyon0804 <lozybean@163.com>
+Date:   Mon Nov 2 10:33:40 2015 +0800
+
+    Merge pull request #24 from tianyabeef/master
+    
+    modify
+
+commit cfee2cb401afc04453b57230510ed326735db6f1
+Merge: 82b0427 da08adc
+Author: hy <hy@realbio.cn>
+Date:   Mon Nov 2 10:32:34 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit 82b0427ef22a4a78c0c7979ca6fef950b802a8c5
+Author: hy <hy@realbio.cn>
+Date:   Mon Nov 2 10:32:28 2015 +0800
+
+    modify
+
+commit c35c60b01e796761a9e9a11bd9bc3578e3cda315
+Author: Lyon <lozybean@163.com>
+Date:   Mon Nov 2 10:30:13 2015 +0800
+
+    fix diff pca
+
+commit da08adc9bf466ba76bdfa9c32dc2716a3073850a
+Merge: 4cb9755 a64177e
+Author: Lyon0804 <lozybean@163.com>
+Date:   Mon Nov 2 10:29:43 2015 +0800
+
+    Merge pull request #23 from tianyabeef/master
+    
+    modify
+
+commit a64177ed374b119b612a389af0c3929fcec811a7
+Merge: c9bf93f 4cb9755
+Author: hy <hy@realbio.cn>
+Date:   Mon Nov 2 10:28:21 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit c9bf93f212e89e765af133f13192d83a3086b220
+Author: hy <hy@realbio.cn>
+Date:   Mon Nov 2 10:28:14 2015 +0800
+
+    modify
+
+commit 4cb975507f012d557009607a0db51c5cb77bca72
+Merge: 79d6803 dd0f310
+Author: Lyon0804 <lozybean@163.com>
+Date:   Mon Nov 2 10:14:26 2015 +0800
+
+    Merge pull request #22 from tianyabeef/master
+    
+    heatmap
+
+commit dd0f31019b0109317398316e83e7fab51cc956fd
+Merge: a4101c4 79d6803
+Author: hy <hy@realbio.cn>
+Date:   Mon Nov 2 10:13:02 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit a4101c4d628b356049b824430aa42ab718c807a3
+Author: hy <hy@realbio.cn>
+Date:   Mon Nov 2 10:12:50 2015 +0800
+
+    heatmap
+
+commit 79d6803e7345ed6be7ab95e08aa73e7acfee4b6c
+Author: Lyon <lozybean@163.com>
+Date:   Mon Nov 2 10:10:54 2015 +0800
+
+    fix color
+
+commit 0129e7579e5fec3b85e4d525586a01b57dc53749
+Author: hy <hy@realbio.cn>
+Date:   Mon Nov 2 10:04:24 2015 +0800
+
+    bast.html
+
+commit 95d3feeeeb368c5fb1c79aa81e17645afc0eaac5
+Author: hy <hy@realbio.cn>
+Date:   Mon Nov 2 09:56:18 2015 +0800
+
+    heatmap
+
+commit 4f106796080d36f907b928c9659dc332f0c484dd
+Merge: 3100603 8cd1b9a
+Author: hy <hy@realbio.cn>
+Date:   Mon Nov 2 09:51:16 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit 3100603f8645b1f7249d952045329ece83c11655
+Author: hy <hy@realbio.cn>
+Date:   Mon Nov 2 09:51:00 2015 +0800
+
+    heatmap
+
+commit 8cd1b9a5587eca9545b0bfe543cf3101a6dd70e1
+Merge: 905596d da1ec5b
+Author: Lyon0804 <lozybean@163.com>
+Date:   Mon Nov 2 09:10:09 2015 +0800
+
+    Merge pull request #21 from tianyabeef/master
+    
+    modify
+
+commit da1ec5b772de59560dcd7753d022a1bf4bf33c4a
+Merge: b4dfba1 905596d
+Author: hy <hy@realbio.cn>
+Date:   Sun Nov 1 11:47:24 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit b4dfba16741b0703353e43c025314197e2c4cffb
+Author: hy <hy@realbio.cn>
+Date:   Sun Nov 1 11:47:12 2015 +0800
+
+    03tax heatmap.Rth
+
+commit 905596d278dc13fdbafa182dc2e08b13f737876f
+Merge: 6c5646b 1ac64f4
+Author: Lyon0804 <lozybean@163.com>
+Date:   Sat Oct 31 18:07:21 2015 +0800
+
+    Merge pull request #20 from tianyabeef/master
+    
+    modify
+
+commit 1ac64f48bcfa973df6838f159646b856c43d7968
+Author: hy <hy@realbio.cn>
+Date:   Fri Oct 30 19:48:57 2015 +0800
+
+    html .Rtp
+
+commit 8e904deb94dfaa77606d892ae088257c9e989d1a
+Merge: d55b0f4 6c5646b
+Author: hy <hy@realbio.cn>
+Date:   Fri Oct 30 15:22:26 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit d55b0f4209c2a2e91065a09d29c6e1bc8cfbfa96
+Author: hy <hy@realbio.cn>
+Date:   Fri Oct 30 15:22:18 2015 +0800
+
+    html have't so much sample
+
+commit 6c5646b5d60189456c9987ca9c85a545c4d6bacc
+Merge: ffefae2 b449139
+Author: Lyon0804 <lozybean@163.com>
+Date:   Fri Oct 30 13:56:10 2015 +0800
+
+    Merge pull request #19 from tianyabeef/master
+    
+    bar_plot.Rtp
+
+commit b449139f7bbc14446d6a4c01dd88c82f5cf708d2
+Merge: 9d35d13 ffefae2
+Author: hy <hy@realbio.cn>
+Date:   Fri Oct 30 13:54:15 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit 9d35d13c38b7695e3f218aad5eca18e546c26373
+Author: hy <hy@realbio.cn>
+Date:   Fri Oct 30 13:54:03 2015 +0800
+
+    bar_plot.Rtp
+
+commit ffefae230a90b91ac605cf265b81f8ff262e2f57
+Author: Lyon <lozybean@163.com>
+Date:   Fri Oct 30 13:12:59 2015 +0800
+
+    bug fix when judge sample_num in group
+
+commit e1783a31f95ff5378805a0b68a775f877f8c22cc
+Merge: 55b8702 0e10b99
+Author: Lyon0804 <lozybean@163.com>
+Date:   Fri Oct 30 12:57:45 2015 +0800
+
+    Merge pull request #18 from tianyabeef/master
+    
+    bug fixed
+
+commit 0e10b99a6f3c000c75a6fa5ff5d5f94678234e14
+Author: hy <hy@realbio.cn>
+Date:   Fri Oct 30 12:52:48 2015 +0800
+
+    bug
+
+commit 15cf29aa6225a49d4c7d9d2d3a6cfaafbe372a98
+Author: hy <hy@realbio.cn>
+Date:   Fri Oct 30 12:06:13 2015 +0800
+
+    bar_plot
+
+commit 031ddff80185da0bfbb7e23884d9027b0b6fa36d
+Author: hy <hy@realbio.cn>
+Date:   Fri Oct 30 11:56:25 2015 +0800
+
+    alpha_png
+
+commit 547d85362c6ab8ee08a34836a99ecaf6611d39d6
+Merge: 6faa150 55b8702
+Author: hy <hy@realbio.cn>
+Date:   Fri Oct 30 11:52:25 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit 6faa15010855b7cdd1f2fe1be04bee9fae0d9516
+Author: hy <hy@realbio.cn>
+Date:   Fri Oct 30 11:52:09 2015 +0800
+
+    base.html
+
+commit 55b87028e979ec771d281abc91f8f63233a84403
+Merge: 54359a5 4947aa5
+Author: Lyon <lozybean@163.com>
+Date:   Fri Oct 30 11:47:39 2015 +0800
+
+    Merge branch 'master' of github.com:lozybean/16S_ITS_pipeline_v3.0
+
+commit 54359a576a32e29391fca8327eb34e5062c336cd
+Author: Lyon <lozybean@163.com>
+Date:   Fri Oct 30 11:47:30 2015 +0800
+
+    rewrite barplot
+
+commit 4947aa585502e7092425456ca7cdba248a714248
+Merge: 0209c5b 447a30b
+Author: Lyon0804 <lozybean@163.com>
+Date:   Fri Oct 30 11:46:18 2015 +0800
+
+    Merge pull request #17 from tianyabeef/master
+    
+    modify
+
+commit 447a30bcd1ae206ec2f063e514753a33aed9dd70
+Author: hy <hy@realbio.cn>
+Date:   Fri Oct 30 09:35:42 2015 +0800
+
+    html
+
+commit db97d8eefb7f5ca3a5d8f33337cfda272eae2fb5
+Merge: fc98270 0209c5b
+Author: hy <hy@realbio.cn>
+Date:   Thu Oct 29 20:32:23 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit fc98270d9e50d4bacc7e9c4b82f79161c340a13e
+Author: hy <hy@realbio.cn>
+Date:   Thu Oct 29 20:32:02 2015 +0800
+
+    bar_plot
+
+commit 0209c5b113a5d92a80c46d833d64039ae5dfd018
+Merge: 9b59bd2 f832034
+Author: Lyon0804 <lozybean@163.com>
+Date:   Thu Oct 29 14:54:17 2015 +0800
+
+    Merge pull request #16 from tianyabeef/master
+    
+    modify
+
+commit f8320341c7530636a2cf53d192eaf6add85cacde
+Author: hy <hy@realbio.cn>
+Date:   Thu Oct 29 14:52:22 2015 +0800
+
+    html
+
+commit 6c2d57d8e9ea83ead2d07c13bebd7ad7a62de5eb
+Merge: 4b26bd9 9b59bd2
+Author: hy <hy@realbio.cn>
+Date:   Thu Oct 29 14:40:55 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit 4b26bd98c479a92eac1745dafcf8c1df5ff34d74
+Author: hy <hy@realbio.cn>
+Date:   Thu Oct 29 14:40:41 2015 +0800
+
+    Don't show
+
+commit 2a828cd0aec99a63a1fdd07345ddf5289396ba3f
+Author: hy <hy@realbio.cn>
+Date:   Thu Oct 29 14:36:12 2015 +0800
+
+    Don't show
+
+commit 9b59bd2362df1f5113fd8fa1704ef1b2fd6bc583
+Author: Lyon <lozybean@163.com>
+Date:   Thu Oct 29 13:24:07 2015 +0800
+
+    fix star plot
+
+commit 01901c1e57dba3148bba9bb5a6e3ff7198cc5978
+Merge: e72fffa e4e79ef
+Author: Lyon0804 <lozybean@163.com>
+Date:   Thu Oct 29 13:17:38 2015 +0800
+
+    Merge pull request #15 from tianyabeef/master
+    
+    modify
+
+commit e4e79efd091f4eb34cdf807b62a87f2777a4c33e
+Author: hy <hy@realbio.cn>
+Date:   Thu Oct 29 13:08:23 2015 +0800
+
+    report
+
+commit 0967ab0b870a0e48376d08251bc765dcabb4abc4
+Merge: 68a83cc e72fffa
+Author: hy <hy@realbio.cn>
+Date:   Thu Oct 29 12:03:42 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit 68a83ccde63a44bc61194ad0d31b454772bb6ec6
+Author: hy <hy@realbio.cn>
+Date:   Thu Oct 29 12:03:34 2015 +0800
+
+    LDA
+
+commit e72fffa45f22130b7346d892271401da07aa2034
+Merge: 841c9a5 d855443
+Author: Lyon0804 <lozybean@163.com>
+Date:   Thu Oct 29 11:51:16 2015 +0800
+
+    Merge pull request #14 from tianyabeef/master
+    
+    modify
+
+commit d855443c73e89ad0bacd3e38ffaa171f31151870
+Merge: 27c8da5 841c9a5
+Author: hy <hy@realbio.cn>
+Date:   Thu Oct 29 11:50:01 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit 27c8da5403bfb3025fcc0fae8926d38196c1a4cf
+Author: hy <hy@realbio.cn>
+Date:   Thu Oct 29 11:46:04 2015 +0800
+
+    group_alpha_makers_txt
+
+commit 841c9a5f69cc1b2ee4b2379f08cd83af1c225697
+Merge: f664980 e8e7451
+Author: Lyon0804 <lozybean@163.com>
+Date:   Thu Oct 29 11:31:13 2015 +0800
+
+    Merge pull request #13 from tianyabeef/master
+    
+    midofy
+
+commit e8e74512a5a82d5e5d7e30442b1b3f318ebdf5be
+Merge: b31adf7 f664980
+Author: hy <hy@realbio.cn>
+Date:   Thu Oct 29 11:30:02 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit b31adf73a2803c963d034fead3725845d6064ec1
+Author: hy <hy@realbio.cn>
+Date:   Thu Oct 29 11:26:53 2015 +0800
+
+    get_result
+
+commit f6649800287fe51e64ce007f08043c3a4190f7ab
+Merge: c42be59 795ef47
+Author: Lyon0804 <lozybean@163.com>
+Date:   Thu Oct 29 10:54:18 2015 +0800
+
+    Merge pull request #12 from tianyabeef/master
+    
+    modify
+
+commit 795ef474c0596dbe862b097371cdb6410506cf40
+Merge: 5f30954 c42be59
+Author: hy <hy@realbio.cn>
+Date:   Thu Oct 29 10:24:02 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit 5f309540525bd21642c5663036e926f45e05813f
+Author: hy <hy@realbio.cn>
+Date:   Thu Oct 29 10:23:54 2015 +0800
+
+    get_resuly
+
+commit c42be596ed4a096c1ca46c2455116fe6d64c376f
+Merge: ee30a83 26ab2b0
+Author: Lyon0804 <lozybean@163.com>
+Date:   Thu Oct 29 10:10:19 2015 +0800
+
+    Merge pull request #11 from tianyabeef/master
+    
+    modify
+
+commit 26ab2b0cee8872a3da3edd0a10e345cb791aff5b
+Author: hy <hy@realbio.cn>
+Date:   Thu Oct 29 10:05:47 2015 +0800
+
+    get_html.cfg
+
+commit ace3525f84e6f8a430109c4b15db19e9c9b84748
+Merge: d660f92 ee30a83
+Author: hy <hy@realbio.cn>
+Date:   Thu Oct 29 10:04:07 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit d660f9286e5cdfd9fbd3c782b6192d4aa8c25bb3
+Author: hy <hy@realbio.cn>
+Date:   Thu Oct 29 10:03:55 2015 +0800
+
+    get_html.cfg
+
+commit ee30a83c2785fed88b1d109765570bda4dd689fc
+Author: Lyon <lozybean@163.com>
+Date:   Thu Oct 29 09:54:58 2015 +0800
+
+    fix heatmap
+
+commit 074a67e8ede363457b012ac759a1f6f95e514a8f
+Merge: 3ef3a7a a385178
+Author: Lyon0804 <lozybean@163.com>
+Date:   Thu Oct 29 09:48:26 2015 +0800
+
+    Merge pull request #10 from tianyabeef/master
+    
+    midify html_picture
+
+commit a385178aa9ca3e564cb2628a3665ddb5e5d3da68
+Author: hy <hy@realbio.cn>
+Date:   Thu Oct 29 09:46:28 2015 +0800
+
+    heatmap.Rtp
+
+commit f1ba882fc185ba04f2753f8d9c20ac6f40146736
+Author: hy <hy@realbio.cn>
+Date:   Thu Oct 29 09:33:25 2015 +0800
+
+    modify report.html
+
+commit b00a0f4fcf137b13b7802d7e05f527a4c301c1ad
+Author: hy <hy@realbio.cn>
+Date:   Thu Oct 29 09:11:33 2015 +0800
+
+    modify report.html
+
+commit 510b1e8354a6d070dfbcc7a52b4790de9f84b98a
+Author: hy <hy@realbio.cn>
+Date:   Thu Oct 29 09:09:36 2015 +0800
+
+    modify report.html
+
+commit 9ce4f9dfd5166af0d6ee4a411578d471b40de77d
+Merge: f9d3d32 3ef3a7a
+Author: hy <hy@realbio.cn>
+Date:   Wed Oct 28 18:33:27 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit f9d3d329fc20a66078ea74bf59db38141db8b073
+Author: hy <hy@realbio.cn>
+Date:   Wed Oct 28 18:33:06 2015 +0800
+
+    modify html_picture
+
+commit 3ef3a7ac09e06f30f7b72c4ed0a12a9435982ab1
+Merge: f4709b7 3a67e25
+Author: Lyon0804 <lozybean@163.com>
+Date:   Wed Oct 28 16:53:18 2015 +0800
+
+    Merge pull request #9 from tianyabeef/master
+    
+    midify table.js
+
+commit f4709b7a51d6eff5f31ccedd72f504d080e7a5aa
+Author: Lyon <lozybean@163.com>
+Date:   Wed Oct 28 16:52:49 2015 +0800
+
+    fix some bug
+
+commit 3a67e251f0d0d13cf813944f72ddacf8e2671327
+Merge: d0a1ecc f0a7e08
+Author: hy <hy@realbio.cn>
+Date:   Wed Oct 28 14:56:55 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit d0a1ecc8d74b79e465d1533a883be198c551d58c
+Author: hy <hy@realbio.cn>
+Date:   Wed Oct 28 14:56:46 2015 +0800
+
+    modify table.js
+
+commit f0a7e089413a24293bd3a75351634ab16b4031e2
+Merge: 7a8c64c 3a2f03d
+Author: Lyon0804 <lozybean@163.com>
+Date:   Wed Oct 28 09:41:35 2015 +0800
+
+    Merge pull request #8 from tianyabeef/master
+    
+    modify
+
+commit 3a2f03dcdcee45064794c22833161dac5b67f092
+Author: hy <hy@realbio.cn>
+Date:   Wed Oct 28 09:36:12 2015 +0800
+
+    table_template
+
+commit d48f23a2716144c764287efa5f87294bb98b264c
+Merge: f168330 7a8c64c
+Author: hy <hy@realbio.cn>
+Date:   Wed Oct 28 09:31:32 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit f168330569ddd1a60514945829011f82a0d248b6
+Author: hy <hy@realbio.cn>
+Date:   Wed Oct 28 09:31:25 2015 +0800
+
+    wkhtmltopdf
+
+commit 7a8c64c3acbf1564fded6997237a0f8cac9a34d7
+Merge: 3a970da 4cc0ee7
+Author: Lyon0804 <lozybean@163.com>
+Date:   Wed Oct 28 09:24:29 2015 +0800
+
+    Merge pull request #7 from tianyabeef/master
+    
+    add diff analysis
+
+commit 4cc0ee7fdcc674c7bfa2de4c3dd5fd2bd1e5f618
+Merge: f781748 3a970da
+Author: hy <hy@realbio.cn>
+Date:   Tue Oct 27 17:50:30 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit f781748fba6e8f66e776aeaa1a0c10d0d9339d8d
+Author: hy <hy@realbio.cn>
+Date:   Tue Oct 27 17:49:40 2015 +0800
+
+    add pdf
+
+commit 3a970da78757eaf27d402fa84c182b2bbf15c33a
+Author: Lyon <lozybean@163.com>
+Date:   Tue Oct 27 17:15:48 2015 +0800
+
+    change the minimum sample of diff test
+
+commit 71364bfc3f64e0825f90481df46514ea7f4e4192
+Merge: b12925f baa9331
+Author: hy <hy@realbio.cn>
+Date:   Tue Oct 27 16:24:40 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit b12925f099284b3073331d3d93bca5a4eec0aa2f
+Author: hy <hy@realbio.cn>
+Date:   Tue Oct 27 16:24:14 2015 +0800
+
+    add diff analysis
+
+commit baa9331addb4a5d5aadc60a4239b9357c177d4ad
+Merge: 44296f3 29eb924
+Author: Lyon0804 <lozybean@163.com>
+Date:   Tue Oct 27 16:06:06 2015 +0800
+
+    Merge pull request #6 from tianyabeef/master
+    
+    modify
+
+commit 44296f3077a7cc7e26f599b1196239d9585713b4
+Author: Lyon <lozybean@163.com>
+Date:   Tue Oct 27 16:04:43 2015 +0800
+
+    update LEfSe to rm norank
+
+commit 29eb9244bcff5ddb8655593a1b93ccc258f6635c
+Author: hy <hy@realbio.cn>
+Date:   Tue Oct 27 15:00:47 2015 +0800
+
+    modify get_html_2.cfg
+
+commit df4ff6ff2aeb7104653f674eab26b7804252b2a4
+Author: hy <hy@realbio.cn>
+Date:   Tue Oct 27 14:52:18 2015 +0800
+
+    rm table.js
+
+commit b4076612e0e17c7ffab6ab0f1ccdaada3c7c4568
+Merge: ec3e3e2 fba143e
+Author: hy <hy@realbio.cn>
+Date:   Tue Oct 27 14:51:00 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit ec3e3e287f90a2abeedcee43bfa5dfc43e814a4b
+Author: hy <hy@realbio.cn>
+Date:   Tue Oct 27 14:50:33 2015 +0800
+
+    modify table_template.js
+
+commit 9bf1cb11724aed2fecadbfb3f429b811f65b523b
+Author: hy <hy@realbio.cn>
+Date:   Tue Oct 27 12:46:29 2015 +0800
+
+    rm ~file
+
+commit a0c777391eb65c18388fead2ce23bd0b455c2faf
+Author: hy <hy@realbio.cn>
+Date:   Tue Oct 27 12:45:47 2015 +0800
+
+    d
+
+commit fba143e3073152170f39b9417b6ce343fafe7aae
+Author: Lyon <lozybean@163.com>
+Date:   Tue Oct 27 12:07:19 2015 +0800
+
+    fix shell variable name
+
+commit 11891292c0f9c3af4e575861ae03164e09eb33eb
+Author: Lyon <lozybean@163.com>
+Date:   Tue Oct 27 11:48:58 2015 +0800
+
+    fix beta pcoa
+
+commit 6cc6dc67b43368f0a786b41b5962c307e5b000cc
+Merge: 20c28d4 40eadb0
+Author: hy <hy@realbio.cn>
+Date:   Tue Oct 27 10:17:01 2015 +0800
+
+    Merge branch 'master' of https://github.com/lozybean/16S_ITS_pipeline_v3.0
+
+commit 40eadb0a3f730e12f85637fe6de7c3bfb150c98b
+Author: Lyon <lozybean@163.com>
+Date:   Tue Oct 27 10:16:28 2015 +0800
+
+    fix alpha statistic
+
+commit 20c28d48be03cb5e2dd714cae1aa1cc7fb9dfc24
+Author: hy <hy@realbio.cn>
+Date:   Tue Oct 27 09:15:11 2015 +0800
+
+    rm setting.pyo
+
+commit 35278c77ce377405d63a0d0ff4a1c0b1c6405f31
+Author: hy <hy@realbio.cn>
+Date:   Tue Oct 27 09:14:01 2015 +0800
+
+    config modify
+
+commit f82471305e69491fa8d975e100be4acc6fd4a324
+Author: Lyon <lozybean@163.com>
+Date:   Mon Oct 26 18:41:00 2015 +0800
+
+    update
+
+commit ad6c9f2d5e461c9303ac79de266aa75fee1fd46d
+Author: Lyon <lozybean@163.com>
+Date:   Fri Oct 23 15:56:02 2015 +0800
+
+    debug
+
+commit 479bc93e7d1be947165bb12e69aaf5951aff86b6
+Author: Lyon <lozybean@163.com>
+Date:   Fri Oct 23 15:19:23 2015 +0800
+
+    debug
+
+commit b0f9629e7570e26e74baefa345cb1ad10edbfc9f
+Author: Lyon <lozybean@163.com>
+Date:   Fri Oct 23 14:36:43 2015 +0800
+
+    debug
+
+commit be60d3dd05167e06111ae644de37dd2597287fa7
+Author: Lyon <lozybean@163.com>
+Date:   Fri Oct 23 13:54:50 2015 +0800
+
+    temp
+
+commit b8a80e70dadbaea99a2a5aec96aa8be539b96bf4
+Merge: 61a44c4 92c6286
+Author: lozybean <lozybean@163.com>
+Date:   Fri Oct 23 13:53:52 2015 +0800
+
+    Merge pull request #5 from tianyabeef/master
+    
+    add html
+
+commit 92c6286e2f0c56db3bdebb97a79ffaff62773be2
+Author: hy <hy@realbio.cn>
+Date:   Fri Oct 23 13:51:46 2015 +0800
+
+    add html
+
+commit 61a44c41bc0d0c4653b1a843ae48f7c3d7832a02
+Author: Lyon <lozybean@163.com>
+Date:   Fri Oct 23 13:51:38 2015 +0800
+
+    temp
+
+commit a0617fccd409f69e87423ac357a789986e8f75d8
+Merge: 16ce605 e5ca631
+Author: Lyon <lozybean@163.com>
+Date:   Fri Oct 23 13:49:33 2015 +0800
+
+    Merge branch 'master' of github.com:lozybean/16S_ITS_pipeline_v3.0
+
+commit 16ce605993a00b9eb55fbe15708d7ae70bf72b4f
+Author: Lyon <lozybean@163.com>
+Date:   Fri Oct 23 13:49:02 2015 +0800
+
+    temp
+
+commit e5ca6315e471ad7686702567d9aa3254bd3ceb4b
+Merge: cac46cf ec6451d
+Author: lozybean <lozybean@163.com>
+Date:   Fri Oct 23 13:48:32 2015 +0800
+
+    Merge pull request #4 from tianyabeef/master
+    
+    html
+
+commit ec6451dc3b756951916e97ab752f38a8a73cadc7
+Author: hy <hy@realbio.cn>
+Date:   Fri Oct 23 13:36:54 2015 +0800
+
+    html
+
+commit cac46cf8e0a50d836bf0994aa961b8c9558d7f26
+Author: Lyon <lozybean@163.com>
+Date:   Fri Oct 23 12:40:49 2015 +0800
+
+    temp
+
+commit cf711fd7241fe07acfaa58851c78ba0049512a46
+Author: Lyon <lozybean@163.com>
+Date:   Thu Oct 22 17:37:29 2015 +0800
+
+    rm pyc
+
+commit da82b66cf91dc530af50c6b31eda7416a58222db
+Author: Lyon <lozybean@163.com>
+Date:   Thu Oct 22 17:34:39 2015 +0800
+
+    add profile tree
+
+commit 08c6523df0c6677e92ffe0619c136043c4237f2a
+Author: Lyon <lozybean@163.com>
+Date:   Tue Oct 20 16:26:33 2015 +0800
+
+    add config checker
+
+commit bc38f057a4feb6771238c04f3244aba40b208cc2
+Author: Lyon <lozybean@163.com>
+Date:   Tue Oct 20 14:31:51 2015 +0800
+
+    temp
+
+commit 6d439deca0ed16091b0ee7a49115125343292079
+Author: Lyon <lozybean@163.com>
+Date:   Tue Oct 20 13:54:15 2015 +0800
+
+    temp
+
+commit 3562892c445da51f8abdf23edcd72a5e4d4d9543
+Author: Lyon <lozybean@163.com>
+Date:   Tue Oct 20 13:50:01 2015 +0800
+
+    temp
+
+commit b685e6d50eb6d600e65d7f13c8aae1dfbcfdb66c
+Merge: e00efe9 7576e10
+Author: lozybean <lozybean@163.com>
+Date:   Tue Oct 20 13:19:52 2015 +0800
+
+    Merge pull request #3 from tianyabeef/master
+    
+    05_diff_pca
+
+commit e00efe98b49f0bbba48ffb831ae98c18229c0dcb
+Author: Lyon <lozybean@163.com>
+Date:   Tue Oct 20 13:18:30 2015 +0800
+
+    temp
+
+commit 7576e10253cc683c12f70d79e74903411717e81b
+Author: hy <hy@realbio.cn>
+Date:   Mon Oct 19 13:03:05 2015 +0800
+
+    05_diff_pca
+
+commit ebaa366b77d718947c2972850ecc865e48396df1
+Author: Lyon <lozybean@163.com>
+Date:   Fri Oct 16 17:36:24 2015 +0800
+
+    add beta analysis
+
+commit b978fd822227c2c8e4cb7536e00ce5c7f0aaf2d9
+Author: Lyon <lozybean@163.com>
+Date:   Thu Oct 15 21:25:24 2015 +0800
+
+    finish alpha_analysis
+
+commit 0633a907c4c664f5c5a691c71c25949030530b23
+Author: Lyon <lozybean@163.com>
+Date:   Thu Oct 15 21:12:26 2015 +0800
+
+    finish alpha analysis
+
+commit e1e6f9754b19b1f7c8b3e6bce7d01c33b80d8cb3
+Author: Lyon <lozybean@163.com>
+Date:   Thu Oct 15 17:57:42 2015 +0800
+
+    temp
+
+commit 0c0cc631a9c736650c4edb968090d2e430afe9a3
+Author: Lyon <lozybean@163.com>
+Date:   Wed Oct 14 18:59:07 2015 +0800
+
+    temp
+
+commit 9669aecaf91fcb757e7579c9845df8b94f8e2fa4
+Author: Lyon <lozybean@163.com>
+Date:   Tue Oct 13 20:38:35 2015 +0800
+
+    temp
+
+commit ba4016fea10ba73f7f0108aca9f1689e2b31b492
+Author: Lyon <lozybean@163.com>
+Date:   Tue Oct 13 20:36:29 2015 +0800
+
+    temp
+
+commit 64aec05306ebd02a02d8d64f4a8bd39a6861c4fb
+Author: Lyon <lozybean@163.com>
+Date:   Mon Oct 12 18:46:49 2015 +0800
+
+    temp
+
+commit 97ccb7e1e3506b279a926cf11155fa2f0976fbfe
+Author: Lyon <lozybean@163.com>
+Date:   Mon Oct 12 18:30:55 2015 +0800
+
+    temp
+
+commit f7bbc734f2f7b8eec6ecec9ec37fe16bb98e4734
+Merge: 1e38548 8f46095
+Author: lozybean <lozybean@163.com>
+Date:   Mon Oct 12 17:30:40 2015 +0800
+
+    Merge pull request #2 from tianyabeef/hy-feature
+    
+    Hy feature
+
+commit 1e385486c89d93f91c293fc4c302c7c46a8c5b69
+Author: Lyon <lozybean@163.com>
+Date:   Mon Oct 12 17:30:13 2015 +0800
+
+    to add headmap
+
+commit 8f4609553e25343ce0dd1f0149edc44563d934f4
+Author: hy <hy@realbio.cn>
+Date:   Mon Oct 12 17:22:38 2015 +0800
+
+    modif heatmap
+
+commit 6c5a9ad5984172d628afc67b1c88ccace191608a
+Author: hy <hy@realbio.cn>
+Date:   Mon Oct 12 17:05:40 2015 +0800
+
+    add heatmap
+
+commit f2545f11eee0e4a9de3be4d0589620affb9aa5af
+Author: hy <hy@realbio.cn>
+Date:   Mon Oct 12 16:58:45 2015 +0800
+
+    add heatmap
+
+commit d8ccfa73ebf8bf6f9c76112c33f1121e4afa4fb0
+Author: Lyon <lozybean@163.com>
+Date:   Sat Oct 10 18:38:35 2015 +0800
+
+    temp
+
+commit fcab80a5e6e16739ceef3f9b29549083263c19a9
+Author: Lyon <lozybean@163.com>
+Date:   Fri Oct 9 23:47:17 2015 +0800
+
+    temp
+
+commit 095603946c5afccb9e2c91a20895938a789f1204
+Author: Lyon <lozybean@163.com>
+Date:   Fri Oct 9 23:47:06 2015 +0800
+
+    temp
+
+commit e196588aa72c7d1f605fa310d8d04f9751563c92
+Author: Lyon <lozybean@163.com>
+Date:   Fri Oct 9 16:21:02 2015 +0800
+
+    temp
+
+commit 456cff6237ba4b8960b87a2fcbb0487e9a167fc8
+Author: Lyon <lozybean@163.com>
+Date:   Thu Oct 8 19:12:36 2015 +0800
+
+    temp
+
+commit d4213a23e7b95ad482021c2fdfa7d0f799ad7daf
+Author: Lyon <lozybean@163.com>
+Date:   Thu Oct 1 00:16:45 2015 +0800
+
+    temp
+
+commit 468ecb91c80b789ce9b57f86dcbc502ccdfc9970
+Author: Lyon <lozybean@163.com>
+Date:   Tue Sep 29 10:23:49 2015 +0800
+
+    finish rm test
+
+commit 3614b25eb6c0e7ef088c7982a93f1702d1c4943c
+Author: Lyon <lozybean@163.com>
+Date:   Tue Sep 29 10:17:04 2015 +0800
+
+    temp
+
+commit d8c060e96ab8971bdc098278bb2fad44bff485d5
+Author: Lyon <lozybean@163.com>
+Date:   Mon Sep 28 20:53:10 2015 +0800
+
+    temp
+
+commit 852f638aee834e6d36b3fdda0512546de43f8cf2
+Author: Lyon <lozybean@163.com>
+Date:   Mon Sep 28 20:52:46 2015 +0800
+
+    temp
+
+commit 5e0a91a2df01591d87672c3f8363da947fcbd6a2
+Author: Lyon <lozybean@163.com>
+Date:   Mon Sep 28 20:43:50 2015 +0800
+
+    temp
+
+commit 793bcec92100d5096d146f9c6f8a309b60753bff
+Author: Lyon <lozybean@163.com>
+Date:   Fri Sep 18 18:43:19 2015 +0800
+
+    rm
+
+commit 59f0da3bde9502212cd91436acec107887050837
+Author: Lyon <lozybean@163.com>
+Date:   Fri Sep 18 17:50:35 2015 +0800
+
+    build the structure
+
+commit 1b89935eb69b55a8ec530b7ae411e8015f868b19
+Author: Lyon <lozybean@163.com>
+Date:   Tue Sep 15 20:29:25 2015 +0800
+
+    build the construction
+
+commit dc426be119a9f5124a9621b14f1f05cdf7d17946
+Author: Lyon <lozybean@163.com>
+Date:   Mon Sep 14 00:28:27 2015 +0800
+
+    edit 01_get_singleton_read
+
+commit d9f8bb00e68965bbe79d2531450f2e078fa30824
+Author: Lyon <lozybean@163.com>
+Date:   Sun Sep 13 23:02:28 2015 +0800
+
+    first test
