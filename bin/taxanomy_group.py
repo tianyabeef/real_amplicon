@@ -23,7 +23,12 @@ def taxanomy_group(cfg_in, vars=None):
     # summarize trans
     work.commands.append('%s -i %s' % (scripts['summarize_trans'],
                                        outfiles['summarize_dir']))
-
+    # tax_star
+    work.commands.append('%s -t %s -i %s -o %s -s %s' % (scripts['tax_star'],
+                                                         params['tax_ass'],
+                                                         params['uniform_profile'],
+                                                         outfiles['tax_star_dir'],
+                                                         params['group']))
     # bar_plot
     work.commands.append('%s -t %s -o %s -g %s --with_group' % (scripts['group_bar_plot'],
                                                                 outfiles['summarize_dir'],
