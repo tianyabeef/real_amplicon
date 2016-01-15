@@ -282,8 +282,10 @@ def plot_one_tree(newick_file, profile_dict, node_dict, params, prefix=''):
     add_branch_text(t, tree_style=ts, node_dict=node_dict)
     set_node_style(t, node_dict=node_dict)
 
-    pdf_file = '%s/%s_tax_tree%s.pdf' % (params['outdir'], prefix, suf)
-    png_file = '%s/%s_tax_tree%s.png' % (params['outdir'], prefix, suf)
+    if prefix:
+        prefix += '_'
+    pdf_file = '%s/%stax_tree%s.pdf' % (params['outdir'], prefix, suf)
+    png_file = '%s/%stax_tree%s.png' % (params['outdir'], prefix, suf)
     t.render(pdf_file, tree_style=ts, dpi=100)
     image_trans(pdf_file, png_file)
 
