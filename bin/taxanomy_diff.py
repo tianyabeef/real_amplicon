@@ -21,25 +21,26 @@ def commands_factory(infile, outdir, mode, vars):
         command += ' --paired'
     commands.append(command)
 
-    # pca
     marker_profile = outdir + '/profile.for_plot.txt'
-    commands.append('%s -i %s -o %s -g %s' % (scripts['diff_pca'],
-                                              marker_profile,
-                                              outdir,
-                                              params['group']))
+
+    # pca
+    commands.append('%s -i %s -o %s/pca -g %s' % (scripts['diff_pca'],
+                                                  marker_profile,
+                                                  outdir,
+                                                  params['group']))
     # heatmap
-    commands.append('%s -f %s -o %s -g %s -t %s' % (scripts['diff_heatmap'],
-                                                    marker_profile,
-                                                    outdir,
-                                                    params['group'],
-                                                    params['heatmap_top']))
+    commands.append('%s -f %s -o %s/heatmap -g %s -t %s' % (scripts['diff_heatmap'],
+                                                            marker_profile,
+                                                            outdir,
+                                                            params['group'],
+                                                            params['heatmap_top']))
     # boxplot
     if vars['min_sample_num_in_groups'] >= 5:
-        commands.append('%s -i %s -o %s -g %s -t %s' % (scripts['diff_boxplot'],
-                                                        marker_profile,
-                                                        outdir,
-                                                        params['group'],
-                                                        params['boxplot_top']))
+        commands.append('%s -i %s -o %s/boxplot -g %s -t %s' % (scripts['diff_boxplot'],
+                                                                marker_profile,
+                                                                outdir,
+                                                                params['group'],
+                                                                params['boxplot_top']))
     os.system('mkdir -p %s' % outdir)
     with open(outdir + '/commands.sh', 'w') as cmd:
         cmd.write('\n'.join(commands))
