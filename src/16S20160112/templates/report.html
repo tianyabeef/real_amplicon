@@ -7,7 +7,7 @@
 <div id="mainPanle" region="center" border="true" border="false">
     <div class="main">
 
-        {% include 'incdlues/customer_info.html' %}
+        {% include 'includes/customer_info.html' %}
 
         {% include "includes/project_info.html" %}
 
@@ -60,12 +60,21 @@
 
         <h2>备注</h2>
         <p class="paragraph">网页中表格的数值保留了两位有效数字，在Excel表中保留原始数值没有做处理。</p>
-        <p><a name="gobottom"></a></p><!--到底部-->
+        <h3 id="gobottom"></h3><!--到底部-->
     </div>
 </div>
 
 
 {% include "includes/foot.html" %}
+<!-- ###########################################################去顶部和底部################################################# -->
+
+<div class="go">
+    <a title="返回顶部" class="top" href="#项目信息"></a>
+    <a title="如果您有意见，请反馈给我们！" class="feedback" href="javascript:void(0);" target="_self"></a>
+    <a title="返回底部" class="bottom" href="#gobottom"></a>
+</div>
+
+    <script type="text/javascript" src="js/table.js"></script>
 
 {% endblock %}
 

@@ -1,26 +1,27 @@
-<div class="page"><!-- 分页 -->
-    <div class="container">
-        <div class="row clearfix">
-            <div class="col-md-12 column">
-                <h1 class="text-center">
-                    16S rDNA Amplicon测序
-                </h1>
-                <h1 class="text-center">
-                    {{ project_name }}结题报告
-                </h1>
-                <p class="text-center">
-                    客户：{{ customer_name }}
-                </p>
-                <p class="text-center">
-                    项目编号：{{ project_id }}
-                </p>
-                <h2 class="text-center">
-                    上海锐翌生物科技有限公司
-                </h2>
-                <p class="text-center">
-                    {{ time.year }}年{{ time.month }}月{{ time.day }}日
-                </p>
-            </div>
+
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <h1 class="big_h1 text-center">
+                {{ amplification }} rDNA Amplicon测序
+            </h1>
+            <h1 class="big_h1 text-center">
+                {{ project['project_name'] }}结题报告
+            </h1>
+            <div class="blank-big"></div>
+            <p class="text-center">
+                客户：{{ project['customer_name'] }}
+            </p>
+            <p class="text-center">
+                项目编号：{{ project['project_num'] }}
+            </p>
+            <h2 class="text-center">
+                上海锐翌生物科技有限公司
+            </h2>
+            <p class="text-center">
+                {{ time }}
+            </p>
         </div>
     </div>
 </div>
+

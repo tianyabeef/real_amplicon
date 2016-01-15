@@ -1,5 +1,5 @@
 {% if alpha_diversity %}
-    <h2 id="单个样品多样性分析">7.1 单个样品多样性分析</h2>
+    <h3 id="单个样品多样性分析">7.1 单个样品多样性分析</h3>
     <p class="paragraph">Alpha多样性反映的是单个样品内部的物种多样性，包括observed
         species指数、chao指数，shannon指数以及simpson指数，PD_whole_tree指数等。Alpha多样性统计见<a
                 href="..\results\03_Alpha_diversity\{{ group_file }}\alpha_statistic.tsv" target="_blank">alpha_statistic.tsv</a>
@@ -49,7 +49,7 @@
 
 
 {% if alpha_diff %}
-    <h2 id="单个样品差异分析">7.2 单个样品差异分析(每组内样品数>=3)</h2>
+    <h3 id="单个样品差异分析">7.2 单个样品差异分析(每组内样品数>=3)</h3>
     {% if alpha_diff_boxplot %}
         <p class="center">
             <img class="size1" src='images/group/box_plot/chao1.boxplot.png'/><img class="size1"

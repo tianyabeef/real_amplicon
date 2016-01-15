@@ -59,6 +59,9 @@ def get_html(cfg_in, vars=None):
     dirs.append(image_dir + "/group/genus/")
     dirs.append(image_dir + "/group/order/")
     dirs.append(image_dir + "/group/phylum/")
+    dirs.append(image_dir + "/group/tax_bar_tree/")
+    dirs.append(image_dir + "group/tax_tree/")
+    dirs.append(image_dir + "group/phylo_tree/")
     makedirs(dirs)
     origin = config.items('origin')
 

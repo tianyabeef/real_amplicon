@@ -1,116 +1,96 @@
 {% if reads_statistical %}
-    <div class="page">
-        <h1 id="数据统计">四、数据统计</h1>
-        <h2 id="测序数据统计">4.1 测序数据统计</h2>
-        <p class="paragraph">
-            Paired-end 测序，*_1.fq 和*_2.fq 分别对应一个FASTQ 文件。FASTQ 文件是用户得到的最原始文件，其中每4 行表示一条read，即：
-            @FC4290FAAXX:4:1:3:84#CAGATC/1
-            CCAACTATGATAGCCAANAAGGGAAAGCCATAGAG…
-            +
-            abb_aab_aa`a^aba^D[`a_`aaaa`_a_`__a…
-            每个序列共有4 行，
-            第1行是@序列ID，包括index 序列及read1 或read2 标志，由测序仪产生；
-            第2行是碱基序列，大写“ACTGN”；第三行是“+”，省略了序列ID；
-            第3行是一个 + 号；
-            第4行是序列对应的测序质量值序列，每个字母对应第2 行每个碱基，第四行每个字母对应的ASCII 值减去33，即为该碱基的测序质量值;
-            比如I 对应的ASCII 十进制值为73，那么其对应的碱基质量值是40。Solexa碱基质量值范围为0 到41。
-        </p>
-        <p class="name_table">Table 4-1-1 statistic of valid sequences</p>
-        <div class="center_table">
-            <div id="toolbar12" class="pull-left-self">
-                <select class="form-control">
-                    <option value="">Export Basic</option>
-                    <option value="all">Export All</option>
-                    <option value="selected">Export Selected</option>
-                </select>
-            </div>
-            <table id="table12" data-height="560" data-pagination="true" data-filter-control="true"
-                   data-show-export="true" data-page-list="[10, 25, 50, 100, 200, All]">
-            </table>
+
+    <h1 id="数据统计">四、数据统计</h1>
+    <h3 id="数据格式说明">4.1 数据格式说明</h3>        
+    <p class="paragraph">    Paired-end 测序，*_1.fq 和*_2.fq 分别对应一个FASTQ 文件。FASTQ 文件是用户得到的最原始文件，其中每4 行表示一条read，即：</p>
+    <p class="paragraph">    @FC4290FAAXX:4:1:3:84#CAGATC/1</p>
+    <p class="paragraph">    CCAACTATGATAGCCAANAAGGGAAAGCCATAGAG…</p>
+    <p class="paragraph">    +</p>
+    <p class="paragraph">    abb_aab_aa`a^aba^D[`a_`aaaa`_a_`__a…</p>
+    <p class="paragraph">   每个序列共有4 行，</p>
+    <p class="paragraph">   第1行是@序列ID，包括index 序列及read1 或read2 标志，由测序仪产生；</p>
+    <p class="paragraph">    第2行是碱基序列，大写“ACTGN”；第三行是“+”，省略了序列ID；</p>
+    <p class="paragraph">    第3行是一个 + 号；</p>
+    <p class="paragraph">    第4行是序列对应的测序质量值序列，每个字母对应第2 行每个碱基，第四行每个字母对应的ASCII 值减去33，即为该碱基的测序质量值;</p>
+    <p class="paragraph">    比如I 对应的ASCII 十进制值为73，那么其对应的碱基质量值是40。Solexa碱基质量值范围为0 到41。</p>        
+    <p class="name_table">表 4-1-1 有效序列统计</p>
+    <div class="center_table">
+        <div id="toolbar12" class="pull-left-self">
+            <select class="form-control">
+                <option value="">Export Basic</option>
+                <option value="all">Export All</option>
+                <option value="selected">Export Selected</option>
+            </select>
         </div>
-        <p class="premark">
-            第一列Valid：为编号;
-            第二列Insert size：插入片段长度;
-            第三列seq length:测序长度;
-            第四列Raw data：原始数据;
-            第五列total base：总碱基数;
-        </p>
-        <h2>数据优化统计</h2>
-        <p class="paragraph">
-            通过Illumina平台（MiSeq）进行Paired-end测序，Paired End Reads通过Reads之间的Overlap关系拼接成长Reads，并对拼接后的Reads进行质控，得到Clean
-            Reads。拼接过程及质控标准见实验方法中的方法1。
-        </p>
+        <table id="table12" data-height="560" data-pagination="true" data-filter-control="true"
+               data-show-export="true" data-page-list="[10, 25, 50, 100, 200, All]">
+        </table>
+    </div>        
+    <p class="premark">    第一列Valid：为编号;</p>
+    <p class="premark">    第二列Insert size：插入片段长度;</p>
+    <p class="premark">    第三列seq length:测序长度;</p>
+    <p class="premark">    第四列Raw data：原始数据;</p>
+    <p class="premark">    第五列total base：总碱基数;</p>      
 
-        <p class="paragraph">
-            <a href="..\results\01_Reads\" target="_blank">
-                结果目录：01_Reads
-            </a>
-        </p>
-    <div>
+         
 
-    <div class="page">
-        <h3 id="优化序列统计">4.2 优化序列统计</h3>
-        <p class="paragraph">通过Illumina平台进行Paired-End测序，Paired End Reads通过Reads之间的Overlap关系拼接成长Reads，并对拼接后的Reads进行质控，得到Clean Reads。</p>
-        <p class="paragraph">
-            对16S rDNA高变区测序序列进行测序，测序为V3-V4区；
-            通过Pandaseq[1]软件利用重叠关系将双末端测序得到的成对Reads拼接成一条序列，得到高变区的长Reads。
-            然后使用内部撰写的程序对拼接后的Reads进行如下处理，获取Clean Reads：
-            1）去除平均质量值低于20的Reads；
-            2）去除Reads含N的碱基数超过3个的Reads；
-            3）Reads长度范围为220~500 nt。
-        </p>
-        <p class="name_table">表4-2-1 优化数据统计</p>
-        <div class="center_table">
-            <div id="toolbar13" class="pull-left-self">
-                <select class="form-control">
-                    <option value="">Export Basic</option>
-                    <option value="all">Export All</option>
-                    <option value="selected">Export Selected</option>
-                </select>
-            </div>
-            <table id="table13" data-height="560" data-pagination="true" data-filter-control="true"
-                   data-show-export="true" data-page-list="[10, 25, 50, 100, 200, All]">
-            </table>
+    <h3 id="有效数据统计">4.2 有效数据统计</h3>
+    <p class="paragraph">通过Illumina平台进行Paired-End测序，Paired End Reads通过Reads之间的Overlap关系拼接成长Reads，并对拼接后的Reads进行质控，得到Clean Reads。</p>
+    
+    <p class="paragraph">    对16S rDNA高变区测序序列进行测序，测序为V3-V4区；</p>
+    <p class="paragraph">    通过Pandaseq[1]软件利用重叠关系将双末端测序得到的成对Reads拼接成一条序列，得到高变区的长Reads。</p>
+    <p class="paragraph">    然后使用内部撰写的程序对拼接后的Reads进行如下处理，获取Clean Reads：</p>
+    <p class="paragraph">    1）去除平均质量值低于20的Reads；</p>
+    <p class="paragraph">    2）去除Reads含N的碱基数超过3个的Reads；</p>
+    <p class="paragraph">    3）Reads长度范围为220~500 nt。</p>
+    
+    <p class="name_table">表4-2-1 有效序列统计</p>
+    <div class="center_table">
+        <div id="toolbar13" class="pull-left-self">
+            <select class="form-control">
+                <option value="">Export Basic</option>
+                <option value="all">Export All</option>
+                <option value="selected">Export Selected</option>
+            </select>
         </div>
-        <p class="tremark">
-            第一列sample：样品;
-            第二列seqs，reads数量;
-            第三列Bases：碱基数量;
-            第四列Average length:reads的平均长度;
-        </p>
-    <div>
+        <table id="table13" data-height="560" data-pagination="true" data-filter-control="true"
+               data-show-export="true" data-page-list="[10, 25, 50, 100, 200, All]">
+        </table>
+    </div>        
+    <p class="tremark">注：第一列Sample name 是样品名称</p>
+    <p class="tremark">第二列Clean Reads是有效序列数</p>
+    <p class="tremark">第三列Bases(bp) 是总碱基数</p>
+    <p class="tremark">第四列 Q20 (%) 是Q20碱基占总碱基数的百分比</p>
+    <p class="tremark">第五列Q30 (%) 是Q30碱基占总碱基数的百分比</p>
+    <p class="tremark">第六列)GC (%) 是该样品的GC含量</p>
+    <p class="tremark">第七列Average length(bp) 是指该样品的平均长度</p>
 
+    <h3 id="数据优化统计">4.3 数据优化统计</h3>
 
-    <div class="page">
-        <p class="name_table">
-            表4-2-2 长度分布
-        </p>
-        <div class="center_table">
-            <div id="toolbar14" class="pull-left-self">
-                <select class="form-control">
-                    <option value="">Export Basic</option>
-                    <option value="all">Export All</option>
-                    <option value="selected">Export Selected</option>
-                </select>
-            </div>
-            <table id="table14" data-height="560" data-pagination="true" data-filter-control="true"
-                   data-show-export="true" data-page-list="[10, 25, 50, 100, 200, All]">
-            </table>
+    <p class="name_table"> 表4-3-1 有效序列的长度分布</p>
+    <div class="center_table">
+        <div id="toolbar14" class="pull-left-self">
+            <select class="form-control">
+                <option value="">Export Basic</option>
+                <option value="all">Export All</option>
+                <option value="selected">Export Selected</option>
+            </select>
         </div>
-        <p class="tremark">
-            第一列length：碱基长度;
-            第二列seqs，reads数量;
-            第三列Precent：该区间的reads数量在总reads数量的百分比
-        </p>
-        <p class="center">
-            <img class="size1" src="images/length_distrubution.png"/>
-        </p>
-        <p class="name_fig">
-            图1-1 序列长度的统计
-        </p>
-        <p class="premark">
-            注：横坐标是序列的长度，纵坐标是Reads的数量
-        </p>
+        <table id="table14" data-height="560" data-pagination="true" data-filter-control="true"
+               data-show-export="true" data-page-list="[10, 25, 50, 100, 200, All]">
+        </table>
+    </div>        
+    <p class="tremark">    第一列length：碱基长度; </p>
+    <p class="tremark">    第二列seqs，reads数量; </p>  
+    <p class="center">
+        <img class="size1" src="images/length_distrubution.png"/>
+    </p>
+    <p class="name_fig">
+        图4-3-1 序列长度的统计
+    </p>
+    <p class="premark">
+        注：横坐标是序列的长度，纵坐标是Reads的数量
+    </p>
 
-    <div>
+
 {% endif %}
