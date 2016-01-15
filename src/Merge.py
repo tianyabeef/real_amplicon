@@ -51,7 +51,7 @@ class Subject(object):
         self.min_length = min_length
         self.length_step = length_step
         self.stat_file = out_stat_file
-        self.upload_stat = upload_stat
+        self.upload_stat_file = upload_stat
         self.upload_dir = upload_dir
         self.name_table_file = name_table_file
         self.sample_set = {}
@@ -138,7 +138,7 @@ class Subject(object):
         out_stat.close()
 
     def upload_stat(self):
-        stat_file = open(self.stat_file, 'w')
+        stat_file = open(self.upload_stat_file, 'w')
         stat_file.write('Sample name\tClean Reads\tBases(bp)\tQ20(%)\tQ30(%)\tGC(%)\tAverage length(bp)\n')
         for sample in self.sample_set.itervalues():
             Q20_percent = sample.stats['Q20'] / sample.stats['bases'] * 100
