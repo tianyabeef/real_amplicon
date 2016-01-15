@@ -1,8 +1,8 @@
 <h1>9 显著性差异分析 （PCA:每组样品数>=3;Heatmap:每组样品数>=3;Boxplot:每组样品数>=5）</h1>
 
-{% include '../../analysis/leafse.html' %}
+{% include 'analysis/leafse.html' %}
 
-<h2 id="组间差异分析">9.2 组间差异分析</h2>
+<h3 id="组间差异分析">9.2 组间差异分析</h3>
 
 {% if diff_analysis %}
     <h4>OTU水平的差异分析</h4>
@@ -122,7 +122,7 @@
 {% endif %}
 
 
-<h2 id="STAMP分析">9.3 STAMP分析</h2>
+<h3 id="STAMP分析">9.3 STAMP分析</h3>
     <p class="paragraph">STAMP 差异分析用于比较两个样品或者两组样品之间物种的丰度，通过此分析可获得显著性差异物种以及该物种更趋向何种环境条件下的样品。</p>
     <p class="center">
         <img class="size1" src="images/group/taxall_diff/diff_boxplot.png" alt="second slide">

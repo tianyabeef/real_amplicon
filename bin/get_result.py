@@ -24,6 +24,14 @@ def makedirs(dirs):
         makedir(dir)
 
 
+def check_filename(file_name):
+    if file_name.endswith('R'):
+        return False
+    if file_name.startswith('log'):
+        return False
+    if file_name.endswith('Rout'):
+        return False
+    
 def get_result(cfg_in, vars=None):
     work = Work(DEFAULT_CONFIG_DIR + '/get_result.cfg')
     work.set_params(cfg_in, vars)
@@ -54,12 +62,9 @@ def get_result(cfg_in, vars=None):
                     makedir(os.path.dirname(target_file))
                     match = re.match(r".*dir$",key)
                     if match:
-                        command += 'cp -rf ' + work_dir + '../' + value_rep + '/*.png '
-                        command += target_file + '\n'
-                        command += 'cp -rf ' + work_dir + '../' + value_rep + '/*.pdf '
-                        command += target_file + '\n'
-                        command += 'cp -rf ' + work_dir + '../' + value_rep + '/*.txt '
-                        command += target_file + '\n'
+                        for file_name in os.open('ls %s/../%s/*' % (work_dir, value_rep)).read().rstrip().split('\n'):
+                            if check_filename(file_name):
+                                commands += 'cp -rf %s %s\n' % (file_name, target_file)
                     else:
                         command += 'cp -rf ' + work_dir + '../' + value_rep + ' '
                         command += target_file + '\n'
@@ -68,10 +73,10 @@ def get_result(cfg_in, vars=None):
                 makedir(os.path.dirname(target_file))
                 match = re.match(r".*dir$",key)
                 if match:
-                    command += 'cp -rf ' + work_dir + '../' + value + '/*.txt ' + target_file + '\n'
-                    command += 'cp -rf ' + work_dir + '../' + value + '/*.pdf ' + target_file + '\n'
-                    command += 'cp -rf ' + work_dir + '../' + value + '/*.png ' + target_file + '\n'
-                else:
+                    for file_name in os.open('ls %s/../%s/*' % (work_dir,value)).read().rstrip().split('\n'):
+                        if check_filename(file_name):
+                            commands += 'cp -rf %s %s\n' % (file_name,target_file)
+                 else:
                     command += 'cp -rf ' + work_dir + '../' + value + ' ' + target_file + '\n'
         else:
             sys.stderr.write('06_get_html.cfg target section no have ' + key + '\n')

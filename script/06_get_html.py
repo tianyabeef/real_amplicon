@@ -12,6 +12,7 @@ import re
 from jinja2 import Environment, FileSystemLoader
 import operator
 import os
+import time
 
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1, this_script_path + '/../bin')
@@ -253,6 +254,24 @@ def read_params(args):
     params = vars(args)
     return params
 
+def get_project_information(config):
+    project = {}
+    project['project_name']=config.get('project','project_name')
+    project['customer_name']=config.get('project','customer_name')
+    project['project_num']=config.get('project','project_num')
+    project['sample_source']=config.get('project','sample_source')
+    project['sample_type']=config.get('project','sample_type')
+    project['note_information']=config.get('project','note_information')
+    project['project_contacts']=config.get('project','project_contacts')
+    project['phone']=config.get('project','phone')
+    project['email']=config.get('project','email')
+    project['enterprise_name']=config.get('project','enterprise_name')
+    project['enterprise_address']=config.get('project','enterprise_address')
+    project['salesman']=config.get('project','salesman')
+    project['sale_phone']=config.get('project','sale_phone')
+    project['sale_email']=config.get('project','sale_email')
+    return project 
+
 
 def get_html():
     params = read_params(sys.argv)
@@ -467,8 +486,13 @@ def get_html():
     with open(work_dir + 'report/js/table_pdf.js', 'w') as fp:
         fp.write(table)
     # finally_get_html
+    #custom_info
+    var_html['time'] = time.strftime('%F')
+    #project 
+    project = get_project_information(config)
+    var_html['project'] = project 
 
-    #    sample_num_in_groups,min_sample_mun_in_groups,sample_num_total,group_num = parse_group(group_file_origin)
+
     var_html['amplification'] = data_type
     var_html['core_microbiome'] = len(coreMicrobiomes)
     var_html['star_picture_top'] = 10
@@ -516,6 +540,8 @@ def get_html():
 
     if 2 <= group_num <= 5:
         var_html['otu_venn'] = True
+    elif group_num >=6:
+        var_html['otu_flower'] = True
 
     var_html['rank_abundance'] = True
     var_html['alpha_diversity'] = True

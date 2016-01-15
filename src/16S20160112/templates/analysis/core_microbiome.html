@@ -1,7 +1,7 @@
 
 {% if core_microbiome_html %}
     {% if core_otu_exists %}
-    <div class="page">
+
         <h3 id="Core microbiome分析">5.3 Core microbiome分析（总样品数>=5）</h3>
         <p class="center">
             共有OTU数与样品的关系
@@ -43,7 +43,7 @@
         <p class="tremark">    第一列OTU ID是OTU名称；</p>
         <p class="tremark">    第二列Taxonomy Level是OTU所代表的物种所在的分类水平；</p></p>
         <p class="tremark">    第三列Taxonomy Name是OTU所代表的物种名称。</p>
-    </div>
+
     {% else %}
         <p class="error"> 未找到Core Microbiome </p>
     {% endif %}
