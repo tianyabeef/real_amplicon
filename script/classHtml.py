@@ -30,6 +30,13 @@ class OtuStatistical(object):
         self.mapped_reads = mapped_reads
         self.mapped_ratio = mapped_ratio
         self.otus = otus
+    def __init__(slef,sampleName, amplicon_type, clean_read, mapped_reads, mapped_ratio, otus):
+        self.sampleName = sampleName
+        self.amplicon_type = amplicon_type
+        self.clean_read = clean_read
+        self.mapped_reads = mapped_reads
+        self.mapped_ratio = mapped_ratio
+        self.otus = otus
 
 
 class OtuStatisticalDownsize(object):

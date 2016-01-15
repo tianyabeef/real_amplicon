@@ -128,8 +128,6 @@ var dataStatisticals = [
 			sampleName:"{{ otuStatistical.sampleName|safe }}",
 			ampliconType:"{{ otuStatistical.amplicon_type }}",
 			cleanReads:"{{ otuStatistical.clean_read }}",
-			Q20:"{{ otuStatistical.q20 }}",
-			Q30:"{{ otuStatistical.q30 }}",
 			mappedReads:"{{ otuStatistical.mapped_reads }}",
 			mappedRatio:"{{ otuStatistical.mapped_ratio }}",
 			OTUs:"{{ otuStatistical.otus }}"
@@ -167,18 +165,6 @@ $('#table1').bootstrapTable({
     }, {
         field: 'cleanReads',
         title: 'clean reads',
-        align: 'center',
-        filterControl: 'input',
-        sortable: true,
-    }, {
-        field: 'Q20',
-        title: 'Q20(%)',
-        align: 'center',
-        filterControl: 'input',
-        sortable: true,
-    }, {
-        field: 'Q30',
-        title: 'Q30(%)',
         align: 'center',
         filterControl: 'input',
         sortable: true,
