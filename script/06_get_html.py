@@ -13,63 +13,10 @@ from jinja2 import Environment, FileSystemLoader
 import operator
 import os
 import time
-
+from classHtml import * 
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1, this_script_path + '/../bin')
 from settings import *
-
-
-class OtuStatistical(object):
-    '''
-    classdocs
-    '''
-
-    def __init__(self, sampleName, amplicon_type, clean_read, q20, q30,
-                 singleton, singleton_ratio, mapped_reads, mapped_ratio, otus):
-        self.sampleName = sampleName
-        self.amplicon_type = amplicon_type
-        self.clean_read = clean_read
-        self.q20 = q20
-        self.q30 = q30
-        self.singleton = singleton
-        self.singleton_ratio = singleton_ratio
-        self.mapped_reads = mapped_reads
-        self.mapped_ratio = mapped_ratio
-        self.otus = otus
-
-
-class OtuStatisticalDownsize(object):
-    def __init__(self, sample_name, downsize, otus_before, otus_after):
-        self.sample_name = sample_name
-        self.downsize = downsize
-        self.otus_before = otus_before
-        self.otus_after = otus_after
-
-
-class CoreMicrobiome(object):
-    def __init__(self, otu_id, taxonomy_level, taxonomy_name):
-        self.otu_id = otu_id
-        self.taxonomy_level = taxonomy_level
-        self.taxonomy_name = taxonomy_name
-
-
-class OtuAssignmentsStatistical(object):
-    def __init__(self, assignmentsName, num):
-        self.assignmentsName = assignmentsName
-        self.num = num
-
-
-class Alpha_diversity(object):
-    def __init__(self, alphaName, chao1, goods_coverage, observed_species,
-                 whole_tree, shannon, simpson):
-        self.alphaName = alphaName
-        self.chao1 = chao1
-        self.goods_coverage = goods_coverage
-        self.observed_species = observed_species
-        self.whole_tree = whole_tree
-        self.shannon = shannon
-        self.simpson = simpson
-
 
 def stringasfloat(string):
     try:
@@ -289,6 +236,25 @@ def get_html():
     # save table
     var_html = {}
     tabs = []
+
+    #sava table
+    readsStats = {}
+    with open('%s/../%s' % (work_dir,config.get('origin', 'reads_stat')),'r') as lines:
+        lines.next()
+        for line in lines:
+            tabs = line.strip().split("\t")
+            readsStat = ReadsStat(tabs[0],tabs[1],tabs[2],tabs[3],tabs[4],tabs[5],tabs[6])
+            readsStats[tabs[0]] = readsStat
+
+    #save table
+    readsLengths = {}
+    with open('%s/../%s' % (work_dir,config.get('origin','reads_length')),'r') as lines:
+        lines.next()
+        for line in lines:
+            tabs = line.strip().split("\t")
+            readsLength = ReadsLength(tabs[0],tabs[1])
+            readsLengths[tabs[0]] = readsLength 
+
     otuStatisticals = {}
     with open(work_dir + "../" + config.get('origin', 'pick_otu_txt'),
               'r') as lines:
