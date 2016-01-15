@@ -23,13 +23,21 @@ def taxanomy_group(cfg_in, vars=None):
     # summarize trans
     work.commands.append('%s -i %s' % (scripts['summarize_trans'],
                                        outfiles['summarize_dir']))
-
+    # tax_star
+    work.commands.append('%s -t %s -i %s -o %s -s %s' % (scripts['tax_star'],
+                                                         params['tax_ass'],
+                                                         params['uniform_profile'],
+                                                         outfiles['tax_star_dir'],
+                                                         params['group']))
     # bar_plot
     work.commands.append('%s -t %s -o %s -g %s --with_group' % (scripts['group_bar_plot'],
                                                                 outfiles['summarize_dir'],
                                                                 outfiles['bar_plot_dir'],
                                                                 params['group']))
-
+    work.commands.append('%s -t %s -o %s -g %s' % (scripts['group_bar_plot'],
+                                                   outfiles['summarize_dir'],
+                                                   outfiles['bar_plot_sample_dir'],
+                                                   params['group']))
     # core otu
     if sample_num_total >= 5:
         work.commands.append('%s -i %s -t %s -c %s -o %s' % (scripts['core_otu'],
@@ -88,7 +96,7 @@ def taxanomy_group(cfg_in, vars=None):
                                                                outfiles['tax_tree_outdir']
                                                                )
     # plot tax tree with branch circle
-    work.commands.append('%s --with_branch_circle' % command)
+    work.commands.append('%s --with_branch_circle --plot_in_samples' % command)
     # plot tax tree with leaf pie
     work.commands.append('%s -g %s --with_leaf_pie' % (command, params['group']))
     return outfiles
