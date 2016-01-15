@@ -290,23 +290,23 @@ def work_html(pipeline, group_files, infiles=None):
     word_dir = pipeline.config.get('params', 'work_dir')
     data_type = pipeline.config.get('params', 'data_type')
     job_id = pipeline.config.get('params', 'job_id')
-   
-    #project information
-    project_name = pipeline.config.get('project','project_name') 
-    customer_name = pipeline.config.get('project','customer_name')
-    project_num = pipeline.config.get('project','project_num')
-    sample_source = pipeline.config.get('project','sample_source')
-    sample_type = pipeline.config.get('project','sample_type')
-    note_information = pipeline.config.get('project','note_information')
-    project_contacts = pipeline.config.get('project','project_contacts')
-    phone = pipeline.config.get('project','phone')
-    email = pipeline.config.get('project','email')
-    enterprise_name = pipeline.config.get('project','enterprise_name')
-    enterprise_address = pipeline.config.get('project','enterprise_address')
-    salesman = pipeline.config.get('project','salesman')
-    sale_phone = pipeline.config.get('project','sale_phone')
-    sale_email = pipeline.config.get('project','sale_email')
-     
+
+    # project information
+    project_name = pipeline.config.get('project', 'project_name')
+    customer_name = pipeline.config.get('project', 'customer_name')
+    project_num = pipeline.config.get('project', 'project_num')
+    sample_source = pipeline.config.get('project', 'sample_source')
+    sample_type = pipeline.config.get('project', 'sample_type')
+    note_information = pipeline.config.get('project', 'note_information')
+    project_contacts = pipeline.config.get('project', 'project_contacts')
+    phone = pipeline.config.get('project', 'phone')
+    email = pipeline.config.get('project', 'email')
+    enterprise_name = pipeline.config.get('project', 'enterprise_name')
+    enterprise_address = pipeline.config.get('project', 'enterprise_address')
+    salesman = pipeline.config.get('project', 'salesman')
+    sale_phone = pipeline.config.get('project', 'sale_phone')
+    sale_email = pipeline.config.get('project', 'sale_email')
+
     group_files = group_files
     work_dir = word_dir + "/" + job_id + "_report_" + time.strftime('%F') + "/"
     vars = {
@@ -314,20 +314,20 @@ def work_html(pipeline, group_files, infiles=None):
         'group_files': group_files,
         'data_type': data_type,
         'job_id': job_id,
-        'project_name':project_name,
-        'customer_name':customer_name,
-        'project_num':project_num,
-        'sample_source':sample_source,
-        'sample_type':sample_type,
-        'note_information':note_information,
-        'project_contacts':project_contacts,
-        'phone':phone,
-        'email':email,
-        'enterprise_name':enterprise_name,
-        'enterprise_address':enterprise_address,
-        'salesman':salesman,
-        'sale_phone':sale_phone,
-        'sale_email':sale_email
+        'project_name': project_name,
+        'customer_name': customer_name,
+        'project_num': project_num,
+        'sample_source': sample_source,
+        'sample_type': sample_type,
+        'note_information': note_information,
+        'project_contacts': project_contacts,
+        'phone': phone,
+        'email': email,
+        'enterprise_name': enterprise_name,
+        'enterprise_address': enterprise_address,
+        'salesman': salesman,
+        'sale_phone': sale_phone,
+        'sale_email': sale_email
     }
     get_result_outfile = get_result(pipeline.config, vars=vars)
     get_html_outfile = get_html(pipeline.config, vars=vars)

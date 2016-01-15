@@ -1,5 +1,5 @@
 class ReadsStat(object):
-    def __init__(self,sampleName,clean_read,base, q20, q30,gc,average_length):
+    def __init__(self, sampleName, clean_read, base, q20, q30, gc, average_length):
         self.sampleName = sampleName
         self.clean_read = clean_read
         self.base = base
@@ -8,10 +8,12 @@ class ReadsStat(object):
         self.gc = gc
         self.average_length = average_length
 
-class ReadsLength(object)
-    def __init__(self,name,num):
+
+class ReadsLength(object):
+    def __init__(self, name, num):
         self.name = name
         self.num = num
+
 
 class OtuStatistical(object):
     '''
@@ -30,7 +32,8 @@ class OtuStatistical(object):
         self.mapped_reads = mapped_reads
         self.mapped_ratio = mapped_ratio
         self.otus = otus
-    def __init__(slef,sampleName, amplicon_type, clean_read, mapped_reads, mapped_ratio, otus):
+
+    def __init__(self, sampleName, amplicon_type, clean_read, mapped_reads, mapped_ratio, otus):
         self.sampleName = sampleName
         self.amplicon_type = amplicon_type
         self.clean_read = clean_read
@@ -70,6 +73,3 @@ class Alpha_diversity(object):
         self.whole_tree = whole_tree
         self.shannon = shannon
         self.simpson = simpson
-
-
-
