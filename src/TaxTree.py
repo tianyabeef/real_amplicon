@@ -109,7 +109,6 @@ class TreeNode(object):
         self.__min_size = self.MIN_SIZE
         self.__style = NodeStyle()
         self.__level = level
-        self.__branch_color = None
         self.__profile = 0
         self.__dist = 1
         self.__size = self.MIN_SIZE
@@ -241,18 +240,7 @@ class TreeNode(object):
     def profile(self, value):
         self.__profile = value
         self.size = self.profile ** 0.5 * 50
-        if self.profile == 0:
-            self.branch_color = 'red'
-            self.__size = 0
         self.__dist = len(self.name) * 7 + self.size + 4
-
-    @property
-    def branch_color(self):
-        return self.__branch_color
-
-    @branch_color.setter
-    def branch_color(self, value):
-        self.__branch_color = value
 
     @property
     def size(self):
