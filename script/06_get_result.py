@@ -11,13 +11,17 @@ import os
 import sys
 import argparse
 from util import mkdir
-
+import ConfigParser
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1, this_script_path + '/../bin')
 from Work import Work
 
-
-def read_params(args):
+def get_section(config, section):
+    var = {}
+    for item in config.items(section):
+        var[item[0]] = item[1]
+    return var
+def  read_params(args):
     parser = argparse.ArgumentParser(description=''' ''')
     parser.add_argument('--config', dest='config', metavar='FILE', type=str, required=True,
                         help="set the config file")
@@ -33,38 +37,37 @@ def check_filename(file_name):
         return False
     if file_name.endswith('Rout'):
         return False
+    if file_name.endswith('biom'):
+        return False
     return True
 
 
-def read_config(config_file):
-    work = Work(config_file)
-    work.load_default_config()
-    config = work.config
-    params = config.get_section('params')
-    outfiles = config.get_section('outfiles')
-    work_dir = params['work_dir']
-    group_files = params['group_files']
-    out_dir_results = outfiles['out_dir']
+def get_result(config_file):
+    config = ConfigParser.ConfigParser()
+    config.read(config_file)
+    
+    #work = Work(config_file)
+    #work.load_default_config()
+    #config = work.config
+    work_dir = config.get('params','work_dir')
+    group_names = re.split('\s+', config.get('params', 'group_files'))
+    out_dir_results = config.get('outfiles','out_dir')
+    origin = get_section(config,'origin')
+    target = get_section(config,'target')    
+    
 
-    origin = config.get_section('origin')
-    target = config.get_section('target')
 
     for key, value in origin.iteritems():
-        origin[key] = '%s/%s' % (work_dir, value)
+        origin[key] = '%s/../%s' % (work_dir, value)
 
     for key, value in target.iteritems():
         target[key] = '%s/%s' % (out_dir_results, value)
 
 
-def get_result(outdir, origin, target, params, group_names):
-    outdir = params['outdir']
-    origin = params['origin']
-    target = params['target']
-    group_names = params['group_names']
     regex = re.compile('.+\/(.+)\..+')
     group_reg = re.compile(r".*#group.*")
 
-    for key, value in origin:
+    for key,value in origin.iteritems():
         if key in target:
             match = group_reg.match(value)
             if match:
@@ -74,7 +77,7 @@ def get_result(outdir, origin, target, params, group_names):
                     target_file = target[key].replace("#group", analysis_name)
                     mkdir(os.path.dirname(target_file))
                     if re.match(r".*dir$", key):
-                        for group_name in os.open('ls %s/*' % value_rep).read().rstrip().split('\n'):
+                        for group_name in os.popen('ls %s/*' % value_rep).read().rstrip().split('\n'):
                             if check_filename(group_name):
                                 os.system('cp -rf %s %s' % (group_name, target_file))
             else:
@@ -82,7 +85,7 @@ def get_result(outdir, origin, target, params, group_names):
                 mkdir(os.path.dirname(target_file))
                 match = re.match(r".*dir$", key)
                 if match:
-                    for file_name in os.open('ls %s/*' % value).read().rstrip().split('\n'):
+                    for file_name in os.popen('ls %s/*' % value).read().rstrip().split('\n'):
                         if check_filename(file_name):
                             os.system('cp -rf %s %s' % (file_name, target_file))
                 else:
@@ -90,15 +93,14 @@ def get_result(outdir, origin, target, params, group_names):
         else:
             sys.stderr.write('06_get_html.cfg target section no have ' + key + '\n')
 
-    for docs in os.listdir(params['docs_dir']):
-        if docs.find(params['data_type']) >= 0:
-            origin = '%s/%s' % (params['docs_dir'], docs)
-            target_file = '%s/%s' % (outdir, docs)
+    for docs in os.listdir(config.get('params','docs_dir')):
+        if docs.find(config.get('params','data_type')) >= 0:
+            origin = '%s/%s' % (config.get('params','docs_dir'), docs)
+            target_file = '%s/%s' % (out_dir_results, docs)
             mkdir(os.path.dirname(target_file))
             os.system('cp -rf %s %s' % (origin, target_file))
 
 
 if __name__ == '__main__':
     params = read_params(sys.argv)
-    read_config(params['config_file'])
-    get_result(params)
+    get_result(params['config'])

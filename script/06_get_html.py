@@ -78,9 +78,9 @@ def save_table(input_dir):
                             str += '%s:"%s",' % (
                                 value, stringasfloat(tabs[i + 1]))
                             # str += value+":\""+tabs[i+1]+"\","
-                            jqGrid += "field:'" + value + "',title:'" + value + "',align:'center',filterControl:'input',sortable:true},"
+                            jqGrid += "field:'" + value + "',title:'" + samples_name[i] + "',align:'center',filterControl:'input',sortable:true},"
                         else:
-                            jqGrid += "field:'" + value + "',title:'" + value + "',align:'center',filterControl:'input',sortable:true}"
+                            jqGrid += "field:'" + value + "',title:'" + samples_name[i] + "',align:'center',filterControl:'input',sortable:true}"
                             str += '%s:"%s"' % (
                                 value, stringasfloat(tabs[i + 1]))
                             # str += value+":\""+tabs[i+1]+"\""
@@ -93,11 +93,11 @@ def save_table(input_dir):
                             str += '%s:"%s",' % (
                                 value, stringasfloat(tabs[i + 1]))
                             # str += value+":\""+tabs[i+1]+"\","
-                            jqGrid += "field:'" + value + "',title:'" + value + "',align:'center',filterControl:'input',sortable:true},"
+                            jqGrid += "field:'" + value + "',title:'" + samples_name[i] + "',align:'center',filterControl:'input',sortable:true},"
                             if count == 1:
                                 weight_unifrac_jqGrid_list.append(jqGrid)
                         else:
-                            jqGrid += "field:'" + value + "',title:'" + value + "',align:'center',filterControl:'input',sortable:true}"
+                            jqGrid += "field:'" + value + "',title:'" + samples_name[i] + "',align:'center',filterControl:'input',sortable:true}"
                             str += '%s:"%s"' % (
                                 value, stringasfloat(tabs[i + 1]))
                             # str += value+":\""+tabs[i+1]+"\""
@@ -154,9 +154,9 @@ def save_table2(input_dir):
                             str += '%s:"%s",' % (
                                 value, stringasfloat(tabs[i + 1]))
                             # str += value+":\""+tabs[i+1]+"\","
-                            jqGrid += "field:'" + value + "',title:'" + value + "',align: 'center',filterControl: 'input',sortable: true},"
+                            jqGrid += "field:'" + value + "',title:'" + samples_name[i] + "',align: 'center',filterControl: 'input',sortable: true},"
                         else:
-                            jqGrid += "field:'" + value + "',title:'" + value + "',align: 'center',filterControl: 'input',sortable: true}"
+                            jqGrid += "field:'" + value + "',title:'" + samples_name[i] + "',align: 'center',filterControl: 'input',sortable: true}"
                             str += '%s:"%s"' % (
                                 value, stringasfloat(tabs[i + 1]))
                             # str += value+":\""+tabs[i+1]+"\""
@@ -167,9 +167,9 @@ def save_table2(input_dir):
                             str += '%s:"%s",' % (
                                 varlue, stringasfloat(tabs[i + 1]))
                             # str += value+":\""+tabs[i+1]+"\","
-                            jqGrid += "field:'" + value + "',title:'" + value + "',align: 'center',filterControl: 'input',sortable: true},"
+                            jqGrid += "field:'" + value + "',title:'" + samples_name[i] + "',align: 'center',filterControl: 'input',sortable: true},"
                         else:
-                            jqGrid += "field:'" + value + "',title:'" + value + "',align: 'center',filterControl: 'input',sortable: true}"
+                            jqGrid += "field:'" + value + "',title:'" + samples_name[i] + "',align: 'center',filterControl: 'input',sortable: true}"
                             str += '%s:"%s"' % (
                                 value, stringasfloat(tabs[i + 1]))
                             # str += value+":\""+tabs[i+1]+"\""
@@ -243,7 +243,7 @@ def get_html():
         lines.next()
         for line in lines:
             tabs = line.strip().split("\t")
-            readsStat = ReadsStat(tabs[0],tabs[1],tabs[2],tabs[3],tabs[4],tabs[5],tabs[6])
+            readsStat = ReadsStat(tabs[0],tabs[1],tabs[2],tabs[3],tabs[4],tabs[5],stringasfloat(tabs[6]))
             readsStats[tabs[0]] = readsStat
 
     #save table
@@ -381,6 +381,8 @@ def get_html():
                                      key=operator.itemgetter(1),
                                      reverse=True)
     table = template.render(
+            readsLengths = readsLengths,
+            readsStats  = readsStats,
             otuStatisticals=otuStatisticals,
             otuStatisticalDownsizes=otuStatisticalDownsizes,
             otuAssignmentsStatisticals=otuAssignmentsStatisticals,
@@ -417,6 +419,8 @@ def get_html():
     # save_table
     template = env.get_template('table_template_pdf.js')
     table = template.render(
+            readsLengths = readsLengths,
+            readsStats  = readsStats,
             otuStatisticals=otuStatisticals,
             otuStatisticalDownsizes=otuStatisticalDownsizes,
             otuAssignmentsStatisticals=otuAssignmentsStatisticals,

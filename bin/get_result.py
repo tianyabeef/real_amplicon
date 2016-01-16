@@ -16,20 +16,15 @@ def get_result(cfg_in, vars=None):
     work.set_params(cfg_in, vars)
     work.load_default_config()
     config = work.config
-    params = config.get_section('params')
     outfiles = config.get_section('outfiles')
-    work_dir = params['work_dir']
-    group_files = params['group_files']
     out_dir_results = outfiles['out_dir']
+    outfiles = config.get_section('outfiles') 
+    scripts = config.get_section('scripts')
 
     os.system('rm -Rf %s' % out_dir_results)
-
-
-
     command = ''
-    group_files = re.split('\s+', config.get('params', 'group_files'))
-
-    regex = re.compile('.+\/(.+)\..+')
+    command += 'python %s --config %s' % (scripts['get_result'], outfiles['config'])
+    work.commands.append(command) 
     return outfiles
 
 

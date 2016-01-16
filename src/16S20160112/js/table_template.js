@@ -1,11 +1,11 @@
 
 
 var lengths = [
-    {% for key,readsLength in readsLengths %}
+    {% for key,readsLength in readsLengths.items() %}
         {
-            name:"{{ readsLength.name }}",
+            length_name:"{{ readsLength.name }}",
             num:"{{ readsLength.num }}"
-        }
+        },
 
     {% endfor %}
 ];
@@ -25,11 +25,11 @@ $('#table13').bootstrapTable({
         checkbox: true,
         
     }, {
-        field: 'name',
+        field: 'length_name',
         title: 'Length (bp)',
         align: 'center',
         sortable: true,
-        filterControl: 'input',
+        filterControl: 'select',
     }, {
         field: 'num',
         title: 'Sequences',
@@ -41,10 +41,8 @@ $('#table13').bootstrapTable({
 });
 
 
-
-
 var Stat = [
-    {% for key,readsStat in readsStats %}
+    {% for key,readsStat in readsStats.items() %}
         {
             sampleName:"{{ readsStat.sampleName }}",
             cleanReads:"{{ readsStat.clean_read }}",
@@ -53,7 +51,7 @@ var Stat = [
             Q30:"{{ readsStat.q30 }}",
             GC:"{{ readsStat.gc }}",
             averageLength:"{{ readsStat.average_length }}"
-        }
+        },
 
     {% endfor %}
 ];
@@ -78,7 +76,7 @@ $('#table12').bootstrapTable({
         title: 'Sample name',
         align: 'center',
         sortable: true,
-        filterControl: 'input',
+        filterControl: 'select',
     }, {
         field: 'cleanReads',
         title: 'clean reads',
@@ -120,7 +118,6 @@ $('#table12').bootstrapTable({
 });
 
 
-
 // JavaScript Document
 var dataStatisticals = [
 	{% for key,otuStatistical in otuStatisticals %}
@@ -155,7 +152,7 @@ $('#table1').bootstrapTable({
         title: 'Sample name',
         align: 'center',
         sortable: true,
-        filterControl: 'input',
+        filterControl: 'select',
     }, {
         field: 'ampliconType',
         title: 'Amplicon type',
@@ -534,72 +531,10 @@ $('#table7').bootstrapTable({
         title: 'state',
         checkbox: true,
         
-    }, {
-        field: 'sampleName',
-        title: 'sampleName',
-        align: 'center',
-        sortable: true,
-        filterControl: 'input',
-    },
+    },	
 	{% for beta_diversity in beta_diversity_jqGrid %}
 	{{ beta_diversity }}
 	{% endfor %}
-/*
-    , {
-        field: 'sample0',
-        title: 'FC2',
-        align: 'center',
-        filterControl: 'input',
-        sortable: true,
-    }, {
-        field: 'sample1',
-        title: 'FT4',
-        align: 'center',
-        filterControl: 'input',
-        sortable: true,
-    }, {
-        field: 'sample2',
-        title: 'FT2',
-        align: 'center',
-        filterControl: 'input',
-        sortable: true,
-    }, {
-        field: 'sample3',
-        title: 'FC1',
-        align: 'center',
-        filterControl: 'input',
-        sortable: true,
-    }, {
-        field: 'sample4',
-        title: 'FT3',
-        align: 'center',
-        filterControl: 'input',
-        sortable: true,
-    }, {
-        field: 'sample5',
-        title: 'FT6',
-        align: 'center',
-        filterControl: 'input',
-        sortable: true,
-    }, {
-        field: 'sample6',
-        title: 'FC8',
-        align: 'center',
-        filterControl: 'input',
-        sortable: true,
-    }, {
-        field: 'sample7',
-        title: 'FT5',
-        align: 'center',
-        filterControl: 'input',
-        sortable: true,
-    }, {
-        field: 'sample8',
-        title: 'FC5',
-        align: 'center',
-        filterControl: 'input',
-        sortable: true,
-    }*/
 
     ],
     data: beta_diversitys
@@ -632,13 +567,7 @@ $('#table8').bootstrapTable({
         title: 'state',
         checkbox: true,
         
-    }, {
-        field: 'sampleName',
-        title: 'sampleName',
-        align: 'center',
-        sortable: true,
-        filterControl: 'input',
-    }, 
+    },
     {% for beta_diversity in beta_un_diversity_jqGrid %}
 		{{ beta_diversity }}
 	{% endfor %}
@@ -646,24 +575,6 @@ $('#table8').bootstrapTable({
 	],
     data: beta_un_diversitys
 });
-/*jQuery().ready(function (){
-	jQuery("#list54").jqGrid({
-		data: beta_un_diversitys,
-		datatype: "local",
-		height: 230,
-		rowNum: 10,
-		rowList: [10,20,30],
-		colNames:['{{ beta_un_diversity_sampleName }}'],
-		colModel:[
-			 {% for beta_diversity in beta_un_diversity_jqGrid %}
-			 {{ beta_diversity }}
-				{% endfor %}
-		],
-		pager: "#plist54",
-		viewrecords: true,
-		caption: "样品Beta diversity统计表（unweighted_unifrac）"
-	});
- })*/
  {% endif %}
 
 
@@ -741,52 +652,15 @@ $('#table10').bootstrapTable({
         title: 'state',
         checkbox: true,
         
-    }, {
-        field: 'taxonname',
-        title: 'taxonname',
-        align: 'center',
-        sortable: true,
-        filterControl: 'input',
-    }, {
-        field: 'sample0',
-        title: 'mean(Control)',
-        align: 'center',
-        filterControl: 'input',
-        sortable: true,
-    }, {
-        field: 'sample1',
-        title: 'mean(LDC)',
-        align: 'center',
-        filterControl: 'input',
-        sortable: true,
-    }, {
-        field: 'sample2',
-        title: 'pvalue',
-        align: 'center',
-        filterControl: 'input',
-        sortable: true,
-    }],
+    }, 
+	{% for value in diff_genus_marker_jqGrid %}
+                {{ value }}
+        {% endfor %}
+
+	],
     data: diff_genus_markers
 });
 
- /*jQuery().ready(function (){
-	jQuery("#list56").jqGrid({
-		data: diff_genus_markers,
-		datatype: "local",
-		height: 230,
-		rowNum: 10,
-		rowList: [10,20,30],
-		colNames:['{{ diff_genus_marker_sampleName }}'],
-		colModel:[
-			 {% for value in diff_genus_marker_jqGrid %}
-			 {{ value }}
-				{% endfor %}
-		],
-		pager: "#plist56",
-		viewrecords: true,
-		caption: "差异显著物种列表"
-	});
- })*/
 {% endif %}
 
 

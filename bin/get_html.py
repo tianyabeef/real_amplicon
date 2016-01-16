@@ -82,7 +82,7 @@ def get_html(cfg_in, vars=None):
             print '06_get_html.cfg no have ' + key
     command.append('python %s -c %s \n' % (scripts['get_html'], config.get('outfiles', 'config')))
     command.append(
-            'wkhtmltopdf --margin-right 5mm --margin-left 5mm  --exclude-from-outline  --footer-right \'--[page]--\' --header-line --footer-line %s %s \n' % (
+            'wkhtmltopdf --margin-right 5mm --margin-left 5mm  --exclude-from-outline  --footer-right \'--第[page]页/共[toPage]页--\' --header-line --footer-line --header-center 上海锐翌生物科技有限公司 %s %s \n' % (
                 out_dir_report + '/pdf.html', out_dir_report + '/report.pdf'))
     #  command.append('rm %s/pdf.html\n'%out_dir_report)
     #  command.append('rm %s/../results/work_html.sh %s/../results/work_html.cfg\n'%(out_dir_report,out_dir_report))
