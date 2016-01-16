@@ -6,7 +6,7 @@
             Reads根据其丰度大小进行排序，将其中的Singletons过滤掉，（因为Singletons可能由于测序错误造成，故将这部分序列去除，不进行后期OTU聚类），利用Usearch在0.97相似度下进行聚类，对聚类后的序列进行嵌合体过滤后，得到用于物种分类的OTU(Operational
             Taxonomic Units)，最后将所有Clean Reads比对到OTU序列上，将能比对上OTU的Reads提取出来，得到最终的Mapped Reads。
             统计各个样品每个OTU中的丰度信息，OTU的丰度初步说明了样品的物种丰富程度。{{ sample_sum }}个样品共产生{{ otu_sum }}个OTU。每个样品OTU统计结果见表5-1-1，详细信息表见<a
-                href="..\results\01_Reads\pick_otu_summary.tsv" target="_blank">pick_otu_summary.tsv</a>，样品OTU统计表单。
+                href="..\results\04_data_statistics\pick_otu_summary.tsv" target="_blank">pick_otu_summary.tsv</a>，样品OTU统计表单。
         </p>
         <p class="name_table">表5-1-1 样品数据和OTU统计</p>
         <table id="table1" data-height="413"></table>
@@ -38,7 +38,7 @@
         <p class="premark">图中一条曲线代表一个样品，横轴表示从某个样品中随机抽取的Clean
             Reads数目，纵轴表示该Reads数目对应的Alpha多样性指数的大小，随着测序深度的增加，当曲线趋于平缓时表示此时的测序数据量比较合理。</p>
         <p class="paragraph">根据Alpha多样性分析，兼顾测序饱和度和样品完整性，我们对每个样品随机抽取{{ downsize }}条Reads。抽平后的样品OTU统计见<a
-                href="..\results\02_OTU\all\otu_downsize_stat.tsv" target="_blank">otu_downsize_stat.tsv</a>中，表5-2-1
+                href="..\results\05_OTU_analysis\all\otu_downsize_stat.tsv" target="_blank">otu_downsize_stat.tsv</a>中，表5-2-1
             展示部分结果：
         </p>
         <p class="name_table">表5-2-1 抽平后样品OTU统计</p>
@@ -63,7 +63,7 @@
             </p>
             <p class="premark">图中表示的是覆盖一定比例以上样品的OTU的数目，横坐标是覆盖样品的比例，纵坐标是统计的覆盖大于此比例样品的OTU的数目。</p>
             <p class="paragraph">结合OTU所代表的物种，可以找出Core microbiome（即覆盖100%样品的微生物组）。该项目的Core
-                microbiome共包含{{ core_microbiome }}个OTUs，<a href="..\results\02_OTU\{{ group_file }}\core_otu.tsv"
+                microbiome共包含{{ core_microbiome }}个OTUs，<a href="..\results\05_OTU_analysis\{{ group_file }}\core_otu\\core_otu.tsv"
                                                            target="_blank">core_otu.tsv</a>其部分物种信息如下：</p>
             <p class="name_table">表5-3-1 Core microbiome OTU列表</p>
     

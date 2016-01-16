@@ -1,7 +1,9 @@
+
+ <h1>六、物种分类和丰度分析</h1>
 {% if otu_tax_assignments %}
     <h3 id="物种注释分析">6.1 物种注释分析</h3>
     <p class="paragraph">从各个OTU中挑选出丰度最高的一条序列，作为该OTU的代表序列（代表序列见文件rep_set.fna）。使用RDP方法，将该代表序列与已知物种的{{ amplification }}数据库进行比对，从而对每个OTU进行物种归类（物种注释结果见文件<a
-            href="..\result\02_OTU\all\tax_assignment.tsv" target="_blank">tax_assignments.tsv</a>）。</p>
+            href="..\result\05_OTU_analysis\all\tax_assignment.tsv" target="_blank">tax_assignments.tsv</a>）。</p>
     <p class="name_table">表6-1-1 OTU注释统计</p>
     <table id="table4" data-height="413"></table>
 {% endif %}
@@ -14,7 +16,7 @@
     <h3 id="物种注释结果统计">6.2 物种注释结果统计</h3>
     <p class="paragraph">根据物种注释情况，统计每个样品注释到各分类>水平(Kingdom, Phylum, Class, Order, Family, Genus,
         Species)上的相对丰度，由此可>轻松了解注释到各分类水平的整体情况 </p>
-    <p class="paragraph">详细信息请见文件<a href="..\results\02_OTU\all\profile_tree.tsv" target="_blank">profile_tree.tsv。</a></p>
+    <p class="paragraph">详细信息请见文件<a href="..\results\05_OTU_analysis\all\profile_tree.tsv" target="_blank">profile_tree.tsv。</a></p>
 {% endif %}
 
 
@@ -79,8 +81,8 @@
 
 
 
-<h3 id="物种聚类分析">6.4 物种聚类分析 </h3>
-{% if otu_heatmap %}
+    <h3 id="物种聚类分析">6.4 物种聚类分析 </h3>
+
     <p class="paragraph">
        根据样品中物种注释信息及丰度，从物种和样品两个层面进行物种丰度聚类，通过柱状图对比，利于观察样品之间的聚类关系以及物种组成差异。
     </p>
@@ -91,9 +93,7 @@
     <p class="premark">
         注：最右侧为样品聚类结果，颜色区分样品分组；中间为各个样品的所含属水平比例；右侧表示各个颜色代表的属；
     </p>
-{% else %}
-    <p class="error">样品数不足无法分析</p>
-{% endif %}
+
 
 
 
@@ -145,19 +145,20 @@
         根据物种分类结果，筛选出优势物种，如物种丰度前20进行物种分类树统计，从整个分类系统上了解单个或多个样品中的优势物种的丰度差异和进化关系。
     </p>
     <p class="center">
-        <img class="size2" src="images/tree_species_classification.png"/>
+        <img class="size2" src="images/group/tax_tree/tax_tree_circle.png"/>
     </p>
     <p class="name_fig">图6-7-1 物种分类以及丰度比例关系图</p>
     <p class="premark">
 注：不同颜色表示不同的分类水平，圆圈的大小代表该分类的相对丰度大小；分类名下方的数字表示相对丰度百分率。
     </p>
         <p class="center">
-        <img class="size2" src="images/tree_species_classification_2.png"/>
+        <img class="size2" src="images/group/tax_tree/tax_tree_pie.png"/>
     </p>
     <p class="name_fig">图6-7-2 物种分类以及不同分组占比关系图</p>
     <p class="premark">
 说明：不同颜色的扇形表示不同的样品/分组，扇形的大小表示该样品/分组在该分类上相对丰度的比例大小；分类名下方的数字表示相对丰度百分率；
     </p>
+
 {% endif %}
 
 
@@ -168,12 +169,15 @@
 
 {% if otu_krona %}
     <h3 id="物种注释结果KRONA展示">6.8 物种注释结果KRONA展示</h3>
-    <p class="paragraph">使用KRONA[4]对物种注释结果进行可视化展示,
-        展示结果中，圆圈从内到外依次代表不同的分类级别，扇形的大小代表不同OTU注释结果的相对比例,更多详细的信息请参考KRONA展示结果详解。示例图如下所示：</p>
-    <p class="center">
-        <img class="size2" src="images/20.png"/>
+    <p class="paragraph">
+        使用KRONA软件对物种注释结果进行可视化展示,
+        展示结果中，圆圈从内到外依次代表不同的分类级别，扇形的大小代表不同OTU注释结果的相对比例。
+        图6-8-1如下所示：
     </p>
-    <p class="name_fig">图6-8-1 物种注释结果可视化展示</p>
+    <iframe name="myFrame" src="images/krona.html" width=100% height=668px></iframe>
+    <p class="name_fig">
+        图6-8-1 物种注释结果可视化展示
+    </p>
 
 {% endif %}
 
@@ -187,6 +191,7 @@
 
 
 {% if phylogenetic_tree %}
+    
     <h3 id="物种进化树">6.9 物种进化树</h3>
     <p class="paragraph">
         为了进一步研究OTUs的系统进化关系，通过多序列比对得到所有OTUs代表序列的系统发生关系。
@@ -194,7 +199,7 @@
         并结合每个OTUs的相对丰度及其代表序列的物种注释置信度信息，进行整合展示，由此可见这些属中的OTU之间的系统进化关系。
     </p>
     <p class="center">
-        <img class="size2" src="images/phylogenetic_tree.png"/>
+        <img class="size2" src="images/group/phylo_tree/phylo_tree.png"/>
     </p>图5-9-1 物种进化树</p>
     <p class="premark">
        注：分支的颜色表示对应的不同门水平分类
