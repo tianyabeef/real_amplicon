@@ -87,104 +87,376 @@
         使用RDP方法，将该代表序列与{{ amplification }}数据库比对，从而对每个OTU进行物种分类。
         归类后，根据每个OTU中序列的条数，从而得到OTU丰度表，最后根据该OTU丰度表进行后续分析。
     </p>
+    <div class="blank-300"></div>
+</div>
 
-    <h2 id="项目分析内容">3.2项目分析内容</h2>
+
+
+
+
+
+
+
+<div class="page">
+    <h3 id="项目分析内容">3.2项目分析内容</h3>
     <div class="container">
         <div class="row clearfix">
             <div class="col-md-12 column">
                 <table class="table table-bordered">
                     <thead>
-                    <tr class="success">
-                        <th>
+                        <tr class="success">
+                            <th>
 
-                        </th>
-                        <th>
-                            一、物种注释与评估
-                        </th>
-                        <th>
+                            </th>
+                            <th>
+                                一、OTU分析
+                            </th>
+                            <th>
 
-                        </th>
-                        <th>
-                            二、物种分类与丰度分析
-                        </th>
-                    </tr>
+                            </th>
+                            <th>
+                                二、物种分类与丰度分析
+                            </th>
+                            <th>
+
+                            </th>
+                            <th>
+                                三、Alpha分析
+                            </th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>
-                            <input type="checkbox" checked="checked">
-                        </td>
-                        <td>
-                            测序数据统计
-                        </td>
-                        <td>
-                            <input type="checkbox" checked="checked">
-                        </td>
-                        <td>
-                            物种注释分析
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="checkbox" checked="checked">
-                        </td>
-                        <td>
-                            数据优化统计
-                        </td>
-                        <td>
-                            <input type="checkbox" checked="checked">
-                        </td>
-                        <td>
-                            物种注释结果统计
-                        </td>
-                    </tr>
-                    <tr class="error">
-                        <td>
-                            <input type="checkbox">
-                        </td>
-                        <td>
-                            OTU聚类
-                        </td>
-                        <td>
-                            <input type="checkbox">
-                        </td>
-                        <td>
-                            物种丰度分析
-                        </td>
-                    </tr>
-                    <tr class="warning">
-                        <td>
-                            <input type="checkbox">
-                        </td>
-                        <td>
-                            抽平处理
-                        </td>
-                        <td>
-                            <input type="checkbox">
-                        </td>
-                        <td>
-                            物种热图分析
-                        </td>
-                    </tr>
-                    <tr class="info">
-                        <td>
-                            <input type="checkbox">
-                        </td>
-                        <td>
-                            Core microbiome分析
-                        </td>
-                        <td>
-                            <input type="checkbox">
-                        </td>
-                        <td>
-                            Rank Abundance曲线
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" checked="checked" disabled>
+                            </td>
+                            <td>
+                                OTU聚类
+                            </td>
+                            <td>
+                                <input type="checkbox" checked="checked" disabled>
+                            </td>
+                            <td>
+                                物种注释分析
+                            </td>
+                            <td>
+                                <input type="checkbox" checked="checked" disabled>
+                            </td>
+                            <td>
+                                单样品多样性分析
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" checked="checked" disabled>
+                            </td>
+                            <td>
+                                抽平处理
+                            </td>
+                            <td>
+                                <input type="checkbox" checked="checked" disabled>
+                            </td>
+                            <td>
+                                物种注释结果统计
+                            </td>
+                            <td>
+                                <input type="checkbox" checked="checked" disabled>
+                            </td>
+                            <td>
+                                单个样品差异分析
+                            </td>
+                        </tr>
+                        <tr >
+                            
+                            <td>
+                                <input type="checkbox" {% if core_microbiome_html %} checked="checked" {% endif %} disabled>
+                            </td>
+                            <td>
+                                Core microbiome分析
+                            </td>
+                            <td>
+                                <input type="checkbox" {% if star_picture %} checked="checked" {% endif %} disabled>
+                            </td>
+                            <td>
+                                star分析
+                            </td>
+                            <td>
+                               
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        <tr >
+                            <td>
+                                <input type="checkbox" {% if otu_venn %} checked="checked" {% endif %} disabled>
+                            </td>
+                            <td>
+                                OTU Venn 图分析
+                            </td>
+                            <td>
+                                <input type="checkbox" checked="checked"  disabled>
+                            </td>
+                            <td>
+                                物种聚类分析
+                            </td>
+                            <td>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        <tr >
+                            <td>
+                                <input type="checkbox" {% if otu_pca %} checked="checked" {% endif %} disabled>
+                            </td>
+                            <td>
+                                OTU PCA分析
+                            </td>
+                            <td>
+                                <input type="checkbox" {% if otu_heatmap %} checked="checked" {% endif %} disabled>
+                            </td>
+                            <td>
+                                物种热图分析
+                            </td>
+                            <td>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        <tr >
+                            <td>
+                                <input type="checkbox" checked="checked" disabled>
+                            </td>
+                            <td>
+                                Specaccum物种累计曲线
+                            </td>
+                            <td>
+                                <input type="checkbox" checked="checked" disabled>
+                            </td>
+                            <td>
+                                Rank Abundance曲线
+                            </td>
+                            <td>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        <tr >
+                            <td>
+                            </td>
+                            <td>
+                               
+                            </td>
+                            <td>
+                                <input type="checkbox" checked="checked" disabled>
+                            </td>
+                            <td>
+                                物种分类树分析
+                            </td>
+                            <td>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        <tr >
+                            <td>
+                            </td>
+                            <td>
+                               
+                            </td>
+                            <td>
+                                <input type="checkbox" checked="checked" disabled>
+                            </td>
+                            <td>
+                                Krona分析
+                            </td>
+                            <td>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        <tr >
+                            <td>
+                            </td>
+                            <td>
+                               
+                            </td>
+                            <td>
+                                <input type="checkbox" checked="checked" disabled>
+                            </td>
+                            <td>
+                                物种进化树分析
+                            </td>
+                            <td>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                    </tbody>
+                    <thead>
+                        <tr class="success">
+                            <th>
+
+                            </th>
+                            <th>
+                                四、Beta多样性分析
+                            </th>
+                            <th>
+
+                            </th>
+                            <th>
+                                五、显著差异分析
+                            </th>
+                            <th>
+
+                            </th>
+                            <th>
+                                六、个性化分析
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input type="checkbox" {% if uniFra_analysis_heatmap %} checked="checked" {% endif %} disabled>
+                            </td>
+                            <td>
+                                UniFrac 热图分析
+                            </td>
+                            <td>
+                                <input type="checkbox" {% if lefse_enough %} checked="checked" {% endif %} disabled>
+                            </td>
+                            <td>
+                                LEfSe分析
+                            </td>
+                            <td>
+                                <input type="checkbox" disabled>
+                            </td>
+                            <td>
+                                物种CCA/RDA分析
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" {% if uniFra_analysis_anosim %} checked="checked" {% endif %} disabled>
+                            </td>
+                            <td>
+                                Anoism分析
+                            </td>
+                            <td>
+                                <input type="checkbox" {% if otu_heatmap %} checked="checked" {% endif %} disabled>
+                            </td>
+                            <td>
+                                组间差异分析
+                            </td>
+                            <td>
+                                <input type="checkbox" {% if diff_analysis %} checked="checked" {% endif %} disabled>
+                            </td>
+                            <td>
+                                16S功能预测
+                            </td>
+                        </tr>
+                        <tr >
+                            <td>
+                                <input type="checkbox" disabled>
+                            </td>
+                            <td>
+                                MRPP分析
+                            </td>
+                            <td>
+                                <input type="checkbox" disabled>
+                            </td>
+                            <td>
+                                STAMP分析
+                            </td>
+                            <td>
+                               
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        <tr >
+                            <td>
+                                <input type="checkbox" {% if uniFra_analysis_pcoa %} checked="checked" {% endif %} disabled>
+                            </td>
+                            <td>
+                                PCoA分析
+                            </td>
+                            <td>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        <tr >
+                            <td>
+                                <input type="checkbox" {% if uniFra_analysis_nmds %} checked="checked" {% endif %} disabled>
+                            </td>
+                            <td>
+                                NMDS分析
+                            </td>
+                            <td>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                        <tr >
+                            <td>
+                                <input type="checkbox" disabled>
+                            </td>
+                            <td>
+                                UPGMA层次聚类
+                            </td>
+                            <td>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
     <p class="tremark">设计到的所以分析内容全部列表，然后“√”选项目设计到的分析内容</p>
-    
+
+
+
+    <div class="blank-600"></div>
+
 </div>
