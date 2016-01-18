@@ -96,6 +96,10 @@ img.size5 {
     page-break-inside: avoid !important;
 }
 
+table, tr, td, th, tbody, thead, tfoot {
+    page-break-inside: avoid !important;
+}
+
 .error {
     text-indent: 2em;
     line-height: 1.5;
@@ -205,6 +209,30 @@ img.size5 {
 .blank {
     height: 60px;
 }
-.blank-big {
+.blank-100 {
+	height:100px;
+}
+.blank-200 {
+	height: 200px;
+	}
+.blank-300 {
+	height: 300px;
+	}
+.blank-400 {
+	height: 400px;
+	}
+.blank-500 {
+	height: 500px;
+	}
+.blank-600 {
     height: 600px;
+}
+.blank-700 {
+    height: 700px;
+}
+.blank-800 {
+    height: 800px;
+}
+.blank-1000 {
+	height: 1000px;
 }

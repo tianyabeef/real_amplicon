@@ -1,12 +1,12 @@
             <h1>六、物种分类和丰度分析</h1>
 {% if otu_tax_assignments %}
 
-    <h2 id="物种注释分析">6.1 物种注释分析</h2>
+    <h3 id="物种注释分析">6.1 物种注释分析</h3>
     <p class="paragraph">
         从各个OTU中挑选出丰度最高的一条序列，作为该OTU的代表序列（代表序列见文件rep_set.fna）。
         使用RDP方法，将该代表序列与已知物种的{{ amplification }}数据库进行比对，从而对每个OTU进行物种归类
         （物种注释结果见文件
-        <a href="javascript:void(0)" onClick="StartExcel('..\\results\\02_OTU\\all\\tax_assignment.tsv')">
+        <a href="javascript:void(0)" onClick="StartExcel('..\\results\\05_OTU_analysis\\all\\tax_assignment.tsv')">
             tax_assignments.tsv
         </a>
         ）。

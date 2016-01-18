@@ -4,7 +4,7 @@
 
 {% if uniFra_analysis_heatmap %}
     <p class="paragraph">
-        <a href="..\results\04_Beta_diversity\{{ group_file }}" target="_blank">
+        <a href="..\results\08_Beta_diversity\{{ group_file }}" target="_blank">
             结果目录：04_Beta_diversity
         </a>
     </p>
@@ -18,12 +18,12 @@
         图4-5 UniFrac距离分布Heatmap，通过对UniFrac结果的聚类，具有相似Beta多样性的样品聚类在一起，反应了样品间的相似性。
         详细统计结果见附件
         <a href="javascript:void(0)"
-           onClick="StartExcel('..\\results\\04_Beta_diversity\\{{ group_file }}\\weighted_unifrac_otu_table.tsv')">
+           onClick="StartExcel('..\\results\\08_Beta_diversity\\{{ group_file }}\\weighted_unifrac_otu_table.tsv')">
             weighted_unifrac.tsv
         </a>
         与
         <a href="javascript:void(0)"
-           onClick="StartExcel('..\\results\\04_Beta_diversity\\{{ group_file }}\\unweighted_unifrac_otu_table.tsv')">
+           onClick="StartExcel('..\\results\\08_Beta_diversity\\{{ group_file }}\\unweighted_unifrac_otu_table.tsv')">
             unweighted_unifrac.tsv
         </a>。
     </p>
@@ -133,7 +133,7 @@
     <p class="error">样品数不足无法分析</p>
 {% endif %}
 
-<h2 id="NMDS分析">8.6 UPGMA层次聚类</h2>
+<h3 id="NMDS分析">8.6 UPGMA层次聚类</h3>
     <p class="paragraph">UPGMA（Unweighted pair group method with arithmetic mean，非加权组平均法）常用来解决分类问题的一种聚类分析方法，其假设的前提是：在进化过程中所有核苷酸/氨基酸的变异率相同。通过UPGMA构建系统进化树，使得结果可视化，可以直观显示不同的环境样本中微生物进化的差异程度。</p>
     <p class="center">
         <img class="size1" src="images/group/weighted_unifrac_cluster.png"/>

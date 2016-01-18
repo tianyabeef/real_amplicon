@@ -32,10 +32,15 @@
     <p class="paragraph">
         使用Illumina HiSeq PE250进行上机测序。
     </p>
+    <div class="blank-700"></div>
 </div>
 
 
-<div id="page">
+
+
+
+
+<div class="page">
     <h1 id="生物信息分析流程">三、生物信息分析流程</h1>
     <h2 >3.1生物信息分析流程</h2>
     <p>&nbsp;</p>
@@ -47,7 +52,7 @@
         {% endif %}
     </p>
     <p class="name_fig">
-        图1 测序原理图
+        图3-1-1 测序原理图
     </p>
     <p class="premark">
         设计{{ amplification }}特定引物扩增特异区域，得到
@@ -58,11 +63,20 @@
         {% endif %}
         左右扩增片段。加接头，采用MiSeq平台，测序得到2X300bp的Paired-End数据，通过拼接，可以得到较长序列，从而进行{{ amplification }}分析。
     </p>
+    <div class="blank-400"></div>
+</div>
+
+
+
+
+
+
+<div class="page">
     <p class="center">
         <img class="size2" src="images/2.png"/>
     </p>
     <p class="name_fig">
-        图2 分析流程图
+        图3-1-2 分析流程图
     </p>
     <p class="paragraph">
         对原始数据进行QC之后，用Usearch软件对数据进行去嵌合体和聚类的操作，Usearch聚类时，
@@ -172,4 +186,5 @@
         </div>
     </div>
     <p class="tremark">设计到的所以分析内容全部列表，然后“√”选项目设计到的分析内容</p>
+    
 </div>

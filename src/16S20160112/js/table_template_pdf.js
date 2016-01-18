@@ -1,3 +1,126 @@
+var lengths = [
+    {% for key,readsLength in readsLengths.items() %}
+  	{% if loop.index0<10 %}
+      	{
+            length_name:"{{ readsLength.name }}",
+            num:"{{ readsLength.num }}"
+        },
+	{% endif %}
+    {% endfor %}
+];
+$(function () {
+    $('#toolbar13').find('select').change(function () {
+        $('#table13').bootstrapTable('refreshOptions', {
+            exportTypes:['excel','csv'],
+            exportDataType: $(this).val()
+        });
+    });
+})
+$('#table13').bootstrapTable({
+    exportTypes:['excel','csv'],
+    columns: [{
+        field: 'state',
+        title: 'state',
+        checkbox: true,
+        
+    }, {
+        field: 'length_name',
+        title: 'Length (bp)',
+        align: 'center',
+        sortable: true,
+        filterControl: 'input',
+    }, {
+        field: 'num',
+        title: 'Sequences',
+        align: 'center',
+        filterControl: 'input',
+        sortable: true,
+    }],
+    data: lengths
+});
+
+
+
+var Stat = [
+    {% for key,readsStat in readsStats.items() %}
+        {% if loop.index0<10 %}
+	{
+            sampleName:"{{ readsStat.sampleName }}",
+            cleanReads:"{{ readsStat.clean_read }}",
+            Bases:"{{ readsStat.base }}",
+            Q20:"{{ readsStat.q20 }}",
+            Q30:"{{ readsStat.q30 }}",
+            GC:"{{ readsStat.gc }}",
+            averageLength:"{{ readsStat.average_length }}"
+        },
+	{% endif %}
+
+    {% endfor %}
+];
+
+$(function () {
+    $('#toolbar12').find('select').change(function () {
+        $('#table12').bootstrapTable('refreshOptions', {
+            exportTypes:['excel','csv'],
+            exportDataType: $(this).val()
+        });
+    });
+})
+$('#table12').bootstrapTable({
+    exportTypes:['excel','csv'],
+    columns: [{
+        field: 'state',
+        title: 'state',
+        checkbox: true,
+        
+    }, {
+        field: 'sampleName',
+        title: 'Sample name',
+        align: 'center',
+        sortable: true,
+        filterControl: 'input',
+    }, {
+        field: 'cleanReads',
+        title: 'clean reads',
+        align: 'center',
+        filterControl: 'input',
+        sortable: true,
+    }, {
+        field: 'Bases',
+        title: 'Bases(bp)',
+        align: 'center',
+        filterControl: 'input',
+        sortable: true,
+    }, {
+        field: 'Q20',
+        title: 'Q20(%)',
+        align: 'center',
+        filterControl: 'input',
+        sortable: true,
+    }, {
+        field: 'Q30',
+        title: 'Q30(%)',
+        align: 'center',
+        filterControl: 'input',
+        sortable: true,
+    }, {
+        field: 'GC',
+        title: 'GC(%)',
+        align: 'center',
+        filterControl: 'input',
+        sortable: true,
+    }, {
+        field: 'averageLength',
+        title: 'Average Length',
+        align: 'center',
+        filterControl: 'input',
+        sortable: true,
+    }],
+    data: Stat
+});
+
+
+
 // JavaScript Document
 var dataStatisticals = [
 	{% for key,otuStatistical in otuStatisticals %}
@@ -511,25 +634,12 @@ $('#table10').bootstrapTable({
         align: 'center',
         sortable: true,
         filterControl: 'input',
-    }, {
-        field: 'sample0',
-        title: 'mean(Control)',
-        align: 'center',
-        filterControl: 'input',
-        sortable: true,
-    }, {
-        field: 'sample1',
-        title: 'mean(LDC)',
-        align: 'center',
-        filterControl: 'input',
-        sortable: true,
-    }, {
-        field: 'sample2',
-        title: 'pvalue',
-        align: 'center',
-        filterControl: 'input',
-        sortable: true,
-    }],
+    }, 
+	{% for value in diff_genus_marker_jqGrid %}
+                {{ value }}
+        {% endfor %}
+
+	],
     data: diff_genus_markers
 });
 
