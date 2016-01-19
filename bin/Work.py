@@ -92,25 +92,25 @@ class Work(object):
             config = cfg
         return config
 
-    def set_params(self, config, vars=None):
-        params_list = self.default_config.options('params')
+    def set_params(self, config, section_name='params', vars=None):
+        params_list = self.default_config.options(section_name)
         config = self.__read_config(config)
-        self.load_default_section('params')
+        self.load_default_section(section_name)
         if config is None:
             return None
         try:
-            param_dict = config.get_section('params')
+            param_dict = config.get_section(section_name)
         except cp.NoSectionError, ex:
             return None
         for option in params_list:
             try:
-                self.config.set('params', option, param_dict[option])
+                self.config.set(section_name, option, param_dict[option])
             except KeyError, ex:
-                if self.config.get('params', str(ex).strip("'")) is None:
+                if self.config.get(section_name, str(ex).strip("'")) is None:
                     raise KeyError, ex
         if vars is not None:
             for option, value in vars.iteritems():
-                self.config.set('params', option, value)
+                self.config.set(section_name, option, value)
 
     def set_config(self, config):
         config = self.__read_config(config)
