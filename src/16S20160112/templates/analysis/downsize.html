@@ -1,13 +1,23 @@
 {% if downsize_html %}
 
+
+
+
 <h3 id="抽平处理">5.2 抽平处理</h3>
 <p class="paragraph">
-    由于不同样品对应的Reads数量差距较大，为了保证后期分析结果合理，我们对每个样品的数据进行随机抽平处理，
-    抽平参数根据Alpha多样性指数的稀释曲线来确定。
+    不同样本对应的Reads数量差距较大，为避免因样品数据大小不同而造成分析时的偏差，我们在样品达到足够的测序深度的情况下，对每个样品进行随机抽平处理。测序深度用Alpha多样性指数来衡量。抽平的参数必须在保证测序深度足够的前提下去选取。
 </p>
 <p class="paragraph">
-    Alpha多样性反映的是单个样品内部的物种多样性，包括observed species指数、chao指数。
+   observed_species指数表示实际观测到的OTU数量，chao1指数用来估计样品所含OTU的总数，其公式为：
 </p>
+<p class="center">
+    <img src="images2/formula.png">
+</p>
+<p class="premark">Schao1：估计的OTU数量；</p>
+<p class="premark">Sobs：实际观察到的OTU数量；</p>
+<p class="premark">n1：只含一条OTU的数量；</p>
+<p class="premark">n2：只含两条OTU的数量；</p>
+<p class="paragraph">根据Alpha多样性分析，兼顾测序饱和度和样品完整性，我们对每个样品随机抽取28012条reads。抽平后的样品OTU统计见OTU_downsize_stat.tsv中的样品抽平OTU统计表单，结果如下：</p>
 
 <p class="center">
     <img class="size1" src="images/alpha/chao1.png"/>
@@ -16,10 +26,7 @@
 <p class="name_fig">图5-2-1 表示样品物种丰富度Alpha多样性指数稀释曲线图</p>
 
 <p class="premark">
-    图中一条曲线代表一个样品，
-    横轴表示从某个样品中随机抽取的Clean Reads数目，
-    纵轴表示该Reads数目对应的Alpha多样性指数的大小，
-    随着测序深度的增加，当曲线趋于平缓时表示此时的测序数据量比较合理。
+   注：横轴表示从某个样品中随机抽取的Clean Reads数目，纵轴表示该Reads数目对应的Alpha多样性指数的大小。图中一条曲线代表一个样品，随着测序深度的增加，当曲线趋于平缓时表示此时的测序数据量比较合理。
 </p>
 <p class="paragraph">
     根据Alpha多样性分析，兼顾测序饱和度和样品完整性，我们对每个样品随机抽取{{ downsize }}条Reads。
