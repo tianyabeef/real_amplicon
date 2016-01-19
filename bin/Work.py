@@ -92,7 +92,7 @@ class Work(object):
             config = cfg
         return config
 
-    def set_params(self, config, section_name='params', vars=None):
+    def set_params(self, config, vars=None, section_name='params'):
         params_list = self.default_config.options(section_name)
         config = self.__read_config(config)
         self.load_default_section(section_name)
