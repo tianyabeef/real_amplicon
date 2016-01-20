@@ -4,25 +4,27 @@ import sys
 import os
 import argparse
 from util import mkdir
+
 this_script_path = os.path.dirname(__file__)
-sys.path.insert(1,this_script_path + '/../src')
+sys.path.insert(1, this_script_path + '/../src')
 import PickOtuStat as ps
+
 
 def read_params(args):
     parser = argparse.ArgumentParser(description='summary stat from previous stats | v1.0 at 2015/09/16 by liangzb',
-            epilog='you must set at least one of --uc or --otutab, if you set both, --uc used')
-    parser.add_argument('-r',dest='raw_data_stat',metavar='FILE',type=str,required=True,
-            help="set the data stat file produced by 00_Merge.py ")
-    parser.add_argument('-s',dest='single_stat',metavar='FILE',type=str,required=True,
-            help="set the single stat file produced by 01_get_singleton_read.py")
-    parser.add_argument('--uc',dest='uc_file',metavar='FILE',type=str,default=None,
-            help="set the uc file to get mapped reads, must be set when leave otutab file free")
-    parser.add_argument('--otutab',dest='otutab',metavar='FILE',type=str,default=None,
-            help="set the otutab file to get mapped reads, must be set when leave uc file free")
-    parser.add_argument('--single_list',dest='single_list',metavar='FILE',type=str,default=None,
-            help="set the single list file produced by 01_get_single_read")
-    parser.add_argument('-o',dest='outfile',metavar='FILE',type=str,required=True,
-            help="set the output xls file ")
+                                     epilog='you must set at least one of --uc or --otutab, if you set both, --uc used')
+    parser.add_argument('-r', dest='raw_data_stat', metavar='FILE', type=str, required=True,
+                        help="set the data stat file produced by 00_Merge.py ")
+    parser.add_argument('-s', dest='single_stat', metavar='FILE', type=str, required=True,
+                        help="set the single stat file produced by 01_get_singleton_read.py")
+    parser.add_argument('--uc', dest='uc_file', metavar='FILE', type=str, default=None,
+                        help="set the uc file to get mapped reads, must be set when leave otutab file free")
+    parser.add_argument('--otutab', dest='otutab', metavar='FILE', type=str, default=None,
+                        help="set the otutab file to get mapped reads, must be set when leave uc file free")
+    parser.add_argument('--single_list', dest='single_list', metavar='FILE', type=str, default=None,
+                        help="set the single list file produced by 01_get_single_read")
+    parser.add_argument('-o', dest='outfile', metavar='FILE', type=str, required=True,
+                        help="set the output xls file ")
 
     args = parser.parse_args()
     params = vars(args)
