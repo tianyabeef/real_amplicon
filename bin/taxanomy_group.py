@@ -52,11 +52,12 @@ def taxanomy_group(cfg_in, vars=None):
                                                        params['uniform_profile'],
                                                        params['group'],
                                                        outfiles['otu_venn_outdir']))
+    # otu flower
     elif group_num > 5:
         work.commands.append('%s %s %s %s' % (scripts['otu_flower'],
                                               params['uniform_profile'],
                                               params['group'],
-                                              outfiles['otu_venn_outdir']))
+                                              outfiles['otu_flower_outdir']))
     # tax_pca
     if sample_num_total >= 5:
         command = '%s -i %s -g %s -o %s' % (scripts['otu_pca'],
