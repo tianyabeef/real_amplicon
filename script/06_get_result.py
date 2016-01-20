@@ -82,7 +82,7 @@ def get_result(config_file):
                                 if check_filename(file_name):
                                     os.system('cp -rf %s %s' % (file_name, target_file))
                         except OSError:
-                            sys.stderr('%s dir not found!\n' % value_rep)
+                            sys.stderr.write('%s dir not found!\n' % value_rep)
                     else:
                         if check_filename(value_rep):
                             os.system('cp -rf %s %s' % (value_rep, target_file))
@@ -97,7 +97,7 @@ def get_result(config_file):
                             if check_filename(file_name):
                                 os.system('cp -rf %s %s' % (file_name, target_file))
                     except OSError:
-                        sys.stderr('%s dir not found!\n' % value)
+                        sys.stderr.write('%s dir not found!\n' % value)
                 else:
                     if check_filename(value):
                         os.system("cp -rf %s %s" % (value, target_file))
