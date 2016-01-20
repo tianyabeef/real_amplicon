@@ -469,7 +469,7 @@ def get_html():
     var_html['project'] = project 
     #personalize
     personalize = get_section(config,'personalize')
-    vat_html['personalize'] = personalize
+    var_html['personalize'] = personalize
 
 
     var_html['amplification'] = data_type
