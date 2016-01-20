@@ -22,7 +22,7 @@
 
 
 
-{% if personalize.network %}
+{% if personalize.annotation %}
 <h3 id="16S功能预测">10.3 16S功能预测</h3>
 	<p class="paragraph">16s序列能够区分菌的种属，但是并不包含这些菌的基因和代谢功能的信息。不过由于我们已经对大量的细菌基因组进行了测序，所以可以根据16s的菌种信息，利用这个菌属已经测序的细菌基因组的基因信息和代谢功能信息来估计每类基因的上限和下限。因此可以利用16s序列测序来预测菌群的功能基因分布和代谢途径分布情况。</p>
 {% endif %}
@@ -30,7 +30,7 @@
 
 
 
-{% if personalize.annotation %}
+{% if personalize.network %}
 <h3 id="Network网络分析">10.4 Network网络分析</h3>
 	<p class="paragraph">网络分析（network analysis）是关于网络的图论分析、最优化分析以及动力学分析的总称。</p>
-{% endif %]}
+{% endif %}

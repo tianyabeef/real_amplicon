@@ -98,9 +98,15 @@
     {% if otu_venn %}
         <h3 id="OTU Venn图分析">5.4 OTU Venn图分析(分组数量2~5组)</h3>
         <p class="paragraph">在0.97的相似度下，得到了每个样品的OTU个数，利用Venn图可以展示多样品共有和各自特有OTU数目，直观展示样品间OTU的重叠情况。</p>
+        {% if otu_flower %}
+        <p class="center">
+            <img class="size1" src="images/group/flower.png"/>
+        </p>
+        {% else %}
         <p class="center">
             <img class="size1" src="images/group/venn.png"/>
         </p>
+        {% endif %}
         <p class="name_fig">图5-4-1 OTU venn图（2-5组）</p>
         <p class="premark">
             不同颜色图形代表不同样品或者不同组别，不同颜色图形之间交叠部分数字为两个样品或两个组别之间共有的OTU个数。同理，多个颜色图形之间交叠部分数字为多个样品或组别之间共有OTU个数。Venn图容许2-5个样品或组别。</p>

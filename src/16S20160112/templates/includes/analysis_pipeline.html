@@ -357,13 +357,13 @@
                         </tr>
                         <tr >
                             <td>
-                                <input type="checkbox" disabled>
+                                <input type="checkbox" {% if uniFra_analysis_mrpp %} checked="checked" {% endif %} disabled>
                             </td>
                             <td>
                                 MRPP分析
                             </td>
                             <td>
-                                <input type="checkbox" disabled>
+                                <input type="checkbox" checked="checked" disabled>
                             </td>
                             <td>
                                 STAMP分析
@@ -417,7 +417,7 @@
                         </tr>
                         <tr >
                             <td>
-                                <input type="checkbox" disabled>
+                                <input type="checkbox" checked="checked" disabled>
                             </td>
                             <td>
                                 UPGMA层次聚类
