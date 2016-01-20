@@ -19,13 +19,11 @@
 
     <h3 id="有效数据统计">4.2 有效数据统计</h3>
     <p class="paragraph">通过Illumina平台进行Paired-End测序，Paired End Reads通过Reads之间的Overlap关系拼接成长Reads，并对拼接后的Reads进行质控，得到Clean Reads。</p>
-    
-    <p class="paragraph">    对16S rDNA高变区测序序列进行测序，测序为V3-V4区；</p>
-    <p class="paragraph">    通过Pandaseq[1]软件利用重叠关系将双末端测序得到的成对Reads拼接成一条序列，得到高变区的长Reads。</p>
-    <p class="paragraph">    然后使用内部撰写的程序对拼接后的Reads进行如下处理，获取Clean Reads：</p>
-    <p class="paragraph">    1）去除平均质量值低于20的Reads；</p>
-    <p class="paragraph">    2）去除Reads含N的碱基数超过3个的Reads；</p>
-    <p class="paragraph">    3）Reads长度范围为220~500 nt。</p>
+    <p class="paragraph">软件平台：拼接: pandaseq ；质控：锐翌分析平台</p>
+    <p class="paragraph">结果目录：<a href="javascript:void(0)"
+               onClick="StartExcel('..\\results\\\04_data_statistics\reads_stat.tsv')" target="_blank"> 
+                有效数据统计
+            </a></p>
     
     <p class="name_table">表4-2-1 有效序列统计</p>
     <div class="center_table">
@@ -49,7 +47,15 @@
     <p class="tremark">第七列Average length(bp) 是指该样品的平均长度</p>
 
     <h3 id="数据优化统计">4.3 数据优化统计</h3>
-
+    <p class="paragraph">对16S rDNA高变区测序序列进行测序，测序为V3-V4区；通过Pandaseq软件利用重叠关系将双末端测序得到的成对Reads拼接成一条序列，得到高变区的长Reads。然后使用内部撰写的程序对拼接后的Reads进行如下处理，获取Clean Reads：</p>
+    <p class="paragraph">1）去除平均质量值低于20的Reads；</p>
+    <p class="paragraph">2）去除Reads含N的碱基数超过3个的Reads；</p>
+    <p class="paragraph">3）Reads长度范围为220~500 nt。</p>
+    <p class="paragraph">软件平台：锐翌分析平台</p>
+    <p class="paragraph">结果目录：<a href="javascript:void(0)"
+               onClick="StartExcel('..\\results\\\04_data_statistics\length_distrubution.tsv')" target="_blank">
+                数据优化统计
+            </a></p>
     <p class="name_table"> 表4-3-1 有效序列的长度分布</p>
     <div class="center_table">
         <div id="toolbar13" class="pull-left-self">

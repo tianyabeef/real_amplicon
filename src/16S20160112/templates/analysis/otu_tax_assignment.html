@@ -2,15 +2,8 @@
 {% if otu_tax_assignments %}
 
     <h3 id="物种注释分析">6.1 物种注释分析</h3>
-    <p class="paragraph">
-        从各个OTU中挑选出丰度最高的一条序列，作为该OTU的代表序列（代表序列见文件rep_set.fna）。
-        使用RDP方法，将该代表序列与已知物种的{{ amplification }}数据库进行比对，从而对每个OTU进行物种归类
-        （物种注释结果见文件
-        <a href="javascript:void(0)" onClick="StartExcel('..\\results\\05_OTU_analysis\\all\\tax_assignment.tsv')">
-            tax_assignments.tsv
-        </a>
-        ）。
-    </p>
+    <p class="paragraph">从各个OTU中挑选出丰度最高的一条序列，作为该OTU的代表序列（代表序列见文件rep_set.fna）。使用RDP方法，将该代表序列与已知物种的{{ amplification }}数据库进行比对，从而对每个OTU进行物种归类（物种注释结果见文件<a
+            href="..\result\05_OTU_analysis\all\tax_assignment.tsv" target="_blank">tax_assignments.tsv</a>）。</p>
     <p class="name_table">表6-1-1 OTU注释统计</p>
     <div class="center_table">
         <div id="toolbar4" class="pull-left-self">
@@ -24,5 +17,9 @@
                data-show-export="true" data-page-list="[10, 25, 50, 100, 200, All]">
         </table>
     </div>
+    <p class="tremark">注：第一列注释到的OTUs名称；</p>
+    <p class="tremark">第二列注释的OTUs数量;</p>
+
+
 
 {% endif %}
