@@ -345,7 +345,7 @@
                                 LEfSe分析
                             </td>
                             <td>
-                                <input type="checkbox" disabled>
+                                <input type="checkbox" {% if personalize.cca_rda %} checked="checked" {% endif %} disabled>
                             </td>
                             <td>
                                 物种CCA/RDA分析
@@ -365,10 +365,10 @@
                                 组间差异分析
                             </td>
                             <td>
-                                <input type="checkbox" {% if diff_analysis %} checked="checked" {% endif %} disabled>
+                                <input type="checkbox" {% if personalize.STAMP %} checked="checked" {% endif %} disabled>
                             </td>
                             <td>
-                                16S功能预测
+                                STAMP分析
                             </td>
                         </tr>
                         <tr >
@@ -382,13 +382,13 @@
                                 <input type="checkbox" disabled>
                             </td>
                             <td>
-                                STAMP分析
-                            </td>
-                            <td>
-                               
-                            </td>
-                            <td>
                                 
+                            </td>
+                            <td>
+                               <input type="checkbox" {% if personalize.annotation %} checked="checked" {% endif %} disabled>
+                            </td>
+                            <td>
+                                16S功能预测
                             </td>
                         </tr>
                         <tr >
@@ -405,10 +405,10 @@
                                 
                             </td>
                             <td>
-                                
+                                <input type="checkbox" {% if personalize.network %} checked="checked" {% endif %} disabled>
                             </td>
                             <td>
-                                
+                                Network网络分析
                             </td>
                         </tr>
                         <tr >
