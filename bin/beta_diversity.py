@@ -60,10 +60,11 @@ def beta_diversity(cfg_in, vars=None):
                                                        outfiles['beta_anosim_dir']))
 
     # beta mrpp
-    work.commands.append('%s -d %s -g %s -o %s' % (scripts['beta_mrpp'],
-                                                   outfiles['beta_div_dir'],
-                                                   params['group'],
-                                                   outfiles['beta_mrpp_dir']))
+    if min_sample_num_in_groups >= 5 and group_num >= 2:
+        work.commands.append('%s -d %s -g %s -o %s' % (scripts['beta_mrpp'],
+                                                       outfiles['beta_div_dir'],
+                                                       params['group'],
+                                                       outfiles['beta_mrpp_dir']))
 
     # beta cluster
     command = '%s --jackknifed_beta_diversity %s --make_bootstrapped_tree %s ' % (scripts['beta_cluster'],
