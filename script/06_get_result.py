@@ -31,14 +31,12 @@ def  read_params(args):
 
 
 def check_filename(file_name):
-    if file_name.endswith('R'):
+    if not file_name:
         return False
-    if file_name.startswith('log'):
-        return False
-    if file_name.endswith('Rout'):
-        return False
-    if file_name.endswith('biom'):
-        return False
+    filter_suffix = ['R', 'log', 'Rout', 'pl', 'py', 'pyc', 'sh', 'alpha_div', 'rarefaction']
+    for suf in filter_suffix:
+        if file_name.endswith(suf):
+            return False
     return True
 
 
@@ -77,19 +75,25 @@ def get_result(config_file):
                     target_file = target[key].replace("#group", analysis_name)
                     mkdir(os.path.dirname(target_file))
                     if re.match(r".*dir$", key):
-                        for group_name in os.popen('ls %s/*' % value_rep).read().rstrip().split('\n'):
-                            if check_filename(group_name):
-                                os.system('cp -rf %s %s' % (group_name, target_file))
+                        for file_name in os.listdir(value_rep):
+                            file_name = '%s/%s' % (value_rep, file_name)
+                            if check_filename(file_name):
+                                os.system('cp -rf %s %s' % (file_name, target_file))
+                    else:
+                        if check_filename(value_rep):
+                            os.system('cp -rf %s %s' % (value_rep, target_file))
             else:
                 target_file = target[key]
                 mkdir(os.path.dirname(target_file))
                 match = re.match(r".*dir$", key)
                 if match:
-                    for file_name in os.popen('ls %s/*' % value).read().rstrip().split('\n'):
+                    for file_name in os.listdir(value):
+                        file_name = '%s/%s' % (value, file_name)
                         if check_filename(file_name):
                             os.system('cp -rf %s %s' % (file_name, target_file))
                 else:
-                    os.system("cp -rf %s %s" % (value, target_file))
+                    if check_filename(value):
+                        os.system("cp -rf %s %s" % (value, target_file))
         else:
             sys.stderr.write('06_get_html.cfg target section no have ' + key + '\n')
 
