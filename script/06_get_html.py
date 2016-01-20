@@ -17,6 +17,12 @@ from classHtml import *
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1, this_script_path + '/../bin')
 from settings import *
+def get_section(config, section):
+    var = {}
+    for item in config.items(section):
+        var[item[0]] = item[1]
+    return var
+
 
 def stringasfloat(string):
     try:
@@ -457,9 +463,13 @@ def get_html():
     # finally_get_html
     #custom_info
     var_html['time'] = time.strftime('%F')
-    #project 
-    project = get_project_information(config)
+    #project
+    project = get_section(config,'project')
+#    project = get_project_information(config)
     var_html['project'] = project 
+    #personalize
+    personalize = get_section(config,'personalize')
+    vat_html['personalize'] = personalize
 
 
     var_html['amplification'] = data_type

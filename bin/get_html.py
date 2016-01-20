@@ -26,6 +26,8 @@ def get_html(cfg_in, vars=None):
     sys.setdefaultencoding('utf-8')
     work = Work(DEFAULT_CONFIG_DIR + '/get_html.cfg')
     work.set_params(cfg_in, vars)
+    work.set_params(cfg_in,section_name="project")
+    work.set_params(cfg_in,section_name="personalize")
     work.load_default_config()
     config = work.config
 
