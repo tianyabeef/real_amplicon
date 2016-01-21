@@ -9,6 +9,7 @@ import ConfigParser
 import sys
 import argparse
 import re
+from collections import OrderedDict
 from jinja2 import Environment, FileSystemLoader
 import operator
 import os
@@ -171,7 +172,7 @@ def save_table2(input_dir):
 
                         if i < 8:
                             str += '%s:"%s",' % (
-                                varlue, stringasfloat(tabs[i + 1]))
+                                value, stringasfloat(tabs[i + 1]))
                             # str += value+":\""+tabs[i+1]+"\","
                             jqGrid += "field:'" + value + "',title:'" + samples_name[i] + "',align: 'center',filterControl: 'input',sortable: true},"
                         else:
@@ -244,7 +245,7 @@ def get_html():
     tabs = []
 
     #sava table
-    readsStats = {}
+    readsStats = OrderedDict()
     with open('%s/../%s' % (work_dir,config.get('origin', 'reads_stat')),'r') as lines:
         lines.next()
         for line in lines:
@@ -253,7 +254,7 @@ def get_html():
             readsStats[tabs[0]] = readsStat
 
     #save table
-    readsLengths = {}
+    readsLengths = OrderedDict()
     with open('%s/../%s' % (work_dir,config.get('origin','reads_length')),'r') as lines:
         lines.next()
         for line in lines:
@@ -261,7 +262,7 @@ def get_html():
             readsLength = ReadsLength(tabs[0],tabs[1])
             readsLengths[tabs[0]] = readsLength 
 
-    otuStatisticals = {}
+    otuStatisticals = OrderedDict()
     with open(work_dir + "../" + config.get('origin', 'pick_otu_txt'),
               'r') as lines:
         var_html['sample_sum'] = int(lines.next().strip().split(":")[1])
@@ -278,7 +279,7 @@ def get_html():
             otuStatisticals[tabs[0]] = otuStatistical
 
             # save otu statistic table
-    otuStatisticalDownsizes = {}
+    otuStatisticalDownsizes = OrderedDict()
     with open(work_dir + "../" + config.get('origin', 'otu_all_downsize_txt'),
               'r') as lines:
         lines.next()
@@ -290,7 +291,7 @@ def get_html():
             otuStatisticalDownsizes[tabs[0]] = otuStatisticalDownsize
 
             # save tabel CoreMicrobiome
-    coreMicrobiomes = {}
+    coreMicrobiomes = OrderedDict()
     var_html['core_otu_exists'] = True
     try:
         with open(work_dir + "../" + config.get(
@@ -310,7 +311,7 @@ def get_html():
         sys.stderr.write('there is no core microbiomes!\n')
 
     # save otu assignment stat table
-    otuAssignmentsStatisticals = {}
+    otuAssignmentsStatisticals = OrderedDict()
     with open(work_dir + "../" + config.get('origin', 'otu_statistic_txt'),
               'r') as lines:
         lines.next()
@@ -321,7 +322,7 @@ def get_html():
             otuAssignmentsStatisticals[tabs[0]] = otuAssignmentsStatistical
 
             # save alpha diversity table
-    alpha_diversitys = {}
+    alpha_diversitys = OrderedDict()
     with open(work_dir + "../" + config.get(
             'origin', 'group_alpha_statistic_txt').replace("#group", group_file),
               'r') as lines:
@@ -335,7 +336,7 @@ def get_html():
             alpha_diversitys[tabs[0]] = alpha_diversity
 
             # save alpha diff table
-    alpha_diversity_diffs = {}
+    alpha_diversity_diffs = OrderedDict()
     alpha_diff_exist = True
     try:
         with open(work_dir + "../" + config.get(
@@ -422,46 +423,6 @@ def get_html():
             diff_phylum_marker_exist=diff_phylum_marker[3])
     with open(work_dir + 'report/js/table.js', 'w') as fp:
         fp.write(table)
-    # save_table
-    # template = env.get_template('table_template_pdf.js')
-    # table = template.render(
-    #         readsLengths = readsLengths,
-    #         readsStats  = readsStats,
-    #         otuStatisticals=otuStatisticals,
-    #         otuStatisticalDownsizes=otuStatisticalDownsizes,
-    #         otuAssignmentsStatisticals=otuAssignmentsStatisticals,
-    #         alpha_diversitys=alpha_diversitys,
-    #         alpha_diversity_diffs=alpha_diversity_diffs,
-    #         alpha_diff_exist=alpha_diff_exist,
-    #         beta_diversity_data=beta_diversity[0],
-    #         beta_diversity_jqGrid=beta_diversity[1],
-    #         beta_diversity_sampleName=beta_diversity[2],
-    #         beta_diversity_exist=beta_diversity[3],
-    #         beta_un_diversity_data=beta_un_diversity[0],
-    #         beta_un_diversity_jqGrid=beta_un_diversity[1],
-    #         beta_un_diversity_sampleName=beta_un_diversity[2],
-    #         beta_un_diversity_exist=beta_un_diversity[3],
-    #         coreMicrobiomes=coreMicrobiomes,
-    #         diff_otu_marker_data=diff_otu_marker[0],
-    #         diff_otu_marker_jqGrid=diff_otu_marker[1],
-    #         diff_otu_marker_sampleName=diff_otu_marker[2],
-    #         diff_otu_marker_exist=diff_otu_marker[3],
-    #         diff_genus_marker_data=diff_genus_marker[0],
-    #         diff_genus_marker_jqGrid=diff_genus_marker[1],
-    #         diff_genus_marker_sampleName=diff_genus_marker[2],
-    #         diff_genus_marker_exist=diff_genus_marker[3],
-    #         diff_taxall_marker_data=diff_taxall_marker[0],
-    #         diff_taxall_marker_jqGrid=diff_taxall_marker[1],
-    #         diff_taxall_marker_sampleName=diff_taxall_marker[2],
-    #         diff_taxall_marker_exist=diff_taxall_marker[3],
-    #         diff_phylum_marker_data=diff_phylum_marker[0],
-    #         diff_phylum_marker_jqGrid=diff_phylum_marker[1],
-    #         diff_phylum_marker_sampleName=diff_phylum_marker[2],
-    #         diff_phylum_marker_exist=diff_phylum_marker[3])
-    # with open(work_dir + 'report/js/table_pdf.js', 'w') as fp:
-    #     fp.write(table)
-    # finally_get_html
-    #custom_info
     var_html['time'] = time.strftime('%F')
     #project
     project = get_section(config,'project')
