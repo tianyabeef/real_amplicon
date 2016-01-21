@@ -73,3 +73,23 @@ class Alpha_diversity(object):
         self.whole_tree = whole_tree
         self.shannon = shannon
         self.simpson = simpson
+class Obj(object):
+    pass
+def createClass(file):
+    obj_list = []
+    with open(file) as fq:
+        list = fq.next().strip().split("\t")
+        list.insert(0, "sampleName")
+        for line in fq:
+            obj = Obj()
+            array = line.strip().split("\t")
+            if len(list) == len(array):
+                for i in range(0,len(list)):
+                    obj.__setattr__(list[i],array[i])
+                obj_list.append(obj)
+            else:
+                del list[0]
+                for i in range(0,len(list)):
+                    obj.__setattr__(list[i],array[i])
+                obj_list.append(obj)                
+    return obj_list        
