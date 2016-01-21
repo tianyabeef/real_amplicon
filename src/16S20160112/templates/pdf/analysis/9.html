@@ -9,7 +9,7 @@
     {% if diff_otu_marker_exist %}
         <p class="paragraph">使用秩和检验的方法对不同分组之间的进行显著性差异分析，以找出对组间划分产生显著性差异影响的物种。本分析对于两组间的差异分析采用R语言stats包的wilcox.test函数，对于两组以上的组间差异分析采用R语言stats包的kruskal.test函数。</p>
         <p class="paragraph">软件平台：锐翌分析平台</p>
-        <p class="paragraph">结果目录：<a href="javascript:void(0)" onclick="StartExcel('..\results\09_diff_analysis\{{ group_file }}\\genus_diff')" target="_blank">属水平差异</a><a href="javascript:void(0)" onclick="StartExcel('..\results\09_diff_analysis\{{ group_file }}\\otu_diff')" target="_blank">OTU水平差异</a><a href="javascript:void(0)" onclick="StartExcel('..\results\09_diff_analysis\{{ group_file }}\\taxall_diff')" target="_blank">全水平差异</a></p>
+        <p class="paragraph">结果目录：<a href="javascript:void(0)" onclick="StartExcel('..\\results\\09_diff_analysis\\{{ group_file }}\\genus_diff')" target="_blank">属水平差异</a><a href="javascript:void(0)" onclick="StartExcel('..\\results\\09_diff_analysis\\{{ group_file }}\\otu_diff')" target="_blank">OTU水平差异</a><a href="javascript:void(0)" onclick="StartExcel('..\\results\\09_diff_analysis\\{{ group_file }}\\taxall_diff')" target="_blank">全水平差异</a></p>
         <p class="paragraph">
             下表是在不同组样品间有显著差异的OTUs（p < {{ p_value }}, Kruskal-Wallis test），共{{ diff_otus }}个,
             如表6-2-1显示。结果表格
