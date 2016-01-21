@@ -98,7 +98,7 @@
         {% if core_otu_exists %}
             <p class="paragraph">根据样品的共有OTU以及OTU所代表的物种，可以找到Core microbiome（覆盖100%样品的微生物组）。</p>
             <p class="paragraph">软件平台：锐翌分析平台</p>
-            <p class="paragraph">结果目录：<a href="javascript:void(0)" onClick="StartExcel('..\\results\\\05_OTU_analysis\\{{ group_file }}\\core_otu\\core_otu.tsv')" target="_blank"> 核心OTU列表 </a></p>
+            <p class="paragraph">结果目录：<a href="javascript:void(0)" onClick="StartExcel('..\\results\\05_OTU_analysis\\{{ group_file }}\\core_otu\\core_otu.tsv')" target="_blank"> 核心OTU列表 </a></p>
             <p class="name_table">
                 表5-3-1 Core microbiome OTU列表
             </p>
@@ -149,13 +149,13 @@
         <p class="paragraph">软件平台：R语言/Perl SVG</p>
         
         {% if otu_flower %}
-        <p class="paragraph">结果目录：<a href="javascript:void(0)" onClick="StartExcel('..\\results\\\05_OTU_analysis\\{{ group_file }}\\venn')" target="_blank"> flower图 </a></p>
+        <p class="paragraph">结果目录：<a href="javascript:void(0)" onClick="StartExcel('..\\results\\05_OTU_analysis\\{{ group_file }}\\venn')" target="_blank"> flower图 </a></p>
         <p class="center">
             <img class="size1" src="images/group/flower.png"/>
         </p>
         <p class="name_fig">图5-4-1 OTU flower图</p>
         {% else %}
-        <p class="paragraph">结果目录：<a href="javascript:void(0)" onClick="StartExcel('..\\results\\\05_OTU_analysis\\{{ group_file }}\\venn')" target="_blank"> venn图 </a></p>
+        <p class="paragraph">结果目录：<a href="javascript:void(0)" onClick="StartExcel('..\\results\\05_OTU_analysis\\{{ group_file }}\\venn')" target="_blank"> venn图 </a></p>
         <p class="center">
             <img class="size1" src="images/group/venn.png"/>
         </p>
@@ -181,7 +181,7 @@
         <p class="paragraph">PCA分析(Principal Component
             Analysis)，即主成分分析，是一种分析和简化数据集的技术。不同处理或不同环境间的样品可能表现出分散和聚集的分布情况，从而可以判断相同条件的样品组成是否具有相似性。</p>
         <p class="paragraph">软件平台：R语言</p>
-        <p class="paragraph">结果目录：<a href="javascript:void(0)" onClick="StartExcel('..\\results\\\05_OTU_analysis\\{{ group_file }}\\otu_pca')" target="_blank"> PCA图 </a></p>
+        <p class="paragraph">结果目录：<a href="javascript:void(0)" onClick="StartExcel('..\\results\\05_OTU_analysis\\{{ group_file }}\\otu_pca')" target="_blank"> PCA图 </a></p>
         <p class="center">
             <img class="size2" src="images/group/otu_pca.png"/>
         </p>
@@ -202,7 +202,7 @@
         <p class="paragraph">物种累积曲线(Species Accumulation Curves)用于描述随着抽样量的加大物种增加的状况，是理解调查样地物种组成和预测物种丰富度的有效工具。在生物多样性和群落调查中，被广泛用于抽样量充分性的判断以及物种丰富度(Species Richness)的估计。</p>
         <p class="paragraph">利用物种累积曲线判断抽样量是否充分是根据曲线的特征来判断：如果曲线一直急剧上升，几乎为直线，表明抽样量不足，需要增加抽样量; 如果曲线在急剧上升后变为上升舒缓，则表明抽样充分。</p>
         <p class="paragraph">软件平台：R语言specaccum包</p>
-        <p class="paragraph">结果目录：<a href="javascript:void(0)" onClick="StartExcel('..\\results\\\05_OTU_analysis\\all\\specaccum')" target="_blank"> specaccum图 </a></p>
+        <p class="paragraph">结果目录：<a href="javascript:void(0)" onClick="StartExcel('..\\results\\05_OTU_analysis\\all\\specaccum')" target="_blank"> specaccum图 </a></p>
         <p class="center">
             <img class="size2" src="images/specaccum.png"/>
         </p>

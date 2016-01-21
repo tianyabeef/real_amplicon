@@ -329,7 +329,7 @@
                                 LEfSe分析
                             </td>
                             <td>
-                                <input type="checkbox" disabled>
+                                <input type="checkbox" {% if personalize.cca_rda == "true" or personalize.cca_rda == "True" %} checked="checked" {% endif %} disabled>
                             </td>
                             <td>
                                 物种CCA/RDA分析
@@ -349,10 +349,10 @@
                                 组间差异分析
                             </td>
                             <td>
-                                <input type="checkbox" {% if diff_analysis %} checked="checked" {% endif %} disabled>
+                                <input type="checkbox" {% if personalize.STAMP == "true" or personalize.STAMP == "True" %} checked="checked" {% endif %} disabled>
                             </td>
                             <td>
-                                16S功能预测
+                                STAMP分析
                             </td>
                         </tr>
                         <tr >
@@ -363,16 +363,16 @@
                                 MRPP分析
                             </td>
                             <td>
-                                <input type="checkbox" checked="checked" disabled>
-                            </td>
-                            <td>
-                                STAMP分析
-                            </td>
-                            <td>
-                               
+                                
                             </td>
                             <td>
                                 
+                            </td>
+                            <td>
+                               <input type="checkbox" {% if personalize.annotation == "true" or personalize.annotation == "True" %} checked="checked" {% endif %} disabled>
+                            </td>
+                            <td>
+                                16S功能预测
                             </td>
                         </tr>
                         <tr >
@@ -389,10 +389,10 @@
                                 
                             </td>
                             <td>
-                                
+                                <input type="checkbox" {% if personalize.network == "true" or personalize.network == "True" %} checked="checked" {% endif %} disabled>
                             </td>
                             <td>
-                                
+                                Network网络分析
                             </td>
                         </tr>
                         <tr >
