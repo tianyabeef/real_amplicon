@@ -1,12 +1,11 @@
 <h3 id="Specaccum物种累积曲线">5.6 Specaccum物种累积曲线（总样品数>=10）</h3>
 {% if specaccum %}
 
-    <p class="paragraph">
-        物种累积曲线(Species Accumulation Curves)用于描述随着抽样量的加大物种增加的状况，
-        是理解调查样地物种组成和预测物种丰富度的有效工具，
-        在生物多样性和群落调查中，被广泛用于抽样量充分性的判断以及物种丰富度(Species Richness)的估计。
-        因此，通过物种累积曲线不仅可以判断抽样量是否充分，在抽样量充分的前提下，运用物种累积曲线还可以对物种丰富度进行预测。
-    </p>
+    
+    <p class="paragraph">物种累积曲线(Species Accumulation Curves)用于描述随着抽样量的加大物种增加的状况，是理解调查样地物种组成和预测物种丰富度的有效工具。在生物多样性和群落调查中，被广泛用于抽样量充分性的判断以及物种丰富度(Species Richness)的估计。</p>
+    <p class="paragraph">利用物种累积曲线判断抽样量是否充分是根据曲线的特征来判断：如果曲线一直急剧上升，几乎为直线，表明抽样量不足，需要增加抽样量; 如果曲线在急剧上升后变为上升舒缓，则表明抽样充分。</p>
+    <p class="paragraph">软件平台：R语言specaccum包</p>
+    <p class="paragraph">结果目录：<a href="javascript:void(0)" onClick="StartExcel('..\\results\\\05_OTU_analysis\\all\\specaccum')" target="_blank"> specaccum图 </a></p>
     <p class="center">
         <img class="size2" src="images/specaccum.png"/>
     </p>
@@ -14,7 +13,7 @@
         图5-6-1 物种累积曲线
     </p>
     <p class="premark">
-        注：横坐标是样品的数量，纵坐标是OTUs的数量
+        注：横坐标是样品的数量，纵坐标是OTUs的数量。由物种累积曲线可以判断抽样量是否充分，在抽样量充分的前提下，运用物种累积曲线还可以对物种丰富度进行预测。
     </p>
 
 {% else %}
