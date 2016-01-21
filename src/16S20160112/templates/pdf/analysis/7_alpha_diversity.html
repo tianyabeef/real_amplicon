@@ -1,134 +1,73 @@
-<h1>7 Alpha多样性分析</h1>
-
-{% if alpha_diversity %}
-    <h3 id="单个样品多样性分析">7.1 单个样品多样性分析</h3>
-    <p class="paragraph">
-        Alpha多样性反映的是单个样品内部的物种多样性，
-        包括observed species指数、chao1指数，shannon指数以及simpson指数，PD_whole_tree指数等。
-        Alpha多样性统计见
-        <a href="javascript:void(0)"
-           onClick="StartExcel('..\\results\\07_Alpha_diversity\\{{ group_file }}\\alpha_statistic.tsv')" target="_blank">
-            alpha_statistic.tsv
-        </a>
-    </p>
-    <p class="paragraph">observed_species指数表示实际观测到的otu数量；</p>
-    <p class="paragraph">goods_coverage指数表示测序深度:</p>
-    <p class="paragraph">测序深度：C=1-n1/N</p>
-    <p class="paragraph">为n1只有含一条序列的OTU数目，N为抽样中出现的总的序列数</p>
-    <p class="paragraph">chao1指数用来估计样品所含OTU的总数，其公式为：</p>
-    <p class="center">
-        <img src="images2/formula_chao1.png">
-    </p>
-
-    <p class="paragraph">    Schao1：估计的OTU数量；</p>
-    <p class="paragraph">Sobs：实际观察到的OTU数量；</p>
-    <p class="paragraph">n1：只含一条OTU的数量；</p>
-    <p class="paragraph">n2：只含两条OTU的数量；</p>
-    <p class="paragraph">shannon指数用来估算微生物群落的多样性，shannon值越大，多样性越高，其计算公式为：</p>
-    <p class="center">
-        <img src="images2/formula_shannon.png">
-    </p>
-
-
-    <p class="paragraph">Sobs：实际观察到的OTU数量；</p>
-    <p class="paragraph">ni：只含i条OTU的数量；</p>
-    N：所有的序列数</p>
-    <p class="paragraph">simpson指数和shannon指数一样用来估算微生物群落的多样性，simpson指数越大，多样性则越低，其计算公式为：</p>
-    <p class="center">
-        <img src="images2/formula_simpson.png">
-    </p>
-
-
-
-
-    <p class="paragraph">Sobs：实际观察到的OTU数量；</p>
-    <p class="paragraph">ni：只含i条OTU的数量；</p>
-    <p class="paragraph">N：所有的序列数</p>
-    <p class="paragraph">软件平台：qiime/锐翌分析平台</p>
-    <p class="paragraph">结果目录：<a href="javascript:void(0)"  onClick="StartExcel('..\results\07_Alpha_diversity\{{ group_file }}\alpha_statistic.tsv')" target="_blank">alpha列表</a></p>
-
-
-    <p class="name_table">表7-1-1 样品Alpha多样性统计结果</p>
-
-    <table id="table5" data-height="413"></table>
-
-
-    <p class="tremark">注：第一列Sample Name是样品名称；第二列至最后一列是样品的不同的Alpha多样性指数的数值。</p>
-    <p class="center">
-        <img class="size1" src='images/group/alpha_div_collated/chao1.png'/><img class="size1"
-                                                                                 src='images/group/alpha_div_collated/goods_coverage.png'/>
-    </p>
-    <p class="center">
-        <img class="size1" src='images/group/alpha_div_collated/observed_species.png'/><img class="size1"
-                                                                                            src='images/group/alpha_div_collated/PD_whole_tree.png'/>
-    </p>
-    <p class="center">
-        <img class="size1" src='images/group/alpha_div_collated/shannon.png'/><img class="size1"
-                                                                                   src='images/group/alpha_div_collated/simpson.png'/>
-    </p>
-
-    <p class="name_fig"> 图7-1-1 样品物种丰度Alpha多样性指数稀释曲线图 </p>
-    <p class="premark">注：横轴表示抽取的reads数量，纵轴表示相应Alpha多样性指数的值。图中一种颜色代表一组样品，测序条数不能覆盖样品时，曲线直线上升；测序条数增加到覆盖样品中的大部分微生物时，曲线呈现平滑趋势。</p>
-
-{% else %}
-    <h3 id="单个样品多样性分析">7.1 单个样品多样性分析</h3>
-    <p class="error">样品数不足无法分析</p>
-{% endif %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{% if alpha_diff %}
-    <h3 id="单个样品差异分析">7.2 单个样品差异分析(每组内样品数>=3)</h3>
-
-    {% if alpha_diff_boxplot %}
-        
-    <p class="paragraph">分别对Alpha
-        Diversity的各个指数进行秩和检验分析(若两组样品比较即使用R中的wilcox.test函数，若两组以上的样品比较则使用R中的kruskal.test函数)，通过秩和检验筛选不同条件下的显著差异的Alpha
-        Diversity指数。
-    </p>
-    <p class="paragraph">软件平台：</p>
-    <p class="paragraph">结果目录：<a href="javascript:void(0)"  onClick="StartExcel('..\results\03_Alpha_diversity\{{ group_file }}\alpha_marker.tsv')" target="_blank">alpha_marker.tsv</a></p>
-    <p class="name_table">表7-2-1 Alpha diversity指数差异检验</p>
-
-    <table id="table6" data-height="413"></table>
-
-
-    <p class="tremark">注：第一行是Alpha Diversity指数；第二行至第{{ group_num + 2 }}行分别为{{ group_num }}组样品的均值；其中（P-value）行为秩和检验的P-value值；</p>
-    <p class="center">
-            <img class="size1" src='images/group/box_plot/chao1.boxplot.png'/><img class="size1"
-                                                                                   src='images/group/box_plot/goods_coverage.boxplot.png'/>
-        </p>
-        <p class="center">
-            <img class="size1" src='images/group/box_plot/observed_species.boxplot.png'/><img class="size1"
-                                                                                              src='images/group/box_plot/PD_whole_tree.boxplot.png'/>
-        </p>
-        <p class="center">
-            <img class="size1" src='images/group/box_plot/shannon.boxplot.png'/><img class="size1"
-                                                                                     src='images/group/box_plot/simpson.boxplot.png'/>
-        </p>
-
-        <p class="name_fig">图7-2-1组间Alpha多样性盒形图：</p>
-        <p class="premark">
-            注：盒形图可以显示5个统计量（最小值，第一个四分位数，中位数，第三个中位数和最大值，及由下到上的5条线），异常值以“o”标出。横轴是分组名称，纵轴是不同分组下的alpha多样性指数的值。</p>
-    {% endif %}
-
-{% else %}
-    <h3 id="单个样品差异分析">7.2 单个样品差异分析(每组内样品数>=3)</h3>
-    <p class="error">样品数不足无法分析</p>
-{% endif %}
-
+{% extends "pdf/analysis/7.html" %}
+{% block table5 %}
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="success">
+                    <th>sampleName</th>
+                    <th>chao1</th>
+                    <th>goodsCoverage</th>
+                    <th>observedSpecies</th>
+                    <th>wholeTree</th>
+                    <th>shannon</th>
+                    <th>simpson</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for key,alphaDiversity in alpha_diversitys.items() %}
+                    {% if loop.index0 < 10 %}
+                        <tr>
+                            <td>{{ alphaDiversity.alphaName|safe }}</td>
+                            <td>{{ alphaDiversity.chao1 }}</td>
+                            <td>{{ alphaDiversity.goods_coverage }}</td>
+                            <td>{{ alphaDiversity.observed_species }}</td>
+                            <td>{{ alphaDiversity.whole_tree }}</td>
+                            <td>{{ alphaDiversity.shannon }}</td>
+                            <td>{{ alphaDiversity.simpson }}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div> 
+{% endblock %}
+{% block table6 %}
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="success">
+                    <th>sampleName</th>
+                    <th>chao1</th>
+                    <th>goodsCoverage</th>
+                    <th>observedSpecies</th>
+                    <th>wholeTree</th>
+                    <th>shannon</th>
+                    <th>simpson</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for key,alphaDiversity in alpha_diversity_diffs.items() %}
+                        {% if loop.index0 < 10 %}
+                            <tr>
+                                <td>{{ alphaDiversity.alphaName|safe}}</td>
+                                <td>{{ alphaDiversity.chao1 }}</td>
+                                <td>{{ alphaDiversity.goods_coverage }}</td>
+                                <td>{{ alphaDiversity.observed_species }}</td>
+                                <td>{{ alphaDiversity.whole_tree }}</td>
+                                <td>{{ alphaDiversity.shannon }}</td>
+                                <td>{{ alphaDiversity.simpson }}</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div> 
+{% endblock %}

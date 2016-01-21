@@ -53,16 +53,7 @@ p.tremark {
     font-size: 1.2em;
 }
 
-.table {
-    font-family: Calibri, Arial, Helvetica, sans-serif;
-    width: 100%;
-    border-collapse: collapse;
-    text-align: center;
-}
 
-.table td {
-    text-align: center;
-}
 
 img.size1 {
     margin: 5px auto;
@@ -237,4 +228,16 @@ table, tr, td, th, tbody, thead, tfoot {
 	height: 1000px;
 }
 
+.table {
+    font-family: Calibri, Arial, Helvetica, sans-serif;
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
 
+.table td {
+    text-align: center;
+}
+.table th {
+    text-align: center;
+}

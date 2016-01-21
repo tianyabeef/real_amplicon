@@ -423,43 +423,43 @@ def get_html():
     with open(work_dir + 'report/js/table.js', 'w') as fp:
         fp.write(table)
     # save_table
-    template = env.get_template('table_template_pdf.js')
-    table = template.render(
-            readsLengths = readsLengths,
-            readsStats  = readsStats,
-            otuStatisticals=otuStatisticals,
-            otuStatisticalDownsizes=otuStatisticalDownsizes,
-            otuAssignmentsStatisticals=otuAssignmentsStatisticals,
-            alpha_diversitys=alpha_diversitys,
-            alpha_diversity_diffs=alpha_diversity_diffs,
-            alpha_diff_exist=alpha_diff_exist,
-            beta_diversity_data=beta_diversity[0],
-            beta_diversity_jqGrid=beta_diversity[1],
-            beta_diversity_sampleName=beta_diversity[2],
-            beta_diversity_exist=beta_diversity[3],
-            beta_un_diversity_data=beta_un_diversity[0],
-            beta_un_diversity_jqGrid=beta_un_diversity[1],
-            beta_un_diversity_sampleName=beta_un_diversity[2],
-            beta_un_diversity_exist=beta_un_diversity[3],
-            coreMicrobiomes=coreMicrobiomes,
-            diff_otu_marker_data=diff_otu_marker[0],
-            diff_otu_marker_jqGrid=diff_otu_marker[1],
-            diff_otu_marker_sampleName=diff_otu_marker[2],
-            diff_otu_marker_exist=diff_otu_marker[3],
-            diff_genus_marker_data=diff_genus_marker[0],
-            diff_genus_marker_jqGrid=diff_genus_marker[1],
-            diff_genus_marker_sampleName=diff_genus_marker[2],
-            diff_genus_marker_exist=diff_genus_marker[3],
-            diff_taxall_marker_data=diff_taxall_marker[0],
-            diff_taxall_marker_jqGrid=diff_taxall_marker[1],
-            diff_taxall_marker_sampleName=diff_taxall_marker[2],
-            diff_taxall_marker_exist=diff_taxall_marker[3],
-            diff_phylum_marker_data=diff_phylum_marker[0],
-            diff_phylum_marker_jqGrid=diff_phylum_marker[1],
-            diff_phylum_marker_sampleName=diff_phylum_marker[2],
-            diff_phylum_marker_exist=diff_phylum_marker[3])
-    with open(work_dir + 'report/js/table_pdf.js', 'w') as fp:
-        fp.write(table)
+    # template = env.get_template('table_template_pdf.js')
+    # table = template.render(
+    #         readsLengths = readsLengths,
+    #         readsStats  = readsStats,
+    #         otuStatisticals=otuStatisticals,
+    #         otuStatisticalDownsizes=otuStatisticalDownsizes,
+    #         otuAssignmentsStatisticals=otuAssignmentsStatisticals,
+    #         alpha_diversitys=alpha_diversitys,
+    #         alpha_diversity_diffs=alpha_diversity_diffs,
+    #         alpha_diff_exist=alpha_diff_exist,
+    #         beta_diversity_data=beta_diversity[0],
+    #         beta_diversity_jqGrid=beta_diversity[1],
+    #         beta_diversity_sampleName=beta_diversity[2],
+    #         beta_diversity_exist=beta_diversity[3],
+    #         beta_un_diversity_data=beta_un_diversity[0],
+    #         beta_un_diversity_jqGrid=beta_un_diversity[1],
+    #         beta_un_diversity_sampleName=beta_un_diversity[2],
+    #         beta_un_diversity_exist=beta_un_diversity[3],
+    #         coreMicrobiomes=coreMicrobiomes,
+    #         diff_otu_marker_data=diff_otu_marker[0],
+    #         diff_otu_marker_jqGrid=diff_otu_marker[1],
+    #         diff_otu_marker_sampleName=diff_otu_marker[2],
+    #         diff_otu_marker_exist=diff_otu_marker[3],
+    #         diff_genus_marker_data=diff_genus_marker[0],
+    #         diff_genus_marker_jqGrid=diff_genus_marker[1],
+    #         diff_genus_marker_sampleName=diff_genus_marker[2],
+    #         diff_genus_marker_exist=diff_genus_marker[3],
+    #         diff_taxall_marker_data=diff_taxall_marker[0],
+    #         diff_taxall_marker_jqGrid=diff_taxall_marker[1],
+    #         diff_taxall_marker_sampleName=diff_taxall_marker[2],
+    #         diff_taxall_marker_exist=diff_taxall_marker[3],
+    #         diff_phylum_marker_data=diff_phylum_marker[0],
+    #         diff_phylum_marker_jqGrid=diff_phylum_marker[1],
+    #         diff_phylum_marker_sampleName=diff_phylum_marker[2],
+    #         diff_phylum_marker_exist=diff_phylum_marker[3])
+    # with open(work_dir + 'report/js/table_pdf.js', 'w') as fp:
+    #     fp.write(table)
     # finally_get_html
     #custom_info
     var_html['time'] = time.strftime('%F')
@@ -551,13 +551,54 @@ def get_html():
         var_html['alpha_diff_boxplot'] = True
     var_html['group_file'] = group_file
     html_dir = config.get('params', 'html_template')
+    #report
     env = Environment(loader=FileSystemLoader(html_dir + '/templates',
                                               encoding='utf-8'))
     template = env.get_template('report.html')
     finally_html = template.render(var_html)
     with open(config.get('outfiles', 'report_html'), 'w') as fp:
         fp.write(finally_html)
+    
+
+    #pdf 
     templetaPDF = env.get_template('pdf.html')
+    # save_table
+    beta_un_diversity_pdf = []
+    beta_un_diversity_pdf = createClass(work_dir + "../" + config.get(
+            'origin', 'group_beta_div_un_txt').replace("#group", group_file))
+    # save_table
+    beta_diversity_pdf = []
+    beta_diversity_pdf = createClass(work_dir + "../" + config.get(
+            'origin', 'group_beta_div_txt').replace("#group", group_file))
+    # save_table'
+    diff_otu_marker_pdf = []
+    diff_otu_marker_pdf = createClass(work_dir + "../" + config.get(
+            'origin', 'group_diff_otu_marker_p_txt').replace("#group", group_file))
+    # save_table
+    diff_genus_marker_pdf = []
+    diff_genus_marker_pdf = createClass(work_dir + "../" + config.get(
+            'origin', 'group_diff_genus_marker_p_txt').replace("#group",
+                                                               group_file))
+    # save_table
+    diff_taxall_marker_pdf = []
+    diff_taxall_marker_pdf = createClass(work_dir + "../" + config.get(
+            'origin', 'group_diff_taxall_marker_p_txt').replace("#group",
+                                                                group_file))
+    var_html['readsLengths'] = readsLengths
+    var_html['readsStats'] = readsStats
+    var_html['otuStatisticals'] = otuStatisticals
+    var_html['otuStatisticalDownsizes'] = otuStatisticalDownsizes
+    var_html['otuAssignmentsStatisticals'] = otuAssignmentsStatisticals
+    var_html['alpha_diversitys'] = alpha_diversitys
+    var_html['alpha_diversity_diffs'] = alpha_diversity_diffs
+    var_html['coreMicrobiomes'] = coreMicrobiomes    
+
+    var_html['beta_un_diversity_pdf'] = beta_un_diversity_pdf
+    var_html['beta_diversity_pdf']  = beta_diversity_pdf
+    var_html['diff_otu_marker_pdf'] = diff_otu_marker_pdf
+    var_html['diff_genus_marker_pdf'] = diff_genus_marker_pdf
+    var_html['diff_taxall_marker_pdf'] = diff_taxall_marker_pdf
+
     pdf = templetaPDF.render(var_html)
     with open(config.get('outfiles', 'pdf_html'), 'w') as fp:
         fp.write(pdf)
