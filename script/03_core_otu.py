@@ -30,7 +30,7 @@ if __name__ == '__main__':
     params = read_params(sys.argv)
     mkdir(params['out_dir'])
     for_plot = params['out_dir'] + '/for_plot.txt'
-    core_otu = params['out_dir'] + '/core_otu.txt'
+    core_otu = params['out_dir'] + '/core_otu.tsv'
     pdf_file = params['out_dir'] + '/core_otu.pdf'
     png_file = params['out_dir'] + '/core_otu.png'
 
