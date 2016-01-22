@@ -37,7 +37,7 @@ def read_params(args):
 def check_filename(file_name):
     if not file_name:
         return False
-    filter_suffix = ['R', 'log', 'Rout', 'pl', 'py', 'pyc', 'sh', 'alpha_div', 'rarefaction']
+    filter_suffix = ['R', 'log', 'Rout', 'pl', 'py', 'pyc', 'sh', 'alpha_div', 'rarefaction', 'cfg']
     for suf in filter_suffix:
         if file_name.endswith(suf):
             return False
