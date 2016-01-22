@@ -525,26 +525,33 @@ def get_html():
     templetaPDF = env.get_template('pdf.html')
     # save_table
     beta_un_diversity_pdf = []
+    beta_diversity_pdf = []
+    diff_otu_marker_pdf = []
+    diff_genus_marker_pdf = []
+    diff_taxall_marker_pdf = []
+    
     beta_un_diversity_pdf = createClass(work_dir + "../" + config.get(
             'origin', 'group_beta_div_un_txt').replace("#group", group_file))
-    # save_table
-    beta_diversity_pdf = []
+        # save_table
     beta_diversity_pdf = createClass(work_dir + "../" + config.get(
             'origin', 'group_beta_div_txt').replace("#group", group_file))
-    # save_table'
-    diff_otu_marker_pdf = []
+        # save_table'
     diff_otu_marker_pdf = createClass(work_dir + "../" + config.get(
             'origin', 'group_diff_otu_marker_p_txt').replace("#group", group_file))
-    # save_table
-    diff_genus_marker_pdf = []
+        # save_table
     diff_genus_marker_pdf = createClass(work_dir + "../" + config.get(
             'origin', 'group_diff_genus_marker_p_txt').replace("#group",
                                                                group_file))
-    # save_table
-    diff_taxall_marker_pdf = []
+        # save_table
     diff_taxall_marker_pdf = createClass(work_dir + "../" + config.get(
-            'origin', 'group_diff_taxall_marker_p_txt').replace("#group",
-                                                                group_file))
+            'origin', 'group_diff_taxall_marker_p_txt').replace("#group",group_file))
+
+    var_html['beta_un_diversity_pdf'] = beta_un_diversity_pdf
+    var_html['beta_diversity_pdf']  = beta_diversity_pdf
+    var_html['diff_otu_marker_pdf'] = diff_otu_marker_pdf
+    var_html['diff_genus_marker_pdf'] = diff_genus_marker_pdf
+    var_html['diff_taxall_marker_pdf'] = diff_taxall_marker_pdf
+        
     var_html['readsLengths'] = readsLengths
     var_html['readsStats'] = readsStats
     var_html['otuStatisticals'] = otuStatisticals
@@ -553,12 +560,6 @@ def get_html():
     var_html['alpha_diversitys'] = alpha_diversitys
     var_html['alpha_diversity_diffs'] = alpha_diversity_diffs
     var_html['coreMicrobiomes'] = coreMicrobiomes    
-
-    var_html['beta_un_diversity_pdf'] = beta_un_diversity_pdf
-    var_html['beta_diversity_pdf']  = beta_diversity_pdf
-    var_html['diff_otu_marker_pdf'] = diff_otu_marker_pdf
-    var_html['diff_genus_marker_pdf'] = diff_genus_marker_pdf
-    var_html['diff_taxall_marker_pdf'] = diff_taxall_marker_pdf
 
     pdf = templetaPDF.render(var_html)
     with open(config.get('outfiles', 'pdf_html'), 'w') as fp:
