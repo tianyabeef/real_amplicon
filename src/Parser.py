@@ -135,9 +135,9 @@ class TaxParser(object):
 def parse_stat_file(stat_file, group_file=None):
     group = parse_group_file(group_file)
     with open(stat_file) as fp:
-        line = fp.next()
-        while (line):
-            line = fp.next().strip()
+        # line = fp.next()
+        # while (line):
+        #     line = fp.next().strip()
         fp.next()
         maximum = 0
         minimum = 0xffffff
