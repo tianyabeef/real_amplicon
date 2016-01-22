@@ -28,7 +28,7 @@ def read_params(args):
 
     args = parser.parse_args()
     params = vars(args)
-    if params['uc_file'] == None and params['otutab'] == None:
+    if params['uc_file'] is None and params['otutab'] is None:
         parser.print_help()
         sys.exit()
     return params
