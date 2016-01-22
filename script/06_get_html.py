@@ -253,7 +253,7 @@ def get_html():
             for line in lines:
                 tabs = line.strip().split("\t")
                 coreMicrobiome = CoreMicrobiome(tabs[0], tabs[1], tabs[2])
-                    mrpp[tabs[0]] = coreMicrobiome
+                mrpp[tabs[0]] = coreMicrobiome
     except IOError:
         sys.stderr.write('there is no mrpp data!\n')
     #sava table
