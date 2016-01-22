@@ -46,4 +46,4 @@ if __name__ == '__main__':
         subject.get_mapped_tags_from_uc(params['uc_file'])
     else:
         subject.get_mapped_tags_from_otutab(params['otutab'])
-    subject.write(params['outfile'])
+    subject.write(params['outfile'], '%s.fullstat' % params['outfile'])

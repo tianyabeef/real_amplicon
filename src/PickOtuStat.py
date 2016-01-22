@@ -97,9 +97,9 @@ class Subject(object):
                     sample.stats['singleton_mapped_tags'] += 1
         fp.close()
 
-    def write(self, file):
-        fp_log = open('%s.log' % file, 'w')
-        fp = open(file, 'w')
+    def write(self, file1, file2):
+        fp_log = open(file2, 'w')
+        fp = open(file1, 'w')
         fp_log.write('Sample Number: %s\n' % len(self.sample_set))
         sample_list = list(self.sample_set.itervalues())
         sample_list.sort()
