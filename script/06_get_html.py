@@ -287,7 +287,7 @@ def get_html():
             tabs = line.strip().split("\t")
             # sample_name amplicon_type tags mapped_reads mapped_ratio
             otuStatistical = OtuStatistical(tabs[0], data_type, tabs[1],
-                                            tabs[2], tabs[3], tabs[4])
+                                            tabs[2], tabs[3], tabs[10])
             otuStatisticals[tabs[0]] = otuStatistical
 
             # save otu statistic table
