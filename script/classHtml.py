@@ -66,8 +66,8 @@ class OtuAssignmentsStatistical(object):
 
 
 class Alpha_diversity(object):
-    def __init__(self, alphaName, chao1, goods_coverage, observed_species,
-                 whole_tree, shannon, simpson):
+    def __init__(self, alphaName, chao1, observed_species,
+                 whole_tree, shannon, simpson, goods_coverage):
         self.alphaName = alphaName
         self.chao1 = chao1
         self.goods_coverage = goods_coverage
