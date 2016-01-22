@@ -1,3 +1,5 @@
+import sys
+
 class ReadsStat(object):
     def __init__(self, sampleName, clean_read, base, q20, q30, gc, average_length):
         self.sampleName = sampleName
@@ -94,5 +96,5 @@ def createClass(file):
                         obj.__setattr__(list[i],array[i])
                     obj_list.append(obj)                
     except IOError:
-        sys.stderr.write('%s dir not found!\n' % file)
+        sys.stderr.write('%s file not found!\n' % file)
     return obj_list        
