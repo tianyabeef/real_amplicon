@@ -321,7 +321,6 @@ def get_html():
     except IOError:
         var_html['core_otu_exists'] = False
         sys.stderr.write('there is no core microbiomes!\n')
-
     # save otu assignment stat table
     otuAssignmentsStatisticals = OrderedDict()
     with open(work_dir + "../" + config.get('origin', 'otu_statistic_txt'),
