@@ -243,7 +243,19 @@ def get_html():
     # save table
     var_html = {}
     tabs = []
-
+    # save tabel CoreMicrobiome
+    mrpp = OrderedDict()
+    try:
+        with open(work_dir + "../" + config.get(
+                'origin', 'group_bdiv_mrpp_txt').replace("#group", group_file),
+                  'r') as lines:
+            lines.next()
+            for line in lines:
+                tabs = line.strip().split("\t")
+                coreMicrobiome = CoreMicrobiome(tabs[0], tabs[1], tabs[2])
+                    mrpp[tabs[0]] = coreMicrobiome
+    except IOError:
+        sys.stderr.write('there is no mrpp data!\n')
     #sava table
     readsStats = OrderedDict()
     with open('%s/../%s' % (work_dir,config.get('origin', 'reads_stat')),'r') as lines:
