@@ -247,12 +247,18 @@ def add_pie_face(tree, ts, total_profile, group):
         if group is not None:
             profile_list_grouped = OrderedDict()
             for sample_name, profile in profile_list.iteritems():
-                profile_list_grouped[group[sample_name]] = profile
+                if group[sample_name] not in profile_list_grouped:
+                    profile_list_grouped[group[sample_name]] = 0
+                profile_list_grouped[group[sample_name]] += profile
             profile_list = pd.Series(profile_list_grouped)
         col_num = len(profile_list)
         times = int(math.ceil(col_num / len(COLS_BREWER)))
         cols = (COLS_BREWER * times)[:col_num]
         summary = sum(profile_list)
+        if not summary:
+            print profile_list
+            print profile_list_grouped
+            continue
         percents = map(lambda s: s / summary * 100, profile_list)
         P = PieChartFace(percents=percents, width=50, height=50, colors=cols)
         node.add_face(P, 0, 'aligned')
