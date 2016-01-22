@@ -75,3 +75,33 @@
     </div>
 </div> 
 {% endblock %}
+
+{% block table14 %}
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <table class="table table-bordered">
+                <thead>
+                <tr class="success">
+                    <th>groupname</th>
+                    <th>classdelta_weighed</th>
+                    <th>classdelta_unweighed</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for  key,mrppAnalysis in mrpp.items() %}
+                        {% if loop.index0 < 10 %}
+                        <tr>
+                            <td>{{ mrppAnalysis.otu_id }}</td>
+                            <td>{{ mrppAnalysis.taxonomy_level }}</td>
+                            <td>{{ mrppAnalysis.taxonomy_name }}</td>
+                        </tr>
+                        {% endif%}
+                    {% endfor %}
+                
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div> 
+{% endblock %}

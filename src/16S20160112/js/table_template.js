@@ -1,3 +1,49 @@
+var mrpps = [
+    {% for key,mrppAnalysis in mrpp.items() %}
+        {
+            groupname:"{{ mrppAnalysis.otu_id }}",
+            classdelta_weighed:"{{ mrppAnalysis.taxonomy_level }}",
+            classdelta_unweighed:"{{ mrppAnalysis.taxonomy_name }}"
+        },
+
+    {% endfor %}
+];
+$(function () {
+    $('#toolbar14').find('select').change(function () {
+        $('#table14').bootstrapTable('refreshOptions', {
+            exportTypes:['excel','csv'],
+            exportDataType: $(this).val()
+        });
+    });
+})
+$('#table14').bootstrapTable({
+    exportTypes:['excel','csv'],
+    columns: [{
+        field: 'state',
+        title: 'state',
+        checkbox: true,
+        
+    }, {
+        field: 'groupname',
+        title: 'groupname',
+        align: 'center',
+        sortable: true,
+        filterControl: 'select',
+    }, {
+        field: 'classdelta_weighed',
+        title: 'classdelta_weighed',
+        align: 'center',
+        filterControl: 'input',
+        sortable: true,
+    }, {
+        field: 'classdelta_unweighed',
+        title: 'classdelta_unweighed',
+        align: 'center',
+        filterControl: 'input',
+        sortable: true,
+    }],
+    data: mrpps
+});
 
 
 var lengths = [
