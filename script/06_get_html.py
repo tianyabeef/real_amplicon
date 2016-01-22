@@ -400,6 +400,7 @@ def get_html():
                                      key=operator.itemgetter(1),
                                      reverse=True)
     table = template.render(
+            mrpp = mrpp,
             readsLengths = readsLengths,
             readsStats  = readsStats,
             otuStatisticals=otuStatisticals,
@@ -564,6 +565,7 @@ def get_html():
     var_html['diff_genus_marker_pdf'] = diff_genus_marker_pdf
     var_html['diff_taxall_marker_pdf'] = diff_taxall_marker_pdf
         
+    var_html['mrpp'] = mrpp
     var_html['readsLengths'] = readsLengths
     var_html['readsStats'] = readsStats
     var_html['otuStatisticals'] = otuStatisticals
