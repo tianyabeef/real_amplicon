@@ -52,6 +52,9 @@ topbarplot <- function(profile, number = NULL, palette = NULL)
 		}else{
 			number = nrow(profile)
 		}
+		if(number > nrow(profile)){
+			number = nrow(profile)
+		}
 		return(number)
 	}
 	number = get_number()
