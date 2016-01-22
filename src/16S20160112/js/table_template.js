@@ -387,13 +387,7 @@ $('#table5').bootstrapTable({
         align: 'center',
         filterControl: 'input',
         sortable: true,
-    }, {
-        field: 'goodsCoverage',
-        title: 'goodsCoverage',
-        align: 'center',
-        filterControl: 'input',
-        sortable: true,
-    }, {
+    },  {
         field: 'observedSpecies',
         title: 'observedSpecies',
         align: 'center',
@@ -414,6 +408,12 @@ $('#table5').bootstrapTable({
     }, {
         field: 'simpson',
         title: 'simpson',
+        align: 'center',
+        filterControl: 'input',
+        sortable: true,
+    },{
+        field: 'goodsCoverage',
+        title: 'goodsCoverage',
         align: 'center',
         filterControl: 'input',
         sortable: true,
@@ -471,12 +471,6 @@ $('#table6').bootstrapTable({
         filterControl: 'input',
         sortable: true,
     }, {
-        field: 'goodsCoverage',
-        title: 'goodsCoverage',
-        align: 'center',
-        filterControl: 'input',
-        sortable: true,
-    }, {
         field: 'observedSpecies',
         title: 'observedSpecies',
         align: 'center',
@@ -497,6 +491,12 @@ $('#table6').bootstrapTable({
     }, {
         field: 'simpson',
         title: 'simpson',
+        align: 'center',
+        filterControl: 'input',
+        sortable: true,
+    }, {
+        field: 'goodsCoverage',
+        title: 'goodsCoverage',
         align: 'center',
         filterControl: 'input',
         sortable: true,
@@ -608,24 +608,7 @@ $('#table9').bootstrapTable({
     ],
     data: diff_otu_markers
 });
-/*jQuery().ready(function (){
-	jQuery("#list55").jqGrid({
-		data: diff_otu_markers,
-		datatype: "local",
-		height: 230,
-		rowNum: 10,
-		rowList: [10,20,30],
-		colNames:['{{ diff_otu_marker_sampleName }}'],
-		colModel:[
-			 {% for value in diff_otu_marker_jqGrid %}
-			 {{ value }}
-				{% endfor %}
-		],
-		pager: "#plist55",
-		viewrecords: true,
-		caption: "差异显著OTU列表"
-	});
- })*/
+
 {% endif %}
 
 

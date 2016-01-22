@@ -56,18 +56,7 @@
         <p class="name_table">
             表5-2-1 抽平后样品OTU统计
         </p>
-<!--         <div class="center_table">
-            <div id="toolbar2" class="pull-left-self">
-                <select class="form-control">
-                    <option value="">Export Basic</option>
-                    <option value="all">Export All</option>
-                    <option value="selected">Export Selected</option>
-                </select>
-            </div>
-            <table id="table2" data-height="560" data-pagination="true" data-filter-control="true"
-                   data-show-export="true" data-page-list="[10, 25, 50, 100, 200, All]">
-            </table>
-        </div> -->
+
         {% block table2 %}
         {% endblock %}
         <p class="tremark">注：第一列Sample Name是样品名称;</p>
@@ -104,18 +93,7 @@
             </p>
             {% block table3 %}
             {% endblock %}
-<!--             <div class="center_table">
-                <div id="toolbar3" class="pull-left-self">
-                    <select class="form-control">
-                        <option value="">Export Basic</option>
-                        <option value="all">Export All</option>
-                        <option value="selected">Export Selected</option>
-                    </select>
-                </div>
-                <table id="table3" data-height="560" data-pagination="true" data-filter-control="true"
-                       data-show-export="true" data-page-list="[10, 25, 50, 100, 200, All]">
-                </table>
-            </div>  -->
+
             <p class="tremark">   注：</p>
             <p class="tremark">    第一列OTU ID是OTU名称；</p>
             <p class="tremark">    第二列Taxonomy Level是OTU所代表的物种所在的分类水平；</p></p>
@@ -143,7 +121,7 @@
 
 
 
-    {% if otu_venn %}
+    {% if otu_venn or otu_flower %}
         <h3 id="OTU Venn图分析">5.4 OTU Venn图分析(分组数量2~5组)</h3>
         <p class="paragraph">根据每个样品的OTU在每个样品的丰度，计算出每个样品或组间共有和特有的OTU，Venn图可以很好的反应组间共有以及组内特有的OTU数目。</p>
         <p class="paragraph">软件平台：R语言/Perl SVG</p>
