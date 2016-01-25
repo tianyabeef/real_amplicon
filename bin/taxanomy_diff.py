@@ -86,11 +86,18 @@ def taxanomy_diff(cfg_in, vars=None):
     # all level
     work.commands += commands_factory(params['summarize_dir'] + '/otu_table_all.txt', outfiles['taxall_diff_outdir'],
                                       'all', vars)
-
     # phylum level
     work.commands += commands_factory(params['summarize_dir'] + '/otu_table_L2.txt', outfiles['phylum_diff_outdir'],
                                       'phylum', vars)
-
+    # class level
+    work.commands += commands_factory(params['summarize_dir'] + '/otu_table_L3.txt', outfiles['phylum_diff_outdir'],
+                                      'class', vars)
+    # order level
+    work.commands += commands_factory(params['summarize_dir'] + '/otu_table_L4.txt', outfiles['phylum_diff_outdir'],
+                                      'order', vars)
+    # family level
+    work.commands += commands_factory(params['summarize_dir'] + '/otu_table_L5.txt', outfiles['phylum_diff_outdir'],
+                                      'family', vars)
     # genus level
     work.commands += commands_factory(params['summarize_dir'] + '/otu_table_L6.txt', outfiles['genus_diff_outdir'],
                                       'genus', vars)
