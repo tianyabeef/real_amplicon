@@ -227,7 +227,7 @@ def work_tree(pipeline, analysis_name, infiles=None):
     pipeline.add_job('make_tree_' + analysis_name,
                      outfiles['shell'],
                      prep='OTU_group_' + analysis_name)
-    return outfiles
+    return outfiles['tree_file']
 
 
 def work_alpha_diversity(pipeline, analysis_name, tree_file, infiles=None):
