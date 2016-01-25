@@ -1,4 +1,11 @@
 import sys
+class MrppStat(object):
+    def __init__(self,group,a,observeDelta,expectDelta,significance):
+        self.group = group
+        self.a = a
+        self.observeDelta = observeDelta
+        self.expectDelta = expectDelta
+        self.significance = significance
 
 class ReadsStat(object):
     def __init__(self, sampleName, clean_read, base, q20, q30, gc, average_length):
