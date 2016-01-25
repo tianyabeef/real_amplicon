@@ -37,13 +37,18 @@ def trans(infile, outfile, level=None):
         for line in fp:
             tabs = line.strip().split('\t')
             taxes = tabs[0].split(';')
-            for tax in taxes:
-                if not regex.search(tax):
-                    continue
+            if level is None:
+                tax = taxes[-1]
                 if tax not in profiles:
-                    profiles[tax] = map(lambda a: float(a), tabs[1:])
-                else:
-                    profiles[tax] = map(lambda a, b: float(a) + float(b), profiles[tax], tabs[1:])
+                    profiles[tax] = map(float, tabs[1:])
+            else:
+                for tax in taxes:
+                    if not regex.search(tax):
+                        continue
+                    if tax not in profiles:
+                        profiles[tax] = map(float, tabs[1:])
+                    else:
+                        profiles[tax] = map(lambda a, b: float(a) + float(b), profiles[tax], tabs[1:])
         for tax in sorted(profiles.iterkeys()):
             out.write('%s\t%s\n' % (tax, '\t'.join(map(lambda s: str(s), profiles[tax]))))
 
