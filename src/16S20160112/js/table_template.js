@@ -1,9 +1,11 @@
 var mrpps = [
     {% for key,mrppAnalysis in mrpp.items() %}
         {
-            groupname:"{{ mrppAnalysis.otu_id }}",
-            classdelta_weighed:"{{ mrppAnalysis.taxonomy_level }}",
-            classdelta_unweighed:"{{ mrppAnalysis.taxonomy_name }}"
+            Group:"{{ mrppAnalysis.group }}",
+            A:"{{ mrppAnalysis.a }}",
+            ObserveDelta:"{{ mrppAnalysis.observeDelta }}",
+            ExpectDelta:"{{ mrppAnalysis.expectDelta }}",
+            Significance:"{{ mrppAnalysis.significance }}"
         },
 
     {% endfor %}
@@ -24,20 +26,32 @@ $('#table14').bootstrapTable({
         checkbox: true,
         
     }, {
-        field: 'groupname',
-        title: 'groupname',
+        field: 'Group',
+        title: 'Group',
         align: 'center',
         sortable: true,
         filterControl: 'select',
     }, {
-        field: 'classdelta_weighed',
-        title: 'classdelta_weighed',
+        field: 'A',
+        title: 'A',
         align: 'center',
         filterControl: 'input',
         sortable: true,
     }, {
-        field: 'classdelta_unweighed',
-        title: 'classdelta_unweighed',
+        field: 'ObserveDelta',
+        title: 'ObserveDelta',
+        align: 'center',
+        filterControl: 'input',
+        sortable: true,
+    }, {
+        field: 'ExpectDelta',
+        title: 'ExpectDelta',
+        align: 'center',
+        filterControl: 'input',
+        sortable: true,
+    }, {
+        field: 'Significance',
+        title: 'Significance',
         align: 'center',
         filterControl: 'input',
         sortable: true,

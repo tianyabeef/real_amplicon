@@ -69,12 +69,16 @@
     {% if uniFra_analysis_anosim %}
     <h3 id="MRPP">8.3 MRPP （每组样品数>=5）</h3>
     <p class="paragraph">MRPP组间差异分析是用于分析组间微生物群落结构的差异是否显著的一种分析方法，通常与PCA、PCoA、NMDS等降维图配合使用。</p>
+    <p class="paragraph">MRPP分析与Anosim类似，排序方法不同，结果可以得到A值，ObserveDelta值，ExpectDelta值和Significance值。</p>
     <p class="name_table">表8-3-1 MRPP组间差异分析</p>
     {% block table14 %}
     {% endblock %}
-    <p class="paragraph">注：第一列表示分组名称；</p>
-    <p class="paragraph">第二列表示weighted_unifrac指数对应的classdelta值；</p>
-    <p class="paragraph">第三列表示unweighted_unifrac指数对应的classdelta值；</p>
+    <p class="tremark">注：1.Group：分组名称；</p>
+    <p class="tremark">2.A：A统计量；</p>
+    <p class="tremark">3.ObserveDelta：Bray-Curtis距离指数对应的ObserveDelta值；</p>
+    <p class="tremark">4.ExpectDelta：Bray-Curtis距离指数对应的ExpectDelta值；</p>
+    <p class="tremark">5.Significance：Bray-Curtis距离指数对应的显著性p值。</p>
+    <p class="tremark">A值大于0说明组间差异大于组内差异，A值小于0说明组内差异大于组间差异；ObserveDelta值越小说明组内差异越小；ExpectDelta值越小说明组间差异越小；Significance小于0.05说明差异显著。</p>
     {% else %}
         <h3 id="MRPP">8.3 MRPP （每组样品数>=5）</h3>
         <p class="error">样品数不足无法分析</p>
