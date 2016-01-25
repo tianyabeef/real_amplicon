@@ -218,11 +218,8 @@ def work_diff(pipeline, analysis_name, group_file, infiles=None):
     return outfiles
 
 
-# TODO:
-# make work_tree a script not a module
 def work_tree(pipeline, analysis_name, infiles=None):
-    work_dir = '%s/04_diversity_analysis/%s/tree' % (
-        pipeline.config.get('params', 'work_dir'), analysis_name)
+    work_dir = '%s/04_diversity_analysis/%s/tree' % (pipeline.config.get('params', 'work_dir'), analysis_name)
     vars = {'work_dir': work_dir, 'rep_set': infiles['rep_set']}
     outfiles = make_tree(pipeline.config, vars=vars)
     pipeline.make_shell(work_dir + '/make.sh',
@@ -230,7 +227,7 @@ def work_tree(pipeline, analysis_name, infiles=None):
     pipeline.add_job('make_tree_' + analysis_name,
                      outfiles['shell'],
                      prep='OTU_group_' + analysis_name)
-    return outfiles['tree_file']
+    return outfiles
 
 
 def work_alpha_diversity(pipeline, analysis_name, tree_file, infiles=None):

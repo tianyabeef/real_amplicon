@@ -19,11 +19,12 @@ def make_otu_table(cfg_in, vars=None):
     classifier_file = out_dir + '/rdp_classifier.txt'
 
     # pick rep set
-    work.commands.append('%s -i %s -f %s -o %s -m %s' % (qiime['pick_rep_set'],
-                                                         params['otu_mapping_file'],
-                                                         params['reference_seqs'],
-                                                         outfiles['rep_set'],
-                                                         params['pick_rep_set_method']))
+    work.commands.append('%s --pick_rep_set %s -i %s -f %s -o %s -m %s' % (scripts['pick_rep_set'],
+                                                                           qiime['pick_rep_set'],
+                                                                           params['otu_mapping_file'],
+                                                                           params['reference_seqs'],
+                                                                           os.path.dirname(outfiles['rep_set']),
+                                                                           params['pick_rep_set_method']))
     # assign taxonomy
     work.commands.append('%s -j %s -i %s -d %s -o %s -c %s --hier_outfile %s -m %s' % (scripts['rdp_classfier'],
                                                                                        software['rdp_classifier'],

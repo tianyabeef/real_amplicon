@@ -28,7 +28,7 @@ def read_params(args):
     parser.add_argument('-s', '--out_stat_file', dest='out_stat_file', metavar='FILE', type=str, default=None,
                         help="set the out_stat_file, [ default OUTDIR/DATA_TYPE_together.stat ]")
     parser.add_argument('-l', '--length_stat_file', dest='length_stat_file', metavar='FILE', type=str, default=None,
-                        help="set the out_length_file, [ default OUTDIR/DATA_TYPE_together.length ]")
+                        help="set the out_length_file, [ default OUTDIR/reads_length.tsv ]")
     parser.add_argument('-o', '--upload_stat', dest='upload_stat', metavar='FILE', type=str, default=None,
                         help="set the upload stat file, [ default OUTDIR/reads_stat.tsv ]")
     parser.add_argument('--max', dest='max_length', metavar='INT', type=int, default=500,
@@ -51,7 +51,7 @@ def read_params(args):
     if params['out_stat_file'] is None:
         params['out_stat_file'] = params['outdir'] + '/%s_together.stat' % params['data_type']
     if params['length_stat_file'] is None:
-        params['length_stat_file'] = params['outdir'] + '/%s_together.length' % params['data_type']
+        params['length_stat_file'] = params['outdir'] + '/reads_length.tsv'
     if params['upload_stat'] is None:
         params['upload_stat'] = params['outdir'] + '/reads_stat.tsv'
     return params
