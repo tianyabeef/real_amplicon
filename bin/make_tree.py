@@ -41,7 +41,6 @@ def make_tree(cfg_in, vars=None):
 
     if params['group']:
         # pick rep set
-        print('ok')
         work.commands.append('%s --pick_rep_set %s -i %s -f %s -g %s -o %s -m %s' % (scripts['pick_rep_set'],
                                                                                      qiime['pick_rep_set'],
                                                                                      params['otu_mapping_file'],
@@ -53,11 +52,14 @@ def make_tree(cfg_in, vars=None):
         group_names = set(group.itervalues())
         for group_name in group_names:
             rep_set_file = '%s/%s.rep_set.fna' % (outfiles['rep_set_dir'], group_name)
+            tax_set_file = '%s/%s.tax_set.fna' % (outfiles['rep_set_dir'], group_name)
             tree_file = '%s/%s.rep_phylo.tre' % (outfiles['out_dir'], group_name)
-            # config.get('outfiles', 'tree_files') += ' %s' % tree_file
-            # config.get()
             outfiles['tree_files'] += ' %s' % tree_file
-            command = get_command(rep_set_file, tree_file, params, scripts, qiime, outfiles)
+            work.commands.append('%s --rep_set %s --tax_ass %s -o %s' % (scripts['get_genus_rep'],
+                                                                         rep_set_file,
+                                                                         params['tax_assign'],
+                                                                         tax_set_file))
+            command = get_command(tax_set_file, tree_file, params, scripts, qiime, outfiles)
             work.commands.append(command)
         config.set('outfiles', 'tree_files', outfiles['tree_files'])
 
