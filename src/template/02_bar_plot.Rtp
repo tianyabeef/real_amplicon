@@ -32,9 +32,18 @@ if(ncol(data)>99){
   spa = (15*total_spa/ncol(data))/(15*(1-total_spa)/ncol(data))
 }
 if(ncol(data)==1){
-     barplot(as.matrix(data),col=cols,xaxt='n',font=2,space=spa,width=width,xlim=c(3,15))
+     barplot(as.matrix(data),
+     		 col=cols,xaxt='n',
+     		 font=2,space=spa,
+     		 width=width,xlim=c(3,15),
+     		 ylab='Relative Abundance(%)'
+     		 )
 }else{
-    barplot(as.matrix(data),col=cols,xaxt='n',font=2,space=spa,width=width)
+    barplot(as.matrix(data),col=cols,
+            xaxt='n',font=2,space=spa,
+            width=width,
+            ylab='Relative Abundance(%)'
+            )
 }
 
 if(ncol(data)<=10 && max_sample_name_length<=5){
