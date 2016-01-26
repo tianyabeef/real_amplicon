@@ -10,7 +10,8 @@ group_colors = color_list[[2]]
 group_names = color_list[[3]]
 group = color_list[[4]]
 
-X.anosim = anosim(vegdist(X), group[,1])
+#X.anosim = anosim(vegdist(X), group[,1])
+X.anosim = anosim(as.dist(X), group[,1])
 
 pdf("@#{pdf_file}",11,8.5)
 par(mar=c(4.1,5.1,3.1,2.1))
