@@ -172,6 +172,7 @@ def work_03(pipeline, analysis_name, infiles=None, pre_config=None):
         'group': infiles['group_file'],
         'reference_seqs': downsize_outfiles['seqs_fa'],
         'otu_mapping_file': downsize_outfiles['otu_table'],
+        'tax_assign': otu_table_outfiles['tax_assign'],
     }
     tax_rep_tree = make_tree(pipeline.config, vars=vars)
 
