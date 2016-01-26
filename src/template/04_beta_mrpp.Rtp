@@ -7,8 +7,10 @@ group=read.table("@#{group_file}",header=F,row.names=1,check.names=F,quote="")
 weighted_unifrac = weighted_unifrac[,rownames(group)]
 unweighted_unifrac = unweighted_unifrac[,rownames(group)]
 
-mrpp.weighted_unifrac = mrpp(vegdist(weighted_unifrac), group[,1])
-mrpp.unweighted_unifrac = mrpp(vegdist(unweighted_unifrac), group[,1])
+#mrpp.weighted_unifrac = mrpp(vegdist(weighted_unifrac), group[,1])
+#mrpp.unweighted_unifrac = mrpp(vegdist(unweighted_unifrac), group[,1])
+mrpp.weighted_unifrac = mrpp(as.dist(weighted_unifrac), group[,1])
+mrpp.unweighted_unifrac = mrpp(as.dist(unweighted_unifrac), group[,1])
 #
 #t1 = as.data.frame(mrpp.weighted_unifrac$classdelta)
 #t2 = as.data.frame(mrpp.unweighted_unifrac$classdelta)

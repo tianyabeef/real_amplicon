@@ -10,7 +10,8 @@ group_names = color_list[[3]]
 group = color_list[[4]]
 g = unique(group)
 
-d=dist(t(X))
+#d=dist(t(X))
+d=as.dist(X)
 X.dudi = dudi.pco(d,nf=2,scannf=F)
 con = X.dudi$eig/sum(X.dudi$eig)*100
 con = round(con,2)
