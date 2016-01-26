@@ -30,7 +30,7 @@ def read_params(args):
 
 
 def get_genus(tax_ass):
-    genus_reg = re.compile('g__(.+)')
+    genus_reg = re.compile('g__([^;]+)')
     genus = {}
     genus_values = set()
     with open(tax_ass) as fp:
