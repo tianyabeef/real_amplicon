@@ -168,7 +168,10 @@ def work_03(pipeline, analysis_name, infiles=None, pre_config=None):
 
     vars = {
         'work_dir': '%s/tax_rep_tree' % work_dir,
-        'rep_set': otu_table_outfiles['tax_set']
+        'rep_set': otu_table_outfiles['tax_set'],
+        'group': infiles['group_file'],
+        'reference_seqs': downsize_outfiles['seqs_fa'],
+        'otu_mapping_file': downsize_outfiles['otu_table'],
     }
     tax_rep_tree = make_tree(pipeline.config, vars=vars)
 
@@ -179,6 +182,7 @@ def work_03(pipeline, analysis_name, infiles=None, pre_config=None):
         'uniform_profile': otu_table_outfiles['uniform_profile'],
         'tax_ass': otu_table_outfiles['tax_assign'],
         'newick': tax_rep_tree['tree_file'],
+        'newicks': tax_rep_tree['tree_files'],
     }
     taxanomy_group_outfiles = taxanomy_group(pipeline.config, vars=vars)
 
