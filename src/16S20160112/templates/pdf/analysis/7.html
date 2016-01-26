@@ -12,38 +12,51 @@
         </a>
     </p>
     <p class="paragraph">observed_species指数表示实际观测到的otu数量；</p>
-    <p class="paragraph">goods_coverage指数表示测序深度:</p>
-    <p class="paragraph">测序深度：C=1-n1/N</p>
-    <p class="paragraph">为n1只有含一条序列的OTU数目，N为抽样中出现的总的序列数</p>
+
+    <p class="paragraph">goods_coverage指数表示测序深度: </p>
+    <p class="center">
+        <img src="images2/formula_depth.png">
+    </p>
+    <p class="paragraph">Cdepth：goods_coverage指数表示测序深度;</p>
+    <p class="paragraph">n1：只有含一条序列的OTU数目</p>
+    <p class="paragraph">N：为抽样中出现的总的序列数</p>
+    <p class="paragraph">参考网址：<a href="javascript:void(0)" onClick="StartExcel('http://scikit-bio.org/docs/latest/generated/generated/skbio.diversity.alpha.goods_coverage.html')" target="_blank">http://scikit-bio.org/docs/latest/generated/generated/skbio.diversity.alpha.goods_coverage.html</a></p>
+
+
+
     <p class="paragraph">chao1指数用来估计样品所含OTU的总数，其公式为：</p>
     <p class="center">
         <img src="images2/formula_chao1.png">
-    </p>
-
-    <p class="paragraph">    Schao1：估计的OTU数量；</p>
+    </p>    
+    <p class="paragraph">chao1：估计的OTU数量；</p>
     <p class="paragraph">Sobs：实际观察到的OTU数量；</p>
-    <p class="paragraph">n1：只含一条OTU的数量；</p>
-    <p class="paragraph">n2：只含两条OTU的数量；</p>
+    <p class="paragraph">F1：只含一条序列的OTU的数量；</p>
+    <p class="paragraph">F2：含两条序列的OTU的数量；</p>
+    <p class="paragraph">参考网址：<a href="javascript:void(0)" onClick="StartExcel('http://scikit-bio.org/docs/latest/generated/generated/skbio.diversity.alpha.chao1.html')" target="_blank">http://scikit-bio.org/docs/latest/generated/generated/skbio.diversity.alpha.chao1.html</a></p>
+
+
+
+
+
     <p class="paragraph">shannon指数用来估算微生物群落的多样性，shannon值越大，多样性越高，其计算公式为：</p>
     <p class="center">
         <img src="images2/formula_shannon.png">
     </p>
-
-
     <p class="paragraph">Sobs：实际观察到的OTU数量；</p>
-    <p class="paragraph">ni：只含i条OTU的数量；</p>
+    <p class="paragraph">ni：第i个OTU的序列数量；</p>
     <p class="paragraph">N：所有的序列数</p>
+    <p class="paragraph">参考网址：<a href="javascript:void(0)" onClick="StartExcel('http://scikit-bio.org/docs/latest/generated/generated/skbio.diversity.alpha.shannon.html')" target="_blank">http://scikit-bio.org/docs/latest/generated/generated/skbio.diversity.alpha.shannon.html</a></p>
+
+
+
     <p class="paragraph">simpson指数和shannon指数一样用来估算微生物群落的多样性，simpson指数越大，多样性则越低，其计算公式为：</p>
     <p class="center">
         <img src="images2/formula_simpson.png">
     </p>
-
-
-
-
     <p class="paragraph">Sobs：实际观察到的OTU数量；</p>
-    <p class="paragraph">ni：只含i条OTU的数量；</p>
+    <p class="paragraph">ni：第i个OTU的序列数量；</p>
     <p class="paragraph">N：所有的序列数</p>
+    <p class="paragraph">参考网址：<a href="javascript:void(0)" onClick="StartExcel('http://scikit-bio.org/docs/latest/generated/generated/skbio.diversity.alpha.simpson.html')" target="_blank">http://scikit-bio.org/docs/latest/generated/generated/skbio.diversity.alpha.simpson.html</a></p>
     <p class="paragraph">软件平台：qiime/锐翌分析平台</p>
     <p class="paragraph">结果目录：<a href="javascript:void(0)"  onClick="StartExcel('..\\results\\07_Alpha_diversity\\{{ group_file }}\alpha_statistic.tsv')" target="_blank">alpha列表</a></p>
 

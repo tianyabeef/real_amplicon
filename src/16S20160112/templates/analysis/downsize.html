@@ -11,14 +11,16 @@
    observed_species指数表示实际观测到的OTU数量，chao1指数用来估计样品所含OTU的总数，其公式为：
 </p>
 <p class="center">
-    <img src="images2/formula.png">
+    <img src="images2/formula_chao1.png">
 </p>
-<p class="premark">Schao1：估计的OTU数量；</p>
-<p class="premark">Sobs：实际观察到的OTU数量；</p>
-<p class="premark">n1：只含一条OTU的数量；</p>
-<p class="premark">n2：只含两条OTU的数量；</p>
-<p class="premark">软件平台：锐翌分析平台</p>
-<p class="premark">结果文件：<a href="javascript:void(0)" onClick="StartExcel('..\\results\\05_OTU_analysis\\all\\otu_downsize_stat.tsv')" target="_blank">
+<p class="paragraph">chao1：估计的OTU数量；</p>
+<p class="paragraph">Sobs：实际观察到的OTU数量；</p>
+<p class="paragraph">F1：只含一条序列的OTU的数量；</p>
+<p class="paragraph">F2：只含两条序列的OTU的数量；</p>
+<p class="paragraph">参考网址：<a href="javascript:void(0)" onClick="StartExcel('http://scikit-bio.org/docs/latest/generated/generated/skbio.diversity.alpha.chao1.html')" target="_blank">http://scikit-bio.org/docs/latest/generated/generated/skbio.diversity.alpha.chao1.html</a></p>
+        
+<p class="paragraph">软件平台：锐翌分析平台</p>
+<p class="paragraph">结果文件：<a href="javascript:void(0)" onClick="StartExcel('..\\results\\05_OTU_analysis\\all\\otu_downsize_stat.tsv')" target="_blank">
             抽平后样品OTU统计
         </a></p>
 <p class="paragraph">根据Alpha多样性分析，兼顾测序饱和度和样品完整性，我们对每个样品随机抽取28012条reads。抽平后的样品OTU统计见OTU_downsize_stat.tsv中的样品抽平OTU统计表单，结果如下：</p>
