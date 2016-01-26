@@ -488,6 +488,7 @@ def get_html():
         var_html['otu_heatmap'] = True
         var_html['uniFra_analysis_pcoa'] = True
         var_html['uniFra_analysis_nmds'] = True
+	var_html['uniFra_analysis_upgma'] = True
     if min_sample_num_in_groups >= 5 and group_num >= 2:
         var_html['uniFra_analysis_anosim'] = True
         var_html['uniFra_analysis_mrpp'] = True
