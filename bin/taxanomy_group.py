@@ -89,6 +89,19 @@ def taxanomy_group(cfg_in, vars=None):
                                                                 params['newick'],
                                                                 params['tax_ass'],
                                                                 outfiles['phylo_tree_outdir']))
+    if params['newicks']:
+        newicks = re.split('\s+', params['newicks'].strip())
+        phylo_tree_grouply_outdir = []
+        for newick in newicks:
+            group_name = os.path.basename(newick).replace('.rep_phylo.tre', '')
+            out_dir = '%s/%s' % (outfiles['phylo_tree_outdir'], group_name)
+            work.commands.append('%s --newick %s --tax_ass %s -o %s' % (scripts['plot_phylo_tree'],
+                                                                        newick,
+                                                                        params['tax_ass'],
+                                                                        out_dir))
+            phylo_tree_grouply_outdir.append(out_dir)
+        config.set('outfiles', 'phylo_tree_grouply_outdir', phylo_tree_grouply_outdir)
+
     # plot tax tree
     command = '%s --profile %s --tax_ass %s --top %s -o %s' % (scripts['plot_tax_tree'],
                                                                params['uniform_profile'],

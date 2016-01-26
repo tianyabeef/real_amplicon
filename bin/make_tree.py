@@ -41,7 +41,6 @@ def make_tree(cfg_in, vars=None):
 
     if params['group']:
         # pick rep set
-        print('ok')
         work.commands.append('%s --pick_rep_set %s -i %s -f %s -g %s -o %s -m %s' % (scripts['pick_rep_set'],
                                                                                      qiime['pick_rep_set'],
                                                                                      params['otu_mapping_file'],
