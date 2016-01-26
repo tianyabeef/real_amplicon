@@ -42,10 +42,12 @@
             <img class="size1" src="images/group/otu_diff/heatmap.png" alt="First slide">
         </p>
         <p class="name_fig"> 图9-2-1 差异OTU的Heatmap结果展示</p>
-        <p class="center">
-            <img class="size1" src="images/group/otu_diff/diff_boxplot.png" alt="second slide">
-        </p>
-        <p class="name_fig"> 图9-2-2 差异OTU的Boxplot结果展示</p>
+            {% if diff_analysis_boxplot %}
+            <p class="center">
+                <img class="size1" src="images/group/otu_diff/diff_boxplot.png" alt="second slide">
+            </p>
+            <p class="name_fig"> 图9-2-2 差异OTU的Boxplot结果展示</p>
+            {% endif %}
         <p class="center">
             <img class="size1" src="images/group/otu_diff/diff_pca.png" alt="third slide">
         </p>
@@ -90,12 +92,14 @@
         <p class="paragraph">为了直观地对这些差异属进行展示，绘制对应图形如下：</p>
         <p class="center">
             <img class="size1" src="images/group/genus_diff/heatmap.png" alt="First slide">
-        </p>
+        </p>        
         <p class="name_fig"> 图9-2-4 属水平差异物种的Heatmap结果展示</p>
-        <p class="center">
-            <img class="size1" src="images/group/genus_diff/diff_boxplot.png" alt="second slide">
-        </p>
-        <p class="name_fig"> 图9-2-5 属水平差异物种的Boxplot结果展示</p>
+            {% if diff_analysis_boxplot %}
+            <p class="center">
+                <img class="size1" src="images/group/genus_diff/diff_boxplot.png" alt="second slide">
+            </p>
+            <p class="name_fig"> 图9-2-5 属水平差异物种的Boxplot结果展示</p>
+            {% endif %}
         <p class="center">
             <img class="size1" src="images/group/genus_diff/diff_pca.png" alt="third slide">
         </p>
@@ -140,10 +144,12 @@
             <img class="size1" src="images/group/taxall_diff/heatmap.png" alt="First slide">
         </p>
         <p class="name_fig"> 图9-2-7 所有水平差异物种的Heatmap结果展示</p>
-        <p class="center">
-            <img class="size1" src="images/group/taxall_diff/diff_boxplot.png" alt="second slide">
-        </p>
-        <p class="name_fig"> 图9-2-8 所有水平差异物种的Boxplot结果展示</p>
+            {% if diff_analysis_boxplot %}
+            <p class="center">
+                <img class="size1" src="images/group/taxall_diff/diff_boxplot.png" alt="second slide">
+            </p>
+            <p class="name_fig"> 图9-2-8 所有水平差异物种的Boxplot结果展示</p>
+            {% endif %}
         <p class="center">
             <img class="size1" src="images/group/taxall_diff/diff_pca.png" alt="third slide">
         </p>
@@ -156,9 +162,3 @@
 {% else %}
     <p class="error">样品数不足无法分析</p>
 {% endif %}
-
-
-
-
-
-

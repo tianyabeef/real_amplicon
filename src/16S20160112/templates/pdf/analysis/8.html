@@ -145,7 +145,7 @@
 
 
 {% if uniFra_analysis_upgma %}
-<h3 id="UPGMA层次聚类">8.6 UPGMA层次聚类</h3>
+<h3 id="UPGMA层次聚类">8.6 UPGMA层次聚类（总样品数>=5）</h3>
     <p class="paragraph">UPGMA（Unweighted pair group method with arithmetic mean，非加权组平均法）常用来解决分类问题的一种聚类分析方法，其假设的前提是：在进化过程中所有核苷酸/氨基酸的变异率相同。通过UPGMA构建系统进化树，使得结果可视化，可以直观显示不同的环境样本中微生物进化的差异程度。</p>
     <p class="paragraph">软件平台：锐翌分析平台</p>
     <p class="paragraph">结果目录：<a href="javascript:void(0)" onclick="StartExcel('..\\results\\08_Beta_diversity\\{{ group_file }}\\cluster')" target="_blank">cluster</a></p>
@@ -158,7 +158,7 @@
         注：树枝不同颜色代表不同的分组（左图为Weight_UniFrac结果，右图为Unweight_UniFrac结果）
     </p>
 {% else %}
-<h3 id="UPGMA层次聚类">8.6 UPGMA层次聚类</h3>
+<h3 id="UPGMA层次聚类">8.6 UPGMA层次聚类（总样品数>=5）</h3>
 <p class="error">样品数不足无法分析</p>
 {% endif %}
    
