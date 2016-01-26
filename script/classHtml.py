@@ -1,4 +1,5 @@
 import sys
+
 class MrppStat(object):
     def __init__(self,group,a,observeDelta,expectDelta,significance):
         self.group = group
@@ -85,7 +86,7 @@ class Alpha_diversity(object):
 class Obj(object):
     pass
 def createClass(file):
-    obj_list = []
+    obj_list = [] 
     try:
         with open(file) as fq:
             list = fq.next().strip().split("\t")
