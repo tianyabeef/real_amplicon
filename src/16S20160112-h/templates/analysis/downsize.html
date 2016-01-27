@@ -1,0 +1,62 @@
+{% if downsize_html %}
+
+
+
+
+<h3 id="抽平处理">5.2 抽平处理</h3>
+<p class="paragraph">
+    不同样本对应的Reads数量差距较大，为避免因样品数据大小不同而造成分析时的偏差，我们在样品达到足够的测序深度的情况下，对每个样品进行随机抽平处理。测序深度用Alpha多样性指数来衡量。抽平的参数必须在保证测序深度足够的前提下去选取。
+</p>
+<p class="paragraph">
+   observed_species指数表示实际观测到的OTU数量，chao1指数用来估计样品所含OTU的总数，其公式为：
+</p>
+<p class="center">
+    <img src="images2/formula_chao1.png">
+</p>
+<p class="paragraph">Schao1：估计的OTU数量；</p>
+<p class="paragraph">Sobs：实际观察到的OTU数量；</p>
+<p class="paragraph">F1：只含一条序列的OTU的数量；</p>
+<p class="paragraph">F2：只含两条序列的OTU的数量；</p>
+<p class="paragraph">参考网址：<a href="javascript:void(0)" onClick="StartExcel('http://scikit-bio.org/docs/latest/generated/generated/skbio.diversity.alpha.chao1.html')" target="_blank">http://scikit-bio.org/docs/latest/generated/generated/skbio.diversity.alpha.chao1.html</a></p>
+        
+<p class="paragraph">软件平台：锐翌分析平台</p>
+<p class="paragraph">结果文件：<a href="javascript:void(0)" onClick="StartExcel('..\\results\\05_OTU_analysis\\all\\otu_downsize_stat.tsv')" target="_blank">
+            抽平后样品OTU统计
+        </a></p>
+<p class="paragraph">根据Alpha多样性分析，兼顾测序饱和度和样品完整性，我们对每个样品随机抽取28012条reads。抽平后的样品OTU统计见OTU_downsize_stat.tsv中的样品抽平OTU统计表单，结果如下：</p>
+<p class="name_table">
+    表5-2-1 抽平后样品OTU统计
+</p>
+<div class="center_table">
+    <div id="toolbar2" class="pull-left-self">
+        <select class="form-control">
+            <option value="">Export Basic</option>
+            <option value="all">Export All</option>
+            <option value="selected">Export Selected</option>
+        </select>
+    </div>
+    <table id="table2" data-height="560" data-pagination="true" data-filter-control="true"
+           data-show-export="true" data-page-list="[10, 25, 50, 100, 200, All]">
+    </table>
+</div>
+<p class="tremark">注：第一列Sample Name是样品名称;</p>
+<p class="tremark">第二列Downsize是抽平数量;</p>
+<p class="tremark">第三列otu_berfore抽平前的OTU个数;</p>
+<p class="tremark">第三列otus_after是抽平后样品所含有的OTU个数。</p>
+<p class="paragraph">Alpha多样性反映的是单个样品内部的物种多样性，包括observed species指数和chao指数。</p>
+
+
+<p class="center">
+    <img class="size1" src="images/alpha/chao1.png"/>
+    <img class="size1" src="images/alpha/observed_species.png"/>
+</p>
+<p class="name_fig">图5-2-1 表示样品物种丰富度Alpha多样性指数稀释曲线图</p>
+
+<p class="premark">
+   注：横轴表示从某个样品中随机抽取的Clean Reads数目，纵轴表示该Reads数目对应的Alpha多样性指数的大小。图中一条曲线代表一个样品，随着测序深度的增加，当曲线趋于平缓时表示此时的测序数据量比较合理。
+</p>
+
+
+
+
+{% endif %}
