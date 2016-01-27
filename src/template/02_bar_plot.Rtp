@@ -10,7 +10,11 @@ pdf_width = 15
 max_sample_name_length = max(mapply(nchar,colnames(data)))
 max_legend_name_length = max(mapply(nchar,rownames(data)))
 width = 5
-layout_width = -2/13*max_legend_name_length+5.46153846
+if(max_legend_name_length > 29){
+  layout_width=1
+}else{
+  layout_width = -2/13*max_legend_name_length+5.46153846
+}
 pdf('@#{pdf_file}',height=12,width=pdf_width)
 if(max_sample_name_length < 10){
   bottom_mar = 8+5
