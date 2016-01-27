@@ -1,0 +1,139 @@
+<h1>9 显著性差异分析 （PCA:每组样品数>=3;Heatmap:每组样品数>=3;Boxplot:每组样品数>=5）</h1>
+
+{% include 'analysis/leafse.html' %}
+
+<h3 id="组间差异分析">9.2 组间差异分析</h3>
+
+{% if diff_analysis %}
+    <h4>OTU水平的差异分析</h4>
+    {% if diff_otu_marker_exist %}
+        <p class="paragraph">使用秩和检验的方法对不同分组之间的进行显著性差异分析，以找出对组间划分产生显著性差异影响的物种。本分析对于两组间的差异分析采用R语言stats包的wilcox.test函数，对于两组以上的组间差异分析采用R语言stats包的kruskal.test函数。</p>
+        <p class="paragraph">软件平台：锐翌分析平台</p>
+        <p class="paragraph">结果目录：<a href="javascript:void(0)" onclick="StartExcel('..\\results\\09_diff_analysis\\{{ group_file }}\\genus_diff')" target="_blank">属水平差异</a><a href="javascript:void(0)" onclick="StartExcel('..\\results\\09_diff_analysis\\{{ group_file }}\\otu_diff')" target="_blank">OTU水平差异</a><a href="javascript:void(0)" onclick="StartExcel('..\\results\\09_diff_analysis\\{{ group_file }}\\taxall_diff')" target="_blank">全水平差异</a></p>
+        <p class="paragraph">
+            下表是在不同组样品间有显著差异的OTUs（p < {{ p_value }}, Kruskal-Wallis test），共{{ diff_otus }}个,
+            如表6-2-1显示。结果表格
+            <a href="javascript:void(0)"
+               onClick="StartExcel('..\\results\\09_diff_analysis\\{{ group_file }}\\otu_diff\\otu_diff.marker.filt.tsv')">
+                otu_diff.marker.filt.tsv
+            </a>
+        </p>
+        <p class="name_table">表9-2-1差异显著OTU列表</p>        
+        <!-- <table id="table9" data-height="560"></table> -->
+        {% block table9 %}
+        {% endblock %}
+        
+        <p class="tremark">注：第一列是OTU名称；</p>
+        <p class="tremark">第二列至第{{ group_num + 2 }}列分别为{{ group_num }}组样品的均值；</p>
+        <p class="tremark">最后一列是秩和检验的p值；</p>
+
+        <p class="paragraph">为了直观地对这些OTUs进行展示，绘制对应图形如下：</p>
+        <p class="center">
+            <img class="size1" src="images/group/otu_diff/heatmap.png" alt="First slide">
+        </p>
+        <p class="name_fig"> 图9-2-1 差异OTU的Heatmap结果展示</p>
+            {% if diff_analysis_boxplot %}
+            <p class="center">
+                <img class="size1" src="images/group/otu_diff/diff_boxplot.png" alt="second slide">
+            </p>
+            <p class="name_fig"> 图9-2-2 差异OTU的Boxplot结果展示</p>
+            {% endif %}
+        <p class="center">
+            <img class="size1" src="images/group/otu_diff/diff_pca.png" alt="third slide">
+        </p>
+        <p class="name_fig"> 图9-2-3 差异OTU的PCA结果展示</p>
+
+
+    {% else %}
+        <p class="error">未找到OTU水平差异</p>
+    {% endif %}
+
+    <h4>属水平的差异分析</h4>
+    {% if diff_genus_marker_exist %}
+        <p class="paragraph">
+            通过Kruskal-Wallis test分析可以找出在不同组间有明显差异(p < {{ p_value }})的属如下（共{{ diff_genus }}个属）。
+            结果表格
+            <a href="javascript:void(0)"
+               onClick="StartExcel('..\\results\\09_diff_analysis\\{{ group_file }}\\genus_diff\\genus_diff.marker.filt.tsv')">
+                genus_diff.marker.filt.tsv
+            </a>
+        </p>
+        <p class="name_table">表9-2-2差异显著物种列表</p>
+        {% block table10 %}
+        {% endblock %}
+       <!--  <table id="table10" data-height="560"></table> -->
+
+
+        
+        <p class="tremark">注：第一列是物种名称；</p>
+        <p class="tremark">第二列至第{{ group_num + 2 }}列分别为{{ group_num }}组样品的均值；</p>
+        <p class="tremark">最后一列是秩和检验的p值。</p>
+
+        <p class="paragraph">为了直观地对这些差异属进行展示，绘制对应图形如下：</p>
+        <p class="center">
+            <img class="size1" src="images/group/genus_diff/heatmap.png" alt="First slide">
+        </p>
+        <p class="name_fig"> 图9-2-4 属水平差异物种的Heatmap结果展示</p>
+            {% if diff_analysis_boxplot %}
+            <p class="center">
+                <img class="size1" src="images/group/genus_diff/diff_boxplot.png" alt="second slide">
+            </p>
+            <p class="name_fig"> 图9-2-5 属水平差异物种的Boxplot结果展示</p>
+            {% endif %}
+        <p class="center">
+            <img class="size1" src="images/group/genus_diff/diff_pca.png" alt="third slide">
+        </p>
+        <p class="name_fig"> 图9-2-6 属水平差异物种的PCA结果展示</p>
+
+
+    {% else %}
+        <p class="error">未找到属水平差异</p>
+    {% endif %}
+
+    <h4>所有水平的差异分析</h4>
+    {% if diff_taxall_marker_exist %}
+        <p class="paragraph">
+            通过Kruskal-Wallis test分析可以找出在不同组间有明显差异(p < {{ p_value }})的物种(包含所有水平)如下
+            （共{{ diff_species }}个）。结果表格
+            <a href="javascript:void(0)"
+               onClick="StartExcel('..\\results\\09_diff_analysis\\{{ group_file }}\\taxall_diff\\taxall_diff.marker.filt.tsv')">
+                taxall_diff.marker.filt.tsv
+            </a>
+        </p>
+        <p class="name_table">表9-2-3所有水平差异显著物种列表</p>
+        {% block table11 %}
+        {% endblock %}
+            <!-- <table id="table11" data-height="560"></table> -->
+        <p class="tremark">   注:第一列是物种名称；</p>
+        <p class="tremark">   第二列至第{{ group_num + 2 }}列分别为{{ group_num }}组样品的均值；</p>
+        <p class="tremark">   最后一列是秩和检验的p值。</p>
+        
+        <p class="paragraph">为了直观地对这些差异物种进行展示，绘制对应图形如下：</p>
+        <p class="center">
+            <img class="size1" src="images/group/taxall_diff/heatmap.png" alt="First slide">
+        </p>
+        <p class="name_fig"> 图9-2-7 所有水平差异物种的Heatmap结果展示</p>
+            {% if diff_analysis_boxplot %}
+            <p class="center">
+                <img class="size1" src="images/group/taxall_diff/diff_boxplot.png" alt="second slide">
+            </p>
+            <p class="name_fig"> 图9-2-8 所有水平差异物种的Boxplot结果展示</p>
+            {% endif %}
+        <p class="center">
+            <img class="size1" src="images/group/taxall_diff/diff_pca.png" alt="third slide">
+        </p>
+        <p class="name_fig"> 图9-2-9 所有水平差异物种的PCA结果展示</p>
+
+    {% else %}
+        <p class="error">未找到所有水平差异</p>
+    {% endif %}
+
+{% else %}
+    <p class="error">样品数不足无法分析</p>
+{% endif %}
+
+
+
+
+
+

@@ -1,0 +1,225 @@
+
+ <h1>六、物种分类和丰度分析</h1>
+{% if otu_tax_assignments %}
+    <h3 id="物种注释分析">6.1 物种注释分析</h3>
+    <p class="paragraph">从各个OTU中挑选出丰度最高的一条序列，作为该OTU的代表序列（代表序列见文件rep_set.fna）。使用RDP方法，将该代表序列与已知物种的{{ amplification }}数据库进行比对，从而对每个OTU进行物种归类（物种注释结果见文件<a
+            href="..\results\05_OTU_analysis\all\tax_assignment.tsv" target="_blank">tax_assignments.tsv</a>）。</p>
+    <p class="name_table">表6-1-1 OTU注释统计</p>
+    {% block table4 %}
+    {% endblock %}
+    <!-- <table id="table4" data-height="413"></table> -->
+    <p class="tremark">注：第一列注释到的OTUs名称；</p>
+    <p class="tremark">第二列注释的OTUs数量;</p>
+{% endif %}
+
+
+
+
+
+{% if otu_annotation_statistical %}
+    <h3 id="物种注释结果统计">6.2 物种注释结果统计</h3>
+    <p class="paragraph">根据物种注释情况，统计每个样品注释到各分类>水平(Kingdom, Phylum, Class, Order, Family, Genus,
+        Species)上的相对丰度，由此可>轻松了解注释到各分类水平的整体情况 </p>
+    <p class="paragraph">    软件平台：锐翌分析平台</p>
+    <p class="paragraph">结果文件：<a href="javascript:void(0)" onClick="StartExcel('..\\results\\05_OTU_analysis\\all\\profile_tree.tsv')" target="_blank">profile_tree.tsv。</a></p>
+{% endif %}
+
+
+
+
+
+
+
+{% if tax_summary %}
+    <div class="page">
+        <h3 id="物种丰度分析">6.3 物种丰度分析</h3>
+        <p class="paragraph">根据物种注释结果，分别在门、纲、目、科、属分类等级对各个样品做物种profiling相应的柱状图。形成物种相对丰度柱状图，可以直观地查看各样品在不同的分类等级上，相对分度较高的物种和比例。</p>
+        <p class="paragraph">软件平台：锐翌分析平台</p>
+        <p class="paragraph">结果目录：<a href="javascript:void(0)" onClick="StartExcel('..\\results\\06_classification_abundance_analysis\\all\\bar_plot\\')" target="_blank"> bar_plot图 </a></p>
+        <p class="center">
+            <img class="size1" src='images/genus/bar_plot.png'/><img class="size1"
+                                                                     src='images/family/bar_plot.png'/>
+        </p>
+        <p class="center">
+            <img class="size1" src='images/class/bar_plot.png'/><img class="size1" src='images/order/bar_plot.png'/>
+        </p>
+        <p class="center">
+            <img class="size1" src='images/phylum/bar_plot.png'/>
+        </p>
+        <p class="name_fig">图6-3-1 样品门分类水平中物种Profiling柱状图</p>
+        <p class="premark">   注：横轴为样品名称，纵轴为相对丰度的比例。颜色对应不同物种名称，色块长度表示该色块所代表的物种的相对丰度的比例。 </p>
+        <p class="paragraph">根据样品分组信息，分别在门、纲、目、科、属分类等级对不同group做物种profiling相应的柱状图。图6-3-2展示了门分类等级上的物种Profiling不同分组的Boxplot图。</p>
+        <p class="paragraph">软件平台：锐翌分析平台</p>
+        <p class="paragraph">结果目录：<a href="javascript:void(0)" onClick="StartExcel('..\\results\\06_classification_abundance_analysis\\{{ group_file }}\\bar_plot\\')" target="_blank"> bar_plot图 </a></p>
+        <p class="center">
+            <img class="size1" src='images/group/genus/bar_plot.png'/><img class="size1"
+                                                                           src='images/group/family/bar_plot.png'/>
+        </p>
+        <p class="center">
+            <img class="size1" src='images/group/class/bar_plot.png'/><img class="size1"
+                                                                           src='images/group/order/bar_plot.png'/>
+        </p>
+        <p class="center">
+            <img class="size1" src='images/group/phylum/bar_plot.png'/>
+        </p>
+
+        <p class="name_fig">图6-3-2 门分类水平中不同group的物种Profiling柱状图</p>
+        <p class="premark">注：横轴为分组名称，纵轴为相对丰度的比例。颜色对应不同物种名称，色块长度表示该色块所代表的物种的相对丰度的比例。</p>
+    </div>
+
+    <div class="page">
+        <p class="paragraph">  在属分类等级对{{ star_picture_top }}的物种丰度做Star图。一个星形图代表着一个样品的物种相对丰度信息。每个星形图中的扇形代表一个物种，用不同颜色区分，用扇形的半径来代表物种相对丰度的大小，扇形的半径越长表示丰度高，反之丰度相对较低。
+        图6-3-3展示了属分类等级上的top{{ star_picture_top }}的物种Star图。  </p>
+        <p class="paragraph">软件平台：锐翌分析平台</p>
+        <p class="paragraph">结果目录：<a href="javascript:void(0)" onClick="StartExcel('..\\results\\06_classification_abundance_analysis\\all\\tax_star\\')" target="_blank"> star图 </a></p>
+        {% if star_picture %}
+            <p class="center">
+                <img class="size5" src="images/tax_star.png"/>
+            </p>
+            <p class="name_fig">图6-3-6 属分类水平中不同group的top{{ star_picture_top }}物种Profiling星图</p>
+            <p class="premark">
+                注：一个星形图代表着一个样品的物种相对丰度信息。每个星形图中的扇形代表一个物种，用不同颜色区分，用扇形的半径来代表物种相对丰度的大小，扇形半径越长代表此扇形所对应的物种的相对丰度越高。</p>
+        {% else %}
+            <p class="error">样品数3个以下时不具有比较意义</p>
+        {% endif %}
+    </div>
+{% endif %}
+
+
+
+
+
+
+
+
+    <h3 id="物种聚类分析">6.4 物种聚类分析 </h3>
+
+    <p class="paragraph"> 根据样品中物种注释信息及丰度，从物种和样品两个层面进行物种丰度聚类，通过柱状图对比，利于观察样品之间的聚类关系以及物种组成差异。</p>
+    <p class="paragraph">软件平台：锐翌分析平台</p>
+    <p class="paragraph">结果目录：<a href="javascript:void(0)" onClick="StartExcel('..\\results\\06_classification_abundance_analysis\\{{ group_file }}\\tax_bar_tree\\')" target="_blank"> bar_tree图 </a></p>
+    <p class="center">
+        <img class="size2" src="images/group/tax_bar_tree/bar_tree.png"/>
+    </p>
+    <p class="name_fig">图6-4-1 物种丰度聚类图</p>
+    <p class="premark">
+        注：最右侧为样品聚类结果，颜色区分样品分组；中间为各个样品的所含属水平比例；右侧表示各个颜色代表的属；
+    </p>
+
+
+
+
+
+
+
+{% if otu_heatmap %}
+    <h3 id="物种热图分析">6.5 物种热图分析（总样品数>=5）</h3>
+    <p class="paragraph">
+        Heatmap是以颜色梯度来代表数据矩阵中数值的大小并能根据物种或样品丰度相似性进行聚类的一种图形展示方式。聚类结果加上样品的处理或取样环境分组信息，可以直观观察到相同处理或相似环境样品的聚类情况，并直接反映了样品的群落组成的相似性和差异性。本分析内容在属分类等级进行Heatmap聚类分析。纵向聚类表示所有物种在不同样品间表达的形似情况，距离越近，枝长越短，说明样品的物种组成及丰度越相似。横向聚类表示该物种在各样品丰度相似情况，与纵向聚类一样，距离越近，枝长越短，说明两物种在各样品间的组成越相似。</p>
+    <p class="paragraph">软件平台：锐翌分析平台</p>
+    <p class="paragraph">结果目录：<a href="javascript:void(0)" onClick="StartExcel('..\\results\\06_classification_abundance_analysis\\{{ group_file }}\\heatmap\\')" target="_blank"> heatmap图</a></p>
+    <p class="center">
+        <img class="size2" src="images/group/heatmap.png"/>
+    </p>
+    <p class="name_fig">图6-5-1 物种丰度热图</p>
+    <p class="premark">Heatmap是以颜色梯度来代表数据矩阵中数值的大小并能根据物种或样品丰度相似性进行聚类。如有样品分组信息，图中前一行为样品分组信息，颜色与图列对应。</p>
+
+{% else %}
+    <h3 id="物种热图分析">6.5 物种热图分析（总样品数>=5）</h3>
+    <p class="error">样品数不足无法分析</p>
+{% endif %}
+
+
+
+
+
+
+{% if rank_abundance %}
+    <h3 id="Rank Abundance曲线">6.6 Rank Abundance曲线</h3>
+    <p class="paragraph"> 将样品中的OTUs按相对丰度(或者包含的序列数目)由大到小排序得到对应的排序编号，再以OTUs的排序编号为横坐标，OTUs中的相对丰度（也可用该等级OTU中序列数的相对百分含量）为纵坐标,将这些点用折线连接，即绘制得到Rank Abundance曲线</p>
+
+    <p class="paragraph"> Rank Abundance曲线可同时用于解释样品多样性的物种的丰度和均匀程度两个方面。物种的丰度由曲线在横轴上的长度来反映，曲线越宽，表示物种的组成越丰富；物种组成的均匀程度由曲线的形状来反映，曲线越平坦，表示物种组成的均匀程度越高。</p>
+    <p class="paragraph">软件平台：qiime</p>
+    <p class="paragraph">结果目录：<a href="javascript:void(0)" onClick="StartExcel('..\\results\\06_classification_abundance_analysis\\all\\rank_abundance\\')" target="_blank"> rank_abundance图</a></p>
+    <p class="center">
+        <img class="size2" src="images/rank_abundance.png"/>
+    </p>
+    <p class="name_fig">图6-6-1 Rank Abundance曲线</p>
+    <p class="premark">注：横坐标为按OTUs丰度排序的序号(Rank)，纵坐标为对应的OTUs的丰度(Abundance)，不同的样品使用不同的颜色和线型的曲线表示。</p>
+{% endif %}
+
+
+
+
+
+
+    <h3 id="物种分类树">6.7 物种分类树</h3>
+    <p class="paragraph">
+        根据物种分类结果，筛选出优势物种，如物种丰度前20进行物种分类树统计，从整个分类系统上了解单个或多个样品中的优势物种的丰度差异和进化关系。
+    </p>
+    <p class="paragraph">软件平台：锐翌分析平台</p>
+    <p class="paragraph">结果目录：<a href="javascript:void(0)" onClick="StartExcel('..\\results\\06_classification_abundance_analysis\\{{ group_file }}\\tax_tree\\')" target="_blank"> 物种分类树</a></p>
+    <p class="center">
+        <img class="size2" src="images/group/tax_tree/tax_tree_circle.png"/>
+    </p>
+    <p class="name_fig">图6-7-1 物种分类以及丰度比例关系图</p>
+    <p class="premark">
+注：不同颜色表示不同的分类水平，圆圈的大小代表该分类的相对丰度大小；分类名下方的数字表示相对丰度百分率。
+    </p>
+    <p class="paragraph">每个样品的物种分类树见目录：<a href="javascript:void(0)" onClick="StartExcel('..\\results\\06_classification_abundance_analysis\\{{ group_file }}\\tax_tree\\samples')" target="_blank"> 样品物种分类树</a> </p>
+    <p class="center">
+        <img class="size2" src="images/group/tax_tree/tax_tree_pie.png"/>
+    </p>
+    <p class="name_fig">图6-7-2 物种分类以及不同分组占比关系图</p>
+    <p class="premark">
+说明：不同颜色的扇形表示不同的样品/分组，扇形的大小表示该样品/分组在该分类上相对丰度的比例大小；分类名下方的数字表示相对丰度百分率；
+    </p>
+
+
+
+
+
+
+
+
+{% if otu_krona %}
+    <h3 id="物种注释结果KRONA展示">6.8 物种注释结果KRONA展示</h3>
+    <p class="paragraph">
+        使用KRONA软件对物种注释结果进行可视化展示,
+        展示结果中，圆圈从内到外依次代表不同的分类级别，扇形的大小代表不同OTU注释结果的相对比例。
+        图6-8-1如下所示：
+    </p>
+    <p class="paragraph">软件平台：krona</p>
+    <iframe name="myFrame" src="images/krona.html" width=100% height=668px></iframe>
+    <p class="name_fig">
+        图6-8-1 物种注释结果可视化展示
+    </p>
+
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+    
+    <h3 id="物种进化树">6.9 物种进化树</h3>
+    <p class="paragraph">
+        为了进一步研究OTUs的系统进化关系，通过多序列比对得到所有OTUs代表序列的系统发生关系。
+        选取最大相对丰度排名前{{ Phylogenetic_genus_top }}的属所对应的OTUs的系统发生关系数据，
+        并结合每个OTUs的相对丰度及其代表序列的物种注释置信度信息，进行整合展示，由此可见这些属中的OTU之间的系统进化关系。
+    </p>
+    <p class="paragraph">软件平台：锐翌分析平台</p>
+    <p class="paragraph">结果目录：<a href="javascript:void(0)" onClick="StartExcel('..\\results\\06_classification_abundance_analysis\\{{ group_file }}\\phylo_tree\\')" target="_blank"> 物种进化树</a></p>
+    <p class="center">
+        <img class="size2" src="images/group/phylo_tree/phylo_tree.png"/>
+    </p class="name_fig">图5-9-1 物种进化树</p>
+    <p class="premark">
+       注：分支的颜色表示对应的不同门水平分类
+    </p>
+
+

@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block main %}
+<!-- #################################################### top navigation #################################### -->
+{% include "includes/navigator.html" %}
+<!-- #####################################################主要面板####################################### -->
+<div id="mainPanle" region="center" border="true" border="false">
+    <div class="main">
+
+        {% include 'includes/customer_info.html' %}
+
+        {% include "includes/project_info.html" %}
+
+        {% include 'includes/analysis_pipeline.html' %}
+
+        {% include 'analysis/reads_statistic.html' %}
+
+        {% include 'analysis/otu_statistic.html' %}
+
+        {% include 'analysis/downsize.html' %}
+
+        {% include 'analysis/core_microbiome.html' %}
+
+        {% include 'analysis/otu_venn.html' %}
+
+        {% include 'analysis/otu_pca.html' %}
+
+        {% include 'analysis/specaccum.html' %}
+
+        {% include 'analysis/otu_tax_assignment.html' %}
+
+        {% include 'analysis/annotation_statistic.html' %}
+
+        {% include 'analysis/tax_summary.html' %}
+
+        {% include 'analysis/species_clustering.html' %}
+
+        {% include 'analysis/otu_heatmap.html' %}
+
+        {% include 'analysis/rank_abundance.html' %}
+
+        {% include "analysis/tree_species_classification.html" %}
+
+        {% include 'analysis/otu_krona.html' %}
+
+        {% include 'analysis/phylogenetic_tree.html' %}
+
+        {% include 'analysis/alpha_diversity.html' %}
+
+        {% include 'analysis/alpha_diff.html' %}
+
+        {% include 'analysis/beta_unifrac.html' %}
+
+        {% include 'analysis/diff_analysis.html' %}
+
+        {% include 'analysis/personalize.html' %}
+
+
+        <h2>备注：</h2>
+        <p class="paragraph">网页中表格的数值保留了两位有效数字，在Excel表中保留原始数值没有做处理。</p>
+        <p class="paragraph"><a href="javascript:void(0)" onClick="StartExcel('..\\results\\16S交付文档.pdf')" target="_blank">交付文档</a></p>
+        <p class="paragraph"><a href="javascript:void(0)" onClick="StartExcel('..\\results\\16S分析方法.pdf')" target="_blank">分析方法</a></p>
+        <p class="paragraph">网页中表格的数值保留了两位有效数字，在Excel表中保留原始数值没有做处理。</p>
+        <h3 id="gobottom"></h3><!--到底部-->
+    </div>
+</div>
+
+
+{% include "includes/foot.html" %}
+<!-- ###########################################################去顶部和底部################################################# -->
+
+<div class="go">
+    <a title="返回顶部" class="top" href="#项目信息"></a>
+    <a title="如果您有意见，请反馈给我们！" class="feedback" href="javascript:void(0);" target="_self"></a>
+    <a title="返回底部" class="bottom" href="#gobottom"></a>
+</div>
+
+    <script type="text/javascript" src="js/table.js"></script>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+

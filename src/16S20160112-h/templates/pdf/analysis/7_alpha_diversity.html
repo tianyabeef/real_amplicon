@@ -1,0 +1,73 @@
+{% extends "pdf/analysis/7.html" %}
+{% block table5 %}
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="success">
+                    <th>sampleName</th>
+                    <th>chao1</th>
+                    <th>goodsCoverage</th>
+                    <th>observedSpecies</th>
+                    <th>wholeTree</th>
+                    <th>shannon</th>
+                    <th>simpson</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for key,alphaDiversity in alpha_diversitys.items() %}
+                    {% if loop.index0 < 10 %}
+                        <tr>
+                            <td>{{ alphaDiversity.alphaName|safe }}</td>
+                            <td>{{ alphaDiversity.chao1 }}</td>
+                            <td>{{ alphaDiversity.goods_coverage }}</td>
+                            <td>{{ alphaDiversity.observed_species }}</td>
+                            <td>{{ alphaDiversity.whole_tree }}</td>
+                            <td>{{ alphaDiversity.shannon }}</td>
+                            <td>{{ alphaDiversity.simpson }}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div> 
+{% endblock %}
+{% block table6 %}
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="success">
+                    <th>sampleName</th>
+                    <th>chao1</th>
+                    <th>goodsCoverage</th>
+                    <th>observedSpecies</th>
+                    <th>wholeTree</th>
+                    <th>shannon</th>
+                    <th>simpson</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for key,alphaDiversity in alpha_diversity_diffs.items() %}
+                        {% if loop.index0 < 10 %}
+                            <tr>
+                                <td>{{ alphaDiversity.alphaName|safe}}</td>
+                                <td>{{ alphaDiversity.chao1 }}</td>
+                                <td>{{ alphaDiversity.goods_coverage }}</td>
+                                <td>{{ alphaDiversity.observed_species }}</td>
+                                <td>{{ alphaDiversity.whole_tree }}</td>
+                                <td>{{ alphaDiversity.shannon }}</td>
+                                <td>{{ alphaDiversity.simpson }}</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div> 
+{% endblock %}

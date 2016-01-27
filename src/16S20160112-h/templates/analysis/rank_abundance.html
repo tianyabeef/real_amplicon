@@ -1,0 +1,16 @@
+{% if rank_abundance %}
+    <h2 id="Rank Abundance曲线">6.6 Rank Abundance曲线</h2>
+    <p class="paragraph"> 将样品中的OTUs按相对丰度(或者包含的序列数目)由大到小排序得到对应的排序编号，再以OTUs的排序编号为横坐标，OTUs中的相对丰度（也可用该等级OTU中序列数的相对百分含量）为纵坐标,将这些点用折线连接，即绘制得到Rank Abundance曲线</p>
+    <p class="paragraph"> Rank Abundance曲线可同时用于解释样品多样性的物种的丰度和均匀程度两个方面。物种的丰度由曲线在横轴上的长度来反映，曲线越宽，表示物种的组成越丰富；物种组成的均匀程度由曲线的形状来反映，曲线越平坦，表示物种组成的均匀程度越高。</p>
+    <p class="paragraph">软件平台：qiime</p>
+    <p class="paragraph">结果目录：<a href="javascript:void(0)" onClick="StartExcel('..\\results\\06_classification_abundance_analysis\\all\\rank_abundance\\')" target="_blank"> rank_abundance图</a></p>
+    <p class="center">
+        <img class="size2" src="images/rank_abundance.png"/>
+    </p>
+    <p class="name_fig">
+        图6-6-1 Rank Abundance曲线
+    </p>
+    <p class="premark">
+        注：横坐标为按OTUs丰度排序的序号(Rank)，纵坐标为对应的OTUs的丰度(Abundance)，不同的样品使用不同的颜色和线型的曲线表示。
+    </p>
+{% endif %}

@@ -1,0 +1,67 @@
+{% extends "pdf/analysis/4.html" %}
+
+{% block table12 %}
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="success">
+                    <th>sampleName</th>
+                    <th>cleanReads</th>
+                    <th>Bases</th>
+                    <th>Q20</th>
+                    <th>Q30</th>
+                    <th>GC</th>
+                    <th>averageLength</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for key,readsStat in readsStats.items() %}
+                        {% if loop.index0 < 10 %}
+                        <tr>
+                            <td>{{ readsStat.sampleName }}</td>
+                            <td>{{ readsStat.clean_read }}</td>
+                            <td>{{ readsStat.base }}</td>
+                            <td>{{ readsStat.q20 }}</td>
+                            <td>{{ readsStat.q30 }}</td>
+                            <td>{{ readsStat.gc }}</td>
+                            <td>{{ readsStat.average_length }}</td>
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>   
+{% endblock %}
+
+{% block table13 %}
+
+
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="success">
+                        <th>length_name</th>
+                        <th>num</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for key,readsLength in readsLengths.items() %}
+                    {% if loop.index0 < 10 %}
+                        <tr>
+                            <td>{{ readsLength.name }}</td>
+                            <td>{{ readsLength.num }}</td>
+                        </tr>
+                    {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>           
+{% endblock %}

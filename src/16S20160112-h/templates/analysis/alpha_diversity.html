@@ -1,0 +1,133 @@
+<h1>7 Alpha多样性分析</h1>
+
+<h2 id="单个样品多样性分析">7.1 单个样品多样性分析</h2>
+
+{% if alpha_diversity %}
+
+    <p class="paragraph">
+        Alpha多样性反映的是单个样品内部的物种多样性，
+        包括observed species指数、chao1指数，shannon指数以及simpson指数，PD_whole_tree指数等。
+        Alpha多样性统计见
+        <a href="javascript:void(0)"
+           onClick="StartExcel('..\\results\\07_Alpha_diversity\\{{ group_file }}\\alpha_statistic.tsv')" target="_blank">
+            alpha_statistic.tsv
+        </a>
+    </p>
+    <p class="paragraph">observed_species指数表示实际观测到的otu数量；</p>
+
+    <p class="paragraph">goods_coverage指数表示测序深度: </p>
+    <p class="center">
+        <img src="images2/formula_depth.png">
+    </p>
+    <p class="paragraph">Cdepth：goods_coverage指数表示测序深度;</p>
+    <p class="paragraph">n1：只有含一条序列的OTU数目</p>
+    <p class="paragraph">N：为抽样中出现的总的序列数</p>
+    <p class="paragraph">参考网址：<a href="javascript:void(0)" onClick="StartExcel('http://scikit-bio.org/docs/latest/generated/generated/skbio.diversity.alpha.goods_coverage.html')" target="_blank">http://scikit-bio.org/docs/latest/generated/generated/skbio.diversity.alpha.goods_coverage.html</a></p>
+
+
+
+    <p class="paragraph">chao1指数用来估计样品所含OTU的总数，其公式为：</p>
+    <p class="center">
+        <img src="images2/formula_chao1.png">
+    </p>    
+    <p class="paragraph">Schao1：估计的OTU数量；</p>
+    <p class="paragraph">Sobs：实际观察到的OTU数量；</p>
+    <p class="paragraph">F1：只含一条序列的OTU的数量；</p>
+    <p class="paragraph">F2：含两条序列的OTU的数量；</p>
+    <p class="paragraph">参考网址：<a href="javascript:void(0)" onClick="StartExcel('http://scikit-bio.org/docs/latest/generated/generated/skbio.diversity.alpha.chao1.html')" target="_blank">http://scikit-bio.org/docs/latest/generated/generated/skbio.diversity.alpha.chao1.html</a></p>
+
+
+
+
+
+    <p class="paragraph">shannon指数用来估算微生物群落的多样性，shannon值越大，多样性越高，其计算公式为：</p>
+    <p class="center">
+        <img src="images2/formula_shannon.png">
+    </p>
+    <p class="paragraph">Sobs：实际观察到的OTU数量；</p>
+    <p class="paragraph">ni：第i个OTU的序列数量；</p>
+    <p class="paragraph">N：所有的序列数</p>
+    <p class="paragraph">参考网址：<a href="javascript:void(0)" onClick="StartExcel('http://scikit-bio.org/docs/latest/generated/generated/skbio.diversity.alpha.shannon.html')" target="_blank">http://scikit-bio.org/docs/latest/generated/generated/skbio.diversity.alpha.shannon.html</a></p>
+
+
+
+    <p class="paragraph">simpson指数和shannon指数一样用来估算微生物群落的多样性，simpson指数越大，多样性则越高，其计算公式为：</p>
+    <p class="center">
+        <img src="images2/formula_simpson.png">
+    </p>
+    <p class="paragraph">Sobs：实际观察到的OTU数量；</p>
+    <p class="paragraph">ni：第i个OTU的序列数量；</p>
+    <p class="paragraph">N：所有的序列数</p>
+    <p class="paragraph">参考网址：<a href="javascript:void(0)" onClick="StartExcel('http://scikit-bio.org/docs/latest/generated/generated/skbio.diversity.alpha.simpson.html')" target="_blank">http://scikit-bio.org/docs/latest/generated/generated/skbio.diversity.alpha.simpson.html</a></p>
+
+    <p class="paragraph">软件平台：qiime/锐翌分析平台</p>
+    <p class="paragraph">结果目录：<a href="javascript:void(0)"  onClick="StartExcel('..\\results\\07_Alpha_diversity\\{{ group_file }}')" target="_blank">alpha列表</a></p>
+
+    <p class="name_table">表7-1-1 样品Alpha多样性统计结果</p>
+
+    <div class="center_table">
+        <div id="toolbar5" class="pull-left-self">
+            <select class="form-control">
+                <option value="">Export Basic</option>
+                <option value="all">Export All</option>
+                <option value="selected">Export Selected</option>
+            </select>
+        </div>
+        <table id="table5" data-height="580" data-pagination="true" data-filter-control="true"
+               data-show-export="true" data-page-list="[10, 25, 50, 100, 200, All]">
+        </table>
+    </div>
+
+    <p class="tremark">
+        注：第一列Sample Name是样品名称；
+        第二列至最后一列是样品的不同的Alpha多样性指数的数值。
+    </p>
+    <!-- main slider carousel -->
+    <div class="row">
+        <div class="col-md-12" id="slider">
+            <div class="col-md-12" id="carousel-bounding-box">
+                <div id="myCarousel3" class="carousel slide">
+                    <!-- 轮播（Carousel）项目 -->
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <img src="images/group/alpha_div_collated/chao1.png" alt="First slide">
+                        </div>
+                        <div class="item">
+                            <img src="images/group/alpha_div_collated/goods_coverage.png" alt="second slide">
+                        </div>
+                        <div class="item">
+                            <img src="images/group/alpha_div_collated/observed_species.png" alt="third slide">
+                        </div>
+                        <div class="item">
+                            <img src="images/group/alpha_div_collated/PD_whole_tree.png" alt="four slide">
+                        </div>
+                        <div class="item">
+                            <img src="images/group/alpha_div_collated/shannon.png" alt="five slide">
+                        </div>
+                        <div class="item">
+                            <img src="images/group/alpha_div_collated/simpson.png" alt="six slide">
+                        </div>
+                    </div>
+                    <!-- 轮播（Carousel）导航 -->
+                    <a class="carousel-control left" href="#myCarousel3" data-slide="prev"><span
+                            class="img-switch-btn"></span></a>
+                    <a class="carousel-control right" href="#myCarousel3" data-slide="next"><span
+                            class="img-switch-btn2"></span></a>
+                    <!-- 控制按钮 -->
+                    <div style="text-align:center;">
+                        <input type="button" class="btn btn-success btn-sm" id="slide-3-0" value="chao1">
+                        <input type="button" class="btn btn-success btn-sm" id="slide-3-1" value="goods_coverage">
+                        <input type="button" class="btn btn-success btn-sm" id="slide-3-2" value="observed_species">
+                        <input type="button" class="btn btn-success btn-sm" id="slide-3-3" value="PD_whole_tree">
+                        <input type="button" class="btn btn-success btn-sm" id="slide-3-4" value="shannon">
+                        <input type="button" class="btn btn-success btn-sm" id="slide-3-5" value="simpson">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p class="name_fig"> 图7-1-1 样品物种丰度Alpha多样性指数稀释曲线图 </p>
+     <p class="premark">注：横轴表示抽取的reads数量，纵轴表示相应Alpha多样性指数的值。图中一种颜色代表一组样品，测序条数不能覆盖样品时，曲线直线上升；测序条数增加到覆盖样品中的大部分微生物时，曲线呈现平滑趋势。</p>
+{% else %}
+    <p class="error">样品数不足无法分析</p>
+{% endif %}
