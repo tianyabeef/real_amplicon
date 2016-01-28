@@ -476,9 +476,10 @@ def get_html():
     var_html['downsize_html'] = True
 
     var_html['star_picture'] = True
+    var_html['tax_bar_tree'] = True
     if sample_num_total <= 3:
         var_html['star_picture'] = False
-
+        var_html['tax_bar_tree'] = False
     if sample_num_total >= 4:
         var_html['uniFra_analysis_heatmap'] = True
 

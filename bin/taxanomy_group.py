@@ -78,11 +78,12 @@ def taxanomy_group(cfg_in, vars=None):
                                                              outfiles['tax_heatmap_outdir'],
                                                              params['heatmap_top']))
     # tax tree
-    work.commands.append('%s -i %s -g %s -o %s -t %s' % (scripts['tax_bar_tree'],
-                                                         outfiles['summarize_dir'] + '/otu_table_L6.txt',
-                                                         params['group'],
-                                                         outfiles['tax_bar_tree_outdir'],
-                                                         params['bar_tree_top']))
+    if sample_num_total >= 3:
+        work.commands.append('%s -i %s -g %s -o %s -t %s' % (scripts['tax_bar_tree'],
+                                                             outfiles['summarize_dir'] + '/otu_table_L6.txt',
+                                                             params['group'],
+                                                             outfiles['tax_bar_tree_outdir'],
+                                                             params['bar_tree_top']))
 
     # plot phylo tree
     work.commands.append('%s --newick %s --tax_ass %s -o %s' % (scripts['plot_phylo_tree'],
