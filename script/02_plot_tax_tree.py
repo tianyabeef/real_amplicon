@@ -262,13 +262,13 @@ def add_pie_face(tree, ts, total_profile, group):
         percents = map(lambda s: s / summary * 100, profile_list)
         P = PieChartFace(percents=percents, width=50, height=50, colors=cols)
         node.add_face(P, 0, 'aligned')
+        #ts.legend.add_face(TextFace(" "), 0)
+        #ts.legend.add_face(TextFace(" "), 1)
     for ind, g in enumerate(profile_list.index):
-        ts.legend.add_face(TextFace(" "), 0)
-        ts.legend.add_face(TextFace(" "), 1)
         T = TextFace('  %s  ' % g)
-        ts.legend.add_face(T, 0)
+        ts.legend.add_face(T, ind*2%24)
         C = CircleFace(radius=10, color=cols[ind], style="circle")
-        ts.legend.add_face(C, 1)
+        ts.legend.add_face(C, (ind*2+1)%24)
         ts.legend_position = 1
 
 
