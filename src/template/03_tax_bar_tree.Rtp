@@ -75,7 +75,7 @@ topbarplot <- function(profile, number = NULL, palette = NULL)
 	profile <- rbind(profile, Others)
 	barplot(profile, col = col, space = 0.25, width = 0.8, horiz = T, xaxt = "n", las = 1, ylim = c(0, ncol(profile)),
 			family="mono")
-	mtext(paste(number, "Main Species in Samples"), side = 3, line = 1, cex = 2)
+	mtext(paste(number, "Main Genes in Samples"), side = 3, line = 1, cex = 2)
 	specol <- col
 	names(specol) <- rownames(profile)
 	specol
