@@ -40,6 +40,8 @@ def work_single(file, group):
         group_name = group[sample]
         if group_name not in alphas:
             alphas[group_name] = []
+        if tail[ind] == "n/a":
+            continue
         alphas[group_name].append(tail[ind])
     return alphas
 
