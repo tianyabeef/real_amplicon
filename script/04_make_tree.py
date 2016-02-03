@@ -7,7 +7,7 @@ import argparse
 import os
 from util import mkdir
 
-
+# TODO: rewrite this script with mafft
 def read_params(args):
     parser = argparse.ArgumentParser(description='''make tree wrapper | v1.0 at 2015/10/14 by liangzb ''')
     parser.add_argument('--align_seq_py', dest='align_seqs_soft', metavar='FILE', type=str, default='align_seqs.py',
