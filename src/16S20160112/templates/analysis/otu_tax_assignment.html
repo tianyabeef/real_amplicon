@@ -3,7 +3,7 @@
 
     <h3 id="物种注释分析">6.1 物种注释分析</h3>
         <p class="paragraph">从各个OTU中挑选出丰度最高的一条序列，作为该OTU的代表序列，使用RDP方法，将该代表序列与已知物种的
-        {{ amplification }}数据库 {% if amplification == "16S" %} （RDP，http://rdp.cme.msu.edu）{% else %} (UNITE,https://unite.ut.ee/) {% endif %}进行比对，从而对每个OTU进行物种归类。根据物种注释情况，
+        {{ amplification }}数据库（RDP，http://rdp.cme.msu.edu）进行比对，从而对每个OTU进行物种归类。根据物种注释情况，
         统计每个样品注释到各分类水平(Kingdom, Phylum, Class, Order, Family, Genus, Species)上的序列数目，由此可轻松了解注释到各分类水平的整体情况[6] - [7]。
         物种注释结果见文件<a href="..\results\05_OTU_analysis\all\tax_assignment.tsv" target="_blank">tax_assignments.tsv</a></p>
     <p class="name_table">表6-1-1 OTU注释统计</p>
