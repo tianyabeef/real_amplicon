@@ -65,7 +65,7 @@ if(nrow(X)<=1){
 	boxplot(pc1 ~ time1, data = Y1, col = group_colors,horizontal=F,outline=T,cex.lab=1.6,cex.axis=1.2,yaxt="n")
 
 	plot(0, xaxt='n', yaxt='n',type='n',xlab='',bty='n')
-	legend("top",legend=group_names,col=group_colors,pch=15,cex=1.3,pt.cex=5,x.intersp=3,y.intersp=2,horiz=F,ncol = as.integer(length(group_colors)/6+1))
+	legend("top",legend=group_names,col=group_colors,pch=15,cex=1.3,pt.cex=5,x.intersp=3,y.intersp=2,horiz=F,ncol = ,ncol = ceiling(length(group_colors)/6))
 
 }
 dev.off()
