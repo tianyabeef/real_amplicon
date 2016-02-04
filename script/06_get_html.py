@@ -501,7 +501,7 @@ def get_html():
 
     var_html['rank_abundance'] = True
     var_html['alpha_diversity'] = True
-    if sample_num_total >= 10:
+    if sample_num_total >= 6:
         var_html['specaccum'] = True
     var_html['otu_tax_assignments'] = True
     var_html['otu_annotation_statistical'] = True
