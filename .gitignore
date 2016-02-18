@@ -5,3 +5,5 @@ qiime/
 biopython/
 hy/
 git.sh
+.idea/
+.metadata/
