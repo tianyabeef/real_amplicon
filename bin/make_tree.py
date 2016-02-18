@@ -4,27 +4,35 @@ from settings import *
 
 
 def get_command(rep_set_file, tree_file, params, scripts, qiime, outfiles):
-    command = "%s --align_seq_py %s --make_phylogeny_py %s " % (scripts['make_tree'],
+    if params['data_type'] == '16S':
+        command = "%s --align_seq_py %s --make_phylogeny_py %s " % (scripts['make_tree'],
                                                                 qiime['align_seqs'],
                                                                 qiime['make_phylogeny'])
 
-    if not params['align_method']:
-        if params['data_type'] == '16S':
+        if not params['align_method']:
             params['align_method'] = 'pynast'
-        elif params['data_type'] == 'ITS':
-            params['align_method'] = 'muscle'
-    command += '-i %s -a %s -d %s --tree_file %s -o %s ' % (rep_set_file,
+        command += '-i %s -a %s -d %s --tree_file %s -o %s ' % (rep_set_file,
                                                             params['align_method'],
                                                             params['data_type'],
                                                             tree_file,
                                                             outfiles['out_dir'])
-    if params['align_method'] == 'pynast':
-        if not params['pre_align']:
-            raise IOError, 'must set the pre align file when align_method is pynast'
-        command += "-t %s " % params['pre_align']
-    if params['lanemask']:
-        command += '--filter_alignment_py %s -m %s ' % (qiime['filter_alignment'],
-                                                        params['lanemask'])
+        if params['align_method'] == 'pynast':
+            if not params['pre_align']:
+                raise IOError, 'must set the pre align file when align_method is pynast'
+            command += "-t %s " % params['pre_align']
+        if params['lanemask']:
+            command += '--filter_alignment_py %s -m %s ' % (qiime['filter_alignment'],
+                                                            params['lanemask'])
+
+    elif params['data_type'] == 'ITS':
+        command = "%s  --make_phylogeny_py %s " % (scripts['make_tree'],
+                                                   qiime['make_phylogeny'])
+        command += '-i %s -d %s --tree_file %s -o %s ' % (rep_set_file,
+                                                            params['data_type'],
+                                                            tree_file,
+                                                            outfiles['out_dir'])
+        command += '--retree %s --mafft %s ' % (params['retree'],
+                                                            qiime['mafft'])
     return command
 
 
