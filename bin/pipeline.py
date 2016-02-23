@@ -292,7 +292,7 @@ def work_html(pipeline, group_files, infiles=None):
     word_dir = pipeline.config.get('params', 'work_dir')
     data_type = pipeline.config.get('params', 'data_type')
     job_id = pipeline.config.get('params', 'job_id')
-
+    sequence_platform = pipeline.config.get('params', 'sequence_platform')
     # project information
     project_name = pipeline.config.get('project', 'project_name')
     customer_name = pipeline.config.get('project', 'customer_name')
@@ -308,6 +308,7 @@ def work_html(pipeline, group_files, infiles=None):
     salesman = pipeline.config.get('project', 'salesman')
     sale_phone = pipeline.config.get('project', 'sale_phone')
     sale_email = pipeline.config.get('project', 'sale_email')
+
 
     group_files = group_files
     work_dir = word_dir + "/" + job_id + "_report_" + time.strftime('%F') + "/"
@@ -329,7 +330,8 @@ def work_html(pipeline, group_files, infiles=None):
         'enterprise_address': enterprise_address,
         'salesman': salesman,
         'sale_phone': sale_phone,
-        'sale_email': sale_email
+        'sale_email': sale_email,
+        'sequence_platform':sequence_platform
     }
     get_result_outfile = get_result(pipeline.config, vars=vars)
     get_html_outfile = get_html(pipeline.config, vars=vars)
