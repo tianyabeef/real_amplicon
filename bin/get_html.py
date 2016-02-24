@@ -27,10 +27,10 @@ def get_html(cfg_in, vars=None):
     sys.setdefaultencoding('utf-8')
     if vars is not None:
         if vars['sequence_platform'] == 'miseq':
-            print const.html_template_miseq
+            #print const.html_template_miseq
             vars["html_template"] = const.html_template_miseq
         if vars['sequence_platform'] == 'hiseq':
-            print const.html_template_hiseq
+            #print const.html_template_hiseq
             vars["html_template"] = const.html_template_hiseq
     work = Work(DEFAULT_CONFIG_DIR + '/get_html.cfg')
     work.set_params(cfg_in, vars)
