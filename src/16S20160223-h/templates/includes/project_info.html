@@ -1,0 +1,137 @@
+<h1 id="项目信息">一、项目信息</h1>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="success">
+                        <td colspan="4">
+                            项目相关信息
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>
+                            项目名称
+                        </th>
+                        <td colspan="3">
+                            {{ project['project_name'] }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            项目编号
+                        </th>
+                        <td colspan="3">
+                            {{ project['project_num'] }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            样品来源
+                        </th>
+                        <td colspan="3">
+                            {{ project['sample_source'] }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            样品类型
+                        </th>
+                        <td colspan="3">
+                            {{ project['sample_type'] }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            备注信息
+                        </th>
+                        <td colspan="3">
+                            {{ project['note_information'] }}
+                        </td>
+                    </tr>
+                </tbody>
+                <thead>
+                    <tr class="success">
+                        <td colspan="4">
+                            客户信息
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th rowspan="2">
+                            项目联系人
+                        </th>
+                        <td rowspan="2">
+                            {{ project['project_contacts'] }}
+                        </td>
+                        <th>
+                            联系电话
+                        </th>
+                        <td>
+                            {{ project['phone'] }}
+                        </td>
+                    </tr>
+                    <tr >
+                        <th>
+                            邮箱
+                        </th>
+                        <td>
+                            {{ project['email'] }}
+                        </td>
+                    </tr>
+                    <tr >
+                        <th>
+                            单位名称
+                        </th>
+                        <td  colspan="3">
+                            {{ project['enterprise_name'] }}
+                        </td>
+                    </tr>
+                    <tr >
+                        <th>
+                            单位地址
+                        </th>
+                        <td  colspan="3">
+                            {{ project['enterprise_address'] }}
+                        </td>
+                    </tr>
+                </tbody>
+                <thead>
+                    <tr class="success">
+                        <td colspan="4">
+                            锐翌科技代表信息
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th  rowspan="2">
+                            科技代表
+                        </th> 
+                        <td rowspan="2">
+                            {{ project['salesman'] }}
+                        </td>                         
+                        <td>
+                            联系电话
+                        </td>
+                        <td>
+                            {{ project['sale_phone'] }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            联系邮箱
+                        </td>
+                        <td>
+                            {{ project['sale_email'] }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="blank-900"></div>

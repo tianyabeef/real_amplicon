@@ -1,0 +1,26 @@
+<h3 id="LDA EffectSize（LEfSe）分析">9.1 LDA EffectSize（LEfSe）分析(每组样品数≥3)</h3>
+{% if lefse or diff_analysis %}
+
+{% endif %}
+{% if lefse %}
+    <p class="paragraph">
+        LDA EffectSize(LEfSe分析)：LEfSe采用线性判别分析 (LDA) 来估算每个组分(物种)丰度对差异效果影响的大小，找出对样品划分产生显著性差异影响的群落或物种。LEfSe分析强调统计意义和生物相关性<sup>[24]</sup>。
+        
+    </p>
+    <p class="paragraph">软件平台：LEfSe</p>
+    <p class="paragraph">结果目录：<a href="javascript:void(0)" onclick="StartExcel('..\\results\\09_diff_analysis\\{{ group_file }}\\LEfSe')" target="_blank">09_diff_analysis\group\LEfSe\</a></p>
+    <p class="center">
+        <img class="size2" src="images/group/LDA.cladogram.png"/>
+    </p>
+    <p class="center">
+        <img class="size2" src="images/group/LDA.png"/>
+    </p>
+    <p class="name_fig">图9-1-1 LEfSe分析图</p>
+    <p class="premark">
+        注：上图为聚类树，不同颜色表示不同分组，不同颜色的节点表示在该颜色所代表的分组中起到重要作用的微生物群。黄色节点表示的是在不同分组中没有起到重要作用的微生物类群。图中英文字母所表示的物种名称在右侧图例中进行展示。下图是统计不同分组中有显著作用的微生物类群通过LDA(线性回归分析)后得到的LDA分值。（LDA阀值{{ LDA_cutoff }}）。
+    </p>
+{% elif lefse_enough %}
+    <p class="error">未找到显著性差异</p>
+{% else %}
+    <p class="error">样品量不足无法分析</p>
+{% endif %}

@@ -1,0 +1,41 @@
+{% if otu_statistical %}
+
+<h1 id="OTU分析">五、OTU分析</h1>
+
+<h3 id="OTU聚类">5.1 OTU聚类</h3>
+<p class="paragraph">
+    首先我们将序列完全一样的Clean Reads根据其丰度大小进行排序，将其中的Singletons过滤掉，
+    (因为Singletons可能由于测序错误造成，故将这部分序列去除，不进行后期OTU聚类)，
+    利用Usearch在0.97相似度下进行聚类，对聚类后的序列进行嵌合体过滤后，得到用于物种分类的OTU(Operational Taxonomic Units)，
+    最后将所有Clean Reads比对到OTU序列上，将能比对上OTU的Reads提取出来，得到最终的Mapped Reads<sup>[2]-[3]</sup>。
+    统计各个样品每个OTU中的丰度信息，OTU的丰度初步说明了样品的物种丰富程度。
+    </p>
+    <p class="paragraph">{{ sample_sum }}个样品共产生{{ otu_sum }}个OTU。</p>
+
+    <p class="paragraph">软件平台：usearch</p>
+    <p class="paragraph">结果文件：
+    <a href="javascript:void(0)" onClick="StartExcel('..\\results\\04_data_statistics\\pick_otu_summary.tsv')" target="_blank">
+        pick_otu_summary.tsv
+    </a></p>
+<p class="name_table">表5-1-1 样品数据和OTU统计</p>
+
+<div class="center_table">
+    <div id="toolbar1" class="pull-left-self">
+        <select class="form-control">
+            <option value="">Export Basic</option>
+            <option value="all">Export All</option>
+            <option value="selected">Export Selected</option>
+        </select>
+    </div>
+    <table id="table1" data-height="580" data-pagination="true" data-filter-control="true"
+           data-show-export="true" data-page-list="[10, 25, 50, 100, 200, All]"></table>
+</div>
+        <p class="tremark">注：第一列Sample Name是样品名称；</p>
+        <p class="tremark">第二列Amplicon type是扩增子类型；</p>
+        <p class="tremark">第三列Clean Read是质控后的Reads条数；</p>
+        <p class="tremark">第四列Mapped Reads是比对上OTU的Reads占Clean Reads的数量；</p>
+        <p class="tremark">第五列Mapped Reads(%)是比对上OTU的Reads占Clean Reads的比例；</p>
+        <p class="tremark">第六列OTUs是样品所含有的OTU个数。</p>
+    
+
+{% endif %}

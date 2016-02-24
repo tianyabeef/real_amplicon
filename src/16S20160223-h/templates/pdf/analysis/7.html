@@ -1,0 +1,154 @@
+<h1>7 Alpha多样性分析</h1>
+
+{% if alpha_diversity %}
+    <h3 id="单个样品多样性分析">7.1 单个样品多样性分析</h3>
+    <p class="paragraph">Alpha多样性(Alpha diversity)是对单个样品中物种多样性的分析，包括observed species指数、chao1指数、shannon指数、simpson指数以及PD_whole_tree指数。利用QIIME<sup>[16]-[17]</sup>软件计算样品的Alpha多样性指数的值，并做出相应的稀释曲线。</p>
+    <p class="paragraph">稀释曲线是利用已测得16S rDNA序列中已知的各种OTUs的相对比例，来计算抽取n个(n小于测得Reads序列总数)Reads时各Alpha多样性指数的期望值，然后根据一组n值(一般为一组小于总序列数的等差数列)与其相对应的Alpha多样性指数的期望值做出曲线来，并作出Alpha多样性指数的统计表格<sup>[18]</sup>。</p>
+    <p class="paragraph">observed_species指数表示实际观测到的otu数量；</p>
+
+    <p class="paragraph">goods_coverage指数表示测序深度: </p>
+    <p class="center">
+        <img src="images2/formula_depth.png">
+    </p>
+    <p class="paragraph">Cdepth：goods_coverage指数表示测序深度;</p>
+    <p class="paragraph">n1：只有含一条序列的OTU数目</p>
+    <p class="paragraph">N：为抽样中出现的总的序列数</p>
+    <p class="paragraph">参考网址：<a href="javascript:void(0)" onClick="StartExcel('http://scikit-bio.org/docs/latest/generated/generated/skbio.diversity.alpha.goods_coverage.html')" target="_blank">http://scikit-bio.org/docs/latest/generated/generated/skbio.diversity.alpha.goods_coverage.html</a></p>
+
+
+
+    <p class="paragraph">chao1指数用来估计样品所含OTU的总数，其公式为：</p>
+    <p class="center">
+        <img src="images2/formula_chao1.png">
+    </p>    
+    <p class="paragraph">Schao1：估计的OTU数量；</p>
+    <p class="paragraph">Sobs：实际观察到的OTU数量；</p>
+    <p class="paragraph">F1：只含一条序列的OTU的数量；</p>
+    <p class="paragraph">F2：含两条序列的OTU的数量；</p>
+    <p class="paragraph">参考网址：<a href="javascript:void(0)" onClick="StartExcel('http://scikit-bio.org/docs/latest/generated/generated/skbio.diversity.alpha.chao1.html')" target="_blank">http://scikit-bio.org/docs/latest/generated/generated/skbio.diversity.alpha.chao1.html</a></p>
+
+
+
+
+
+    <p class="paragraph">shannon指数用来估算微生物群落的多样性，shannon值越大，多样性越高，其计算公式为：</p>
+    <p class="center">
+        <img src="images2/formula_shannon.png">
+    </p>
+    <p class="paragraph">Sobs：实际观察到的OTU数量；</p>
+    <p class="paragraph">ni：第i个OTU的序列数量；</p>
+    <p class="paragraph">N：所有的序列数</p>
+    <p class="paragraph">参考网址：<a href="javascript:void(0)" onClick="StartExcel('http://scikit-bio.org/docs/latest/generated/generated/skbio.diversity.alpha.shannon.html')" target="_blank">http://scikit-bio.org/docs/latest/generated/generated/skbio.diversity.alpha.shannon.html</a></p>
+
+
+
+    <p class="paragraph">simpson指数和shannon指数一样用来估算微生物群落的多样性，simpson指数越大，多样性则越高，其计算公式为：</p>
+    <p class="center">
+        <img src="images2/formula_simpson.png">
+    </p>
+    <p class="paragraph">Sobs：实际观察到的OTU数量；</p>
+    <p class="paragraph">ni：第i个OTU的序列数量；</p>
+    <p class="paragraph">N：所有的序列数</p>
+    <p class="paragraph">参考网址：<a href="javascript:void(0)" onClick="StartExcel('http://scikit-bio.org/docs/latest/generated/generated/skbio.diversity.alpha.simpson.html')" target="_blank">http://scikit-bio.org/docs/latest/generated/generated/skbio.diversity.alpha.simpson.html</a></p>
+    
+    <p class="paragraph">软件平台：qiime/锐翌分析平台</p>
+    <p class="paragraph">结果目录：<a href="javascript:void(0)"
+       onClick="StartExcel('..\\results\\07_Alpha_diversity\\{{ group_file }}\\alpha_statistic.tsv')" target="_blank">
+        07_Alpha_diversity\alpha_statistic.tsv\
+        </a>
+    </p>
+    
+    <p class="name_table">表7-1-1 样品Alpha多样性统计结果</p>
+
+    {% block table5 %}
+    {% endblock %}
+<!--     <table id="table5" data-height="413"></table> -->
+
+
+    <p class="tremark"> 注：第一列Sample Name是样品名称；</p>
+    <p class="tremark">    第二列至最后一列是样品的不同的Alpha多样性指数的数值。 </p>
+    <p class="paragraph">结果目录：<a href="javascript:void(0)"  onClick="StartExcel('..\\results\\07_Alpha_diversity\\{{ group_file }}')" target="_blank">alpha列表</a></p>
+
+    <p class="center">
+        <img class="size1" src='images/group/alpha_div_collated/chao1.png'/><img class="size1"
+                                                                                 src='images/group/alpha_div_collated/goods_coverage.png'/>
+    </p>
+    <p class="center">
+        <img class="size1" src='images/group/alpha_div_collated/observed_species.png'/><img class="size1"
+                                                                                            src='images/group/alpha_div_collated/PD_whole_tree.png'/>
+    </p>
+    <p class="center">
+        <img class="size1" src='images/group/alpha_div_collated/shannon.png'/><img class="size1"
+                                                                                   src='images/group/alpha_div_collated/simpson.png'/>
+    </p>
+
+    <p class="name_fig"> 图7-1-1 样品物种丰度Alpha多样性指数稀释曲线图 </p>
+    <p class="premark">注：横轴表示抽取的reads数量，纵轴表示相应Alpha多样性指数的值。图中一种颜色代表一组样品，测序条数不能覆盖样品时，曲线直线上升；测序条数增加到覆盖样品中的大部分微生物时，曲线呈现平滑趋势。</p>
+
+{% else %}
+    <h3 id="单个样品多样性分析">7.1 单个样品多样性分析</h3>
+    <p class="error">样品数不足无法分析</p>
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% if alpha_diff %}
+    <h3 id="单个样品差异分析">7.2 单个样品差异分析(每组内样品数>=3)</h3>
+
+    {% if alpha_diff_boxplot %}
+        
+    <p class="paragraph">
+        分别对Alpha diversity的各个指数进行秩和检验分析(若两组样品比较则使用R中的wilcox.test函数，若两组以上的样品比较则使用R中的kruskal.test函数)，通过秩和检验筛选不同条件下的显著差异的Alpha Diversity指数。
+    </p>
+
+    <p class="paragraph">软件平台：</p>
+    <p class="paragraph">结果目录：<a href="javascript:void(0)" onClick="StartExcel('..\\results\\07_Alpha_diversity\\{{ group_file }}\\alpha_marker.tsv')" target="_blank"> 07_Alpha_diversity \total_alpha_rare\ alpha_marker.tsv</a></p>
+    <p class="paragraph">结果目录：<a href="javascript:void(0)" onClick="StartExcel('..\\results\\07_Alpha_diversity\\{{ group_file }}\\box_plot')" target="_blank">07_Alpha_diversity\group\box_plot\</a></p>
+    <p class="name_table">表7-2-1 Alpha diversity指数差异检验</p>
+    {% block table6 %}
+    {% endblock %}
+<!--     <table id="table6" data-height="413"></table> -->
+
+
+    <p class="tremark">注：第一行Alpha name是Alpha diversity指数；</p>
+    <p class="tremark">第二行p-value是Alpha diversity指数对应的秩和检验的p值；</p>
+    <p class="tremark">第二行至第{{ group_num + 2 }}行分别为{{ group_num }}组样品的均值；</p>
+    <p class="center">
+            <img class="size1" src='images/group/box_plot/chao1.boxplot.png'/><img class="size1"
+                                                                                   src='images/group/box_plot/goods_coverage.boxplot.png'/>
+        </p>
+        <p class="center">
+            <img class="size1" src='images/group/box_plot/observed_species.boxplot.png'/><img class="size1"
+                                                                                              src='images/group/box_plot/PD_whole_tree.boxplot.png'/>
+        </p>
+        <p class="center">
+            <img class="size1" src='images/group/box_plot/shannon.boxplot.png'/><img class="size1"
+                                                                                     src='images/group/box_plot/simpson.boxplot.png'/>
+        </p>
+
+        <p class="name_fig">图7-2-1组间Alpha多样性盒形图：</p>
+        <p class="premark">
+            注：横轴是分组名称，纵轴是不同分组下的alpha多样性指数的值。盒形图可以显示5个统计量(最小值，第一个四分位数，中位数，第三个中位数和最大值，及由下到上的5条线)，异常值以“o”标出。
+        </p>
+    {% endif %}
+
+{% else %}
+    <h3 id="单个样品差异分析">7.2 单个样品差异分析(每组内样品数>=3)</h3>
+    <p class="error">样品数不足无法分析</p>
+{% endif %}
+

@@ -1,0 +1,35 @@
+{% if otu_venn %}
+
+        <h3 id="OTU Venn图分析">5.4 OTU Venn图分析(分组数量2~5组)</h3>
+        <p class="paragraph">根据每个样品的OTU在每个样品的丰度，计算出每个样品或组间共有和特有的OTU，Venn图可以很好的反应组间共有以及组内特有的OTU数目<sup>[4]</sup>。</p>
+        <p class="paragraph">软件平台：R语言/Perl SVG</p>
+        <p class="paragraph">结果目录：<a href="javascript:void(0)" onClick="StartExcel('..\\results\\05_OTU_analysis\\{{ group_file }}\\venn')" target="_blank">05_OTU_analysis\venn\</a></p>
+
+        <p class="center">
+            <img class="size1" src="images/group/venn.png"/>
+        </p>
+        <p class="name_fig">图5-4-1 OTU venn图</p>
+        
+        <p class="premark">
+            注：不同颜色图形代表不同样品或者不同组别，不同颜色图形之间交叠部分数字为两个样品或两个组别之间共有的OTU个数；同理，多个颜色图形之间交叠部分数字为多个样品或组别之间共有OTU个数；Venn图，分组数量：2-5个组；</p>
+
+
+{% elif otu_flower %}
+
+        <h3 id="OTU Venn图分析">5.4 OTU flower图分析(分组数量6-10组)</h3>
+        <p class="paragraph">根据每个样品的OTU在每个样品的丰度，计算出每个样品或组间共有和特有的OTU，Venn图可以很好的反应组间共有以及组内特有的OTU数目。</p>
+        <p class="paragraph">软件平台：R语言/Perl SVG</p>
+        <p class="paragraph">结果目录：<a href="javascript:void(0)" onClick="StartExcel('..\\results\\05_OTU_analysis\\{{ group_file }}\\venn')" target="_blank"> flower图 </a></p>
+
+        <p class="center">
+            <img class="size1" src="images/group/flower.png"/>
+        </p>
+        <p class="name_fig">图5-4-1 OTU flower图</p>
+        
+        <p class="premark">
+            注：不同颜色图形代表不同样品或者不同组别，不同颜色图形之间交叠部分数字为两个样品或两个组别之间共有的OTU个数；同理，多个颜色图形之间交叠部分数字为多个样品或组别之间共有OTU个数；Venn图，花瓣图分组数量6-10个组。</p>
+
+{% else %}
+    <h3 id="OTU Venn图分析">2.4 OTU Venn图分析 或者 花瓣图分析 (分组数量>=2组)</h3>
+    <p class="error">样品数不足无法分析</p>
+{% endif %}

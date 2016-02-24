@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block main %}
+<!-- ###########################################顶部loge############################################# -->
+{% include "pdf/includes/navigator.html" %}
+<!-- #####################################################主要面板####################################### -->
+<div class="main">
+    <div class="page">
+            {% include 'includes/customer_info.html' %}
+    </div>
+    <div class="page">
+        <!-- 项目信息 -->
+            {% include "includes/project_info.html" %}
+    </div>
+
+            {% include 'pdf/includes/2_experimental_process.html' %}
+
+            {% include 'pdf/analysis/4_reads_statistic.html' %}
+
+            {% include 'pdf/analysis/5_otu_Analysis.html' %}
+
+            {% include 'pdf/analysis/6_otu_tax_assignment.html' %}
+
+            {% include 'pdf/analysis/7_alpha_diversity.html' %}
+
+            {% include 'pdf/analysis/8_beta_unifrac.html' %}
+
+            {% include 'pdf/analysis/9_diff_analysis.html' %}
+
+            {% include "pdf/analysis/10_personalize.html" %}
+
+            {% include "pdf/includes/directory.html" %}
+
+
+</div>
+
+{% include "includes/foot.html" %}
+
+
+{% endblock %}
