@@ -99,9 +99,12 @@
         <table id="table14" data-height="560" data-pagination="true" data-filter-control="true"
                data-show-export="true" data-page-list="[10, 25, 50, 100, 200, All]"></table>
     </div>
-    <p class="tremark">注：第一列表示分组名称；</p>
-    <p class="tremark">第二列表示weighted_unifrac指数对应的classdelta值；</p>
-    <p class="tremark">第三列表示unweighted_unifrac指数对应的classdelta值。</p>
+    <p class="tremark">注：Group：分为weighted_unifrac、unweighted_unifrac；</p>
+    <p class="tremark">A：A统计量；</p>
+    <p class="tremark">ObserveDelta：Bray-Curtis距离指数对应的ObserveDelta值；</p>
+    <p class="tremark">ExpectDelta：Bray-Curtis距离指数对应的ExpectDelta值；</p>
+    <p class="tremark">Significance：Bray-Curtis距离指数对应的显著性p值；</p>
+    <p class="tremark">A值大于0说明组间差异大于组内差异，A值小于0说明组内差异大于组间差异；ObserveDelta值越小说明组内差异越小；ExpectDelta值越小说明组间差异越小；Significance小于0.05说明差异显著；</p>
 
 {% else %}
     <p class="error">样品数不足无法分析</p>
