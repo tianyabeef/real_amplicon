@@ -32,4 +32,7 @@ if(sample_num < 10){
 
 plot(nmds$points,col=sample_colors,pch=19,cex=cex,cex.axis=1.5,cex.lab=1.7,ylim=ylim,xlim=xlim)
 legend("topright",legend=group_names,col=group_colors,pch=15,cex=1,horiz=F)
+
+write.csv(nmds$points,file=paste(substr("@#{pdf_file}",0,nchar("@#{pdf_file}")-4),"_point_inf.csv",sep = ""),fileEncoding="utf-8",quote = F)
+
 dev.off()
