@@ -25,7 +25,11 @@
    以稀释后的基因组DNA为模板，使用KAPA HiFi Hotstart ReadyMix PCR kit高保真酶进行PCR，确保扩增的准确性和高效性。用2%琼脂糖凝胶电泳检测PCR产物，并用AxyPrep DNA凝胶回收试剂盒(AXYGEN公司)切胶回收PCR产物。回收后，利用Thermo NanoDrop 2000紫外微量分光光度计和2%琼脂糖凝胶电泳进行文库质检。
 </p>
 <p class="center">
-    <img class="size2" src="images/pcr.png"/>
+    {% if amplification == "16S" %}
+        <img class="size2" src="images/pcr_16S.png"/>
+    {% elif amplification == "ITS" %}
+        <img class="size2" src="images/pcr_ITS.png"/>
+    {% endif %}
 </p>
 
 <h3 id="PCR产物定量和均一化">2.5 PCR产物定量和均一化</h3>
