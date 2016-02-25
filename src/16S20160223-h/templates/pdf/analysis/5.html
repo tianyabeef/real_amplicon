@@ -67,7 +67,7 @@
         <p class="tremark">第三列otu_berfore抽平前的OTU个数;</p>
         <p class="tremark">第四列otus_after是抽平后样品所含有的OTU个数。</p>
         <p class="paragraph">Alpha多样性反映的是单个样品内部的物种多样性，包括observed species指数和chao指数。</p>
-        <p class="paragraph">结果目录：<a href="javascript:void(0)" onClick="StartExcel('..\\results\\04_data_statistics\alpha')" target="_blank">04_data_statistics\alpha
+        <p class="paragraph">结果目录：<a href="javascript:void(0)" onClick="StartExcel('..\\results\\04_data_statistics\\alpha')" target="_blank">04_data_statistics\alpha
                 </a></p>
 
         <p class="center">
@@ -87,7 +87,7 @@
 
 
     {% if core_microbiome_html %}
-        <h3 id="Core microbiome分析">5.3 Core microbiome分析（总样品数>=5）</h3>
+        <h3 id="Core microbiome分析">5.3 Core microbiome分析（总样品数≥5）</h3>
         {% if core_otu_exists %}
             <p class="paragraph">根据样品的共有OTU以及OTU所代表的物种，可以找到Core microbiome（覆盖100%样品的微生物组）。</p>
             <p class="paragraph">软件平台：锐翌分析平台</p>
@@ -118,7 +118,7 @@
             <p class="error"> 未找到Core Microbiome </p>
         {% endif %}
     {% else %}
-        <h3 id="Core microbiome分析">5.3 Core microbiome分析（总样品数>=5）</h3>
+        <h3 id="Core microbiome分析">5.3 Core microbiome分析（总样品数≥5）</h3>
         <p class="error">样品数不足无法分析</p>
     {% endif %}
 
@@ -159,7 +159,7 @@
 
 {% block otu_pca_head %}
     {% if otu_pca %}
-        <h3 id="OTU PCA分析">5.5 OTU PCA分析（总样品数>=5）</h3>
+        <h3 id="OTU PCA分析">5.5 OTU PCA分析（总样品数≥5）</h3>
         <p class="paragraph">
     PCA分析(Principal Component Analysis)，即主成分分析，是一种分析和简化数据集的技术。PCA可以初步的反映出不同处理或不同环境间的样品可能表现出分散和聚集的分布情况，从而可以判断相同条件的样品组成是否具有相似性<sup>[5]</sup>。
         </p>
@@ -173,7 +173,7 @@
         <p class="premark">纵坐标表示第二主成分，括号中的百分比表示第二主成分对样品差异的贡献率。</p>
         <p class="premark">不同颜色代表样品属于不同的分组，两点之间的距离越远，表示两个样品的微生物群落差异越大。</p>
     {% else %}
-        <h3 id="OTU PCA分析">5.5 OTU PCA分析（总样品数>=5）</h3>
+        <h3 id="OTU PCA分析">5.5 OTU PCA分析（总样品数≥5）</h3>
         <p class="error">样品数不足无法分析</p>
     {% endif %}
 {% endblock %}
@@ -182,7 +182,7 @@
 
 {% block specaccum_head %}
     {% if specaccum %}
-        <h3 id="Specaccum物种累积曲线">5.6 Specaccum物种累积曲线（总样品数>=10）</h3>
+        <h3 id="Specaccum物种累积曲线">5.6 Specaccum物种累积曲线（总样品数≥10）</h3>
         <p class="paragraph">物种累积曲线(Species Accumulation Curves)用于描述随着抽样量的加大物种增加的状况，是理解调查样地物种组成和预测物种丰富度的有效工具。在生物多样性和群落调查中，被广泛用于抽样量充分性的判断以及物种丰富度(Species Richness)的估计。</p>
         <p class="paragraph">利用物种累积曲线判断抽样量是否充分是根据曲线的特征来判断：如果曲线一直急剧上升，几乎为直线，表明抽样量不足，需要增加抽样量; 如果曲线在急剧上升后变为上升舒缓，则表明抽样充分。</p>
         <p class="paragraph">软件平台：R语言specaccum包</p>
@@ -198,7 +198,7 @@
         </p>
         
     {% else %}
-        <h3 id="Specaccum物种累积曲线">5.6 Specaccum物种累积曲线（总样品数>=10）</h3>
+        <h3 id="Specaccum物种累积曲线">5.6 Specaccum物种累积曲线（总样品数≥10）</h3>
         <p class="error">样品数不足无法分析</p>
     {% endif %}
 {% endblock %}
