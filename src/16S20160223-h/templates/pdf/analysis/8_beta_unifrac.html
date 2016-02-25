@@ -23,8 +23,10 @@
                         <tr>
                             <td>{{ obj.__dict__['sampleName'] }}</td>
                                 {% for key in obj.__dict__ %}
-                                    {% if key != "sampleName" %}
-                            <td>{{ obj.__dict__[key] }}</td>
+                                    {% if loop.index0 < 10 %}
+                                        {% if key != "sampleName" %}
+                                <td>{{ obj.__dict__[key] }}</td>
+                                        {% endif %}
                                     {% endif %}
                                 {% endfor %}
                         </tr>
@@ -61,8 +63,10 @@
                     <tr>
                         <td>{{ obj.__dict__['sampleName'] }}</td>
                             {% for key in obj.__dict__ %}
-                                {% if key != "sampleName" %}
-                        <td>{{ obj.__dict__[key] }}</td>
+                                {% if loop.index0 < 10 %}
+                                    {% if key != "sampleName" %}
+                            <td>{{ obj.__dict__[key] }}</td>
+                                    {% endif %}
                                 {% endif %}
                             {% endfor %}
                     </tr>
@@ -83,18 +87,22 @@
             <table class="table table-bordered">
                 <thead>
                 <tr class="success">
-                    <th>groupname</th>
-                    <th>classdelta_weighed</th>
-                    <th>classdelta_unweighed</th>
+                    <th>group</th>
+                    <th>a</th>
+                    <th>observeDelta</th>
+                    <th>expectDelta</th>
+                    <th>significance</th>
                 </tr>
                 </thead>
                 <tbody>
                     {% for  key,mrppAnalysis in mrpp.items() %}
                         {% if loop.index0 < 10 %}
                         <tr>
-                            <td>{{ mrppAnalysis.otu_id }}</td>
-                            <td>{{ mrppAnalysis.taxonomy_level }}</td>
-                            <td>{{ mrppAnalysis.taxonomy_name }}</td>
+                            <td>{{ mrppAnalysis.group }}</td>
+                            <td>{{ mrppAnalysis.a }}</td>
+                            <td>{{ mrppAnalysis.observeDelta }}</td>
+                            <td>{{ mrppAnalysis.expectDelta }}</td>
+                            <td>{{ mrppAnalysis.significance }}</td>
                         </tr>
                         {% endif%}
                     {% endfor %}
