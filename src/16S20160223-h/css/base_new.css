@@ -18,7 +18,7 @@ p.paragraph {
 
 .center_table {
 	width: 80%;
-	margin: auto;
+    margin: auto;
 }
 
 p.name_fig {
@@ -240,4 +240,12 @@ table, tr, td, th, tbody, thead, tfoot {
 }
 .table th {
     text-align: center;
+}
+
+/*table head color*/
+.th-inner{
+	background-color: #2068A6;
+}
+.bs-checkbox div{
+	background-color: #FFFFFF;
 }
