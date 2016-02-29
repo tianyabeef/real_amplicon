@@ -9,11 +9,12 @@
                     <th>taxonname</th>
                     {% for key in diff_otu_marker_pdf[0].__dict__ %}
                         {% if loop.index0 < 10 %}
-                            {% if key != "taxonname" %}
+                            {% if key != "taxonname" and key != "pvalue" %}
                         <th>{{ key }}</th>
                             {% endif %}
                         {% endif %}
                     {% endfor %}
+                    <th>pvalue</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -49,11 +50,12 @@
                         <th>taxonname</th>
                         {% for key in diff_genus_marker_pdf[0].__dict__ %}
                             {% if loop.index0 < 10 %}
-                                {% if key != "taxonname" %}
+                                {% if key != "taxonname" and key != "pvalue" %}
                                     <th>{{ key }}</th>
                                 {% endif %}
                             {% endif %}
                         {% endfor %}
+                        <th>pvalue</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -88,11 +90,12 @@
                         <th>taxonname</th>
                         {% for key in diff_taxall_marker_pdf[0].__dict__ %}
                             {% if loop.index0 < 10 %}
-                                {% if key != "taxonname" %}
+                                {% if key != "taxonname" and key != "pvalue" %}
                                     <th>{{ key }}</th>
                                 {% endif %}
                             {% endif %}
                         {% endfor %}
+                        <th>pvalue</th>
                     </tr>
                 </thead>
                 <tbody>

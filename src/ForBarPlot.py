@@ -125,6 +125,7 @@ class Subject(object):
         self.pick_top()
         out_str = 'tax_name'
         groups = {}
+        print group
         _list = list(group.itervalues())
         group_key_sort = []
         for _i in _list:
