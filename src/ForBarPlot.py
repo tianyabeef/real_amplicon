@@ -42,10 +42,8 @@ class Sample(object):
         for tax in self.tax.iterkeys():
             if tax in used_tax:
                 self.percent[tax] = self.tax[tax] / 1 * 100
-            else:
                 other += self.tax[tax]
-        other = other / 1
-        self.other_percent = other * 100
+        self.other_percent = (1-other)*100
 
 class Subject(object):
 

@@ -28,7 +28,7 @@ def read_params(args):
                         help="plot group bar plot, if group is not set, this param will not be used")
     parser.add_argument('--without_group', dest="with_group", action='store_false',
                         help="plot sample bar plot, if this params is set, group file will only for order")
-    parser.add_argument('--contains_other', dest="contains_other", action='store_false',
+    parser.add_argument('--contains_other', dest="contains_other", action='store_true',
                         help="totel abundance contains other abundance ; totel aundance is 1")
     parser.set_defaults(with_group=False)
     args = parser.parse_args()
