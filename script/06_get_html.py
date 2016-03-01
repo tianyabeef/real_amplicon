@@ -251,7 +251,6 @@ def get_html():
                   'r') as lines:
             lines.next()
             for line in lines:
-                print line
                 tabs = line.strip().split("\t")
                 mrppStat = MrppStat(tabs[0], tabs[1], tabs[2],tabs[3],tabs[4])
                 mrpp[tabs[0]] = mrppStat
