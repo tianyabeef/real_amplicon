@@ -34,6 +34,8 @@ def read_params(args):
                         help="set the seqs_per_sample, can be overrited if set stat_file")
     parser.add_argument('--stat_file', dest='stat_file', metavar='FILE', type=str, default=None,
                         help="set the stat file produced by 01_stat.py")
+    parser.add_argument('--add_params', dest='add_params', metavar='STR', type=str, default=None,
+                        help="add params commands")
     parser.add_argument('-o', '--out_dir', dest='out_dir', metavar='DIR', type=str, required=True,
                         help="set the output dir")
     args = parser.parse_args()
@@ -110,12 +112,21 @@ if __name__ == '__main__':
     commands = []
     mapfile = '%s/mapfile.txt' % params['out_dir']
     convert_mapfile(params['group_file'], mapfile)
-    command = '%s -i %s -e %s -t %s -m %s -o %s -f' % (params['jack_soft'],
+    if params['add_params'] is None:
+        command = '%s -i %s -e %s -t %s -m %s -o %s -f' % (params['jack_soft'],
                                                        params['otu_biom'],
                                                        params['seqs'],
                                                        params['tree_file'],
                                                        mapfile,
                                                        params['out_dir'])
+    else:
+        command = '%s -i %s -e %s -t %s -m %s -o %s -f %s' % (params['jack_soft'],
+                                                       params['otu_biom'],
+                                                       params['seqs'],
+                                                       params['tree_file'],
+                                                       mapfile,
+                                                       params['out_dir'],
+                                                        params['add_params'])
     commands.append(command)
     os.system(command)
     for name in ['weighted_unifrac', 'unweighted_unifrac']:
