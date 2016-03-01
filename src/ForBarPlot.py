@@ -37,6 +37,15 @@ class Sample(object):
                 other += self.tax[tax]
         other = other / self.total_profile
         self.other_percent = other * 100
+    def pick_top_contains_other(self,used_tax):
+        other = 0
+        for tax in self.tax.iterkeys():
+            if tax in used_tax:
+                self.percent[tax] = self.tax[tax] / 1 * 100
+            else:
+                other += self.tax[tax]
+        other = other / 1
+        self.other_percent = other * 100
 
 class Subject(object):
 
@@ -125,7 +134,6 @@ class Subject(object):
         self.pick_top()
         out_str = 'tax_name'
         groups = {}
-        print group
         _list = list(group.itervalues())
         group_key_sort = []
         for _i in _list:
@@ -137,6 +145,73 @@ class Subject(object):
                 groups[g] = Group(g)
             groups[g].samples[sample.name] = sample
             sample.pick_top(self.used_tax)
+        groups_sort = map(lambda s:groups[s],group_key_sort)
+
+        for g in groups_sort:
+            g.get_percent(self.used_tax)
+            out_str += '\t%s'%g.name
+        fp.write(out_str.strip() + '\n')
+        for tax in sorted(self.used_tax,
+                cmp=lambda a,b:cmp(dict_[b],dict_[a])):
+            out_str = tax
+            for g in groups_sort:
+                out_str += '\t%s'%g.percent[tax]
+            fp.write(out_str.strip() + '\n')
+        out_str = 'Other'
+        for g in groups_sort:
+            out_str += '\t%s'%g.other_percent
+        fp.write(out_str.strip() + '\n')
+        fp.close()
+
+
+    def run_contains_other(self,group=None):
+        fp = open(self.outfile,'w')
+        dict_ = self.tax_total_profile
+        self.read_profile()
+        self.pick_top()
+        out_str = 'tax_name'
+        sample_dict = {}
+        for sample in self.sample:
+            sample_dict[sample.name] = sample
+        if group is not None:
+            samples = list(group.iterkeys())
+            samples = map(lambda s:sample_dict[s],samples)
+        else:
+            samples = self.sample
+        for sample in samples:
+            sample.pick_top_contains_other(self.used_tax)
+            out_str += '\t%s'%sample.name
+        fp.write(out_str.strip() + '\n')
+        for tax in sorted(self.used_tax,
+                cmp=lambda a,b:cmp(dict_[b],dict_[a])):
+            out_str = tax
+            for sample in samples:
+                out_str += '\t%s'%sample.percent[tax]
+            fp.write(out_str.strip() + '\n')
+        out_str = 'Other'
+        for sample in samples:
+            out_str += '\t%s'%sample.other_percent
+        fp.write(out_str.strip() + '\n')
+        fp.close()
+
+    def run_with_group_contains_other(self,group):
+        fp = open(self.outfile,'w')
+        dict_ = self.tax_total_profile
+        self.read_profile()
+        self.pick_top()
+        out_str = 'tax_name'
+        groups = {}
+        _list = list(group.itervalues())
+        group_key_sort = []
+        for _i in _list:
+            if not _i in group_key_sort:
+                group_key_sort.append(_i)
+        for sample in self.sample:
+            g = group[sample.name]
+            if g not in groups:
+                groups[g] = Group(g)
+            groups[g].samples[sample.name] = sample
+            sample.pick_top_contains_other(self.used_tax)
         groups_sort = map(lambda s:groups[s],group_key_sort)
 
         for g in groups_sort:
