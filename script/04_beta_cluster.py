@@ -120,7 +120,8 @@ if __name__ == '__main__':
                                                        mapfile,
                                                        params['out_dir'])
     else:
-        command = '%s -i %s -e %s -t %s -m %s -o %s -f %s' % (params['jack_soft'],
+        #TODO need add_params
+        command = '%s -i %s -e %s -t %s -m %s -o %s -f -%s' % (params['jack_soft'],
                                                        params['otu_biom'],
                                                        params['seqs'],
                                                        params['tree_file'],
