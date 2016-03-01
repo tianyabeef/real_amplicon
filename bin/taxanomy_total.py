@@ -47,7 +47,7 @@ def taxanomy_total(cfg_in, vars=None):
                                                    params['total_group_file']))
 
     # bar_plot_contains_other
-    work.commands.append('%s -t %s -o %s -g %s' % (scripts['sample_bar_plot'],
+    work.commands.append('%s -t %s -o %s -g %s --contains_other' % (scripts['sample_bar_plot'],
                                                    outfiles['summarize_dir'],
                                                    outfiles['bar_plot_contains_other_dir'],
                                                    params['total_group_file']))

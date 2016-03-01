@@ -28,6 +28,8 @@ def read_params(args):
                         help="plot group bar plot, if group is not set, this param will not be used")
     parser.add_argument('--without_group', dest="with_group", action='store_false',
                         help="plot sample bar plot, if this params is set, group file will only for order")
+    parser.add_argument('--contains_other', dest="contains_other", action='store_false',
+                        help="totel abundance contains other abundance ; totel aundance is 1")
     parser.set_defaults(with_group=False)
     args = parser.parse_args()
     params = vars(args)
@@ -45,13 +47,22 @@ def work(level, params):
     profile = '%s/otu_table_L%d.txt' % (params['wf_tax_dir'], level)
     outfile = '%s/for_plot.txt' % work_dir
     subject = Subject(TAX_LEVEL[level], profile, outfile)
-    if params['group'] is not None:
-        if params['with_group']:
-            subject.run_with_group(params['group'])
+    if params['contains_other']:
+        if params['group'] is not None:
+            if params['with_group']:
+                subject.run_with_group_contains_other(params['group'])
+            else:
+                subject.run_contains_other(params['group'])
         else:
-            subject.run(params['group'])
+            subject.run()
     else:
-        subject.run()
+        if params['group'] is not None:
+            if params['with_group']:
+                subject.run_with_group(params['group'])
+            else:
+                subject.run(params['group'])
+        else:
+            subject.run()
 
 
 if __name__ == '__main__':

@@ -39,12 +39,12 @@ def taxanomy_group(cfg_in, vars=None):
                                                    outfiles['bar_plot_sample_dir'],
                                                    params['group']))
 
-    # bar_plot
-    work.commands.append('%s -t %s -o %s -g %s --with_group' % (scripts['group_bar_plot'],
+    # bar_plot_contains_other
+    work.commands.append('%s -t %s -o %s -g %s --with_group --contains_other' % (scripts['group_bar_plot'],
                                                                 outfiles['summarize_dir'],
                                                                 outfiles['bar_plot_contains_other_dir'],
                                                                 params['group']))
-    work.commands.append('%s -t %s -o %s -g %s' % (scripts['group_bar_plot'],
+    work.commands.append('%s -t %s -o %s -g %s --contains_other' % (scripts['group_bar_plot'],
                                                    outfiles['summarize_dir'],
                                                    outfiles['bar_plot_sample_contains_other_dir'],
                                                    params['group']))
