@@ -144,7 +144,7 @@ class Subject(object):
             Q20_percent = sample.stats['Q20'] / sample.stats['bases'] * 100
             Q30_percent = sample.stats['Q30'] / sample.stats['bases'] * 100
             GC_percent = sample.stats['GC'] / sample.stats['bases'] * 100
-            average_length = np.mean(sample.stats['length'])
+            average_length = int(np.mean(sample.stats['length']))  #输出整数
             stat_file.write('%s\t%s\t%s\t%2.2f%%\t%2.2f%%\t%2.2f%%\t%s\n' % (sample.name,
                                                                              sample.stats['tags'],
                                                                              sample.stats['bases'],

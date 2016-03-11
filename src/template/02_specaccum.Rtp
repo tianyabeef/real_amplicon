@@ -3,7 +3,7 @@ X=read.table('@#{otu_table}',head=T,row.names=1,sep="\t", check.names=F,quote=""
 X=t(X)
 
 pdf('@#{pdf_file}',20,12)
-par(mar=c(5,5,0,0))
+par(mar=c(6,5,3,3))
 #sp1 <- specaccum(X)
 sp2 <- specaccum(X, "random")
 #plot(sp1, ci.type="poly", col="blue", lwd=2, ci.lty=0, ci.col="lightblue")
