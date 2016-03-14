@@ -39,7 +39,7 @@ def read_params(args):
                         help="set the length step to stat, [ default is 20 ]")
     parser.add_argument('-r', dest='required', metavar='INT ', type=int, default=50000,
                         help="set the required data of this subject, [ default is 50000 ]")
-    parser.add_argument('-r', dest='required_file', metavar='FILE ', type=str, default=None,
+    parser.add_argument('--r_file', dest='required_file', metavar='FILE ', type=str, default=None,
                         help="set the required data of this subject, [ default is None ]")
     parser.add_argument('-n', dest='name_table', metavar='FILE', type=str, default=None,
                         help="set the name convert table, [ default is None ]")
