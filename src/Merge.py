@@ -10,9 +10,12 @@ from MySeqRecord import SeqRecord
 
 
 class Sample(object):
-    def __init__(self, sample_name, required_data):
+    def __init__(self, sample_name, required_data, random):
         self.name = sample_name
-        self.needed_data = self._get_need_data(required_data)
+        if random:
+            self.needed_data = self._get_need_data(required_data)
+        else:
+            self.needed_data = int(required_data)
         self.stats = {}
         self.stats['tags'] = 0
         self.stats['bases'] = 0
@@ -78,7 +81,14 @@ class Subject(object):
             except KeyError, ex:
                 return None
         if sample_name not in self.sample_set:
-            sample_obj = Sample(sample_name, self.required_data)
+            if type(self.required_data) is int:
+                sample_obj = Sample(sample_name, self.required_data,True)
+            if type(self.required_data) is str:
+                with open(self.required_data,mode="r") as fq:
+                    for line in fq:
+                        tabs = line.strip().split("\t")
+                        if tabs[0] == sample_name:
+                            sample_obj = Sample(sample_name, tabs[1],False)
             sample_obj.init_handle(self.upload_dir)
             self.sample_set[sample_name] = sample_obj
         sample_obj = self.sample_set[sample_name]
@@ -144,7 +154,7 @@ class Subject(object):
             Q20_percent = sample.stats['Q20'] / sample.stats['bases'] * 100
             Q30_percent = sample.stats['Q30'] / sample.stats['bases'] * 100
             GC_percent = sample.stats['GC'] / sample.stats['bases'] * 100
-            average_length = int(np.mean(sample.stats['length']))  #输出整数
+            average_length = int(np.mean(sample.stats['length']))
             stat_file.write('%s\t%s\t%s\t%2.2f%%\t%2.2f%%\t%2.2f%%\t%s\n' % (sample.name,
                                                                              sample.stats['tags'],
                                                                              sample.stats['bases'],
