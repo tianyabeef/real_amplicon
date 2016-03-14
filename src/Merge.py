@@ -86,7 +86,7 @@ class Subject(object):
             if self.required_data_file is None:
                 sample_obj = Sample(sample_name, self.required_data,True)
             else:
-                with open(self.required_data,mode="r") as fq:
+                with open(self.required_data_file,mode="r") as fq:
                     for line in fq:
                         tabs = line.strip().split("\t")
                         if tabs[0] == sample_name:
