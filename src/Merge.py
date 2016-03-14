@@ -45,7 +45,8 @@ class Subject(object):
                  required_data, out_length_file,
                  max_length, min_length, length_step,
                  upload_stat=None,
-                 name_table_file=None):
+                 name_table_file=None,
+                 required_data_file=None):
         self.infile_list = infile_list
         self.required_data = required_data
         self.out_fasta_file = out_fasta_file
@@ -60,6 +61,7 @@ class Subject(object):
         self.sample_set = {}
         self.name_table = {}
         self.length = {}
+        self.required_data_file = required_data_file
 
     def read_name_table(self):
         try:
@@ -81,9 +83,9 @@ class Subject(object):
             except KeyError, ex:
                 return None
         if sample_name not in self.sample_set:
-            if type(self.required_data) is int:
+            if self.required_data_file is None:
                 sample_obj = Sample(sample_name, self.required_data,True)
-            if type(self.required_data) is str:
+            else:
                 with open(self.required_data,mode="r") as fq:
                     for line in fq:
                         tabs = line.strip().split("\t")

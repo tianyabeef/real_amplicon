@@ -37,8 +37,10 @@ def read_params(args):
                         help="set the min length to stat, [ default is 220 ]")
     parser.add_argument('--step', dest='length_step', metavar='INT', type=int, default=20,
                         help="set the length step to stat, [ default is 20 ]")
-    parser.add_argument('-r', dest='required', metavar='INT or STR ',  default=50000,
+    parser.add_argument('-r', dest='required', metavar='INT ', type=int, default=50000,
                         help="set the required data of this subject, [ default is 50000 ]")
+    parser.add_argument('-r', dest='required_file', metavar='FILE ', type=str, default=None,
+                        help="set the required data of this subject, [ default is None ]")
     parser.add_argument('-n', dest='name_table', metavar='FILE', type=str, default=None,
                         help="set the name convert table, [ default is None ]")
 
@@ -71,7 +73,8 @@ if __name__ == '__main__':
                          max_length=params['max_length'],
                          min_length=params['min_length'],
                          length_step=params['length_step'],
-                         name_table_file=params['name_table'])
+                         name_table_file=params['name_table'],
+                         required_data_file=params['required_file'],)
     subject.read_name_table()
     subject.merge()
     subject.write_stat()
