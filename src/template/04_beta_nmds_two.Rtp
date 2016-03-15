@@ -1,3 +1,4 @@
+library(ggplot2)
 source('/data_center_01/pipeline/16S_ITS_pipeline_v3.0/src/template/labels2colors.R')
 library("vegan")
 X=read.table("@#{distance_table}",header=TRUE,row.names=1,sep="\t",check.names=F,quote="")
@@ -30,11 +31,12 @@ if(sample_num < 10){
   cex = 1.2
 }
 plot_data <- as.data.frame(cbind(nmds$points,as.vector(group[,1]),as.vector(group[,2])))
+plot_data$MDS1<-as.numeric(plot_data$MDS1)
+plot_data$MDS2<-as.numeric(plot_data$MDS2)
 colnames(plot_data) <- c("MDS1","MDS2","group","time")
 scale_shape_manual <- c(18,15,17,19,8,9,10,11,12,13,14)[0:length(unique(group[,1]))]
 scale_color_manual <- group_colors
-p <-ggplot(plot_data,aes(x=Axis1,y=Axis2,shape=group,colour=time))+geom_point(size=3)+scale_shape_manual(values = scale_shape_manual)+scale_color_manual(values = scale_color_manual)
-p <- p+labs(x =paste("PCA1(",con[1],"%)"),y =paste("PCA2(",con[2],"%)"))
+p <-ggplot(plot_data,aes(x=MDS1,y=MDS2,shape=group,colour=time))+geom_point(size=3)+scale_shape_manual(values = scale_shape_manual)+scale_color_manual(values = scale_color_manual)
 p <- p+theme(axis.title.x = element_text(size=10,colour = "black",face = "bold"),axis.title.y = element_text(size=10,colour = "black",face = "bold"),axis.text.y = element_text(size=10,colour = "black"),axis.text.x = element_text(size=10,colour = "black"))
 p <-p + theme_bw()
 p <- p + theme(panel.grid.major=element_line(colour=NA))
