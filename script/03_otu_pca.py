@@ -23,6 +23,8 @@ def read_params(args):
                         help="plot boxplot")
     parser.add_argument('--without_boxplot', dest='with_boxplot', action='store_false',
                         help="unplot boxplot")
+    parser.add_argument('--two_lenged', dest='two_lenged', action = 'store_true',default=False,
+                        help="two_lenged")
     parser.set_defaults(with_boxplot=True)
     args = parser.parse_args()
     params = vars(args)
@@ -39,10 +41,16 @@ if __name__ == '__main__':
             'pdf_file': pdf_file}
 
     r_job = rp.Rparser()
-    if params['with_boxplot']:
-        r_job.open(this_script_path + '/../src/template/03_tax_pca_with_boxplot.Rtp')
+    if params['two_lenged']:
+        if params['with_boxplot']:
+            r_job.open(this_script_path + '/../src/template/03_tax_pca_two.Rtp')
+        else:
+            r_job.open(this_script_path + '/../src/template/03_tax_pca_two.Rtp')
     else:
-        r_job.open(this_script_path + '/../src/template/03_tax_pca.Rtp')
+        if params['with_boxplot']:
+            r_job.open(this_script_path + '/../src/template/03_tax_pca_with_boxplot.Rtp')
+        else:
+            r_job.open(this_script_path + '/../src/template/03_tax_pca.Rtp')
     r_job.format(vars)
     r_job.write(params['out_dir'] + '/tax_pca.R')
     r_job.run()
