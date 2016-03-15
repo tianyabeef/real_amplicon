@@ -24,6 +24,8 @@ def read_params(args):
                         help="unplot boxplot")
     parser.add_argument('--with_boxplot', dest='with_boxplot', action='store_true',
                         help="plot boxplot")
+    parser.add_argument('--two_legend', dest='two_legend', action = 'store_true',default=False,
+                        help="two_legend")
     parser.set_defaults(with_boxplot=True)
     args = parser.parse_args()
     params = vars(args)
@@ -50,10 +52,16 @@ if __name__ == '__main__':
     params = read_params(sys.argv)
     mkdir(params['out_dir'])
     r_job = rp.Rparser()
-    if params['with_boxplot']:
-        r_job.open(this_script_path + '/../src/template/04_beta_nmds_with_boxplot.Rtp')
+    if params['two_legend']:
+        if params['with_boxplot']:
+            r_job.open(this_script_path + '/../src/template/04_beta_nmds_two.Rtp')
+        else:
+            r_job.open(this_script_path + '/../src/template/04_beta_nmds_two.Rtp')
     else:
-        r_job.open(this_script_path + '/../src/template/04_beta_nmds.Rtp')
+        if params['with_boxplot']:
+            r_job.open(this_script_path + '/../src/template/04_beta_nmds_with_boxplot.Rtp')
+        else:
+            r_job.open(this_script_path + '/../src/template/04_beta_nmds.Rtp')
 
     for name in ['weighted_unifrac', 'unweighted_unifrac']:
         work(r_job, name, params)
