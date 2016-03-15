@@ -209,18 +209,26 @@ def work_03(pipeline, analysis_name, infiles=None, pre_config=None):
 def work_diff(pipeline, analysis_name, group_file, infiles=None):
     work_dir = '%s/05_diff_analysis/%s' % (pipeline.config.get('params', 'work_dir'), analysis_name)
     vars = {
-        'work_dir': work_dir,
-        'group': group_file,
-        'summarize_dir': infiles['summarize_dir'],
-        'uniform_profile': infiles['uniform_profile']
-    }
-    outfiles = taxanomy_diff(pipeline.config, vars=vars)
-    pipeline.make_shell(work_dir + '/make.sh',
-                        [('taxanomy_diff', outfiles['config'])])
-    pipeline.add_job('diff_analysis_' + analysis_name,
-                     outfiles['shell'],
-                     prep='OTU_group_' + analysis_name)
-    return outfiles
+                'work_dir': work_dir,
+                'group': group_file,
+                'summarize_dir': infiles['summarize_dir'],
+                'uniform_profile': infiles['uniform_profile']
+
+            }
+    try:
+        if pipeline.config.get('params', 'abundance_cutoff'):
+            abundance_cutoff = pipeline.config.get('params', 'abundance_cutoff')
+            vars['abundance_cutoff'] = abundance_cutoff
+        outfiles = taxanomy_diff(pipeline.config, vars=vars)
+        pipeline.make_shell(work_dir + '/make.sh',
+                            [('taxanomy_diff', outfiles['config'])])
+        pipeline.add_job('diff_analysis_' + analysis_name,
+                         outfiles['shell'],
+                         prep='OTU_group_' + analysis_name)
+        return outfiles
+    except:
+        pass
+
 
 
 def work_tree(pipeline, analysis_name, infiles=None):

@@ -66,6 +66,12 @@ def taxanomy_diff(cfg_in, vars=None):
     # min_sample_num_in_groups must be more than 3
     if min_sample_num_in_groups < 3:
         return outfiles
+    #abundance_cutoff
+    if params['abundance_cutoff'] > 0:
+        work.commands.append('%s -i %s -g %s -o %s --cutoff %s' % ( scripts['filter_abundance'],params['summarize_dir'],params['group'],params['filter_abundance_dir'],params['abundance_cutoff']))
+        work.commands.append('%s -i %s -g %s -o %s --cutoff %s' % ( scripts['filter_abundance'],params['uniform_profile'],params['group'],params['filter_abundance_dir'],params['abundance_cutoff']))
+        params['summarize_dir'] = params['filter_abundance_dir']
+        params['uniform_profile'] = params['filter_abundance_dir'] + '/otu_table_uniform_filter_abundance.txt'
 
     # LEfSe analysis
     work.commands.append('%s -i %s -l %s -g %s -o %s --LDA %s' % (scripts['LEfSe'],
