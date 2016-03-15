@@ -14,7 +14,7 @@ pdf(file="@#{pdf_file}",11,8.5)
 par(mar=c(4.1,5.1,4.1,2.1))
 
 if(nrow(X)<=1){
-	plot(0,type='n')
+	p<-plot(0,type='n')
 	text(1,0,'no item for plot')
 }else{
 	max_sample_name_length = max(mapply(nchar,as.character(group[,1])))
@@ -44,14 +44,15 @@ if(nrow(X)<=1){
 	ylim = c(ymin,ymax)
 	X.dudi$li$group<-group[,1]
 	X.dudi$li$time<-group[,2]
-	scale_shape_manual <- c(18,15,17,19)[0:length(unique(group[,1]))]
+	scale_shape_manual <- c(18,15,17,19,21,22,23,24)[0:length(unique(group[,1]))]
 	scale_color_manual <- group_colors
 	p <-ggplot(X.dudi$li,aes(x=Axis1,y=Axis2,shape=group,colour=time))+geom_point(size=3)+scale_shape_manual(values = scale_shape_manual)+scale_color_manual(values = scale_color_manual)
 	p <- p+labs(x =paste("PCA1(",con[1],"%)"),y =paste("PCA2(",con[2],"%)"))
 	p <- p+theme(axis.title.x = element_text(size=10,colour = "black",face = "bold"),axis.title.y = element_text(size=10,colour = "black",face = "bold"),axis.text.y = element_text(size=10,colour = "black"),axis.text.x = element_text(size=10,colour = "black"))
-	p
+
 
 
 	write.csv(X.dudi$li,file=paste(substr("@#{pdf_file}",0,nchar("@#{pdf_file}")-4),"_point_inf.csv",sep = ""),fileEncoding="utf-8",quote = F)
 }
+p
 dev.off()
