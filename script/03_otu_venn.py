@@ -53,8 +53,11 @@ def read(otu_table_file, sample_in_group, vars):
                 otu_num = otu_num_dict[otu_name]
             for ind, tab in enumerate(tabs):
                 if float(tab) > 0:
-                    group = sample_in_group[samples[ind]]
-                    otu_in_group[group].add(otu_num)
+                    if samples[ind] in sample_in_group:
+                        group = sample_in_group[samples[ind]]
+                        otu_in_group[group].add(otu_num)
+                    else:
+                        print "sample %s no in group" % samples[ind]
     return otu_in_group
 
 
