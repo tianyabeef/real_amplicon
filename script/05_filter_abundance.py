@@ -42,8 +42,11 @@ if __name__ == '__main__':
         dd = df[df>cut_off]
         df["num_True"] = dd.count(axis=1)
         for i in range(len(df.index)):
-            if df.icol[i,sample_num+1] < quantile_value:
-                if df.icol[i,sample_num+2] < sample_num:
+            print df.ix[i,sample_num+1]
+            print quantile_value
+            print df.ix[i,sample_num+1] < quantile_value
+            if df.ix[i,sample_num+1] < quantile_value:
+                if df.ix[i,sample_num+2] < sample_num:
                     df.drop(df.index[i])
         del df["sum"]
         del df["num_True"]
