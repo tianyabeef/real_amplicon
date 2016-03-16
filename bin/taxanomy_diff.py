@@ -68,15 +68,20 @@ def taxanomy_diff(cfg_in, vars=None):
         return outfiles
     #abundance_cutoff
     if float(params['abundance_cutoff']) > 0:
-        work.commands.append('%s -i %s/otu_table_all.txt -g %s -o %s --cutoff %s' % ( scripts['filter_abundance'],params['summarize_dir'],params['group'],params['filter_abundance_dir'],params['abundance_cutoff']))
-        work.commands.append('%s -i %s/otu_table_L2.txt -g %s -o %s --cutoff %s' % ( scripts['filter_abundance'],params['summarize_dir'],params['group'],params['filter_abundance_dir'],params['abundance_cutoff']))
-        work.commands.append('%s -i %s/otu_table_L3.txt -g %s -o %s --cutoff %s' % ( scripts['filter_abundance'],params['summarize_dir'],params['group'],params['filter_abundance_dir'],params['abundance_cutoff']))
-        work.commands.append('%s -i %s/otu_table_L4.txt -g %s -o %s --cutoff %s' % ( scripts['filter_abundance'],params['summarize_dir'],params['group'],params['filter_abundance_dir'],params['abundance_cutoff']))
-        work.commands.append('%s -i %s/otu_table_L5.txt -g %s -o %s --cutoff %s' % ( scripts['filter_abundance'],params['summarize_dir'],params['group'],params['filter_abundance_dir'],params['abundance_cutoff']))
-        work.commands.append('%s -i %s/otu_table_L6.txt -g %s -o %s --cutoff %s' % ( scripts['filter_abundance'],params['summarize_dir'],params['group'],params['filter_abundance_dir'],params['abundance_cutoff']))
-        work.commands.append('%s -i %s -g %s -o %s --cutoff %s' % ( scripts['filter_abundance'],params['uniform_profile'],params['group'],params['filter_abundance_dir'],params['abundance_cutoff']))
-        params['summarize_dir'] = params['filter_abundance_dir']
-        params['uniform_profile'] = params['filter_abundance_dir'] + '/otu_table_uniform_filter_abundance.txt'
+        cutoff = float(params['abundance_cutoff'])
+        py = scripts['filter_abundance']
+        summarize_dir = params['summarize_dir']
+        uniform_profile = params['uniform_profile']
+        filter_abundance_dir = params['filter_abundance_dir']
+        work.commands.append('%s -i %s/otu_table_all.txt  -o %s --cutoff %s' % ( py,summarize_dir,filter_abundance_dir,cutoff))
+        work.commands.append('%s -i %s/otu_table_L2.txt  -o %s --cutoff %s' % ( py,summarize_dir,filter_abundance_dir,cutoff))
+        work.commands.append('%s -i %s/otu_table_L3.txt  -o %s --cutoff %s' % ( py,summarize_dir,filter_abundance_dir,cutoff))
+        work.commands.append('%s -i %s/otu_table_L4.txt  -o %s --cutoff %s' % ( py,summarize_dir,filter_abundance_dir,cutoff))
+        work.commands.append('%s -i %s/otu_table_L5.txt  -o %s --cutoff %s' % ( py,summarize_dir,filter_abundance_dir,cutoff))
+        work.commands.append('%s -i %s/otu_table_L6.txt  -o %s --cutoff %s' % ( py,summarize_dir,filter_abundance_dir,cutoff))
+        work.commands.append('%s -i %s  -o %s --cutoff %s' % ( py,uniform_profile,filter_abundance_dir,cutoff))
+        params['summarize_dir'] = filter_abundance_dir
+        params['uniform_profile'] = filter_abundance_dir + '/otu_table_uniform_filter_abundance.txt'
 
     # LEfSe analysis
     work.commands.append('%s -i %s -l %s -g %s -o %s --LDA %s' % (scripts['LEfSe'],
