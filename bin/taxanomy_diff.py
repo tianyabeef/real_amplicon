@@ -72,7 +72,7 @@ def taxanomy_diff(cfg_in, vars=None):
         py = scripts['filter_abundance']
         summarize_dir = params['summarize_dir']
         uniform_profile = params['uniform_profile']
-        filter_abundance_dir = params['filter_abundance_dir']
+        filter_abundance_dir = outfiles['filter_abundance_dir']
         work.commands.append('%s -i %s/otu_table_all.txt  -o %s --cutoff %s' % ( py,summarize_dir,filter_abundance_dir,cutoff))
         work.commands.append('%s -i %s/otu_table_L2.txt  -o %s --cutoff %s' % ( py,summarize_dir,filter_abundance_dir,cutoff))
         work.commands.append('%s -i %s/otu_table_L3.txt  -o %s --cutoff %s' % ( py,summarize_dir,filter_abundance_dir,cutoff))

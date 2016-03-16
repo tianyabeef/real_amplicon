@@ -8,6 +8,7 @@ import argparse
 import sys
 import os
 import pandas as pd
+from util import mkdir
 def read_params(args):
     parser = argparse.ArgumentParser(description='''diff pca | v1.0 at 2015/10/26 by liangzb ''')
     parser.add_argument('-i', '--infile', dest='infile', metavar='file', type=str, required=True,
@@ -29,6 +30,8 @@ if __name__ == '__main__':
     cut_off = params['cut_off']
     quantile = params['quantile']
     if os.path.isfile(infile):
+        if not os.path.exists(outdir):
+            mkdir(outdir)
         basename = os.path.basename(infile)
         prefix = os.path.splitext(basename)
         df = pd.DataFrame.from_csv(infile,sep="\t")
