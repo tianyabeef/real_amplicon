@@ -67,7 +67,7 @@ def taxanomy_diff(cfg_in, vars=None):
     if min_sample_num_in_groups < 3:
         return outfiles
     #abundance_cutoff
-    if params['abundance_cutoff'] > 0:
+    if float(params['abundance_cutoff']) > 0:
         work.commands.append('%s -i %s/otu_table_all.txt -g %s -o %s --cutoff %s' % ( scripts['filter_abundance'],params['summarize_dir'],params['group'],params['filter_abundance_dir'],params['abundance_cutoff']))
         work.commands.append('%s -i %s/otu_table_L2.txt -g %s -o %s --cutoff %s' % ( scripts['filter_abundance'],params['summarize_dir'],params['group'],params['filter_abundance_dir'],params['abundance_cutoff']))
         work.commands.append('%s -i %s/otu_table_L3.txt -g %s -o %s --cutoff %s' % ( scripts['filter_abundance'],params['summarize_dir'],params['group'],params['filter_abundance_dir'],params['abundance_cutoff']))
