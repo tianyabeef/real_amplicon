@@ -38,7 +38,7 @@ if __name__ == '__main__':
         sample_num = len(df.columns)
         df["sum"] = df.sum(axis=1)
         df = df.sort("sum",ascending=False)
-        quantile_value = df["sum"].quantile(quantile)
+        quantile_value = float(df["sum"].quantile(quantile))
         dd = df[df>cut_off]
         df["num_True"] = dd.count(axis=1)
         for i in range(len(df.index)):
