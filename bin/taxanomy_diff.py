@@ -81,7 +81,7 @@ def taxanomy_diff(cfg_in, vars=None):
         work.commands.append('%s -i %s/otu_table_L6.txt  -o %s --cut_off %s' % ( py,summarize_dir,filter_abundance_dir,cutoff))
         work.commands.append('%s -i %s  -o %s --cut_off %s' % ( py,uniform_profile,filter_abundance_dir,cutoff))
         params['summarize_dir'] = filter_abundance_dir
-        params['uniform_profile'] = filter_abundance_dir + '/otu_table_uniform_filter_abundance.txt'
+        params['uniform_profile'] = filter_abundance_dir + '/otu_table_uniform.txt'
 
     # LEfSe analysis
     work.commands.append('%s -i %s -l %s -g %s -o %s --LDA %s' % (scripts['LEfSe'],
