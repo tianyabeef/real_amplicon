@@ -32,6 +32,8 @@ if __name__ == '__main__':
     basename = os.path.basename(infile)
     prefix = os.path.splitext(basename)
     tmp_file = "%s/%s_tmp"% (outdir,basename)
+    if not os.path.exists(outdir):
+        mkdir(outdir)
     with open(infile) as fq, open(tmp_file, 'w') as out:
         head = fq.next()
         if head.startswith('# Constructed from'):
@@ -39,9 +41,6 @@ if __name__ == '__main__':
         out.write(head)
         for line in fq:
             out.write(line)
-
-    if not os.path.exists(outdir):
-        mkdir(outdir)
     df = pd.DataFrame.from_csv(tmp_file,sep="\t")
     sample_num = len(df.columns)
     df["sum"] = df.sum(axis=1)
