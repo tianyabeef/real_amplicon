@@ -29,26 +29,34 @@ if __name__ == '__main__':
     outdir = params['outdir']
     cut_off = params['cut_off']
     quantile = params['quantile']
-    if os.path.isfile(infile):
-        if not os.path.exists(outdir):
-            mkdir(outdir)
-        basename = os.path.basename(infile)
-        prefix = os.path.splitext(basename)
-        df = pd.DataFrame.from_csv(infile,sep="\t")
-        sample_num = len(df.columns)
-        df["sum"] = df.sum(axis=1)
-        df = df.sort("sum",ascending=False)
-        quantile_value = float(df["sum"].quantile(quantile))
-        dd = df[df>cut_off]
-        df["num_True"] = dd.count(axis=1)
-        for i in range(len(df.index)):
-            print df.ix[i,sample_num+1]
-            print quantile_value
-            print df.ix[i,sample_num+1] < quantile_value
-            if df.ix[i,sample_num+1] < quantile_value:
-                if df.ix[i,sample_num+2] < sample_num:
-                    df.drop(df.index[i])
-        del df["sum"]
-        del df["num_True"]
-        df.to_csv("%s/%s"% (outdir,basename),sep="\t",encoding="utf-8")
+    basename = os.path.basename(infile)
+    prefix = os.path.splitext(basename)
+    tmp_file = "%s/%s_tmp"% (outdir,basename)
+    with open(infile) as fq, open(tmp_file, 'w') as out:
+        head = fq.next()
+        if head.startswith('# Constructed from'):
+            head = fq.next()
+        out.write(head)
+        for line in fq:
+            out.write(line)
+
+    if not os.path.exists(outdir):
+        mkdir(outdir)
+    df = pd.DataFrame.from_csv(tmp_file,sep="\t")
+    sample_num = len(df.columns)
+    df["sum"] = df.sum(axis=1)
+    df = df.sort("sum",ascending=False)
+    quantile_value = float(df["sum"].quantile(quantile))
+    dd = df[df>cut_off]
+    df["num_True"] = dd.count(axis=1)
+    index_list = []
+    for i in range(len(df.index)):
+        if df.ix[i,sample_num] < quantile_value:
+            if df.ix[i,sample_num+1] < sample_num:
+                index_list.append(i)
+    df = df.drop(df.index[index_list])
+    del df["sum"]
+    del df["num_True"]
+    df.to_csv("%s/%s"% (outdir,basename),sep="\t",encoding="utf-8")
+    os.popen("rm %s" % tmp_file)
 
