@@ -46,10 +46,10 @@ if(group_num==2){
     p<-kruskal(X,group,g_order)
 }
 #p
-#fdr <- p.adjust(p, method = "fdr", n = length(p))
-statsKWs<-data.frame(rownames(X),means,p)
+fdr <- p.adjust(p, method = "fdr", n = length(p))
+statsKWs<-data.frame(rownames(X),means,p,fdr)
 ploc=ncol(statsKWs)
-colnames(statsKWs)<- c("taxonname",meanname,"pvalue")
+colnames(statsKWs)<- c("taxonname",meanname,"pvalue","fdr")
 #statsKWs[,ploc]
 #statsKWs0<-as.data.frame(statsKWs[statsKWs[,ploc]<@#{p_cutoff} & !is.na(statsKWs[,ploc]),])
 #colnames(statsKWs0)=colnames(statsKWs)

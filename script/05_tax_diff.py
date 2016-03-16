@@ -21,6 +21,8 @@ def read_params(args):
                         help="set the group file")
     parser.add_argument('-c', '--cutoff', dest='cutoff', metavar='FILE', type=float, default=0.05,
                         help="set the p_value cutoff")
+    parser.add_argument('-q', '--fdr', dest='fdr', metavar='FILE', type=float, default=0.05,
+                        help="set the fdr cutoff")
     parser.add_argument('--paired', dest='paired', action='store_true',
                         help="paired compare")
     parser.set_defaults(paired=False)
@@ -48,11 +50,12 @@ def filt(infile, filt_file):
         for line in fp:
             tabs = line.strip().split('\t')
             try:
-                p_value = float(tabs[-1])
+                p_value = float(tabs[-2])
+                q_value = float(tabs[-1])
             except ValueError, ex:
                 if str(ex).startswith('could not convert string to float'):
                     continue
-            if p_value < params['cutoff']:
+            if p_value < params['cutoff'] and q_value < params["fdr"]:
                 marker_set.add(tabs[0])
                 out.write(line)
     return marker_set
