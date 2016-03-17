@@ -358,8 +358,7 @@ def work_html(pipeline, group_files, infiles=None):
         out.write('rm -rf %s\n' % ' '.join(rm_files))
 
     pipeline.merge_shell(work_dir + '/work.sh', [get_result_outfile['shell'],
-                                                 get_html_outfile['shell'],
-                                                 rm_shell])
+                                                 get_html_outfile['shell']])
     pipeline.add_job('html',
                      work_dir + '/work.sh',
                      prep=pipeline.html_hold_jobs[:-1])
