@@ -17,7 +17,7 @@ def read_params(args):
                         help="set the work dir")
     parser.add_argument('--cut_off', dest='cut_off', metavar='cut_off', type=float, required=True,
                         help="set the group file")
-    parser.add_argument('--quantile', dest='quantile', metavar='quantile', type=float, default=0.75,
+    parser.add_argument('--quantile', dest='quantile', metavar='quantile', type=float, default=0.25,
                         help="thr sum of raw  set quantile;0.25 or 0.5 or 0.75")
     args = parser.parse_args()
     params = vars(args)
