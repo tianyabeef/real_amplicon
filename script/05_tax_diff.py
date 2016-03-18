@@ -21,7 +21,7 @@ def read_params(args):
                         help="set the group file")
     parser.add_argument('-c', '--cutoff', dest='cutoff', metavar='FILE', type=float, default=0.05,
                         help="set the p_value cutoff")
-    parser.add_argument('-q', '--fdr', dest='fdr', metavar='FILE', type=float, default=0.5,
+    parser.add_argument('-q', '--fdr', dest='fdr', metavar='FILE', type=float, default=1,
                         help="set the fdr cutoff")
     parser.add_argument('--paired', dest='paired', action='store_true',
                         help="paired compare")
