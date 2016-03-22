@@ -81,7 +81,7 @@ if __name__ == '__main__':
     elif params['data_type'] == 'ITS':
         mkdir('%s/align_result/' % params['out_dir'])
         align_result = '%s/align_result/rep_set_aligned.fasta' % params['out_dir']
-        command = "%s --retree %s --reorder %s > " % (params['mafft'],params['retree'], params['rep_set'])
+        command = "%s --retree %s --progress %s  --reorder %s > " % (params['mafft'],params['retree'],"%s/stderr" % os.path.dirname(params['rep_set']),params['rep_set'])
         command += '%s\n' % align_result
         command += '%s -i %s -o %s\n' % (params['make_phylogeny_soft'],
                                          align_result,
