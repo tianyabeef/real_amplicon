@@ -92,7 +92,11 @@ dist = dist(t(data))
 print(dist)
 layout(t(c(1,2,2,2,3)))
 max_sample_name_length = max(mapply(nchar,colnames(data)))
-mar_left = (max_sample_name_length - 3) * 0.5
+if(max_sample_name_length>3){
+    mar_left = (max_sample_name_length - 3) * 0.5
+}else{
+    mar_left = 0.1
+}
 par(mar = c(5,5,5,mar_left))
 data.order <- treeplot(dist, group, grpcol)
 data <- data[, data.order]

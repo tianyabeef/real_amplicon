@@ -67,7 +67,10 @@ def get_support_file(group, tree_file, support_file):
 
     color_map = {}
     for ind, group_name in enumerate(list(set(group.itervalues()))):
-        color_map[group_name] = COLS_BREWER[ind]
+        if len(group)>20:
+            color_map[group_name] = "#000000"
+        else:
+            color_map[group_name] = COLS_BREWER[ind]
     color_dict = {}
     t = DndParser(open(tree_file, 'U'), constructor=PhyloNode, unescape_name=True)
     nodes = t.getNodesDict()
