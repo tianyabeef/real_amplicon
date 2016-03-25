@@ -1,10 +1,18 @@
 source('/data_center_01/pipeline/16S_ITS_pipeline_v3.0/src/template/labels2colors.R')
 data <- read.table('@#{infile}',header=TRUE,row.names=1,sep='\t', check.names=F,quote="")
-
-
+data <- data[c(attributes(sort(apply(data,1,sum)[-nrow(data)],decreasing=T))$names,"Other"),]
 tax_num = nrow(data)
-cols = cols_brewer[1:tax_num-1]
-cols[tax_num] = '#000000'
+
+
+if(tax_num < (@#{top}+2)){
+    cols = cols_brewer[1:tax_num-1]
+    cols[tax_num] = '#000000'
+}else{
+    cols = cols_brewer[1:@#{top}]
+    cols[(@#{top}+1):tax_num] = '#000000'
+
+}
+
 font_size = 2
 pdf_width = 15
 max_sample_name_length = max(mapply(nchar,colnames(data)))
@@ -122,9 +130,17 @@ bar_plot <- function(lmat = lmat, lhei = lhei, lwid = lwid,bottom_mar = bottom_m
   
   par(mar=c(mar_legend_bottom,0,mar_legend_top,0))
   plot(0, type="n", bty="n", xaxt="n", yaxt="n", xlab="",ylab="")
-  
+  if(tax_num < (@#{top}+2)){
   legend("top", pch=15, col=cols, legend=rownames(data), bty="n",
          pt.cex=pt.cex, cex=2, ncol=ncol, x.intersp=x.intersp, y.intersp=y.intersp,xpd=TRUE)
+  }else{
+  legend("top", pch=15, col=cols, legend=c(attributes(sort(apply(data,1,sum)[-nrow(data)],decreasing=T))$names[1:@#{top}],"Other"), bty="n",
+         pt.cex=pt.cex, cex=2, ncol=ncol, x.intersp=x.intersp, y.intersp=y.intersp,xpd=TRUE)
+  }
+
+
+
+
   
 }
 

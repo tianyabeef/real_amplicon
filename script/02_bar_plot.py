@@ -30,6 +30,8 @@ def read_params(args):
                         help="plot sample bar plot, if this params is set, group file will only for order")
     parser.add_argument('--contains_other', dest="contains_other", action='store_true',
                         help="totel abundance contains other abundance ; totel aundance is 1")
+    parser.add_argument('--top', dest="top",metavar="INT",type=int,default=20,
+                        help='set the top num, [default is 20]')
     parser.set_defaults(with_group=False)
     args = parser.parse_args()
     params = vars(args)
@@ -68,7 +70,7 @@ def work(level, params):
 if __name__ == '__main__':
     params = read_params(sys.argv)
     mkdir(params['out_dir'])
-
+    top = params['top']
     outfile_list = []
     for level in params['level_list']:
         outfile_list.append(work(level, params))
@@ -81,7 +83,8 @@ if __name__ == '__main__':
         Rscript = '%s/bar_plot.R' % work_dir
         pdf_file = '%s/bar_plot.pdf' % work_dir
         png_file = '%s/bar_plot.png' % work_dir
-        vars = {"infile": infile,
+        vars = {"top":top,
+                "infile": infile,
                 "pdf_file": pdf_file,
                 "title": '%s Level Barplot' % TAX_LEVEL[level].capitalize()}
         r_job.format(vars)
