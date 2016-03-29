@@ -73,13 +73,14 @@ def taxanomy_diff(cfg_in, vars=None):
         summarize_dir = params['summarize_dir']
         uniform_profile = params['uniform_profile']
         filter_abundance_dir = outfiles['filter_abundance_dir']
-        work.commands.append('%s -i %s/otu_table_all.txt  -o %s --cut_off %s' % ( py,summarize_dir,filter_abundance_dir,cutoff))
-        work.commands.append('%s -i %s/otu_table_L2.txt  -o %s --cut_off %s' % ( py,summarize_dir,filter_abundance_dir,cutoff))
-        work.commands.append('%s -i %s/otu_table_L3.txt  -o %s --cut_off %s' % ( py,summarize_dir,filter_abundance_dir,cutoff))
-        work.commands.append('%s -i %s/otu_table_L4.txt  -o %s --cut_off %s' % ( py,summarize_dir,filter_abundance_dir,cutoff))
-        work.commands.append('%s -i %s/otu_table_L5.txt  -o %s --cut_off %s' % ( py,summarize_dir,filter_abundance_dir,cutoff))
-        work.commands.append('%s -i %s/otu_table_L6.txt  -o %s --cut_off %s' % ( py,summarize_dir,filter_abundance_dir,cutoff))
-        work.commands.append('%s -i %s  -o %s --cut_off %s' % ( py,uniform_profile,filter_abundance_dir,cutoff))
+        group = params['group']
+        work.commands.append('%s -i %s/otu_table_all.txt -g %s -o %s --cut_off %s' % ( py,summarize_dir,group,filter_abundance_dir,cutoff))
+        work.commands.append('%s -i %s/otu_table_L2.txt -g %s  -o %s --cut_off %s' % ( py,summarize_dir,group,filter_abundance_dir,cutoff))
+        work.commands.append('%s -i %s/otu_table_L3.txt -g %s  -o %s --cut_off %s' % ( py,summarize_dir,group,filter_abundance_dir,cutoff))
+        work.commands.append('%s -i %s/otu_table_L4.txt -g %s  -o %s --cut_off %s' % ( py,summarize_dir,group,filter_abundance_dir,cutoff))
+        work.commands.append('%s -i %s/otu_table_L5.txt -g %s  -o %s --cut_off %s' % ( py,summarize_dir,group,filter_abundance_dir,cutoff))
+        work.commands.append('%s -i %s/otu_table_L6.txt -g %s  -o %s --cut_off %s' % ( py,summarize_dir,group,filter_abundance_dir,cutoff))
+        work.commands.append('%s -i %s -g %s -o %s --cut_off %s' % ( py,uniform_profile,group,filter_abundance_dir,cutoff))
         params['summarize_dir'] = filter_abundance_dir
         params['uniform_profile'] = filter_abundance_dir + '/otu_table_uniform.txt'
 

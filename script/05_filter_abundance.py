@@ -13,10 +13,12 @@ def read_params(args):
     parser = argparse.ArgumentParser(description='''diff pca | v1.0 at 2015/10/26 by liangzb ''')
     parser.add_argument('-i', '--infile', dest='infile', metavar='file', type=str, required=True,
                         help="set the marker file in")
+    parser.add_argument('-g', '--group', dest='group', metavar='file', type=str, default=None,
+                        help="set group file")
     parser.add_argument('-o', '--outdir', dest='outdir', metavar='DIR', type=str, required=True,
                         help="set the work dir")
     parser.add_argument('--cut_off', dest='cut_off', metavar='cut_off', type=float, required=True,
-                        help="set the group file")
+                        help="set the  cut off abundance")
     parser.add_argument('--quantile', dest='quantile', metavar='quantile', type=float, default=0.25,
                         help="thr sum of raw  set quantile;0.25 or 0.5 or 0.75")
     args = parser.parse_args()
@@ -25,6 +27,7 @@ def read_params(args):
 
 if __name__ == '__main__':
     params = read_params(sys.argv)
+    group = params["group"]
     infile = params['infile']
     outdir = params['outdir']
     cut_off = params['cut_off']
@@ -42,6 +45,9 @@ if __name__ == '__main__':
         for line in fq:
             out.write(line)
     df = pd.DataFrame.from_csv(tmp_file,sep="\t")
+    if group is not None:
+        dfgroup = pd.DataFrame.from_csv(group,seq="\t",header=False)
+        df = df[dfgroup.index.tolist()]
     sample_num = len(df.columns)
     df["sum"] = df.sum(axis=1)
     df = df.sort("sum",ascending=False)
