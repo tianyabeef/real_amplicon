@@ -46,7 +46,7 @@ if __name__ == '__main__':
             out.write(line)
     df = pd.DataFrame.from_csv(tmp_file,sep="\t")
     if group is not None:
-        dfgroup = pd.DataFrame.from_csv(group,seq="\t",header=False)
+        dfgroup = pd.DataFrame.from_csv(group,sep="\t")
         df = df[dfgroup.index.tolist()]
     sample_num = len(df.columns)
     df["sum"] = df.sum(axis=1)
