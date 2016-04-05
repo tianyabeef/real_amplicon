@@ -36,10 +36,10 @@ plot_data$MDS2<-as.numeric(plot_data$MDS2)
 colnames(plot_data) <- c("MDS1","MDS2","group","time")
 scale_shape_manual <- c(18,15,17,19,8,9,10,11,12,13,14)[0:length(unique(group[,1]))]
 scale_color_manual <- group_colors
-p <-ggplot(plot_data,aes(x=MDS1,y=MDS2,shape=group,colour=time))+geom_point(size=3)+scale_shape_manual(values = scale_shape_manual)+scale_color_manual(values = scale_color_manual)
-p <- p+theme(axis.title.x = element_text(size=10,colour = "black",face = "bold"),axis.title.y = element_text(size=10,colour = "black",face = "bold"),axis.text.y = element_text(size=10,colour = "black"),axis.text.x = element_text(size=10,colour = "black"))
+p <-ggplot(plot_data,aes(x=MDS1,y=MDS2,shape=group,colour=time))+geom_point(size=5)+scale_shape_manual(values = scale_shape_manual)+scale_color_manual(values = scale_color_manual)
 p <-p + theme_bw()
 p <- p + theme(panel.grid.major=element_line(colour=NA))
+p <- p+theme(axis.title.x = element_text(size=17,colour = "black",face = "bold"),axis.title.y = element_text(size=17,colour = "black",face = "bold"),axis.text.y = element_text(size=17,colour = "black"),axis.text.x = element_text(size=17,colour = "black"))
 p
 write.csv(nmds$points,file=paste(substr("@#{pdf_file}",0,nchar("@#{pdf_file}")-4),"_point_inf.csv",sep = ""),fileEncoding="utf-8",quote = F)
 
