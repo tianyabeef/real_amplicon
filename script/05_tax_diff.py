@@ -25,6 +25,8 @@ def read_params(args):
                         help="set the fdr cutoff")
     parser.add_argument('--paired', dest='paired', action='store_true',
                         help="paired compare")
+    parser.add_argument('--test', dest='test', metavar='methed',type=str,default="wilcox",
+                        help="wilcox,t,default[wilcox]")
     parser.set_defaults(paired=False)
     args = parser.parse_args()
     params = vars(args)
@@ -80,6 +82,7 @@ if __name__ == '__main__':
         'group_file': params['group'],
         'marker_file': params['marker'],
         'paired': params['paired'],
+        'test': params['test']
     }
     r_job.format(var)
     r_job.write(params['outdir'] + '/diff.marker.R')

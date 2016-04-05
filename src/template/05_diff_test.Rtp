@@ -39,11 +39,18 @@ kruskal=function(X,group,g){
     }
     p
 }
-if(group_num==2){
-	paired=@#{paired}
-    p <- apply(X, 1, function(row) unlist(wilcox.test(row[glist[[1]]],row[glist[[2]]],paired=paired)["p.value"]))
+if("@#{test}"=="t"){
+    if(group_num==2){
+        paired=@#{paired}
+    	p <- apply(X, 1, function(row) unlist(t.test(row[glist[[1]]],row[glist[[2]]],paired=paired)["p.value"]))
+    }
 }else{
-    p<-kruskal(X,group,g_order)
+    if(group_num==2){
+	paired=@#{paired}
+    	p <- apply(X, 1, function(row) unlist(wilcox.test(row[glist[[1]]],row[glist[[2]]],paired=paired)["p.value"]))
+    }else{
+    	p<-kruskal(X,group,g_order)
+    }
 }
 #p
 fdr <- p.adjust(p, method = "fdr", n = length(p))
