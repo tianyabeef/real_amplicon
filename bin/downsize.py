@@ -28,6 +28,7 @@ def downsize(cfg_in,vars=None):
     outfiles = config.get_section('outfiles')
 
     flag = True
+    pre_outfiles={}
     if params['pre_config']:
         pre_config = MyConfigParser()
         pre_config.readfp(open(params['pre_config']))
@@ -39,29 +40,28 @@ def downsize(cfg_in,vars=None):
             work.commands.append('ln -s %s %s'%(pre_outfiles['downsize_stat'],outfiles['downsize_stat']))
             flag = False
     if flag:
-        params['group'] = params['group'] or None
+        if pre_outfiles:
+            command = '%s -o %s -d %s -oo %s -od %s -g %s' % (scripts['downsize_two'],pre_outfiles['otu_table'],pre_outfiles['downsize_stat'],outfiles['otu_table'],outfiles['downsize_stat'],params['group'])
 
-        if re.search('[t,y]',params['keep_small_size'].lower()):
-            keep_small_size = '--keep_small_size'
+            work.commands.append(command)
+            work.commands.append('%s -i %s -t %s -o %s'%(scripts['otutab2fa'],params['seqs_all'],outfiles['otu_table'],outfiles['seqs_fa']))
         else:
-            keep_small_size = '--no_keep_small_size'
-        command = '%s -i %s -o %s --out_statfile %s %s' % (scripts['downsize'],
-                                                           params['otu_table_in'],
-                                                           outfiles['otu_table'],
-                                                           outfiles['downsize_stat'],
-                                                           keep_small_size)
-        if params['minimum']:
-            command += ' -m %s' % params['minimum']
-        else:
-            command += ' -s %s' % params['stat_file_in']
-        if params['group']:
-            command += ' -g %s' % params['group']
-        work.commands.append(command)
+            params['group'] = params['group'] or None
 
-        work.commands.append('%s -i %s -t %s -o %s'%(scripts['otutab2fa'],
-                                                    params['seqs_all'],
-                                                    outfiles['otu_table'],
-                                                    outfiles['seqs_fa']))
+            if re.search('[t,y]',params['keep_small_size'].lower()):
+                 keep_small_size = '--keep_small_size'
+            else:
+                 keep_small_size = '--no_keep_small_size'
+            command = '%s -i %s -o %s --out_statfile %s %s' % (scripts['downsize'], params['otu_table_in'],outfiles['otu_table'], outfiles['downsize_stat'], keep_small_size)
+            if params['minimum']:
+                command += ' -m %s' % params['minimum']
+            else:
+                command += ' -s %s' % params['stat_file_in']
+            if params['group']:
+                command += ' -g %s' % params['group']
+            work.commands.append(command)
+
+            work.commands.append('%s -i %s -t %s -o %s'%(scripts['otutab2fa'], params['seqs_all'],outfiles['otu_table'],outfiles['seqs_fa']))
 
     return outfiles
 

@@ -19,7 +19,7 @@ def read_params(args):
                         help="set the work dir")
     parser.add_argument('--cut_off', dest='cut_off', metavar='cut_off', type=float, required=True,
                         help="set the  cut off abundance")
-    parser.add_argument('--quantile', dest='quantile', metavar='quantile', type=float, default=0.25,
+    parser.add_argument('--quantile', dest='quantile', metavar='quantile', type=float, default=1.0,
                         help="thr sum of raw  set quantile;0.25 or 0.5 or 0.75")
     args = parser.parse_args()
     params = vars(args)
@@ -43,11 +43,20 @@ if __name__ == '__main__':
             head = fq.next()
         out.write(head)
         for line in fq:
+            tabs = line.strip().split("\t")
+            if tabs[0].split(";")[-1]=="Other":
+                continue
+#            tabs[0]=tabs[0].split(";")[-1]
+#            out.write("%s\n" % "\t".join(tabs))
             out.write(line)
     df = pd.DataFrame.from_csv(tmp_file,sep="\t")
     if group is not None:
-        dfgroup = pd.DataFrame.from_csv(group,sep="\t")
-        df = df[dfgroup.index.tolist()]
+	dfgroup=[]
+	with open(group,"r") as fq:
+	    for line in fq:
+		tabs = line.strip().split("\t")
+		dfgroup.append(tabs[0])
+        df = df[dfgroup]
     sample_num = len(df.columns)
     df["sum"] = df.sum(axis=1)
     df = df.sort("sum",ascending=False)
@@ -57,7 +66,7 @@ if __name__ == '__main__':
     index_list = []
     for i in range(len(df.index)):
         if df.ix[i,sample_num] < quantile_value:
-            if df.ix[i,sample_num+1] < sample_num:
+            if df.ix[i,sample_num+1] <2:
                 index_list.append(i)
     df = df.drop(df.index[index_list])
     del df["sum"]
