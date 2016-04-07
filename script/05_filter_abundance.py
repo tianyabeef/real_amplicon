@@ -7,6 +7,7 @@ __version__ = "1.0.0-dev"
 import argparse
 import sys
 import os
+import re
 import pandas as pd
 from util import mkdir
 def read_params(args):
@@ -45,7 +46,7 @@ if __name__ == '__main__':
         for line in fq:
             tabs = line.strip().split("\t")
             if tabs[0].split(";")[-1]=="Other":
-                continue
+                    continue
 #            tabs[0]=tabs[0].split(";")[-1]
 #            out.write("%s\n" % "\t".join(tabs))
             out.write(line)
