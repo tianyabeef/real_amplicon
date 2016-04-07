@@ -4,8 +4,8 @@ weighted_unifrac=read.table("@#{weighted_unifrac}",header=TRUE,row.names=1,sep="
 unweighted_unifrac=read.table("@#{unweighted_unifrac}",header=TRUE,row.names=1,sep="\t",check.names=F,quote="")
 group=read.table("@#{group_file}",header=F,row.names=1,check.names=F,quote="")
 
-weighted_unifrac = weighted_unifrac[,rownames(group)]
-unweighted_unifrac = unweighted_unifrac[,rownames(group)]
+weighted_unifrac = weighted_unifrac[rownames(group),rownames(group)]
+unweighted_unifrac = unweighted_unifrac[rownames(group),rownames(group)]
 
 #mrpp.weighted_unifrac = mrpp(vegdist(weighted_unifrac), group[,1])
 #mrpp.unweighted_unifrac = mrpp(vegdist(unweighted_unifrac), group[,1])
