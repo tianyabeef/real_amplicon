@@ -61,7 +61,6 @@ if __name__ == '__main__':
         __range = range(params['min'], params['max'], params['step'])
 
     maker = MyRarefactionMaker(params['infile'], __range, 10)
-
     maker.rarefy_to_files(params['outdir'],
                           False,
                           False,
