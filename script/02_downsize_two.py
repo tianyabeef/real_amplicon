@@ -5,7 +5,7 @@ import os
 from util import mkdir
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1,this_script_path + '/../src')
-from Downsize import Subject
+#from Downsize import Subject
 from Parser import parse_stat_file,parse_group_file
 
 
@@ -41,6 +41,7 @@ if __name__ == '__main__':
         for line in fq:
             tabs  = line.strip().split("\t")
             sample_list.append(tabs[0])
+    #print sample_list
     with open(otu_table,mode="r") as fq , open(downsize_stat,mode="r") as fq3 ,open(out_otu_table,mode="w") as fqout , open(out_downsize_stat,mode="w") as fqout3:
         for line in fq:
             tabs = line.strip().split("\t")
@@ -48,6 +49,7 @@ if __name__ == '__main__':
             for value in tabs:
                 if value.split("_")[0] in sample_list:
                     tmp.append(value)
+     #       print "%s\t%s"%(tabs[0],len(tmp))
             if len(tmp)!=0:
                 fqout.write("%s\t" % tabs[0])
                 fqout.write("%s\n" % ("\t".join(tmp)))

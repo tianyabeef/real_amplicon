@@ -35,8 +35,11 @@ class Sample(object):
                 self.percent[tax] = self.tax[tax] / self.total_profile * 100
             else:
                 other += self.tax[tax]
-        other = other / self.total_profile
-        self.other_percent = other * 100
+        if self.total_profile==0:
+            self.other_percent=0
+        else:
+            other = other / self.total_profile
+            self.other_percent = other * 100
     def pick_top_contains_other(self,used_tax):
         other = 0
         for tax in self.tax.iterkeys():

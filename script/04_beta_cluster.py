@@ -67,7 +67,7 @@ def get_support_file(group, tree_file, support_file):
 
     color_map = {}
     for ind, group_name in enumerate(list(set(group.itervalues()))):
-        if len(group)>20:
+        if len(list(set(group.itervalues())))>20:
             color_map[group_name] = "#000000"
         else:
             color_map[group_name] = COLS_BREWER[ind]
