@@ -15,6 +15,7 @@ def pick_otu(cfg_in,vars=None):
     out_dir = outfiles['out_dir']
     sorted_fa = out_dir + '/sorted.fa'
     cluster_otus = out_dir + '/cluster_otus.fa'
+    rmchime_otus = out_dir + '/rmchime.otus.fa'
     otus_fa = out_dir + '/otus.fa'
     map_uc = out_dir + '/map.uc'
 
@@ -31,9 +32,11 @@ def pick_otu(cfg_in,vars=None):
     work.commands.append('%s -cluster_otus %s -otus %s'%(usearch,
                                                          sorted_fa,
                                                          cluster_otus))
+    #remove chime
+    work.commands.append("%s -uchime_ref %s -db /data_center_03/USER/huangy/database/rdp_training/RDPClassifier_16S_trainsetNo15_rawtrainingdata/trainset15_092015.fa -nonchimeras %s -strand plus" % (usearch,cluster_otus,rmchime_otus))
     # rename
     work.commands.append('%s --infile %s --outfile %s'%(scripts['01_rename_otu_fasta'],
-                                                        cluster_otus,
+                                                        rmchime_otus,
                                                         otus_fa))
     # remap
     work.commands.append('%s -usearch_global %s -db %s -strand %s -id %s -uc %s'%(usearch,
