@@ -35,6 +35,9 @@ def downsize(cfg_in,vars=None):
         pre_outfiles = pre_config.get_section('outfiles')
         pre_group = pre_config.get('params','group')
         if check_group_row(pre_group,params['group']):
+            work.commands.append('rm %s'% outfiles['otu_table'])
+            work.commands.append('rm %s'% outfiles['seqs_fa'])
+            work.commands.append('rm %s'% outfiles['downsize_stat'])
             work.commands.append('ln -s %s %s'%(pre_outfiles['otu_table'],outfiles['otu_table']))
             work.commands.append('ln -s %s %s'%(pre_outfiles['seqs_fa'],outfiles['seqs_fa']))
             work.commands.append('ln -s %s %s'%(pre_outfiles['downsize_stat'],outfiles['downsize_stat']))
