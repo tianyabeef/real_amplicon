@@ -39,8 +39,13 @@ if(nrow(data)<=1){
 	}
 	par(oma=c(0,0,0,oma.right))
 	col = colorRampPalette(c("lightblue", "yellow", "orange", "red"),bias=3)(3000)
-
-	cexCol=-0.0133*ncol(data)+2
+	if((ncol(data)>100) && (ncol(data)<200)){
+		cexCol=0.5
+	}else if(ncol(data)>=200){
+		cexCol = 0.3
+	}else{
+		cexCol=-0.0133*ncol(data)+2
+	}
 
 	Colv=TRUE
 	Rowv=TRUE
