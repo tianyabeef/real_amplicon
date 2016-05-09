@@ -61,8 +61,9 @@ if __name__ == '__main__':
     taxfile = params["taxfile"]
     search_name = OrderedDict()
     with open(infile,"r") as fq:
+        fq.next()
         for line in fq:
-            name = line.strip()
+            name = line.strip().split("\t")[0]
             name = "%s%s" % (inlevel,name)
             search_name[name] = ""
     with open(taxfile,'r') as fq:
