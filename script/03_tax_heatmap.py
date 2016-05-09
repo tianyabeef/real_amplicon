@@ -45,11 +45,13 @@ if __name__ == '__main__':
     mkdir(params['out_dir'])
     if params['for_plot'] is None:
         params['for_plot'] = params['out_dir'] + '/for_plot.txt'
+        params['for_plot_filter'] = params['out_dir'] + '/for_plot_filter.txt'
         tax_profile_filter(params['otu_table'], params['for_plot'], params['level'])
     pdf_file = params['out_dir'] + '/heatmap.pdf'
     png_file = params['out_dir'] + '/heatmap.png'
 
-    vars = {'heatmap_profile': params['for_plot'],
+    vars = {'for_plot_filter':params['for_plot_filter'],
+            'heatmap_profile': params['for_plot'],
             'pdf_file': pdf_file,
             'group': params['group'],
             'top': params['top'],
