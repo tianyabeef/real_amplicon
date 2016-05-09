@@ -75,7 +75,7 @@ topbarplot <- function(profile, number = NULL, palette = NULL)
 	profile <- rbind(profile, Others)
 	barplot(profile, col = col, space = 0.25, width = 0.8, horiz = T, xaxt = "n", las = 1, ylim = c(0, ncol(profile)),
 			family="mono")
-	mtext(paste(number, "Main Genes in Samples"), side = 3, line = 1, cex = 2)
+	mtext(paste(number, "Main genus in Samples"), side = 3, line = 1, cex = 2)
 	specol <- col
 	names(specol) <- rownames(profile)
 	specol
@@ -83,7 +83,15 @@ topbarplot <- function(profile, number = NULL, palette = NULL)
 
 data <- read.table("@#{profile}", head = T, check.names = F, row.names=1, quote="", sep='\t')
 pregroup <- read.table("@#{group}", head = F, check.names = F, row.names = 1,quote="", sep='\t')
-pdf("@#{pdf_file}", width = 15)
+if((ncol(data)>70) && (ncol(data)<150)){
+	pdf("@#{pdf_file}", width = 15,height=20)
+}else if((ncol(data)>=150) && (ncol(data)<250)){
+	pdf("@#{pdf_file}", width = 15,height=30)
+}else if(ncol(data)>=250){
+	pdf("@#{pdf_file}", width = 15,height=40)
+}else{
+	pdf("@#{pdf_file}", width = 15)
+}
 group <- as.vector(pregroup[,1])
 names(group) <- rownames(pregroup)
 grpcol <- cols_brewer
