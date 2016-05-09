@@ -1,15 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- #
-__author__ = "huangy"
-__copyright__ = "Copyright 2016, The metagenome Project"
-__version__ = "1.0.0-dev"
-#!/usr/bin/env python
-# encoding: utf-8
 
 from __future__ import division
 import sys
 import argparse
 import os
+from collections import OrderedDict
 from util import mkdir, image_trans, tax_profile_filter
 
 this_script_path = os.path.dirname(__file__)
@@ -63,7 +59,7 @@ if __name__ == '__main__':
     inlevel = params["inputlevel"]
     outlevel = params["outlevel"]
     taxfile = params["taxfile"]
-    search_name = {}
+    search_name = OrderedDict()
     with open(infile,"r") as fq:
         for line in fq:
             name = line.strip()

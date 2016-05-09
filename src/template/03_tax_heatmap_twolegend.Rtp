@@ -105,6 +105,6 @@ if(nrow(data)<=1){
 		   # bg = 'gray90',
 		   # pt.cex=2*legend.cex,cex=legend.cex,
 		   xpd=T)
-	legend("top",pch=15,col=group_colors_row, legend=group_names_row,xpd=T)
+	legend(x=-0.1,y=0.7,pch=15,col=group_colors_row, legend=group_names_row,xpd=T)
 }
 dev.off()
