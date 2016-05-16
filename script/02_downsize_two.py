@@ -2,6 +2,7 @@
 import sys
 import argparse
 import os
+import re
 from util import mkdir
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1,this_script_path + '/../src')
@@ -45,13 +46,14 @@ if __name__ == '__main__':
     with open(otu_table,mode="r") as fq , open(downsize_stat,mode="r") as fq3 ,open(out_otu_table,mode="w") as fqout , open(out_downsize_stat,mode="w") as fqout3:
         for line in fq:
             tabs = line.strip().split("\t")
+            otuName = tabs.pop(0)
             tmp = []
             for value in tabs:
-                if value.split("_")[0] in sample_list:
+                if re.search('(.*)_\d+$', value).group(1) in sample_list:
                     tmp.append(value)
      #       print "%s\t%s"%(tabs[0],len(tmp))
             if len(tmp)!=0:
-                fqout.write("%s\t" % tabs[0])
+                fqout.write("%s\t" % otuName)
                 fqout.write("%s\n" % ("\t".join(tmp)))
         head = fq3.next()
         fqout3.write(head)

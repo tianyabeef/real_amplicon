@@ -38,7 +38,7 @@ predict_metagenomes.py -f --type_of_prediction cog -i %(outdir)s/normalized_otus
 
 categorize_by_function.py -i %(outdir)s/metagenome_predictions.biom -c KEGG_Pathways -l 3 -o %(outdir)s/metagenome_predictions.L3.biom
 categorize_by_function.py -f -i %(outdir)s/metagenome_predictions.biom -c KEGG_Pathways -l 3 -o %(outdir)s/metagenome_predictions.L3.txt
-categorize_by_function.py -i %(outdir)s/metagenome_predictions.biom -c KEGG_Pathways -l 2 -o %(outdir)s/metagenome_predictions.L3.biom
+categorize_by_function.py -i %(outdir)s/metagenome_predictions.biom -c KEGG_Pathways -l 2 -o %(outdir)s/metagenome_predictions.L2.biom
 categorize_by_function.py -f -i %(outdir)s/metagenome_predictions.biom -c KEGG_Pathways -l 2 -o %(outdir)s/metagenome_predictions.L2.txt
 
 echo "summarize_taxa:md_identifier\tKEGG_Pathways" > %(outdir)s/qiime_params.txt
