@@ -54,5 +54,6 @@ if __name__ == '__main__':
         command += ' --x_linear_scale --y_linear_scale'
     if params['absolute']:
         command += ' --absolute_counts'
+    #print command
     os.system(command)
     image_trans(pdf_file, png_file)

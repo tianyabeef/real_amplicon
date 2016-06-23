@@ -1,10 +1,12 @@
 data=read.table('@#{file_group}',header=F,sep="\t",check.names=F,quote="")
-group=read.table('@#{file_group_name}',header=F,check.names=F,sep="\t",quote="")
+group=read.table('@#{file_group_name}',header=F,check.names=F,sep="\t",quote="",stringsAsFactors=F)
 numcol = ncol(data)
-numrow  = nrow(data)
+numrow  = nrow(group)
+write.table(data[,c(1,2)],file="@#{outputdir}/newname.list",quote=F,col.names=F,row.names=F,sep="\t")
+write.table(data[,c(2,2)],file="@#{outputdir}/alpha_group.txt",quote=F,col.names=F,row.names=F,sep="\t")	
 if((numcol-2)==numrow){
     for(i in 1:numrow){
-        write.table(data[,c(1,2+i)],file="@#{file_group_name}/group[i,1]")
+        write.table(data[,c(1,2+i)],file=paste(paste("@#{outputdir}/",paste(unlist(strsplit(group[i,1],split=","))[-1], collapse='VS'),sep=""),".group",sep=""),quote=F,col.names=F,row.names=F,sep="\t")
     }
 }else{
     print("warning :please check @#{file_group} @#{file_group_name}")

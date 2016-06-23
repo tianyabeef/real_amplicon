@@ -39,6 +39,8 @@ def read_params(args):
     params = vars(args)
     if params['statfile'] is not None:
         maximum, minimum = parse_stat_file(params['statfile'], group_file=params['group_file'])
+	print "maximum is :%s" % maximum
+	print "minimum is : %s" % minimum
         if params['mode'] == 'MAX':
             params['max'] = maximum
         elif params['mode'] == 'MIN':
@@ -59,7 +61,7 @@ if __name__ == '__main__':
         __range += range(params['min'], 10000, int(params['step'] / 10)) + range(10000, params['max'], params['step'])
     else:
         __range = range(params['min'], params['max'], params['step'])
-
+#    print "list is :%s" % __range
     maker = MyRarefactionMaker(params['infile'], __range, 10)
     maker.rarefy_to_files(params['outdir'],
                           False,

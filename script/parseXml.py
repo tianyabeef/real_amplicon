@@ -7,7 +7,7 @@ import xlrd
 import re
 import  argparse
 import sys
-
+import os
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1, this_script_path + '/../src')
 import Parser as rp
@@ -48,8 +48,10 @@ if __name__ == '__main__':
         for i in range(nrows):
 
             if re.search("^四、分组信息",table.cell_value(i,0).encode('utf-8')):
+		print i
                 to_read_sample = True
             if re.search("^五、比较方案*",table.cell_value(i,0).encode('utf-8')):
+		print i
                 to_read_group = True
                 to_read_sample = False
             if to_read_sample:
@@ -77,7 +79,7 @@ if __name__ == '__main__':
                         to_read_group = False
                         continue
                     else:
-                        fqout2.write("\t".join(r_list))
+                        fqout2.write(",".join(r_list))
                         fqout2.write("\n")
 
     r_job = rp.Rparser()

@@ -10,10 +10,11 @@ __version__ = "1.9.1"
 __maintainer__ = "Justin Kuczynski"
 __email__ = "justinak@gmail.com"
 
+
+from qiime.plot_rank_abundance_graph import plot_rank_abundance_graphs
 from biom import load_table
 
 from qiime.util import make_option
-from qiime.plot_rank_abundance_graph import plot_rank_abundance_graphs
 from qiime.util import (parse_command_line_parameters, get_options_lookup,
                         create_dir)
 

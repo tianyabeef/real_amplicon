@@ -145,8 +145,8 @@ def parse_stat_file(stat_file, group_file=None):
             tabs = line.strip().split('\t')
 #            if group and tabs[0] not in group:
 #                continue
-            if maximum < int(tabs[1]):
-                maximum = int(tabs[1])
+            if maximum < int(tabs[2]):
+                maximum = int(tabs[2])
             if minimum > int(tabs[2]):
                 minimum = int(tabs[2])
     return maximum, minimum

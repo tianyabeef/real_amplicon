@@ -11,7 +11,7 @@ this_script_path = os.path.dirname(__file__)
 sys.path.insert(1, this_script_path + '/../src')
 import Parser as rp
 from Parser import parse_group_file
-
+import pandas as pd
 
 def read_params(args):
     parser = argparse.ArgumentParser(description='''diff boxplot | v1.0 at 2015/10/26 by liangzb ''')
@@ -50,6 +50,9 @@ def get_table(params):
     sample_dict = {}
     group_dict = {}
     profile_total = defaultdict(float)
+    data = pd.DataFrame.from_csv(params['infile'],sep="\t")
+    data.index.name="Name"
+    data.to_csv(params['infile'],sep="\t")
     with open(params['infile']) as fp:
         samples = fp.next().strip().split('\t')[1:]
         for sample in samples:
