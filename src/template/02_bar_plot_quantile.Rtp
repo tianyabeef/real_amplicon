@@ -1,6 +1,76 @@
+library("shape")
 source('/data_center_01/pipeline/16S_ITS_pipeline_v3.0/src/template/labels2colors.R')
 data <- read.table('@#{infile}',header=TRUE,row.names=1,sep='\t', check.names=F,quote="")
+group = read.table("@#{groupfile}",header = T,row.names = 1,sep = "\t",quote="",check.names = F)
 data <- data[c(attributes(sort(apply(data,1,sum)[-nrow(data)],decreasing=T))$names,"Other"),]
+confintMy<-function(x,cumulative,sigma=-1,alpha=0.05){
+  n<-length(x)
+
+  xb<-mean(as.numeric(x))
+  if(sigma>=0){
+    tmp<-sigma/sqrt(n)*qnorm(1-alpha/2);df<-n
+  }
+  else{
+    tmp<-sd(x)/sqrt(n)*qt(1-alpha/2,n-1);df<- n-1
+  }
+  data.frame(mean=xb,means=xb+cumulative,df=df,a=xb-tmp+cumulative,b=xb+tmp+cumulative)
+}
+quantileMy<-function(x,cumulative,sigma=-1,alpha=0.05){
+  n<-length(x)
+  xb<-mean(as.numeric(x))
+  df<-n
+  qq = quantile(as.matrix(x),probs = seq(0.25, 0.75,0.5))
+  data.frame(mean=xb,means=xb+cumulative,df=df,a=as.numeric(qq[1])+cumulative,b=as.numeric(qq[2])+cumulative)
+
+}
+
+confidenceInterval<-function(data,group,sigma=-1,alpha=0.05){
+  if(is.data.frame(data)){
+    if(is.data.frame(group)){
+      if (is.numeric(group[,1])) {
+        labels = as.factor(as.character(group[,1]))
+      }
+      labels=group[,1]
+      labelNum=length(unique(labels))
+      labelU = unique(labels)
+      factors = list()
+      for(i in 1:labelNum){
+        factors[[i]]=which(group[,1]==labelU[i])
+      }
+      cumulative = array(0,labelNum)
+      plotmean = data.frame()
+      resultmean = data.frame()
+      resulta = data.frame()
+      resultb = data.frame()
+      for(i in 1:nrow(data)){
+        for(j in 1:labelNum){
+          x = data[i,factors[[j]]]
+          resl = quantileMy(x,cumulative[j],sigma,alpha)
+          plotmean[i,j] = resl[1]
+          resultmean[i,j] = resl[2]
+          resulta[i,j] = resl[4]
+          resultb[i,j] = resl[5]
+          cumulative[j] = resultmean[i,j]
+        }
+      }
+    }
+  }
+  rownames(plotmean)=rownames(data)
+  colnames(plotmean)=labelU
+  rownames(resultmean)=rownames(data)
+  colnames(resultmean)=labelU
+  rownames(resulta)=rownames(data)
+  colnames(resulta)=labelU
+  rownames(resultb)=rownames(data)
+  colnames(resultb)=labelU
+  class(resultmean)
+  list(plotmean,resultmean,resulta,resultb)
+}
+
+
+ddd = confidenceInterval(data,group)
+data = ddd[[1]]
+
 tax_num = nrow(data)
 
 
@@ -87,53 +157,63 @@ bar_plot <- function(lmat = lmat, lhei = lhei, lwid = lwid,bottom_mar = bottom_m
   if (missing(pt.cex) || is.null(pt.cex)) {
     pt.cex = 5
   }
-
-
+  
+  
   par(mar=c(bottom_mar,mar_left,6,mar_right))
   if(ncol(data)==1){
-    barplot(as.matrix(data),col=cols,xaxt='n',font=2,space=spa,width=width,xlim=c(3,15),cex.axis =2)
+    plotself = barplot(as.matrix(data),col=cols,xaxt='n',font=2,space=spa,width=width,xlim=c(3,15),cex.axis =2)
+    tt = matrix(plotself,nrow = nrow(data),ncol = ncol(data),byrow = T)
+    Arrows(tt,as.matrix(ddd[[2]]),tt,as.matrix(ddd[[3]]),arr.type="T")
+    Arrows(tt,as.matrix(ddd[[2]]),tt,as.matrix(ddd[[4]]),arr.type="T")
   }else if(ncol(data)>1 && ncol(data)<=10){
-    barplot(as.matrix(data),col=cols,xaxt='n',font=2,space=spa,width=width,cex.axis = 2)
+    plotself = barplot(as.matrix(data),col=cols,xaxt='n',font=2,space=spa,width=width,cex.axis = 2)
+    tt = matrix(plotself,nrow = nrow(data),ncol = ncol(data),byrow = T)
+    Arrows(tt,as.matrix(ddd[[2]]),tt,as.matrix(ddd[[3]]),arr.type="T")
+    Arrows(tt,as.matrix(ddd[[2]]),tt,as.matrix(ddd[[4]]),arr.type="T")
   }else{
-    barplot(as.matrix(data),col=cols,xaxt='n',font=2,space=spa,width=width,cex.axis = 3)
+    plotself = barplot(as.matrix(data),col=cols,xaxt='n',font=2,space=spa,width=width,cex.axis = 3)
+    tt = matrix(plotself,nrow = nrow(data),ncol =ncol(data) ,byrow = T)
+    Arrows(tt,as.matrix(ddd[[2]]),tt,as.matrix(ddd[[3]]),arr.type="T")
+    Arrows(tt,as.matrix(ddd[[2]]),tt,as.matrix(ddd[[4]]),arr.type="T")
   }
+  ww = seq(from=from_factor*spa*width, length=ncol(data), by=1*spa*width+width)
   if(ncol(data) == 1){
     text(9.5,srt=srt, adj=1, labels=colnames(data),
          xpd=T, cex=font_size, y=-5)
     mtext('Relative Abundance(%)',side=2,line=5,cex=font_size*0.9,font=2)
     mtext('@#{title}', side=3, line=1, cex=font_size*1.1,,font=2)
   }else if(ncol(data)<=10){
-    text(seq(from=from_factor*spa*width, length=ncol(data), by=1*spa*width+width),
+    text(ww,
          srt=srt, adj=1, labels=colnames(data),
          xpd=T, cex=font_size, y=-5)
     mtext('Relative Abundance(%)',side=2,line=5,cex=font_size*0.9,font=2)
     mtext('@#{title}', side=3, line=1, cex=font_size*1.1,font=2)
   }else if(ncol(data)>10 && ncol(data)<=50){
-    text(seq(from=from_factor*spa*width, length=ncol(data), by=1*spa*width+width),
+    text(ww,
          srt=srt, adj=1, labels=colnames(data),
          xpd=T, cex=font_size, y=-5)
     mtext('Relative Abundance(%)',side=2,line=5,cex=font_size*1.1,font=2)
     mtext('@#{title}', side=3, line=1, cex=font_size*1.1,font=2)
   }else if(ncol(data)>50 && ncol(data)<=100){
-    text(seq(from=from_factor*spa*width, length=ncol(data), by=1*spa*width+width),
+    text(ww,
          srt=srt, adj=1, labels=colnames(data),
          xpd=T, cex=font_size*0.8, y=-5)
     mtext('Relative Abundance(%)',side=2,line=5,cex=font_size*1.1,font=2)
     mtext('@#{title}', side=3, line=1, cex=font_size*1.1,font=2)
   }else if(ncol(data)>100 && ncol(data)<=150){
-    text(seq(from=from_factor*spa*width, length=ncol(data), by=1*spa*width+width),
+    text(ww,
          srt=srt, adj=1, labels=colnames(data),
          xpd=T, cex=font_size*0.6, y=-5)
     mtext('Relative Abundance(%)',side=2,line=5,cex=font_size*1.1,font=2)
     mtext('Genus Level Barplot', side=3, line=1, cex=font_size*1.1,font=2)
   }else{
-    text(seq(from=from_factor*spa*width, length=ncol(data), by=1*spa*width+width),
+    text(ww,
          srt=srt, adj=1, labels=colnames(data),
          xpd=T, cex=font_size*0.3, y=-5)
     mtext('Relative Abundance(%)',side=2,line=5,cex=font_size*1.1,font=2)
     mtext('Genus Level Barplot', side=3, line=1, cex=font_size*1.1,font=2)
   }
-
+  
   par(mar=c(mar_legend_bottom,0,mar_legend_top,0))
   plot(0, type="n", bty="n", xaxt="n", yaxt="n", xlab="",ylab="")
   if(tax_num < (@#{top}+2)){
@@ -145,19 +225,16 @@ bar_plot <- function(lmat = lmat, lhei = lhei, lwid = lwid,bottom_mar = bottom_m
   }
 
 
-
-
-
 }
 
 
-def.par <- par(no.readonly=TRUE)
+def.par <- par(no.readonly=TRUE)  
 if(ncol(data)>0 && ncol(data)<=1){
   ncol = ceiling( tax_num / 21)
   y.intersp=1
   pt.cex=3
   bar_plot(lmat = matrix(c(1,2),1,2,byrow=TRUE), lhei = c(1,1), lwid = c(layout_width,1),bottom_mar=bottom_mar,data=data,cols=cols,spa=spa,width=width,from_factor = 1.5,ncol = ncol,srt=srt,y.intersp=y.intersp,pt.cex=pt.cex)
-
+  
 }else if(ncol(data)>1 && ncol(data)<=2){
   spa = spa*3
   ncol = ceiling( tax_num / 21)
@@ -165,33 +242,34 @@ if(ncol(data)>0 && ncol(data)<=1){
   y.intersp=1
   pt.cex=3
   bar_plot(lmat = matrix(c(1,2),1,2,byrow=TRUE), lhei = c(1,1), lwid = c(layout_width,1),bottom_mar=bottom_mar,data=data,cols=cols,spa=spa,width=width,from_factor = from_factor,ncol = ncol,srt=srt,y.intersp=y.intersp,pt.cex=pt.cex)
-
+  
 }else if(ncol(data)>2 && ncol(data)<=4){
   ncol = ceiling( tax_num / 21)
   from_factor = 1.8
   y.intersp=1
   pt.cex=3
   bar_plot(lmat = matrix(c(1,2),1,2,byrow=TRUE), lhei = c(1,1), lwid = c(layout_width,1),bottom_mar=bottom_mar,data=data,cols=cols,spa=spa,width=width,from_factor = from_factor,ncol = ncol,srt=srt,y.intersp=y.intersp,pt.cex=pt.cex)
-
+  
 }else if(ncol(data)>4 && ncol(data)<=10){
   ncol = 1
   srt = 90
   y.intersp=1.05
   pt.cex=3
   bar_plot(lmat = matrix(c(1,2),1,2,byrow=TRUE), lhei = c(1,1), lwid = c(layout_width,1),bottom_mar=bottom_mar,data=data,cols=cols,spa=spa,width=width,ncol = ncol,srt=srt,y.intersp=y.intersp,pt.cex=pt.cex)
-
+  
 }else if(ncol(data)>10 && ncol(data)<=30){
   mar_right=40-ncol(data)
   mar_left=40-ncol(data)
   ncol = ceiling( tax_num / 7)
   mar_legend_top = 0
-  bar_plot(lmat = matrix(c(1,1,2),3,1,byrow=TRUE), lhei = c(1,1,1),lwid = c(1),bottom_mar=bottom_mar,data=data,cols=cols,spa=spa,width=width,ncol = ncol,srt=srt,mar_left = mar_left,mar_right =mar_right,mar_legend_top = mar_legend_top)
-
+ bar_plot(lmat = matrix(c(1,1,2),3,1,byrow=TRUE), lhei = c(1,1,1),lwid = c(1),bottom_mar=bottom_mar,data=data,cols=cols,spa=spa,width=width,ncol = ncol,srt=srt,mar_left = mar_left,mar_right =mar_right,mar_legend_top = mar_legend_top)
+  
 }else{
   ncol = ceiling( tax_num / 7)
   mar_legend_top = 0
   bar_plot(lmat = matrix(c(1,1,2),3,1,byrow=TRUE), lhei = c(1,1,1),lwid = c(1),bottom_mar=bottom_mar,data=data,cols=cols,spa=spa,width=width,ncol = ncol,srt=srt,mar_legend_top = mar_legend_top )
 }
+
 
 par(def.par)
 dev.off()
