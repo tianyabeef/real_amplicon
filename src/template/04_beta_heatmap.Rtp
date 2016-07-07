@@ -17,7 +17,7 @@ par(mar=c(7,7,3,3))
 aheatmap(infile, 
 		 Rowv=FALSE, 
 		 Colv=TRUE, 
-		 distfun="correlation", 
+		 distfun=as.dist(infile),
 		 hclustfun="complete", 
 		 annCol=annotation, 
 		 annColors=cols,

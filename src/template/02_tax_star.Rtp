@@ -1,3 +1,4 @@
+source('/data_center_01/pipeline/16S_ITS_pipeline_v3.0/src/template/labels2colors.R')
 library(grid)
 X=read.table('@#{tax_ass_uniform}',sep="\t",row.name=1,header=T, check.names=F,quote="")
 sample_num = ncol(X)
@@ -17,7 +18,7 @@ if(sample_num <=9 ){
         draw.segments = T,
         frame.plot=T,
         key.loc=c(3.5,-1),
-        col.segments = rainbow(10),
+        col.segments = cols_brewer[1:10],
         ylim=ylim
     )
 }
@@ -30,7 +31,7 @@ if(sample_num>9 && sample_num<=16){
         draw.segments = T,
         frame.plot=T,
         key.loc=c(6,-1),
-        col.segments = rainbow(10),
+        col.segments = cols_brewer[1:10],
         ylim=c(3,4)
     )
 }
@@ -43,7 +44,7 @@ if(sample_num>16 && sample_num<=25){
         draw.segments = T,
         frame.plot=T,
         key.loc=c(7,-1),
-        col.segments = rainbow(10),
+        col.segments = cols_brewer[1:10],
         ylim=c(4,5)
     )
 }
@@ -56,7 +57,7 @@ if(sample_num>25 && sample_num<=36){
         draw.segments = T,
         frame.plot=T,
         key.loc=c(8,-1),
-        col.segments = rainbow(10),
+        col.segments = cols_brewer[1:10],
         ylim=c(5,6)
     )
 }
@@ -73,7 +74,7 @@ if(sample_num > 36 && sample_num<=56){
         draw.segments = T,
         frame.plot=T,
         key.loc=loc,
-        col.segments = rainbow(10),
+        col.segments = cols_brewer[1:10],
         ylim=c(-2,18)
     )
 }
@@ -87,7 +88,7 @@ if(sample_num > 56 && sample_num<=63){
         draw.segments = T,
         frame.plot=T,
         key.loc=loc,
-        col.segments = rainbow(10),
+        col.segments = cols_brewer[1:10],
         ylim=c(1,15)
     )
 
@@ -102,7 +103,7 @@ if(sample_num > 63 && sample_num <= 72){
         draw.segments = T,
         frame.plot=T,
         key.loc=loc,
-        col.segments = rainbow(10),
+        col.segments = cols_brewer[1:10],
         ylim=c(2,18)
     )
 
@@ -117,22 +118,22 @@ if(sample_num > 72 && sample_num < 90){
         draw.segments = T,
         frame.plot = T,
         key.loc = loc,
-        col.segments = rainbow(10),
+        col.segments = cols_brewer[1:10],
         ylim = c(3,15)
     )
 }
 if(sample_num > 90){
-    loc = c(12,-1)
+#    loc = c(12,-1)
     stars(
-        t(X),
+        t(X),ncol=ceiling(sqrt(sample_num)),
         labels = colnames(X),
         len=1,
         xpd=TRUE, main = "Genus",
         draw.segments = T,
         frame.plot = T,
-        key.loc = loc,
-        col.segments = rainbow(10),
-        ylim = c(3,15)
+        key.loc = c(ceiling(sqrt(sample_num))+2,-1),
+        col.segments = cols_brewer[1:10],
+        ylim=c(0,floor(sqrt(sample_num))*2)
     )
 }
 dev.off()
