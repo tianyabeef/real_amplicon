@@ -122,7 +122,7 @@ if(sample_num > 72 && sample_num < 90){
         ylim = c(3,15)
     )
 }
-if(sample_num > 90){
+if(sample_num >= 90){
 #    loc = c(12,-1)
     stars(
         t(X),ncol=ceiling(sqrt(sample_num)),
