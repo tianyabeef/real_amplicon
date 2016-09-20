@@ -1,3 +1,4 @@
+export PYTHONPATH=''
 #set anaconda2
 export PATH=/data_center_03/USER/huangy/soft/MAIN/anaconda2/bin:$PATH
 # User install R software
