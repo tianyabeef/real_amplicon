@@ -48,7 +48,8 @@ def work(level, params):
         os.mkdir(work_dir)
     profile = '%s/otu_table_L%d.txt' % (params['wf_tax_dir'], level)
     outfile = '%s/for_plot.txt' % work_dir
-    subject = Subject(TAX_LEVEL[level], profile, outfile)
+    top = params['top']
+    subject = Subject(TAX_LEVEL[level], profile, outfile,top)
     if params['contains_other']:
         if params['group'] is not None:
             if params['with_group']:

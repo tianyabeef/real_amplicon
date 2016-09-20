@@ -6,7 +6,8 @@ import sys
 import argparse
 import os
 from util import mkdir
-
+import pandas as pd
+import numpy
 
 def read_params(args):
     parser = argparse.ArgumentParser(description='''alpha statistic | v1.0 at 2015/10/16 by liangzb ''')
@@ -30,6 +31,13 @@ def work_single(file):
         for tail in fp:
             pass
         tail = tail.rstrip().split()[3:]
+	if "n/a" in tail:
+            
+	    df = pd.DataFrame.from_csv(file,sep="\t")
+            df = df.replace("n/a",numpy.nan)
+            df.fillna(method='pad')
+            df =df.astype(float)
+            tail =  df.iloc[2:,2:].apply(numpy.max, axis=0).tolist()
     for ind, sample in enumerate(samples):
         alphas[sample] = tail[ind]
     return alphas

@@ -110,6 +110,8 @@ def work(name, params):
 
 if __name__ == '__main__':
     params = read_params(sys.argv)
+    if os.path.isdir(params['out_dir']):
+            os.popen("rm -rf %s" % params['out_dir'])
     mkdir(params['out_dir'])
 
     commands = []

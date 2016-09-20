@@ -125,13 +125,13 @@ bar_plot <- function(lmat = lmat, lhei = lhei, lwid = lwid,bottom_mar = bottom_m
          srt=srt, adj=1, labels=colnames(data),
          xpd=T, cex=font_size*0.6, y=-5)
     mtext('Relative Abundance(%)',side=2,line=5,cex=font_size*1.1,font=2)
-    mtext('Genus Level Barplot', side=3, line=1, cex=font_size*1.1,font=2)
+    mtext('@#{title} Level Barplot', side=3, line=1, cex=font_size*1.1,font=2)
   }else{
     text(seq(from=from_factor*spa*width, length=ncol(data), by=1*spa*width+width),
          srt=srt, adj=1, labels=colnames(data),
          xpd=T, cex=font_size*0.3, y=-5)
     mtext('Relative Abundance(%)',side=2,line=5,cex=font_size*1.1,font=2)
-    mtext('Genus Level Barplot', side=3, line=1, cex=font_size*1.1,font=2)
+    mtext('@#{title} Level Barplot', side=3, line=1, cex=font_size*1.1,font=2)
   }
 
   par(mar=c(mar_legend_bottom,0,mar_legend_top,0))

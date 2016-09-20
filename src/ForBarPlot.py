@@ -50,13 +50,14 @@ class Sample(object):
 
 class Subject(object):
 
-    def __init__(self,level,profile,outfile):
+    def __init__(self,level,profile,outfile,top):
         self.sample = []
         self.level = level
         self.profile = profile
         self.outfile = outfile
         self.tax_total_profile = defaultdict(float)
         self.used_tax = []
+	self.top=top
 
     def read_profile(self):
         fp = open(self.profile)
@@ -95,7 +96,7 @@ class Subject(object):
             n2 = dict_[b]
             return cmp(n2,n1)
         top = sorted(list(taxes_),
-                cmp=my_cmp)[:20]
+                cmp=my_cmp)[:self.top]
         self.used_tax = top
 
     def run(self,group=None):

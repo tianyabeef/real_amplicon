@@ -25,7 +25,7 @@ def read_params(args):
     parser.add_argument('--with_boxplot', dest='with_boxplot', action='store_true',
                         help="plot boxplot")
     parser.add_argument('--two_legend', dest='two_legend', action = 'store_true',default=False,
-                        help="two_legend")
+                        help="two_legend,set group have three col")
     parser.set_defaults(with_boxplot=True)
     args = parser.parse_args()
     params = vars(args)

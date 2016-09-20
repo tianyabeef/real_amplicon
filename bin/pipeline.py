@@ -117,7 +117,7 @@ def work_alpha_rare_all(pipeline, out_stat_file, infiles=None):
         'otu_biom': infiles['otu_biom'],
         'stat_file': out_stat_file,
         'tree_file': tree_outfiles['tree_file'],
-        'choice_mode': 'MIN'
+        'choice_mode': 'MAX'
     }
     outfiles = alpha_rare(pipeline.config, vars=vars)
     pipeline.make_shell(work_dir + '/make.sh',
@@ -252,7 +252,7 @@ def work_alpha_diversity(pipeline, analysis_name, tree_file, infiles=None):
         'stat_file': infiles['out_stat_file'],
         'tree_file': tree_file,
         'otu_biom': infiles['otu_biom'],
-        'choice_mode': 'MIN'
+        'choice_mode': 'MAX'
     }
     alpha_rare_outfiles = alpha_rare(pipeline.config, vars=vars)
 

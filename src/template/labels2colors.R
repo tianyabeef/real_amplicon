@@ -1,4 +1,4 @@
-cols_brewer = c('#00447E','#F34800','#64A10E','#930026','#464E04','#049a0b','#4E0C66','#D00000','#FF6C00','#FF00FF','#c7475b','#00F5FF','#BDA500','#A5CFED','#f0301c','#2B8BC3','#FDA100','#54adf5','#CDD7E2','#9295C1')
+cols_brewer = c('#00447E','#F34800','#64A10E','#930026','#464E04','#049a0b','#4E0C66','#D00000','#FF6C00','#FF00FF','#c7475b','#00F5FF','#BDA500','#A5CFED','#f0301c','#2B8BC3','#FDA100','#54adf5','#CDD7E2','#9295C1',"#FF0000FF", "#FF9900FF", "#CCFF00FF", "#33FF00FF" ,"#00FF66FF", "#00FFFFFF" ,"#0066FFFF" ,"#3300FFFF","#CC00FFFF","#FF0099FF")
 labels2colors <- function (labels, colorSeq = NULL, naColor = "grey", 
   commonColorCode = TRUE) 
 {

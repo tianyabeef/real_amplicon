@@ -8,6 +8,14 @@ sample_colors = color_list[[1]]
 group_colors =  color_list[[2]]
 group_names =   color_list[[3]]
 group = color_list[[4]]
+group_names_max_length=max(mapply(nchar,group_names))
+if(group_names_max_length>0 && group_names_max_length<=2){
+	xlim_add = 1800
+}else if(group_names_max_length>2 && group_names_max_length<=4){
+	xlim_add = 5000
+}else{
+	xlim_add = 10000
+}
 pdf('@#{pdf_file}')
 par(mar=c(5.1,5.1,3.1,2.1))
 
@@ -18,7 +26,7 @@ if(ncol(table)==4){
   ymax=max(as.numeric(as.character(table[,4][table[,4] != "n/a"])))
   
   # plot blank canvas
-  plot(0,0,xlim=c(0,max(readnumber)+1800),ylim=c(0,ymax),type="n",xlab="reads",ylab="shannon",cex.lab=1.4)
+  plot(0,0,xlim=c(0,max(readnumber)+xlim_add),ylim=c(0,ymax),type="n",xlab="reads",ylab="shannon",cex.lab=1.4)
  
     legend("topright",legend=g_order,col=gcols_order,seg.len=1.5,lwd=1.6,cex=0.8) 
 
@@ -58,7 +66,7 @@ if(ncol(table)==4){
 	ymax=max(as.numeric(as.character(table[table != "n/a"])))
 
 	# plot blank canvas
-	plot(0,0,xlim=c(0,max(readnumber)+1800),ylim=c(0,ymax),type="n",xlab="reads",ylab="@#{alpha_name}",cex.lab=1.4)
+	plot(0,0,xlim=c(0,max(readnumber)+xlim_add),ylim=c(0,ymax),type="n",xlab="reads",ylab="@#{alpha_name}",cex.lab=1.4)
 	if( length( group_names ) <= 10){ 
 		legend("topright",legend=group_names,col=group_colors,seg.len=1.5,lwd=1.6,cex=0.8) 
 	}
@@ -102,7 +110,7 @@ par(mar=c(5.1,5.1,3.1,2.1))
 if(ncol(table)==1){
   g_order = group[,1]
   # plot blank canvas
-  plot(0,0,xlim=c(0,max(readnumber)+1800),ylim=c(0,ymax),type="n",xlab="reads",ylab="shannon",cex.lab=1.4)
+  plot(0,0,xlim=c(0,max(readnumber)+xlim_add),ylim=c(0,ymax),type="n",xlab="reads",ylab="shannon",cex.lab=1.4)
  
     legend("topright",legend=g_order,col=gcols_order,seg.len=1.5,lwd=1.6,cex=0.8) 
 
@@ -138,7 +146,7 @@ if(ncol(table)==1){
 	ymax=max(as.numeric(as.character(table[table != "n/a"])))
 
 	# plot blank canvas
-	plot(0,0,xlim=c(0,max(readnumber)+1800),ylim=c(0,ymax),type="n",xlab="reads",ylab="@#{alpha_name}",cex.lab=1.4)
+	plot(0,0,xlim=c(0,max(readnumber)+xlim_add),ylim=c(0,ymax),type="n",xlab="reads",ylab="@#{alpha_name}",cex.lab=1.4)
 	if( length( group_names ) <= 10){ 
 		legend("topright",legend=group_names,col=group_colors,seg.len=1.5,lwd=1.6,cex=0.8) 
 	}
