@@ -9,3 +9,4 @@ const.pipeline_dir = "/data_center_01/pipeline/16S_ITS_pipeline_v3.0/"
 const.config = "%s/config/" % const.pipeline_dir
 const.html_template_miseq = "/data_center_01/pipeline/16S_ITS_pipeline_v3.0/src/16S20160112"
 const.html_template_hiseq = "/data_center_01/pipeline/16S_ITS_pipeline_v3.0/src/16S20160223-h"
+const.html_template_jin = "/data_center_01/pipeline/16S_ITS_pipeline_v3.0/src/16S20160223-h-jin"
