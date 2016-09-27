@@ -229,7 +229,7 @@ class Pipeline(Work):
             params = self.config.get_section('params')
             params['job_id']
             assert params['data_type'] == '16S' or params['data_type'] == 'ITS', 'data_type : %s' % params['data_type']
-            assert params['sequence_platform'] == 'hiseq' or params['sequence_platform'] == 'miseq', 'sequence_platform : %s' % params['sequence_platform']
+            assert params['sequence_platform'] == 'hiseq' or params['sequence_platform'] == 'miseq' or params['sequence_platform'] == 'jin' , 'sequence_platform : %s' % params['sequence_platform']
             assert os.path.isdir(params['work_dir']), 'work_dir : %s' % params['work_dir']
             assert os.path.isfile(params['name_list']), 'name_list : %s' % params['name_list']
             sample_num = os.popen("awk '{print $2}' %s| sort -u|wc -l" % params['name_list']).read().rstrip()
