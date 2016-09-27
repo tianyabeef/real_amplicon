@@ -1,0 +1,122 @@
+{% extends "pdf/analysis/9.html" %}
+{% block table9 %}
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <table class="table table-bordered">
+                <thead>
+                <tr class="success">
+                    <th>taxonname</th>
+                    {% for key in diff_otu_marker_pdf[0].__dict__ %}
+                        {% if loop.index0 < 10 %}
+                            {% if key != "taxonname" and key != "pvalue" %}
+                        <th>{{ key }}</th>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                    <th>pvalue</th>
+                </tr>
+                </thead>
+                <tbody>
+                    
+                    {% for obj in diff_otu_marker_pdf %}
+                <tr>
+                        {% if loop.index0 < 10 %}
+                            <td>{{ obj.__dict__['taxonname'] }}</td>
+                            
+                            {% for key in obj.__dict__ %}
+                                {% if key != "taxonname" and key != "pvalue" %}
+                                    <td>{{ obj.__dict__[key] }}</td>
+                                {% endif %}
+                            {% endfor %}
+                            <td>{{ obj.__dict__['pvalue'] }}</td>
+                        {% endif %}
+                </tr>
+                    {% endfor %}
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block table10 %}
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="success">
+                        <th>taxonname</th>
+                        {% for key in diff_genus_marker_pdf[0].__dict__ %}
+                            {% if loop.index0 < 10 %}
+                                {% if key != "taxonname" and key != "pvalue" %}
+                                    <th>{{ key }}</th>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                        <th>pvalue</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                        {% for obj in diff_genus_marker_pdf %}
+                    <tr>
+                            {% if loop.index0 < 10 %}
+                            <td>{{ obj.__dict__['taxonname'] }}</td>
+                                {% for key in obj.__dict__ %}
+                                    {% if key != "taxonname" and key != "pvalue" %}
+                                        <td>{{ obj.__dict__[key] }}</td>
+                                    {% endif %}
+                                {% endfor %}
+                            <td>{{ obj.__dict__['pvalue'] }}</td>
+                            {% endif %}
+                    </tr>
+                        {% endfor %}
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block table11 %}
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="success">
+                        <th>taxonname</th>
+                        {% for key in diff_taxall_marker_pdf[0].__dict__ %}
+                            {% if loop.index0 < 10 %}
+                                {% if key != "taxonname" and key != "pvalue" %}
+                                    <th>{{ key }}</th>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                        <th>pvalue</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                        {% for obj in diff_taxall_marker_pdf %}
+                        <tr>
+                            {% if loop.index0 < 10 %}
+                                <td>{{ obj.__dict__['taxonname'] }}</td>
+                                    {% for key in obj.__dict__ %}
+                                        {% if key != "taxonname" and key != "pvalue" %}
+                                <td>{{ obj.__dict__[key] }}</td>
+                                        {% endif %}
+                                    {% endfor %}
+                                <td>{{ obj.__dict__['pvalue'] }}</td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

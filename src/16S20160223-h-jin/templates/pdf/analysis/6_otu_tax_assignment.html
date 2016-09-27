@@ -1,0 +1,27 @@
+{% extends "pdf/analysis/6.html" %}
+{% block table4 %}
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <table class="table table-bordered">
+                <thead>
+                <tr class="success">
+                    <th>otuName</th>
+                    <th>num</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for  key,otuAssignmentsStatistical in otuAssignmentsStatisticals.items() %}
+                        {% if loop.index0 < 10 %}
+                        <tr>
+                            <td>{{ key }}</td>
+                            <td>{{ otuAssignmentsStatistical.num }}</td>
+                        </tr>
+                        {% endif%}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div> 
+{% endblock %}

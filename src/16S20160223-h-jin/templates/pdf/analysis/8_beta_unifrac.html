@@ -1,0 +1,115 @@
+{% extends "pdf/analysis/8.html" %}
+{% block table7 %}
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="success">
+                        <th >sample Name</th>
+                        {% for key in beta_diversity_pdf[0].__dict__ %}
+                            {% if loop.index0 < 8 %}
+                                {% if key != "sampleName" %}
+                            <th>{{ key }}</th>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                        {% for obj in beta_diversity_pdf %}
+                            {% if loop.index0 < 10 %}
+                        <tr>
+                            <td>{{ obj.__dict__['sampleName'] }}</td>
+                                {% for key in obj.__dict__ %}
+                                    {% if loop.index0 < 8 %}
+                                        {% if key != "sampleName" %}
+                                <td>{{ obj.__dict__[key] }}</td>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                        </tr>
+                            {% endif %}
+                        {% endfor %}
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div> 
+{% endblock %}
+{% block table8 %}
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <table class="table table-bordered">
+                <thead>
+                <tr class="success">
+                    <th>sample Name</th>
+                    {% for key in beta_un_diversity_pdf[0].__dict__ %}
+                        {% if loop.index0 < 8 %}
+                            {% if key != "sampleName" %}
+                        <th>{{ key }}</th>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+                </thead>
+                <tbody>
+                
+                    {% for obj in beta_un_diversity_pdf %}
+                        {% if loop.index0 < 10 %}
+                    <tr>
+                        <td>{{ obj.__dict__['sampleName'] }}</td>
+                            {% for key in obj.__dict__ %}
+                                {% if loop.index0 < 8 %}
+                                    {% if key != "sampleName" %}
+                            <td>{{ obj.__dict__[key] }}</td>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                    </tr>
+                        {% endif %}
+                    {% endfor %}
+                
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div> 
+{% endblock %}
+
+{% block table14 %}
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <table class="table table-bordered">
+                <thead>
+                <tr class="success">
+                    <th>group</th>
+                    <th>a</th>
+                    <th>observeDelta</th>
+                    <th>expectDelta</th>
+                    <th>significance</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for  key,mrppAnalysis in mrpp.items() %}
+                        {% if loop.index0 < 10 %}
+                        <tr>
+                            <td>{{ mrppAnalysis.group }}</td>
+                            <td>{{ mrppAnalysis.a }}</td>
+                            <td>{{ mrppAnalysis.observeDelta }}</td>
+                            <td>{{ mrppAnalysis.expectDelta }}</td>
+                            <td>{{ mrppAnalysis.significance }}</td>
+                        </tr>
+                        {% endif%}
+                    {% endfor %}
+                
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div> 
+{% endblock %}

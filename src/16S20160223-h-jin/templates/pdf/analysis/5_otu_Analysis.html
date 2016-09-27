@@ -1,0 +1,96 @@
+{% extends "pdf/analysis/5.html" %}
+{% block table1 %}
+    
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="success">
+                    <th>sampleName</th>
+                    <th>ampliconType</th>
+                    <th>cleanReads</th>
+                    <th>mappedReads</th>
+                    <th>mappedRatio</th>
+                    <th>OTUs</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for key,otuStatistical in otuStatisticals %}
+                        {% if loop.index0 < 10 %}
+                            <tr>
+                                <td>{{ otuStatistical.sampleName|safe }}</td>
+                                <td>{{ otuStatistical.amplicon_type }}</td>
+                                <td>{{ otuStatistical.clean_read }}</td>
+                                <td>{{ otuStatistical.mapped_reads }}</td>
+                                <td>{{ otuStatistical.mapped_ratio }}</td>
+                                <td>{{ otuStatistical.otus }}</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div> 
+
+{% endblock %}
+{% block table2 %}
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="success">
+                    <th>sampleName</th>
+                    <th>downsize</th>
+                    <th>otus_before</th>
+                    <th>otus_after</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for key,otuStatisticalDownsize in otuStatisticalDownsizes %}
+                    {% if loop.index0 < 10 %}
+                        <tr>
+                            <td>{{ otuStatisticalDownsize.sample_name|safe }}</td>
+                            <td>{{ otuStatisticalDownsize.downsize }}</td>
+                            <td>{{ otuStatisticalDownsize.otus_before }}</td>
+                            <td>{{ otuStatisticalDownsize.otus_after }}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div> 
+
+{% endblock %}
+{% block table3 %}
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="success">
+                    <th>otuId</th>
+                    <th>taxonomyLevel</th>
+                    <th>taxonomyName</th>
+                    </tr>
+                </thead>
+                <tbody>
+                 {% for key,coreMicrobiome in coreMicrobiomes.items() %}
+                    {% if loop.index0 < 10 %}
+                        <tr>
+                             <td>{{ coreMicrobiome.otu_id|safe }}</td>
+                             <td>{{ coreMicrobiome.taxonomy_level|safe }}</td>
+                             <td>{{ coreMicrobiome.taxonomy_name|safe }}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div> 
+{% endblock %}
