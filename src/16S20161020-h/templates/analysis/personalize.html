@@ -1,0 +1,70 @@
+<h1 id="个性化分析">十、个性化分析</h1>
+{% if personalize.cca_rda == "true" or personalize.cca_rda == "True" %}
+<h3 id="物种CCA/RDA分析">10.1 典范对应分析/冗余分析(CCA/RDA)(总样品数≥5，环境因子数≤ 6)</h3>
+    <p class="paragraph">典范对应分析(canonical correspondence analysis, CCA) 或冗余分析(redundancy analysis, RDA)是基于对应分析发展而来的一种排序方法，将对应分析与多元回归分析相结合，每一步计算均与环境因子进行回归，又称多元直接梯度分析。此分析主要用来反映菌群与环境因子之间的关系。RDA是基于线性模型<sup>[25]</sup>，CCA是基于单峰模型。CCA/RDA分析可以检测环境因子、样品、菌群三者之间的关系或者两两之间的关系。
+    </p>
+    <p class="paragraph">软件平台：R vegan </p>
+    <p class="paragraph">结果目录：<a href="javascript:void(0)" onClick="StartExcel('..\\results\\10_personalize\\CCA/RDA\\')" target="_blank"> CCA/RDA</a></p>
+
+    <p class="center">
+        <img class="size1" src="images/group/rda.png" alt="First slide">
+    </p>
+    <p class="name_fig"> 图10-1-1 RDA图</p>
+    <p class="premark">注：箭头代表不同的环境因子，射线越长表示该环境因子影响越大。环境因子之间的夹角为锐角时表示两个环境因子之间呈正相关关系，钝角时呈负相关关系。</p>
+{% endif %}
+
+
+{% if personalize.STAMP == "true" or personalize.STAMP == "True" %}
+<h3 id="STAMP分析">10.2 物种STAMP差异分析(每组样品数≥5)</h3>
+    <p class="paragraph">STAMP差异分析用于比较两个样品或者两组样品之间物种的丰度，通过此分析可获得显著性差异物种以及该物种更趋向何种环境条件下的样品<sup>[26]</sup>.</p>
+    <p class="paragraph">软件平台：stamp</p>
+    <p class="paragraph">结果目录：<a href="javascript:void(0)" onClick="StartExcel('..\\results\\10_personalize\\STAMP\\')" target="_blank">STAMP</a></p>
+
+    <p class="center">
+        <img class="size1" src="images/group/stamp.png" alt="second slide">
+    </p>
+
+    <p class="name_fig"> 图10-2物种STAMP差异比较分析。</p>
+    <p class="premark">注：左图表示不同功能的两个/组样品中的丰度比例，中间为95%置信度区间内，功能分度的差一比例显示，右坐标为P值。</p>
+{% endif %}
+
+
+{% if amplification == "16S" %}
+{% if personalize.annotation == "true" or personalize.annotation == "True" %}
+<h3 id="16S功能预测">10.3 16S功能预测</h3>
+    <p class="paragraph">PICRUSt (phylogenetic investigation of communities by reconstruction of unobserved states)通过隐性状态重建进行群落系统进化的研究<sup>[15]</sup>，该软件基于16S rDNA和参考序列数据库，预测宏基因组功能组成<sup>[27]</sup>。</p>
+    <p class="paragraph">  通过对宏基因组测序数据功能分析和对应16S预测功能分析结果的比较发现，此方法的准确性在84%-95%，
+    对肠道微生物菌群和土壤菌群的功能分析接近95%，能非常好的反映样品中的功能基因构成。</p>
+    <p class="paragraph">为了能够通过16S测序数据来准确的预测出功能构成，首先需要对原始16S测序数据的种属数量进行标准化，因为不同的种属菌包含的16S拷贝数不相同。然后将16S的种属构成信息通过构建好的已测序基因组的种属功能基因构成表映射获得预测的功能结果</p>
+    <p class="paragraph">软件平台：PICRUSt<sup>[27]</sup>和STAMP<sup>[26]</sup></p>
+    <p class="paragraph">结果目录：  <a href="javascript:void(0)" onClick="StartExcel('..\\results\\10_personalize\\annotation\\')" target="_blank">annotation</a></p>
+    <p class="center">
+        <img class="size1" src="images/group/annotation1.png" alt="second slide">
+    </p>
+
+    <p class="name_fig"> 图10-3-1 KEGG代谢途径差异分析图。</p>
+    <p class="premark">注：图中不同的颜色代表不同的分组，展示了在第三层级的构成在组间存在显著差异的KEGG代谢途径的分类以及在各组所占的比例，右侧为差异的比例和置信区间以及P-value。</p>
+    <p class="center">
+        <img class="size1" src="images/group/annotation2.png" alt="second slide">
+    </p>
+
+    <p class="name_fig"> 图10-3-2 KEGG代谢途径PCA分析图。</p>
+    <p class="premark">注：图中展示了在第三层KEGG代谢途径PCA分析图，展示了在不同的主成分下，两组样品的分布情况。</p>
+
+{% endif %}
+{% endif %}
+
+
+
+
+{% if personalize.network == "true" or personalize.network == "True" %}
+<h3 id="Network网络分析">10.4 Network网络分析</h3>
+    <p class="paragraph">Cytoscape是一款图形化显示分子间相互作用的生物信息分析软件。我们通过对不同样本间的物种丰度信息进行相关性分析，可以获得物种在环境样本中的共存在关系，得到物种在同一环境下的相互作用的情况，进一步解释样本间表型差异的形成机制；也可以对代谢通路等功能的丰度信息进行相关性分析，分析功能间的相互关系，以及这些关系同环境之间的联系。Cytoscape从可视化的角度去表现物种或代谢功能与样本、样本分类三者之间的相关关系，从网络结构图中发现重要的模式或信息。我们选取在不同分组中显著富集的物种(属水平)构建物种网络图。</p>
+    <p class="paragraph">软件平台：Cytoscape (http://www.cytoscape.org/)</p>
+    <p class="paragraph">结果目录: <a href="javascript:void(0)" onClick="StartExcel('..\\results\\10_personalize\\network\\')" target="_blank">network</a></p>
+    <p class="name_fig">图10-4 Cytoscape交互网络关联分析。</p>
+    <p class="center">
+        <img class="size1" src="images/group/network.png" alt="second slide">
+    </p>
+    <p class="premark">图中每个圆圈代表一种物种(属水平),圆圈颜色代表不同分组，圆圈直径的大小代表物种丰度大小；各物种间的交互作用通过直线关联，线的粗细与相关作用关系强度成正比，其中实线代表正相关，虚线代表负相关。</p>
+{% endif %}

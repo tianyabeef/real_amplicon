@@ -1,0 +1,115 @@
+{% if tax_summary %}
+    <h3 id="物种丰度分析">6.3 物种丰度分析</h3>
+    <p class="paragraph">根据物种注释结果，分别在门、纲、目、科、属分类等级对各个样品做物种profiling相应的柱状图。形成物种相对丰度柱状图，可以直观地查看各样品在不同的分类等级上相对丰度较高的物种和比例<sup>[8]-[11]</sup>。</p>
+    <p class="paragraph">软件平台：锐翌分析平台</p>
+    <p class="paragraph">结果目录：<a href="javascript:void(0)" onClick="StartExcel('..\\results\\06_classification_abundance_analysis\\all\\bar_plot\\')" target="_blank"> 06_classification_abundance_analysis\bar_plot_sample\ </a></p>
+    <!-- main slider carousel -->
+    <div class="row">
+        <div class="col-md-12" id="slider">
+            <div class="col-md-12" id="carousel-bounding-box">
+                <div id="myCarousel1" class="carousel slide">
+                    <!-- 轮播（Carousel）项目 -->
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <img src="images/genus/bar_plot.png" alt="genus">
+                        </div>
+                        <div class="item">
+                            <img src="images/family/bar_plot.png" alt="family">
+                        </div>
+                        <div class="item">
+                            <img src="images/order/bar_plot.png" alt="order">
+                        </div>
+                        <div class="item">
+                            <img src="images/class/bar_plot.png" alt="class">
+                        </div>
+                        <div class="item">
+                            <img src="images/phylum/bar_plot.png" alt="phylum">
+                        </div>
+                    </div>
+                    <!-- 轮播（Carousel）导航 -->
+                    <a class="carousel-control left" href="#myCarousel1" data-slide="prev"><span
+                            class="img-switch-btn"></span></a>
+                    <a class="carousel-control right" href="#myCarousel1" data-slide="next"><span
+                            class="img-switch-btn2"></span></a>
+                    <!-- 控制按钮 -->
+                    <div style="text-align:center;">
+                        <input type="button" class="btn btn-success btn-sm" id="slide-1-0" value="genus">
+                        <input type="button" class="btn btn-success btn-sm" id="slide-1-1" value="family">
+                        <input type="button" class="btn btn-success btn-sm" id="slide-1-2" value="order">
+                        <input type="button" class="btn btn-success btn-sm" id="slide-1-3" value="class">
+                        <input type="button" class="btn btn-success btn-sm" id="slide-1-4" value="phylum">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p class="name_fig">图6-3-1 样品各分类水平中物种Profiling柱状图</p>
+    <p class="premark">   注：横轴为样品名称，纵轴为相对丰度的比例。颜色对应不同物种名称，色块长度表示该色块所代表的物种的相对丰度的比例。 </p>
+    <p class="paragraph">根据样品分组信息，分别在门、纲、目、科、属分类等级对不同group做物种profiling相应的柱状图。</p>
+    <p class="paragraph">软件平台：锐翌分析平台</p>
+    <p class="paragraph">结果目录：<a href="javascript:void(0)" onClick="StartExcel('..\\results\\06_classification_abundance_analysis\\{{ group_file }}\\bar_plot\\')" target="_blank"> 06_classification_abundance_analysis\bar_plot\ </a></p>
+    <!-- main slider carousel -->
+    <div class="row">
+        <div class="col-md-12" id="slider">
+            <div class="col-md-12" id="carousel-bounding-box">
+                <div id="myCarousel2" class="carousel slide">
+                    <!-- 轮播（Carousel）项目 -->
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <img src="images/group/genus/bar_plot.png" alt="genus">
+                        </div>
+                        <div class="item">
+                            <img src="images/group/family/bar_plot.png" alt="family">
+                        </div>
+                        <div class="item">
+                            <img src="images/group/order/bar_plot.png" alt="order">
+                        </div>
+                        <div class="item">
+                            <img src="images/group/class/bar_plot.png" alt="class">
+                        </div>
+                        <div class="item">
+                            <img src="images/group/phylum/bar_plot.png" alt="phylum">
+                        </div>
+                    </div>
+                    <!-- 轮播（Carousel）导航 -->
+                    <a class="carousel-control left" href="#myCarousel2" data-slide="prev"><span
+                            class="img-switch-btn"></span></a>
+                    <a class="carousel-control right" href="#myCarousel2" data-slide="next"><span
+                            class="img-switch-btn2"></span></a>
+                    <!-- 控制按钮 -->
+                    <div style="text-align:center;">
+                        <input type="button" class="btn btn-success btn-sm" id="slide-2-0" value="genus">
+                        <input type="button" class="btn btn-success btn-sm" id="slide-2-1" value="family">
+                        <input type="button" class="btn btn-success btn-sm" id="slide-2-2" value="order">
+                        <input type="button" class="btn btn-success btn-sm" id="slide-2-3" value="class">
+                        <input type="button" class="btn btn-success btn-sm" id="slide-2-4" value="phylum">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p class="name_fig">
+        图6-3-2 不同group各分类水平中的物种Profiling柱状图
+    </p>
+    <p class="premark">
+        注：横轴为分组名称，纵轴为相对丰度的比例。颜色对应不同物种名称，色块长度表示该色块所代表的物种的相对丰度的比例。
+    </p>
+
+    <p class="paragraph">  在属分类等级对{{ star_picture_top }}的物种丰度做Star图。一个星形图代表一个样品的物种相对丰度信息。每个星形图中的扇形代表一个物种，用不同颜色区分，用扇形的半径来代表物种相对丰度的大小，扇形的半径越长表示丰度高，反之丰度相对较低. </p>
+    <p class="paragraph">软件平台：锐翌分析平台</p>
+    <p class="paragraph">结果目录：<a href="javascript:void(0)" onClick="StartExcel('..\\results\\06_classification_abundance_analysis\\all\\tax_star\\')" target="_blank"> 06_classification_abundance_analysis\tax_star\ </a></p>
+    {% if star_picture %}
+        <p class="center">
+            <img class="size5" src="images/tax_star.png"/>
+        </p>
+        <p class="name_fig">图6-3-3 属分类水平中不同group的top{{ star_picture_top }}物种Profiling星图</p>
+        <p class="remark">
+           注： 一个星形图代表着一个样品的物种相对丰度信息。每个星形图中的扇形代表一个物种，用不同颜色区分，用扇形的半径来代表物种相对丰度的大小，扇形半径越长代表此扇形所对应的物种的相对丰度越高。
+        </p>
+    {% else %}
+        <p class="error">样品数3个以下时不具有比较意义</p>
+    {% endif %}
+
+{% endif %}
