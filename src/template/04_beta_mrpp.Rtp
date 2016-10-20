@@ -20,20 +20,20 @@ mrpp.unweighted_unifrac = mrpp(as.dist(unweighted_unifrac), group[,1])
 #colnames(t1) = c('groupname', 'classdelta.weighted_unifrac', 'classdelta.unweighted_unifrac')
 #write.table(t1, file="@#{outfile}", quote=F, sep='\t', row.names=F)
 
-t1 = as.data.frame(c('weited_unifrac',
+t1 = as.data.frame(c('weighted_unifrac',
                      mrpp.weighted_unifrac$A,
                      mrpp.weighted_unifrac$delta,
                      mrpp.weighted_unifrac$E.delta,
                      mrpp.weighted_unifrac$Pvalue))
 t1 = t(t1)
-rownames(t1) = 'weited_unifrac'
+rownames(t1) = 'weighted_unifrac'
 t2 = as.data.frame(c('unweighted_unifrac',
                      mrpp.unweighted_unifrac$A,
                      mrpp.unweighted_unifrac$delta,
                      mrpp.unweighted_unifrac$E.delta,
                      mrpp.unweighted_unifrac$Pvalue))
 t2 = t(t2)
-rownames(t2) = 'unweited_unifrac'
+rownames(t2) = 'unweighted_unifrac'
 t = rbind(t1, t2)
 colnames(t) = c('beta_div', 'A', 'observe_delta', 'expect_delta', 'p_value')
 
