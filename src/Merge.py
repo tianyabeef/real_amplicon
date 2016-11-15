@@ -105,7 +105,11 @@ class Subject(object):
         sample.out.write(record.format('fastq'))
 
     def merge_with_infile(self, infile):
-        for record in SeqIO.parse(open(infile), 'fastq'):
+        if os.path.splitext(infile)[1]==".gz":
+            filehandle = gzip.open(infile,"r")
+        else:
+            filehandle = open(infile,"r")
+        for record in SeqIO.parse(filehandle, 'fastq'):
             description = record.description
             try:
                 sample = re.search('(\S+)_\d+$', description).group(1)

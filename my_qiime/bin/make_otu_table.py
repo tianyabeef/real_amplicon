@@ -102,7 +102,6 @@ def main():
         with open(opts.mapping_fp, 'U') as map_f:
             mapping_data, mapping_header, mapping_comments = \
                 parse_mapping_file(map_f)
-
         sample_metadata = mapping_file_to_dict(mapping_data,
                                                mapping_header)
 
