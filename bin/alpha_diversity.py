@@ -34,10 +34,17 @@ def alpha_diversity(cfg_in, vars=None):
 
     if min_sample_num_in_groups >= 3:
     # alpha_diff_test
-        work.commands.append('%s -a %s -m %s -o %s'%(scripts['alpha_diff_test'],
+        command=('%s -a %s -m %s -o %s'%(scripts['alpha_diff_test'],
                                                      outfiles['alpha_grouped'],
                                                      params['alpha_metrics'],
                                                      outfiles['alpha_diff_dir']))
+        if params['paired'].lower() == 'true':
+            command+=' --paired'
+        work.commands.append(command)
+      #  work.commands.append('%s -a %s -m %s -o %s'%(scripts['alpha_diff_test'],
+      #                                               outfiles['alpha_grouped'],
+      #                                               params['alpha_metrics'],
+      #                                               outfiles['alpha_diff_dir']))
 
     return outfiles
 
