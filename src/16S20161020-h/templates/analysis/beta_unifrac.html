@@ -65,7 +65,7 @@
 <h3 id="Anosim分析">8.2 Anosim分析（每组样品数≥5）</h3>
 {% if uniFra_analysis_anosim %}
     <p class="paragraph">
-        相似性分析Anosim分析是一种非参数检验，用来检验组间(两组或多组)的差异是否显著大于组内差异，从而判断分组是否有意义。首先利用 Bray-Curtis算法计算两两样品间的距离，然后将所有距离从小到大进行排序。
+        相似性分析Anosim分析是一种非参数检验，用来检验组间(两组或多组)的差异是否显著大于组内差异，从而判断分组是否有意义。首先利用 UniFrac算法计算两两样品间的距离，然后将所有距离从小到大进行排序。
     </p>
     <p class="paragraph">软件平台：R vegan/锐翌分析平台</p>
     <p class="paragraph">结果目录：<a href="javascript:void(0)" onclick="StartExcel('..\\results\\08_Beta_diversity\\{{ group_file }}\\anosim')" target="_blank">08_Beta_diversity\group\anosim\</a></p>
@@ -96,14 +96,14 @@
                 <option value="selected">Export Selected</option>
             </select>
         </div>
-        <table id="table14" data-height="560" data-pagination="true" data-filter-control="true"
+        <table id="table14" data-height="560" data-pagination="true" data-filter-control="true"`
                data-show-export="true" data-page-list="[10, 25, 50, 100, 200, All]"></table>
     </div>
     <p class="tremark">注：Group：分为weighted_unifrac、unweighted_unifrac；</p>
     <p class="tremark">A：A统计量；</p>
-    <p class="tremark">ObserveDelta：Bray-Curtis距离指数对应的ObserveDelta值；</p>
-    <p class="tremark">ExpectDelta：Bray-Curtis距离指数对应的ExpectDelta值；</p>
-    <p class="tremark">Significance：Bray-Curtis距离指数对应的显著性p值；</p>
+    <p class="tremark">ObserveDelta：Unifrac距离指数对应的ObserveDelta值；</p>
+    <p class="tremark">ExpectDelta：Unifrac距离指数对应的ExpectDelta值；</p>
+    <p class="tremark">Significance：Unifrac距离指数对应的显著性p值；</p>
     <p class="tremark">A值大于0说明组间差异大于组内差异，A值小于0说明组内差异大于组间差异；ObserveDelta值越小说明组内差异越小；ExpectDelta值越小说明组间差异越小；Significance小于0.05说明差异显著；</p>
 
 {% else %}

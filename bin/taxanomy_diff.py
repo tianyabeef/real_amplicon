@@ -34,6 +34,10 @@ def commands_factory(infile, outdir, mode, vars):
                                                             outdir,
                                                             params['group'],
                                                             params['heatmap_top']))
+    #spearman
+    commands.append('%s -i %s -o %s/spearman' % (scripts['diff_spearman'],
+                                                 marker_profile,
+                                                 outdir))
     # boxplot
     if vars['min_sample_num_in_groups'] >= 5:
         commands.append('%s -i %s -o %s/boxplot -g %s -t %s' % (scripts['diff_boxplot'],
@@ -64,7 +68,7 @@ def taxanomy_diff(cfg_in, vars=None):
     group_num = parse_group(params['group'])
 
     # min_sample_num_in_groups must be more than 3
-    if min_sample_num_in_groups < 3:
+    if min_sample_num_in_groups < 1:
         return outfiles
     #abundance_cutoff
     if float(params['abundance_cutoff']) > 0:

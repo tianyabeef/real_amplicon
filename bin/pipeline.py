@@ -244,7 +244,7 @@ def work_tree(pipeline, analysis_name, infiles=None):
     return outfiles['tree_file']
 
 
-def work_alpha_diversity(pipeline, analysis_name, tree_file, infiles=None):
+def work_alpha_diversity(pipeline, analysis_name, tree_file, infiles=None,paired=False):
     work_dir = '%s/04_diversity_analysis/%s/alpha' % (pipeline.config.get('params', 'work_dir'), analysis_name)
     vars = {
         'work_dir': work_dir,
@@ -259,7 +259,8 @@ def work_alpha_diversity(pipeline, analysis_name, tree_file, infiles=None):
     vars = {
         'work_dir': work_dir,
         'group': infiles['group_file'],
-        'alpha_div_collate_dir': alpha_rare_outfiles['alpha_collate_dir']
+        'alpha_div_collate_dir': alpha_rare_outfiles['alpha_collate_dir'],
+	'paired':paired
     }
     alpha_diversity_outfiles = alpha_diversity(pipeline.config, vars=vars)
 
@@ -370,6 +371,7 @@ if __name__ == '__main__':
     pipeline = Pipeline(work_cfg)
     user_config = pipeline.config
     data_type = user_config.get('params', 'data_type')
+    paired = user_config.get('params','paired')
     group_files = re.split('\s+', user_config.get('params', 'group_files'))
 
     outfiles_00 = work_00(pipeline)
@@ -398,7 +400,7 @@ if __name__ == '__main__':
         work_alpha_diversity(pipeline,
                              analysis_name,
                              tree_file,
-                             infiles=infiles)
+                             infiles=infiles,paired=paired)
         work_beta_diversity(pipeline,
                             analysis_name,
                             tree_file,

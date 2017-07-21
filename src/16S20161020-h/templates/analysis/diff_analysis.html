@@ -7,13 +7,13 @@
 {% if diff_analysis %}
     <h4>OTU水平的差异分析</h4>
     {% if diff_otu_marker_exist %}
-        <p class="paragraph">使用秩和检验的方法对不同分组之间进行显著性差异分析，以找出对组间划分产生显著性差异影响的物种。本分析对于两组间的差异分析采用R语言stats包的wilcox.test函数，对于两组以上的组间差异分析采用R语言stats包的kruskal.test函数。</p>
+        <p class="paragraph">使用秩和检验的方法对不同分组之间进行显著性差异分析，以找出对组间划分产生显著性差异影响的物种。本分析对于两组间的差异分析采用R语言stats包的wilcox.test函数，对于两组以上的组间差异分析采用R语言stats包的kruskal.test函数（独立样本）或friedman.test函数（非独立样本）。</p>
         <p class="paragraph">软件平台：锐翌分析平台</p>
         <p class="paragraph">结果目录：<a href="javascript:void(0)" onclick="StartExcel('..\\results\\09_diff_analysis\\{{ group_file }}\\genus_diff')" target="_blank">09_diff_analysis\group\genus_diff\</a></p>
 		<p class="paragraph">结果目录：<a href="javascript:void(0)" onclick="StartExcel('..\\results\\09_diff_analysis\\{{ group_file }}\\otu_diff')" target="_blank">09_diff_analysis\group\otu_diff\</a></p>
 		<p class="paragraph">结果目录：<a href="javascript:void(0)" onclick="StartExcel('..\\results\\09_diff_analysis\\{{ group_file }}\\taxall_diff')" target="_blank">09_diff_analysis\group\taxall_diff\</a></p>
         <p class="paragraph">
-            下表是在不同组样品间有显著差异的OTUs（p < {{ p_value }}, Kruskal-Wallis test），共{{ diff_otus }}个,
+            下表是在不同组样品间有显著差异的OTUs（p < {{ p_value }}），共{{ diff_otus }}个,
             如表9-2-1显示。结果文件
             <a href="javascript:void(0)"
                onClick="StartExcel('..\\results\\09_diff_analysis\\{{ group_file }}\\otu_diff\\otu_diff.marker.filt.tsv')">
@@ -71,7 +71,7 @@
     <h4>属水平的差异分析</h4>
     {% if diff_genus_marker_exist %}
         <p class="paragraph">
-            通过Kruskal-Wallis test分析可以找出在不同组间有明显差异(p < {{ p_value }})的属如下（共{{ diff_genus }}个属）。
+            通过秩和检验可以找出在不同组间有明显差异(p < {{ p_value }})的属如下（共{{ diff_genus }}个属）。
             结果文件
             <a href="javascript:void(0)"
                onClick="StartExcel('..\\results\\09_diff_analysis\\{{ group_file }}\\genus_diff\\genus_diff.marker.filt.tsv')">
@@ -122,7 +122,6 @@
         <p class="name_fig"> 图9-2-6 属水平差异物种的PCA结果展示</p>
         <p class="premark">注：横坐标表示第一主成分，百分比则表示第一主成分对样品差异的贡献值；纵坐标表示第二主成分，百分比表示第二主成分对样品差异的贡献值；图中的每个点表示一个样品，同一个组的样品使用同一种颜色表示。</p>
 
-
     {% else %}
         <p class="error">未找到属水平差异</p>
     {% endif %}
@@ -130,7 +129,7 @@
     <h4>所有水平的差异分析</h4>
     {% if diff_taxall_marker_exist %}
         <p class="paragraph">
-            通过Kruskal-Wallis test分析可以找出在不同组间有明显差异(p < {{ p_value }})的物种(包含所有水平)如下
+            通过秩和检验可以找出在不同组间有明显差异(p < {{ p_value }})的物种(包含所有水平)如下
             （共{{ diff_species }}个）。结果文件
             <a href="javascript:void(0)"
                onClick="StartExcel('..\\results\\09_diff_analysis\\{{ group_file }}\\taxall_diff\\taxall_diff.marker.filt.tsv')">
@@ -186,4 +185,18 @@
 
 {% else %}
     <p class="error">样品数不足无法分析</p>
+{% endif %}
+
+<h2 id="Spearman相关性分析">9.3 优势物种Spearman相关系数分析（每组样品数≥3)</h2>
+{% if diff_genus_marker_exist %}
+	<p class="paragraph">使用LEfSe在各水平上或秩和检验在属水平上（或某一特定水平），选择丰度前30的差异物种，通过R软件的corrplot包绘制优势物种之间spearman相关性热图，并通过该热图可以发现优势物种之间重要的模式与关系。</p>
+	<p class="center">
+    	<img class="size1" src="images/group/genus_diff/diff_spearman.png" alt="First slide">
+	</p>
+	<p class="name_fig"> 图9-3-1 丰度前30的差异物种相关性系数分析</p>
+	<p class="premark">注：在属水平上，通过秩和检验得到差异物种，计算丰度前30的差异物种之间的相关系。右边蓝色表示正相关，红色表示负相关。颜色越深，表明物种之间的相关性越强。</p>
+	
+
+{% else %}
+	<p class="error">样品不足或未找到差异属无法分析</p>
 {% endif %}

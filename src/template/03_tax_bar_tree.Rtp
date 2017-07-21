@@ -74,7 +74,7 @@ topbarplot <- function(profile, number = NULL, palette = NULL,samplecolor=sample
 	profile <- as.matrix(profile[order(-rowsums)[1:number], ])
 	Others  <- 1 - apply(profile, 2, sum)
 	profile <- rbind(profile, Others)
-	tt = barplot(profile, col = col, space = 0.25, width = 0.8, horiz = T,cex.lab=2,xlab = "Relative Abundancd", yaxt="n", las = 1, ylim = c(0, ncol(profile)),
+	tt = barplot(profile, col = col, space = 0.25, width = 0.8, cex.axis=1.5, horiz = T,cex.lab=2,xlab = "Relative Abundance", yaxt="n", las = 1, ylim = c(0, ncol(profile)),
 			family="mono")
 	text(x=-0.025,y=tt,labels=colnames(profile),col=samplecolor,xpd=TRUE)
 	mtext(paste(number, "Main genus in Samples"), side = 3, line = 1, cex = 2)
@@ -113,15 +113,15 @@ dist = dist(t(data))
 print(dist)
 layout(t(c(1,2,2,2,3)))
 max_sample_name_length = max(mapply(nchar,colnames(data)))
-if(max_sample_name_length>3){
-    mar_left = (max_sample_name_length - 3) * 0.5
+if(max_sample_name_length>6){
+    mar_left = (max_sample_name_length - 3) * 0.8
 }else{
-    mar_left = 0.1
+    mar_left = max_sample_name_length
 }
-par(mar = c(5,5,5,mar_left))
+par(mar = c(5,5,5,0))
 data.order <- treeplot(dist, group, group_colors,group_names)
 data <- data[, data.order]
-par(mar = c(5,3,5,0))
+par(mar = c(5,mar_left,5,0))
 specol <- topbarplot(data, number="@#{top}",samplecolor=sample_colors[data.order])
 par(mar = c(5,0,5,0))
 plot(0, type = "n", xaxt = "n", yaxt = "n", bty ="n", xlab = "", ylab = "")

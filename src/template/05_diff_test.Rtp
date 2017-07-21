@@ -3,9 +3,10 @@ group=read.table("@#{group_file}",header=F,row.names=1,check.names=F,quote="")
 X=as.matrix(X)
 #colnames(X)=sub("X","",colnames(X))####if the first letter of more than one colnames(X) is num,execute this progress
 group_num = nrow(unique(group))
-group=group[colnames(X),1]
-group=as.data.frame(group)
-rownames(group)=colnames(X)
+X=X[,rownames(group)]
+#group=group[colnames(X),1]
+#group=as.data.frame(group)
+#rownames(group)=colnames(X)
 g=unique(group)
 g_order=g[order(g),1]
 p=c()
@@ -39,6 +40,24 @@ kruskal=function(X,group,g){
     }
     p
 }
+friedman=function(X,group,g_order){
+    p=c()
+    for (i in 1:nrow(X)){
+        xdf=c()
+        for (j in 1:length(g_order)){
+            rname=which(group[,1]==g_order[j])
+            g0=rownames(group)[rname]
+            g0=g0[!is.na(g0)]
+            Xg=X[i,g0]
+            xdf=cbind(xdf,Xg)
+        }
+#        xdf=t(xdf)
+        colnames(xdf)=g_order
+        p0=friedman.test(xdf)$p.value
+        p=c(p,p0)
+    }
+    p
+}
 if("@#{test}"=="t"){
     if(group_num==2){
         paired=@#{paired}
@@ -49,7 +68,12 @@ if("@#{test}"=="t"){
 	paired=@#{paired}
     	p <- apply(X, 1, function(row) unlist(wilcox.test(row[glist[[1]]],row[glist[[2]]],paired=paired)["p.value"]))
     }else{
-    	p<-kruskal(X,group,g_order)
+        paired=@#{paired}
+        if(paired){
+            p<-friedman(X,group,g_order)
+        }else{
+    	    p<-kruskal(X,group,g_order)
+            }
     }
 }
 #p

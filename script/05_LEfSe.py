@@ -6,7 +6,7 @@ import argparse
 from util import mkdir
 
 this_script_path = os.path.dirname(__file__)
-sys.path.insert(1, this_script_path + '/../src')
+sys.path.insert(1, '/data_center_01/pipeline/16S_ITS_pipeline_v3.0/script/../src')
 from Parser import parse_group_file
 
 
@@ -42,10 +42,12 @@ def do_format(infile, outfile, group):
         head = in_fp.next()
         samples = head.strip().split('\t')[1:]
         remain_samples = []
+        ind_list = []
         for ind, sample in enumerate(samples):
             try:
                 groups.append(group[sample])
                 remain_samples.append(sample)
+                ind_list.append(ind)
             except KeyError, ex:
                 print('%s sample in not in the group_file' % ex)
                 continue
@@ -54,6 +56,11 @@ def do_format(infile, outfile, group):
         out_fp.write('Taxon\t%s\n' % '\t'.join(samples))
         for line in in_fp:
             tabs = line.strip().split('\t')
+            tmp = []
+            for ind_t, sample_t in enumerate(tabs):
+                xiabiao = ind_t - 1
+                if xiabiao in ind_list:
+                    tmp.append(sample_t)
             if tabs[0].endswith('Other'):
                 continue
             if tabs[0].endswith('norank'):
@@ -61,24 +68,29 @@ def do_format(infile, outfile, group):
             if tabs[0].endswith('unclassfied'):
                 continue
             tabs[0] = tabs[0].replace(';', '|')
-            out_fp.write('\t'.join(tabs) + '\n')
+            out_fp.write(tabs[0] + '\t')
+            out_fp.write('\t'.join(tmp) + '\n')
 
 
 def get_commands(infile, LEfSe_path, out_dir, LDA, c, u):
     commands = []
+    command='source /home/songwf/.bashrc'
+    commands.append(command)
     command = '%sformat_input.py %s %s/LDA.in -c %s -u %s -o 1000000' % (LEfSe_path, infile, out_dir, c, u)
     commands.append(command)
     command = '%srun_lefse.py %s/LDA.in %s/LDA.res -l %s' % (LEfSe_path, out_dir, out_dir, LDA)
     commands.append(command)
-    command = '%splot_res.py %s/LDA.res %s/LDA.pdf --format pdf --dpi 150' % (LEfSe_path, out_dir, out_dir)
+    command = '%splot_res.py %s/LDA.res %s/LDA.pdf --format pdf --dpi 150 --width 16' % (LEfSe_path, out_dir, out_dir)
     commands.append(command)
-    command = '%splot_res.py %s/LDA.res %s/LDA.png --format png --dpi 150' % (LEfSe_path, out_dir, out_dir)
+    command = '%splot_res.py %s/LDA.res %s/LDA.png --format png --dpi 150 --width 16' % (LEfSe_path, out_dir, out_dir)
     commands.append(command)
     command = '%splot_cladogram.py %s/LDA.res %s/LDA.cladogram.pdf --format pdf --dpi 150' % (
         LEfSe_path, out_dir, out_dir)
     commands.append(command)
     command = '%splot_cladogram.py %s/LDA.res %s/LDA.cladogram.png --format png --dpi 150' % (
         LEfSe_path, out_dir, out_dir)
+    commands.append(command)
+    command='source deactivate'
     commands.append(command)
     if not os.path.isdir('%s/biomarkers_raw_images' % out_dir):
         os.mkdir('%s/biomarkers_raw_images' % out_dir)

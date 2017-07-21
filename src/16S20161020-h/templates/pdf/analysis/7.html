@@ -113,7 +113,7 @@
     {% if alpha_diff_boxplot %}
         
     <p class="paragraph">
-        分别对Alpha diversity的各个指数进行秩和检验分析(若两组样品比较则使用R中的wilcox.test函数，若两组以上的样品比较则使用R中的kruskal.test函数)，通过秩和检验筛选不同条件下的显著差异的Alpha Diversity指数。
+        分别对Alpha diversity的各个指数进行秩和检验分析(若两组样品比较则使用R中的wilcox.test函数，若两组以上的样品比较则使用R中的kruskal.test函数（独立样本）或friedman.test（非独立样本）)，通过秩和检验筛选不同条件下的显著差异的Alpha Diversity指数。
     </p>
 
     <p class="paragraph">软件平台：</p>

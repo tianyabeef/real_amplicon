@@ -6,7 +6,7 @@ import sys
 import argparse
 import os
 from util import mkdir
-
+import pandas as pd
 this_script_path = os.path.dirname(__file__)
 sys.path.insert(1, this_script_path + '/../src')
 from Parser import parse_group_file
@@ -32,10 +32,12 @@ def read_params(args):
 def work_single(file, group):
     alphas = {}
     with open(file) as fp:
-        samples = fp.next().rstrip().split('\t')[3:]
+        #samples = fp.next().rstrip().split('\t')[3:]
+	samples = fp.next().rstrip().split('\t')[1:]
         for tail in fp:
             pass
-        tail = tail.rstrip().split()[3:]
+        #tail = tail.rstrip().split()[3:]
+	tail = tail.rstrip().split()[1:]	
     for ind, sample in enumerate(samples):
         group_name = group[sample]
         if group_name not in alphas:
@@ -63,5 +65,8 @@ if __name__ == '__main__':
     for alpha_name in params['alpha_metrics'].split(','):
         file = '%s/%s.txt' % (params['alpha_dir'], alpha_name)
         outfile = '%s/%s.txt' % (params['out_dir'], alpha_name)
+	data = pd.DataFrame.from_csv(file,sep="\t")
+        data[group.keys()].to_csv("%s_tmp"%(file),sep="\t")
+	file = "%s_tmp"%(file)
         alphas = work_single(file, group)
         write(outfile, alphas, group)

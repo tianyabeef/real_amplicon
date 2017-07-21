@@ -21,10 +21,15 @@ for(i in 1:length(xlist)){
     meanname=c(meanname,paste("mean(",group_name,")",sep=""))
 }
 
+paired=@#{paired}
 if(group_num == 2){
-    p = wilcox.test(xlist[[1]],xlist[[2]])["p.value"]
+    p = wilcox.test(xlist[[1]],xlist[[2]],paired=paired)["p.value"]
 }else{
-    p=kruskal.test(xlist)["p.value"]
+    if(paired){
+        p=friedman.test(X)$p.value
+    }else{
+        p=kruskal.test(xlist)["p.value"]
+    }
 }
 statsKWs<-cbind("@#{alpha_name}",means,p)
 colnames(statsKWs)<- c("alphaname",meanname,"pvalue")

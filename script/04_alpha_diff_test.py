@@ -24,12 +24,20 @@ def read_params(args):
                         help="set the output dir")
     parser.add_argument('-s', '--out_tsv', dest='out_tsv', metavar='FILE', type=str, default=None,
                         help="set the marker stat file, [default is out_dir/alpha_markers.tsv]")
+    parser.add_argument('--paired', dest='paired', action='store_true',help="paired compare")
     args = parser.parse_args()
     params = vars(args)
     if params['out_tsv'] is None:
         params['out_tsv'] = params['out_dir'] + '/alpha_marker.tsv'
+        params['paired'] = judge(params['paired'])
     return params
 
+def judge(value):
+    if value:
+        value = 'TRUE'
+    else:
+        value = 'FALSE'
+    return value
 
 class Group(object):
     def __init__(self, group_name):
@@ -75,7 +83,8 @@ if __name__ == '__main__':
         print marker_file
         vars = {'grouped_file': file,
                 'marker_file': marker_file,
-                'alpha_name': alpha_name}
+                'alpha_name': alpha_name,
+                'paired': params['paired']}
         r_job = rp.Rparser()
         r_job.open(this_script_path + '/../src/template/04_alpha_diff_test.Rtp')
         r_job.format(vars)

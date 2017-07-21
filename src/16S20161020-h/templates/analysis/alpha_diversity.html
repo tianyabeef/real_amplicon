@@ -5,7 +5,12 @@
 {% if alpha_diversity %}
 
     <p class="paragraph">Alpha多样性(Alpha diversity)是对单个样品中物种多样性的分析，包括observed species指数、chao1指数、shannon指数、simpson指数以及PD_whole_tree指数。利用QIIME<sup>[16]-[17]</sup>软件计算样品的Alpha多样性指数的值，并做出相应的稀释曲线。</p>
+    {% if amplification=="16S" %}
     <p class="paragraph">稀释曲线是利用已测得16S rDNA序列中已知的各种OTUs的相对比例，来计算抽取n个(n小于测得Reads序列总数)Reads时各Alpha多样性指数的期望值，然后根据一组n值(一般为一组小于总序列数的等差数列)与其相对应的Alpha多样性指数的期望值做出曲线来，并作出Alpha多样性指数的统计表格<sup>[18]</sup>。</p>
+    {% elif amplification=="ITS" %}
+    <p class="paragraph">稀释曲线是利用已测得ITS序列中已知的各种OTUs的相对比例，来计算抽取n个(n小于测得Reads序列总数)Reads时各Alpha多样性指数的期望值，然后根据一组n值(一般>为一组小于总序列数的等差数列)与其相对应的Alpha多样性指数的期望值做出曲线来，并作出Alpha多样性指数的统计表格<sup>[18]</sup>。</p>
+    {% endif %}
+
     <p class="paragraph">observed_species指数表示实际观测到的otu数量；</p>
 
     <p class="paragraph">goods_coverage指数表示测序深度: </p>

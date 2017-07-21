@@ -42,7 +42,7 @@ if(nrow(X)<=1){
 	xlim = c(xmin,xmax+xlegend)
 	ylim = c(ymin,ymax)
 	plot(X.dudi$li,col=sample_colors,pch=19,cex=cex,ylim=ylim,xlim=xlim,xlab=paste("PCA1(",con[1],"%)",sep=""),ylab=paste("PCA2(",con[2],"%)",sep=""),cex.axis=1.5,cex.lab=2)
-	legend("topright",legend=group_names,col=group_colors,pch=15,cex=1.5,horiz=F)
+	legend("topright",legend=group_names,col=group_colors,pch=19,cex=1.5,horiz=F)
 
 	write.csv(X.dudi$li,file=paste(substr("@#{pdf_file}",0,nchar("@#{pdf_file}")-4),"_point_inf.csv",sep = ""),fileEncoding="utf-8",quote = F)
 }
